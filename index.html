@@ -3812,6 +3812,7 @@ function cloudSync() {
     settings: JSON.parse(localStorage.getItem('fim_settings') || '{}'),
     waTemplates: JSON.parse(localStorage.getItem('fim_wa_templates') || '{}'),
     polizzeSaldate: JSON.parse(localStorage.getItem('fim_polizze_saldate') || '{}'),
+    passwordHash: localStorage.getItem(PWD_KEY) || null,
     lastSync: new Date().toISOString()
   };
   firebaseDb.ref('fim_data').set(data).then(() => {
@@ -3849,10 +3850,15 @@ function cloudPull() {
     if (data.provOverrides) { localStorage.setItem('fim_prov_overrides', JSON.stringify(data.provOverrides)); }
     if (data.waTemplates) { localStorage.setItem('fim_wa_templates', JSON.stringify(data.waTemplates)); }
     if (data.polizzeSaldate) { localStorage.setItem('fim_polizze_saldate', JSON.stringify(data.polizzeSaldate)); }
+    if (data.passwordHash) { localStorage.setItem(PWD_KEY, data.passwordHash); }
 
     refreshAll();
     updateSyncStatus('synced');
     showToast('Dati scaricati dal cloud con successo!');
+    // Se la password è stata ripristinata dal cloud, nascondi la sezione di setup
+    if (data.passwordHash && document.getElementById('firstSetupSection')) {
+      document.getElementById('firstSetupSection').style.display = 'none';
+    }
   }).catch(err => {
     console.error('Pull error:', err);
     showToast('Errore download: ' + err.message, 'error');
@@ -4313,10 +4319,15 @@ function cloudPullSilent() {
     if (data.settings) { localStorage.setItem('fim_settings', JSON.stringify(data.settings)); }
     if (data.waTemplates) { localStorage.setItem('fim_wa_templates', JSON.stringify(data.waTemplates)); }
     if (data.polizzeSaldate) { localStorage.setItem('fim_polizze_saldate', JSON.stringify(data.polizzeSaldate)); }
+    if (data.passwordHash) { localStorage.setItem(PWD_KEY, data.passwordHash); }
 
     localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
     refreshAll();
     updateSyncStatus('synced');
+    // Se la password è stata ripristinata dal cloud, nascondi la sezione di setup
+    if (data.passwordHash && document.getElementById('firstSetupSection')) {
+      document.getElementById('firstSetupSection').style.display = 'none';
+    }
     showToast('📥 Dati scaricati dal cloud automaticamente!', 'success');
     console.log('AutoSync: pull complete, ' + (polizze ? polizze.length : 0) + ' polizze loaded');
   }).catch(err => {
@@ -11901,7 +11912,38 @@ function changePassword() {
 (function() {
   const stored = localStorage.getItem(PWD_KEY);
   if (!stored) {
-    document.getElementById('firstSetupSection').style.display = 'block';
+    // Password non trovata localmente — prova a recuperarla da Firebase
+    // Inizializza Firebase subito per controllare la password nel cloud
+    try {
+      const settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
+      const apiKey = settings.firebaseApiKey || FIREBASE_DEFAULTS.apiKey;
+      const dbUrl = settings.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL;
+      const projId = settings.firebaseProjectId || FIREBASE_DEFAULTS.projectId;
+      if (apiKey && dbUrl && typeof firebase !== 'undefined') {
+        if (!firebase.apps.length) {
+          firebase.initializeApp({ apiKey: apiKey, databaseURL: dbUrl, projectId: projId });
+        }
+        firebase.database().ref('fim_data/passwordHash').once('value').then(function(snap) {
+          const cloudPwd = snap.val();
+          if (cloudPwd) {
+            localStorage.setItem(PWD_KEY, cloudPwd);
+            // Nascondi la sezione di prima configurazione e mostra solo il login
+            document.getElementById('firstSetupSection').style.display = 'none';
+            console.log('[Auth] Password recuperata dal cloud Firebase');
+          } else {
+            document.getElementById('firstSetupSection').style.display = 'block';
+          }
+        }).catch(function(err) {
+          console.warn('[Auth] Impossibile recuperare password dal cloud:', err);
+          document.getElementById('firstSetupSection').style.display = 'block';
+        });
+      } else {
+        document.getElementById('firstSetupSection').style.display = 'block';
+      }
+    } catch(e) {
+      console.warn('[Auth] Errore init Firebase per recupero password:', e);
+      document.getElementById('firstSetupSection').style.display = 'block';
+    }
   }
   if (sessionStorage.getItem('fim_authenticated') === 'true' && stored) {
     document.getElementById('loginOverlay').style.display = 'none';
