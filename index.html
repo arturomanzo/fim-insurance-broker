@@ -11865,20 +11865,70 @@ function simpleHash(str) {
   return 'fim_' + Math.abs(hash).toString(36) + '_' + str.length;
 }
 
+// Funzione helper: salva password hash su Firebase IMMEDIATAMENTE
+function _savePasswordToFirebase(pwdHash) {
+  try {
+    if (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length) {
+      firebase.database().ref('fim_data/passwordHash').set(pwdHash).then(function() {
+        console.log('[Auth] Password salvata su Firebase cloud');
+      }).catch(function(e) {
+        console.warn('[Auth] Errore salvataggio password su Firebase:', e);
+      });
+    } else {
+      // Firebase non ancora inizializzato, prova a inizializzarlo
+      var s = JSON.parse(localStorage.getItem('fim_settings') || '{}');
+      var cfg = {
+        apiKey: s.firebaseApiKey || FIREBASE_DEFAULTS.apiKey,
+        databaseURL: s.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL,
+        projectId: s.firebaseProjectId || FIREBASE_DEFAULTS.projectId
+      };
+      if (!firebase.apps.length) { firebase.initializeApp(cfg); }
+      firebase.database().ref('fim_data/passwordHash').set(pwdHash).then(function() {
+        console.log('[Auth] Password salvata su Firebase cloud (init)');
+      }).catch(function(e) {
+        console.warn('[Auth] Errore salvataggio password su Firebase:', e);
+      });
+    }
+  } catch(e) { console.warn('[Auth] _savePasswordToFirebase error:', e); }
+}
+
+// Flag: Firebase ha finito di caricare?
+var _fimPasswordReady = !!localStorage.getItem(PWD_KEY);
+
 function checkLogin() {
-  const pwd = document.getElementById('loginPassword').value;
-  const stored = localStorage.getItem(PWD_KEY);
-  if (!stored) {
+  var pwd = document.getElementById('loginPassword').value;
+  var stored = localStorage.getItem(PWD_KEY);
+
+  // Se Firebase sta ancora caricando, mostra messaggio di attesa
+  if (!stored && !_fimPasswordReady) {
+    document.getElementById('loginError').textContent = 'Connessione al cloud in corso, riprova tra un istante...';
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('loginError').style.color = '#2b6cb0';
+    setTimeout(function() {
+      document.getElementById('loginError').style.display = 'none';
+      document.getElementById('loginError').style.color = '#e53e3e';
+      document.getElementById('loginError').textContent = 'Password non corretta';
+    }, 2500);
+    return;
+  }
+
+  // Se Firebase ha finito ma la password non esiste da nessuna parte → prima configurazione
+  if (!stored && _fimPasswordReady) {
     document.getElementById('firstSetupSection').style.display = 'block';
     return;
   }
+
+  // Verifica password
   if (simpleHash(pwd) === stored) {
     document.getElementById('loginOverlay').style.display = 'none';
     sessionStorage.setItem('fim_authenticated', 'true');
+    // Ri-salva password su Firebase ad ogni login riuscito (per sicurezza)
+    _savePasswordToFirebase(stored);
   } else {
+    document.getElementById('loginError').textContent = 'Password non corretta';
     document.getElementById('loginError').style.display = 'block';
     document.getElementById('loginPassword').style.borderColor = '#e53e3e';
-    setTimeout(() => {
+    setTimeout(function() {
       document.getElementById('loginError').style.display = 'none';
       document.getElementById('loginPassword').style.borderColor = '#e2e8f0';
     }, 3000);
@@ -11886,67 +11936,102 @@ function checkLogin() {
 }
 
 function setFirstPassword() {
-  const p1 = document.getElementById('newPassword1').value;
-  const p2 = document.getElementById('newPassword2').value;
+  var p1 = document.getElementById('newPassword1').value;
+  var p2 = document.getElementById('newPassword2').value;
   if (!p1 || p1.length < 4) { alert('La password deve avere almeno 4 caratteri'); return; }
   if (p1 !== p2) { alert('Le password non coincidono'); return; }
-  localStorage.setItem(PWD_KEY, simpleHash(p1));
+  var hashed = simpleHash(p1);
+  localStorage.setItem(PWD_KEY, hashed);
+  // SALVA IMMEDIATAMENTE SU FIREBASE
+  _savePasswordToFirebase(hashed);
   document.getElementById('loginOverlay').style.display = 'none';
   sessionStorage.setItem('fim_authenticated', 'true');
-  showToast('Password impostata con successo');
+  showToast('Password impostata con successo e salvata nel cloud');
 }
 
 function changePassword() {
-  const current = prompt('Inserisci la password attuale:');
+  var current = prompt('Inserisci la password attuale:');
   if (!current) return;
-  const stored = localStorage.getItem(PWD_KEY);
+  var stored = localStorage.getItem(PWD_KEY);
   if (stored && simpleHash(current) !== stored) { alert('Password attuale non corretta'); return; }
-  const newPwd = prompt('Inserisci la nuova password (min 4 caratteri):');
+  var newPwd = prompt('Inserisci la nuova password (min 4 caratteri):');
   if (!newPwd || newPwd.length < 4) { alert('Password non valida'); return; }
-  const confirm2 = prompt('Conferma la nuova password:');
+  var confirm2 = prompt('Conferma la nuova password:');
   if (newPwd !== confirm2) { alert('Le password non coincidono'); return; }
-  localStorage.setItem(PWD_KEY, simpleHash(newPwd));
-  alert('Password aggiornata con successo');
+  var hashed = simpleHash(newPwd);
+  localStorage.setItem(PWD_KEY, hashed);
+  // SALVA IMMEDIATAMENTE SU FIREBASE
+  _savePasswordToFirebase(hashed);
+  alert('Password aggiornata con successo e salvata nel cloud');
 }
 
 (function() {
-  const stored = localStorage.getItem(PWD_KEY);
-  if (!stored) {
-    // Password non trovata localmente — prova a recuperarla da Firebase
-    // Inizializza Firebase subito per controllare la password nel cloud
-    try {
-      const settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
-      const apiKey = settings.firebaseApiKey || FIREBASE_DEFAULTS.apiKey;
-      const dbUrl = settings.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL;
-      const projId = settings.firebaseProjectId || FIREBASE_DEFAULTS.projectId;
-      if (apiKey && dbUrl && typeof firebase !== 'undefined') {
-        if (!firebase.apps.length) {
-          firebase.initializeApp({ apiKey: apiKey, databaseURL: dbUrl, projectId: projId });
-        }
-        firebase.database().ref('fim_data/passwordHash').once('value').then(function(snap) {
-          const cloudPwd = snap.val();
-          if (cloudPwd) {
-            localStorage.setItem(PWD_KEY, cloudPwd);
-            // Nascondi la sezione di prima configurazione e mostra solo il login
-            document.getElementById('firstSetupSection').style.display = 'none';
-            console.log('[Auth] Password recuperata dal cloud Firebase');
-          } else {
-            document.getElementById('firstSetupSection').style.display = 'block';
-          }
-        }).catch(function(err) {
-          console.warn('[Auth] Impossibile recuperare password dal cloud:', err);
-          document.getElementById('firstSetupSection').style.display = 'block';
-        });
-      } else {
-        document.getElementById('firstSetupSection').style.display = 'block';
+  var stored = localStorage.getItem(PWD_KEY);
+
+  // Se la password è già in localStorage, siamo pronti
+  if (stored) {
+    _fimPasswordReady = true;
+    document.getElementById('firstSetupSection').style.display = 'none';
+    if (sessionStorage.getItem('fim_authenticated') === 'true') {
+      document.getElementById('loginOverlay').style.display = 'none';
+    }
+    return;
+  }
+
+  // Password NON trovata localmente — prova a recuperarla da Firebase
+  _fimPasswordReady = false;
+  try {
+    var settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
+    var apiKey = settings.firebaseApiKey || FIREBASE_DEFAULTS.apiKey;
+    var dbUrl = settings.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL;
+    var projId = settings.firebaseProjectId || FIREBASE_DEFAULTS.projectId;
+    if (apiKey && dbUrl && typeof firebase !== 'undefined') {
+      if (!firebase.apps.length) {
+        firebase.initializeApp({ apiKey: apiKey, databaseURL: dbUrl, projectId: projId });
       }
-    } catch(e) {
-      console.warn('[Auth] Errore init Firebase per recupero password:', e);
+      // Mostra un indicatore di caricamento nel campo password
+      var loginPwdField = document.getElementById('loginPassword');
+      if (loginPwdField) loginPwdField.placeholder = 'Connessione al cloud...';
+
+      firebase.database().ref('fim_data').once('value').then(function(snap) {
+        var data = snap.val();
+        _fimPasswordReady = true;
+        if (loginPwdField) loginPwdField.placeholder = 'Password';
+
+        if (data && data.passwordHash) {
+          // Password trovata nel cloud! Salvala localmente
+          localStorage.setItem(PWD_KEY, data.passwordHash);
+          document.getElementById('firstSetupSection').style.display = 'none';
+          console.log('[Auth] Password recuperata dal cloud Firebase');
+
+          // Recupera anche tutti gli altri dati dal cloud
+          if (data.clienti) { localStorage.setItem('fim_clienti', JSON.stringify(data.clienti)); }
+          if (data.collaboratori) { localStorage.setItem('fim_collaboratori', JSON.stringify(data.collaboratori)); }
+          if (data.polizze) { localStorage.setItem('fim_polizze', JSON.stringify(data.polizze)); }
+          if (data.provOverrides) { localStorage.setItem('fim_prov_overrides', JSON.stringify(data.provOverrides)); }
+          if (data.settings) { localStorage.setItem('fim_settings', JSON.stringify(data.settings)); }
+          if (data.waTemplates) { localStorage.setItem('fim_wa_templates', JSON.stringify(data.waTemplates)); }
+          if (data.polizzeSaldate) { localStorage.setItem('fim_polizze_saldate', JSON.stringify(data.polizzeSaldate)); }
+          localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
+          console.log('[Auth] Tutti i dati ripristinati dal cloud');
+        } else {
+          // Nessuna password nel cloud — è davvero la prima configurazione
+          document.getElementById('firstSetupSection').style.display = 'block';
+        }
+      }).catch(function(err) {
+        console.warn('[Auth] Impossibile recuperare dati dal cloud:', err);
+        _fimPasswordReady = true;
+        if (loginPwdField) loginPwdField.placeholder = 'Password';
+        document.getElementById('firstSetupSection').style.display = 'block';
+      });
+    } else {
+      _fimPasswordReady = true;
       document.getElementById('firstSetupSection').style.display = 'block';
     }
-  }
-  if (sessionStorage.getItem('fim_authenticated') === 'true' && stored) {
-    document.getElementById('loginOverlay').style.display = 'none';
+  } catch(e) {
+    console.warn('[Auth] Errore init Firebase:', e);
+    _fimPasswordReady = true;
+    document.getElementById('firstSetupSection').style.display = 'block';
   }
 })();
 
