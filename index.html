@@ -7871,6 +7871,34 @@ function viewSchedaCollab(id) {
     html += '</div>';
   }
 
+  // ============ SEZIONE DOCUMENTI ============
+  html += '<div style="margin-top:24px;border-top:2px solid var(--border);padding-top:16px;">';
+  html += '<h4 style="color:#2b6cb0;margin-bottom:16px;">📄 Documenti Collaboratore</h4>';
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">';
+
+  // Contratto di collaborazione
+  html += '<div style="background:linear-gradient(135deg,#ebf8ff,#bee3f8);border-radius:12px;padding:16px;cursor:pointer;transition:transform .2s;border:1px solid #90cdf4;" onclick="generateContrattoCollaborazione(\'' + c.id + '\')" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'scale(1)\'">';
+  html += '<div style="font-size:28px;margin-bottom:8px;">📝</div>';
+  html += '<div style="font-weight:700;font-size:14px;color:#2b6cb0;">Contratto di Collaborazione</div>';
+  html += '<div style="font-size:12px;color:#4a5568;margin-top:4px;">Con tabella provvigionale personalizzata</div>';
+  html += '</div>';
+
+  // Privacy FIM
+  html += '<div style="background:linear-gradient(135deg,#f0fff4,#c6f6d5);border-radius:12px;padding:16px;cursor:pointer;transition:transform .2s;border:1px solid #9ae6b4;" onclick="generatePrivacyFIM(\'' + c.id + '\')" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'scale(1)\'">';
+  html += '<div style="font-size:28px;margin-bottom:8px;">🔒</div>';
+  html += '<div style="font-weight:700;font-size:14px;color:#276749;">Informativa Privacy FIM</div>';
+  html += '<div style="font-size:12px;color:#4a5568;margin-top:4px;">GDPR - Reg. UE 2016/679</div>';
+  html += '</div>';
+
+  // Allegati IVASS
+  html += '<div style="background:linear-gradient(135deg,#faf5ff,#e9d8fd);border-radius:12px;padding:16px;cursor:pointer;transition:transform .2s;border:1px solid #d6bcfa;" onclick="generateAllegatiIVASS(\'' + c.id + '\')" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'scale(1)\'">';
+  html += '<div style="font-size:28px;margin-bottom:8px;">🏛️</div>';
+  html += '<div style="font-weight:700;font-size:14px;color:#553c9a;">Allegati IVASS</div>';
+  html += '<div style="font-size:12px;color:#4a5568;margin-top:4px;">All. 3, 4, 4-ter Reg. 40/2018</div>';
+  html += '</div>';
+
+  html += '</div></div>';
+
   document.getElementById('schedaCollabContent').innerHTML = html;
   document.getElementById('schedaCollabEditBtn').onclick = function() { closeModal('schedaCollabModal'); openCollabModal(id); };
   document.getElementById('schedaCollabModal').style.display = 'flex';
@@ -7901,6 +7929,431 @@ function renderCollabProdTable() {
       <td>${attive > 0 ? '<span class="prov-badge prov-earned">Attivo</span>' : '<span class="prov-badge prov-pending">Inattivo</span>'}</td>
     </tr>`;
   }).join('');
+}
+
+// ============================================================================
+// GENERAZIONE DOCUMENTI COLLABORATORE
+// ============================================================================
+
+function _getDocSettings() {
+  const s = JSON.parse(localStorage.getItem('fim_settings') || '{}');
+  return {
+    ragioneSociale: s.ragioneSociale || 'FIM INSURANCE BROKER S.A.S.',
+    piva: s.piva || '',
+    cf: s.cf || '',
+    indirizzo: s.indirizzo || '',
+    cap: s.cap || '',
+    citta: s.citta || '',
+    provincia: s.provincia || '',
+    telefono: s.telefono || '',
+    email: s.email || '',
+    pec: s.pec || '',
+    rui: s.rui || 'B000405449',
+    brokerName: s.brokerName || 'FIM Insurance Broker'
+  };
+}
+
+function _docCSS() {
+  return `
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; font-size:11pt; line-height:1.6; color:#1a202c; padding:40px 60px; max-width:210mm; margin:0 auto; }
+    h1 { font-size:18pt; color:#1a365d; margin-bottom:6px; text-align:center; }
+    h2 { font-size:14pt; color:#2b6cb0; margin:24px 0 10px; border-bottom:2px solid #bee3f8; padding-bottom:4px; }
+    h3 { font-size:12pt; color:#2d3748; margin:16px 0 8px; }
+    .header { text-align:center; margin-bottom:30px; border-bottom:3px solid #1a365d; padding-bottom:16px; }
+    .header-logo { font-size:22pt; font-weight:700; color:#1a365d; letter-spacing:1px; }
+    .header-sub { font-size:9pt; color:#718096; margin-top:4px; }
+    table { width:100%; border-collapse:collapse; margin:10px 0; }
+    table th { background:#edf2f7; color:#2d3748; font-weight:600; padding:8px 12px; text-align:left; border:1px solid #e2e8f0; font-size:10pt; }
+    table td { padding:8px 12px; border:1px solid #e2e8f0; font-size:10pt; }
+    .highlight { background:#ebf8ff; padding:12px; border-radius:6px; border-left:4px solid #3182ce; margin:12px 0; }
+    .signature-area { margin-top:40px; display:flex; justify-content:space-between; gap:40px; }
+    .signature-box { flex:1; text-align:center; padding-top:60px; border-top:1px solid #2d3748; font-size:10pt; color:#4a5568; }
+    .article { margin-bottom:14px; }
+    .article-title { font-weight:700; color:#2d3748; }
+    .small { font-size:9pt; color:#718096; }
+    .footer { margin-top:40px; padding-top:12px; border-top:1px solid #e2e8f0; font-size:8pt; color:#a0aec0; text-align:center; }
+    @media print {
+      body { padding:20px 40px; }
+      .no-print { display:none !important; }
+    }
+  `;
+}
+
+function _openDocWindow(title, htmlContent) {
+  const w = window.open('', '_blank');
+  w.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + title + '</title>');
+  w.document.write('<style>' + _docCSS() + '</style></head><body>');
+  w.document.write('<div class="no-print" style="position:fixed;top:10px;right:10px;z-index:9999;display:flex;gap:8px;">');
+  w.document.write('<button onclick="window.print()" style="padding:10px 20px;background:#2b6cb0;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;">🖨️ Stampa / Salva PDF</button>');
+  w.document.write('<button onclick="window.close()" style="padding:10px 16px;background:#e53e3e;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;">✕ Chiudi</button>');
+  w.document.write('</div>');
+  w.document.write(htmlContent);
+  w.document.write('</body></html>');
+  w.document.close();
+}
+
+// ---- 1. CONTRATTO DI COLLABORAZIONE ----
+function generateContrattoCollaborazione(collabId) {
+  const c = collaboratori.find(x => x.id === collabId);
+  if (!c) return showToast('Collaboratore non trovato', 'error');
+  const s = _getDocSettings();
+  const oggi = new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' });
+  const sede = [s.indirizzo, s.cap, s.citta, s.provincia ? '(' + s.provincia + ')' : ''].filter(Boolean).join(', ');
+  const collabSede = [c.indirizzo, c.cap, c.citta].filter(Boolean).join(', ');
+
+  // Build provvigioni table
+  const provTable = JSON.parse(localStorage.getItem('fim_prov_table') || '{}');
+  const indivProv = JSON.parse(localStorage.getItem('fim_indiv_prov') || '{}');
+  const defaultRami = [
+    'Auto - RCA', 'Auto - CVT / Kasko', 'Incendio / Grandine', 'Furto',
+    'RC Generale / RC Terzi', 'RC Professionale', 'Infortuni / Malattia',
+    'Vita / TCM', 'Trasporti / Merci', 'Responsabilità Civile Prodotti',
+    'Multirischio Abitazione', 'Multirischio Azienda', 'Tutela Legale',
+    'Cyber Risk', 'D&O / Amministratori', 'Cauzioni / Fideiussioni',
+    'Altro / Varie'
+  ];
+  let provRows = '';
+  defaultRami.forEach(function(ramo) {
+    const ruoloKey = (c.ruolo || 'Subagente').toLowerCase().replace(/ /g,'');
+    let perc = '-';
+    // Check individual
+    if (indivProv[c.id] && indivProv[c.id][ramo] !== undefined && indivProv[c.id][ramo] !== '') {
+      perc = indivProv[c.id][ramo] + '%';
+    } else if (provTable[ramo]) {
+      const roles = { 'subagente':'subagente','collaboratore':'collaboratore','segnalatore':'segnalatore','agente':'agente','responsabilearea':'respArea' };
+      const k = roles[ruoloKey] || 'subagente';
+      if (provTable[ramo][k] !== undefined && provTable[ramo][k] !== '') perc = provTable[ramo][k] + '%';
+    }
+    if (perc === '-' && c.retrocessione) perc = c.retrocessione + '%';
+    provRows += '<tr><td>' + ramo + '</td><td style="text-align:center;font-weight:600;">' + perc + '</td></tr>';
+  });
+
+  let html = '';
+  html += '<div class="header">';
+  html += '<div class="header-logo">' + s.ragioneSociale + '</div>';
+  html += '<div class="header-sub">Iscritta al RUI - Sez. B - N. ' + s.rui + '</div>';
+  html += '<div class="header-sub">' + sede + (s.piva ? ' — P.IVA: ' + s.piva : '') + '</div>';
+  html += '<div class="header-sub">' + [s.telefono ? 'Tel. ' + s.telefono : '', s.email, s.pec ? 'PEC: ' + s.pec : ''].filter(Boolean).join(' — ') + '</div>';
+  html += '</div>';
+
+  html += '<h1>CONTRATTO DI COLLABORAZIONE</h1>';
+  html += '<p style="text-align:center;color:#718096;margin-bottom:24px;">ai sensi dell\'art. 42 del D.Lgs. 209/2005 (CAP) e del Regolamento IVASS n. 40/2018</p>';
+
+  html += '<h2>Premesse</h2>';
+  html += '<p>Con il presente contratto, stipulato in data <strong>' + oggi + '</strong>, tra:</p>';
+  html += '<div class="highlight">';
+  html += '<strong>' + s.ragioneSociale + '</strong> (di seguito "Broker"), con sede in ' + sede;
+  html += (s.piva ? ', P.IVA ' + s.piva : '') + (s.cf ? ', C.F. ' + s.cf : '') + ', iscritta al RUI Sez. B n. ' + s.rui;
+  html += '</div>';
+  html += '<div class="highlight" style="border-left-color:#38a169;">';
+  html += '<strong>' + c.cognome + ' ' + c.nome + '</strong> (di seguito "Collaboratore"), ';
+  html += (c.cf ? 'C.F. ' + c.cf + ', ' : '') + (c.piva ? 'P.IVA ' + c.piva + ', ' : '');
+  html += (collabSede ? 'residente in ' + collabSede + ', ' : '');
+  html += (c.rui ? 'iscritto al RUI Sez. ' + (c.sezioneRUI || 'E') + ' n. ' + c.rui : 'in attesa di iscrizione al RUI Sez. E');
+  html += ', ruolo: <strong>' + (c.ruolo || 'Subagente') + '</strong>';
+  html += '</div>';
+
+  html += '<h2>Art. 1 — Oggetto</h2>';
+  html += '<div class="article"><p>Il Broker conferisce al Collaboratore l\'incarico di svolgere attività di intermediazione assicurativa e riassicurativa per proprio conto, nel rispetto delle disposizioni del D.Lgs. 209/2005 (Codice delle Assicurazioni Private), del Regolamento IVASS n. 40/2018 e successive modificazioni, nonché delle istruzioni operative impartite dal Broker.</p></div>';
+
+  html += '<h2>Art. 2 — Durata</h2>';
+  html += '<div class="article"><p>Il presente contratto ha decorrenza dal <strong>' + (c.dataInizio ? formatDate(c.dataInizio) : oggi) + '</strong>';
+  if (c.scadenzaMandato) html += ' e scadenza il <strong>' + formatDate(c.scadenzaMandato) + '</strong>';
+  else html += ' a tempo indeterminato';
+  html += '. Tipo di mandato: <strong>' + (c.tipoMandato || 'Collaborazione') + '</strong>. Ciascuna parte potrà recedere con preavviso scritto di almeno 30 giorni.</p></div>';
+
+  html += '<h2>Art. 3 — Obblighi del Collaboratore</h2>';
+  html += '<div class="article">';
+  html += '<p>Il Collaboratore si impegna a:</p>';
+  html += '<p>a) Operare con diligenza, correttezza e trasparenza nei confronti dei contraenti e degli assicurati;</p>';
+  html += '<p>b) Rispettare le disposizioni del Regolamento IVASS n. 40/2018 e successive modifiche (incluso Provvedimento n. 163/2025 sull\'Arbitro Assicurativo);</p>';
+  html += '<p>c) Mantenere aggiornata la propria formazione professionale (min. 30 ore annuali ex art. 89 Reg. IVASS 40/2018);</p>';
+  html += '<p>d) Consegnare ai clienti la documentazione precontrattuale prevista (Allegati 3, 4 e 4-ter del Reg. 40/2018);</p>';
+  html += '<p>e) Trasmettere tempestivamente al Broker tutta la documentazione relativa ai contratti intermediati;</p>';
+  html += '<p>f) Non operare in conflitto di interessi e segnalare prontamente ogni situazione potenzialmente conflittuale;</p>';
+  html += '<p>g) Mantenere valida e aggiornata la copertura RC Professionale;</p>';
+  html += '<p>h) Rispettare la normativa sulla protezione dei dati personali (GDPR — Reg. UE 2016/679).</p>';
+  html += '</div>';
+
+  html += '<h2>Art. 4 — Obblighi del Broker</h2>';
+  html += '<div class="article">';
+  html += '<p>Il Broker si impegna a:</p>';
+  html += '<p>a) Fornire al Collaboratore gli strumenti e la formazione necessari per l\'esercizio dell\'attività;</p>';
+  html += '<p>b) Provvedere all\'iscrizione/aggiornamento del Collaboratore nella Sezione E del RUI;</p>';
+  html += '<p>c) Liquidare le provvigioni secondo la tabella allegata entro il mese successivo all\'incasso dei premi;</p>';
+  html += '<p>d) Garantire la copertura assicurativa RC Professionale per l\'attività svolta dal Collaboratore.</p>';
+  html += '</div>';
+
+  html += '<h2>Art. 5 — Tabella Provvigionale</h2>';
+  html += '<div class="article"><p>Le provvigioni riconosciute al Collaboratore sono calcolate sull\'<strong>imponibile netto</strong> (premio lordo – imposte – SSN) e risultano dalla seguente tabella:</p></div>';
+  html += '<table><thead><tr><th>Ramo / Tipo Garanzia</th><th style="text-align:center;">% Provvigione ' + (c.ruolo || 'Subagente') + '</th></tr></thead><tbody>';
+  html += provRows;
+  html += '</tbody></table>';
+  if (c.retrocessione) {
+    html += '<div class="highlight"><strong>Retrocessione base contrattuale:</strong> ' + c.retrocessione + '% — Si applica in assenza di percentuale specifica per ramo.</div>';
+  }
+
+  html += '<h2>Art. 6 — Esclusiva e Concorrenza</h2>';
+  html += '<div class="article"><p>Il presente rapporto è a carattere ' + (c.tipoMandato === 'Monomandatario' ? '<strong>esclusivo</strong>. Il Collaboratore si impegna a non svolgere attività di intermediazione per conto di altri intermediari.' : '<strong>non esclusivo</strong>. Il Collaboratore potrà svolgere attività anche per conto di altri intermediari, nel rispetto degli obblighi di trasparenza e informativa verso i contraenti.') + '</p></div>';
+
+  html += '<h2>Art. 7 — Trattamento Dati Personali</h2>';
+  html += '<div class="article"><p>Il Collaboratore è nominato "Responsabile del trattamento" ai sensi dell\'art. 28 del Reg. UE 2016/679 (GDPR) per i dati personali dei clienti acquisiti nell\'esercizio dell\'incarico. Il Collaboratore si impegna a trattare tali dati nel rispetto delle istruzioni ricevute dal Broker e della normativa vigente. L\'informativa privacy completa è fornita come documento separato allegato al presente contratto.</p></div>';
+
+  html += '<h2>Art. 8 — Cessazione del Rapporto</h2>';
+  html += '<div class="article"><p>Alla cessazione del rapporto, il Collaboratore dovrà restituire tempestivamente tutta la documentazione, i dati dei clienti e gli strumenti ricevuti dal Broker. Le provvigioni maturate fino alla data di cessazione verranno liquidate entro 60 giorni.</p></div>';
+
+  html += '<h2>Art. 9 — Foro Competente</h2>';
+  html += '<div class="article"><p>Per ogni controversia derivante dal presente contratto sarà competente il Foro di ' + (s.citta || '___________') + '.</p></div>';
+
+  html += '<h2>Art. 10 — Allegati</h2>';
+  html += '<div class="article"><p>Costituiscono parte integrante del presente contratto:</p>';
+  html += '<p>— Informativa Privacy FIM (GDPR — Reg. UE 2016/679)</p>';
+  html += '<p>— Allegato 3 — Informativa sul Distributore (Reg. IVASS 40/2018)</p>';
+  html += '<p>— Allegato 4 — Informazioni precontrattuali (Reg. IVASS 40/2018)</p>';
+  html += '<p>— Allegato 4-ter — Regole di comportamento del distributore</p></div>';
+
+  html += '<div class="signature-area">';
+  html += '<div class="signature-box">Il Broker<br><strong>' + s.ragioneSociale + '</strong></div>';
+  html += '<div class="signature-box">Il Collaboratore<br><strong>' + c.cognome + ' ' + c.nome + '</strong></div>';
+  html += '</div>';
+
+  html += '<p style="text-align:center;margin-top:20px;color:#718096;font-size:10pt;">Luogo e data: ' + (s.citta || '___________') + ', ' + oggi + '</p>';
+  html += '<div class="footer">Documento generato automaticamente dal gestionale ' + s.brokerName + ' — ' + new Date().toLocaleString('it-IT') + '</div>';
+
+  _openDocWindow('Contratto Collaborazione - ' + c.cognome + ' ' + c.nome, html);
+}
+
+// ---- 2. INFORMATIVA PRIVACY FIM ----
+function generatePrivacyFIM(collabId) {
+  const c = collaboratori.find(x => x.id === collabId);
+  if (!c) return showToast('Collaboratore non trovato', 'error');
+  const s = _getDocSettings();
+  const sede = [s.indirizzo, s.cap, s.citta, s.provincia ? '(' + s.provincia + ')' : ''].filter(Boolean).join(', ');
+
+  let html = '';
+  html += '<div class="header">';
+  html += '<div class="header-logo">' + s.ragioneSociale + '</div>';
+  html += '<div class="header-sub">Iscritta al RUI - Sez. B - N. ' + s.rui + '</div>';
+  html += '<div class="header-sub">' + sede + '</div>';
+  html += '</div>';
+
+  html += '<h1>INFORMATIVA SUL TRATTAMENTO DEI DATI PERSONALI</h1>';
+  html += '<p style="text-align:center;color:#718096;margin-bottom:24px;">ai sensi degli artt. 13 e 14 del Regolamento UE 2016/679 (GDPR)</p>';
+
+  html += '<h2>1. Titolare del Trattamento</h2>';
+  html += '<div class="article"><p><strong>' + s.ragioneSociale + '</strong>';
+  html += sede ? ', con sede in ' + sede : '';
+  html += s.piva ? ', P.IVA ' + s.piva : '';
+  html += '.</p>';
+  html += '<p>Contatti: ' + [s.email, s.pec ? 'PEC: ' + s.pec : '', s.telefono ? 'Tel. ' + s.telefono : ''].filter(Boolean).join(' — ') + '</p></div>';
+
+  html += '<h2>2. Finalità e Base Giuridica del Trattamento</h2>';
+  html += '<div class="article">';
+  html += '<p>I dati personali del Collaboratore sono trattati per le seguenti finalità:</p>';
+  html += '<table><thead><tr><th>Finalità</th><th>Base Giuridica (Art. 6 GDPR)</th></tr></thead><tbody>';
+  html += '<tr><td>Gestione del rapporto di collaborazione contrattuale</td><td>Esecuzione del contratto (art. 6.1.b)</td></tr>';
+  html += '<tr><td>Adempimento obblighi normativi IVASS/RUI</td><td>Obbligo legale (art. 6.1.c)</td></tr>';
+  html += '<tr><td>Iscrizione e aggiornamento Sezione E del RUI</td><td>Obbligo legale (art. 6.1.c)</td></tr>';
+  html += '<tr><td>Calcolo e liquidazione provvigioni</td><td>Esecuzione del contratto (art. 6.1.b)</td></tr>';
+  html += '<tr><td>Adempimenti fiscali, contabili e previdenziali</td><td>Obbligo legale (art. 6.1.c)</td></tr>';
+  html += '<tr><td>Formazione professionale obbligatoria IVASS</td><td>Obbligo legale (art. 6.1.c)</td></tr>';
+  html += '<tr><td>Gestione compliance e audit interni</td><td>Legittimo interesse (art. 6.1.f)</td></tr>';
+  html += '</tbody></table></div>';
+
+  html += '<h2>3. Categorie di Dati Trattati</h2>';
+  html += '<div class="article"><p>Dati anagrafici e identificativi (nome, cognome, codice fiscale, P.IVA, indirizzo, recapiti); dati professionali (numero RUI, sezione di iscrizione, formazione IVASS, RC professionale); dati economici e bancari (IBAN, provvigioni, fatture).</p></div>';
+
+  html += '<h2>4. Destinatari dei Dati</h2>';
+  html += '<div class="article"><p>I dati potranno essere comunicati a:</p>';
+  html += '<p>— IVASS e autorità di vigilanza per obblighi di legge;</p>';
+  html += '<p>— Compagnie assicurative partner per la gestione dei contratti;</p>';
+  html += '<p>— Consulenti fiscali e legali del Broker;</p>';
+  html += '<p>— Fornitori di servizi informatici (hosting, cloud) per la gestione del gestionale;</p>';
+  html += '<p>I dati non saranno trasferiti al di fuori dello Spazio Economico Europeo (SEE).</p></div>';
+
+  html += '<h2>5. Periodo di Conservazione</h2>';
+  html += '<div class="article"><p>I dati saranno conservati per tutta la durata del rapporto di collaborazione e per i successivi <strong>10 anni</strong> dalla cessazione, in conformità agli obblighi di legge in materia fiscale (art. 2220 c.c.), assicurativa (D.Lgs. 209/2005) e antiriciclaggio (D.Lgs. 231/2007).</p></div>';
+
+  html += '<h2>6. Diritti dell\'Interessato</h2>';
+  html += '<div class="article"><p>In qualità di interessato, il Collaboratore ha diritto di:</p>';
+  html += '<p>— <strong>Accesso</strong> (art. 15 GDPR): ottenere conferma del trattamento e copia dei dati;</p>';
+  html += '<p>— <strong>Rettifica</strong> (art. 16): correggere dati inesatti;</p>';
+  html += '<p>— <strong>Cancellazione</strong> (art. 17): richiedere la cancellazione, salvo obblighi di legge;</p>';
+  html += '<p>— <strong>Limitazione</strong> (art. 18): limitare il trattamento in specifiche circostanze;</p>';
+  html += '<p>— <strong>Portabilità</strong> (art. 20): ricevere i dati in formato strutturato;</p>';
+  html += '<p>— <strong>Opposizione</strong> (art. 21): opporsi al trattamento basato su legittimo interesse;</p>';
+  html += '<p>— <strong>Reclamo</strong>: proporre reclamo al Garante per la Protezione dei Dati Personali (www.garanteprivacy.it).</p>';
+  html += '<p style="margin-top:8px;">Per esercitare i propri diritti, scrivere a: <strong>' + (s.email || s.pec || '___________') + '</strong></p></div>';
+
+  html += '<h2>7. Conferimento dei Dati</h2>';
+  html += '<div class="article"><p>Il conferimento dei dati è <strong>necessario</strong> per la gestione del rapporto di collaborazione e l\'adempimento degli obblighi normativi IVASS. Il mancato conferimento comporterà l\'impossibilità di instaurare o proseguire il rapporto di collaborazione.</p></div>';
+
+  html += '<h2>8. Trattamento Automatizzato</h2>';
+  html += '<div class="article"><p>I dati personali non sono soggetti a processi decisionali automatizzati né a profilazione di cui all\'art. 22 del GDPR.</p></div>';
+
+  html += '<div style="margin-top:40px;padding:16px;background:#f7fafc;border-radius:8px;border:1px solid #e2e8f0;">';
+  html += '<h3>Presa Visione e Consenso</h3>';
+  html += '<p style="margin-top:8px;">Il/La sottoscritto/a <strong>' + c.cognome + ' ' + c.nome + '</strong>' + (c.cf ? ' (C.F. ' + c.cf + ')' : '') + ' dichiara di aver ricevuto e preso visione della presente informativa ai sensi degli artt. 13 e 14 del GDPR.</p>';
+  html += '</div>';
+
+  html += '<div class="signature-area">';
+  html += '<div class="signature-box">Data e luogo<br>__________________, ____/____/________</div>';
+  html += '<div class="signature-box">Firma del Collaboratore<br><strong>' + c.cognome + ' ' + c.nome + '</strong></div>';
+  html += '</div>';
+
+  html += '<div class="footer">Informativa Privacy — ' + s.ragioneSociale + ' — Documento generato il ' + new Date().toLocaleString('it-IT') + '<br>Conforme al Reg. UE 2016/679 (GDPR) — Ultimo aggiornamento normativo verificato automaticamente</div>';
+
+  _openDocWindow('Privacy FIM - ' + c.cognome + ' ' + c.nome, html);
+}
+
+// ---- 3. ALLEGATI IVASS (3, 4, 4-ter) ----
+function generateAllegatiIVASS(collabId) {
+  const c = collaboratori.find(x => x.id === collabId);
+  if (!c) return showToast('Collaboratore non trovato', 'error');
+  const s = _getDocSettings();
+  const sede = [s.indirizzo, s.cap, s.citta, s.provincia ? '(' + s.provincia + ')' : ''].filter(Boolean).join(', ');
+
+  // Retrieve compagnie partner
+  const compagnieList = (typeof compagnie !== 'undefined' && compagnie.length > 0) ?
+    compagnie.filter(function(co) { return co.attiva !== false; }).map(function(co) { return co.nomeBreve || co.ragioneSociale || '-'; }) : [];
+
+  let html = '';
+  html += '<div class="header">';
+  html += '<div class="header-logo">' + s.ragioneSociale + '</div>';
+  html += '<div class="header-sub">Iscritta al RUI - Sez. B - N. ' + s.rui + '</div>';
+  html += '<div class="header-sub">' + sede + '</div>';
+  html += '</div>';
+
+  // ===== ALLEGATO 3 =====
+  html += '<h1>ALLEGATO 3</h1>';
+  html += '<p style="text-align:center;color:#718096;margin-bottom:6px;">INFORMATIVA SUL DISTRIBUTORE</p>';
+  html += '<p style="text-align:center;color:#718096;margin-bottom:24px;">(Art. 56 del Regolamento IVASS n. 40/2018 e successive modifiche)</p>';
+
+  html += '<h2>A — Dati Identificativi del Distributore</h2>';
+  html += '<table>';
+  html += '<tr><td style="width:40%;font-weight:600;">Denominazione</td><td>' + s.ragioneSociale + '</td></tr>';
+  html += '<tr><td style="font-weight:600;">Sede Legale</td><td>' + sede + '</td></tr>';
+  html += '<tr><td style="font-weight:600;">N. Iscrizione RUI</td><td>Sezione B — N. ' + s.rui + '</td></tr>';
+  html += '<tr><td style="font-weight:600;">P.IVA / C.F.</td><td>' + [s.piva, s.cf].filter(Boolean).join(' / ') + '</td></tr>';
+  html += '<tr><td style="font-weight:600;">Telefono</td><td>' + (s.telefono || '-') + '</td></tr>';
+  html += '<tr><td style="font-weight:600;">Email</td><td>' + (s.email || '-') + '</td></tr>';
+  html += '<tr><td style="font-weight:600;">PEC</td><td>' + (s.pec || '-') + '</td></tr>';
+  html += '</table>';
+
+  if (c.rui) {
+    html += '<h3>Collaboratore che svolge l\'attività di distribuzione</h3>';
+    html += '<table>';
+    html += '<tr><td style="width:40%;font-weight:600;">Nominativo</td><td>' + c.cognome + ' ' + c.nome + '</td></tr>';
+    html += '<tr><td style="font-weight:600;">N. Iscrizione RUI</td><td>Sezione ' + (c.sezioneRUI || 'E') + ' — N. ' + c.rui + '</td></tr>';
+    html += '<tr><td style="font-weight:600;">Ruolo</td><td>' + (c.ruolo || 'Subagente') + '</td></tr>';
+    html += '</table>';
+  }
+
+  html += '<h2>B — Rapporti con Imprese di Assicurazione</h2>';
+  html += '<p>In qualità di Broker assicurativo (Sez. B del RUI), ' + s.ragioneSociale + ' <strong>non ha obblighi contrattuali di operare esclusivamente con una o più imprese di assicurazione</strong> e fornisce consulenza fondata su un\'analisi imparziale del mercato.</p>';
+
+  if (compagnieList.length > 0) {
+    html += '<h3>Imprese di assicurazione con cui intrattiene rapporti d\'affari</h3>';
+    html += '<div style="column-count:3;column-gap:20px;font-size:10pt;margin:10px 0;">';
+    compagnieList.sort().forEach(function(name) {
+      html += '<p style="margin:2px 0;">• ' + name + '</p>';
+    });
+    html += '</div>';
+    html += '<p class="small">Elenco aggiornato automaticamente al ' + new Date().toLocaleDateString('it-IT') + ' dal gestionale ' + s.brokerName + '</p>';
+  }
+
+  html += '<h2>C — Tutela del Contraente</h2>';
+  html += '<div class="article">';
+  html += '<p><strong>Reclami:</strong> Eventuali reclami riguardanti il comportamento dell\'intermediario possono essere inoltrati per iscritto a: ' + s.ragioneSociale + ', ' + sede + (s.pec ? ' — PEC: ' + s.pec : '') + '.</p>';
+  html += '<p><strong>IVASS:</strong> In caso di mancata risposta o risposta insoddisfacente entro 45 giorni, è possibile rivolgersi all\'IVASS, Via del Quirinale 21, 00187 Roma (www.ivass.it).</p>';
+  html += '<p><strong>Arbitro Assicurativo:</strong> Dal 15 gennaio 2026, ai sensi del Provvedimento IVASS n. 163/2025, è possibile rivolgersi all\'Arbitro Assicurativo per la risoluzione delle controversie in materia assicurativa (www.arbitroassicurativo.it).</p>';
+  html += '<p><strong>Fondo di Garanzia:</strong> L\'intermediario aderisce al sistema di garanzia previsto dalla legge per la tutela dei contraenti.</p>';
+  html += '</div>';
+
+  // ===== PAGE BREAK =====
+  html += '<div style="page-break-before:always;"></div>';
+
+  // ===== ALLEGATO 4 =====
+  html += '<h1>ALLEGATO 4</h1>';
+  html += '<p style="text-align:center;color:#718096;margin-bottom:6px;">INFORMAZIONI DA RENDERE AL CONTRAENTE</p>';
+  html += '<p style="text-align:center;color:#718096;margin-bottom:24px;">prima della sottoscrizione (Art. 58 Reg. IVASS 40/2018)</p>';
+
+  html += '<h2>1 — Tipo di Intermediario</h2>';
+  html += '<div class="article"><p>' + s.ragioneSociale + ' è un <strong>Broker di assicurazione</strong> iscritto alla Sezione B del RUI n. ' + s.rui + '. In qualità di broker, fornisce consulenza professionale basata su un\'analisi imparziale di un numero sufficientemente ampio di contratti disponibili sul mercato, al fine di raccomandare il contratto più adeguato alle esigenze del contraente.</p></div>';
+
+  html += '<h2>2 — Partecipazioni e Conflitti di Interesse</h2>';
+  html += '<div class="article">';
+  html += '<p>a) Il Broker non detiene partecipazioni superiori al 10% nel capitale sociale o nei diritti di voto di alcuna impresa di assicurazione.</p>';
+  html += '<p>b) Nessuna impresa di assicurazione o impresa controllante un\'impresa di assicurazione detiene partecipazioni superiori al 10% nel capitale sociale del Broker.</p>';
+  html += '</div>';
+
+  html += '<h2>3 — Remunerazione</h2>';
+  html += '<div class="article"><p>Il Broker è remunerato mediante <strong>provvigioni</strong> corrisposte dalle imprese di assicurazione. Il contraente non è tenuto al pagamento di alcun compenso aggiuntivo, salvo diverso accordo scritto.</p></div>';
+
+  html += '<h2>4 — Consulenza e Analisi delle Esigenze</h2>';
+  html += '<div class="article"><p>Prima della conclusione del contratto, il Broker acquisirà le informazioni necessarie a valutare le esigenze assicurative del contraente, fornendo una raccomandazione personalizzata coerente con il profilo di rischio, le esigenze e le richieste del cliente (c.d. "demands and needs").</p></div>';
+
+  html += '<h2>5 — Strumenti di Tutela</h2>';
+  html += '<div class="article">';
+  html += '<p>— <strong>Reclami:</strong> ' + s.ragioneSociale + ', ' + sede + (s.pec ? ' — PEC: ' + s.pec : '') + '</p>';
+  html += '<p>— <strong>IVASS:</strong> Via del Quirinale 21, 00187 Roma — www.ivass.it — Fax 06.42133206</p>';
+  html += '<p>— <strong>Arbitro Assicurativo:</strong> www.arbitroassicurativo.it (operativo dal 15/01/2026 ex Provv. IVASS 163/2025)</p>';
+  html += '<p>— <strong>Conciliazione paritetica:</strong> Ove prevista dal contratto o dalla legge</p>';
+  html += '</div>';
+
+  // ===== PAGE BREAK =====
+  html += '<div style="page-break-before:always;"></div>';
+
+  // ===== ALLEGATO 4-TER =====
+  html += '<h1>ALLEGATO 4-TER</h1>';
+  html += '<p style="text-align:center;color:#718096;margin-bottom:6px;">ELENCO DELLE REGOLE DI COMPORTAMENTO DEL DISTRIBUTORE</p>';
+  html += '<p style="text-align:center;color:#718096;margin-bottom:24px;">(Art. 54 del Regolamento IVASS n. 40/2018 e successive modifiche)</p>';
+
+  html += '<div class="article"><p>Nell\'esercizio dell\'attività di distribuzione assicurativa, ' + s.ragioneSociale + ' e i suoi collaboratori si impegnano a rispettare le seguenti regole di comportamento:</p></div>';
+
+  const regole = [
+    { n:'1', t:'Diligenza, correttezza e trasparenza', d:'Operare con diligenza, correttezza e trasparenza nei confronti dei contraenti e degli assicurati, nell\'interesse dei clienti e dell\'integrità del mercato assicurativo (art. 119-bis CAP).' },
+    { n:'2', t:'Informativa precontrattuale', d:'Fornire al contraente, prima della sottoscrizione, le informazioni previste dagli Allegati 3 e 4 del Regolamento IVASS n. 40/2018, inclusa l\'informativa su conflitti di interesse, remunerazione e tutele disponibili.' },
+    { n:'3', t:'Valutazione delle esigenze (demands and needs)', d:'Acquisire le informazioni necessarie a valutare le esigenze assicurative e previdenziali del contraente, proponendo contratti coerenti con il suo profilo di rischio e le sue necessità (art. 58 Reg. 40/2018).' },
+    { n:'4', t:'Consulenza personalizzata', d:'Fornire raccomandazioni personalizzate, basate su un\'analisi imparziale del mercato, motivando le ragioni per cui un determinato prodotto è ritenuto più adeguato alle esigenze del cliente.' },
+    { n:'5', t:'Gestione dei conflitti di interesse', d:'Identificare, prevenire e gestire situazioni di conflitto di interesse, operando sempre nell\'interesse del cliente e comunicando tempestivamente eventuali conflitti.' },
+    { n:'6', t:'Protezione dei dati personali', d:'Trattare i dati personali nel rispetto del Regolamento UE 2016/679 (GDPR), del D.Lgs. 196/2003 e del D.Lgs. 101/2018, garantendo riservatezza e sicurezza delle informazioni.' },
+    { n:'7', t:'Conservazione della documentazione', d:'Conservare la documentazione relativa ai contratti intermediati per il periodo previsto dalla legge, garantendone l\'accessibilità e l\'integrità (art. 62 Reg. 40/2018).' },
+    { n:'8', t:'Formazione continua', d:'Mantenere aggiornata la propria competenza professionale mediante l\'assolvimento dell\'obbligo formativo di almeno 30 ore annuali (art. 89 Reg. 40/2018).' },
+    { n:'9', t:'Gestione dei reclami', d:'Gestire i reclami dei contraenti con tempestività e diligenza, rispondendo entro 45 giorni dal ricevimento e informando il cliente sui mezzi di tutela disponibili, incluso l\'Arbitro Assicurativo (Provv. IVASS 163/2025).' },
+    { n:'10', t:'Anti-riciclaggio', d:'Adempiere agli obblighi di adeguata verifica della clientela e segnalazione di operazioni sospette ai sensi del D.Lgs. 231/2007.' }
+  ];
+
+  regole.forEach(function(r) {
+    html += '<div class="article">';
+    html += '<p><span class="article-title">' + r.n + '. ' + r.t + '</span></p>';
+    html += '<p>' + r.d + '</p>';
+    html += '</div>';
+  });
+
+  html += '<div style="margin-top:30px;padding:16px;background:#faf5ff;border-radius:8px;border:1px solid #e9d8fd;">';
+  html += '<h3 style="color:#553c9a;">Riferimenti Normativi</h3>';
+  html += '<p style="font-size:10pt;">— D.Lgs. 7 settembre 2005, n. 209 (Codice delle Assicurazioni Private)</p>';
+  html += '<p style="font-size:10pt;">— Regolamento IVASS n. 40 del 2 agosto 2018 (e successive modifiche: Provv. 97/2020, 128/2023, 131/2023, 134/2023, 147/2024, 163/2025, 169/2026)</p>';
+  html += '<p style="font-size:10pt;">— Regolamento UE 2016/679 (GDPR)</p>';
+  html += '<p style="font-size:10pt;">— D.Lgs. 21 novembre 2007, n. 231 (Antiriciclaggio)</p>';
+  html += '<p style="font-size:10pt;">— Provvedimento IVASS n. 163/2025 (Arbitro Assicurativo — operativo dal 15/01/2026)</p>';
+  html += '</div>';
+
+  html += '<div class="signature-area">';
+  html += '<div class="signature-box">Per presa visione — Il Contraente/Collaboratore<br><strong>' + c.cognome + ' ' + c.nome + '</strong></div>';
+  html += '<div class="signature-box">Il Distributore<br><strong>' + s.ragioneSociale + '</strong></div>';
+  html += '</div>';
+
+  html += '<div class="footer">';
+  html += 'Allegati 3, 4 e 4-ter ai sensi del Regolamento IVASS n. 40/2018 — ' + s.ragioneSociale + '<br>';
+  html += 'Documento generato il ' + new Date().toLocaleString('it-IT') + ' — Elenco compagnie aggiornato automaticamente dal gestionale<br>';
+  html += 'Include riferimento Arbitro Assicurativo (Provv. IVASS 163/2025, operativo dal 15/01/2026)';
+  html += '</div>';
+
+  _openDocWindow('Allegati IVASS - ' + c.cognome + ' ' + c.nome, html);
 }
 
 function updateCollabSelects() {
