@@ -98,12 +98,27 @@ if (total > 0) {
   log('Nessun dato. Apri questa pagina dal dispositivo con i dati.');
 }
 
+// Sanitizza le chiavi per Firebase (rimuovi . $ # [ ] / e chiavi vuote)
+function sanitizeKeys(obj) {
+  if (obj === null || obj === undefined) return obj;
+  if (Array.isArray(obj)) return obj.map(sanitizeKeys);
+  if (typeof obj !== 'object') return obj;
+  var clean = {};
+  for (var key in obj) {
+    if (!obj.hasOwnProperty(key)) continue;
+    var safeKey = key.replace(/[.$#\[\]\/]/g, '_');
+    if (safeKey === '') safeKey = '_empty_';
+    clean[safeKey] = sanitizeKeys(obj[key]);
+  }
+  return clean;
+}
+
 function pushToCloud() {
   log('Inizio caricamento via REST API...');
   document.getElementById('pushBtn').disabled = true;
   document.getElementById('pushBtn').textContent = 'CARICAMENTO IN CORSO...';
 
-  var data = {
+  var data = sanitizeKeys({
     clienti: clienti.length > 0 ? clienti : null,
     compagnie: compagnie.length > 0 ? compagnie : null,
     polizze: polizze.length > 0 ? polizze : null,
@@ -121,9 +136,10 @@ function pushToCloud() {
     polizzeSaldate: Object.keys(polizzeSaldate).length > 0 ? polizzeSaldate : null,
     passwordHash: passwordHash,
     lastSync: new Date().toISOString()
-  };
+  });
 
   var jsonStr = JSON.stringify(data);
+  log('Dati sanitizzati OK');
   log('Dimensione dati: ' + (jsonStr.length / 1024).toFixed(1) + ' KB');
 
   // Usa fetch + REST API (piu compatibile con tablet)

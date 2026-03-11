@@ -3750,6 +3750,21 @@ let firebaseApp = null;
 let firebaseDb = null;
 let cloudSyncEnabled = false;
 
+// ============ SANITIZE KEYS per Firebase (rimuovi . $ # [ ] / e chiavi vuote) ============
+function _sanitizeFirebaseKeys(obj) {
+  if (obj === null || obj === undefined) return obj;
+  if (Array.isArray(obj)) return obj.map(_sanitizeFirebaseKeys);
+  if (typeof obj !== 'object') return obj;
+  var clean = {};
+  for (var key in obj) {
+    if (!obj.hasOwnProperty(key)) continue;
+    var safeKey = key.replace(/[.$#\[\]\/]/g, '_');
+    if (safeKey === '') safeKey = '_empty_';
+    clean[safeKey] = _sanitizeFirebaseKeys(obj[key]);
+  }
+  return clean;
+}
+
 // ============ AUTO CLOUD PUSH (salvataggio automatico nel cloud) ============
 var _autoCloudPushTimer = null;
 var _autoCloudPushDelay = 2000; // 2 secondi di debounce
@@ -3786,7 +3801,7 @@ function autoCloudPush() {
       passwordHash: localStorage.getItem(PWD_KEY) || null,
       lastSync: new Date().toISOString()
     };
-    firebaseDb.ref('fim_data').set(data).then(function() {
+    firebaseDb.ref('fim_data').set(_sanitizeFirebaseKeys(data)).then(function() {
       localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
       updateSyncStatus('synced');
       console.log('[AutoPush] Dati sincronizzati nel cloud automaticamente');
@@ -3866,7 +3881,7 @@ function cloudSync() {
     passwordHash: localStorage.getItem(PWD_KEY) || null,
     lastSync: new Date().toISOString()
   };
-  firebaseDb.ref('fim_data').set(data).then(() => {
+  firebaseDb.ref('fim_data').set(_sanitizeFirebaseKeys(data)).then(() => {
     localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
     updateSyncStatus('synced');
     showToast('Dati sincronizzati nel cloud', 'success');
