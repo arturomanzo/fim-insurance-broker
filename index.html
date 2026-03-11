@@ -3750,6 +3750,54 @@ let firebaseApp = null;
 let firebaseDb = null;
 let cloudSyncEnabled = false;
 
+// ============ AUTO CLOUD PUSH (salvataggio automatico nel cloud) ============
+var _autoCloudPushTimer = null;
+var _autoCloudPushDelay = 2000; // 2 secondi di debounce
+
+function autoCloudPush() {
+  // Debounce: aspetta 2 secondi dopo l'ultima modifica prima di sincronizzare
+  if (_autoCloudPushTimer) clearTimeout(_autoCloudPushTimer);
+  _autoCloudPushTimer = setTimeout(function() {
+    if (!cloudSyncEnabled || !firebaseDb) {
+      console.log('[AutoPush] Firebase non connesso, sync saltato');
+      return;
+    }
+    // CLOUD GUARD: non sincronizzare se i dati locali sono vuoti ma dovrebbero esserci
+    if ((!polizze || polizze.length === 0) && _lastKnownPolizzeCount > 5) {
+      console.error('[AutoPush] Sync bloccato: polizze vuote ma count precedente era ' + _lastKnownPolizzeCount);
+      return;
+    }
+    var data = {
+      clienti: clienti,
+      compagnie: compagnie,
+      polizze: polizze,
+      collaboratori: collaboratori,
+      fatture: fatture,
+      preventivi: preventivi,
+      quotazioni: quotazioni,
+      sinistri: sinistri,
+      quietanze: quietanze,
+      provTable: provTable,
+      indivProvTables: indivProvTables,
+      provOverrides: JSON.parse(localStorage.getItem('fim_prov_overrides') || '{}'),
+      settings: JSON.parse(localStorage.getItem('fim_settings') || '{}'),
+      waTemplates: JSON.parse(localStorage.getItem('fim_wa_templates') || '{}'),
+      polizzeSaldate: JSON.parse(localStorage.getItem('fim_polizze_saldate') || '{}'),
+      passwordHash: localStorage.getItem(PWD_KEY) || null,
+      lastSync: new Date().toISOString()
+    };
+    firebaseDb.ref('fim_data').set(data).then(function() {
+      localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
+      updateSyncStatus('synced');
+      console.log('[AutoPush] Dati sincronizzati nel cloud automaticamente');
+    }).catch(function(err) {
+      console.error('[AutoPush] Errore sync:', err);
+      updateSyncStatus('error');
+    });
+  }, _autoCloudPushDelay);
+}
+// ============ FINE AUTO CLOUD PUSH ============
+
 // Default Firebase credentials for FIM Insurance Broker
 const FIREBASE_DEFAULTS = {
   apiKey: 'AIzaSyAdrtV-54W2Ajhfz_4lLH65fd9Oz3K33gM',
@@ -4285,9 +4333,9 @@ function autoCloudSync() {
       const localSync = localStorage.getItem('fim_last_cloud_sync') || '1970-01-01';
       const cloudSync_ts = cloudData.lastSync || '1970-01-01';
       if (new Date(cloudSync_ts) > new Date(localSync)) {
-        // Cloud is newer → notify user
-        updateSyncStatus('connected');
-        showToast('📥 Dati più recenti disponibili nel cloud. Clicca "Scarica dal Cloud" per aggiornare.', 'info');
+        // Cloud is newer → auto-pull (scenario: dati inseriti da altro dispositivo)
+        console.log('AutoSync: cloud più recente (' + cloudSync_ts + ' vs ' + localSync + '), pull automatico...');
+        cloudPullSilent();
       } else {
         updateSyncStatus('synced');
       }
@@ -4387,6 +4435,7 @@ function saveData(force) {
   localStorage.setItem(DB_KEY, JSON.stringify(polizze));
   _lastKnownPolizzeCount = polizze.length;
   refreshAll();
+  autoCloudPush();
 }
 
 function loadSettings() {
@@ -4452,6 +4501,7 @@ function saveSettings() {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   refreshAll();
   showToast('Impostazioni salvate');
+  autoCloudPush();
 }
 
 // ======================= DATE HELPERS =======================
@@ -4951,6 +5001,7 @@ function loadCompagnie() {
 
 function saveCompagnie() {
   localStorage.setItem(COMPAGNIE_KEY, JSON.stringify(compagnie));
+  autoCloudPush();
 }
 
 // Pre-built list of Italian insurance companies for seeding
@@ -5344,6 +5395,7 @@ function loadClienti() {
 
 function saveClienti() {
   localStorage.setItem(CLIENTI_KEY, JSON.stringify(clienti));
+  autoCloudPush();
 }
 
 // Migration: extract unique clients from existing polizze
@@ -7532,6 +7584,7 @@ function loadCollaboratori() {
 function saveCollaboratori() {
   localStorage.setItem(COLLAB_KEY, JSON.stringify(collaboratori));
   refreshAll();
+  autoCloudPush();
 }
 
 function generateCollabCode() {
@@ -7922,6 +7975,7 @@ function saveProvTable() {
   localStorage.setItem(PROV_TABLE_KEY, JSON.stringify(provTable));
   refreshAll();
   showToast('Tabella provvigionale salvata');
+  autoCloudPush();
 }
 
 function resetProvTable() {
@@ -7955,7 +8009,7 @@ let indivProvTables = {};
 function loadIndivProvTables() {
   try { indivProvTables = JSON.parse(localStorage.getItem(INDIV_PROV_KEY)) || {}; } catch(e) { indivProvTables = {}; }
 }
-function saveIndivProvTables() { localStorage.setItem(INDIV_PROV_KEY, JSON.stringify(indivProvTables)); }
+function saveIndivProvTables() { localStorage.setItem(INDIV_PROV_KEY, JSON.stringify(indivProvTables)); autoCloudPush(); }
 
 function renderIndivProvTable() {
   const collabId = document.getElementById('provIndivCollab').value;
@@ -8333,6 +8387,7 @@ function loadFatture() {
 }
 function saveFatture() {
   localStorage.setItem(INV_KEY, JSON.stringify(fatture));
+  autoCloudPush();
 }
 
 function getNextInvoiceNumber() {
@@ -9146,7 +9201,7 @@ function exportInvoicesCSV() {
 const PREV_KEY = 'fim_preventivi';
 let preventivi = [];
 function loadPreventivi() { try { preventivi = JSON.parse(localStorage.getItem(PREV_KEY)) || []; } catch(e) { preventivi = []; } }
-function savePreventivi() { localStorage.setItem(PREV_KEY, JSON.stringify(preventivi)); }
+function savePreventivi() { localStorage.setItem(PREV_KEY, JSON.stringify(preventivi)); autoCloudPush(); }
 
 // Parametri base di mercato italiano RCA (stime 2025-2026)
 const RCA_BASE_PRICES = {
@@ -9359,7 +9414,7 @@ function printPreventivo() {
 const QUOT_KEY = 'fim_quotazioni';
 let quotazioni = [];
 function loadQuotazioni() { try { quotazioni = JSON.parse(localStorage.getItem(QUOT_KEY)) || []; } catch(e) { quotazioni = []; } }
-function saveQuotazioniData() { localStorage.setItem(QUOT_KEY, JSON.stringify(quotazioni)); }
+function saveQuotazioniData() { localStorage.setItem(QUOT_KEY, JSON.stringify(quotazioni)); autoCloudPush(); }
 
 const GARANZIE_TEMPLATES = [
   { nome: 'R.C.A.', massimale: '€ 6.450.000,00', scoperto: '', franchigia: '' },
@@ -9848,7 +9903,7 @@ function _generateQuotPDF(q) {
 const SIN_KEY = 'fim_sinistri';
 let sinistri = [];
 function loadSinistri() { try { sinistri = JSON.parse(localStorage.getItem(SIN_KEY)) || []; } catch(e) { sinistri = []; } }
-function saveSinistriData() { localStorage.setItem(SIN_KEY, JSON.stringify(sinistri)); }
+function saveSinistriData() { localStorage.setItem(SIN_KEY, JSON.stringify(sinistri)); autoCloudPush(); }
 
 function getNextSinNumber() {
   const year = new Date().getFullYear();
@@ -10307,6 +10362,7 @@ function getPolizzeSaldate() {
 }
 function savePolizzeSaldate(obj) {
   localStorage.setItem('fim_polizze_saldate', JSON.stringify(obj));
+  autoCloudPush();
 }
 function getSaldataKey(r) {
   // Chiave univoca: tipo_numPolizza_compagnia (per polizze) o tipo_numero (per fatture)
@@ -11404,7 +11460,7 @@ function clearWALog() {
 const Q_KEY = 'fim_quietanze';
 let quietanze = [];
 function loadQuietanze() { try { quietanze = JSON.parse(localStorage.getItem(Q_KEY)) || []; } catch(e) { quietanze = []; } }
-function saveQuietanzeData() { localStorage.setItem(Q_KEY, JSON.stringify(quietanze)); }
+function saveQuietanzeData() { localStorage.setItem(Q_KEY, JSON.stringify(quietanze)); autoCloudPush(); }
 
 function generateQuietanze() {
   let count = 0;
@@ -11865,73 +11921,46 @@ function simpleHash(str) {
   return 'fim_' + Math.abs(hash).toString(36) + '_' + str.length;
 }
 
-// Funzione helper: salva password hash su Firebase IMMEDIATAMENTE
+// Helper: salva password hash su Firebase IMMEDIATAMENTE
 function _savePasswordToFirebase(pwdHash) {
   try {
     if (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length) {
       firebase.database().ref('fim_data/passwordHash').set(pwdHash).then(function() {
         console.log('[Auth] Password salvata su Firebase cloud');
-      }).catch(function(e) {
-        console.warn('[Auth] Errore salvataggio password su Firebase:', e);
-      });
+      }).catch(function(e) { console.warn('[Auth] Errore salvataggio pwd Firebase:', e); });
     } else {
-      // Firebase non ancora inizializzato, prova a inizializzarlo
       var s = JSON.parse(localStorage.getItem('fim_settings') || '{}');
-      var cfg = {
-        apiKey: s.firebaseApiKey || FIREBASE_DEFAULTS.apiKey,
-        databaseURL: s.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL,
-        projectId: s.firebaseProjectId || FIREBASE_DEFAULTS.projectId
-      };
+      var cfg = { apiKey: s.firebaseApiKey || FIREBASE_DEFAULTS.apiKey, databaseURL: s.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL, projectId: s.firebaseProjectId || FIREBASE_DEFAULTS.projectId };
       if (!firebase.apps.length) { firebase.initializeApp(cfg); }
       firebase.database().ref('fim_data/passwordHash').set(pwdHash).then(function() {
         console.log('[Auth] Password salvata su Firebase cloud (init)');
-      }).catch(function(e) {
-        console.warn('[Auth] Errore salvataggio password su Firebase:', e);
-      });
+      }).catch(function(e) { console.warn('[Auth] Errore salvataggio pwd Firebase:', e); });
     }
   } catch(e) { console.warn('[Auth] _savePasswordToFirebase error:', e); }
 }
 
-// Flag: Firebase ha finito di caricare?
 var _fimPasswordReady = !!localStorage.getItem(PWD_KEY);
 
 function checkLogin() {
   var pwd = document.getElementById('loginPassword').value;
   var stored = localStorage.getItem(PWD_KEY);
-
-  // Se Firebase sta ancora caricando, mostra messaggio di attesa
   if (!stored && !_fimPasswordReady) {
     document.getElementById('loginError').textContent = 'Connessione al cloud in corso, riprova tra un istante...';
     document.getElementById('loginError').style.display = 'block';
     document.getElementById('loginError').style.color = '#2b6cb0';
-    setTimeout(function() {
-      document.getElementById('loginError').style.display = 'none';
-      document.getElementById('loginError').style.color = '#e53e3e';
-      document.getElementById('loginError').textContent = 'Password non corretta';
-    }, 2500);
+    setTimeout(function() { document.getElementById('loginError').style.display = 'none'; document.getElementById('loginError').style.color = '#e53e3e'; document.getElementById('loginError').textContent = 'Password non corretta'; }, 2500);
     return;
   }
-
-  // Se Firebase ha finito ma la password non esiste da nessuna parte → prima configurazione
-  if (!stored && _fimPasswordReady) {
-    document.getElementById('firstSetupSection').style.display = 'block';
-    return;
-  }
-
-  // Verifica password
+  if (!stored && _fimPasswordReady) { document.getElementById('firstSetupSection').style.display = 'block'; return; }
   if (simpleHash(pwd) === stored) {
     document.getElementById('loginOverlay').style.display = 'none';
     sessionStorage.setItem('fim_authenticated', 'true');
-    // Ri-salva password su Firebase ad ogni login riuscito (per sicurezza)
     _savePasswordToFirebase(stored);
   } else {
     document.getElementById('loginError').textContent = 'Password non corretta';
     document.getElementById('loginError').style.display = 'block';
     document.getElementById('loginPassword').style.borderColor = '#e53e3e';
-    setTimeout(function() {
-      document.getElementById('loginError').style.display = 'none';
-      document.getElementById('loginPassword').style.borderColor = '#e2e8f0';
-    }, 3000);
+    setTimeout(function() { document.getElementById('loginError').style.display = 'none'; document.getElementById('loginPassword').style.borderColor = '#e2e8f0'; }, 3000);
   }
 }
 
@@ -11942,11 +11971,10 @@ function setFirstPassword() {
   if (p1 !== p2) { alert('Le password non coincidono'); return; }
   var hashed = simpleHash(p1);
   localStorage.setItem(PWD_KEY, hashed);
-  // SALVA IMMEDIATAMENTE SU FIREBASE
   _savePasswordToFirebase(hashed);
   document.getElementById('loginOverlay').style.display = 'none';
   sessionStorage.setItem('fim_authenticated', 'true');
-  showToast('Password impostata con successo e salvata nel cloud');
+  showToast('Password impostata e salvata nel cloud');
 }
 
 function changePassword() {
@@ -11960,15 +11988,12 @@ function changePassword() {
   if (newPwd !== confirm2) { alert('Le password non coincidono'); return; }
   var hashed = simpleHash(newPwd);
   localStorage.setItem(PWD_KEY, hashed);
-  // SALVA IMMEDIATAMENTE SU FIREBASE
   _savePasswordToFirebase(hashed);
-  alert('Password aggiornata con successo e salvata nel cloud');
+  alert('Password aggiornata e salvata nel cloud');
 }
 
 (function() {
   var stored = localStorage.getItem(PWD_KEY);
-
-  // Se la password è già in localStorage, siamo pronti
   if (stored) {
     _fimPasswordReady = true;
     document.getElementById('firstSetupSection').style.display = 'none';
@@ -11977,8 +12002,6 @@ function changePassword() {
     }
     return;
   }
-
-  // Password NON trovata localmente — prova a recuperarla da Firebase
   _fimPasswordReady = false;
   try {
     var settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
@@ -11986,36 +12009,36 @@ function changePassword() {
     var dbUrl = settings.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL;
     var projId = settings.firebaseProjectId || FIREBASE_DEFAULTS.projectId;
     if (apiKey && dbUrl && typeof firebase !== 'undefined') {
-      if (!firebase.apps.length) {
-        firebase.initializeApp({ apiKey: apiKey, databaseURL: dbUrl, projectId: projId });
-      }
-      // Mostra un indicatore di caricamento nel campo password
+      if (!firebase.apps.length) { firebase.initializeApp({ apiKey: apiKey, databaseURL: dbUrl, projectId: projId }); }
       var loginPwdField = document.getElementById('loginPassword');
       if (loginPwdField) loginPwdField.placeholder = 'Connessione al cloud...';
-
       firebase.database().ref('fim_data').once('value').then(function(snap) {
         var data = snap.val();
         _fimPasswordReady = true;
         if (loginPwdField) loginPwdField.placeholder = 'Password';
-
         if (data && data.passwordHash) {
-          // Password trovata nel cloud! Salvala localmente
           localStorage.setItem(PWD_KEY, data.passwordHash);
           document.getElementById('firstSetupSection').style.display = 'none';
           console.log('[Auth] Password recuperata dal cloud Firebase');
-
-          // Recupera anche tutti gli altri dati dal cloud
-          if (data.clienti) { localStorage.setItem('fim_clienti', JSON.stringify(data.clienti)); }
-          if (data.collaboratori) { localStorage.setItem('fim_collaboratori', JSON.stringify(data.collaboratori)); }
-          if (data.polizze) { localStorage.setItem('fim_polizze', JSON.stringify(data.polizze)); }
+          if (data.clienti) { clienti = Array.isArray(data.clienti) ? data.clienti : Object.values(data.clienti); localStorage.setItem('fim_clienti', JSON.stringify(clienti)); }
+          if (data.compagnie) { compagnie = Array.isArray(data.compagnie) ? data.compagnie : Object.values(data.compagnie); localStorage.setItem('fim_compagnie', JSON.stringify(compagnie)); }
+          if (data.polizze) { polizze = Array.isArray(data.polizze) ? data.polizze : Object.values(data.polizze); localStorage.setItem('fim_polizze_db', JSON.stringify(polizze)); _lastKnownPolizzeCount = polizze.length; }
+          if (data.collaboratori) { collaboratori = Array.isArray(data.collaboratori) ? data.collaboratori : Object.values(data.collaboratori); localStorage.setItem('fim_collaboratori', JSON.stringify(collaboratori)); }
+          if (data.fatture) { fatture = Array.isArray(data.fatture) ? data.fatture : Object.values(data.fatture); localStorage.setItem('fim_fatture', JSON.stringify(fatture)); }
+          if (data.preventivi) { preventivi = Array.isArray(data.preventivi) ? data.preventivi : Object.values(data.preventivi); localStorage.setItem('fim_preventivi', JSON.stringify(preventivi)); }
+          if (data.quotazioni) { quotazioni = Array.isArray(data.quotazioni) ? data.quotazioni : Object.values(data.quotazioni); localStorage.setItem('fim_quotazioni', JSON.stringify(quotazioni)); }
+          if (data.sinistri) { sinistri = Array.isArray(data.sinistri) ? data.sinistri : Object.values(data.sinistri); localStorage.setItem('fim_sinistri', JSON.stringify(sinistri)); }
+          if (data.quietanze) { quietanze = Array.isArray(data.quietanze) ? data.quietanze : Object.values(data.quietanze); localStorage.setItem('fim_quietanze', JSON.stringify(quietanze)); }
+          if (data.provTable) { provTable = data.provTable; localStorage.setItem('fim_prov_table', JSON.stringify(provTable)); }
+          if (data.indivProvTables) { indivProvTables = data.indivProvTables; localStorage.setItem('fim_indiv_prov', JSON.stringify(indivProvTables)); }
           if (data.provOverrides) { localStorage.setItem('fim_prov_overrides', JSON.stringify(data.provOverrides)); }
           if (data.settings) { localStorage.setItem('fim_settings', JSON.stringify(data.settings)); }
           if (data.waTemplates) { localStorage.setItem('fim_wa_templates', JSON.stringify(data.waTemplates)); }
           if (data.polizzeSaldate) { localStorage.setItem('fim_polizze_saldate', JSON.stringify(data.polizzeSaldate)); }
           localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
+          try { refreshAll(); } catch(e) {}
           console.log('[Auth] Tutti i dati ripristinati dal cloud');
         } else {
-          // Nessuna password nel cloud — è davvero la prima configurazione
           document.getElementById('firstSetupSection').style.display = 'block';
         }
       }).catch(function(err) {
