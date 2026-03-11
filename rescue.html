@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIM Rescue - Sync Dati</title>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<style>
+body { font-family: -apple-system, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #1a2744; color: #fff; }
+h1 { color: #d4a04a; text-align: center; }
+.status { padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 16px; }
+.info { background: #2a3a5c; }
+.success { background: #1a5c2a; }
+.error { background: #5c1a1a; }
+button { display: block; width: 100%; padding: 18px; font-size: 20px; font-weight: bold; background: #d4a04a; color: #1a2744; border: none; border-radius: 10px; cursor: pointer; margin: 15px 0; }
+button:active { background: #b8862e; }
+#log { background: #0d1b2a; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 13px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<h1>FIM Rescue</h1>
+<p style="text-align:center;">Questa pagina carica i dati dal localStorage al cloud Firebase</p>
+
+<div id="localStatus" class="status info">Analisi dati locali...</div>
+<button id="pushBtn" onclick="pushToCloud()" style="display:none;">CARICA DATI NEL CLOUD</button>
+<div id="log"></div>
+
+<script>
+var firebaseConfig = {
+  apiKey: 'AIzaSyAdrtV-54W2Ajhfz_4lLH65fd9Oz3K33gM',
+  databaseURL: 'https://fim-insurance-broker-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'fim-insurance-broker'
+};
+
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+function log(msg) {
+  var el = document.getElementById('log');
+  el.textContent += new Date().toLocaleTimeString() + ' - ' + msg + '\n';
+  el.scrollTop = el.scrollHeight;
+}
+
+function safeParseArray(key) {
+  try {
+    var raw = localStorage.getItem(key);
+    if (!raw) return [];
+    var parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch(e) { return []; }
+}
+
+function safeParse(key) {
+  try {
+    var raw = localStorage.getItem(key);
+    if (!raw) return {};
+    return JSON.parse(raw);
+  } catch(e) { return {}; }
+}
+
+// Check local data
+var polizze = safeParseArray('fim_polizze_db');
+var clienti = safeParseArray('fim_clienti');
+var compagnie = safeParseArray('fim_compagnie');
+var collaboratori = safeParseArray('fim_collaboratori');
+var fatture = safeParseArray('fim_fatture');
+var preventivi = safeParseArray('fim_preventivi');
+var quotazioni = safeParseArray('fim_quotazioni');
+var sinistri = safeParseArray('fim_sinistri');
+var quietanze = safeParseArray('fim_quietanze');
+var provTable = safeParse('fim_prov_table');
+var indivProvTables = safeParse('fim_indiv_prov');
+var provOverrides = safeParse('fim_prov_overrides');
+var settings = safeParse('fim_settings');
+var waTemplates = safeParse('fim_wa_templates');
+var polizzeSaldate = safeParse('fim_polizze_saldate');
+var passwordHash = localStorage.getItem('fim_password_hash') || null;
+
+var total = polizze.length + clienti.length + compagnie.length + collaboratori.length + fatture.length;
+var statusEl = document.getElementById('localStatus');
+
+if (total > 0) {
+  statusEl.className = 'status success';
+  statusEl.innerHTML = '<strong>Dati trovati nel localStorage!</strong><br>' +
+    'Polizze: ' + polizze.length + '<br>' +
+    'Clienti: ' + clienti.length + '<br>' +
+    'Compagnie: ' + compagnie.length + '<br>' +
+    'Collaboratori: ' + collaboratori.length + '<br>' +
+    'Fatture: ' + fatture.length + '<br>' +
+    'Preventivi: ' + preventivi.length + '<br>' +
+    'Quotazioni: ' + quotazioni.length + '<br>' +
+    'Sinistri: ' + sinistri.length + '<br>' +
+    'Quietanze: ' + quietanze.length;
+  document.getElementById('pushBtn').style.display = 'block';
+  log('Dati locali trovati: ' + total + ' record totali');
+} else {
+  statusEl.className = 'status error';
+  statusEl.innerHTML = '<strong>Nessun dato trovato nel localStorage.</strong><br>Apri questa pagina dal dispositivo che contiene i dati (es. tablet).';
+  log('Nessun dato locale trovato');
+}
+
+function pushToCloud() {
+  log('Inizio caricamento nel cloud...');
+  document.getElementById('pushBtn').disabled = true;
+  document.getElementById('pushBtn').textContent = 'CARICAMENTO IN CORSO...';
+
+  var data = {
+    clienti: clienti,
+    compagnie: compagnie,
+    polizze: polizze,
+    collaboratori: collaboratori,
+    fatture: fatture,
+    preventivi: preventivi,
+    quotazioni: quotazioni,
+    sinistri: sinistri,
+    quietanze: quietanze,
+    provTable: provTable,
+    indivProvTables: indivProvTables,
+    provOverrides: provOverrides,
+    settings: settings,
+    waTemplates: waTemplates,
+    polizzeSaldate: polizzeSaldate,
+    passwordHash: passwordHash,
+    lastSync: new Date().toISOString()
+  };
+
+  db.ref('fim_data').set(data).then(function() {
+    log('SUCCESSO! Tutti i dati caricati nel cloud!');
+    statusEl.className = 'status success';
+    statusEl.innerHTML = '<strong>DATI CARICATI NEL CLOUD CON SUCCESSO!</strong><br>Ora puoi aprire il gestionale da qualsiasi dispositivo.';
+    document.getElementById('pushBtn').textContent = 'COMPLETATO!';
+    document.getElementById('pushBtn').style.background = '#1a5c2a';
+    document.getElementById('pushBtn').style.color = '#fff';
+  }).catch(function(err) {
+    log('ERRORE: ' + err.message);
+    statusEl.className = 'status error';
+    statusEl.innerHTML = '<strong>Errore nel caricamento:</strong> ' + err.message;
+    document.getElementById('pushBtn').disabled = false;
+    document.getElementById('pushBtn').textContent = 'RIPROVA';
+  });
+}
+</script>
+</body>
+</html>
