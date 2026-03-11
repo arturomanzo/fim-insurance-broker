@@ -3822,7 +3822,10 @@ function initFirebase() {
       databaseURL: dbUrl,
       projectId: projId
     };
-    if (!firebaseApp) {
+    // Check if Firebase was already initialized (e.g. by IIFE password recovery)
+    if (firebase.apps && firebase.apps.length > 0) {
+      firebaseApp = firebase.apps[0];
+    } else {
       firebaseApp = firebase.initializeApp(config);
     }
     firebaseDb = firebase.database();
@@ -3937,7 +3940,9 @@ function emergencyCloudRecovery() {
       databaseURL: FIREBASE_DEFAULTS.databaseURL,
       projectId: FIREBASE_DEFAULTS.projectId
     };
-    if (!firebaseApp) {
+    if (firebase.apps && firebase.apps.length > 0) {
+      firebaseApp = firebase.apps[0];
+    } else {
       firebaseApp = firebase.initializeApp(config);
     }
     firebaseDb = firebase.database();
