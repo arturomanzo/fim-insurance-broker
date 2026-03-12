@@ -3765,19 +3765,54 @@ function _sanitizeFirebaseKeys(obj) {
   return clean;
 }
 
-// ============ AUTO CLOUD PUSH (salvataggio automatico nel cloud) ============
+// ============ SMART CLOUD SYNC con MERGE (evita sovrascrittura dati tra dispositivi) ============
 var _autoCloudPushTimer = null;
-var _autoCloudPushDelay = 2000; // 2 secondi di debounce
+var _autoCloudPushDelay = 2500;
+var _isReceivingFromCloud = false; // Flag per evitare push durante pull
+var _firebaseListener = null; // Riferimento al listener real-time
+var _deviceId = localStorage.getItem('fim_device_id') || (function() { var id = 'dev_' + Date.now() + '_' + Math.random().toString(36).substr(2,6); localStorage.setItem('fim_device_id', id); return id; })();
+
+// Merge intelligente di due array per ID: unisce senza duplicare, prende il più recente per dataModifica
+function _mergeArraysById(local, cloud) {
+  if (!cloud || !Array.isArray(cloud) && typeof cloud !== 'object') return local || [];
+  var cloudArr = Array.isArray(cloud) ? cloud : Object.values(cloud);
+  var localArr = Array.isArray(local) ? local : (local ? Object.values(local) : []);
+  var map = {};
+  // Prima aggiungi tutti i locali
+  localArr.forEach(function(item) {
+    if (item && item.id) map[String(item.id)] = item;
+  });
+  // Poi unisci i cloud: se non esiste localmente, aggiungilo; se esiste, prendi il più recente
+  cloudArr.forEach(function(item) {
+    if (!item || !item.id) return;
+    var key = String(item.id);
+    if (!map[key]) {
+      // Nuovo dal cloud → aggiungilo
+      map[key] = item;
+    } else {
+      // Esiste in entrambi → prendi quello modificato più di recente
+      var localDate = map[key].dataModifica || map[key].dataCreazione || '1970-01-01';
+      var cloudDate = item.dataModifica || item.dataCreazione || '1970-01-01';
+      if (cloudDate > localDate) {
+        map[key] = item;
+      }
+    }
+  });
+  return Object.values(map);
+}
 
 function autoCloudPush() {
-  // Debounce: aspetta 2 secondi dopo l'ultima modifica prima di sincronizzare
   if (_autoCloudPushTimer) clearTimeout(_autoCloudPushTimer);
   _autoCloudPushTimer = setTimeout(function() {
     if (!cloudSyncEnabled || !firebaseDb) {
       console.log('[AutoPush] Firebase non connesso, sync saltato');
       return;
     }
-    // CLOUD GUARD: non sincronizzare se i dati locali sono vuoti ma dovrebbero esserci
+    if (_isReceivingFromCloud) {
+      console.log('[AutoPush] Ricevendo dati dal cloud, push posticipato');
+      return;
+    }
+    // CLOUD GUARD
     if ((!polizze || polizze.length === 0) && _lastKnownPolizzeCount > 5) {
       console.error('[AutoPush] Sync bloccato: polizze vuote ma count precedente era ' + _lastKnownPolizzeCount);
       return;
@@ -3799,19 +3834,85 @@ function autoCloudPush() {
       waTemplates: JSON.parse(localStorage.getItem('fim_wa_templates') || '{}'),
       polizzeSaldate: JSON.parse(localStorage.getItem('fim_polizze_saldate') || '{}'),
       passwordHash: localStorage.getItem(PWD_KEY) || null,
-      lastSync: new Date().toISOString()
+      lastSync: new Date().toISOString(),
+      lastDevice: _deviceId
     };
     firebaseDb.ref('fim_data').set(_sanitizeFirebaseKeys(data)).then(function() {
       localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
       updateSyncStatus('synced');
-      console.log('[AutoPush] Dati sincronizzati nel cloud automaticamente');
+      console.log('[AutoPush] Sync completato da dispositivo ' + _deviceId);
     }).catch(function(err) {
       console.error('[AutoPush] Errore sync:', err);
       updateSyncStatus('error');
     });
   }, _autoCloudPushDelay);
 }
-// ============ FINE AUTO CLOUD PUSH ============
+
+// Real-time listener: riceve cambiamenti dal cloud in tempo reale
+function startRealtimeSync() {
+  if (!cloudSyncEnabled || !firebaseDb) return;
+  // Rimuovi listener precedente
+  if (_firebaseListener) {
+    firebaseDb.ref('fim_data').off('value', _firebaseListener);
+  }
+  _firebaseListener = firebaseDb.ref('fim_data').on('value', function(snapshot) {
+    var data = snapshot.val();
+    if (!data) return;
+    // Ignora i propri push (controlla lastDevice)
+    if (data.lastDevice === _deviceId) return;
+    // Un altro dispositivo ha modificato i dati → fai merge
+    console.log('[RealtimeSync] Dati ricevuti da dispositivo: ' + (data.lastDevice || 'sconosciuto'));
+    _isReceivingFromCloud = true;
+    try {
+      var changed = false;
+      // Merge arrays con ID
+      var collections = [
+        { name: 'clienti', varName: 'clienti', key: 'fim_clienti' },
+        { name: 'compagnie', varName: 'compagnie', key: 'fim_compagnie' },
+        { name: 'polizze', varName: 'polizze', key: 'fim_polizze_db' },
+        { name: 'collaboratori', varName: 'collaboratori', key: 'fim_collaboratori' },
+        { name: 'fatture', varName: 'fatture', key: 'fim_fatture' },
+        { name: 'preventivi', varName: 'preventivi', key: 'fim_preventivi' },
+        { name: 'quotazioni', varName: 'quotazioni', key: 'fim_quotazioni' },
+        { name: 'sinistri', varName: 'sinistri', key: 'fim_sinistri' },
+        { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' }
+      ];
+      collections.forEach(function(col) {
+        if (data[col.name]) {
+          var localArr = window[col.varName] || [];
+          var cloudArr = Array.isArray(data[col.name]) ? data[col.name] : Object.values(data[col.name]);
+          var merged = _mergeArraysById(localArr, cloudArr);
+          if (merged.length !== localArr.length || JSON.stringify(merged.map(function(x){return x.id;})) !== JSON.stringify(localArr.map(function(x){return x.id;}))) {
+            window[col.varName] = merged;
+            localStorage.setItem(col.key, JSON.stringify(merged));
+            changed = true;
+            console.log('[RealtimeSync] Merge ' + col.name + ': ' + localArr.length + ' locali + cloud → ' + merged.length + ' totali');
+          }
+        }
+      });
+      // Oggetti semplici (provTable, settings, ecc.) → prendi dal cloud se più recente
+      if (data.provTable) { provTable = data.provTable; localStorage.setItem('fim_prov_table', JSON.stringify(provTable)); }
+      if (data.indivProvTables) { indivProvTables = data.indivProvTables; localStorage.setItem('fim_indiv_prov', JSON.stringify(indivProvTables)); }
+      if (data.provOverrides) localStorage.setItem('fim_prov_overrides', JSON.stringify(data.provOverrides));
+      if (data.waTemplates) localStorage.setItem('fim_wa_templates', JSON.stringify(data.waTemplates));
+      if (data.polizzeSaldate) localStorage.setItem('fim_polizze_saldate', JSON.stringify(data.polizzeSaldate));
+      if (data.passwordHash) localStorage.setItem(PWD_KEY, data.passwordHash);
+
+      if (changed) {
+        localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
+        refreshAll();
+        updateSyncStatus('synced');
+        showToast('Dati aggiornati da altro dispositivo', 'success');
+      }
+    } catch(e) {
+      console.error('[RealtimeSync] Errore merge:', e);
+    }
+    // Aspetta un attimo prima di riabilitare push per evitare loop
+    setTimeout(function() { _isReceivingFromCloud = false; }, 3000);
+  });
+  console.log('[RealtimeSync] Listener attivo per dispositivo ' + _deviceId);
+}
+// ============ FINE SMART CLOUD SYNC ============
 
 // Default Firebase credentials for FIM Insurance Broker
 const FIREBASE_DEFAULTS = {
@@ -3845,8 +3946,10 @@ function initFirebase() {
     }
     firebaseDb = firebase.database();
     cloudSyncEnabled = true;
-    console.log('Firebase connected to: ' + dbUrl);
+    console.log('Firebase connected to: ' + dbUrl + ' | Device: ' + _deviceId);
     updateSyncStatus('connected');
+    // Avvia listener real-time dopo connessione
+    startRealtimeSync();
   } catch(e) {
     console.error('Firebase init error:', e);
     cloudSyncEnabled = false;
@@ -3879,7 +3982,8 @@ function cloudSync() {
     waTemplates: JSON.parse(localStorage.getItem('fim_wa_templates') || '{}'),
     polizzeSaldate: JSON.parse(localStorage.getItem('fim_polizze_saldate') || '{}'),
     passwordHash: localStorage.getItem(PWD_KEY) || null,
-    lastSync: new Date().toISOString()
+    lastSync: new Date().toISOString(),
+    lastDevice: _deviceId
   };
   firebaseDb.ref('fim_data').set(_sanitizeFirebaseKeys(data)).then(() => {
     localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
@@ -5772,21 +5876,62 @@ function viewScheda(id) {
   html += '<div style="text-align:center;"><div style="font-weight:600;color:' + privColor + ';">' + (c.consensoPrivacy ? 'Ottenuto' : 'Non ottenuto') + '</div><div style="color:var(--text-light);">Privacy GDPR' + (c.scadenzaConsenso ? ' — Scad. ' + formatDate(c.scadenzaConsenso) : '') + '</div></div>';
   html += '</div></div>';
 
-  // Polizze
+  // Polizze raggruppate per Ramo (cartelle cliente)
   html += '<div style="background:var(--bg);border-radius:8px;padding:16px;margin-top:12px;">';
-  html += '<h4 style="margin:0 0 12px;color:var(--primary);">📋 Polizze (' + polizzeCliente.length + ')</h4>';
+  html += '<h4 style="margin:0 0 16px;color:var(--primary);">Portafoglio Assicurativo (' + polizzeCliente.length + ' polizze)</h4>';
   if (polizzeCliente.length === 0) {
     html += '<p style="color:var(--text-light);">Nessuna polizza collegata.</p>';
   } else {
-    html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
-    html += '<tr style="background:var(--primary);color:white;"><th style="padding:6px 8px;">N. Polizza</th><th style="padding:6px 8px;">Compagnia</th><th style="padding:6px 8px;">Ramo</th><th style="padding:6px 8px;">Scadenza</th><th style="padding:6px 8px;">Premio</th><th style="padding:6px 8px;">Stato</th></tr>';
+    // Raggruppa per ramo
+    var ramiGroup = {};
+    var ramiIcons = {'Auto':'&#x1F697;','RCA':'&#x1F697;','ARD':'&#x1F697;','CVT':'&#x1F697;','Vita':'&#x2764;','Infortuni':'&#x1FA79;','Salute':'&#x1F3E5;','Casa':'&#x1F3E0;','Incendio':'&#x1F525;','Furto':'&#x1F512;','RC Professionale':'&#x1F4BC;','RC Generale':'&#x1F4BC;','Azienda':'&#x1F3ED;','Responsabilit\\u00e0 Civile':'&#x2696;','Trasporti':'&#x1F69A;','Cauzioni':'&#x1F4DC;','Tutela Legale':'&#x2696;','Credito':'&#x1F4B3;','Multirischi':'&#x1F6E1;','Tecnologici':'&#x1F4BB;','Costruzioni':'&#x1F3D7;','D&O':'&#x1F464;','Cyber':'&#x1F310;'};
+    var ramiColors = {'Auto':'#3182ce','RCA':'#3182ce','ARD':'#3182ce','CVT':'#3182ce','Vita':'#e53e3e','Infortuni':'#dd6b20','Salute':'#38a169','Casa':'#805ad5','Incendio':'#c53030','Azienda':'#2b6cb0','RC Professionale':'#4a5568','Furto':'#6b46c1'};
     polizzeCliente.forEach(function(p) {
-      var stato = getDateStatus(p.scadenza);
-      var statoLabel = stato === 'expired' ? '<span style="color:#e74c3c;">Scaduta</span>' : (stato === 'warning' ? '<span style="color:#e67e22;">In Scadenza</span>' : '<span style="color:#27ae60;">Attiva</span>');
-      if (p.annullata) statoLabel = '<span style="color:#95a5a6;">Annullata</span>';
-      html += '<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;font-weight:600;">' + (p.numPolizza || '—') + '</td><td style="padding:6px 8px;">' + (p.compagnia || '—') + '</td><td style="padding:6px 8px;">' + (p.ramo || p.tipoGaranzia || '—') + '</td><td style="padding:6px 8px;">' + formatDate(p.scadenza) + '</td><td style="padding:6px 8px;font-weight:600;">' + (p.premio ? parseFloat(p.premio).toFixed(2) + ' €' : '—') + '</td><td style="padding:6px 8px;">' + statoLabel + '</td></tr>';
+      var ramo = p.ramo || p.tipoGaranzia || 'Altro';
+      if (!ramiGroup[ramo]) ramiGroup[ramo] = [];
+      ramiGroup[ramo].push(p);
     });
-    html += '</table>';
+    // Ordina i rami alfabeticamente
+    var ramiSorted = Object.keys(ramiGroup).sort();
+    ramiSorted.forEach(function(ramo) {
+      var pols = ramiGroup[ramo];
+      var icon = ramiIcons[ramo] || '&#x1F4C4;';
+      var color = ramiColors[ramo] || '#4a5568';
+      var totalePremio = pols.reduce(function(sum, p) { return sum + (parseFloat(p.premio) || 0); }, 0);
+      var attive = pols.filter(function(p) { return !p.annullata && getDateStatus(p.scadenza) !== 'expired'; }).length;
+
+      html += '<div style="margin-bottom:12px;border:1px solid var(--border);border-radius:10px;overflow:hidden;border-left:4px solid ' + color + ';">';
+      // Header cartella ramo
+      html += '<div style="background:linear-gradient(135deg,' + color + '10,' + color + '05);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'none\'?\'block\':\'none\'">';
+      html += '<div><span style="font-size:20px;margin-right:8px;">' + icon + '</span><strong style="font-size:14px;color:' + color + ';">' + ramo + '</strong><span style="margin-left:8px;font-size:12px;color:var(--text-light);">(' + pols.length + ' polizz' + (pols.length === 1 ? 'a' : 'e') + ' - ' + attive + ' attiv' + (attive === 1 ? 'a' : 'e') + ')</span></div>';
+      html += '<div style="text-align:right;"><div style="font-weight:700;color:' + color + ';">' + totalePremio.toLocaleString('it-IT', {minimumFractionDigits:2}) + ' &#x20AC;</div><div style="font-size:10px;color:var(--text-light);">premio totale</div></div>';
+      html += '</div>';
+      // Contenuto cartella
+      html += '<div style="display:block;">';
+      html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
+      html += '<tr style="background:#f7fafc;"><th style="padding:6px 8px;text-align:left;">N. Polizza</th><th style="padding:6px 8px;text-align:left;">Compagnia</th><th style="padding:6px 8px;text-align:left;">Decorrenza</th><th style="padding:6px 8px;text-align:left;">Scadenza</th><th style="padding:6px 8px;text-align:right;">Premio</th><th style="padding:6px 8px;text-align:center;">Stato</th></tr>';
+      pols.forEach(function(p) {
+        var stato = getDateStatus(p.scadenza);
+        var statoLabel = stato === 'expired' ? '<span style="color:#e74c3c;font-weight:600;">Scaduta</span>' : (stato === 'warning' ? '<span style="color:#e67e22;font-weight:600;">In Scadenza</span>' : '<span style="color:#27ae60;font-weight:600;">Attiva</span>');
+        if (p.annullata) statoLabel = '<span style="color:#95a5a6;">Annullata</span>';
+        html += '<tr style="border-bottom:1px solid #edf2f7;">';
+        html += '<td style="padding:6px 8px;font-weight:600;">' + (p.numPolizza || '—') + '</td>';
+        html += '<td style="padding:6px 8px;">' + (p.compagnia || '—') + '</td>';
+        html += '<td style="padding:6px 8px;">' + (p.decorrenza ? formatDate(p.decorrenza) : '—') + '</td>';
+        html += '<td style="padding:6px 8px;">' + formatDate(p.scadenza) + '</td>';
+        html += '<td style="padding:6px 8px;text-align:right;font-weight:600;">' + (p.premio ? parseFloat(p.premio).toLocaleString('it-IT', {minimumFractionDigits:2}) + ' &#x20AC;' : '—') + '</td>';
+        html += '<td style="padding:6px 8px;text-align:center;">' + statoLabel + '</td>';
+        html += '</tr>';
+      });
+      html += '</table></div></div>';
+    });
+    // Riepilogo totale
+    var totalePremioTotale = polizzeCliente.reduce(function(s,p) { return s + (parseFloat(p.premio) || 0); }, 0);
+    var attiveTotali = polizzeCliente.filter(function(p) { return !p.annullata && getDateStatus(p.scadenza) !== 'expired'; }).length;
+    html += '<div style="margin-top:12px;padding:12px 16px;background:linear-gradient(135deg,#ebf8ff,#bee3f8);border-radius:8px;display:flex;justify-content:space-between;align-items:center;">';
+    html += '<div><strong style="font-size:14px;">Riepilogo Portafoglio</strong><br><span style="font-size:12px;color:var(--text-light);">' + ramiSorted.length + ' rami - ' + attiveTotali + ' polizze attive su ' + polizzeCliente.length + ' totali</span></div>';
+    html += '<div style="text-align:right;"><div style="font-size:18px;font-weight:700;color:#2b6cb0;">' + totalePremioTotale.toLocaleString('it-IT', {minimumFractionDigits:2}) + ' &#x20AC;</div><div style="font-size:11px;color:var(--text-light);">premio annuo complessivo</div></div>';
+    html += '</div>';
   }
   html += '</div>';
 
