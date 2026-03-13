@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>if(typeof pdfjsLib!=='undefined')pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
@@ -3945,7 +3946,21 @@ function initFirebase() {
       firebaseApp = firebase.initializeApp(config);
     }
     firebaseDb = firebase.database();
-    cloudSyncEnabled = true;
+    // Anonymous Auth for security
+    firebase.auth().signInAnonymously().then(() => {
+      console.log('Firebase Auth: signed in anonymously');
+      cloudSyncEnabled = true;
+      updateSyncStatus('connected');
+      startRealtimeSync();
+    }).catch((err) => {
+      console.error('Firebase Auth error:', err);
+      // Fallback: try without auth
+      cloudSyncEnabled = true;
+      updateSyncStatus('connected');
+      startRealtimeSync();
+    });
+    // Don't set cloudSyncEnabled here - wait for auth
+    return;
     console.log('Firebase connected to: ' + dbUrl + ' | Device: ' + _deviceId);
     updateSyncStatus('connected');
     // Avvia listener real-time dopo connessione
@@ -3959,6 +3974,11 @@ function initFirebase() {
 
 function cloudSync() {
   if (!cloudSyncEnabled || !firebaseDb) return;
+  // Wait for Firebase Auth before syncing
+  if (firebase.auth && firebase.auth().currentUser === null) {
+    console.log('cloudSync: waiting for Firebase Auth...');
+    return;
+  }
   // CLOUD GUARD: non sincronizzare se i dati locali sono vuoti ma dovrebbero esserci
   if ((!polizze || polizze.length === 0) && _lastKnownPolizzeCount > 5) {
     console.error('[CLOUD GUARD] Sync bloccato: polizze locali vuote ma count precedente era ' + _lastKnownPolizzeCount);
@@ -4065,10 +4085,14 @@ function emergencyCloudRecovery() {
       firebaseApp = firebase.initializeApp(config);
     }
     firebaseDb = firebase.database();
-    cloudSyncEnabled = true;
     console.log('[EmergencyRecovery] Firebase connesso a: ' + config.databaseURL);
 
-    firebaseDb.ref('fim_data').once('value').then(snapshot => {
+    // Authenticate before accessing data
+    firebase.auth().signInAnonymously().then(() => {
+      cloudSyncEnabled = true;
+      console.log('[EmergencyRecovery] Auth OK');
+      return firebaseDb.ref('fim_data').once('value');
+    }).then(snapshot => {
       const data = snapshot.val();
       if (!data) {
         showToast('❌ Nessun dato trovato nel cloud Firebase. Il database cloud è vuoto.', 'error');
