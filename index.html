@@ -3792,8 +3792,8 @@ function _mergeArraysById(local, cloud) {
       map[key] = item;
     } else {
       // Esiste in entrambi → prendi quello modificato più di recente
-      var localDate = map[key].dataModifica || map[key].dataCreazione || '1970-01-01';
-      var cloudDate = item.dataModifica || item.dataCreazione || '1970-01-01';
+      var localDate = map[key].updatedAt || map[key].dataModifica || map[key].createdAt || map[key].dataCreazione || '1970-01-01';
+      var cloudDate = item.updatedAt || item.dataModifica || item.createdAt || item.dataCreazione || '1970-01-01';
       if (cloudDate > localDate) {
         map[key] = item;
       }
@@ -3818,27 +3818,56 @@ function autoCloudPush() {
       console.error('[AutoPush] Sync bloccato: polizze vuote ma count precedente era ' + _lastKnownPolizzeCount);
       return;
     }
-    var data = {
-      clienti: clienti,
-      compagnie: compagnie,
-      polizze: polizze,
-      collaboratori: collaboratori,
-      fatture: fatture,
-      preventivi: preventivi,
-      quotazioni: quotazioni,
-      sinistri: sinistri,
-      quietanze: quietanze,
-      provTable: provTable,
-      indivProvTables: indivProvTables,
-      provOverrides: JSON.parse(localStorage.getItem('fim_prov_overrides') || '{}'),
-      settings: JSON.parse(localStorage.getItem('fim_settings') || '{}'),
-      waTemplates: JSON.parse(localStorage.getItem('fim_wa_templates') || '{}'),
-      polizzeSaldate: JSON.parse(localStorage.getItem('fim_polizze_saldate') || '{}'),
-      passwordHash: localStorage.getItem(PWD_KEY) || null,
-      lastSync: new Date().toISOString(),
-      lastDevice: _deviceId
-    };
-    firebaseDb.ref('fim_data').set(_sanitizeFirebaseKeys(data)).then(function() {
+    // PULL-MERGE-PUSH: prima merge con cloud, poi push
+    firebaseDb.ref('fim_data').once('value').then(function(snapshot) {
+      var cloudData = snapshot.val();
+      if (cloudData) {
+        var collections = [
+          { name: 'clienti', varName: 'clienti', key: 'fim_clienti' },
+          { name: 'compagnie', varName: 'compagnie', key: 'fim_compagnie' },
+          { name: 'polizze', varName: 'polizze', key: 'fim_polizze_db' },
+          { name: 'collaboratori', varName: 'collaboratori', key: 'fim_collaboratori' },
+          { name: 'fatture', varName: 'fatture', key: 'fim_fatture' },
+          { name: 'preventivi', varName: 'preventivi', key: 'fim_preventivi' },
+          { name: 'quotazioni', varName: 'quotazioni', key: 'fim_quotazioni' },
+          { name: 'sinistri', varName: 'sinistri', key: 'fim_sinistri' },
+          { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' }
+        ];
+        collections.forEach(function(col) {
+          if (cloudData[col.name]) {
+            var localArr = window[col.varName] || [];
+            var cloudArr = Array.isArray(cloudData[col.name]) ? cloudData[col.name] : Object.values(cloudData[col.name]);
+            var merged = _mergeArraysById(localArr, cloudArr);
+            if (merged.length !== localArr.length) {
+              window[col.varName] = merged;
+              localStorage.setItem(col.key, JSON.stringify(merged));
+              console.log('[AutoPush] Pre-merge ' + col.name + ': ' + localArr.length + ' → ' + merged.length);
+            }
+          }
+        });
+      }
+      var data = {
+        clienti: clienti,
+        compagnie: compagnie,
+        polizze: polizze,
+        collaboratori: collaboratori,
+        fatture: fatture,
+        preventivi: preventivi,
+        quotazioni: quotazioni,
+        sinistri: sinistri,
+        quietanze: quietanze,
+        provTable: provTable,
+        indivProvTables: indivProvTables,
+        provOverrides: JSON.parse(localStorage.getItem('fim_prov_overrides') || '{}'),
+        settings: JSON.parse(localStorage.getItem('fim_settings') || '{}'),
+        waTemplates: JSON.parse(localStorage.getItem('fim_wa_templates') || '{}'),
+        polizzeSaldate: JSON.parse(localStorage.getItem('fim_polizze_saldate') || '{}'),
+        passwordHash: localStorage.getItem(PWD_KEY) || null,
+        lastSync: new Date().toISOString(),
+        lastDevice: _deviceId
+      };
+      return firebaseDb.ref('fim_data').set(_sanitizeFirebaseKeys(data));
+    }).then(function() {
       localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
       updateSyncStatus('synced');
       console.log('[AutoPush] Sync completato da dispositivo ' + _deviceId);
@@ -3849,7 +3878,6 @@ function autoCloudPush() {
   }, _autoCloudPushDelay);
 }
 
-// Real-time listener: riceve cambiamenti dal cloud in tempo reale
 function startRealtimeSync() {
   if (!cloudSyncEnabled || !firebaseDb) return;
   // Rimuovi listener precedente
@@ -3985,31 +4013,61 @@ function cloudSync() {
     showToast('⚠️ Sync cloud bloccato: dati locali sembrano corrotti. Usa "Scarica dal Cloud" per recuperare.', 'error');
     return;
   }
-  const data = {
-    clienti: clienti,
-    compagnie: compagnie,
-    polizze: polizze,
-    collaboratori: collaboratori,
-    fatture: fatture,
-    preventivi: preventivi,
-    quotazioni: quotazioni,
-    sinistri: sinistri,
-    quietanze: quietanze,
-    provTable: provTable,
-    indivProvTables: indivProvTables,
-    provOverrides: JSON.parse(localStorage.getItem('fim_prov_overrides') || '{}'),
-    settings: JSON.parse(localStorage.getItem('fim_settings') || '{}'),
-    waTemplates: JSON.parse(localStorage.getItem('fim_wa_templates') || '{}'),
-    polizzeSaldate: JSON.parse(localStorage.getItem('fim_polizze_saldate') || '{}'),
-    passwordHash: localStorage.getItem(PWD_KEY) || null,
-    lastSync: new Date().toISOString(),
-    lastDevice: _deviceId
-  };
-  firebaseDb.ref('fim_data').set(_sanitizeFirebaseKeys(data)).then(() => {
+  // PULL-MERGE-PUSH: prima scarica dal cloud, fai merge, poi pusha il risultato
+  firebaseDb.ref('fim_data').once('value').then(function(snapshot) {
+    var cloudData = snapshot.val();
+    // Se ci sono dati nel cloud, fai merge prima di pushare
+    if (cloudData) {
+      var collections = [
+        { name: 'clienti', varName: 'clienti', key: 'fim_clienti' },
+        { name: 'compagnie', varName: 'compagnie', key: 'fim_compagnie' },
+        { name: 'polizze', varName: 'polizze', key: 'fim_polizze_db' },
+        { name: 'collaboratori', varName: 'collaboratori', key: 'fim_collaboratori' },
+        { name: 'fatture', varName: 'fatture', key: 'fim_fatture' },
+        { name: 'preventivi', varName: 'preventivi', key: 'fim_preventivi' },
+        { name: 'quotazioni', varName: 'quotazioni', key: 'fim_quotazioni' },
+        { name: 'sinistri', varName: 'sinistri', key: 'fim_sinistri' },
+        { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' }
+      ];
+      collections.forEach(function(col) {
+        if (cloudData[col.name]) {
+          var localArr = window[col.varName] || [];
+          var cloudArr = Array.isArray(cloudData[col.name]) ? cloudData[col.name] : Object.values(cloudData[col.name]);
+          var merged = _mergeArraysById(localArr, cloudArr);
+          if (merged.length !== localArr.length) {
+            window[col.varName] = merged;
+            localStorage.setItem(col.key, JSON.stringify(merged));
+            console.log('[cloudSync] Merge ' + col.name + ': ' + localArr.length + ' local + ' + cloudArr.length + ' cloud → ' + merged.length + ' merged');
+          }
+        }
+      });
+    }
+    // Ora pusha i dati mergiati
+    var data = {
+      clienti: clienti,
+      compagnie: compagnie,
+      polizze: polizze,
+      collaboratori: collaboratori,
+      fatture: fatture,
+      preventivi: preventivi,
+      quotazioni: quotazioni,
+      sinistri: sinistri,
+      quietanze: quietanze,
+      provTable: provTable,
+      indivProvTables: indivProvTables,
+      provOverrides: JSON.parse(localStorage.getItem('fim_prov_overrides') || '{}'),
+      settings: JSON.parse(localStorage.getItem('fim_settings') || '{}'),
+      waTemplates: JSON.parse(localStorage.getItem('fim_wa_templates') || '{}'),
+      polizzeSaldate: JSON.parse(localStorage.getItem('fim_polizze_saldate') || '{}'),
+      passwordHash: localStorage.getItem(PWD_KEY) || null,
+      lastSync: new Date().toISOString(),
+      lastDevice: _deviceId
+    };
+    return firebaseDb.ref('fim_data').set(_sanitizeFirebaseKeys(data));
+  }).then(function() {
     localStorage.setItem('fim_last_cloud_sync', new Date().toISOString());
     updateSyncStatus('synced');
-    showToast('Dati sincronizzati nel cloud', 'success');
-  }).catch(err => {
+  }).catch(function(err) {
     console.error('Sync error:', err);
     updateSyncStatus('error');
   });
