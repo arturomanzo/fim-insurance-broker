@@ -5857,7 +5857,29 @@ function deleteCliente(id) {
 function viewScheda(id) {
   var c = clienti.find(function(x) { return String(x.id) === String(id); });
   if (!c) return;
-  var polizzeCliente = polizze.filter(function(p) { return p.clienteId === c.id; });
+  // Match polizze by clienteId, then fallback to name/CF matching
+  var fullname = ((c.nome || '') + ' ' + (c.cognome || '')).trim().toUpperCase();
+  var reverse = ((c.cognome || '') + ' ' + (c.nome || '')).trim().toUpperCase();
+  var ragSoc = (c.cognome || '').trim().toUpperCase();
+  var cfUp = (c.codiceFiscale || '').toUpperCase();
+  var pivaUp = (c.partitaIva || '').toUpperCase();
+  var polizzeCliente = polizze.filter(function(p) {
+    // Direct clienteId match
+    if (p.clienteId === c.id) return true;
+    // Fallback: match by name
+    var pCliente = (p.cliente || '').trim().toUpperCase();
+    if (pCliente && (pCliente === fullname || pCliente === reverse || pCliente === ragSoc)) {
+      p.clienteId = c.id;
+      return true;
+    }
+    // Fallback: match by CF/P.IVA
+    var pCF = (p.cf || '').trim().toUpperCase();
+    if (pCF && (pCF === cfUp || pCF === pivaUp)) {
+      p.clienteId = c.id;
+      return true;
+    }
+    return false;
+  });
   var today = new Date().toISOString().split('T')[0];
 
   var html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">';
@@ -6189,12 +6211,28 @@ function savePolizza() {
 
   data.rateScadenze = calculateInstallments(data.decorrenza, data.scadenza, data.frazionamento, data.premio);
 
+  // Auto-assign clienteId: find matching cliente by name+CF
+  if (!data.clienteId && data.cliente) {
+    var searchName = data.cliente.trim().toUpperCase();
+    var searchCF = (data.cf || '').trim().toUpperCase();
+    var matched = clienti.find(function(c) {
+      if (searchCF && ((c.codiceFiscale || '').toUpperCase() === searchCF || (c.partitaIva || '').toUpperCase() === searchCF)) return true;
+      var fullname = ((c.nome || '') + ' ' + (c.cognome || '')).trim().toUpperCase();
+      var reverse = ((c.cognome || '') + ' ' + (c.nome || '')).trim().toUpperCase();
+      var ragSoc = (c.cognome || '').trim().toUpperCase();
+      return searchName === fullname || searchName === reverse || searchName === ragSoc;
+    });
+    if (matched) data.clienteId = matched.id;
+  }
+
   if (editingId) {
     const idx = polizze.findIndex(p => p.id === editingId);
     if (idx >= 0) {
       data.id = editingId;
       data.createdAt = polizze[idx].createdAt;
       data.updatedAt = new Date().toISOString();
+      // Preserve clienteId from existing polizza if not found above
+      if (!data.clienteId && polizze[idx].clienteId) data.clienteId = polizze[idx].clienteId;
       polizze[idx] = data;
     }
     showToast('Polizza aggiornata con successo');
@@ -13015,7 +13053,30 @@ function showToast(msg, type='success') {
 }
 
 // ======================= REFRESH ALL =======================
+function relinkPolizzeClienti() {
+  // Auto-link polizze missing clienteId to their cliente
+  if (!clienti || !polizze) return;
+  var fixed = 0;
+  polizze.forEach(function(p) {
+    if (p.clienteId) return;
+    if (!p.cliente) return;
+    var pCliente = p.cliente.trim().toUpperCase();
+    var pCF = (p.cf || '').trim().toUpperCase();
+    var matched = clienti.find(function(c) {
+      if (pCF && ((c.codiceFiscale || '').toUpperCase() === pCF || (c.partitaIva || '').toUpperCase() === pCF)) return true;
+      var fullname = ((c.nome || '') + ' ' + (c.cognome || '')).trim().toUpperCase();
+      var reverse = ((c.cognome || '') + ' ' + (c.nome || '')).trim().toUpperCase();
+      var ragSoc = (c.cognome || '').trim().toUpperCase();
+      return pCliente === fullname || pCliente === reverse || pCliente === ragSoc;
+    });
+    if (matched) { p.clienteId = matched.id; fixed++; }
+  });
+  if (fixed > 0) { saveData(); console.log('[FIM] Auto-linked ' + fixed + ' polizze to clienti'); }
+}
+
 function refreshAll() {
+  // Auto-link polizze to clienti if needed
+  relinkPolizzeClienti();
   // Mostra/nascondi banner emergenza se DB vuoto
   const banner = document.getElementById('emergencyRecoveryBanner');
   if (banner) {
