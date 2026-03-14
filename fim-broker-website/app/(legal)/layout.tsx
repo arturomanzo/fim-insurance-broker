@@ -1,7 +1,7 @@
-export default function LegalLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen bg-white">
-      {children}
-    </div>
-  );
+export default function LegalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
 }
