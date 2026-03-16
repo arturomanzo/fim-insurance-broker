@@ -6382,7 +6382,17 @@ function savePolizza() {
       var ragSoc = (c.cognome || '').trim().toUpperCase();
       return searchName === fullname || searchName === reverse || searchName === ragSoc;
     });
-    if (matched) data.clienteId = matched.id;
+    if (matched) {
+      data.clienteId = matched.id;
+    } else {
+      var nuovoCliente = _createClienteFromPolizza(data);
+      if (nuovoCliente) {
+        clienti.push(nuovoCliente);
+        data.clienteId = nuovoCliente.id;
+        saveClienti();
+        console.log('[FIM] Auto-creato cliente: ' + nuovoCliente.cognome + ' ' + (nuovoCliente.nome || ''));
+      }
+    }
   }
 
   if (editingId) {
@@ -13220,12 +13230,40 @@ function showToast(msg, type='success') {
 }
 
 // ======================= REFRESH ALL =======================
+function _createClienteFromPolizza(pd) {
+  if (!pd.cliente) return null;
+  var nm = pd.cliente.trim();
+  var parts = nm.split(/\s+/);
+  var cog = '', nom = '';
+  var cf = (pd.cf || '').trim().toUpperCase();
+  var tipo = (cf.length === 11) ? 'PG' : 'PF';
+  if (tipo === 'PF' && parts.length >= 2) { cog = parts[0]; nom = parts.slice(1).join(' '); }
+  else { cog = nm; nom = ''; }
+  return {
+    id: generateId(), tipo: tipo, cognome: cog, nome: nom,
+    codiceFiscale: (tipo==='PF') ? cf : '', partitaIva: (tipo==='PG') ? cf : '',
+    email: pd.email||'', telefono: pd.telefono||'',
+    whatsapp: pd.whatsapp||pd.telefono||'',
+    indirizzoResidenza: pd.indirizzo||'',
+    dataNascita: pd.dataNascita||'', luogoNascita: pd.luogoNascita||'',
+    note: 'Auto-creato da polizza ' + (pd.numPolizza||''),
+    dataCreazione: new Date().toISOString().split('T')[0],
+    dataModifica: new Date().toISOString().split('T')[0],
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+  };
+}
+
 function relinkPolizzeClienti() {
   // Auto-link polizze missing clienteId to their cliente
   if (!clienti || !polizze) return;
   var fixed = 0;
+  var created = 0;
   polizze.forEach(function(p) {
-    if (p.clienteId) return;
+    if (p.clienteId) {
+      var exists = clienti.find(function(c) { return String(c.id) === String(p.clienteId); });
+      if (exists) return;
+      p.clienteId = null;
+    }
     if (!p.cliente) return;
     var pCliente = p.cliente.trim().toUpperCase();
     var pCF = (p.cf || '').trim().toUpperCase();
@@ -13236,9 +13274,18 @@ function relinkPolizzeClienti() {
       var ragSoc = (c.cognome || '').trim().toUpperCase();
       return pCliente === fullname || pCliente === reverse || pCliente === ragSoc;
     });
-    if (matched) { p.clienteId = matched.id; fixed++; }
+    if (matched) {
+      p.clienteId = matched.id; fixed++;
+    } else {
+      var nc = _createClienteFromPolizza(p);
+      if (nc) { clienti.push(nc); p.clienteId = nc.id; created++; fixed++; }
+    }
   });
-  if (fixed > 0) { saveData(); console.log('[FIM] Auto-linked ' + fixed + ' polizze to clienti'); }
+  if (fixed > 0 || created > 0) {
+    saveData();
+    if (created > 0) saveClienti();
+    console.log('[FIM] Relink: ' + fixed + ' collegate, ' + created + ' clienti creati');
+  }
 }
 
 function refreshAll() {
