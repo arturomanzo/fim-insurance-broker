@@ -21,13 +21,14 @@
   --success: #38a169;
   --warning: #ecc94b;
   --danger: #e53e3e;
-  --bg: #f7fafc;
+  --bg: #f0f4f8;
   --card: #ffffff;
   --text: #2d3748;
   --text-light: #718096;
   --border: #e2e8f0;
-  --shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+  --shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 25px rgba(0,0,0,.1), 0 4px 10px rgba(0,0,0,.05);
+  --radius: 14px;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -41,16 +42,17 @@ body {
 
 /* HEADER */
 .header {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  background: linear-gradient(135deg, #0f2847 0%, #1a365d 50%, #2b5278 100%);
   color: white;
-  padding: 20px 32px;
+  padding: 16px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 4px 20px rgba(15,40,71,0.3);
   position: sticky;
   top: 0;
   z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
 .header-left {
@@ -60,9 +62,9 @@ body {
 }
 
 .logo {
-  width: 48px;
-  height: 48px;
-  background: var(--accent);
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, #e8a838 0%, #f0c060 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -104,14 +106,14 @@ body {
 
 .stat-card {
   background: var(--card);
-  border-radius: 12px;
-  padding: 18px 20px;
+  border-radius: var(--radius);
+  padding: 20px 22px;
   box-shadow: var(--shadow);
   border-left: 4px solid var(--primary);
-  transition: transform .2s;
+  transition: all .3s ease;
 }
 
-.stat-card:hover { transform: translateY(-2px); }
+.stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 .stat-card.danger { border-left-color: var(--danger); }
 .stat-card.warning { border-left-color: var(--warning); }
 .stat-card.success { border-left-color: var(--success); }
@@ -129,6 +131,66 @@ body {
   font-weight: 800;
   color: var(--primary);
   margin-top: 4px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  border-bottom: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  transition: all .25s ease;
+  text-align: left;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.95);
+  border-left-color: rgba(232,168,56,0.4);
+}
+
+.tab.active {
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  border-left-color: var(--accent);
+  font-weight: 700;
+  box-shadow: inset 0 0 20px rgba(232,168,56,0.05);
+}
+
+.sidebar-nav .sync-status {
+  margin-top: auto;
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+@media (max-width: 1024px) {
+  .app-layout { flex-direction: column; }
+  .sidebar-nav {
+    width: 100%; min-width: 100%; height: auto;
+    position: relative; top: 0;
+    flex-direction: row; overflow-x: auto; overflow-y: hidden;
+    padding: 0; order: -1; gap: 0;
+  }
+  .sidebar-nav .sidebar-title { display: none; }
+  .sidebar-nav .sync-status { display: none; }
+  .tab { border-left: none; border-bottom: 3px solid transparent; padding: 12px 16px; font-size: 12px; }
+  .tab.active { border-bottom-color: var(--accent); border-left: none; }
+  .tab:hover { border-left-color: transparent; }
 }
 
 .stat-card.danger .stat-value { color: var(--danger); }
@@ -163,6 +225,7 @@ body {
 .search-box input:focus {
   outline: none;
   border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(43,108,176,0.1);
 }
 
 .search-box::before {
@@ -191,11 +254,14 @@ body {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all .2s;
+  transition: all .25s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
 
 .btn-primary {
   background: var(--primary);
@@ -252,7 +318,7 @@ table {
 }
 
 thead {
-  background: var(--primary);
+  background: linear-gradient(135deg, #1a365d 0%, #2b5278 100%);
   color: white;
 }
 
@@ -338,7 +404,7 @@ tr:last-child td { border-bottom: none; }
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(15,40,71,0.5);
   z-index: 1000;
   backdrop-filter: blur(4px);
   align-items: center;
@@ -571,31 +637,49 @@ tr:last-child td { border-bottom: none; }
 }
 
 /* TAB BAR */
-.tabs {
+/* APP LAYOUT - Sidebar a destra */
+.app-layout {
   display: flex;
-  gap: 0;
-  padding: 0 32px;
-  margin-bottom: 0;
+  min-height: calc(100vh - 70px);
 }
-.tab {
-  padding: 12px 24px;
-  background: transparent;
-  border: none;
-  border-bottom: 3px solid transparent;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-light);
-  transition: all .2s;
-}
-.tab.active {
-  color: var(--primary);
-  border-bottom-color: var(--accent);
-}
-.tab:hover { color: var(--primary); }
 
-.tab-content { display: none; }
-.tab-content.active { display: block; }
+.main-content {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 40px;
+}
+
+.sidebar-nav {
+  width: 230px;
+  min-width: 230px;
+  background: linear-gradient(180deg, #0f2847 0%, #1a365d 40%, #234572 100%);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  order: 2;
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+  z-index: 50;
+}
+
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+.sidebar-nav .sidebar-title {
+  color: rgba(255,255,255,0.4);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 16px 20px 8px;
+  margin-top: 4px;
+}
 
 /* SETTINGS PANEL */
 .settings-panel {
@@ -604,11 +688,15 @@ tr:last-child td { border-bottom: none; }
 
 .settings-card {
   background: var(--card);
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 24px;
   box-shadow: var(--shadow);
   margin-bottom: 20px;
+  border: 1px solid rgba(226,232,240,0.6);
+  transition: box-shadow .3s ease;
 }
+
+.settings-card:hover { box-shadow: var(--shadow-lg); }
 
 .settings-card h3 {
   color: var(--primary);
@@ -1064,26 +1152,37 @@ tr.collab-row:hover { background: #e3f0ff !important; }
 <!-- STATS -->
 <div class="stats-bar" id="statsBar"></div>
 
-<!-- TABS -->
-<div class="tabs">
+<!-- APP LAYOUT: Sidebar + Content -->
+<div class="app-layout">
+
+<!-- SIDEBAR NAV (destra) -->
+<nav class="sidebar-nav">
+  <div class="sidebar-title">Gestione</div>
   <button class="tab active" onclick="switchTab('polizze')">📋 Polizze</button>
   <button class="tab" onclick="switchTab('anagrafica')">👤 Anagrafica</button>
   <button class="tab" onclick="switchTab('scadenze')">⏰ Scadenzario</button>
   <button class="tab" onclick="switchTab('whatsapp')">📱 WhatsApp</button>
+  <div class="sidebar-title">Amministrazione</div>
   <button class="tab" onclick="switchTab('collaboratori')">👥 Collaboratori</button>
   <button class="tab" onclick="switchTab('provvigioni')">💰 Provvigioni</button>
   <button class="tab" onclick="switchTab('fatture')">🧾 Fatture</button>
+  <div class="sidebar-title">Operativo</div>
   <button class="tab" onclick="switchTab('preventivi')">🚗 Preventivi RCA</button>
   <button class="tab" onclick="switchTab('quotazioni')">📝 Quotazioni</button>
   <button class="tab" onclick="switchTab('sinistri')">⚠️ Sinistri</button>
   <button class="tab" onclick="switchTab('quietanze')">📜 Quietanze</button>
+  <div class="sidebar-title">Strumenti</div>
   <button class="tab" onclick="switchTab('analytics')">📊 Analytics</button>
   <button class="tab" onclick="switchTab('ai')">🤖 AI Assistant</button>
   <button class="tab" onclick="switchTab('agentepdf')">📄 Agente AI PDF</button>
   <button class="tab" onclick="switchTab('impostazioni')">⚙️ Impostazioni</button>
-  <span id="syncStatusHeader" style="font-size:11px;font-weight:600;margin-left:auto;padding:4px 10px;color:var(--text-light);">⚪ Offline</span>
-</div>
-<hr style="border:none;border-top:1px solid var(--border);margin:0 32px;">
+  <div class="sync-status">
+    <span id="syncStatusHeader">⚪ Offline</span>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT (sinistra) -->
+<div class="main-content">
 
 <!-- TAB: POLIZZE -->
 <div class="tab-content active" id="tab-polizze">
@@ -3446,6 +3545,9 @@ Tel: {brokerTel}</textarea>
     </div>
   </div>
 </div>
+
+</div><!-- /main-content -->
+</div><!-- /app-layout -->
 
 <!-- MODAL: AGGIUNGI POLIZZA -->
 <div class="modal-overlay" id="addModal">
@@ -7571,8 +7673,15 @@ function switchTab(tab) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  event.target.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').indexOf("'" + tab + "'") !== -1) {
+      t.classList.add('active');
+    }
+  });
   if (tab === 'analytics') { initAnalytics(); }
+  var mc = document.querySelector('.main-content');
+  if (mc) mc.scrollTop = 0;
+  window.scrollTo(0, 0);
 }
 
 // ======================= EXPORT =======================
