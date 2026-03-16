@@ -13852,19 +13852,43 @@ async function processPDFFile(file) {
     prog.style.width = '45%';
     currentPDFData.rawText = fullText;
 
-    // Step 3: Use the FULL extractPolicyData engine (same as Importa PDF)
-    status.textContent = '3/4 — Estrazione campi completa (extractPolicyData)...';
-    const extracted = extractPolicyData(fullText);
+    // Step 3: AI or Regex extraction
+    var settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
+    var claudeKey = settings.claudeApiKey || '';
+    var extracted;
+
+    if (claudeKey && claudeKey.startsWith('sk-ant-')) {
+      status.textContent = '3/5 \u2014 Analisi AI con Claude...';
+      steps.innerHTML += '<br>\ud83e\udd16 Invio a Claude per analisi intelligente...';
+      prog.style.width = '50%';
+      var textForAI = fullText.length > 15000 ? fullText.substring(0, 15000) + '\n\n[...TESTO TRONCATO...]' : fullText;
+      var aiPrompt = 'Sei un esperto analista assicurativo italiano. Analizza questa polizza assicurativa e restituisci un JSON strutturato.\n\nDOCUMENTO:\n\`\`\`\n' + textForAI + '\n\`\`\`\n\nRispondi SOLO con un oggetto JSON valido (senza markdown, senza \`\`\`), con questa struttura:\n{\n  "compagnia": "nome compagnia assicurativa",\n  "numPolizza": "numero polizza",\n  "cliente": "nome completo contraente (COGNOME NOME o Ragione Sociale)",\n  "cf": "codice fiscale del contraente se presente",\n  "piva": "partita IVA se presente",\n  "indirizzo": "indirizzo del contraente se presente",\n  "telefono": "telefono se presente",\n  "email": "email se presente",\n  "targa": "targa veicolo se polizza auto",\n  "veicolo": "marca e modello veicolo se presente",\n  "decorrenza": "YYYY-MM-DD",\n  "scadenza": "YYYY-MM-DD",\n  "frazionamento": "Annuale|Semestrale|Trimestrale|Mensile",\n  "tipoGaranzia": "RCA|CVT|Incendio|Furto|RCProfessionale|Vita|Infortuni|Multirischio|MultirischioCasa|Trasporti|TutelaLegale|Altro",\n  "premioNetto": 0,\n  "importoImposte": 0,\n  "importoSSN": 0,\n  "premioLordo": 0,\n  "garanzie": ["lista garanzie incluse"],\n  "confidenza": "alta|media|bassa"\n}\n\nREGOLE IMPORTANTI:\n- Per le date usa SEMPRE formato YYYY-MM-DD\n- Per gli importi usa numeri decimali senza simbolo euro (es: 450.00)\n- premioNetto = premio imponibile (senza tasse e SSN)\n- premioLordo = totale che il cliente paga\n- Se un campo non e presente, usa null\n- Rispondi SOLO con il JSON, nessun testo aggiuntivo';
+      var aiResp = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': claudeKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' }, body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 2048, messages: [{ role: 'user', content: aiPrompt }] }) });
+      if (!aiResp.ok) { var errData = await aiResp.text(); throw new Error('Claude API error (' + aiResp.status + '): ' + errData.substring(0, 200)); }
+      var aiData = await aiResp.json();
+      var aiText = aiData.content && aiData.content[0] ? aiData.content[0].text : '';
+      prog.style.width = '70%';
+      var aiJSON;
+      try { var jsonMatch = aiText.match(/\{[\\s\\S]*\}/); aiJSON = JSON.parse(jsonMatch ? jsonMatch[0] : aiText); } catch(pe) { steps.innerHTML += '<br>\u26a0\ufe0f Errore parsing AI, fallback a regex...'; aiJSON = null; }
+      if (aiJSON) {
+        extracted = { cliente: aiJSON.cliente || '', cf: aiJSON.cf || aiJSON.piva || '', compagnia: aiJSON.compagnia || '', numPolizza: aiJSON.numPolizza || '', targa: aiJSON.targa || '', veicolo: aiJSON.veicolo || '', decorrenza: aiJSON.decorrenza || '', scadenza: aiJSON.scadenza || '', frazionamento: aiJSON.frazionamento || '', tipoGaranzia: aiJSON.tipoGaranzia || '', _premioNetto: aiJSON.premioNetto || '', _importoImposte: aiJSON.importoImposte || '', _importoSSN: aiJSON.importoSSN || '', premio: aiJSON.premioLordo || '', telefono: aiJSON.telefono || '', email: aiJSON.email || '', indirizzo: aiJSON.indirizzo || '', _detectedFormat: 'CLAUDE AI (' + (aiJSON.confidenza || 'media') + ')', _garanzie: aiJSON.garanzie || [], _piva: aiJSON.piva || '' };
+        steps.innerHTML += '<br>\u2705 Analisi AI completata (confidenza: ' + (aiJSON.confidenza || 'media') + ')';
+      } else { extracted = extractPolicyData(fullText); steps.innerHTML += '<br>\u26a0\ufe0f Fallback a estrazione regex'; }
+    } else {
+      status.textContent = '3/4 \u2014 Estrazione campi (regex)...';
+      extracted = extractPolicyData(fullText);
+      steps.innerHTML += '<br>\u2139\ufe0f Estrazione regex (configura Claude API per AI)';
+    }
     currentPDFData.extracted = extracted;
-    const foundCount = Object.keys(extracted).filter(function(k) { return !k.startsWith('_') && extracted[k]; }).length;
-    steps.innerHTML += '<br>✅ Campi estratti: ' + foundCount + ' trovati (formato: ' + (extracted._detectedFormat || 'GENERIC') + ')';
-    prog.style.width = '75%';
+    var foundCount = Object.keys(extracted).filter(function(k) { return !k.startsWith('_') && extracted[k]; }).length;
+    steps.innerHTML += '<br>\u2705 Campi estratti: ' + foundCount + ' trovati (formato: ' + (extracted._detectedFormat || 'GENERIC') + ')';
+    prog.style.width = '85%';
 
     // Step 4: DB Matching
-    status.textContent = '4/4 — Matching Database FIM...';
+    status.textContent = (claudeKey ? '5/5' : '4/4') + ' \u2014 Matching Database FIM...';
     const match = agentMatchClienteDB(extracted);
     currentPDFData.match = match;
-    steps.innerHTML += '<br>✅ Matching: ' + match.message;
+    steps.innerHTML += '<br>\u2705 Matching: ' + match.message;
     prog.style.width = '100%';
 
     // Show results
@@ -13873,9 +13897,10 @@ async function processPDFFile(file) {
       populateExtractionForm(extracted, match);
       document.getElementById('pdfResultsPanel').style.display = 'block';
       agentPDFStats.total++;
-      if (extracted.compagnia && extracted.numPolizza && extracted.cliente) agentPDFStats.ok++;
-      else if (extracted.compagnia || extracted.numPolizza) agentPDFStats.warn++;
-      else agentPDFStats.fail++;
+      var isAI = (extracted._detectedFormat || '').indexOf('CLAUDE AI') >= 0;
+      if (extracted.compagnia && extracted.numPolizza && extracted.cliente) { agentPDFStats.ok++; if (isAI) agentPDFStats.accuracySum += 95; else agentPDFStats.accuracySum += 70; }
+      else if (extracted.compagnia || extracted.numPolizza) { agentPDFStats.warn++; agentPDFStats.accuracySum += (isAI ? 60 : 40); }
+      else { agentPDFStats.fail++; agentPDFStats.accuracySum += 10; }
       localStorage.setItem('fim_agent_pdf_stats', JSON.stringify(agentPDFStats));
       updateAgentStats();
       addAgentLog(file.name, extracted, match);
@@ -13937,8 +13962,8 @@ function populateExtractionForm(data, match) {
   // Client fields
   document.getElementById('pdf_nominativo').value = data.cliente || '';
   document.getElementById('pdf_cf').value = data.cf || '';
-  document.getElementById('pdf_piva').value = '';
-  if (data.cf && /^\d{11}$/.test(data.cf)) {
+  document.getElementById('pdf_piva').value = data._piva || '';
+  if (!data._piva && data.cf && /^\d{11}$/.test(data.cf)) {
     document.getElementById('pdf_piva').value = data.cf;
     document.getElementById('pdf_cf').value = '';
   }
@@ -13982,7 +14007,9 @@ function populateExtractionForm(data, match) {
   // Garanzie
   var garEl = document.getElementById('pdfGaranzieList');
   var garanzie = [];
-  if (typeof data.tipoGaranzia === 'string' && data.tipoGaranzia) {
+  if (data._garanzie && Array.isArray(data._garanzie) && data._garanzie.length > 0) {
+    garanzie = data._garanzie;
+  } else if (typeof data.tipoGaranzia === 'string' && data.tipoGaranzia) {
     garanzie = data.tipoGaranzia.split(/\s*\+\s*/).filter(function(g) { return g.trim(); });
   }
   if (garanzie.length > 0) {
