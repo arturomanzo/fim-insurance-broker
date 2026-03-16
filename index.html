@@ -1171,6 +1171,7 @@ tr.collab-row:hover { background: #e3f0ff !important; }
   <button class="tab" onclick="switchTab('quotazioni')">📝 Quotazioni</button>
   <button class="tab" onclick="switchTab('sinistri')">⚠️ Sinistri</button>
   <button class="tab" onclick="switchTab('quietanze')">📜 Quietanze</button>
+  <button class="tab" onclick="switchTab('documenti')">🔍 Documenti AI</button>
   <div class="sidebar-title">Strumenti</div>
   <button class="tab" onclick="switchTab('analytics')">📊 Analytics</button>
   <button class="tab" onclick="switchTab('ai')">🤖 AI Assistant</button>
@@ -3484,6 +3485,18 @@ Tel: {brokerTel}</textarea>
       </div>
     </div>
 
+    <div class="settings-card">
+      <h3>🤖 Intelligenza Artificiale (Claude API)</h3>
+      <p style="color:var(--text-light);margin-bottom:16px;">Configura l'API key di Anthropic (Claude) per l'analisi intelligente dei documenti assicurativi.</p>
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label>Claude API Key (Anthropic)</label>
+          <input type="password" id="set_claudeApiKey" placeholder="sk-ant-api03-..." onchange="saveSettings()">
+          <div style="font-size:11px;color:var(--text-light);margin-top:4px;">Ottieni la chiave su <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--primary);">console.anthropic.com</a></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Cloud Sync -->
     <div class="settings-card">
       <h3>☁️ Sincronizzazione Cloud (Firebase)</h3>
@@ -3800,6 +3813,76 @@ Tel: {brokerTel}</textarea>
   </div>
 </div>
 
+<div class="tab-content" id="tab-documenti">
+  <div class="settings-panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:26px;color:white;">🔍</div>
+        <div>
+          <h2 style="margin:0;font-size:22px;">Analisi Documenti AI</h2>
+          <p style="margin:4px 0 0;color:var(--text-light);font-size:13px;">Carica qualsiasi documento assicurativo: polizze, condizioni, PIP, fascicoli, appendici</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <span id="docAIStatus" style="font-size:12px;padding:6px 12px;border-radius:8px;background:#e8f5e9;color:#2e7d32;font-weight:600;">🟢 AI Pronta</span>
+      </div>
+    </div>
+    <div class="settings-card" style="margin-bottom:20px;">
+      <div id="docAIDropZone" style="border:2px dashed var(--border);border-radius:14px;padding:40px;text-align:center;cursor:pointer;transition:all .3s;background:var(--bg);"
+           ondragover="event.preventDefault();this.style.borderColor='#667eea';this.style.background='#f0f0ff';"
+           ondragleave="this.style.borderColor='var(--border)';this.style.background='var(--bg)';"
+           ondrop="event.preventDefault();this.style.borderColor='var(--border)';this.style.background='var(--bg)';handleDocAIDrop(event);"
+           onclick="document.getElementById('docAIFileInput').click();">
+        <div style="font-size:52px;margin-bottom:12px;">📄</div>
+        <div style="font-size:17px;font-weight:700;color:var(--primary);margin-bottom:6px;">Trascina qui qualsiasi documento assicurativo</div>
+        <div style="font-size:13px;color:var(--text-light);">Polizze, Condizioni Contrattuali, PIP, Fascicoli Informativi, Appendici, Quietanze, Certificati</div>
+        <div style="font-size:11px;color:var(--text-light);margin-top:10px;">Formato: PDF (nativo o scansionato) — Analisi AI con Claude</div>
+        <input type="file" id="docAIFileInput" accept=".pdf" style="display:none;" onchange="handleDocAISelect(event)" multiple>
+      </div>
+    </div>
+    <div id="docAIProcessing" style="display:none;" class="settings-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="width:28px;height:28px;border:3px solid var(--border);border-top:3px solid #667eea;border-radius:50%;animation:spin 1s linear infinite;"></div>
+        <span style="font-weight:600;color:#667eea;" id="docAIProcessingStatus">Analisi in corso con Claude AI...</span>
+      </div>
+      <div style="background:var(--border);border-radius:8px;height:8px;overflow:hidden;">
+        <div id="docAIProgressFill" style="background:linear-gradient(90deg,#667eea,#764ba2);height:100%;width:0%;transition:width .5s;border-radius:8px;"></div>
+      </div>
+      <div id="docAISteps" style="margin-top:12px;font-size:12px;color:var(--text-light);"></div>
+    </div>
+    <div id="docAIResultPanel" style="display:none;" class="settings-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <h3 style="margin:0;">🧠 Risultato Analisi AI</h3>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-sm btn-outline" onclick="resetDocAI()">🔄 Nuova Analisi</button>
+          <button class="btn btn-sm btn-primary" onclick="saveDocAIResult()">💾 Salva nel Database</button>
+        </div>
+      </div>
+      <div id="docAIResultContent"></div>
+    </div>
+    <div class="settings-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <h3 style="margin:0;">📚 Archivio Documenti Analizzati</h3>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="text" id="docAISearch" placeholder="Cerca documento..." oninput="renderDocumentiList()" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;width:250px;">
+          <select id="docAIFilterType" onchange="renderDocumentiList()" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;">
+            <option value="all">Tutti i tipi</option>
+            <option value="polizza">Polizze</option>
+            <option value="condizioni">Condizioni</option>
+            <option value="pip">PIP</option>
+            <option value="fascicolo">Fascicolo</option>
+            <option value="appendice">Appendice</option>
+            <option value="quietanza">Quietanza</option>
+            <option value="certificato">Certificato</option>
+            <option value="altro">Altro</option>
+          </select>
+        </div>
+      </div>
+      <div id="docAIList" style="font-size:13px;color:var(--text-light);">Nessun documento analizzato</div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL: ESTRATTO CONTO CLIENTE -->
 <div class="modal-overlay" id="ecClienteModal">
   <div class="modal" style="max-width:900px;">
@@ -3840,6 +3923,8 @@ Tel: {brokerTel}</textarea>
 <script>
 // ======================= DATA STORE =======================
 let polizze = [];
+let documentiAI = [];
+const DOCAI_KEY = 'fim_documenti_ai';
 let editingId = null;
 let extractedData = null;
 let sortCol = 'scadenza';
@@ -3933,7 +4018,8 @@ function autoCloudPush() {
           { name: 'preventivi', varName: 'preventivi', key: 'fim_preventivi' },
           { name: 'quotazioni', varName: 'quotazioni', key: 'fim_quotazioni' },
           { name: 'sinistri', varName: 'sinistri', key: 'fim_sinistri' },
-          { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' }
+          { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' },
+          { name: 'documentiAI', varName: 'documentiAI', key: 'fim_documenti_ai' }
         ];
         collections.forEach(function(col) {
           if (cloudData[col.name]) {
@@ -3958,6 +4044,7 @@ function autoCloudPush() {
         quotazioni: quotazioni,
         sinistri: sinistri,
         quietanze: quietanze,
+        documentiAI: documentiAI,
         provTable: provTable,
         indivProvTables: indivProvTables,
         provOverrides: JSON.parse(localStorage.getItem('fim_prov_overrides') || '{}'),
@@ -4284,6 +4371,7 @@ function emergencyCloudRecovery() {
       if (data.quotazioni) { quotazioni = Array.isArray(data.quotazioni) ? data.quotazioni : Object.values(data.quotazioni); localStorage.setItem('fim_quotazioni', JSON.stringify(quotazioni)); }
       if (data.sinistri) { sinistri = Array.isArray(data.sinistri) ? data.sinistri : Object.values(data.sinistri); localStorage.setItem('fim_sinistri', JSON.stringify(sinistri)); }
       if (data.quietanze) { quietanze = Array.isArray(data.quietanze) ? data.quietanze : Object.values(data.quietanze); localStorage.setItem('fim_quietanze', JSON.stringify(quietanze)); }
+          if (data.documentiAI) { documentiAI = Array.isArray(data.documentiAI) ? data.documentiAI : Object.values(data.documentiAI); localStorage.setItem('fim_documenti_ai', JSON.stringify(documentiAI)); }
       if (data.provTable) { provTable = data.provTable; localStorage.setItem('fim_prov_table', JSON.stringify(provTable)); }
       if (data.indivProvTables) { indivProvTables = data.indivProvTables; localStorage.setItem('fim_indiv_prov', JSON.stringify(indivProvTables)); }
       if (data.provOverrides) { localStorage.setItem('fim_prov_overrides', JSON.stringify(data.provOverrides)); }
@@ -4724,6 +4812,7 @@ function loadData() {
       _lastKnownPolizzeCount = polizze.length;
     }
   } catch(e) { polizze = []; }
+try { documentiAI = JSON.parse(localStorage.getItem(DOCAI_KEY)) || []; } catch(e) { documentiAI = []; }
 }
 
 function saveData(force) {
@@ -4765,6 +4854,7 @@ function loadSettings() {
       if (settings.email) document.getElementById('email').value = settings.email;
       if (settings.pec) document.getElementById('pec').value = settings.pec;
       if (settings.rui) document.getElementById('rui').value = settings.rui;
+      if (settings.claudeApiKey) document.getElementById('set_claudeApiKey').value = settings.claudeApiKey;
       document.getElementById('set_firebaseApiKey').value = settings.firebaseApiKey || FIREBASE_DEFAULTS.apiKey;
       document.getElementById('set_firebaseDatabaseUrl').value = settings.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL;
       document.getElementById('set_firebaseProjectId').value = settings.firebaseProjectId || FIREBASE_DEFAULTS.projectId;
@@ -4805,6 +4895,7 @@ function saveSettings() {
     firebaseApiKey: document.getElementById('set_firebaseApiKey').value,
     firebaseDatabaseUrl: document.getElementById('set_firebaseDatabaseUrl').value,
     firebaseProjectId: document.getElementById('set_firebaseProjectId').value,
+    claudeApiKey: document.getElementById('set_claudeApiKey').value,
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   refreshAll();
@@ -5620,6 +5711,7 @@ function saveCompagniaForm() {
   saveCompagnie();
   closeModal('compagniaModal');
   renderCompagnieSection();
+  renderDocumentiList();
   updateCompanyDatalist();
   showToast(editingCompagniaId ? 'Compagnia aggiornata!' : 'Compagnia aggiunta!');
 }
@@ -11735,6 +11827,359 @@ function downloadECClientePDF() {
   var filename = 'EstrattoConto_' + ec.cliente.replace(/[^a-zA-Z0-9]/g, '_') + '_' + ec.dataRif + '.pdf';
   doc.save(filename);
   showToast('PDF scaricato: ' + filename);
+}
+
+
+// ======================= DOCUMENTI AI (Claude API) =======================
+var _currentDocAI = null;
+
+function handleDocAIDrop(e) {
+  var files = e.dataTransfer.files;
+  if (files.length > 0) processDocAI(files[0]);
+}
+function handleDocAISelect(e) {
+  var files = e.target.files;
+  if (files.length > 0) processDocAI(files[0]);
+  e.target.value = '';
+}
+
+async function processDocAI(file) {
+  if (!file || !file.name.toLowerCase().endsWith('.pdf')) { showToast('Seleziona un file PDF', 'error'); return; }
+  var settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
+  var claudeKey = settings.claudeApiKey || '';
+  if (!claudeKey || !claudeKey.startsWith('sk-ant-')) { showToast('Configura la Claude API Key nelle Impostazioni', 'error'); return; }
+  var proc = document.getElementById('docAIProcessing');
+  var prog = document.getElementById('docAIProgressFill');
+  var status = document.getElementById('docAIProcessingStatus');
+  var steps = document.getElementById('docAISteps');
+  proc.style.display = 'block';
+  document.getElementById('docAIResultPanel').style.display = 'none';
+  prog.style.width = '0%';
+  steps.innerHTML = '';
+  try {
+    status.textContent = '1/3 \u2014 Caricamento PDF...';
+    steps.innerHTML = '\u2705 File: ' + file.name + ' (' + (file.size/1024).toFixed(0) + ' KB)';
+    prog.style.width = '10%';
+    var arrayBuffer = await file.arrayBuffer();
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    var pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+    var numPages = pdf.numPages;
+    steps.innerHTML += '<br>\u2705 PDF caricato: ' + numPages + ' pagine';
+    prog.style.width = '15%';
+    status.textContent = '2/3 \u2014 Estrazione testo...';
+    var fullText = '';
+    var maxPages = Math.min(numPages, 30);
+    for (var i = 1; i <= maxPages; i++) {
+      var page = await pdf.getPage(i);
+      var tc = await page.getTextContent();
+      var items = tc.items.filter(function(item) { return item.str && item.str.trim(); });
+      if (items.length === 0) continue;
+      var rows = [];
+      items.forEach(function(item) {
+        var y = Math.round((item.transform ? item.transform[5] : 0) * 10) / 10;
+        var x = item.transform ? item.transform[4] : 0;
+        var found = false;
+        for (var r = 0; r < rows.length; r++) {
+          if (Math.abs(rows[r].y - y) < 3) { rows[r].items.push({x:x, str:item.str}); found = true; break; }
+        }
+        if (!found) rows.push({y:y, items:[{x:x, str:item.str}]});
+      });
+      rows.sort(function(a,b) { return b.y - a.y; });
+      rows.forEach(function(row) {
+        row.items.sort(function(a,b) { return a.x - b.x; });
+        var lineText = '';
+        for (var j = 0; j < row.items.length; j++) {
+          if (j > 0) { var gap = row.items[j].x - (row.items[j-1].x + (row.items[j-1].str.length * 4)); lineText += gap > 30 ? '\t' : ' '; }
+          lineText += row.items[j].str;
+        }
+        fullText += lineText + '\n';
+      });
+      fullText += '\n--- PAGINA ' + i + ' ---\n';
+      prog.style.width = (15 + (i / maxPages) * 25) + '%';
+    }
+    steps.innerHTML += '<br>\u2705 Testo estratto: ' + fullText.length + ' caratteri';
+    prog.style.width = '40%';
+    status.textContent = '3/3 \u2014 Analisi AI con Claude...';
+    steps.innerHTML += '<br>\ud83d\udd04 Invio a Claude per analisi intelligente...';
+    var textForAI = fullText.length > 15000 ? fullText.substring(0, 15000) + '\n\n[...TESTO TRONCATO...]' : fullText;
+    var prompt = 'Sei un esperto analista assicurativo italiano. Analizza il seguente documento assicurativo e restituisci un JSON strutturato.\n\nDOCUMENTO:\n```\n' + textForAI + '\n```\n\n' +
+      'Rispondi SOLO con un oggetto JSON valido (senza markdown, senza ```), con questa struttura:\n' +
+      '{\n' +
+      '  "tipoDocumento": "polizza|condizioni_contrattuali|pip|fascicolo_informativo|appendice|quietanza|certificato|altro",\n' +
+      '  "tipoDocumentoLabel": "descrizione leggibile del tipo",\n' +
+      '  "compagnia": "nome compagnia assicurativa",\n' +
+      '  "prodotto": "nome prodotto/linea assicurativa",\n' +
+      '  "numPolizza": "numero polizza se presente",\n' +
+      '  "contraente": {"nome": "", "cf": "", "piva": "", "indirizzo": "", "telefono": "", "email": ""},\n' +
+      '  "assicurato": {"nome": "", "cf": ""},\n' +
+      '  "beneficiario": "se presente",\n' +
+      '  "oggetto": "breve descrizione di cosa copre",\n' +
+      '  "targa": "se veicolo",\n' +
+      '  "decorrenza": "YYYY-MM-DD",\n  "scadenza": "YYYY-MM-DD",\n' +
+      '  "durata": "es: annuale",\n  "frazionamento": "annuale|semestrale|trimestrale|mensile",\n' +
+      '  "premio": {"netto": 0, "imposte": 0, "ssn": 0, "lordo": 0},\n' +
+      '  "garanzie": [{"nome": "", "massimale": "", "franchigia": "", "scoperto": ""}],\n' +
+      '  "esclusioni": ["lista delle principali esclusioni"],\n' +
+      '  "clausole_speciali": ["lista clausole particolari"],\n' +
+      '  "ramo": "RCA|CVT|Incendio|Furto|RC Professionale|Vita|Infortuni|Malattia|Multirischi|Trasporti|Altro",\n' +
+      '  "sintesi": "riassunto in 2-3 frasi del documento per un broker assicurativo",\n' +
+      '  "note_importanti": "eventuali punti critici o attenzioni particolari per il broker",\n' +
+      '  "confidenza": "alta|media|bassa"\n}\n\n' +
+      'Se un campo non e presente nel documento, usa null. Per le date usa formato YYYY-MM-DD. Per gli importi usa numeri senza simbolo euro. Rispondi SOLO con il JSON.';
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': claudeKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4096,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    if (!response.ok) {
+      var errText = await response.text();
+      throw new Error('Claude API error (' + response.status + '): ' + errText.substring(0, 200));
+    }
+    var result = await response.json();
+    var aiText = result.content && result.content[0] ? result.content[0].text : '';
+    prog.style.width = '90%';
+    var jsonMatch = aiText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('Claude non ha restituito un JSON valido');
+    var analysis = JSON.parse(jsonMatch[0]);
+    _currentDocAI = {
+      id: generateId(), fileName: file.name, fileSize: file.size,
+      uploadDate: new Date().toISOString(), numPages: numPages,
+      textLength: fullText.length, analysis: analysis,
+      rawTextPreview: fullText.substring(0, 500)
+    };
+    steps.innerHTML += '<br>\u2705 Analisi completata! Tipo: <strong>' + (analysis.tipoDocumentoLabel || analysis.tipoDocumento) + '</strong>';
+    steps.innerHTML += '<br>\u2705 Compagnia: <strong>' + (analysis.compagnia || 'N/D') + '</strong> | Confidenza: <strong>' + (analysis.confidenza || 'N/D') + '</strong>';
+    prog.style.width = '100%';
+    setTimeout(function() {
+      proc.style.display = 'none';
+      renderDocAIResult(analysis, file.name);
+      document.getElementById('docAIResultPanel').style.display = 'block';
+    }, 600);
+  } catch(err) {
+    status.textContent = 'Errore analisi';
+    steps.innerHTML += '<br>\u274c ' + err.message;
+    prog.style.width = '100%';
+    prog.style.background = '#e53e3e';
+    showToast('Errore: ' + err.message, 'error');
+  }
+}
+
+function renderDocAIResult(a, fileName) {
+  var confColor = a.confidenza === 'alta' ? '#2e7d32' : a.confidenza === 'media' ? '#e65100' : '#c62828';
+  var confBg = a.confidenza === 'alta' ? '#e8f5e9' : a.confidenza === 'media' ? '#fff3e0' : '#ffebee';
+  var html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">';
+  html += '<div>';
+  html += '<div style="background:' + confBg + ';border-radius:10px;padding:14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">';
+  html += '<div><span style="font-size:12px;text-transform:uppercase;font-weight:700;color:' + confColor + ';">' + (a.tipoDocumentoLabel || a.tipoDocumento || 'Documento') + '</span>';
+  html += '<div style="font-size:11px;color:var(--text-light);margin-top:2px;">\ud83d\udcce ' + fileName + '</div></div>';
+  html += '<span style="padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;background:' + confColor + ';color:white;">Confidenza: ' + (a.confidenza || 'N/D') + '</span></div>';
+  html += '<div style="background:var(--bg);border-radius:10px;padding:14px;margin-bottom:12px;">';
+  html += '<h4 style="margin:0 0 10px;color:var(--primary);font-size:13px;">\ud83c\udfe2 Compagnia & Prodotto</h4>';
+  html += '<div style="font-size:14px;font-weight:700;">' + (a.compagnia || 'N/D') + '</div>';
+  if (a.prodotto) html += '<div style="font-size:12px;color:var(--text-light);">' + a.prodotto + '</div>';
+  if (a.numPolizza) html += '<div style="font-size:12px;margin-top:4px;">N. Polizza: <strong>' + a.numPolizza + '</strong></div>';
+  if (a.ramo) html += '<div style="font-size:12px;margin-top:2px;">Ramo: <strong>' + a.ramo + '</strong></div>';
+  html += '</div>';
+  if (a.contraente && a.contraente.nome) {
+    html += '<div style="background:var(--bg);border-radius:10px;padding:14px;margin-bottom:12px;">';
+    html += '<h4 style="margin:0 0 10px;color:var(--primary);font-size:13px;">\ud83d\udc64 Contraente</h4>';
+    html += '<div style="font-size:14px;font-weight:600;">' + a.contraente.nome + '</div>';
+    if (a.contraente.cf) html += '<div style="font-size:12px;">C.F.: ' + a.contraente.cf + '</div>';
+    if (a.contraente.piva) html += '<div style="font-size:12px;">P.IVA: ' + a.contraente.piva + '</div>';
+    if (a.contraente.indirizzo) html += '<div style="font-size:12px;">' + a.contraente.indirizzo + '</div>';
+    html += '</div>';
+  }
+  html += '<div style="background:var(--bg);border-radius:10px;padding:14px;margin-bottom:12px;">';
+  html += '<h4 style="margin:0 0 10px;color:var(--primary);font-size:13px;">\ud83d\udcc5 Periodo & Premio</h4>';
+  if (a.decorrenza) html += '<div style="font-size:12px;">Decorrenza: <strong>' + formatDate(a.decorrenza) + '</strong></div>';
+  if (a.scadenza) html += '<div style="font-size:12px;">Scadenza: <strong>' + formatDate(a.scadenza) + '</strong></div>';
+  if (a.durata) html += '<div style="font-size:12px;">Durata: ' + a.durata + '</div>';
+  if (a.frazionamento) html += '<div style="font-size:12px;">Frazionamento: ' + a.frazionamento + '</div>';
+  if (a.premio && a.premio.lordo) {
+    html += '<div style="margin-top:8px;padding:8px;background:white;border-radius:6px;">';
+    html += '<div style="font-size:18px;font-weight:800;color:var(--primary);">' + formatCurrency(a.premio.lordo) + '</div>';
+    html += '<div style="font-size:11px;color:var(--text-light);">Premio Lordo</div>';
+    if (a.premio.netto) html += '<div style="font-size:11px;">Netto: ' + formatCurrency(a.premio.netto) + ' | Imposte: ' + formatCurrency(a.premio.imposte || 0) + ' | SSN: ' + formatCurrency(a.premio.ssn || 0) + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  html += '</div>';
+
+  html += '<div>';
+  if (a.sintesi) {
+    html += '<div style="background:linear-gradient(135deg,#667eea10,#764ba210);border:1px solid #667eea30;border-radius:10px;padding:14px;margin-bottom:12px;">';
+    html += '<h4 style="margin:0 0 8px;color:#667eea;font-size:13px;">\ud83e\udde0 Sintesi AI</h4>';
+    html += '<div style="font-size:13px;line-height:1.5;">' + a.sintesi + '</div></div>';
+  }
+  if (a.note_importanti) {
+    html += '<div style="background:#fff3e0;border:1px solid #ffcc02;border-radius:10px;padding:14px;margin-bottom:12px;">';
+    html += '<h4 style="margin:0 0 8px;color:#e65100;font-size:13px;">\u26a0\ufe0f Note Importanti</h4>';
+    html += '<div style="font-size:12px;line-height:1.5;">' + a.note_importanti + '</div></div>';
+  }
+  if (a.garanzie && a.garanzie.length > 0 && a.garanzie[0].nome) {
+    html += '<div style="background:var(--bg);border-radius:10px;padding:14px;margin-bottom:12px;">';
+    html += '<h4 style="margin:0 0 10px;color:var(--primary);font-size:13px;">\ud83d\udee1\ufe0f Garanzie (' + a.garanzie.length + ')</h4>';
+    a.garanzie.forEach(function(g) {
+      html += '<div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;">';
+      html += '<div style="font-weight:600;">' + g.nome + '</div>';
+      var details = [];
+      if (g.massimale) details.push('Massimale: ' + g.massimale);
+      if (g.franchigia) details.push('Franchigia: ' + g.franchigia);
+      if (g.scoperto) details.push('Scoperto: ' + g.scoperto);
+      if (details.length > 0) html += '<div style="color:var(--text-light);">' + details.join(' | ') + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  if (a.esclusioni && a.esclusioni.length > 0) {
+    html += '<div style="background:#ffebee;border-radius:10px;padding:14px;margin-bottom:12px;">';
+    html += '<h4 style="margin:0 0 10px;color:#c62828;font-size:13px;">\ud83d\udeab Esclusioni (' + a.esclusioni.length + ')</h4>';
+    a.esclusioni.forEach(function(e) { html += '<div style="font-size:12px;padding:3px 0;border-bottom:1px solid #ffcdd2;">\u2022 ' + e + '</div>'; });
+    html += '</div>';
+  }
+  if (a.clausole_speciali && a.clausole_speciali.length > 0) {
+    html += '<div style="background:#e3f2fd;border-radius:10px;padding:14px;margin-bottom:12px;">';
+    html += '<h4 style="margin:0 0 10px;color:#1565c0;font-size:13px;">\ud83d\udccc Clausole Speciali</h4>';
+    a.clausole_speciali.forEach(function(c) { html += '<div style="font-size:12px;padding:3px 0;border-bottom:1px solid #bbdefb;">\u2022 ' + c + '</div>'; });
+    html += '</div>';
+  }
+  if (a.oggetto) {
+    html += '<div style="background:var(--bg);border-radius:10px;padding:14px;margin-bottom:12px;">';
+    html += '<h4 style="margin:0 0 8px;color:var(--primary);font-size:13px;">\ud83d\udccb Oggetto Assicurato</h4>';
+    html += '<div style="font-size:13px;">' + a.oggetto + '</div>';
+    if (a.targa) html += '<div style="font-size:12px;margin-top:4px;">Targa: <strong>' + a.targa + '</strong></div>';
+    html += '</div>';
+  }
+  html += '</div></div>';
+  document.getElementById('docAIResultContent').innerHTML = html;
+}
+
+function saveDocAIResult() {
+  if (!_currentDocAI) { showToast('Nessun risultato da salvare', 'error'); return; }
+  documentiAI.push(_currentDocAI);
+  localStorage.setItem(DOCAI_KEY, JSON.stringify(documentiAI));
+  autoCloudPush();
+  renderDocumentiList();
+  showToast('Documento salvato! (' + documentiAI.length + ' totali)');
+  var a = _currentDocAI.analysis;
+  if (a && (a.tipoDocumento === 'polizza' || a.tipoDocumento === 'appendice') && a.numPolizza) {
+    var existingPol = polizze.find(function(p) { return p.numPolizza === a.numPolizza; });
+    if (!existingPol) {
+      var newPol = {
+        id: generateId(), cliente: a.contraente ? a.contraente.nome : '',
+        cf: a.contraente ? (a.contraente.cf || a.contraente.piva || '') : '',
+        compagnia: a.compagnia || '', numPolizza: a.numPolizza || '',
+        targa: a.targa || '', tipoGaranzia: a.ramo || '',
+        decorrenza: a.decorrenza || '', scadenza: a.scadenza || '',
+        premio: a.premio ? a.premio.lordo : 0,
+        importoImponibile: a.premio ? a.premio.netto : 0,
+        importoTasse: a.premio ? a.premio.imposte : 0,
+        importoSSN: a.premio ? a.premio.ssn : 0,
+        frazionamento: a.frazionamento || 'Annuale',
+        note: 'Auto-importato da Analisi AI Documenti',
+        garanzie: a.garanzie || [], docAIId: _currentDocAI.id,
+        createdAt: new Date().toISOString()
+      };
+      if (newPol.cliente) {
+        var pCliente = newPol.cliente.trim().toUpperCase();
+        var pCF = (newPol.cf || '').trim().toUpperCase();
+        var matched = clienti.find(function(c) {
+          var cFull = ((c.cognome || '') + ' ' + (c.nome || '')).trim().toUpperCase();
+          var cFullR = ((c.nome || '') + ' ' + (c.cognome || '')).trim().toUpperCase();
+          var cCF = ((c.codiceFiscale || c.partitaIva || '')).trim().toUpperCase();
+          return (pCF && cCF && pCF === cCF) || pCliente === cFull || pCliente === cFullR;
+        });
+        if (matched) { newPol.clienteId = matched.id; }
+        else { var nc = _createClienteFromPolizza(newPol); if (nc) { clienti.push(nc); newPol.clienteId = nc.id; saveClienti(); } }
+      }
+      polizze.push(newPol); saveData();
+      showToast('Polizza ' + newPol.numPolizza + ' creata automaticamente!');
+    } else {
+      if (a.garanzie && a.garanzie.length > 0) existingPol.garanzie = a.garanzie;
+      existingPol.docAIId = _currentDocAI.id; saveData();
+      showToast('Polizza ' + existingPol.numPolizza + ' aggiornata con dati AI');
+    }
+  }
+  _currentDocAI = null;
+}
+
+function resetDocAI() {
+  _currentDocAI = null;
+  document.getElementById('docAIProcessing').style.display = 'none';
+  document.getElementById('docAIResultPanel').style.display = 'none';
+  var prog = document.getElementById('docAIProgressFill');
+  prog.style.width = '0%';
+  prog.style.background = 'linear-gradient(90deg,#667eea,#764ba2)';
+}
+
+function renderDocumentiList() {
+  var container = document.getElementById('docAIList');
+  if (!container) return;
+  if (!documentiAI || documentiAI.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text-light);"><div style="font-size:40px;margin-bottom:10px;">\ud83d\udcc2</div><div>Nessun documento analizzato</div><div style="font-size:12px;">Carica un PDF per iniziare</div></div>';
+    return;
+  }
+  var search = (document.getElementById('docAISearch') ? document.getElementById('docAISearch').value : '').toLowerCase();
+  var filterType = document.getElementById('docAIFilterType') ? document.getElementById('docAIFilterType').value : 'all';
+  var filtered = documentiAI.filter(function(d) {
+    var a = d.analysis || {};
+    var matchSearch = !search || (d.fileName || '').toLowerCase().indexOf(search) !== -1 ||
+      (a.compagnia || '').toLowerCase().indexOf(search) !== -1 ||
+      (a.contraente && a.contraente.nome || '').toLowerCase().indexOf(search) !== -1 ||
+      (a.numPolizza || '').toLowerCase().indexOf(search) !== -1;
+    var matchType = filterType === 'all' || (a.tipoDocumento || '') === filterType;
+    return matchSearch && matchType;
+  });
+  filtered.sort(function(a,b) { return new Date(b.uploadDate) - new Date(a.uploadDate); });
+  var html = '<div style="display:grid;gap:10px;">';
+  filtered.forEach(function(d) {
+    var a = d.analysis || {};
+    var tipoIcon = {'polizza':'\ud83d\udccb','condizioni_contrattuali':'\ud83d\udcdc','pip':'\ud83d\udcca','fascicolo_informativo':'\ud83d\udcc1','appendice':'\ud83d\udcce','quietanza':'\ud83e\uddfe','certificato':'\u2705'}[a.tipoDocumento] || '\ud83d\udcc4';
+    var confColor = a.confidenza === 'alta' ? '#2e7d32' : a.confidenza === 'media' ? '#e65100' : '#c62828';
+    html += '<div style="display:flex;align-items:center;gap:14px;padding:14px;background:var(--bg);border-radius:10px;cursor:pointer;transition:all .2s;" onmouseover="this.style.background=\'#e8edf5\'" onmouseout="this.style.background=\'var(--bg)\'" onclick="viewDocAIDetail(\'' + d.id + '\')">';
+    html += '<div style="font-size:28px;">' + tipoIcon + '</div>';
+    html += '<div style="flex:1;min-width:0;">';
+    html += '<div style="font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (a.compagnia || 'N/D') + ' \u2014 ' + (a.tipoDocumentoLabel || a.tipoDocumento || 'Doc') + '</div>';
+    html += '<div style="font-size:12px;color:var(--text-light);">';
+    if (a.contraente && a.contraente.nome) html += a.contraente.nome + ' | ';
+    if (a.numPolizza) html += 'N.' + a.numPolizza + ' | ';
+    html += d.fileName + '</div></div>';
+    html += '<div style="text-align:right;flex-shrink:0;">';
+    if (a.premio && a.premio.lordo) html += '<div style="font-weight:700;color:var(--primary);font-size:14px;">' + formatCurrency(a.premio.lordo) + '</div>';
+    html += '<div style="font-size:11px;color:var(--text-light);">' + formatDate(d.uploadDate ? d.uploadDate.split('T')[0] : '') + '</div>';
+    html += '<span style="font-size:10px;padding:2px 6px;border-radius:4px;color:white;background:' + confColor + ';">' + (a.confidenza || '') + '</span></div>';
+    html += '<button onclick="event.stopPropagation();deleteDocAI(\'' + d.id + '\')" style="border:none;background:none;cursor:pointer;font-size:16px;color:#e53e3e;padding:4px;" title="Elimina">\ud83d\uddd1\ufe0f</button>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<div style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-light);">' + filtered.length + ' di ' + documentiAI.length + ' documenti</div>';
+  container.innerHTML = html;
+}
+
+function viewDocAIDetail(id) {
+  var doc = documentiAI.find(function(d) { return d.id === id; });
+  if (!doc) return;
+  _currentDocAI = doc;
+  renderDocAIResult(doc.analysis, doc.fileName);
+  document.getElementById('docAIResultPanel').style.display = 'block';
+  document.getElementById('docAIResultPanel').scrollIntoView({behavior: 'smooth'});
+}
+
+function deleteDocAI(id) {
+  if (!confirm('Eliminare questo documento?')) return;
+  documentiAI = documentiAI.filter(function(d) { return d.id !== id; });
+  localStorage.setItem(DOCAI_KEY, JSON.stringify(documentiAI));
+  autoCloudPush(); renderDocumentiList();
+  showToast('Documento eliminato');
 }
 
 // ======================= AI ASSISTANT =======================
