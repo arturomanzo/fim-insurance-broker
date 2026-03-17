@@ -2467,7 +2467,7 @@ Tel: {brokerTel}</textarea>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div class="form-group">
           <label>Cliente / Ragione Sociale</label>
-          <input type="text" id="quotCliente" placeholder="Nome e Cognome / Ragione Sociale" list="quotClientiList" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;">
+          <input type="text" id="quotCliente" placeholder="Nome e Cognome / Ragione Sociale" list="quotClientiList" onchange="autofillQuotCliente()" oninput="autofillQuotCliente()" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;">
           <datalist id="quotClientiList"></datalist>
         </div>
         <div class="form-group">
@@ -2702,7 +2702,17 @@ Tel: {brokerTel}</textarea>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
       <h3 style="margin:0;">📜 Titoli Quietanze</h3>
       <div style="display:flex;gap:8px;">
-        <button class="btn btn-primary btn-sm" onclick="generateQuietanze()">🔄 Genera Quietanze da Polizze</button>
+        <select id="qGenMese" class="filter-select" style="min-width:140px;">
+          <option value="">— Mese —</option>
+          <option value="1">Gennaio</option><option value="2">Febbraio</option><option value="3">Marzo</option>
+          <option value="4">Aprile</option><option value="5">Maggio</option><option value="6">Giugno</option>
+          <option value="7">Luglio</option><option value="8">Agosto</option><option value="9">Settembre</option>
+          <option value="10">Ottobre</option><option value="11">Novembre</option><option value="12">Dicembre</option>
+        </select>
+        <select id="qGenAnno" class="filter-select" style="min-width:90px;">
+          <option value="2025">2025</option><option value="2026" selected>2026</option><option value="2027">2027</option>
+        </select>
+        <button class="btn btn-primary btn-sm" onclick="generateQuietanzeMese()">🔄 Genera Quietanze Mese</button>
         <button class="btn btn-outline btn-sm" onclick="printCaricoQuietanze()">🖨️ Stampa Carico</button>
         <button class="btn btn-outline btn-sm" onclick="exportQuietanzeCSV()">📊 Esporta CSV</button>
       </div>
@@ -3631,7 +3641,8 @@ Tel: {brokerTel}</textarea>
         </div>
         <div class="form-group full-width">
           <label>Cliente / Contraente *</label>
-          <input type="text" id="f_cliente" placeholder="Nome, Cognome o Ragione Sociale">
+          <input type="text" id="f_cliente" placeholder="Nome, Cognome o Ragione Sociale" list="polClientiList" onchange="autofillPolizzaCliente()" oninput="autofillPolizzaCliente()">
+          <datalist id="polClientiList"></datalist>
         </div>
         <div class="form-group">
           <label>Codice Fiscale / P.IVA</label>
@@ -8989,7 +9000,7 @@ function renderProvTableHTML() {
       <td><strong>${ramo}</strong></td>
       ${ruoli.map(r => {
         const id = 'prov_' + safeRamo + '_' + r.replace(/\s/g,'_');
-        return `<td style="text-align:center;"><input type="number" class="prov-input" id="${id}" value="${ramoData[r]||0}" step="0.5" min="0" max="100">%</td>`;
+        return `<td style="text-align:center;"><input type="number" class="prov-input" id="${id}" value="${(ramoData[r]||0).toFixed ? (ramoData[r]||0).toFixed(2) : (ramoData[r]||0)}" step="0.01" min="0" max="100">%</td>`;
       }).join('')}
     </tr>`;
   }).join('');
@@ -9023,7 +9034,7 @@ function renderIndivProvTable() {
     const safeRamo = ramo.replace(/[^a-zA-Z0-9]/g,'_');
     return `<tr>
       <td><strong>${ramo}</strong></td>
-      <td style="text-align:center;"><input type="number" class="prov-input" id="indivProv_${safeRamo}" value="${indivPerc}" step="0.5" min="0" max="100" placeholder="${defaultPerc}" style="width:80px;">%</td>
+      <td style="text-align:center;"><input type="number" class="prov-input" id="indivProv_${safeRamo}" value="${typeof indivPerc === 'number' ? indivPerc.toFixed(2) : indivPerc}" step="0.01" min="0" max="100" placeholder="${defaultPerc}" style="width:80px;">%</td>
       <td style="text-align:center;color:var(--text-light);">${defaultPerc}%</td>
       <td style="text-align:center;color:${diffColor};font-weight:600;">${diff !== '-' ? (parseFloat(diff)>0?'+':'')+diff+'%' : '—'}</td>
     </tr>`;
@@ -9462,6 +9473,54 @@ function editInvoice(id) {
     document.getElementById('inv_subagente').value = inv.subagenteId || '';
   }
   calcInvoiceTotals();
+}
+
+function autofillClienteData(nameValue, fieldMap) {
+  if (!nameValue || nameValue.length < 3) return;
+  var val = nameValue.trim().toLowerCase();
+  var found = null;
+  if (typeof clienti !== 'undefined' && clienti.length) {
+    found = clienti.find(function(c) {
+      var fullName = ((c.cognome || '') + ' ' + (c.nome || '')).trim().toLowerCase();
+      var reverseName = ((c.nome || '') + ' ' + (c.cognome || '')).trim().toLowerCase();
+      var ragSoc = (c.ragioneSociale || '').toLowerCase();
+      return fullName === val || reverseName === val || ragSoc === val || (c.cognome || '').toLowerCase() === val;
+    });
+  }
+  if (!found) {
+    var pol = polizze.find(function(p) { return (p.cliente || '').toLowerCase() === val; });
+    if (pol) { found = { codiceFiscale: pol.cf || pol.codiceFiscale || '', partitaIva: pol.piva || pol.partitaIva || '', indirizzoResidenza: pol.indirizzo || '', capResidenza: pol.cap || '', comuneResidenza: pol.citta || pol.comune || '', provinciaResidenza: pol.provincia || '', telefono: pol.telefono || '', whatsapp: pol.whatsapp || '', email: pol.email || '', dataNascita: pol.dataNascita || '', luogoNascita: pol.luogoNascita || '', sesso: pol.sesso || '' }; }
+  }
+  if (!found) return;
+  Object.keys(fieldMap).forEach(function(key) {
+    var el = document.getElementById(fieldMap[key]); if (!el) return;
+    var v = '';
+    switch(key) {
+      case 'cf': v = found.codiceFiscale || found.partitaIva || ''; break;
+      case 'indirizzo': v = found.indirizzoResidenza || found.indirizzo || ''; break;
+      case 'cap': v = found.capResidenza || found.cap || ''; break;
+      case 'citta': v = found.comuneResidenza || found.comune || found.citta || ''; break;
+      case 'provincia': v = found.provinciaResidenza || found.provincia || ''; break;
+      case 'telefono': v = found.telefono || ''; break;
+      case 'whatsapp': v = found.whatsapp || ''; break;
+      case 'email': v = found.email || ''; break;
+      case 'dataNascita': v = found.dataNascita || ''; break;
+      case 'luogoNascita': v = found.luogoNascita || ''; break;
+      case 'sesso': v = found.sesso || ''; break;
+    }
+    if (v) el.value = v;
+  });
+}
+function autofillPolizzaCliente() { var val = document.getElementById('f_cliente').value; autofillClienteData(val, {cf:'f_cf',indirizzo:'f_indirizzo',cap:'f_cap',citta:'f_citta',provincia:'f_provincia',telefono:'f_telefono',whatsapp:'f_whatsapp',email:'f_email',dataNascita:'f_dataNascita',luogoNascita:'f_luogoNascita',sesso:'f_sesso'}); }
+function autofillQuotCliente() { var val = document.getElementById('quotCliente').value; autofillClienteData(val, {cf:'quotCF',indirizzo:'quotIndirizzo',citta:'quotCitta',telefono:'quotTelefono',email:'quotEmail'}); }
+function populateClientiDatalist() {
+  var names = new Set();
+  if (typeof clienti !== 'undefined') { clienti.forEach(function(c) { var n = ((c.cognome || '') + ' ' + (c.nome || '')).trim(); if (n) names.add(n); if (c.ragioneSociale) names.add(c.ragioneSociale); }); }
+  polizze.forEach(function(p) { if (p.cliente) names.add(p.cliente); });
+  var sorted = Array.from(names).sort();
+  var optHtml = sorted.map(function(n) { return '<option value="' + n + '">'; }).join('');
+  var dlPol = document.getElementById('polClientiList'); if (dlPol) dlPol.innerHTML = optHtml;
+  var dlQuot = document.getElementById('quotClientiList'); if (dlQuot) dlQuot.innerHTML = optHtml;
 }
 
 function autofillCollabInvoiceData() {
@@ -12869,6 +12928,43 @@ function generateQuietanze() {
   showToast(count > 0 ? count + ' quietanze generate' : 'Nessuna nuova quietanza da generare');
 }
 
+function generateQuietanzeMese() {
+  var meseVal = document.getElementById('qGenMese').value;
+  var annoVal = document.getElementById('qGenAnno').value;
+  if (!meseVal) { showToast('Seleziona un mese', 'warning'); return; }
+  var meseTarget = parseInt(meseVal);
+  var annoTarget = parseInt(annoVal);
+  var now = new Date();
+  var count = 0;
+  polizze.forEach(function(p) {
+    if (!p.scadenza || !p.premio) return;
+    var fraz = (p.frazionamento || 'annuale').toLowerCase();
+    var numRate = 1;
+    if (fraz.indexOf('semestral') >= 0) numRate = 2;
+    else if (fraz.indexOf('trimestral') >= 0) numRate = 4;
+    else if (fraz.indexOf('mensil') >= 0) numRate = 12;
+    var premioRata = (parseFloat(p.premio) || 0) / numRate;
+    var decorrenza = new Date(p.decorrenza || p.scadenza);
+    for (var i = 0; i < numRate; i++) {
+      var scadRata = new Date(decorrenza);
+      if (fraz.indexOf('semestral') >= 0) scadRata.setMonth(scadRata.getMonth() + (i * 6));
+      else if (fraz.indexOf('trimestral') >= 0) scadRata.setMonth(scadRata.getMonth() + (i * 3));
+      else if (fraz.indexOf('mensil') >= 0) scadRata.setMonth(scadRata.getMonth() + i);
+      else scadRata.setFullYear(scadRata.getFullYear() + i);
+      if ((scadRata.getMonth() + 1) !== meseTarget || scadRata.getFullYear() !== annoTarget) continue;
+      var qId = 'q_' + p.id + '_' + i;
+      if (quietanze.find(function(q) { return q.id === qId; })) continue;
+      var collabName = '';
+      if (p.collaboratore) { var coll = collaboratori.find(function(x) { return x.id === p.collaboratore; }); if (coll) collabName = coll.cognome + ' ' + coll.nome; }
+      quietanze.push({ id: qId, polizzaId: p.id, numPolizza: p.numPolizza || '-', cliente: p.cliente || '-', clienteId: p.clienteId || '', compagnia: p.compagnia || '-', compagniaId: p.compagniaId || '', collaboratoreId: p.collaboratore || '', collaboratoreNome: collabName, targa: p.targa || '', tipoGaranzia: p.tipoGaranzia || '', scadenzaRata: scadRata.toISOString().split('T')[0], premioRata: Math.round(premioRata * 100) / 100, importoIncassato: 0, metodoPagamento: '', frazionamento: p.frazionamento || 'Annuale', rata: (i + 1) + '/' + numRate, stato: scadRata < now ? 'scaduta' : 'da_incassare', dataIncasso: '', numero: 'Q/' + scadRata.getFullYear() + '/' + String(quietanze.length + count + 1).padStart(4, '0') });
+      count++;
+    }
+  });
+  saveQuietanzeData(); refreshAll();
+  var mesi = ['','Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+  showToast(count > 0 ? count + ' quietanze generate per ' + mesi[meseTarget] + ' ' + annoTarget : 'Nessuna nuova quietanza per ' + mesi[meseTarget] + ' ' + annoTarget);
+}
+
 function markQuietanzaIncassata(id) {
   const q = quietanze.find(x => x.id === id);
   if (!q) return;
@@ -13749,6 +13845,7 @@ function refreshAll() {
   renderClientiTable();
   renderCompagnieSection();
   updateCompanyDatalist();
+  populateClientiDatalist();
   renderScadenzario();
   checkScadenzeAlert();
   renderWhatsAppQueue();
