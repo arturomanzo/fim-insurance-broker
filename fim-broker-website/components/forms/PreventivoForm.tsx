@@ -13,6 +13,8 @@ interface FormData {
   privacy: boolean
 }
 
+type FormErrors = Partial<Record<keyof FormData, string>>
+
 const TIPI_POLIZZA = [
   'Assicurazione Auto',
   'Assicurazione Vita',
@@ -34,18 +36,18 @@ export default function PreventivoForm() {
     privacy: false,
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [errors, setErrors] = useState<Partial<FormData>>({})
+  const [errors, setErrors] = useState<FormErrors>({})
 
   const validate = (): boolean => {
-    const newErrors: Partial<FormData> = {}
-    if (!formData.tipo) newErrors.tipo = 'Seleziona il tipo di polizza' as never
-    if (!formData.nome.trim()) newErrors.nome = 'Il nome è obbligatorio' as never
-    if (!formData.cognome.trim()) newErrors.cognome = 'Il cognome è obbligatorio' as never
+    const newErrors: FormErrors = {}
+    if (!formData.tipo) newErrors.tipo = 'Seleziona il tipo di polizza'
+    if (!formData.nome.trim()) newErrors.nome = 'Il nome è obbligatorio'
+    if (!formData.cognome.trim()) newErrors.cognome = 'Il cognome è obbligatorio'
     if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Inserisci un\'email valida' as never
+      newErrors.email = "Inserisci un'email valida"
     }
-    if (!formData.telefono.trim()) newErrors.telefono = 'Il telefono è obbligatorio' as never
-    if (!formData.privacy) newErrors.privacy = 'Devi accettare la privacy policy' as never
+    if (!formData.telefono.trim()) newErrors.telefono = 'Il telefono è obbligatorio'
+    if (!formData.privacy) newErrors.privacy = 'Devi accettare la privacy policy'
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -114,7 +116,7 @@ export default function PreventivoForm() {
             <option key={t} value={t}>{t}</option>
           ))}
         </select>
-        {errors.tipo && <p className="text-red-500 text-sm mt-1">{errors.tipo as string}</p>}
+        {errors.tipo && <p className="text-red-500 text-sm mt-1">{errors.tipo}</p>}
       </div>
 
       {/* Nome e cognome */}
@@ -129,7 +131,7 @@ export default function PreventivoForm() {
             placeholder="Mario"
             className="input-field"
           />
-          {errors.nome && <p className="text-red-500 text-sm mt-1">{errors.nome as string}</p>}
+          {errors.nome && <p className="text-red-500 text-sm mt-1">{errors.nome}</p>}
         </div>
         <div>
           <label className="label-field">Cognome *</label>
@@ -141,7 +143,7 @@ export default function PreventivoForm() {
             placeholder="Rossi"
             className="input-field"
           />
-          {errors.cognome && <p className="text-red-500 text-sm mt-1">{errors.cognome as string}</p>}
+          {errors.cognome && <p className="text-red-500 text-sm mt-1">{errors.cognome}</p>}
         </div>
       </div>
 
@@ -157,7 +159,7 @@ export default function PreventivoForm() {
             placeholder="mario.rossi@email.it"
             className="input-field"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email as string}</p>}
+          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
         <div>
           <label className="label-field">Telefono *</label>
@@ -169,7 +171,7 @@ export default function PreventivoForm() {
             placeholder="+39 333 1234567"
             className="input-field"
           />
-          {errors.telefono && <p className="text-red-500 text-sm mt-1">{errors.telefono as string}</p>}
+          {errors.telefono && <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>}
         </div>
       </div>
 
@@ -204,7 +206,7 @@ export default function PreventivoForm() {
             e acconsento al trattamento dei miei dati personali per ricevere il preventivo. *
           </span>
         </label>
-        {errors.privacy && <p className="text-red-500 text-sm mt-1">{errors.privacy as string}</p>}
+        {errors.privacy && <p className="text-red-500 text-sm mt-1">{errors.privacy}</p>}
       </div>
 
       {status === 'error' && (
