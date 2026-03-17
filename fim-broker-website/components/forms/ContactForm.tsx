@@ -29,10 +29,10 @@ export default function ContactForm() {
 
     setStatus('loading')
     try {
-      const res = await fetch('/api/preventivo', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, tipo: 'Contatto generico' }),
+        body: JSON.stringify(formData),
       })
       if (!res.ok) throw new Error()
       setStatus('success')
