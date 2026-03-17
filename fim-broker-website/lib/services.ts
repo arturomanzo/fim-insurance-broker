@@ -112,7 +112,7 @@ export const services: Service[] = [
       {
         question: 'Cosa si intende per RC del proprietario?',
         answer:
-          'Copre i danni accidentali causati a terzi connessi alla proprietà o alla conduzione dellabitazione.',
+          "Copre i danni accidentali causati a terzi connessi alla proprietà o alla conduzione dell'abitazione.",
       },
     ],
   },
@@ -134,7 +134,7 @@ export const services: Service[] = [
     ],
     benefits: [
       'Accesso a strutture private di eccellenza',
-      'Nessuna lista dattesa',
+      "Nessuna lista d'attesa",
       'Rete di medici convenzionati',
       'Rimborso rapido',
     ],
@@ -147,7 +147,7 @@ export const services: Service[] = [
       {
         question: 'Sono coperto anche allestero?',
         answer:
-          'Molte nostre polizze prevedono copertura internazionale, ideale per chi viaggia o vive periodi allestero.',
+          "Molte nostre polizze prevedono copertura internazionale, ideale per chi viaggia o vive periodi all'estero.",
       },
     ],
   },
@@ -177,7 +177,7 @@ export const services: Service[] = [
       {
         question: "Cos'è la RC professionale?",
         answer:
-          'Copre i danni causati ai clienti nell esercizio dell attività professionale, tutelandoti da richieste di risarcimento per errori o omissioni.',
+          "Copre i danni causati ai clienti nell'esercizio dell'attività professionale, tutelandoti da richieste di risarcimento per errori o omissioni.",
       },
       {
         question: "Perché un'azienda ha bisogno della cyber risk?",

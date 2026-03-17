@@ -114,7 +114,7 @@ export default function FIMAWidget() {
     <div className="fixed bottom-6 right-6 z-50">
       {/* Chat window */}
       {isOpen && (
-        <div className="mb-4 w-[360px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-slide-up"
+        <div className="mb-4 w-[360px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-slide-up"
              style={{ height: '500px' }}>
           {/* Header */}
           <div className="gradient-primary px-4 py-3 flex items-center justify-between flex-shrink-0">
