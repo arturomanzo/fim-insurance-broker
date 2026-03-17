@@ -101,7 +101,7 @@ export default function ContattiPage() {
       </section>
 
       {/* Emergency */}
-      <section className="bg-accent py-10">
+      <section className="gradient-accent py-10">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>

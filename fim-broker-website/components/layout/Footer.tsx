@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const serviceLinks = [
   { href: '/servizi/assicurazione-auto', label: 'Assicurazione Auto' },
@@ -30,13 +31,28 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center flex-shrink-0">
-                <span className="text-primary font-black text-base">FIM</span>
-              </div>
-              <div>
-                <div className="font-bold text-lg text-white leading-tight">FIM Insurance</div>
-                <div className="text-xs text-white/60 leading-tight">Broker Assicurativo</div>
+            <Link href="/" className="flex items-center mb-4">
+              <Image
+                src="/logo.png"
+                alt="FIM Insurance Broker"
+                width={160}
+                height={48}
+                className="h-10 w-auto object-contain brightness-0 invert"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                  const fallback = e.currentTarget.nextElementSibling as HTMLElement
+                  if (fallback) fallback.style.display = 'flex'
+                }}
+              />
+              {/* Fallback */}
+              <div className="hidden items-center gap-3" aria-hidden="true">
+                <div className="w-12 h-12 gradient-logo rounded-xl flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-black text-base">FIM</span>
+                </div>
+                <div>
+                  <div className="font-black text-lg text-white leading-tight">FIM Insurance</div>
+                  <div className="text-xs text-white/60 leading-tight tracking-wide uppercase">Broker Assicurativo</div>
+                </div>
               </div>
             </Link>
             <p className="text-white/70 text-sm leading-relaxed mb-6">

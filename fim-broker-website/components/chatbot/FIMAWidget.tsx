@@ -119,7 +119,7 @@ export default function FIMAWidget() {
           {/* Header */}
           <div className="gradient-primary px-4 py-3 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center font-black text-primary text-sm">
+              <div className="w-10 h-10 gradient-logo rounded-full flex items-center justify-center font-black text-white text-sm">
                 F
               </div>
               <div>
@@ -151,7 +151,7 @@ export default function FIMAWidget() {
             )}
             {isLoading && !streamingContent && (
               <div className="flex gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-accent text-primary flex items-center justify-center text-xs font-bold flex-shrink-0">
+                <div className="w-8 h-8 rounded-full gradient-logo text-white flex items-center justify-center text-xs font-bold flex-shrink-0">
                   F
                 </div>
                 <div className="bg-gray-100 rounded-2xl rounded-tl-sm px-4 py-3">
@@ -228,7 +228,7 @@ export default function FIMAWidget() {
         )}
         {/* Notification dot */}
         {!isOpen && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full border-2 border-white" />
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-accent-light rounded-full border-2 border-white animate-pulse" />
         )}
       </button>
     </div>

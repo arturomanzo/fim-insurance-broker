@@ -15,7 +15,7 @@ export default function ChatBubble({ role, content, isStreaming }: ChatBubblePro
       <div
         className={clsx(
           'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold',
-          isUser ? 'bg-primary text-white' : 'bg-accent text-primary'
+          isUser ? 'bg-primary text-white' : 'gradient-logo text-white'
         )}
       >
         {isUser ? 'Tu' : 'F'}
