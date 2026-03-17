@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { clsx } from 'clsx'
+import FimLogo from '@/components/ui/FimLogo'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -39,36 +39,9 @@ export default function Navbar() {
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center flex-shrink-0">
-            {/* Usa /logo.png se disponibile, altrimenti logo SVG inline che rispecchia il brand */}
-            <Image
-              src="/logo.png"
-              alt="FIM Insurance Broker"
-              width={160}
-              height={48}
-              className="h-10 md:h-12 w-auto object-contain"
-              onError={(e) => {
-                // Fallback al logo testuale se logo.png non è presente
-                e.currentTarget.style.display = 'none'
-                const fallback = e.currentTarget.nextElementSibling as HTMLElement
-                if (fallback) fallback.style.display = 'flex'
-              }}
-              priority
-            />
-            {/* Fallback logo — nascosto se logo.png è disponibile */}
-            <div className="hidden items-center gap-2.5" aria-hidden="true">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl gradient-logo flex items-center justify-center shadow-sm flex-shrink-0">
-                <span className="text-white font-black text-sm md:text-base tracking-tight">FIM</span>
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-black text-primary text-base md:text-lg leading-tight tracking-tight">
-                  FIM Insurance
-                </div>
-                <div className="text-xs text-gray-500 leading-tight font-medium tracking-wide uppercase">
-                  Broker Assicurativo
-                </div>
-              </div>
-            </div>
+          <Link href="/" className="flex items-center flex-shrink-0" aria-label="FIM Insurance Broker — Home">
+            <FimLogo variant="full" theme="color" height={40} className="hidden sm:block" />
+            <FimLogo variant="icon" theme="color" height={36} className="sm:hidden" />
           </Link>
 
           {/* Desktop Nav */}
