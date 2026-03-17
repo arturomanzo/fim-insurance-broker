@@ -11,7 +11,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contattaci su WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#1ebe57] transition-all duration-200 hover:scale-105 group"
+      className="fixed bottom-6 right-[5.5rem] z-50 flex items-center gap-2 bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#1ebe57] transition-all duration-200 hover:scale-105 group"
     >
       {/* Label that slides in on hover */}
       <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap pl-0 group-hover:pl-4 text-sm font-semibold">
