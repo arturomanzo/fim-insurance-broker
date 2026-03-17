@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2d6b"/>
+      <stop offset="100%" stop-color="#00b4c8"/>
+    </linearGradient>
+  </defs>
+  <!-- Shield -->
+  <path d="M50 5 L90 22 L90 52 C90 74 72 88 50 95 C28 88 10 74 10 52 L10 22 Z" fill="url(#g)"/>
+  <!-- F shape -->
+  <path d="M32 28 L70 28 L62 37 L44 37 L44 47 L60 47 L53 55 L44 55 L44 72 L33 72 L33 28 Z" fill="white" opacity="0.95"/>
+  <!-- Arrow tip -->
+  <path d="M64 20 L82 38 L73 38 L73 27 L62 27 Z" fill="#33c7d8" opacity="0.9"/>
+</svg>

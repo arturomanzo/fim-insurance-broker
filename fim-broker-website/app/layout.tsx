@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
+
 export const metadata: Metadata = {
   title: {
     default: 'FIM Insurance Broker | Soluzioni Assicurative Personalizzate',
@@ -18,11 +20,18 @@ export const metadata: Metadata = {
     'assicurazione vita',
     'assicurazione azienda',
   ],
+  metadataBase: new URL(BASE_URL),
   openGraph: {
     type: 'website',
     locale: 'it_IT',
     siteName: 'FIM Insurance Broker',
+    url: BASE_URL,
   },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@fimbroker',
+  },
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({
