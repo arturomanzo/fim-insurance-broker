@@ -2119,7 +2119,7 @@ Tel: {brokerTel}</textarea>
         </div>
         <div class="form-group" id="inv_client_group" style="display:none;">
           <label>Cliente</label>
-          <select id="inv_cliente">
+          <select id="inv_cliente" onchange="autofillClienteInvoiceData()">
             <option value="">-- Seleziona --</option>
           </select>
         </div>
@@ -3042,363 +3042,1157 @@ Tel: {brokerTel}</textarea>
 
 <!-- TAB: ANALYTICS -->
 <div class="tab-content" id="tab-analytics">
-  <div id="analytics-root" style="min-height:80vh;background:#0B1F3A;color:#E8EDF5;font-family:'DM Sans','Segoe UI',sans-serif;border-radius:12px;overflow:hidden;position:relative;">
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+  <div id="analytics-react-root" style="min-height:80vh;border-radius:12px;overflow:hidden;"></div>
+  <!-- React + Recharts + Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js" crossorigin></script>
+  <script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+const { AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, ScatterChart, Scatter, ZAxis, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ComposedChart, ReferenceLine } = Recharts;
 
-      #analytics-root { background-image: radial-gradient(ellipse at 0% 0%, rgba(0,201,177,.07) 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, rgba(79,195,247,.05) 0%, transparent 50%); }
 
-      #analytics-root .an-header { background:rgba(18,45,86,0.72); border-bottom:1px solid rgba(0,201,177,0.18); padding:24px 32px; display:flex; justify-content:space-between; align-items:center; }
-      #analytics-root .an-title { font-size:24px; font-weight:700; font-family:'Syne',sans-serif; margin:0; }
-      #analytics-root .an-period-select { background:rgba(18,45,86,0.9); border:1px solid rgba(0,201,177,0.18); color:#E8EDF5; padding:8px 12px; border-radius:6px; font-size:14px; cursor:pointer; }
+/* ─── DESIGN TOKENS ────────────────────────────────────────────────────── */
+const T = {
+  bg:       "#0A0B0D",
+  surface:  "#111318",
+  raised:   "#181C24",
+  border:   "#242830",
+  borderHi: "#F5A623",
+  amber:    "#F5A623",
+  amberDim: "#B87A10",
+  cyan:     "#00D2FF",
+  red:      "#FF4757",
+  green:    "#2ED573",
+  violet:   "#9F7AEA",
+  text:     "#F0F2F7",
+  muted:    "#5A6170",
+  muted2:   "#3A4050",
+};
 
-      #analytics-root .an-sub-tabs { background:rgba(18,45,86,0.5); border-bottom:1px solid rgba(0,201,177,0.18); padding:0 32px; display:flex; gap:0; overflow-x:auto; }
-      #analytics-root .an-tab-btn { background:transparent; border:none; color:#7A8FAD; padding:11px 22px; cursor:pointer; font-family:inherit; font-size:14px; font-weight:400; transition:all .18s; border-bottom:3px solid transparent; display:flex; align-items:center; gap:8px; white-space:nowrap; }
-      #analytics-root .an-tab-btn.active { background:rgba(0,201,177,.12); border-bottom-color:#00C9B1; color:#00C9B1; font-weight:600; }
-      #analytics-root .an-tab-btn:hover { background:rgba(0,201,177,.08); }
+/* ─── FONTS ─────────────────────────────────────────────────────────────── */
+const FONTS = `
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;700&family=Barlow:wght@300;400;500;600;700&display=swap');
+`;
 
-      #analytics-root .an-content { padding:28px 32px; }
+/* ─── DATA GENERATORS ───────────────────────────────────────────────────── */
+const seed = (i) => Math.sin(i * 9301 + 49297) * 0.5 + 0.5;
 
-      #analytics-root .an-grid-2 { display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; margin-bottom:28px; }
-      #analytics-root .an-grid-3 { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; margin-bottom:28px; }
-      #analytics-root .an-grid-6 { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; margin-bottom:28px; }
+const MONTHS = ["GEN","FEB","MAR","APR","MAG","GIU","LUG","AGO","SET","OTT","NOV","DIC"];
 
-      #analytics-root .an-kpi-card { background:rgba(18,45,86,0.72); border:1px solid rgba(0,201,177,0.18); border-radius:14px; padding:20px 22px; cursor:default; transition:all .25s; }
-      #analytics-root .an-kpi-card:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,201,177,.18); border-color:#00C9B1; }
-      #analytics-root .an-kpi-label { font-size:11px; font-weight:600; color:#7A8FAD; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
-      #analytics-root .an-kpi-value { font-size:28px; font-weight:700; font-family:'Syne',sans-serif; color:#00C9B1; margin-bottom:8px; }
-      #analytics-root .an-kpi-change { font-size:12px; color:#7A8FAD; }
+const premiumData = MONTHS.map((m,i) => ({
+  m,
+  auto:   Math.round(38000 + seed(i)   * 18000),
+  vita:   Math.round(24000 + seed(i+5) * 12000),
+  rami:   Math.round(16000 + seed(i+9) * 9000),
+  target: 78000,
+})).map(r => ({ ...r, totale: r.auto + r.vita + r.rami }));
 
-      #analytics-root .an-chart-card { background:rgba(18,45,86,0.72); border:1px solid rgba(0,201,177,0.18); border-radius:14px; padding:20px 22px; margin-bottom:20px; }
-      #analytics-root .an-chart-title { font-size:14px; font-weight:600; color:#E8EDF5; margin-bottom:14px; }
+const sinistriData = MONTHS.map((m,i) => ({
+  m,
+  aperti:   Math.round(8  + seed(i+1)  * 12),
+  chiusi:   Math.round(6  + seed(i+3)  * 10),
+  riservati:Math.round(20000 + seed(i+7) * 40000),
+  lr:       +(0.45 + seed(i+2) * 0.25).toFixed(3),
+}));
 
-      #analytics-root .an-badge { padding:2px 10px; border-radius:20px; font-size:11px; font-weight:700; letter-spacing:.5px; display:inline-block; }
-      #analytics-root .an-badge-urgente { background:rgba(232,93,117,.25); color:#E85D75; }
-      #analytics-root .an-badge-prossimo { background:rgba(245,166,35,.2); color:#F5A623; }
-      #analytics-root .an-badge-intempo { background:rgba(0,201,177,.15); color:#00C9B1; }
-      #analytics-root .an-badge-basso { background:rgba(0,201,177,.15); color:#00C9B1; }
-      #analytics-root .an-badge-medio { background:rgba(245,166,35,.2); color:#F5A623; }
-      #analytics-root .an-badge-alto { background:rgba(232,93,117,.25); color:#E85D75; }
+const compagnieData = [
+  { name:"Generali",   premi:185000, sinistri:42, lr:61, quota:26, rating:88 },
+  { name:"Allianz",    premi:152000, sinistri:35, lr:58, quota:22, rating:92 },
+  { name:"UnipolSai",  premi:134000, sinistri:39, lr:63, quota:19, rating:79 },
+  { name:"AXA",        premi:98000,  sinistri:28, lr:55, quota:14, rating:86 },
+  { name:"Zurich",     premi:76000,  sinistri:19, lr:52, quota:11, rating:94 },
+  { name:"HDI",        premi:54000,  sinistri:14, lr:48, quota:8,  rating:81 },
+];
 
-      #analytics-root table { width:100%; border-collapse:collapse; font-size:13px; }
-      #analytics-root thead tr { border-bottom:1px solid rgba(0,201,177,0.18); }
-      #analytics-root th { text-align:left; padding:8px 12px; color:#7A8FAD; font-weight:500; font-size:12px; text-transform:uppercase; letter-spacing:.5px; }
-      #analytics-root tbody tr { border-bottom:1px solid rgba(255,255,255,.04); }
-      #analytics-root tbody tr:hover td { background:rgba(0,201,177,.06); }
-      #analytics-root td { padding:9px 12px; }
+const portfolioMix = [
+  { name:"Auto & Moto",         v:38, color:T.amber  },
+  { name:"Vita & Previdenza",   v:24, color:T.cyan   },
+  { name:"Rami Elementari",     v:18, color:T.green  },
+  { name:"Infortuni & Malattia",v:12, color:T.violet },
+  { name:"RC Professionale",    v:8,  color:T.red    },
+];
 
-      #analytics-root .an-progress { height:6px; border-radius:3px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:4px; }
-      #analytics-root .an-progress-fill { height:100%; border-radius:3px; transition:width .6s ease; background:#00C9B1; }
+const radarData = [
+  { kpi:"Rinnovi",    fim:82, target:75 },
+  { kpi:"NPS",        fim:91, target:80 },
+  { kpi:"Loss Ratio", fim:74, target:70 },
+  { kpi:"Sinistri",   fim:65, target:68 },
+  { kpi:"Cross-sell", fim:88, target:60 },
+  { kpi:"Digital",    fim:94, target:65 },
+];
 
-      #analytics-root .an-filter-select { background:rgba(18,45,86,0.9); border:1px solid rgba(0,201,177,0.18); color:#E8EDF5; padding:8px 12px; border-radius:6px; font-size:13px; cursor:pointer; margin-bottom:20px; }
+const scadenzeData = [
+  { polizza:"Fleet Auto TechItalia Srl",     giorni:6,  premio:4200,  compagnia:"Generali",  tipo:"Auto",  rischio:"high"   },
+  { polizza:"RC Professionale Studio Rossi", giorni:14, premio:1800,  compagnia:"Allianz",   tipo:"RC",    rischio:"medium" },
+  { polizza:"Incendio Magazzino Logistica",  giorni:22, premio:3600,  compagnia:"Zurich",    tipo:"Rami",  rischio:"medium" },
+  { polizza:"Infortuni Farmacia Centrale",   giorni:31, premio:920,   compagnia:"UnipolSai", tipo:"Infort",rischio:"low"    },
+  { polizza:"Multirischio Costruzioni Verdi",giorni:38, premio:2140,  compagnia:"HDI",       tipo:"Multi", rischio:"low"    },
+  { polizza:"Vita Collettiva TechItalia",    giorni:45, premio:5800,  compagnia:"Generali",  tipo:"Vita",  rischio:"low"    },
+];
 
-      #analytics-root .an-company-card { background:rgba(18,45,86,0.72); border:1px solid rgba(0,201,177,0.18); border-radius:12px; padding:16px 18px; }
-      #analytics-root .an-company-name { font-weight:600; font-size:14px; margin-bottom:8px; }
-      #analytics-root .an-company-stat { font-size:12px; color:#7A8FAD; margin-bottom:4px; }
-      #analytics-root .an-company-stat-val { color:#00C9B1; font-weight:600; }
+const clientiData = [
+  { name:"TechItalia Srl",        premi:24800, polizze:7, segmento:"Corporate", lr:48, churn:4  },
+  { name:"Logistica Express Spa", premi:19200, polizze:5, segmento:"Corporate", lr:61, churn:12 },
+  { name:"Studio Arch. Rossi",    premi:12400, polizze:3, segmento:"PMI",       lr:35, churn:7  },
+  { name:"Farmacia Centrale",     premi:9800,  polizze:4, segmento:"PMI",       lr:52, churn:5  },
+  { name:"Costruzioni Verdi Srl", premi:8600,  polizze:6, segmento:"Corporate", lr:78, churn:21 },
+  { name:"Rossini & Partners",    premi:7200,  polizze:3, segmento:"PMI",       lr:41, churn:6  },
+];
 
-      #analytics-root .an-footer { border-top:1px solid rgba(0,201,177,0.18); padding:20px 32px; text-align:center; font-size:12px; color:#7A8FAD; }
+const activityFeed = [
+  { time:"09:41", event:"Polizza rinnovata",     detail:"Fleet Auto TechItalia — €4.200",   type:"success" },
+  { time:"09:28", event:"Sinistro aperto",        detail:"Auto — UnipolSai — Targa DX432GH",  type:"warning" },
+  { time:"08:55", event:"Nuova polizza emessa",   detail:"RC Professionale Studio Rossi",     type:"info"    },
+  { time:"08:30", event:"Scadenza imminente",     detail:"Incendio Magazzino — 22 giorni",    type:"warning" },
+  { time:"Ieri",  event:"Sinistro chiuso",        detail:"Infortuni — Liquidato €3.800",      type:"success" },
+  { time:"Ieri",  event:"Cliente acquisito",      detail:"Rossini & Partners — 3 polizze",    type:"info"    },
+];
 
-      @keyframes anFadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-      #analytics-root .an-fade { animation: anFadeUp .4s ease; }
+/* ─── HELPERS ───────────────────────────────────────────────────────────── */
+const fmt  = n => "€ " + Number(n).toLocaleString("it-IT");
+const fmtK = n => "€ " + (n/1000).toFixed(0) + "k";
 
-      @media (max-width:1200px) {
-        #analytics-root .an-grid-6 { grid-template-columns:repeat(2, 1fr); }
-      }
-      @media (max-width:768px) {
-        #analytics-root .an-grid-2,
-        #analytics-root .an-grid-3,
-        #analytics-root .an-grid-6 { grid-template-columns:1fr; }
-      }
-    </style>
-
-    <!-- Header -->
-    <div class="an-header">
-      <h1 class="an-title">📊 FIM Analytics</h1>
-      <select id="analytics-period" class="an-period-select" onchange="initAnalytics()">
-        <option value="2024">2024</option>
-        <option value="2025" selected>2025</option>
-        <option value="2026">2026</option>
-      </select>
-    </div>
-
-    <!-- Sub-tabs navigation -->
-    <div class="an-sub-tabs">
-      <button class="an-tab-btn active" onclick="switchAnalyticsTab('overview')">📈 Overview</button>
-      <button class="an-tab-btn" onclick="switchAnalyticsTab('premi')">💵 Premi</button>
-      <button class="an-tab-btn" onclick="switchAnalyticsTab('sinistri')">⚠️ Sinistri</button>
-      <button class="an-tab-btn" onclick="switchAnalyticsTab('compagnie')">🏢 Compagnie</button>
-      <button class="an-tab-btn" onclick="switchAnalyticsTab('clienti')">👤 Clienti</button>
-      <button class="an-tab-btn" onclick="switchAnalyticsTab('scadenze')">📅 Scadenze</button>
-    </div>
-
-    <!-- Content -->
-    <div id="analytics-content" class="an-content">
-
-      <!-- OVERVIEW TAB -->
-      <div id="an-overview" class="an-fade">
-        <div class="an-grid-6">
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Premi Totali YTD</div>
-            <div class="an-kpi-value" id="kpi-premi-ytd">€ 0</div>
-            <div class="an-kpi-change">+12.5% vs anno scorso</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Polizze Attive</div>
-            <div class="an-kpi-value" id="kpi-polizze-attive">0</div>
-            <div class="an-kpi-change">+8.2% vs anno scorso</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Sinistri Aperti</div>
-            <div class="an-kpi-value" id="kpi-sinistri-aperti">0</div>
-            <div class="an-kpi-change">-3.1% vs anno scorso</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Clienti Totali</div>
-            <div class="an-kpi-value" id="kpi-clienti-totali">0</div>
-            <div class="an-kpi-change">+5.6% vs anno scorso</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Scadenze 14gg</div>
-            <div class="an-kpi-value" id="kpi-scadenze-14">0</div>
-            <div class="an-kpi-change">Urgenti</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Scadenze 30gg</div>
-            <div class="an-kpi-value" id="kpi-scadenze-30">0</div>
-            <div class="an-kpi-change">In follow-up</div>
-          </div>
-        </div>
-
-        <div class="an-grid-2">
-          <div class="an-chart-card">
-            <div class="an-chart-title">Premi per Ramo (YTD)</div>
-            <canvas id="an-chart-premi-area" height="300"></canvas>
-          </div>
-          <div class="an-chart-card">
-            <div class="an-chart-title">Mix Portafoglio</div>
-            <canvas id="an-chart-portafoglio-pie" height="300"></canvas>
-          </div>
-        </div>
-
-        <div class="an-grid-2">
-          <div class="an-chart-card">
-            <div class="an-chart-title">FIM vs Mercato (Benchmark)</div>
-            <canvas id="an-chart-benchmark-radar" height="300"></canvas>
-          </div>
-          <div class="an-chart-card">
-            <div class="an-chart-title">Sinistri Aperti vs Chiusi</div>
-            <canvas id="an-chart-sinistri-bar" height="300"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- PREMI TAB -->
-      <div id="an-premi" style="display:none;" class="an-fade">
-        <div class="an-grid-3">
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Premi Totali YTD</div>
-            <div class="an-kpi-value" id="kpi-premi-ytd2">€ 0</div>
-            <div class="an-kpi-change">Media/mese: <span id="kpi-premi-media">€ 0</span></div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Premi Mese Corrente</div>
-            <div class="an-kpi-value" id="kpi-premi-mese">€ 0</div>
-            <div class="an-kpi-change">Incassati</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Polizze Attive</div>
-            <div class="an-kpi-value" id="kpi-polizze-premi">0</div>
-            <div class="an-kpi-change">In portafoglio</div>
-          </div>
-        </div>
-
-        <div class="an-chart-card">
-          <div class="an-chart-title">Premi Mensili per Ramo</div>
-          <canvas id="an-chart-premi-stacked" height="350"></canvas>
-        </div>
-
-        <div class="an-chart-card">
-          <div class="an-chart-title">Dettaglio Premi</div>
-          <table>
-            <thead>
-              <tr>
-                <th>Mese</th>
-                <th>Auto</th>
-                <th>Vita</th>
-                <th>Rami Generali</th>
-                <th>Totale</th>
-              </tr>
-            </thead>
-            <tbody id="premi-detail-tbody">
-              <tr><td colspan="5" style="text-align:center;color:#7A8FAD;">Caricamento...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- SINISTRI TAB -->
-      <div id="an-sinistri" style="display:none;" class="an-fade">
-        <div class="an-grid-3">
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Sinistri Aperti</div>
-            <div class="an-kpi-value" id="kpi-sin-aperti">0</div>
-            <div class="an-kpi-change">In gestione</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Sinistri Chiusi YTD</div>
-            <div class="an-kpi-value" id="kpi-sin-chiusi">0</div>
-            <div class="an-kpi-change">Risolti</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Loss Ratio</div>
-            <div class="an-kpi-value" id="kpi-sin-lr">0%</div>
-            <div class="an-kpi-change">Frequenza sinistri</div>
-          </div>
-        </div>
-
-        <div class="an-chart-card">
-          <div class="an-chart-title">Sinistri per Ramo</div>
-          <canvas id="an-chart-sinistri-horizontal" height="280"></canvas>
-        </div>
-
-        <div class="an-chart-card">
-          <div class="an-chart-title">Dettaglio Sinistri</div>
-          <table>
-            <thead>
-              <tr>
-                <th>Numero</th>
-                <th>Polizza</th>
-                <th>Compagnia</th>
-                <th>Data</th>
-                <th>Importo</th>
-                <th>Stato</th>
-              </tr>
-            </thead>
-            <tbody id="sinistri-detail-tbody">
-              <tr><td colspan="6" style="text-align:center;color:#7A8FAD;">Caricamento...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- COMPAGNIE TAB -->
-      <div id="an-compagnie" style="display:none;" class="an-fade">
-        <div style="margin-bottom:20px;">
-          <select id="compagnie-filter" class="an-filter-select" onchange="renderAnalyticsCharts('compagnie')">
-            <option value="all">Tutte le Compagnie</option>
-            <option value="top5">Top 5</option>
-            <option value="low5">Basso Volume</option>
-          </select>
-        </div>
-
-        <div class="an-grid-3" id="compagnie-cards">
-          <!-- populated by JS -->
-        </div>
-
-        <div class="an-chart-card">
-          <div class="an-chart-title">Premi vs Sinistri per Compagnia</div>
-          <canvas id="an-chart-compagnie-grouped" height="350"></canvas>
-        </div>
-      </div>
-
-      <!-- CLIENTI TAB -->
-      <div id="an-clienti" style="display:none;" class="an-fade">
-        <div class="an-grid-3">
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Clienti Totali</div>
-            <div class="an-kpi-value" id="kpi-cli-totali">0</div>
-            <div class="an-kpi-change">In portafoglio</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Polizze/Cliente</div>
-            <div class="an-kpi-value" id="kpi-cli-media">0</div>
-            <div class="an-kpi-change">Media</div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label">Premium Client (>5 pol)</div>
-            <div class="an-kpi-value" id="kpi-cli-premium">0</div>
-            <div class="an-kpi-change">Clienti VIP</div>
-          </div>
-        </div>
-
-        <div class="an-grid-2">
-          <div class="an-chart-card">
-            <div class="an-chart-title">Top 10 Clienti</div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Cliente</th>
-                  <th>Polizze</th>
-                  <th>Premi Totali</th>
-                  <th>Rinnovo</th>
-                </tr>
-              </thead>
-              <tbody id="clienti-top-tbody">
-                <tr><td colspan="4" style="text-align:center;color:#7A8FAD;">Caricamento...</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="an-chart-card">
-            <div class="an-chart-title">Distribuzione Polizze</div>
-            <canvas id="an-chart-clienti-pie" height="300"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- SCADENZE TAB -->
-      <div id="an-scadenze" style="display:none;" class="an-fade">
-        <div class="an-grid-3">
-          <div class="an-kpi-card">
-            <div class="an-kpi-label" style="color:#E85D75;">Scadenze 0-14gg</div>
-            <div class="an-kpi-value" id="kpi-scad-urgente">0</div>
-            <div class="an-progress"><div class="an-progress-fill" id="prog-urgente" style="width:0%;background:#E85D75;"></div></div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label" style="color:#F5A623;">Scadenze 15-30gg</div>
-            <div class="an-kpi-value" id="kpi-scad-prossimo">0</div>
-            <div class="an-progress"><div class="an-progress-fill" id="prog-prossimo" style="width:0%;background:#F5A623;"></div></div>
-          </div>
-          <div class="an-kpi-card">
-            <div class="an-kpi-label" style="color:#00C9B1;">Scadenze 31-60gg</div>
-            <div class="an-kpi-value" id="kpi-scad-intempo">0</div>
-            <div class="an-progress"><div class="an-progress-fill" id="prog-intempo" style="width:0%;background:#00C9B1;"></div></div>
-          </div>
-        </div>
-
-        <div class="an-chart-card">
-          <div class="an-chart-title">Scadenze Prossime 60 Giorni</div>
-          <table>
-            <thead>
-              <tr>
-                <th>Polizza</th>
-                <th>Cliente</th>
-                <th>Data</th>
-                <th>Giorni</th>
-                <th>Premio</th>
-                <th>Stato</th>
-              </tr>
-            </thead>
-            <tbody id="scadenze-table-tbody">
-              <tr><td colspan="6" style="text-align:center;color:#7A8FAD;">Caricamento...</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="an-chart-card">
-          <div class="an-chart-title">Premi Scadenti per Settimana</div>
-          <canvas id="an-chart-scadenze-bar" height="280"></canvas>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="an-footer">
-      FIM Insurance Broker S.A.S. — IVASS B000405449 | Dati aggiornati in tempo reale
-    </div>
+const RiskBar = ({ value, max = 100, color }) => (
+  <div style={{ height: 4, background: T.muted2, borderRadius: 2, overflow: "hidden" }}>
+    <div style={{ height: "100%", width: `${(value/max)*100}%`, background: color, borderRadius: 2, transition: "width 1s ease" }} />
   </div>
+);
+
+const Chip = ({ label, color }) => (
+  <span style={{ background: color + "22", color, border: `1px solid ${color}44`, borderRadius: 4, padding: "2px 8px", fontSize: 10, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, letterSpacing: 1 }}>
+    {label}
+  </span>
+);
+
+const StatDelta = ({ delta, suffix = "%" }) => {
+  const pos = parseFloat(delta) >= 0;
+  return (
+    <span style={{ color: pos ? T.green : T.red, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, fontWeight: 700 }}>
+      {pos ? "▲" : "▼"} {Math.abs(delta)}{suffix}
+    </span>
+  );
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{ background: "#1A1F2E", border: `1px solid ${T.border}`, borderRadius: 8, padding: "10px 16px", fontFamily: "'Barlow', sans-serif", fontSize: 12 }}>
+      <p style={{ color: T.amber, fontWeight: 700, marginBottom: 6, fontFamily: "'JetBrains Mono', monospace", fontSize: 11 }}>{label}</p>
+      {payload.map((p, i) => (
+        <p key={i} style={{ color: p.color || T.text, margin: "3px 0" }}>
+          {p.name}: <strong>{typeof p.value === "number" && p.value > 1000 ? fmt(p.value) : p.value}</strong>
+        </p>
+      ))}
+    </div>
+  );
+};
+
+/* ─── ANIMATED COUNTER ──────────────────────────────────────────────────── */
+function AnimCounter({ target, prefix = "", suffix = "", decimals = 0, duration = 1400 }) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      setVal(parseFloat((ease * target).toFixed(decimals)));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [target]);
+  const disp = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toLocaleString("it-IT");
+  return <span>{prefix}{disp}{suffix}</span>;
+}
+
+/* ─── SPARKLINE ─────────────────────────────────────────────────────────── */
+function Sparkline({ data, color, height = 40 }) {
+  const max = Math.max(...data), min = Math.min(...data);
+  const pts = data.map((v, i) => {
+    const x = (i / (data.length - 1)) * 100;
+    const y = height - ((v - min) / (max - min || 1)) * height;
+    return `${x},${y}`;
+  }).join(" ");
+  return (
+    <svg viewBox={`0 0 100 ${height}`} preserveAspectRatio="none" style={{ width: "100%", height }}>
+      <polyline points={pts} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+      <polyline points={`0,${height} ${pts} 100,${height}`} fill={color} fillOpacity="0.08" />
+    </svg>
+  );
+}
+
+/* ─── GAUGE ─────────────────────────────────────────────────────────────── */
+function Gauge({ value, max = 100, label, color }) {
+  const pct = value / max;
+  const r = 42, cx = 60, cy = 55;
+  const circumference = Math.PI * r;
+  const strokeDash = circumference * pct;
+  return (
+    <svg viewBox="0 0 120 70" style={{ width: "100%", maxWidth: 160 }}>
+      <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`} fill="none" stroke={T.muted2} strokeWidth="8" strokeLinecap="round" />
+      <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`} fill="none" stroke={color} strokeWidth="8" strokeLinecap="round"
+        strokeDasharray={`${strokeDash} ${circumference}`} style={{ transition: "stroke-dasharray 1.2s ease" }} />
+      <text x={cx} y={cy - 6} textAnchor="middle" fill={color} fontSize="16" fontWeight="700" fontFamily="'Bebas Neue', sans-serif">{value}%</text>
+      <text x={cx} y={cy + 8} textAnchor="middle" fill={T.muted} fontSize="7" fontFamily="'Barlow', sans-serif">{label}</text>
+    </svg>
+  );
+}
+
+/* ─── HEATMAP ───────────────────────────────────────────────────────────── */
+const DAYS = ["Lun","Mar","Mer","Gio","Ven"];
+const HOURS = ["8h","10h","12h","14h","16h","18h"];
+const heatData = DAYS.map(d => HOURS.map(h => ({ d, h, v: Math.round(Math.random() * 40 + 5) })));
+
+function Heatmap() {
+  const [hov, setHov] = useState(null);
+  return (
+    <div>
+      <div style={{ display: "grid", gridTemplateColumns: `28px repeat(${HOURS.length}, 1fr)`, gap: 3 }}>
+        <div/>
+        {HOURS.map(h => <div key={h} style={{ fontSize: 9, color: T.muted, textAlign: "center", fontFamily: "'JetBrains Mono', monospace" }}>{h}</div>)}
+        {DAYS.map((d, di) => [
+          <div key={d} style={{ fontSize: 9, color: T.muted, display: "flex", alignItems: "center", fontFamily: "'JetBrains Mono', monospace" }}>{d}</div>,
+          ...HOURS.map((h, hi) => {
+            const cell = heatData[di][hi];
+            const intensity = cell.v / 45;
+            const key = `${di}-${hi}`;
+            return (
+              <div key={key}
+                onMouseEnter={() => setHov({ ...cell, key })}
+                onMouseLeave={() => setHov(null)}
+                style={{
+                  height: 22, borderRadius: 4, cursor: "crosshair",
+                  background: `rgba(245,166,35,${0.05 + intensity * 0.85})`,
+                  border: hov?.key === key ? `1px solid ${T.amber}` : "1px solid transparent",
+                  transition: "all .15s",
+                  position: "relative",
+                }}
+              />
+            );
+          })
+        ])}
+      </div>
+      {hov && (
+        <div style={{ marginTop: 8, fontSize: 11, color: T.amber, fontFamily: "'JetBrains Mono', monospace" }}>
+          {hov.d} {hov.h} — <span style={{ color: T.text }}>{hov.v} interazioni</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── MAIN DASHBOARD ────────────────────────────────────────────────────── */
+function FIMDashboard() {
+  const [view, setView]         = useState("overview");
+  const [period, setPeriod]     = useState("2025");
+  const [sideOpen, setSideOpen] = useState(true);
+  const [search, setSearch]     = useState("");
+  const [sortCol, setSortCol]   = useState("premi");
+  const [sortDir, setSortDir]   = useState("desc");
+  const [filter, setFilter]     = useState("tutti");
+  const [live, setLive]         = useState(true);
+  const [liveVal, setLiveVal]   = useState(699000);
+  const [pulse, setPulse]       = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedComp, setSelectedComp] = useState(null);
+  const [chartType, setChartType] = useState("area");
+  const [showTarget, setShowTarget] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setTimeout(() => setMounted(true), 80); }, []);
+
+  // Live ticker
+  useEffect(() => {
+    if (!live) return;
+    const id = setInterval(() => {
+      setLiveVal(v => v + Math.round((Math.random() - 0.3) * 500));
+      setPulse(true);
+      setTimeout(() => setPulse(false), 600);
+    }, 3000);
+    return () => clearInterval(id);
+  }, [live]);
+
+  const sortedClienti = [...clientiData]
+    .filter(c => filter === "tutti" || c.segmento.toLowerCase() === filter)
+    .filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => sortDir === "desc" ? b[sortCol] - a[sortCol] : a[sortCol] - b[sortCol]);
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "desc" ? "asc" : "desc");
+    else { setSortCol(col); setSortDir("desc"); }
+  };
+
+  const NAVS = [
+    { id:"overview",  icon:"◈", label:"Overview"   },
+    { id:"premi",     icon:"◆", label:"Premi"       },
+    { id:"sinistri",  icon:"◇", label:"Sinistri"    },
+    { id:"compagnie", icon:"▣", label:"Compagnie"   },
+    { id:"clienti",   icon:"◉", label:"Clienti"     },
+    { id:"scadenze",  icon:"◷", label:"Scadenze"    },
+    { id:"attivita",  icon:"◌", label:"Attività"    },
+  ];
+
+  /* styles */
+  const card = (extra = {}) => ({
+    background: T.surface, border: `1px solid ${T.border}`,
+    borderRadius: 10, padding: "20px 22px", ...extra,
+  });
+
+  const btn = (active, color = T.amber) => ({
+    padding: "5px 14px", borderRadius: 5, fontSize: 11, cursor: "pointer",
+    fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, letterSpacing: 1, border: "none",
+    background: active ? color : "transparent",
+    color: active ? T.bg : T.muted,
+    outline: active ? "none" : `1px solid ${T.muted2}`,
+    transition: "all .18s",
+  });
+
+  return (
+    <div style={{ minHeight: "100vh", background: T.bg, color: T.text, fontFamily: "'Barlow', sans-serif", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+      <style>{`
+        ${FONTS}
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #2A303C; border-radius: 2px; }
+        @keyframes fadeUp   { from { opacity:0; transform:translateY(14px) } to { opacity:1; transform:translateY(0) } }
+        @keyframes fadeIn   { from { opacity:0 } to { opacity:1 } }
+        @keyframes scanline { 0%{top:-10%} 100%{top:110%} }
+        @keyframes blink    { 0%,100%{opacity:1} 50%{opacity:0} }
+        @keyframes glow     { 0%,100%{box-shadow:0 0 8px ${T.amber}44} 50%{box-shadow:0 0 20px ${T.amber}88} }
+        .nav-item:hover { background: rgba(245,166,35,.08) !important; color: ${T.text} !important; }
+        .row-h:hover td { background: rgba(245,166,35,.04) !important; }
+        .kcard:hover { border-color: ${T.amber}66 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,166,35,.1); }
+        .comp-card:hover { border-color: ${T.amber} !important; cursor: pointer; }
+        .th-sort:hover { color: ${T.amber} !important; cursor: pointer; }
+        input::placeholder { color: ${T.muted2}; }
+        select option { background: #1A1F2E; color: ${T.text}; }
+      `}</style>
+
+      {/* ── TOP BAR ── */}
+      <header style={{
+        height: 52, display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "0 20px", borderBottom: `1px solid ${T.border}`,
+        background: "rgba(10,11,13,.97)", backdropFilter: "blur(12px)",
+        position: "sticky", top: 0, zIndex: 200, gap: 16,
+      }}>
+        {/* left */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <button onClick={() => setSideOpen(o => !o)} style={{ background: "none", border: "none", color: T.muted, cursor: "pointer", fontSize: 16, lineHeight: 1 }}>☰</button>
+          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, letterSpacing: 3, color: T.text }}>
+            FIM <span style={{ color: T.amber }}>ANALYTICS</span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: T.muted, marginLeft: 10, letterSpacing: 2 }}>v2.0</span>
+          </div>
+          {/* live indicator */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginLeft: 8 }}>
+            <div style={{
+              width: 7, height: 7, borderRadius: "50%",
+              background: live ? T.green : T.muted,
+              animation: live ? "glow 2s infinite" : "none",
+            }} />
+            <button onClick={() => setLive(l => !l)} style={{ background: "none", border: "none", color: live ? T.green : T.muted, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, cursor: "pointer", letterSpacing: 1 }}>
+              {live ? "LIVE" : "PAUSA"}
+            </button>
+          </div>
+        </div>
+
+        {/* center — live premi ticker */}
+        <div style={{ textAlign: "center", transition: "all .3s" }}>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: T.muted, letterSpacing: 2, marginBottom: 1 }}>PREMI YTD</div>
+          <div style={{
+            fontFamily: "'Bebas Neue', sans-serif", fontSize: 26, letterSpacing: 2,
+            color: pulse ? T.amber : T.text, transition: "color .4s",
+          }}>
+            € {liveVal.toLocaleString("it-IT")}
+          </div>
+        </div>
+
+        {/* right */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <input value={search} onChange={e => setSearch(e.target.value)}
+            placeholder="Cerca…"
+            style={{ background: T.raised, border: `1px solid ${T.border}`, borderRadius: 6, padding: "6px 12px", color: T.text, fontSize: 12, width: 180, outline: "none", fontFamily: "'Barlow', sans-serif" }} />
+          <div style={{ display: "flex", gap: 4 }}>
+            {["2024", "2025", "2026"].map(y => (
+              <button key={y} onClick={() => setPeriod(y)} style={btn(period === y)}>{y}</button>
+            ))}
+          </div>
+          <button onClick={() => setDrawerOpen(o => !o)} style={{ background: T.raised, border: `1px solid ${T.border}`, borderRadius: 6, padding: "6px 10px", color: T.muted, cursor: "pointer", fontSize: 14 }}>🔔</button>
+          <div style={{ width: 32, height: 32, borderRadius: "50%", background: `linear-gradient(135deg, ${T.amber}, ${T.amberDim})`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Bebas Neue', sans-serif", fontSize: 14, color: T.bg, letterSpacing: 1 }}>AM</div>
+        </div>
+      </header>
+
+      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+
+        {/* ── SIDEBAR ── */}
+        <aside style={{
+          width: sideOpen ? 200 : 0, minWidth: sideOpen ? 200 : 0, overflow: "hidden",
+          background: T.surface, borderRight: `1px solid ${T.border}`,
+          display: "flex", flexDirection: "column",
+          transition: "all .25s ease",
+        }}>
+          <div style={{ padding: "16px 0", flex: 1 }}>
+            {NAVS.map((n, i) => (
+              <button key={n.id} className="nav-item" onClick={() => setView(n.id)} style={{
+                display: "flex", alignItems: "center", gap: 12, width: "100%", padding: "10px 18px",
+                background: view === n.id ? `rgba(245,166,35,.1)` : "transparent",
+                border: "none", borderLeft: view === n.id ? `2px solid ${T.amber}` : "2px solid transparent",
+                color: view === n.id ? T.amber : T.muted,
+                fontFamily: "'Barlow', sans-serif", fontSize: 13, fontWeight: view === n.id ? 600 : 400,
+                cursor: "pointer", textAlign: "left", transition: "all .15s",
+                animation: `fadeUp .3s ease ${i * 0.04}s both`,
+              }}>
+                <span style={{ fontFamily: "monospace", fontSize: 16 }}>{n.icon}</span>
+                {n.label}
+              </button>
+            ))}
+          </div>
+          <div style={{ padding: "14px 18px", borderTop: `1px solid ${T.border}` }}>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: T.muted, letterSpacing: 1.5, marginBottom: 4 }}>IVASS REG.</div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: T.amber }}>B000405449</div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: T.muted, marginTop: 8 }}>CISTERNA DI LATINA</div>
+          </div>
+        </aside>
+
+        {/* ── MAIN ── */}
+        <main style={{ flex: 1, overflowY: "auto", padding: "24px 28px", position: "relative" }}>
+
+          {/* ─── OVERVIEW ─────────────────────────────────────────── */}
+          {view === "overview" && (
+            <div style={{ animation: "fadeUp .35s ease" }}>
+              {/* page title */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 22 }}>
+                <div>
+                  <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 38, letterSpacing: 3, lineHeight: 1 }}>
+                    OVERVIEW <span style={{ color: T.amber }}>{period}</span>
+                  </h1>
+                  <p style={{ color: T.muted, fontSize: 12, fontFamily: "'JetBrains Mono', monospace", marginTop: 2 }}>
+                    FIM INSURANCE BROKER S.A.S. — AGG. {new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" })}
+                  </p>
+                </div>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <button style={btn(true, T.amber)}>↓ ESPORTA</button>
+                  <button style={btn(false)}>⚙ CONFIG</button>
+                </div>
+              </div>
+
+              {/* KPI strip */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 12, marginBottom: 20 }}>
+                {[
+                  { label:"PREMI YTD",     val:699,   suffix:"k€", delta:12.4, spark: premiumData.map(r => r.totale), color:T.amber  },
+                  { label:"POLIZZE",       val:1847,  suffix:"",   delta:4.9,  spark: [1720,1740,1768,1791,1810,1831,1847], color:T.cyan   },
+                  { label:"SIN. APERTI",   val:34,    suffix:"",   delta:-19,  spark: [54,49,43,41,38,36,34], color:T.red    },
+                  { label:"RINNOVI",       val:82.3,  suffix:"%",  delta:3.1,  spark: [76,77,78,79,80,81,82.3], color:T.green  },
+                  { label:"LOSS RATIO",    val:57.8,  suffix:"%",  delta:-2.4, spark: [63,61,60,59,58.5,58,57.8], color:T.violet },
+                  { label:"NPS",           val:74,    suffix:"",   delta:8.8,  spark: [62,65,67,69,71,73,74], color:T.amber  },
+                ].map((k, i) => (
+                  <div key={i} className="kcard" style={{ ...card(), transition: "all .2s", cursor: "default", animation: `fadeUp .35s ease ${i * 0.06}s both` }}>
+                    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: T.muted, letterSpacing: 1.5, marginBottom: 6 }}>{k.label}</div>
+                    <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, color: k.color, letterSpacing: 1, lineHeight: 1 }}>
+                      <AnimCounter target={k.val} suffix={k.suffix} decimals={k.suffix === "%" || k.suffix === "k€" ? 1 : 0} />
+                    </div>
+                    <div style={{ margin: "8px 0" }}>
+                      <Sparkline data={k.spark} color={k.color} height={30} />
+                    </div>
+                    <StatDelta delta={k.delta} suffix={k.suffix === "%" ? "pp" : "%"} />
+                  </div>
+                ))}
+              </div>
+
+              {/* main charts */}
+              <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16, marginBottom: 16 }}>
+                {/* area chart */}
+                <div style={card()}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                    <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, letterSpacing: 2 }}>ANDAMENTO PREMI <span style={{ color: T.amber }}>{period}</span></div>
+                    <div style={{ display: "flex", gap: 6 }}>
+                      {["area","bar","line"].map(t => (
+                        <button key={t} onClick={() => setChartType(t)} style={btn(chartType === t)}>
+                          {t === "area" ? "▲" : t === "bar" ? "▬" : "—"} {t.toUpperCase()}
+                        </button>
+                      ))}
+                      <button onClick={() => setShowTarget(s => !s)} style={btn(showTarget, T.cyan)}>TARGET</button>
+                    </div>
+                  </div>
+                  <ResponsiveContainer width="100%" height={230}>
+                    {chartType === "bar" ? (
+                      <BarChart data={premiumData} barGap={2}>
+                        <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                        <XAxis dataKey="m" tick={{ fill: T.muted, fontSize: 10, fontFamily: "'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} />
+                        <YAxis tick={{ fill: T.muted, fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={fmtK} />
+                        <Tooltip content={<CustomTooltip />} />
+                        {showTarget && <ReferenceLine y={78000} stroke={T.amber} strokeDasharray="6 3" label={{ value: "TARGET", fill: T.amber, fontSize: 9, fontFamily: "'JetBrains Mono', monospace" }} />}
+                        <Bar dataKey="auto" name="Auto" stackId="s" fill={T.amber} />
+                        <Bar dataKey="vita" name="Vita" stackId="s" fill={T.cyan} />
+                        <Bar dataKey="rami" name="Rami El." stackId="s" fill={T.violet} radius={[3, 3, 0, 0]} />
+                      </BarChart>
+                    ) : chartType === "line" ? (
+                      <LineChart data={premiumData}>
+                        <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                        <XAxis dataKey="m" tick={{ fill: T.muted, fontSize: 10, fontFamily: "'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} />
+                        <YAxis tick={{ fill: T.muted, fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={fmtK} />
+                        <Tooltip content={<CustomTooltip />} />
+                        {showTarget && <ReferenceLine y={78000} stroke={T.amber} strokeDasharray="6 3" />}
+                        <Line type="monotone" dataKey="auto" name="Auto" stroke={T.amber} strokeWidth={2} dot={{ r: 3, fill: T.amber }} />
+                        <Line type="monotone" dataKey="vita" name="Vita" stroke={T.cyan} strokeWidth={2} dot={{ r: 3, fill: T.cyan }} />
+                        <Line type="monotone" dataKey="rami" name="Rami El." stroke={T.violet} strokeWidth={2} dot={false} />
+                        <Line type="monotone" dataKey="totale" name="Totale" stroke={T.green} strokeWidth={2.5} strokeDasharray="8 3" dot={false} />
+                      </LineChart>
+                    ) : (
+                      <AreaChart data={premiumData}>
+                        <defs>
+                          {[["ga",T.amber],["gb",T.cyan],["gc",T.violet]].map(([id,col]) => (
+                            <linearGradient key={id} id={id} x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor={col} stopOpacity={0.22} />
+                              <stop offset="95%" stopColor={col} stopOpacity={0} />
+                            </linearGradient>
+                          ))}
+                        </defs>
+                        <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                        <XAxis dataKey="m" tick={{ fill: T.muted, fontSize: 10, fontFamily: "'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} />
+                        <YAxis tick={{ fill: T.muted, fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={fmtK} />
+                        <Tooltip content={<CustomTooltip />} />
+                        {showTarget && <ReferenceLine y={78000} stroke={T.amber} strokeDasharray="6 3" label={{ value: "TARGET", fill: T.amber, fontSize: 9 }} />}
+                        <Area type="monotone" dataKey="auto" name="Auto" stroke={T.amber} fill="url(#ga)" strokeWidth={2} />
+                        <Area type="monotone" dataKey="vita" name="Vita" stroke={T.cyan} fill="url(#gb)" strokeWidth={2} />
+                        <Area type="monotone" dataKey="rami" name="Rami El." stroke={T.violet} fill="url(#gc)" strokeWidth={2} />
+                      </AreaChart>
+                    )}
+                  </ResponsiveContainer>
+                </div>
+
+                {/* mix portafoglio */}
+                <div style={card()}>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, letterSpacing: 2, marginBottom: 16 }}>MIX <span style={{ color: T.amber }}>PORTAFOGLIO</span></div>
+                  <ResponsiveContainer width="100%" height={160}>
+                    <PieChart>
+                      <Pie data={portfolioMix} dataKey="v" innerRadius={48} outerRadius={70} paddingAngle={3} startAngle={90} endAngle={-270}>
+                        {portfolioMix.map((e, i) => <Cell key={i} fill={e.color} />)}
+                      </Pie>
+                      <Tooltip formatter={v => `${v}%`} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 4 }}>
+                    {portfolioMix.map((p, i) => (
+                      <div key={i} style={{ display: "grid", gridTemplateColumns: "10px 1fr auto", alignItems: "center", gap: 8, fontSize: 11 }}>
+                        <div style={{ width: 8, height: 8, borderRadius: 2, background: p.color }} />
+                        <span style={{ color: T.muted }}>{p.name}</span>
+                        <span style={{ fontFamily: "'JetBrains Mono', monospace", color: p.color, fontWeight: 700 }}>{p.v}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* bottom row */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
+                {/* gauges */}
+                <div style={card()}>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 16, letterSpacing: 2, marginBottom: 12 }}>KPI <span style={{ color: T.amber }}>GAUGE</span></div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
+                    <Gauge value={82} label="RINNOVI" color={T.green} />
+                    <Gauge value={58} label="LOSS RATIO" color={T.amber} />
+                    <Gauge value={74} label="NPS SCORE" color={T.cyan} />
+                    <Gauge value={91} label="SODDISF." color={T.violet} />
+                  </div>
+                </div>
+
+                {/* radar */}
+                <div style={card()}>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 16, letterSpacing: 2, marginBottom: 4 }}>FIM VS <span style={{ color: T.amber }}>MERCATO</span></div>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <RadarChart data={radarData}>
+                      <PolarGrid stroke={T.muted2} />
+                      <PolarAngleAxis dataKey="kpi" tick={{ fill: T.muted, fontSize: 10, fontFamily: "'JetBrains Mono', monospace" }} />
+                      <Radar name="FIM" dataKey="fim" stroke={T.amber} fill={T.amber} fillOpacity={0.15} strokeWidth={2} />
+                      <Radar name="Target" dataKey="target" stroke={T.cyan} fill={T.cyan} fillOpacity={0.05} strokeWidth={1.5} strokeDasharray="4 4" />
+                      <Tooltip />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* heatmap */}
+                <div style={card()}>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 16, letterSpacing: 2, marginBottom: 14 }}>ATTIVITÀ <span style={{ color: T.amber }}>SETTIMANALE</span></div>
+                  <Heatmap />
+                  <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 6, fontSize: 9, fontFamily: "'JetBrains Mono', monospace", color: T.muted }}>
+                    <span>BASSA</span>
+                    {[.1,.25,.45,.65,.85].map((o,i)=>(
+                      <div key={i} style={{ width: 14, height: 14, borderRadius: 3, background: `rgba(245,166,35,${o})` }} />
+                    ))}
+                    <span>ALTA</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ─── PREMI ─────────────────────────────────────────────── */}
+          {view === "premi" && (
+            <div style={{ animation: "fadeUp .35s ease" }}>
+              <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 38, letterSpacing: 3, marginBottom: 20 }}>
+                ANALISI <span style={{ color: T.amber }}>PREMI</span>
+              </h1>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, marginBottom: 20 }}>
+                {[
+                  { label:"AUTO & MOTO",    value:312400, delta:9.8, color:T.amber  },
+                  { label:"VITA & PREVID.", value:224100, delta:14.2,color:T.cyan   },
+                  { label:"RAMI ELEMENTARI",value:162500, delta:7.1, color:T.violet },
+                ].map((k,i)=>(
+                  <div key={i} style={card()}>
+                    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: T.muted, letterSpacing: 1.5, marginBottom: 8 }}>{k.label}</div>
+                    <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: k.color, letterSpacing: 1 }}>{fmt(k.value)}</div>
+                    <div style={{ marginTop: 6 }}><StatDelta delta={k.delta} /></div>
+                    <div style={{ marginTop: 10 }}>
+                      <RiskBar value={k.value} max={340000} color={k.color} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ ...card(), marginBottom: 16 }}>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, letterSpacing: 2, marginBottom: 16 }}>PREMI MENSILI — VISTA <span style={{ color: T.amber }}>COMPOSITA</span></div>
+                <ResponsiveContainer width="100%" height={280}>
+                  <ComposedChart data={premiumData}>
+                    <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                    <XAxis dataKey="m" tick={{ fill: T.muted, fontSize: 10, fontFamily: "'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: T.muted, fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={fmtK} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <ReferenceLine y={78000} stroke={T.amber} strokeDasharray="6 3" label={{ value: "TARGET MENSILE", fill: T.amber, fontSize: 9 }} />
+                    <Bar dataKey="auto" name="Auto" stackId="a" fill={T.amber} />
+                    <Bar dataKey="vita" name="Vita" stackId="a" fill={T.cyan} />
+                    <Bar dataKey="rami" name="Rami El." stackId="a" fill={T.violet} radius={[3,3,0,0]} />
+                    <Line type="monotone" dataKey="totale" name="Totale" stroke={T.green} strokeWidth={2.5} dot={{ r:3, fill:T.green }} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
+              {/* table */}
+              <div style={card()}>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, letterSpacing: 2, marginBottom: 16 }}>DETTAGLIO <span style={{ color: T.amber }}>MENSILE</span></div>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+                  <thead>
+                    <tr style={{ borderBottom: `1px solid ${T.border}` }}>
+                      {["MESE","AUTO","VITA","RAMI EL.","TOTALE","Δ M/M","VS TARGET"].map(h => (
+                        <th key={h} style={{ textAlign: "left", padding: "8px 10px", fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: T.muted, letterSpacing: 1 }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {premiumData.map((r, i) => {
+                      const prev = i > 0 ? premiumData[i-1].totale : r.totale;
+                      const delta = i > 0 ? ((r.totale - prev) / prev * 100).toFixed(1) : null;
+                      const vsTarget = ((r.totale / 78000 - 1) * 100).toFixed(1);
+                      return (
+                        <tr key={i} className="row-h" style={{ borderBottom: `1px solid ${T.muted2}22` }}>
+                          <td style={{ padding: "9px 10px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 700 }}>{r.m}</td>
+                          <td style={{ padding: "9px 10px", color: T.amber }}>{fmt(r.auto)}</td>
+                          <td style={{ padding: "9px 10px", color: T.cyan }}>{fmt(r.vita)}</td>
+                          <td style={{ padding: "9px 10px", color: T.violet }}>{fmt(r.rami)}</td>
+                          <td style={{ padding: "9px 10px", fontWeight: 700 }}>{fmt(r.totale)}</td>
+                          <td style={{ padding: "9px 10px" }}>
+                            {delta ? <StatDelta delta={delta} /> : <span style={{ color: T.muted }}>—</span>}
+                          </td>
+                          <td style={{ padding: "9px 10px" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                              <div style={{ flex:1, height:4, background:T.muted2, borderRadius:2, overflow:"hidden" }}>
+                                <div style={{ height:"100%", width:`${Math.min(100,r.totale/78000*100)}%`, background: r.totale>=78000?T.green:T.amber, borderRadius:2 }}/>
+                              </div>
+                              <span style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:10, color: parseFloat(vsTarget)>=0?T.green:T.red }}>
+                                {parseFloat(vsTarget)>=0?"+":""}{vsTarget}%
+                              </span>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* ─── SINISTRI ──────────────────────────────────────────── */}
+          {view === "sinistri" && (
+            <div style={{ animation: "fadeUp .35s ease" }}>
+              <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 38, letterSpacing: 3, marginBottom: 20 }}>
+                GESTIONE <span style={{ color: T.red }}>SINISTRI</span>
+              </h1>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 14, marginBottom: 20 }}>
+                {[
+                  { label:"APERTI",       value:34,   color:T.red,    suf:"" },
+                  { label:"IN ISTRUTTORIA",value:18,  color:T.amber,  suf:"" },
+                  { label:"CHIUSI YTD",   value:127,  color:T.green,  suf:"" },
+                  { label:"RISERVATO TOT",value:284000,color:T.violet, suf:"€", fmt:true },
+                ].map((k,i)=>(
+                  <div key={i} style={card({ textAlign:"center" })}>
+                    <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:9, color:T.muted, letterSpacing:1.5, marginBottom:8 }}>{k.label}</div>
+                    <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:36, color:k.color }}>
+                      {k.fmt ? fmtK(k.value) : <AnimCounter target={k.value} />}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ display:"grid", gridTemplateColumns:"3fr 2fr", gap:16, marginBottom:16 }}>
+                <div style={card()}>
+                  <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2, marginBottom:16 }}>TREND <span style={{ color:T.red }}>SINISTRI</span></div>
+                  <ResponsiveContainer width="100%" height={240}>
+                    <ComposedChart data={sinistriData}>
+                      <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                      <XAxis dataKey="m" tick={{ fill:T.muted, fontSize:10, fontFamily:"'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} />
+                      <YAxis yAxisId="l" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} />
+                      <YAxis yAxisId="r" orientation="right" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} tickFormatter={v=>v+"%"} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Bar yAxisId="l" dataKey="aperti" name="Aperti" fill={T.red} radius={[3,3,0,0]} />
+                      <Bar yAxisId="l" dataKey="chiusi" name="Chiusi" fill={T.green} radius={[3,3,0,0]} />
+                      <Line yAxisId="r" type="monotone" dataKey="lr" name="Loss Ratio" stroke={T.amber} strokeWidth={2.5} dot={{ r:3, fill:T.amber }} />
+                    </ComposedChart>
+                  </ResponsiveContainer>
+                </div>
+                <div style={card()}>
+                  <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2, marginBottom:16 }}>PER <span style={{ color:T.red }}>RAMO</span></div>
+                  <ResponsiveContainer width="100%" height={240}>
+                    <BarChart layout="vertical" data={[
+                      { name:"Auto",    v:42, c:T.amber  },
+                      { name:"RC",      v:28, c:T.cyan   },
+                      { name:"Rami El.",v:30, c:T.violet },
+                      { name:"Infort.", v:16, c:T.green  },
+                      { name:"Vita",    v:11, c:T.red    },
+                    ]}>
+                      <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                      <XAxis type="number" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} />
+                      <YAxis type="category" dataKey="name" tick={{ fill:T.muted, fontSize:10, fontFamily:"'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} width={55} />
+                      <Tooltip />
+                      <Bar dataKey="v" name="Sinistri" radius={[0,4,4,0]}>
+                        {[T.amber,T.cyan,T.violet,T.green,T.red].map((c,i)=><Cell key={i} fill={c}/>)}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+              {/* loss ratio line */}
+              <div style={card()}>
+                <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2, marginBottom:16 }}>LOSS RATIO <span style={{ color:T.amber }}>MENSILE</span></div>
+                <ResponsiveContainer width="100%" height={180}>
+                  <AreaChart data={sinistriData}>
+                    <defs>
+                      <linearGradient id="glr" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor={T.red} stopOpacity={0.2} />
+                        <stop offset="95%" stopColor={T.red} stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                    <XAxis dataKey="m" tick={{ fill:T.muted, fontSize:10, fontFamily:"'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} tickFormatter={v=>(v*100).toFixed(0)+"%"} />
+                    <Tooltip formatter={v=>(v*100).toFixed(1)+"%"} />
+                    <ReferenceLine y={0.65} stroke={T.red} strokeDasharray="4 2" label={{ value:"SOGLIA 65%", fill:T.red, fontSize:9 }} />
+                    <Area type="monotone" dataKey="lr" name="Loss Ratio" stroke={T.amber} fill="url(#glr)" strokeWidth={2} />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
+
+          {/* ─── COMPAGNIE ─────────────────────────────────────────── */}
+          {view === "compagnie" && (
+            <div style={{ animation: "fadeUp .35s ease" }}>
+              <h1 style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:38, letterSpacing:3, marginBottom:20 }}>
+                ANALISI <span style={{ color:T.amber }}>COMPAGNIE</span>
+              </h1>
+              <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14, marginBottom:20 }}>
+                {compagnieData.map((c,i) => (
+                  <div key={i} className="comp-card" onClick={() => setSelectedComp(selectedComp?.name === c.name ? null : c)}
+                    style={{
+                      ...card(),
+                      border: selectedComp?.name === c.name ? `1px solid ${T.amber}` : `1px solid ${T.border}`,
+                      transition:"all .2s",
+                    }}>
+                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:12 }}>
+                      <div>
+                        <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:20, letterSpacing:2 }}>{c.name}</div>
+                        <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:9, color:T.muted, marginTop:2 }}>QUOTA PORTAF.</div>
+                      </div>
+                      <div style={{ textAlign:"right" }}>
+                        <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:24, color:T.amber }}>{c.quota}%</div>
+                        <Chip label={`RATING ${c.rating}`} color={c.rating >= 90 ? T.green : c.rating >= 80 ? T.amber : T.red} />
+                      </div>
+                    </div>
+                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8, marginBottom:12 }}>
+                      {[
+                        { l:"PREMI", v:fmtK(c.premi), col:T.text },
+                        { l:"SINISTRI", v:c.sinistri, col:T.red },
+                        { l:"LOSS R.", v:c.lr+"%", col:c.lr<60?T.green:c.lr<65?T.amber:T.red },
+                      ].map((s,j)=>(
+                        <div key={j} style={{ background:T.raised, borderRadius:6, padding:"8px 10px" }}>
+                          <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:8, color:T.muted, marginBottom:4 }}>{s.l}</div>
+                          <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, color:s.col }}>{s.v}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:9, color:T.muted, marginBottom:4 }}>PERFORMANCE INDEX</div>
+                    <RiskBar value={c.rating} color={c.rating>=90?T.green:c.rating>=80?T.amber:T.red} />
+                  </div>
+                ))}
+              </div>
+
+              {/* detail panel */}
+              {selectedComp && (
+                <div style={{ ...card(), borderColor:T.amber, marginBottom:16, animation:"fadeUp .25s ease" }}>
+                  <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:22, letterSpacing:3, marginBottom:16, color:T.amber }}>
+                    DETTAGLIO — {selectedComp.name}
+                  </div>
+                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16 }}>
+                    <ResponsiveContainer width="100%" height={200}>
+                      <BarChart data={MONTHS.slice(0,6).map((m,i)=>({ m, premi: Math.round(selectedComp.premi/12 * (0.8+seed(i)*0.4)) }))}>
+                        <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                        <XAxis dataKey="m" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} />
+                        <YAxis tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} tickFormatter={fmtK} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Bar dataKey="premi" name="Premi" fill={T.amber} radius={[4,4,0,0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                    <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+                      {[
+                        { label:"Premi totali annui", value:fmt(selectedComp.premi) },
+                        { label:"Sinistri gestiti",   value:selectedComp.sinistri },
+                        { label:"Loss Ratio",         value:selectedComp.lr+"%" },
+                        { label:"Quota portafoglio",  value:selectedComp.quota+"%" },
+                        { label:"Rating performance", value:selectedComp.rating+"/100" },
+                      ].map((row,i)=>(
+                        <div key={i} style={{ display:"flex", justifyContent:"space-between", borderBottom:`1px solid ${T.muted2}33`, paddingBottom:8 }}>
+                          <span style={{ fontSize:12, color:T.muted }}>{row.label}</span>
+                          <span style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:12, color:T.text, fontWeight:700 }}>{row.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div style={card()}>
+                <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2, marginBottom:16 }}>CONFRONTO <span style={{ color:T.amber }}>COMPAGNIE</span></div>
+                <ResponsiveContainer width="100%" height={240}>
+                  <ComposedChart data={compagnieData} barGap={4}>
+                    <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                    <XAxis dataKey="name" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} />
+                    <YAxis yAxisId="l" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} tickFormatter={fmtK} />
+                    <YAxis yAxisId="r" orientation="right" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Bar yAxisId="l" dataKey="premi" name="Premi" fill={T.amber} radius={[3,3,0,0]} />
+                    <Bar yAxisId="r" dataKey="sinistri" name="Sinistri" fill={T.red} radius={[3,3,0,0]} />
+                    <Line yAxisId="r" type="monotone" dataKey="rating" name="Rating" stroke={T.green} strokeWidth={2} dot={{ r:4, fill:T.green }} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
+
+          {/* ─── CLIENTI ───────────────────────────────────────────── */}
+          {view === "clienti" && (
+            <div style={{ animation:"fadeUp .35s ease" }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20 }}>
+                <h1 style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:38, letterSpacing:3 }}>
+                  PORTAFOGLIO <span style={{ color:T.amber }}>CLIENTI</span>
+                </h1>
+                <div style={{ display:"flex", gap:8, alignItems:"center" }}>
+                  <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Filtra clienti…"
+                    style={{ background:T.raised, border:`1px solid ${T.border}`, borderRadius:6, padding:"7px 12px", color:T.text, fontSize:12, outline:"none", fontFamily:"'Barlow', sans-serif" }} />
+                  {["tutti","corporate","pmi"].map(f=>(
+                    <button key={f} onClick={()=>setFilter(f)} style={btn(filter===f)}>
+                      {f.toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:14, marginBottom:20 }}>
+                {[
+                  { label:"CLIENTI TOTALI", value:342, color:T.amber },
+                  { label:"CORPORATE",      value:84,  color:T.cyan  },
+                  { label:"PMI",            value:98,  color:T.green },
+                  { label:"PRIVATI",        value:160, color:T.violet},
+                ].map((k,i)=>(
+                  <div key={i} style={{ ...card(), textAlign:"center" }}>
+                    <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:9, color:T.muted, letterSpacing:1.5, marginBottom:6 }}>{k.label}</div>
+                    <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:36, color:k.color }}><AnimCounter target={k.value} /></div>
+                  </div>
+                ))}
+              </div>
+
+              {/* table */}
+              <div style={card({ marginBottom:16 })}>
+                <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2, marginBottom:14 }}>DETTAGLIO <span style={{ color:T.amber }}>CLIENTI</span></div>
+                <table style={{ width:"100%", borderCollapse:"collapse", fontSize:12 }}>
+                  <thead>
+                    <tr style={{ borderBottom:`1px solid ${T.border}` }}>
+                      {[
+                        { label:"CLIENTE",   col:null   },
+                        { label:"PREMI",     col:"premi" },
+                        { label:"POLIZZE",   col:"polizze" },
+                        { label:"SEGMENTO",  col:null   },
+                        { label:"LOSS R.",   col:"lr"   },
+                        { label:"CHURN R.",  col:"churn" },
+                        { label:"HEALTH",    col:null   },
+                      ].map((h,i)=>(
+                        <th key={i} onClick={()=>h.col&&handleSort(h.col)} className="th-sort"
+                          style={{ textAlign:"left", padding:"8px 10px", fontFamily:"'JetBrains Mono', monospace", fontSize:9, color: sortCol===h.col?T.amber:T.muted, letterSpacing:1, cursor:h.col?"pointer":"default" }}>
+                          {h.label}{sortCol===h.col?(sortDir==="desc"?" ↓":" ↑"):""}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sortedClienti.map((c,i)=>{
+                      const health = c.lr < 55 && c.churn < 10 ? "OTTIMO" : c.lr < 65 && c.churn < 15 ? "BUONO" : "RISCHIO";
+                      const hCol = health==="OTTIMO"?T.green:health==="BUONO"?T.amber:T.red;
+                      return (
+                        <tr key={i} className="row-h" style={{ borderBottom:`1px solid ${T.muted2}22` }}>
+                          <td style={{ padding:"11px 10px", fontWeight:600 }}>{c.name}</td>
+                          <td style={{ padding:"11px 10px", fontFamily:"'JetBrains Mono', monospace", color:T.amber }}>{fmt(c.premi)}</td>
+                          <td style={{ padding:"11px 10px", fontFamily:"'JetBrains Mono', monospace" }}>{c.polizze}</td>
+                          <td style={{ padding:"11px 10px" }}><Chip label={c.segmento.toUpperCase()} color={c.segmento==="Corporate"?T.cyan:T.violet} /></td>
+                          <td style={{ padding:"11px 10px", color:c.lr<60?T.green:c.lr<70?T.amber:T.red, fontFamily:"'JetBrains Mono', monospace" }}>{c.lr}%</td>
+                          <td style={{ padding:"11px 10px", color:c.churn<10?T.green:c.churn<15?T.amber:T.red, fontFamily:"'JetBrains Mono', monospace" }}>{c.churn}%</td>
+                          <td style={{ padding:"11px 10px" }}><Chip label={health} color={hCol} /></td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16 }}>
+                <div style={card()}>
+                  <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:16, letterSpacing:2, marginBottom:14 }}>PREMI PER <span style={{ color:T.amber }}>CLIENTE</span></div>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <BarChart layout="vertical" data={clientiData.sort((a,b)=>b.premi-a.premi)}>
+                      <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                      <XAxis type="number" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} tickFormatter={fmtK} />
+                      <YAxis type="category" dataKey="name" tick={{ fill:T.muted, fontSize:9, fontFamily:"'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} width={130} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Bar dataKey="premi" name="Premi" fill={T.amber} radius={[0,4,4,0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+                <div style={card()}>
+                  <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:16, letterSpacing:2, marginBottom:14 }}>CHURN RISK <span style={{ color:T.red }}>ANALYSIS</span></div>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <ScatterChart>
+                      <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                      <XAxis dataKey="lr" name="Loss Ratio" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} label={{ value:"Loss Ratio %", fill:T.muted, fontSize:9, position:"insideBottom", offset:-2 }} />
+                      <YAxis dataKey="churn" name="Churn Risk" tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} label={{ value:"Churn %", fill:T.muted, fontSize:9, angle:-90, position:"insideLeft" }} />
+                      <ZAxis dataKey="premi" range={[50,400]} />
+                      <Tooltip cursor={{ stroke:T.amber, strokeWidth:1 }} content={({ active, payload }) => {
+                        if (!active||!payload?.length) return null;
+                        const d = payload[0]?.payload;
+                        return <div style={{ background:"#1A1F2E", border:`1px solid ${T.border}`, borderRadius:8, padding:"10px 14px", fontSize:11, fontFamily:"'Barlow', sans-serif" }}>
+                          <p style={{ color:T.amber, fontWeight:700, marginBottom:4 }}>{d?.name}</p>
+                          <p>Loss Ratio: <b>{d?.lr}%</b></p>
+                          <p>Churn Risk: <b>{d?.churn}%</b></p>
+                          <p>Premi: <b>{fmt(d?.premi)}</b></p>
+                        </div>;
+                      }} />
+                      <Scatter data={clientiData} fill={T.cyan} />
+                    </ScatterChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ─── SCADENZE ──────────────────────────────────────────── */}
+          {view === "scadenze" && (
+            <div style={{ animation:"fadeUp .35s ease" }}>
+              <h1 style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:38, letterSpacing:3, marginBottom:20 }}>
+                SCADENZARIO <span style={{ color:T.amber }}>POLIZZE</span>
+              </h1>
+              <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14, marginBottom:20 }}>
+                {[
+                  { label:"URGENTI (0–14 GG)", value:1, color:T.red    },
+                  { label:"PROSSIME (15–30 GG)",value:2, color:T.amber  },
+                  { label:"IN TEMPO (31+ GG)",  value:3, color:T.green  },
+                ].map((k,i)=>(
+                  <div key={i} style={{ ...card(), display:"flex", alignItems:"center", gap:16 }}>
+                    <div style={{ width:48, height:48, borderRadius:10, background:k.color+"22", border:`1px solid ${k.color}44`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Bebas Neue', sans-serif", fontSize:28, color:k.color }}>{k.value}</div>
+                    <div>
+                      <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:9, color:T.muted, letterSpacing:1, marginBottom:4 }}>{k.label}</div>
+                      <div style={{ fontFamily:"'Barlow', sans-serif", fontSize:13, fontWeight:600, color:k.color }}>polizze</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={card({ marginBottom:16 })}>
+                <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
+                  <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2 }}>PROSSIME <span style={{ color:T.amber }}>SCADENZE</span></div>
+                  <button style={{ ...btn(true), padding:"6px 16px" }}>↓ EXPORT CSV</button>
+                </div>
+                <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+                  {scadenzeData.map((s,i)=>{
+                    const urgency = s.giorni <= 14 ? T.red : s.giorni <= 30 ? T.amber : T.green;
+                    return (
+                      <div key={i} style={{
+                        background:T.raised, borderRadius:8, padding:"14px 16px",
+                        border:`1px solid ${urgency}33`,
+                        display:"grid", gridTemplateColumns:"1fr auto auto auto auto",
+                        alignItems:"center", gap:20, transition:"all .15s",
+                      }} className="kcard">
+                        <div>
+                          <div style={{ fontWeight:600, fontSize:13 }}>{s.polizza}</div>
+                          <div style={{ fontSize:11, color:T.muted, marginTop:3 }}>
+                            {s.compagnia} · {s.tipo}
+                          </div>
+                        </div>
+                        <div style={{ textAlign:"center" }}>
+                          <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:28, color:urgency, lineHeight:1 }}>{s.giorni}</div>
+                          <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:9, color:T.muted }}>GIORNI</div>
+                        </div>
+                        <div style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:13, color:T.amber, fontWeight:700 }}>{fmt(s.premio)}</div>
+                        <Chip label={s.rischio.toUpperCase()} color={s.rischio==="high"?T.red:s.rischio==="medium"?T.amber:T.green} />
+                        <button style={{ ...btn(false), padding:"6px 14px" }}>CONTATTA</button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div style={card()}>
+                <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2, marginBottom:16 }}>DISTRIBUZIONE <span style={{ color:T.amber }}>TEMPORALE</span></div>
+                <ResponsiveContainer width="100%" height={180}>
+                  <BarChart data={[
+                    { label:"0–7 gg",  v:1, c:T.red   },
+                    { label:"8–14 gg", v:0, c:T.red   },
+                    { label:"15–21 gg",v:1, c:T.amber },
+                    { label:"22–30 gg",v:1, c:T.amber },
+                    { label:"31–45 gg",v:2, c:T.green },
+                    { label:"46–60 gg",v:1, c:T.green },
+                  ]}>
+                    <CartesianGrid strokeDasharray="2 4" stroke={T.muted2} />
+                    <XAxis dataKey="label" tick={{ fill:T.muted, fontSize:10, fontFamily:"'JetBrains Mono', monospace" }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill:T.muted, fontSize:10 }} axisLine={false} tickLine={false} />
+                    <Tooltip />
+                    <Bar dataKey="v" name="Polizze" radius={[4,4,0,0]}>
+                      {[T.red,T.red,T.amber,T.amber,T.green,T.green].map((c,i)=><Cell key={i} fill={c}/>)}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
+
+          {/* ─── ATTIVITÀ ──────────────────────────────────────────── */}
+          {view === "attivita" && (
+            <div style={{ animation:"fadeUp .35s ease" }}>
+              <h1 style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:38, letterSpacing:3, marginBottom:20 }}>
+                LOG <span style={{ color:T.amber }}>ATTIVITÀ</span>
+              </h1>
+              <div style={{ display:"grid", gridTemplateColumns:"2fr 1fr", gap:16 }}>
+                <div style={card()}>
+                  <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2, marginBottom:16 }}>FEED <span style={{ color:T.amber }}>REAL-TIME</span>
+                    <span style={{ marginLeft:12, display:"inline-block", width:7, height:7, borderRadius:"50%", background:T.green, animation:"glow 2s infinite", verticalAlign:"middle" }} />
+                  </div>
+                  {activityFeed.map((a,i)=>{
+                    const col = a.type==="success"?T.green:a.type==="warning"?T.amber:T.cyan;
+                    return (
+                      <div key={i} style={{
+                        display:"flex", gap:14, padding:"12px 0",
+                        borderBottom:`1px solid ${T.muted2}22`,
+                        animation:`fadeUp .3s ease ${i*0.07}s both`,
+                      }}>
+                        <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:4 }}>
+                          <div style={{ width:10, height:10, borderRadius:"50%", background:col, boxShadow:`0 0 8px ${col}66`, flexShrink:0 }} />
+                          {i < activityFeed.length-1 && <div style={{ width:1, flex:1, background:T.muted2 }} />}
+                        </div>
+                        <div style={{ flex:1, paddingBottom:4 }}>
+                          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline" }}>
+                            <span style={{ fontWeight:600, fontSize:13 }}>{a.event}</span>
+                            <span style={{ fontFamily:"'JetBrains Mono', monospace", fontSize:10, color:T.muted }}>{a.time}</span>
+                          </div>
+                          <div style={{ fontSize:12, color:T.muted, marginTop:3 }}>{a.detail}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
+                  <div style={card()}>
+                    <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:16, letterSpacing:2, marginBottom:14 }}>EVENTI <span style={{ color:T.amber }}>OGGI</span></div>
+                    {[
+                      { ora:"10:00", desc:"Riunione revisione portafoglio" },
+                      { ora:"14:30", desc:"Call cliente TechItalia Srl" },
+                      { ora:"16:00", desc:"Scadenza invio report IVASS" },
+                    ].map((e,i)=>(
+                      <div key={i} style={{ display:"flex", gap:12, padding:"10px 0", borderBottom:`1px solid ${T.muted2}22` }}>
+                        <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, color:T.amber, minWidth:50 }}>{e.ora}</div>
+                        <div style={{ fontSize:13, color:T.muted, paddingTop:3 }}>{e.desc}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={card()}>
+                    <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:16, letterSpacing:2, marginBottom:14 }}>TASK <span style={{ color:T.amber }}>PENDENTI</span></div>
+                    {[
+                      { label:"Inviare preventivo auto Fleet", done:true  },
+                      { label:"Aggiornare scheda Studio Rossi",done:false },
+                      { label:"Verifica sinistro #2047",       done:false },
+                      { label:"Rinnovo polizza incendio",      done:true  },
+                    ].map((t,i)=>(
+                      <div key={i} style={{ display:"flex", alignItems:"center", gap:10, padding:"8px 0", borderBottom:`1px solid ${T.muted2}22`, fontSize:12 }}>
+                        <div style={{ width:14, height:14, borderRadius:3, border:`1.5px solid ${t.done?T.green:T.muted2}`, background:t.done?T.green+"33":"transparent", flexShrink:0 }}>
+                          {t.done && <div style={{ textAlign:"center", fontSize:9, color:T.green, lineHeight:"14px" }}>✓</div>}
+                        </div>
+                        <span style={{ color:t.done?T.muted:T.text, textDecoration:t.done?"line-through":"none" }}>{t.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </main>
+      </div>
+
+      {/* ── NOTIFICATION DRAWER ── */}
+      {drawerOpen && (
+        <div style={{
+          position:"fixed", top:52, right:0, width:320, height:"calc(100vh - 52px)",
+          background:T.surface, borderLeft:`1px solid ${T.border}`,
+          padding:"20px", zIndex:300, overflowY:"auto", animation:"fadeIn .2s ease",
+        }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
+            <div style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:18, letterSpacing:2 }}>NOTIFICHE</div>
+            <button onClick={()=>setDrawerOpen(false)} style={{ background:"none", border:"none", color:T.muted, cursor:"pointer", fontSize:18 }}>✕</button>
+          </div>
+          {activityFeed.map((a,i)=>{
+            const col = a.type==="success"?T.green:a.type==="warning"?T.amber:T.cyan;
+            return (
+              <div key={i} style={{ background:T.raised, borderRadius:8, padding:"12px 14px", marginBottom:10, borderLeft:`3px solid ${col}` }}>
+                <div style={{ fontWeight:600, fontSize:13, marginBottom:4 }}>{a.event}</div>
+                <div style={{ fontSize:11, color:T.muted }}>{a.detail}</div>
+                <div style={{ fontSize:10, color:T.muted2, marginTop:6, fontFamily:"'JetBrains Mono', monospace" }}>{a.time}</div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ── FOOTER ── */}
+      <footer style={{
+        borderTop:`1px solid ${T.border}`, padding:"8px 24px",
+        display:"flex", justifyContent:"space-between", alignItems:"center",
+        background:T.surface, fontSize:10, fontFamily:"'JetBrains Mono', monospace", color:T.muted,
+      }}>
+        <span>FIM INSURANCE BROKER S.A.S. — IVASS B000405449 — CISTERNA DI LATINA (LT)</span>
+        <span style={{ color:T.amber }}>FIM ANALYTICS 2.0 · {period} · {new Date().toLocaleDateString("it-IT")}</span>
+      </footer>
+    </div>
+  );
+}
+const domContainer = document.getElementById('analytics-react-root');
+if (domContainer) { ReactDOM.render(React.createElement(FIMDashboard), domContainer); }
+
+  </script>
 </div>
+
 
 <!-- TAB: IMPOSTAZIONI -->
 <div class="tab-content" id="tab-impostazioni">
@@ -9225,7 +10019,7 @@ function renderProvReport() {
     <td>${formatCurrency(d.calc.premio)}</td>
     <td style="color:var(--danger);">– ${formatCurrency(d.calc.tasseTotali)}<br><small>${d.calc.fonteDati === 'pdf' ? '📄 da PDF' : (d.p.percImposte||0) + '% imp + ' + (d.p.percSSN||0) + '% SSN'}</small></td>
     <td><input type="number" step="0.01" value="${d.calc.imponibile.toFixed(2)}" style="width:95px;text-align:right;border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:12px;font-weight:700;${d.calc.fonteDati === 'pdf' ? 'background:#e8f5e9;' : ''}" onchange="updateProvImponibile('${d.p.id}', this.value)" title="${d.calc.fonteDati === 'pdf' ? 'Importo netto dal dettaglio economico PDF' : d.calc.fonteDati === 'override' ? 'Valore modificato manualmente' : 'Calcolato: premio - imposte - SSN'}"></td>
-    <td><input type="number" step="0.1" value="${d.perc.toFixed(1)}" style="width:65px;text-align:right;border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:12px;font-weight:700;" onchange="updateProvPercentuale('${d.p.id}', this.value)" data-prov-perc="${d.p.id}"></td>
+    <td><input type="number" step="0.01" value="${d.perc.toFixed(2)}" style="width:75px;text-align:right;border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:12px;font-weight:700;" onchange="updateProvPercentuale('${d.p.id}', this.value)" data-prov-perc="${d.p.id}"></td>
     <td><strong style="color:var(--success);" data-prov-importo="${d.p.id}">${formatCurrency(d.provvigione)}</strong></td>
     <td><button class="btn btn-sm btn-outline" onclick="editProvvigione('${d.p.id}')">✏️ Modifica</button></td>
   </tr>`).join('');
@@ -9264,7 +10058,7 @@ function updateProvPercentuale(polId, newVal) {
   pol.percProvvOverride = nuovaPerc;
   localStorage.setItem(DB_KEY, JSON.stringify(polizze));
   _aggiornaProvSommario();
-  showToast('Percentuale aggiornata: ' + nuovaPerc.toFixed(1) + '% → provvigione ' + formatCurrency(nuovaProv), 'success');
+  showToast('Percentuale aggiornata: ' + nuovaPerc.toFixed(2) + '% → provvigione ' + formatCurrency(nuovaProv), 'success');
 }
 
 function _aggiornaProvSommario() {
@@ -9291,7 +10085,7 @@ function exportProvCSV() {
     const finalPerc = override ? parseFloat(override.perc) : perc;
     const finalImporto = override ? parseFloat(override.importo) : provv;
     details.push([p.numPolizza, p.cliente, p.compagnia, collab.codice, collab.cognome+' '+collab.nome, collab.ruolo,
-      calc.premio.toFixed(2), calc.tasseTotali.toFixed(2), calc.imponibile.toFixed(2), finalPerc.toFixed(1), finalImporto.toFixed(2)]);
+      calc.premio.toFixed(2), calc.tasseTotali.toFixed(2), calc.imponibile.toFixed(2), finalPerc.toFixed(2), finalImporto.toFixed(2)]);
   });
   const headers = ['Polizza','Cliente','Compagnia','Codice Collab','Collaboratore','Ruolo','Premio Lordo','Imposte+SSN','Imponibile Netto','% Provv.','Provvigione'];
   let csv = '\uFEFF' + headers.join(';') + '\n';
@@ -9513,6 +10307,19 @@ function autofillClienteData(nameValue, fieldMap) {
 }
 function autofillPolizzaCliente() { var val = document.getElementById('f_cliente').value; autofillClienteData(val, {cf:'f_cf',indirizzo:'f_indirizzo',cap:'f_cap',citta:'f_citta',provincia:'f_provincia',telefono:'f_telefono',whatsapp:'f_whatsapp',email:'f_email',dataNascita:'f_dataNascita',luogoNascita:'f_luogoNascita',sesso:'f_sesso'}); }
 function autofillQuotCliente() { var val = document.getElementById('quotCliente').value; autofillClienteData(val, {cf:'quotCF',indirizzo:'quotIndirizzo',citta:'quotCitta',telefono:'quotTelefono',email:'quotEmail'}); }
+function autofillClienteInvoiceData() {
+  var clienteName = document.getElementById('inv_cliente').value;
+  if (!clienteName) {
+    document.getElementById('inv_cfPiva').value = '';
+    document.getElementById('inv_indirizzo').value = '';
+    document.getElementById('inv_cap').value = '';
+    document.getElementById('inv_citta').value = '';
+    return;
+  }
+  autofillClienteData(clienteName, {
+    cf: 'inv_cfPiva', indirizzo: 'inv_indirizzo', cap: 'inv_cap', citta: 'inv_citta'
+  });
+}
 function populateClientiDatalist() {
   var names = new Set();
   if (typeof clienti !== 'undefined') { clienti.forEach(function(c) { var n = ((c.cognome || '') + ' ' + (c.nome || '')).trim(); if (n) names.add(n); if (c.ragioneSociale) names.add(c.ragioneSociale); }); }
@@ -14496,6 +15303,7 @@ function computeAnalyticsData() {
 }
 
 function switchAnalyticsTab(tabId) {
+      if (document.getElementById('analytics-react-root')) return;
   document.querySelectorAll('.an-tab-btn').forEach(function(btn) {
     btn.classList.remove('active');
   });
@@ -14508,6 +15316,7 @@ function switchAnalyticsTab(tabId) {
 }
 
 function renderAnalyticsCharts(tabId) {
+      if (document.getElementById('analytics-react-root')) return;
   var data = computeAnalyticsData();
   Chart.defaults.color = '#7A8FAD';
   Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
