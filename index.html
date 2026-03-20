@@ -1166,6 +1166,7 @@ tr.collab-row:hover { background: #e3f0ff !important; }
   <button class="tab" onclick="switchTab('collaboratori')">👥 Collaboratori</button>
   <button class="tab" onclick="switchTab('provvigioni')">💰 Provvigioni</button>
   <button class="tab" onclick="switchTab('fatture')">🧾 Fatture</button>
+  <button class="tab" onclick="switchTab('versamenti')">🏦 Versamenti</button>
   <div class="sidebar-title">Operativo</div>
   <button class="tab" onclick="switchTab('preventivi')">🚗 Preventivi RCA</button>
   <button class="tab" onclick="switchTab('quotazioni')">📝 Quotazioni</button>
@@ -1198,6 +1199,7 @@ tr.collab-row:hover { background: #e3f0ff !important; }
         <button class="btn btn-primary" onclick="openAddModal()">➕ Nuova Polizza</button>
         <button class="btn btn-outline" onclick="openUploadModal()">📄 Importa PDF</button>
         <button class="btn btn-outline" onclick="openECClienteModal()" style="border-color:var(--primary);color:var(--primary);">📄 Estratto Conto Cliente</button>
+        <button class="btn btn-outline" onclick="openAvvisoScadenzaModal()" style="border-color:#e53e3e;color:#e53e3e;">⚠️ Avviso Scadenza</button>
       </div>
     </div>
 
@@ -1432,13 +1434,77 @@ tr.collab-row:hover { background: #e3f0ff !important; }
 </div>
 
 <!-- MODAL: SCHEDA CLIENTE -->
-<div id="schedaClienteModal" class="modal" style="display:none;">
-  <div class="modal-content" style="max-width:850px;max-height:90vh;overflow-y:auto;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+<div class="modal-overlay" id="schedaClienteModal">
+  <div class="modal" style="max-width:850px;max-height:90vh;overflow-y:auto;">
+    <div class="modal-header">
       <h3 style="margin:0;">📋 Scheda Cliente</h3>
-      <button onclick="closeModal('schedaClienteModal')" style="background:none;border:none;font-size:24px;cursor:pointer;">&times;</button>
+      <button class="modal-close" onclick="closeModal('schedaClienteModal')">✕</button>
     </div>
     <div id="schedaClienteContent"></div>
+  </div>
+</div>
+
+<!-- MODAL: AVVISO SCADENZA -->
+<div class="modal-overlay" id="avvisoScadenzaModal">
+  <div class="modal" style="max-width:900px;max-height:90vh;overflow-y:auto;">
+    <div class="modal-header">
+      <h3 style="margin:0;">⚠️ Avviso di Scadenza</h3>
+      <button class="modal-close" onclick="closeModal('avvisoScadenzaModal')">✕</button>
+    </div>
+    <div style="padding:20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+        <div>
+          <label style="font-size:13px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">Cliente</label>
+          <select id="avvisoClienteSelect" onchange="loadPolizzeScadenzaCliente()" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:14px;">
+            <option value="">— Seleziona cliente —</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:13px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">Periodo scadenza</label>
+          <select id="avvisoPeriodo" onchange="loadPolizzeScadenzaCliente()" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-size:14px;">
+            <option value="30">Prossimi 30 giorni</option>
+            <option value="60">Prossimi 60 giorni</option>
+            <option value="90">Prossimi 90 giorni</option>
+            <option value="all">Tutte le scadenze</option>
+          </select>
+        </div>
+      </div>
+      <div id="avvisoScadenzaPreview" style="background:#f8f9fa;border-radius:8px;padding:16px;min-height:100px;">
+        <p style="color:var(--text-light);text-align:center;">Seleziona un cliente per visualizzare le polizze in scadenza</p>
+      </div>
+      <div id="avvisoScadenzaActions" style="display:none;margin-top:16px;gap:8px;justify-content:flex-end;">
+        <button class="btn btn-outline" onclick="printAvvisoScadenza()">🖨️ Stampa</button>
+        <button class="btn btn-primary" onclick="downloadAvvisoScadenzaPDF()">📄 Scarica PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: NUOVO VERSAMENTO -->
+<div class="modal-overlay" id="versamentoModal">
+  <div class="modal" style="max-width:650px;">
+    <div class="modal-header">
+      <h3 id="versamentoModalTitle" style="margin:0;">➕ Nuovo Versamento</h3>
+      <button class="modal-close" onclick="closeModal('versamentoModal')">✕</button>
+    </div>
+    <div style="padding:20px;">
+      <input type="hidden" id="versamentoId">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Data Versamento *</label><input type="date" id="versData" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"></div>
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Importo *</label><input type="number" id="versImporto" step="0.01" placeholder="0.00" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"></div>
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Compagnia *</label><select id="versCompagnia" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"><option value="">— Seleziona —</option></select></div>
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Metodo Pagamento *</label><select id="versMetodo" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"><option value="">— Seleziona —</option><option value="Bonifico">Bonifico Bancario</option><option value="Assegno">Assegno</option><option value="Contanti">Contanti</option><option value="RID/SDD">RID/SDD</option><option value="Carta">Carta di Credito</option><option value="Compensazione">Compensazione Provvigioni</option></select></div>
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">N. Polizza</label><input type="text" id="versPolizza" placeholder="Numero polizza" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"></div>
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Cliente</label><input type="text" id="versCliente" placeholder="Nome cliente" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"></div>
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Rif. Pagamento</label><input type="text" id="versRiferimento" placeholder="CRO / N. Assegno / Altro" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"></div>
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Stato</label><select id="versStato" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"><option value="Completato">Completato</option><option value="In attesa">In attesa</option><option value="Annullato">Annullato</option></select></div>
+      </div>
+      <div style="margin-top:12px;"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Note</label><textarea id="versNote" rows="2" placeholder="Note aggiuntive..." style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;resize:vertical;"></textarea></div>
+      <div style="margin-top:20px;display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn btn-outline" onclick="closeModal('versamentoModal')">Annulla</button>
+        <button class="btn btn-primary" onclick="salvaVersamento()">💾 Salva</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2210,6 +2276,38 @@ Tel: {brokerTel}</textarea>
       <button class="btn btn-outline" onclick="closeModal('invoiceModal')">Annulla</button>
       <button class="btn btn-primary" onclick="saveInvoice()">💾 Salva Fattura</button>
       <button class="btn btn-sm" style="background:#38b2ac;color:white;margin-left:8px;" onclick="printInvoice()">🖨️ Stampa / PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: VERSAMENTI PREMI -->
+<div class="tab-content" id="tab-versamenti">
+  <div class="settings-panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div>
+        <h2 style="margin:0;color:var(--primary);font-size:22px;">🏦 Versamenti Premi ad Agenzie</h2>
+        <p style="color:var(--text-light);margin:4px 0 0;font-size:13px;">Registra e monitora i pagamenti premi alle compagnie assicurative</p>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-primary" onclick="openVersamentoModal()">➕ Nuovo Versamento</button>
+        <button class="btn btn-outline" onclick="exportVersamentiCSV()">📥 Esporta CSV</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:12px;margin-bottom:20px;align-items:end;">
+      <div><label style="font-size:12px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">Compagnia</label><select id="versFilterCompagnia" onchange="renderVersamentiTable()" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:13px;"><option value="">Tutte</option></select></div>
+      <div><label style="font-size:12px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">Metodo Pagamento</label><select id="versFilterMetodo" onchange="renderVersamentiTable()" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:13px;"><option value="">Tutti</option><option value="Bonifico">Bonifico</option><option value="Assegno">Assegno</option><option value="Contanti">Contanti</option><option value="RID/SDD">RID/SDD</option><option value="Carta">Carta di Credito</option><option value="Compensazione">Compensazione</option></select></div>
+      <div><label style="font-size:12px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">Da data</label><input type="date" id="versFilterDa" onchange="renderVersamentiTable()" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:13px;"></div>
+      <div><label style="font-size:12px;font-weight:600;color:var(--text-light);display:block;margin-bottom:4px;">A data</label><input type="date" id="versFilterA" onchange="renderVersamentiTable()" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:13px;"></div>
+      <button class="btn btn-outline" onclick="resetVersamentiFilters()" style="padding:8px 12px;">🔄</button>
+    </div>
+    <div id="versamentiKPI" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;"></div>
+    <div style="overflow-x:auto;">
+      <table id="versamentiTable" style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead><tr style="background:var(--primary);color:white;">
+          <th style="padding:10px 12px;text-align:left;">Data</th><th style="padding:10px 12px;text-align:left;">Compagnia</th><th style="padding:10px 12px;text-align:left;">N. Polizza</th><th style="padding:10px 12px;text-align:left;">Cliente</th><th style="padding:10px 12px;text-align:right;">Importo</th><th style="padding:10px 12px;text-align:left;">Metodo</th><th style="padding:10px 12px;text-align:left;">Riferimento</th><th style="padding:10px 12px;text-align:left;">Note</th><th style="padding:10px 12px;text-align:center;">Azioni</th>
+        </tr></thead>
+        <tbody id="versamentiBody"></tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -6029,7 +6127,7 @@ function viewScheda(id) {
   html += '</div>';
 
   document.getElementById('schedaClienteContent').innerHTML = html;
-  document.getElementById('schedaClienteModal').style.display = 'flex';
+  document.getElementById('schedaClienteModal').classList.add('active');
 }
 
 // Export CSV
@@ -7576,6 +7674,7 @@ function switchTab(tab) {
     }
   });
   if (tab === 'analytics') { initAnalytics(); }
+  if (tab === 'versamenti') { renderVersamentiTable(); }
   var mc = document.querySelector('.main-content');
   if (mc) mc.scrollTop = 0;
   window.scrollTo(0, 0);
@@ -11230,6 +11329,184 @@ function togglePolizzaSaldata(key, cliente) {
   }
   savePolizzeSaldate(saldate);
   generateECCliente();
+}
+
+
+// ======================= AVVISO SCADENZA =======================
+function openAvvisoScadenzaModal() {
+  var sel = document.getElementById('avvisoClienteSelect');
+  var nomi = [];
+  polizze.forEach(function(p) {
+    var nm = (p.cliente || '').trim();
+    if (nm && nomi.indexOf(nm) === -1) nomi.push(nm);
+  });
+  nomi.sort();
+  sel.innerHTML = '<option value="">\u2014 Seleziona cliente \u2014</option>' + nomi.map(function(n) {
+    return '<option value="' + n.replace(/"/g, '&quot;') + '">' + n + '</option>';
+  }).join('');
+  document.getElementById('avvisoScadenzaPreview').innerHTML = '<p style="color:var(--text-light);text-align:center;">Seleziona un cliente per visualizzare le polizze in scadenza</p>';
+  document.getElementById('avvisoScadenzaActions').style.display = 'none';
+  document.getElementById('avvisoScadenzaModal').classList.add('active');
+}
+
+function loadPolizzeScadenzaCliente() {
+  var nome = document.getElementById('avvisoClienteSelect').value;
+  var periodo = document.getElementById('avvisoPeriodo').value;
+  var preview = document.getElementById('avvisoScadenzaPreview');
+  var actions = document.getElementById('avvisoScadenzaActions');
+  if (!nome) { preview.innerHTML = '<p style="color:var(--text-light);text-align:center;">Seleziona un cliente</p>'; actions.style.display = 'none'; return; }
+  var oggi = new Date();
+  var limite = periodo === 'all' ? null : new Date(oggi.getTime() + parseInt(periodo) * 86400000);
+  var pols = polizze.filter(function(p) {
+    if ((p.cliente || '').trim() !== nome) return false;
+    if (!p.scadenza) return false;
+    var scad = new Date(p.scadenza);
+    if (scad < oggi) return false;
+    if (limite && scad > limite) return false;
+    return true;
+  });
+  if (pols.length === 0) { preview.innerHTML = '<p style="color:var(--text-light);text-align:center;">Nessuna polizza in scadenza nel periodo selezionato</p>'; actions.style.display = 'none'; return; }
+  window._avvisoScadenzaData = { cliente: nome, polizze: pols };
+  var totale = 0;
+  var rows = pols.map(function(p) {
+    var premio = parseFloat(p.premio) || 0; totale += premio;
+    return '<tr><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">' + (p.compagnia||'-') + '</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">' + (p.numPolizza||'-') + '</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">' + (p.targa||p.tipoGaranzia||'-') + '</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">' + formatDate(p.scadenza) + '</td><td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:600;">' + formatCurrency(premio) + '</td></tr>';
+  }).join('');
+  var cl = pols[0];
+  preview.innerHTML = '<div style="background:white;border-radius:8px;padding:20px;border:1px solid #e2e8f0;">' +
+    '<div style="text-align:center;margin-bottom:16px;"><h4 style="margin:0;color:#1a365d;">AVVISO DI SCADENZA POLIZZE</h4><p style="margin:4px 0 0;font-size:12px;color:#666;">Data: ' + formatDate(new Date().toISOString().split('T')[0]) + '</p></div>' +
+    '<div style="margin-bottom:16px;padding:12px;background:#f7fafc;border-radius:6px;"><strong>Spett.le ' + nome + '</strong>' + (cl.indirizzo ? '<br>' + cl.indirizzo : '') + (cl.cf ? '<br>C.F./P.IVA: ' + cl.cf : '') + '</div>' +
+    '<p style="font-size:13px;line-height:1.6;margin-bottom:16px;">Vi comunichiamo che sono in scadenza le seguenti polizze. Vi preghiamo di curare in tempo utile il pagamento dei relativi importi presso i nostri uffici o tramite versamento sul nostro conto corrente bancario.</p>' +
+    '<table style="width:100%;border-collapse:collapse;font-size:13px;"><thead><tr style="background:#1a365d;color:white;"><th style="padding:10px 12px;text-align:left;">Compagnia</th><th style="padding:10px 12px;text-align:left;">N. Polizza</th><th style="padding:10px 12px;text-align:left;">Targa/Ramo</th><th style="padding:10px 12px;text-align:left;">Scadenza</th><th style="padding:10px 12px;text-align:right;">Premio</th></tr></thead><tbody>' + rows +
+    '<tr style="background:#edf2f7;font-weight:700;"><td colspan="4" style="padding:10px 12px;">TOTALE</td><td style="padding:10px 12px;text-align:right;">' + formatCurrency(totale) + '</td></tr></tbody></table>' +
+    '<div style="margin-top:16px;padding:12px;background:#fff5f5;border-radius:6px;border-left:4px solid #e53e3e;"><p style="margin:0;font-size:12px;"><strong>Modalit\u00e0 di pagamento:</strong> Bonifico bancario presso Banca Intesa San Paolo<br><strong>IBAN:</strong> IT89 F030 6939 4910 0000 0083 02<br><strong>Intestato a:</strong> FIM INSURANCE BROKER S.A.S. di Manzo Arturo & C.</p></div>' +
+    '<p style="font-size:12px;margin-top:12px;color:#666;">Per informazioni: Sig. Arturo Manzo \u2014 Tel. 347 331 2330</p></div>';
+  actions.style.display = 'flex';
+}
+
+
+function printAvvisoScadenza() {
+  var data = window._avvisoScadenzaData;
+  if (!data) return;
+  var totale = 0;
+  var rows = data.polizze.map(function(p) {
+    var premio = parseFloat(p.premio) || 0; totale += premio;
+    return '<tr><td>' + (p.compagnia||'-') + '</td><td>' + (p.numPolizza||'-') + '</td><td>' + (p.targa||p.tipoGaranzia||'-') + '</td><td>' + formatDate(p.scadenza) + '</td><td style="text-align:right;">' + formatCurrency(premio) + '</td></tr>';
+  }).join('');
+  var cl = data.polizze[0];
+  var w = window.open('', '_blank');
+  w.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Avviso Scadenza - ' + data.cliente + '</title>' +
+    '<style>body{font-family:Georgia,serif;margin:40px;color:#1a1a1a;font-size:13px;line-height:1.6;}table{width:100%;border-collapse:collapse;margin:20px 0;}th,td{border:1px solid #ccc;padding:8px 10px;}th{background:#1a365d;color:white;font-size:12px;}td{font-size:12px;}.header{text-align:center;margin-bottom:30px;}.header h2{margin:0;color:#1a365d;font-size:18px;}.footer{margin-top:40px;font-size:10px;color:#666;text-align:center;border-top:1px solid #ccc;padding-top:12px;}.totale td{background:#edf2f7;font-weight:700;}.iban-box{margin:20px 0;padding:12px;border:2px solid #1a365d;border-radius:4px;background:#f7fafc;}@media print{body{margin:20px;}}</style></head><body>' +
+    '<div class="header"><h2>FIM INSURANCE BROKER S.A.S.</h2><p style="margin:4px 0;font-size:11px;">di Manzo Arturo & C. \u2014 Via Roma 41, 04012 Cisterna di Latina (LT)</p><p style="margin:2px 0;font-size:11px;">P.IVA 02637640596 \u2014 Tel. 347 331 2330</p></div>' +
+    '<p style="text-align:right;font-size:12px;">Data: ' + formatDate(new Date().toISOString().split('T')[0]) + '</p>' +
+    '<p><strong>Spett.le ' + data.cliente + '</strong>' + (cl.indirizzo ? '<br>' + cl.indirizzo : '') + (cl.cf ? '<br>C.F./P.IVA: ' + cl.cf : '') + '</p>' +
+    '<h3 style="text-align:center;color:#1a365d;margin:24px 0 8px;">AVVISO DI SCADENZA</h3>' +
+    '<p>Vi comunichiamo che sono in scadenza le seguenti polizze. Vi preghiamo di curare in tempo utile il pagamento dei relativi importi presso i nostri uffici o tramite versamento sul nostro conto corrente bancario.</p>' +
+    '<table><thead><tr><th>Compagnia</th><th>N. Polizza</th><th>Targa/Ramo</th><th>Scadenza</th><th style="text-align:right;">Premio</th></tr></thead><tbody>' + rows +
+    '<tr class="totale"><td colspan="4">TOTALE</td><td style="text-align:right;">' + formatCurrency(totale) + '</td></tr></tbody></table>' +
+    '<div class="iban-box"><strong>Modalit\u00e0 di pagamento:</strong> Bonifico bancario presso Banca Intesa San Paolo<br><strong>IBAN: IT89 F030 6939 4910 0000 0083 02</strong><br>Intestato a: FIM INSURANCE BROKER S.A.S. di Manzo Arturo & C.</div>' +
+    '<p>Per il pagamento dei relativi premi in scadenza, La invitiamo a voler fare riferimento al Sig. Arturo Manzo (347 331 2330).</p>' +
+    '<p>Distinti saluti.</p><p style="margin-top:30px;"><strong>FIM INSURANCE BROKER S.A.S.</strong></p>' +
+    '<div class="footer">FIM Insurance Broker S.A.S. \u2014 P.IVA 02637640596 \u2014 CCIAA/N. REA LT/187466<br>PEC: fiminsurancebrokersas@pec.it \u2014 Email: info@fimbroker.it \u2014 RUI Sez. B N. B000405449</div></body></html>');
+  w.document.close();
+  setTimeout(function() { w.print(); }, 300);
+}
+
+
+// ======================= VERSAMENTI PREMI =======================
+var versamenti = JSON.parse(localStorage.getItem('fimVersamenti') || '[]');
+function saveVersamenti() { localStorage.setItem('fimVersamenti', JSON.stringify(versamenti)); }
+
+function openVersamentoModal(id) {
+  document.getElementById('versamentoId').value = '';
+  document.getElementById('versData').value = new Date().toISOString().split('T')[0];
+  document.getElementById('versImporto').value = '';
+  document.getElementById('versPolizza').value = '';
+  document.getElementById('versCliente').value = '';
+  document.getElementById('versRiferimento').value = '';
+  document.getElementById('versNote').value = '';
+  document.getElementById('versStato').value = 'Completato';
+  document.getElementById('versMetodo').value = '';
+  var compSel = document.getElementById('versCompagnia');
+  var comps = [];
+  if (typeof compagnie !== 'undefined' && compagnie.length > 0) compagnie.forEach(function(c) { if (c.nome && comps.indexOf(c.nome)===-1) comps.push(c.nome); });
+  polizze.forEach(function(p) { if (p.compagnia && comps.indexOf(p.compagnia)===-1) comps.push(p.compagnia); });
+  comps.sort();
+  compSel.innerHTML = '<option value="">\u2014 Seleziona \u2014</option>' + comps.map(function(c) { return '<option value="'+c+'">'+c+'</option>'; }).join('');
+  if (id) {
+    var v = versamenti.find(function(x){return x.id===id;});
+    if (v) {
+      document.getElementById('versamentoId').value=v.id; document.getElementById('versData').value=v.data||'';
+      document.getElementById('versImporto').value=v.importo||''; document.getElementById('versCompagnia').value=v.compagnia||'';
+      document.getElementById('versMetodo').value=v.metodo||''; document.getElementById('versPolizza').value=v.polizza||'';
+      document.getElementById('versCliente').value=v.cliente||''; document.getElementById('versRiferimento').value=v.riferimento||'';
+      document.getElementById('versStato').value=v.stato||'Completato'; document.getElementById('versNote').value=v.note||'';
+      document.getElementById('versamentoModalTitle').textContent='\u270F\uFE0F Modifica Versamento';
+    }
+  } else { document.getElementById('versamentoModalTitle').textContent='\u2795 Nuovo Versamento'; }
+  document.getElementById('versamentoModal').classList.add('active');
+}
+
+function salvaVersamento() {
+  var data=document.getElementById('versData').value, importo=parseFloat(document.getElementById('versImporto').value),
+      compagnia=document.getElementById('versCompagnia').value, metodo=document.getElementById('versMetodo').value;
+  if (!data||!importo||!compagnia||!metodo) { showToast('Compila tutti i campi obbligatori (*)','error'); return; }
+  var id=document.getElementById('versamentoId').value;
+  var obj={id:id||'vers_'+Date.now(),data:data,importo:importo,compagnia:compagnia,metodo:metodo,
+    polizza:document.getElementById('versPolizza').value,cliente:document.getElementById('versCliente').value,
+    riferimento:document.getElementById('versRiferimento').value,stato:document.getElementById('versStato').value,
+    note:document.getElementById('versNote').value,updatedAt:new Date().toISOString()};
+  if (id) { var idx=versamenti.findIndex(function(x){return x.id===id;}); if(idx!==-1) versamenti[idx]=obj; }
+  else versamenti.push(obj);
+  saveVersamenti(); closeModal('versamentoModal'); renderVersamentiTable(); showToast('Versamento salvato!','success');
+}
+
+function deleteVersamento(id) {
+  if (!confirm('Eliminare questo versamento?')) return;
+  versamenti=versamenti.filter(function(x){return x.id!==id;}); saveVersamenti(); renderVersamentiTable(); showToast('Versamento eliminato','success');
+}
+
+function metodoBadge(m) {
+  var icons={'Bonifico':'\u{1F3E6}','Assegno':'\u{1F4DD}','Contanti':'\u{1F4B5}','RID/SDD':'\u{1F504}','Carta':'\u{1F4B3}','Compensazione':'\u2696\uFE0F'};
+  return '<span style="display:inline-flex;align-items:center;gap:4px;">'+(icons[m]||'\u{1F4B0}')+' '+(m||'-')+'</span>';
+}
+
+function renderVersamentiTable() {
+  var fC=document.getElementById('versFilterCompagnia').value,fM=document.getElementById('versFilterMetodo').value,
+      fDa=document.getElementById('versFilterDa').value,fA=document.getElementById('versFilterA').value;
+  var filtered=versamenti.filter(function(v){
+    if(fC&&v.compagnia!==fC)return false; if(fM&&v.metodo!==fM)return false;
+    if(fDa&&v.data<fDa)return false; if(fA&&v.data>fA)return false; return true;
+  });
+  filtered.sort(function(a,b){return(b.data||'').localeCompare(a.data||'');});
+  var compSel=document.getElementById('versFilterCompagnia'),curVal=compSel.value,allComps=[];
+  versamenti.forEach(function(v){if(v.compagnia&&allComps.indexOf(v.compagnia)===-1)allComps.push(v.compagnia);});
+  allComps.sort();
+  compSel.innerHTML='<option value="">Tutte</option>'+allComps.map(function(c){return'<option value="'+c+'"'+(c===curVal?' selected':'')+'>'+c+'</option>';}).join('');
+  var totale=0,bonifici=0,assegni=0,contanti=0;
+  filtered.forEach(function(v){var imp=parseFloat(v.importo)||0;totale+=imp;if(v.metodo==='Bonifico')bonifici+=imp;else if(v.metodo==='Assegno')assegni+=imp;else if(v.metodo==='Contanti')contanti+=imp;});
+  document.getElementById('versamentiKPI').innerHTML=
+    '<div style="background:white;border-radius:12px;padding:16px;border:1px solid var(--border);text-align:center;"><div style="font-size:24px;font-weight:700;color:var(--primary);">'+formatCurrency(totale)+'</div><div style="font-size:12px;color:var(--text-light);margin-top:4px;">Totale Versamenti</div></div>'+
+    '<div style="background:white;border-radius:12px;padding:16px;border:1px solid var(--border);text-align:center;"><div style="font-size:24px;font-weight:700;color:#2b6cb0;">'+formatCurrency(bonifici)+'</div><div style="font-size:12px;color:var(--text-light);margin-top:4px;">Bonifici</div></div>'+
+    '<div style="background:white;border-radius:12px;padding:16px;border:1px solid var(--border);text-align:center;"><div style="font-size:24px;font-weight:700;color:#38a169;">'+formatCurrency(assegni)+'</div><div style="font-size:12px;color:var(--text-light);margin-top:4px;">Assegni</div></div>'+
+    '<div style="background:white;border-radius:12px;padding:16px;border:1px solid var(--border);text-align:center;"><div style="font-size:24px;font-weight:700;color:#d69e2e;">'+formatCurrency(contanti)+'</div><div style="font-size:12px;color:var(--text-light);margin-top:4px;">Contanti</div></div>';
+  var body=document.getElementById('versamentiBody');
+  if(filtered.length===0){body.innerHTML='<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-light);">Nessun versamento registrato. Clicca "\u2795 Nuovo Versamento" per iniziare.</td></tr>';return;}
+  body.innerHTML=filtered.map(function(v){
+    return '<tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;">'+formatDate(v.data)+'</td><td style="padding:10px 12px;font-weight:600;">'+(v.compagnia||'-')+'</td><td style="padding:10px 12px;">'+(v.polizza||'-')+'</td><td style="padding:10px 12px;">'+(v.cliente||'-')+'</td><td style="padding:10px 12px;text-align:right;font-weight:600;">'+formatCurrency(v.importo)+'</td><td style="padding:10px 12px;">'+metodoBadge(v.metodo)+'</td><td style="padding:10px 12px;font-size:12px;">'+(v.riferimento||'-')+'</td><td style="padding:10px 12px;font-size:12px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="'+(v.note||'').replace(/"/g,'&quot;')+'">'+(v.note||'-')+'</td><td style="padding:10px 12px;text-align:center;white-space:nowrap;"><button onclick="openVersamentoModal(\''+v.id+'\')" style="background:none;border:none;cursor:pointer;font-size:16px;" title="Modifica">\u270F\uFE0F</button><button onclick="deleteVersamento(\''+v.id+'\')" style="background:none;border:none;cursor:pointer;font-size:16px;" title="Elimina">\u{1F5D1}\uFE0F</button></td></tr>';
+  }).join('');
+}
+
+function resetVersamentiFilters(){document.getElementById('versFilterCompagnia').value='';document.getElementById('versFilterMetodo').value='';document.getElementById('versFilterDa').value='';document.getElementById('versFilterA').value='';renderVersamentiTable();}
+
+function exportVersamentiCSV(){
+  if(versamenti.length===0){showToast('Nessun versamento da esportare','error');return;}
+  var headers=['Data','Compagnia','N.Polizza','Cliente','Importo','Metodo','Riferimento','Stato','Note'];
+  var rows=versamenti.map(function(v){return[v.data,v.compagnia,v.polizza,v.cliente,v.importo,v.metodo,v.riferimento,v.stato,v.note];});
+  var csv=[headers.join(';')].concat(rows.map(function(r){return r.map(function(c){return'"'+String(c||'').replace(/"/g,'""')+'"';}).join(';');})).join('\n');
+  var blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Versamenti_Premi_FIM.csv';a.click();
+  showToast('CSV esportato!','success');
 }
 
 function openECClienteModal() {
