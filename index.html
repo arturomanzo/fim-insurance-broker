@@ -5700,7 +5700,7 @@ function saveSettings() {
     firebaseApiKey: document.getElementById('set_firebaseApiKey').value,
     firebaseDatabaseUrl: document.getElementById('set_firebaseDatabaseUrl').value,
     firebaseProjectId: document.getElementById('set_firebaseProjectId').value,
-    claudeApiKey: document.getElementById('set_claudeApiKey').value,
+    claudeApiKey: document.getElementById('set_claudeApiKey').value.replace(/[^\x20-\x7E]/g, '').trim(),
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   refreshAll();
@@ -12712,7 +12712,7 @@ function handleDocAISelect(e) {
 async function processDocAI(file) {
   if (!file || !file.name.toLowerCase().endsWith('.pdf')) { showToast('Seleziona un file PDF', 'error'); return; }
   var settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
-  var claudeKey = settings.claudeApiKey || '';
+  var claudeKey = (settings.claudeApiKey || '').replace(/[^\x20-\x7E]/g, '').trim();
   if (!claudeKey || !claudeKey.startsWith('sk-ant-')) { showToast('Configura la Claude API Key nelle Impostazioni', 'error'); return; }
   var proc = document.getElementById('docAIProcessing');
   var prog = document.getElementById('docAIProgressFill');
@@ -14758,7 +14758,7 @@ async function processPDFFile(file) {
 
     // Step 3: AI or Regex extraction
     var settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
-    var claudeKey = settings.claudeApiKey || '';
+    var claudeKey = (settings.claudeApiKey || '').replace(/[^\x20-\x7E]/g, '').trim();
     var extracted;
 
     if (claudeKey && claudeKey.startsWith('sk-ant-')) {
