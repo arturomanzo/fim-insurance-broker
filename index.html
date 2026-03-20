@@ -3893,7 +3893,8 @@ function autoCloudPush() {
           { name: 'quotazioni', varName: 'quotazioni', key: 'fim_quotazioni' },
           { name: 'sinistri', varName: 'sinistri', key: 'fim_sinistri' },
           { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' },
-          { name: 'documentiAI', varName: 'documentiAI', key: 'fim_documenti_ai' }
+          { name: 'documentiAI', varName: 'documentiAI', key: 'fim_documenti_ai' },
+          { name: 'versamenti', varName: 'versamenti', key: 'fimVersamenti' }
         ];
         collections.forEach(function(col) {
           if (cloudData[col.name]) {
@@ -3918,6 +3919,7 @@ function autoCloudPush() {
         quotazioni: quotazioni,
         sinistri: sinistri,
         quietanze: quietanze,
+        versamenti: typeof versamenti !== 'undefined' ? versamenti : [],
         documentiAI: documentiAI,
         provTable: provTable,
         indivProvTables: indivProvTables,
@@ -3967,7 +3969,8 @@ function startRealtimeSync() {
         { name: 'preventivi', varName: 'preventivi', key: 'fim_preventivi' },
         { name: 'quotazioni', varName: 'quotazioni', key: 'fim_quotazioni' },
         { name: 'sinistri', varName: 'sinistri', key: 'fim_sinistri' },
-        { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' }
+        { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' },
+        { name: 'versamenti', varName: 'versamenti', key: 'fimVersamenti' }
       ];
       collections.forEach(function(col) {
         if (data[col.name]) {
@@ -4043,12 +4046,14 @@ function initFirebase() {
       cloudSyncEnabled = true;
       updateSyncStatus('connected');
       startRealtimeSync();
+      setTimeout(function() { cloudPullSilent(); }, 1500);
     }).catch((err) => {
       console.error('Firebase Auth error:', err);
       // Fallback: try without auth
       cloudSyncEnabled = true;
       updateSyncStatus('connected');
       startRealtimeSync();
+      setTimeout(function() { cloudPullSilent(); }, 1500);
     });
     // Don't set cloudSyncEnabled here - wait for auth
     return;
@@ -4090,7 +4095,8 @@ function cloudSync() {
         { name: 'preventivi', varName: 'preventivi', key: 'fim_preventivi' },
         { name: 'quotazioni', varName: 'quotazioni', key: 'fim_quotazioni' },
         { name: 'sinistri', varName: 'sinistri', key: 'fim_sinistri' },
-        { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' }
+        { name: 'quietanze', varName: 'quietanze', key: 'fim_quietanze' },
+        { name: 'versamenti', varName: 'versamenti', key: 'fimVersamenti' }
       ];
       collections.forEach(function(col) {
         if (cloudData[col.name]) {
@@ -4116,6 +4122,7 @@ function cloudSync() {
       quotazioni: quotazioni,
       sinistri: sinistri,
       quietanze: quietanze,
+        versamenti: typeof versamenti !== 'undefined' ? versamenti : [],
       provTable: provTable,
       indivProvTables: indivProvTables,
       provOverrides: JSON.parse(localStorage.getItem('fim_prov_overrides') || '{}'),
@@ -4147,15 +4154,16 @@ function cloudPull() {
     if (!confirm('Scaricare i dati dal cloud? I dati locali verranno sovrascritti.')) return;
 
     // Restore all data
-    if (data.clienti) { clienti = data.clienti; localStorage.setItem('fim_clienti', JSON.stringify(clienti)); }
-    if (data.compagnie) { compagnie = data.compagnie; localStorage.setItem('fim_compagnie', JSON.stringify(compagnie)); }
-    if (data.polizze) { polizze = data.polizze; localStorage.setItem('fim_polizze_db', JSON.stringify(polizze)); }
-    if (data.collaboratori) { collaboratori = data.collaboratori; localStorage.setItem('fim_collaboratori', JSON.stringify(collaboratori)); }
-    if (data.fatture) { fatture = data.fatture; localStorage.setItem('fim_fatture', JSON.stringify(fatture)); }
-    if (data.preventivi) { preventivi = data.preventivi; localStorage.setItem('fim_preventivi', JSON.stringify(preventivi)); }
-    if (data.quotazioni) { quotazioni = data.quotazioni; localStorage.setItem('fim_quotazioni', JSON.stringify(quotazioni)); }
-    if (data.sinistri) { sinistri = data.sinistri; localStorage.setItem('fim_sinistri', JSON.stringify(sinistri)); }
-    if (data.quietanze) { quietanze = data.quietanze; localStorage.setItem('fim_quietanze', JSON.stringify(quietanze)); }
+    if (data.clienti) { clienti = Array.isArray(data.clienti) ? data.clienti : Object.values(data.clienti); localStorage.setItem('fim_clienti', JSON.stringify(clienti)); }
+    if (data.compagnie) { compagnie = Array.isArray(data.compagnie) ? data.compagnie : Object.values(data.compagnie); localStorage.setItem('fim_compagnie', JSON.stringify(compagnie)); }
+    if (data.polizze) { polizze = Array.isArray(data.polizze) ? data.polizze : Object.values(data.polizze); localStorage.setItem('fim_polizze_db', JSON.stringify(polizze)); _lastKnownPolizzeCount = polizze.length; }
+    if (data.collaboratori) { collaboratori = Array.isArray(data.collaboratori) ? data.collaboratori : Object.values(data.collaboratori); localStorage.setItem('fim_collaboratori', JSON.stringify(collaboratori)); }
+    if (data.fatture) { fatture = Array.isArray(data.fatture) ? data.fatture : Object.values(data.fatture); localStorage.setItem('fim_fatture', JSON.stringify(fatture)); }
+    if (data.preventivi) { preventivi = Array.isArray(data.preventivi) ? data.preventivi : Object.values(data.preventivi); localStorage.setItem('fim_preventivi', JSON.stringify(preventivi)); }
+    if (data.quotazioni) { quotazioni = Array.isArray(data.quotazioni) ? data.quotazioni : Object.values(data.quotazioni); localStorage.setItem('fim_quotazioni', JSON.stringify(quotazioni)); }
+    if (data.sinistri) { sinistri = Array.isArray(data.sinistri) ? data.sinistri : Object.values(data.sinistri); localStorage.setItem('fim_sinistri', JSON.stringify(sinistri)); }
+    if (data.quietanze) { quietanze = Array.isArray(data.quietanze) ? data.quietanze : Object.values(data.quietanze); localStorage.setItem('fim_quietanze', JSON.stringify(quietanze)); }
+    if (data.versamenti) { versamenti = Array.isArray(data.versamenti) ? data.versamenti : Object.values(data.versamenti); localStorage.setItem('fimVersamenti', JSON.stringify(versamenti)); }
     if (data.provTable) { provTable = data.provTable; localStorage.setItem('fim_prov_table', JSON.stringify(provTable)); }
     if (data.indivProvTables) { indivProvTables = data.indivProvTables; localStorage.setItem('fim_indiv_prov', JSON.stringify(indivProvTables)); }
     if (data.provOverrides) { localStorage.setItem('fim_prov_overrides', JSON.stringify(data.provOverrides)); }
@@ -4631,6 +4639,7 @@ function cloudPullSilent() {
     if (data.quotazioni) { quotazioni = Array.isArray(data.quotazioni) ? data.quotazioni : Object.values(data.quotazioni); localStorage.setItem('fim_quotazioni', JSON.stringify(quotazioni)); }
     if (data.sinistri) { sinistri = Array.isArray(data.sinistri) ? data.sinistri : Object.values(data.sinistri); localStorage.setItem('fim_sinistri', JSON.stringify(sinistri)); }
     if (data.quietanze) { quietanze = Array.isArray(data.quietanze) ? data.quietanze : Object.values(data.quietanze); localStorage.setItem('fim_quietanze', JSON.stringify(quietanze)); }
+    if (data.versamenti) { versamenti = Array.isArray(data.versamenti) ? data.versamenti : Object.values(data.versamenti); localStorage.setItem('fimVersamenti', JSON.stringify(versamenti)); }
     if (data.provTable) { provTable = data.provTable; localStorage.setItem('fim_prov_table', JSON.stringify(provTable)); }
     if (data.indivProvTables) { indivProvTables = data.indivProvTables; localStorage.setItem('fim_indiv_prov', JSON.stringify(indivProvTables)); }
     if (data.provOverrides) { localStorage.setItem('fim_prov_overrides', JSON.stringify(data.provOverrides)); }
@@ -11507,6 +11516,84 @@ function exportVersamentiCSV(){
   var blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Versamenti_Premi_FIM.csv';a.click();
   showToast('CSV esportato!','success');
+}
+
+
+function downloadAvvisoScadenzaPDF() {
+  if (typeof jspdf === 'undefined' && typeof window.jspdf === 'undefined') {
+    showToast('Caricamento libreria PDF...', 'info');
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.onload = function() { _generateAvvisoScadenzaPDF(); };
+    document.head.appendChild(s);
+    return;
+  }
+  _generateAvvisoScadenzaPDF();
+}
+
+function _generateAvvisoScadenzaPDF() {
+  var data = window._avvisoScadenzaData;
+  if (!data) return;
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF('p', 'mm', 'a4');
+  var piva = '02637640596';
+  var indBroker = 'Via Roma 41, 04012 Cisterna di Latina (LT)';
+  var pageW = 210, margin = 20, y = 20;
+  doc.setFillColor(26,54,93); doc.rect(0,0,pageW,35,'F');
+  doc.setTextColor(255,255,255); doc.setFontSize(16); doc.setFont('helvetica','bold');
+  doc.text('FIM INSURANCE BROKER S.A.S.', pageW/2, 14, {align:'center'});
+  doc.setFontSize(9); doc.setFont('helvetica','normal');
+  doc.text('di Manzo Arturo & C. \u2014 ' + indBroker, pageW/2, 21, {align:'center'});
+  doc.text('P.IVA ' + piva + ' \u2014 RUI Sez. B N. B000405449', pageW/2, 27, {align:'center'});
+  y = 45;
+  doc.setTextColor(100,100,100); doc.setFontSize(10);
+  doc.text('Data: ' + formatDate(new Date().toISOString().split('T')[0]), pageW-margin, y, {align:'right'}); y+=10;
+  doc.setTextColor(0,0,0); doc.setFontSize(11); doc.setFont('helvetica','bold');
+  doc.text('Spett.le ' + data.cliente, margin, y); y+=6;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  var cl = data.polizze[0];
+  if (cl.indirizzo) { doc.text(cl.indirizzo, margin, y); y+=5; }
+  if (cl.cf) { doc.text('C.F./P.IVA: ' + cl.cf, margin, y); y+=5; }
+  y+=5;
+  doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(26,54,93);
+  doc.text('AVVISO DI SCADENZA', pageW/2, y, {align:'center'}); y+=10;
+  doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(0,0,0);
+  var bodyLines = doc.splitTextToSize('Vi comunichiamo che sono in scadenza le seguenti polizze. Vi preghiamo di curare in tempo utile il pagamento dei relativi importi presso i nostri uffici o tramite versamento sul nostro conto corrente bancario.', pageW-margin*2);
+  doc.text(bodyLines, margin, y); y += bodyLines.length*5+5;
+  var colW=[40,35,30,28,30], headers=['Compagnia','N. Polizza','Targa/Ramo','Scadenza','Premio'], startX=margin;
+  doc.setFillColor(26,54,93); doc.rect(startX,y-4,colW.reduce(function(a,b){return a+b;},0),8,'F');
+  doc.setTextColor(255,255,255); doc.setFontSize(9); doc.setFont('helvetica','bold');
+  var x=startX; headers.forEach(function(hd,i){doc.text(hd,x+2,y,{maxWidth:colW[i]-4});x+=colW[i];}); y+=7;
+  doc.setTextColor(0,0,0); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  var totale=0;
+  data.polizze.forEach(function(p,idx){
+    var premio=parseFloat(p.premio)||0; totale+=premio;
+    if(idx%2===0){doc.setFillColor(247,250,252);doc.rect(startX,y-4,colW.reduce(function(a,b){return a+b;},0),7,'F');}
+    x=startX;
+    [p.compagnia||'-',p.numPolizza||'-',p.targa||p.tipoGaranzia||'-',formatDate(p.scadenza),formatCurrency(premio)].forEach(function(v,i){
+      doc.text(String(v).substring(0,22),x+2,y,{maxWidth:colW[i]-4});x+=colW[i];
+    }); y+=7;
+    if(y>260){doc.addPage();y=20;}
+  });
+  doc.setFillColor(26,54,93); doc.rect(startX,y-4,colW.reduce(function(a,b){return a+b;},0),8,'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold');
+  doc.text('TOTALE',startX+2,y); doc.text(formatCurrency(totale),startX+colW[0]+colW[1]+colW[2]+colW[3]+2,y); y+=12;
+  doc.setTextColor(0,0,0); doc.setDrawColor(26,54,93); doc.setLineWidth(0.5);
+  doc.setFillColor(247,250,252); doc.roundedRect(margin,y-4,pageW-margin*2,22,2,2,'FD');
+  doc.setFontSize(9); doc.setFont('helvetica','bold');
+  doc.text('Modalita di pagamento: Bonifico bancario \u2014 Banca Intesa San Paolo',margin+4,y+1);
+  doc.setFont('helvetica','normal');
+  doc.text('IBAN: IT89 F030 6939 4910 0000 0083 02',margin+4,y+7);
+  doc.text('Intestato a: FIM INSURANCE BROKER S.A.S. di Manzo Arturo & C.',margin+4,y+13); y+=26;
+  doc.setFontSize(9);
+  var cLines=doc.splitTextToSize('Per il pagamento dei relativi premi in scadenza, La invitiamo a voler fare riferimento al Sig. Arturo Manzo (347 331 2330), che sara a Sua completa disposizione.',pageW-margin*2);
+  doc.text(cLines,margin,y); y+=cLines.length*5+8;
+  doc.text('Distinti saluti.',margin,y); y+=10;
+  doc.setFont('helvetica','bold'); doc.text('FIM INSURANCE BROKER S.A.S.',margin,y);
+  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(128,128,128);
+  doc.text('FIM Insurance Broker S.A.S. \u2014 P.IVA 02637640596 \u2014 CCIAA/N. REA LT/187466 \u2014 PEC: fiminsurancebrokersas@pec.it \u2014 RUI Sez. B N. B000405449',pageW/2,287,{align:'center'});
+  doc.save('Avviso_Scadenza_'+data.cliente.replace(/\s+/g,'_')+'.pdf');
+  showToast('PDF scaricato!','success');
 }
 
 function openECClienteModal() {
