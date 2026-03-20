@@ -18,6 +18,15 @@ function sanitize(value: unknown): string {
   return String(value ?? '').trim().slice(0, 1000)
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const FIM_EMAIL = process.env.FIM_EMAIL || 'info@fimbroker.it'
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
@@ -31,6 +40,11 @@ function buildTeamEmailHtml(data: {
   messaggio: string
   timestamp: string
 }): string {
+  const nome = escapeHtml(data.nome)
+  const email = escapeHtml(data.email)
+  const telefono = escapeHtml(data.telefono)
+  const oggetto = escapeHtml(data.oggetto)
+  const messaggio = escapeHtml(data.messaggio)
   return `
 <!DOCTYPE html>
 <html lang="it">
@@ -48,7 +62,7 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Mittente</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 15px; font-weight: 700; color: #1e293b;">${data.nome}</span>
+            <span style="font-size: 15px; font-weight: 700; color: #1e293b;">${nome}</span>
           </td>
         </tr>
         <tr>
@@ -56,31 +70,31 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Email</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <a href="mailto:${data.email}" style="color: #0f2d6b; font-size: 15px;">${data.email}</a>
+            <a href="mailto:${email}" style="color: #0f2d6b; font-size: 15px;">${email}</a>
           </td>
         </tr>
-        ${data.telefono ? `
+        ${telefono ? `
         <tr>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Telefono</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <a href="tel:${data.telefono}" style="color: #0f2d6b; font-size: 15px;">${data.telefono}</a>
+            <a href="tel:${telefono}" style="color: #0f2d6b; font-size: 15px;">${telefono}</a>
           </td>
         </tr>` : ''}
-        ${data.oggetto ? `
+        ${oggetto ? `
         <tr>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Oggetto</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 15px; font-weight: 600; color: #00b4c8;">${data.oggetto}</span>
+            <span style="font-size: 15px; font-weight: 600; color: #00b4c8;">${oggetto}</span>
           </td>
         </tr>` : ''}
         <tr>
           <td style="padding: 10px 0;" colspan="2">
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Messaggio</span>
-            <p style="margin: 8px 0 0; color: #475569; font-size: 14px; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 3px solid #00b4c8;">${data.messaggio}</p>
+            <p style="margin: 8px 0 0; color: #475569; font-size: 14px; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 3px solid #00b4c8;">${messaggio}</p>
           </td>
         </tr>
       </table>
@@ -92,7 +106,7 @@ function buildTeamEmailHtml(data: {
       </div>
 
       <div style="margin-top: 20px; text-align: center;">
-        <a href="mailto:${data.email}?subject=Re: ${data.oggetto || 'La tua richiesta'} — FIM Insurance Broker"
+        <a href="mailto:${email}?subject=Re: ${oggetto || 'La tua richiesta'} — FIM Insurance Broker"
            style="display: inline-block; background: #0f2d6b; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
           Rispondi →
         </a>
@@ -108,7 +122,8 @@ function buildTeamEmailHtml(data: {
 </html>`
 }
 
-function buildClientConfirmHtml(nome: string): string {
+function buildClientConfirmHtml(rawNome: string): string {
+  const nome = escapeHtml(rawNome)
   return `
 <!DOCTYPE html>
 <html lang="it">

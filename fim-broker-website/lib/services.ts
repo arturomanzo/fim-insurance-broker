@@ -145,7 +145,7 @@ export const services: Service[] = [
           'Sì, offriamo polizze familiari che coprono il nucleo familiare con premi vantaggiosi rispetto alle polizze individuali.',
       },
       {
-        question: 'Sono coperto anche allestero?',
+        question: "Sono coperto anche all'estero?",
         answer:
           "Molte nostre polizze prevedono copertura internazionale, ideale per chi viaggia o vive periodi all'estero.",
       },

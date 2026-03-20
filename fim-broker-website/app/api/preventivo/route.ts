@@ -20,6 +20,15 @@ function sanitize(value: unknown): string {
   return String(value ?? '').trim().slice(0, 1000)
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 // Inizializza Resend solo se la chiave è presente
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
@@ -36,6 +45,12 @@ function buildTeamEmailHtml(data: {
   messaggio: string
   timestamp: string
 }): string {
+  const tipo = escapeHtml(data.tipo)
+  const nome = escapeHtml(data.nome)
+  const cognome = escapeHtml(data.cognome)
+  const email = escapeHtml(data.email)
+  const telefono = escapeHtml(data.telefono)
+  const messaggio = escapeHtml(data.messaggio)
   return `
 <!DOCTYPE html>
 <html lang="it">
@@ -56,7 +71,7 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Tipo polizza</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 15px; font-weight: 700; color: #00b4c8;">${data.tipo}</span>
+            <span style="font-size: 15px; font-weight: 700; color: #00b4c8;">${tipo}</span>
           </td>
         </tr>
         <tr>
@@ -64,7 +79,7 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Cliente</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 15px; color: #1e293b; font-weight: 600;">${data.nome} ${data.cognome}</span>
+            <span style="font-size: 15px; color: #1e293b; font-weight: 600;">${nome} ${cognome}</span>
           </td>
         </tr>
         <tr>
@@ -72,7 +87,7 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Email</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <a href="mailto:${data.email}" style="color: #0f2d6b; font-size: 15px;">${data.email}</a>
+            <a href="mailto:${email}" style="color: #0f2d6b; font-size: 15px;">${email}</a>
           </td>
         </tr>
         <tr>
@@ -80,14 +95,14 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Telefono</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <a href="tel:${data.telefono}" style="color: #0f2d6b; font-size: 15px;">${data.telefono}</a>
+            <a href="tel:${telefono}" style="color: #0f2d6b; font-size: 15px;">${telefono}</a>
           </td>
         </tr>
-        ${data.messaggio ? `
+        ${messaggio ? `
         <tr>
           <td style="padding: 10px 0;" colspan="2">
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Messaggio</span>
-            <p style="margin: 8px 0 0; color: #475569; font-size: 14px; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 3px solid #00b4c8;">${data.messaggio}</p>
+            <p style="margin: 8px 0 0; color: #475569; font-size: 14px; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 3px solid #00b4c8;">${messaggio}</p>
           </td>
         </tr>` : ''}
       </table>
@@ -99,7 +114,7 @@ function buildTeamEmailHtml(data: {
       </div>
 
       <div style="margin-top: 20px; text-align: center;">
-        <a href="mailto:${data.email}?subject=Preventivo ${data.tipo} - FIM Insurance Broker&body=Gentile ${data.nome},"
+        <a href="mailto:${email}?subject=Preventivo ${tipo} - FIM Insurance Broker&amp;body=Gentile ${nome},"
            style="display: inline-block; background: #0f2d6b; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
           Rispondi al cliente →
         </a>
@@ -117,7 +132,9 @@ function buildTeamEmailHtml(data: {
 </html>`
 }
 
-function buildClientEmailHtml(nome: string, tipo: string): string {
+function buildClientEmailHtml(rawNome: string, rawTipo: string): string {
+  const nome = escapeHtml(rawNome)
+  const tipo = escapeHtml(rawTipo)
   return `
 <!DOCTYPE html>
 <html lang="it">
