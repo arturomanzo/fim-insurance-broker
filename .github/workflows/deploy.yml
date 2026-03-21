@@ -45,9 +45,12 @@ jobs:
             --prod \
             --yes
         env:
+          # Obbligatori
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          FIM_EMAIL: ${{ secrets.FIM_EMAIL }}
-          FIM_FROM_EMAIL: ${{ secrets.FIM_FROM_EMAIL }}
-          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
-          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER }}
+          # Opzionali — il sito funziona anche senza, ma le email non verranno inviate
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || '' }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID || '' }}
+          FIM_EMAIL: ${{ secrets.FIM_EMAIL || 'info@fimbroker.it' }}
+          FIM_FROM_EMAIL: ${{ secrets.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>' }}
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it' }}
+          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER || '390212345678' }}
