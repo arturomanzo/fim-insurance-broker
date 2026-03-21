@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useState } from 'react'
 import FimLogo from '@/components/ui/FimLogo'
 
 const serviceLinks = [
@@ -25,6 +26,85 @@ const legalLinks = [
   { href: '/cookie-policy', label: 'Cookie Policy' },
   { href: '/note-legali', label: 'Note Legali' },
 ]
+
+function NewsletterForm() {
+  const [email, setEmail] = useState('')
+  const [consent, setConsent] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!consent) return
+    setStatus('loading')
+    setErrorMsg('')
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setErrorMsg(data.error || 'Errore durante l\'iscrizione.')
+        setStatus('error')
+      } else {
+        setStatus('success')
+      }
+    } catch {
+      setErrorMsg('Errore di rete. Riprova.')
+      setStatus('error')
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div className="p-4 bg-accent/20 border border-accent/30 rounded-lg text-sm text-white">
+        <p className="font-semibold mb-1">Iscrizione confermata!</p>
+        <p className="text-white/70">Riceverai le nostre novità assicurative direttamente nella tua inbox.</p>
+      </div>
+    )
+  }
+
+  return (
+    <form className="space-y-3" onSubmit={handleSubmit} noValidate>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="La tua email"
+        required
+        disabled={status === 'loading'}
+        className="w-full px-4 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-60"
+      />
+      <label className="flex items-start gap-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          disabled={status === 'loading'}
+          className="mt-0.5 w-4 h-4 accent-accent flex-shrink-0"
+        />
+        <span className="text-white/60 text-xs leading-snug">
+          Acconsento al trattamento dei miei dati per ricevere comunicazioni commerciali.{' '}
+          <Link href="/privacy-policy" className="underline hover:text-white">
+            Privacy Policy
+          </Link>
+        </span>
+      </label>
+      {status === 'error' && (
+        <p className="text-red-300 text-xs">{errorMsg}</p>
+      )}
+      <button
+        type="submit"
+        disabled={status === 'loading' || !consent}
+        className="w-full px-4 py-2.5 bg-accent text-primary font-semibold text-sm rounded-lg hover:bg-accent-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {status === 'loading' ? 'Iscrizione in corso…' : 'Iscriviti'}
+      </button>
+    </form>
+  )
+}
 
 export default function Footer() {
   return (
@@ -96,19 +176,7 @@ export default function Footer() {
             <p className="text-white/70 text-sm mb-4">
               Rimani aggiornato sulle ultime novità assicurative e offerte esclusive.
             </p>
-            <form className="space-y-2" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="La tua email"
-                className="w-full px-4 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-              />
-              <button
-                type="submit"
-                className="w-full px-4 py-2.5 bg-accent text-primary font-semibold text-sm rounded-lg hover:bg-accent-dark transition-colors"
-              >
-                Iscriviti
-              </button>
-            </form>
+            <NewsletterForm />
 
             {/* RUI */}
             <div className="mt-6 p-3 bg-white/5 rounded-lg border border-white/10">
