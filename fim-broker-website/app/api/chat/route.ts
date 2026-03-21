@@ -12,11 +12,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Messaggi non validi' }, { status: 400 })
     }
 
-    // Sanitize messages: only keep role and content
+    // Sanitize messages: only keep role and content, cap history at 20 turns
     const sanitizedMessages = messages
       .filter((m: { role: string; content: string }) =>
         m.role === 'user' || m.role === 'assistant'
       )
+      .slice(-20)
       .map((m: { role: 'user' | 'assistant'; content: string }) => ({
         role: m.role,
         content: String(m.content).slice(0, 4000), // limit content length
