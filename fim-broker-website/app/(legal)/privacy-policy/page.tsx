@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Privacy Policy</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Gennaio 2025</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Marzo 2026</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -34,6 +34,7 @@ export default function PrivacyPolicyPage() {
                 <li><strong>Dati di navigazione</strong>: indirizzo IP, tipo di browser, pagine visitate, per finalità statistiche anonime</li>
                 <li><strong>Dati forniti dall&apos;utente</strong>: nome, cognome, email, telefono, richiesti per l&apos;erogazione dei servizi di preventivazione e consulenza</li>
                 <li><strong>Dati di comunicazione</strong>: messaggi inviati tramite form di contatto o tramite l&apos;assistente virtuale FIMA (elaborati da Anthropic AI per generare le risposte)</li>
+                <li><strong>Dati di iscrizione alla newsletter</strong>: indirizzo email fornito volontariamente per ricevere comunicazioni commerciali e aggiornamenti assicurativi (solo previo consenso esplicito)</li>
               </ul>
               <p>Le finalità del trattamento sono:</p>
               <ul>
@@ -88,8 +89,9 @@ export default function PrivacyPolicyPage() {
                 </li>
                 <li>
                   <strong>Resend, Inc.</strong> (USA) — gestisce l&apos;invio delle email di conferma
-                  per richieste di preventivo e messaggi di contatto. Il trasferimento avviene sulla
-                  base delle Clausole Contrattuali Standard (SCC).
+                  per richieste di preventivo e messaggi di contatto, nonché il database degli iscritti
+                  alla newsletter (Resend Audiences). Il trasferimento avviene sulla base delle
+                  Clausole Contrattuali Standard (SCC).
                 </li>
               </ul>
               <p>
