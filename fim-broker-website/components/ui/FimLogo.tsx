@@ -8,6 +8,8 @@
  *  - height:  altezza in px (default 48)
  */
 
+import { useId } from 'react'
+
 interface FimLogoProps {
   variant?: 'full' | 'icon' | 'wordmark'
   theme?: 'color' | 'white' | 'dark'
@@ -25,7 +27,8 @@ export default function FimLogo({
   const navy = theme === 'white' ? '#ffffff' : '#0f2d6b'
   const teal = theme === 'white' ? '#ffffff' : theme === 'dark' ? '#0f2d6b' : '#00b4c8'
   const tealLight = theme === 'white' ? '#ffffff' : theme === 'dark' ? '#1a4a9e' : '#33c7d8'
-  const gradId = `fim-grad-${theme}`
+  const uid = useId()
+  const gradId = `fim-grad-${uid}`
 
   // Proporzioni: icona 1:1, full circa 3.5:1
   const iconSize = height
