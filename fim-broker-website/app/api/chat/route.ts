@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createFIMAStream } from '@/lib/anthropic'
+import { rateLimit } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
+  const { ok, retryAfter } = rateLimit(req, { limit: 20, windowMs: 60_000 })
+  if (!ok) {
+    return NextResponse.json(
+      { error: 'Troppe richieste. Attendi qualche secondo e riprova.' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+    )
+  }
+
   try {
     const body = await req.json()
     const { messages } = body

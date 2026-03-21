@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { rateLimit } from '@/lib/rateLimit'
 
 interface ContactRequest {
   nome: string
@@ -169,6 +170,14 @@ function buildClientConfirmHtml(rawNome: string): string {
 }
 
 export async function POST(req: NextRequest) {
+  const { ok, retryAfter } = rateLimit(req, { limit: 5, windowMs: 60 * 60_000 })
+  if (!ok) {
+    return NextResponse.json(
+      { error: 'Troppe richieste. Riprova tra qualche ora.' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+    )
+  }
+
   try {
     const body: ContactRequest = await req.json()
 

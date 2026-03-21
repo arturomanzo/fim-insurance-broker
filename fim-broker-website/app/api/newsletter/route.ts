@@ -1,9 +1,18 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { rateLimit } from '@/lib/rateLimit'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 export async function POST(req: Request) {
+  const { ok, retryAfter } = rateLimit(req, { limit: 3, windowMs: 60 * 60_000 })
+  if (!ok) {
+    return NextResponse.json(
+      { error: 'Troppe richieste. Riprova tra qualche ora.' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+    )
+  }
+
   try {
     const body = await req.json()
     const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : ''
