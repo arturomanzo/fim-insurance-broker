@@ -1369,8 +1369,8 @@ tr.collab-row:hover { background: #e3f0ff !important; }
 </div>
 
 <!-- MODAL: NUOVO/MODIFICA CLIENTE -->
-<div id="clienteModal" class="modal" style="display:none;">
-  <div class="modal-content" style="max-width:750px;max-height:90vh;overflow-y:auto;">
+<div class="modal-overlay" id="clienteModal">
+  <div class="modal" style="max-width:750px;max-height:90vh;overflow-y:auto;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
       <h3 id="clienteModalTitle" style="margin:0;">👤 Nuovo Cliente</h3>
       <button onclick="closeModal('clienteModal')" style="background:none;border:none;font-size:24px;cursor:pointer;">&times;</button>
@@ -1495,7 +1495,8 @@ tr.collab-row:hover { background: #e3f0ff !important; }
         <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Compagnia *</label><select id="versCompagnia" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"><option value="">— Seleziona —</option></select></div>
         <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Metodo Pagamento *</label><select id="versMetodo" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"><option value="">— Seleziona —</option><option value="Bonifico">Bonifico Bancario</option><option value="Assegno">Assegno</option><option value="Contanti">Contanti</option><option value="RID/SDD">RID/SDD</option><option value="Carta">Carta di Credito</option><option value="Compensazione">Compensazione Provvigioni</option></select></div>
         <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">N. Polizza</label><input type="text" id="versPolizza" placeholder="Numero polizza" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"></div>
-        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Cliente</label><input type="text" id="versCliente" placeholder="Nome cliente" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"></div>
+        <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Cliente</label><input type="text" id="versCliente" placeholder="Nome cliente" list="versClientiList" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;">
+          <datalist id="versClientiList"></datalist></div>
         <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Rif. Pagamento</label><input type="text" id="versRiferimento" placeholder="CRO / N. Assegno / Altro" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"></div>
         <div><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Stato</label><select id="versStato" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;"><option value="Completato">Completato</option><option value="In attesa">In attesa</option><option value="Annullato">Annullato</option></select></div>
       </div>
@@ -5929,7 +5930,7 @@ function openClienteModal(id) {
     }
   }
   toggleClienteTipo();
-  document.getElementById('clienteModal').style.display = 'flex';
+  document.getElementById('clienteModal').classList.add('active');
 }
 
 // Save cliente
@@ -9144,11 +9145,13 @@ function updateProvImponibile(polId, newVal) {
 
 function updateProvPercentuale(polId, newVal) {
   var nuovaPerc = parseFloat(newVal) || 0;
-  // Leggi l'imponibile attuale dal campo input della stessa riga
   var pol = polizze.find(function(p) { return p.id === polId; });
   if (!pol) return;
-  var calc = calcImponibile(pol);
-  var nuovaProv = calc.imponibile * nuovaPerc / 100;
+  // Leggi l'imponibile attuale dal campo input nella stessa riga (potrebbe essere stato modificato manualmente)
+  var row = document.querySelector('[data-prov-perc="' + polId + '"');
+  var imponibileInput = row ? row.closest('tr').querySelectorAll('input[type="number"]')[0] : null;
+  var imponibile = imponibileInput ? (parseFloat(imponibileInput.value) || 0) : calcImponibile(pol).imponibile;
+  var nuovaProv = imponibile * nuovaPerc / 100;
   // Aggiorna cella provvigione in tempo reale
   var provCell = document.querySelector('[data-prov-importo="' + polId + '"]');
   if (provCell) provCell.textContent = formatCurrency(nuovaProv);
@@ -9200,9 +9203,8 @@ function editProvvigione(polizzaId) {
   const polizza = polizze.find(p => p.id === polizzaId);
   if (!polizza) return;
   const collab = collaboratori.find(c => c.id === polizza.collaboratore);
-  if (!collab) return;
   const calc = calcImponibile(polizza);
-  const perc = getProvPercentage(polizza.tipoGaranzia, collab.ruolo, polizza.collaboratore);
+  const perc = collab ? getProvPercentage(polizza.tipoGaranzia, collab.ruolo, polizza.collaboratore) : (polizza.percProvvOverride || 0);
   const provvigione = calc.imponibile * perc / 100;
 
   const overrides = JSON.parse(localStorage.getItem('fim_prov_overrides') || '{}');
@@ -9404,7 +9406,37 @@ function autofillClienteData(nameValue, fieldMap) {
   });
 }
 function autofillPolizzaCliente() { var val = document.getElementById('f_cliente').value; autofillClienteData(val, {cf:'f_cf',indirizzo:'f_indirizzo',cap:'f_cap',citta:'f_citta',provincia:'f_provincia',telefono:'f_telefono',whatsapp:'f_whatsapp',email:'f_email',dataNascita:'f_dataNascita',luogoNascita:'f_luogoNascita',sesso:'f_sesso'}); }
-function autofillQuotCliente() { var val = document.getElementById('quotCliente').value; autofillClienteData(val, {cf:'quotCF',indirizzo:'quotIndirizzo',citta:'quotCitta',telefono:'quotTelefono',email:'quotEmail'}); }
+function autofillQuotCliente() {
+  var val = document.getElementById('quotCliente').value;
+  autofillClienteData(val, {
+    cf: 'quotCF', indirizzo: 'quotIndirizzo',
+    telefono: 'quotTelefono', email: 'quotEmail'
+  });
+  if (val && val.length >= 3) {
+    var v = val.trim().toLowerCase();
+    var found = null;
+    if (typeof clienti !== 'undefined' && clienti.length) {
+      found = clienti.find(function(c) {
+        var fn = ((c.cognome||'') + ' ' + (c.nome||'')).trim().toLowerCase();
+        var rn = ((c.nome||'') + ' ' + (c.cognome||'')).trim().toLowerCase();
+        var rs = (c.ragioneSociale||'').toLowerCase();
+        return fn === v || rn === v || rs === v || (c.cognome||'').toLowerCase() === v;
+      });
+    }
+    if (!found) {
+      var pol = polizze.find(function(p) { return (p.cliente||'').toLowerCase() === v; });
+      if (pol) found = { comuneResidenza: pol.citta||pol.comune||'', capResidenza: pol.cap||'', provinciaResidenza: pol.provincia||'' };
+    }
+    if (found) {
+      var parts = [];
+      if (found.comuneResidenza || found.comune || found.citta) parts.push(found.comuneResidenza || found.comune || found.citta);
+      if (found.capResidenza || found.cap) parts.push(found.capResidenza || found.cap);
+      if (found.provinciaResidenza || found.provincia) parts.push(found.provinciaResidenza || found.provincia);
+      var combined = parts.filter(Boolean).join(', ');
+      if (combined) document.getElementById('quotCitta').value = combined;
+    }
+  }
+}
 function autofillClienteInvoiceData() {
   var clienteName = document.getElementById('inv_cliente').value;
   if (!clienteName) {
@@ -9426,6 +9458,9 @@ function populateClientiDatalist() {
   var optHtml = sorted.map(function(n) { return '<option value="' + n + '">'; }).join('');
   var dlPol = document.getElementById('polClientiList'); if (dlPol) dlPol.innerHTML = optHtml;
   var dlQuot = document.getElementById('quotClientiList'); if (dlQuot) dlQuot.innerHTML = optHtml;
+
+  var dlVers = document.getElementById('versClientiList');
+  if (dlVers) dlVers.innerHTML = optHtml;
 }
 
 function autofillCollabInvoiceData() {
