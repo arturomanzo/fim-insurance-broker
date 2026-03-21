@@ -3,6 +3,15 @@ import { services } from '@/lib/services'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
+const blogSlugs = [
+  'come-scegliere-polizza-auto',
+  'assicurazione-vita-guida',
+  'cyber-risk-pmi',
+  'novita-rc-auto-2024',
+  'polizza-casa-alluvioni',
+  'previdenza-complementare',
+]
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
 
@@ -25,5 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  return [...staticPages, ...servicePages]
+  const blogPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
+    url: `${BASE_URL}/blog/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  return [...staticPages, ...servicePages, ...blogPages]
 }

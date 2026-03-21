@@ -52,7 +52,7 @@ export default function Navbar() {
                 href={link.href}
                 className={clsx(
                   'px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
-                  pathname === link.href
+                  pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
                     ? 'bg-primary/10 text-primary'
                     : 'text-gray-600 hover:text-primary hover:bg-gray-100'
                 )}
@@ -108,7 +108,7 @@ export default function Navbar() {
                 href={link.href}
                 className={clsx(
                   'block px-4 py-3 rounded-lg text-sm font-medium transition-colors',
-                  pathname === link.href
+                  pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
                     ? 'bg-primary/10 text-primary'
                     : 'text-gray-600 hover:text-primary hover:bg-gray-50'
                 )}
