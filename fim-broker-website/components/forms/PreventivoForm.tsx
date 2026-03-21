@@ -104,11 +104,14 @@ export default function PreventivoForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       {/* Tipo polizza */}
       <div>
-        <label className="label-field">Tipo di assicurazione *</label>
+        <label htmlFor="prev-tipo" className="label-field">Tipo di assicurazione *</label>
         <select
+          id="prev-tipo"
           name="tipo"
           value={formData.tipo}
           onChange={handleChange}
+          aria-describedby={errors.tipo ? 'prev-tipo-err' : undefined}
+          aria-invalid={!!errors.tipo}
           className="input-field"
         >
           <option value="">Seleziona il tipo...</option>
@@ -116,69 +119,82 @@ export default function PreventivoForm() {
             <option key={t} value={t}>{t}</option>
           ))}
         </select>
-        {errors.tipo && <p className="text-red-500 text-sm mt-1">{errors.tipo}</p>}
+        {errors.tipo && <p id="prev-tipo-err" role="alert" className="text-red-500 text-sm mt-1">{errors.tipo}</p>}
       </div>
 
       {/* Nome e cognome */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="label-field">Nome *</label>
+          <label htmlFor="prev-nome" className="label-field">Nome *</label>
           <input
+            id="prev-nome"
             type="text"
             name="nome"
             value={formData.nome}
             onChange={handleChange}
             placeholder="Mario"
+            aria-describedby={errors.nome ? 'prev-nome-err' : undefined}
+            aria-invalid={!!errors.nome}
             className="input-field"
           />
-          {errors.nome && <p className="text-red-500 text-sm mt-1">{errors.nome}</p>}
+          {errors.nome && <p id="prev-nome-err" role="alert" className="text-red-500 text-sm mt-1">{errors.nome}</p>}
         </div>
         <div>
-          <label className="label-field">Cognome *</label>
+          <label htmlFor="prev-cognome" className="label-field">Cognome *</label>
           <input
+            id="prev-cognome"
             type="text"
             name="cognome"
             value={formData.cognome}
             onChange={handleChange}
             placeholder="Rossi"
+            aria-describedby={errors.cognome ? 'prev-cognome-err' : undefined}
+            aria-invalid={!!errors.cognome}
             className="input-field"
           />
-          {errors.cognome && <p className="text-red-500 text-sm mt-1">{errors.cognome}</p>}
+          {errors.cognome && <p id="prev-cognome-err" role="alert" className="text-red-500 text-sm mt-1">{errors.cognome}</p>}
         </div>
       </div>
 
       {/* Email e telefono */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="label-field">Email *</label>
+          <label htmlFor="prev-email" className="label-field">Email *</label>
           <input
+            id="prev-email"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="mario.rossi@email.it"
+            aria-describedby={errors.email ? 'prev-email-err' : undefined}
+            aria-invalid={!!errors.email}
             className="input-field"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          {errors.email && <p id="prev-email-err" role="alert" className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
         <div>
-          <label className="label-field">Telefono *</label>
+          <label htmlFor="prev-telefono" className="label-field">Telefono *</label>
           <input
+            id="prev-telefono"
             type="tel"
             name="telefono"
             value={formData.telefono}
             onChange={handleChange}
             placeholder="+39 333 1234567"
+            aria-describedby={errors.telefono ? 'prev-telefono-err' : undefined}
+            aria-invalid={!!errors.telefono}
             className="input-field"
           />
-          {errors.telefono && <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>}
+          {errors.telefono && <p id="prev-telefono-err" role="alert" className="text-red-500 text-sm mt-1">{errors.telefono}</p>}
         </div>
       </div>
 
       {/* Messaggio */}
       <div>
-        <label className="label-field">Informazioni aggiuntive</label>
+        <label htmlFor="prev-messaggio" className="label-field">Informazioni aggiuntive</label>
         <textarea
+          id="prev-messaggio"
           name="messaggio"
           value={formData.messaggio}
           onChange={handleChange}
@@ -196,6 +212,8 @@ export default function PreventivoForm() {
             name="privacy"
             checked={formData.privacy}
             onChange={handleChange}
+            aria-describedby={errors.privacy ? 'prev-privacy-err' : undefined}
+            aria-invalid={!!errors.privacy}
             className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
           />
           <span className="text-sm text-gray-600">
@@ -206,11 +224,11 @@ export default function PreventivoForm() {
             e acconsento al trattamento dei miei dati personali per ricevere il preventivo. *
           </span>
         </label>
-        {errors.privacy && <p className="text-red-500 text-sm mt-1">{errors.privacy}</p>}
+        {errors.privacy && <p id="prev-privacy-err" role="alert" className="text-red-500 text-sm mt-1">{errors.privacy}</p>}
       </div>
 
       {status === 'error' && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+        <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
           Si è verificato un errore. Riprova o contattaci direttamente.
         </div>
       )}

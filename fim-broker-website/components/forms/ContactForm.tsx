@@ -67,8 +67,9 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="label-field">Nome e Cognome *</label>
+          <label htmlFor="contact-nome" className="label-field">Nome e Cognome *</label>
           <input
+            id="contact-nome"
             type="text"
             name="nome"
             value={formData.nome}
@@ -79,8 +80,9 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="label-field">Email *</label>
+          <label htmlFor="contact-email" className="label-field">Email *</label>
           <input
+            id="contact-email"
             type="email"
             name="email"
             value={formData.email}
@@ -94,8 +96,9 @@ export default function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="label-field">Telefono</label>
+          <label htmlFor="contact-telefono" className="label-field">Telefono</label>
           <input
+            id="contact-telefono"
             type="tel"
             name="telefono"
             value={formData.telefono}
@@ -105,8 +108,9 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="label-field">Oggetto</label>
+          <label htmlFor="contact-oggetto" className="label-field">Oggetto</label>
           <input
+            id="contact-oggetto"
             type="text"
             name="oggetto"
             value={formData.oggetto}
@@ -118,8 +122,9 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="label-field">Messaggio *</label>
+        <label htmlFor="contact-messaggio" className="label-field">Messaggio *</label>
         <textarea
+          id="contact-messaggio"
           name="messaggio"
           value={formData.messaggio}
           onChange={handleChange}
@@ -149,7 +154,7 @@ export default function ContactForm() {
       </label>
 
       {status === 'error' && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+        <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
           Errore nell&apos;invio. Riprova o contattaci al +39 02 1234567.
         </div>
       )}

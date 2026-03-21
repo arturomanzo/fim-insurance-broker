@@ -36,7 +36,7 @@ export default function Navbar() {
         isScrolled ? 'bg-white/95 backdrop-blur shadow-md' : 'bg-white shadow-sm'
       )}
     >
-      <nav className="container-custom">
+      <nav className="container-custom" aria-label="Navigazione principale">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0" aria-label="FIM Insurance Broker — Home">
@@ -46,20 +46,24 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={clsx(
-                  'px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
-                  pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-gray-600 hover:text-primary hover:bg-gray-100'
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={clsx(
+                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
+                    isActive
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-gray-600 hover:text-primary hover:bg-gray-100'
+                  )}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
           </div>
 
           {/* CTA */}
@@ -85,7 +89,9 @@ export default function Navbar() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
-            aria-label="Menu"
+            aria-label={isMenuOpen ? 'Chiudi menu' : 'Apri menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav-menu"
           >
             {isMenuOpen ? (
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,21 +107,25 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-100 py-4 space-y-1 animate-fade-in">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={clsx(
-                  'block px-4 py-3 rounded-lg text-sm font-medium transition-colors',
-                  pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-gray-600 hover:text-primary hover:bg-gray-50'
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div id="mobile-nav-menu" className="md:hidden border-t border-gray-100 py-4 space-y-1 animate-fade-in">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={clsx(
+                    'block px-4 py-3 rounded-lg text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-gray-600 hover:text-primary hover:bg-gray-50'
+                  )}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
             <div className="pt-4 border-t border-gray-100 space-y-2">
               <a
                 href="tel:+390212345678"
