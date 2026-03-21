@@ -1,56 +1,11 @@
-name: Deploy to Vercel
-
-on:
-  push:
-    branches: [master]
-    paths:
-      - 'fim-broker-website/**'
-      - '.github/workflows/deploy.yml'
-
-defaults:
-  run:
-    working-directory: fim-broker-website
-
-jobs:
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: fim-broker-website/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Link Vercel project
-        run: |
-          npx vercel link \
-            --token ${{ secrets.VERCEL_TOKEN }} \
-            --scope fimbroker-3525s-projects \
-            --project fim-broker-website \
-            --yes
-
-      - name: Deploy to Vercel (production)
-        run: |
-          npx vercel deploy \
-            --token ${{ secrets.VERCEL_TOKEN }} \
-            --prod \
-            --yes
-        env:
-          # Obbligatori
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          # Opzionali — il sito funziona anche senza, ma le email non verranno inviate
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || '' }}
-          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID || '' }}
-          FIM_EMAIL: ${{ secrets.FIM_EMAIL || 'info@fimbroker.it' }}
-          FIM_FROM_EMAIL: ${{ secrets.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>' }}
-          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it' }}
-          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER || '390212345678' }}
+# Deployment is handled by Vercel's native GitHub integration.
+#
+# Setup (one-time, ~2 minutes):
+#   1. Go to https://vercel.com/new
+#   2. Import the repository: arturomanzo/fim-insurance-broker
+#   3. Set Root Directory to: fim-broker-website
+#   4. Add environment variable: ANTHROPIC_API_KEY = <your key>
+#   5. Click Deploy
+#
+# After this, Vercel deploys automatically on every push to master.
+# No GitHub secrets required.
