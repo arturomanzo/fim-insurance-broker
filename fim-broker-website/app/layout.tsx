@@ -110,6 +110,16 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col">
+        <noscript>
+          <div style={{
+            position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
+            background: '#0f2d6b', color: '#fff', textAlign: 'center',
+            padding: '12px 16px', fontSize: '14px', lineHeight: '1.5',
+          }}>
+            <strong>JavaScript disabilitato.</strong> Alcune funzionalità del sito (form di contatto, preventivo, assistente FIMA) richiedono JavaScript per funzionare.
+            Abilita JavaScript nel browser per accedere a tutti i servizi.
+          </div>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
