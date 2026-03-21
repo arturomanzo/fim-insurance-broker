@@ -115,7 +115,7 @@ function buildTeamEmailHtml(data: {
     </div>
     <div style="background: #f8fafc; padding: 16px 32px; border-top: 1px solid #e2e8f0;">
       <p style="margin: 0; font-size: 12px; color: #94a3b8; text-align: center;">
-        FIM Insurance Broker S.r.l. — Via Roma 123, 20121 Milano — info@fimbroker.it
+        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
       </p>
     </div>
   </div>
@@ -152,16 +152,16 @@ function buildClientConfirmHtml(rawNome: string): string {
            style="display: inline-block; background: #00b4c8; color: white; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px; margin-right: 12px;">
           Preventivo Gratuito
         </a>
-        <a href="tel:+390212345678"
+        <a href="tel:+390696883381"
            style="display: inline-block; background: #f1f5f9; color: #0f2d6b; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px;">
-          📞 02 1234567
+          📞 06 96883381
         </a>
       </div>
     </div>
     <div style="background: #0f2d6b; padding: 20px 32px;">
       <p style="margin: 0; font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.8;">
-        FIM Insurance Broker S.r.l. — Via Roma 123, 20121 Milano<br>
-        Iscrizione RUI n. B000XXXXX — <a href="https://www.fimbroker.it" style="color: rgba(255,255,255,0.5);">www.fimbroker.it</a>
+        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina<br>
+        Iscrizione RUI n. B000405449 — <a href="https://www.fimbroker.it" style="color: rgba(255,255,255,0.5);">www.fimbroker.it</a>
       </p>
     </div>
   </div>

@@ -19,9 +19,9 @@ export default function NoteLegaliPage() {
               <h2>Informazioni societarie</h2>
               <p>
                 <strong>FIM Insurance Broker S.r.l.</strong><br />
-                Sede legale: Via Roma 123, 20121 Milano (MI)<br />
-                P.IVA e C.F.: 12345678901<br />
-                REA: MI-XXXXXXX<br />
+                Sede legale: Via Roma 41, 04012 Cisterna di Latina (LT)<br />
+                P.IVA e C.F.: 02637640596<br />
+                REA: LT 187466<br />
                 Capitale sociale: € 50.000,00 i.v.
               </p>
             </section>
@@ -31,7 +31,7 @@ export default function NoteLegaliPage() {
               <p>
                 FIM Insurance Broker S.r.l. è iscritta alla sezione B del Registro Unico degli
                 Intermediari assicurativi e riassicurativi tenuto dall&apos;IVASS (Istituto per la
-                Vigilanza sulle Assicurazioni) con il numero <strong>B000XXXXX</strong>.
+                Vigilanza sulle Assicurazioni) con il numero <strong>B000405449</strong>.
               </p>
               <p>
                 L&apos;iscrizione è verificabile sul sito IVASS: www.ivass.it
@@ -77,7 +77,7 @@ export default function NoteLegaliPage() {
               <h2>Legge applicabile e foro competente</h2>
               <p>
                 Le presenti note legali sono regolate dalla legge italiana. Per qualsiasi
-                controversia è competente il Foro di Milano.
+                controversia è competente il Foro di Latina.
               </p>
             </section>
 
@@ -93,7 +93,7 @@ export default function NoteLegaliPage() {
             <section>
               <h2>Contatti</h2>
               <p>
-                Per qualsiasi informazione: info@fimbroker.it | +39 02 1234567
+                Per qualsiasi informazione: info@fimbroker.it | +39 06 96883381
               </p>
             </section>
           </div>

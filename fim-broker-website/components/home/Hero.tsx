@@ -15,7 +15,7 @@ export default function Hero() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-6 backdrop-blur-sm">
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            Broker autorizzato IVASS — RUI B000XXXXX
+            Broker autorizzato IVASS — RUI B000405449
           </div>
 
           {/* Headline */}

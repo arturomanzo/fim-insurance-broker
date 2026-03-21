@@ -155,7 +155,7 @@ export default function ContactForm() {
 
       {status === 'error' && (
         <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
-          Errore nell&apos;invio. Riprova o contattaci al +39 02 1234567.
+          Errore nell&apos;invio. Riprova o contattaci al +39 06 96883381.
         </div>
       )}
 

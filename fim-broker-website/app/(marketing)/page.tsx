@@ -186,7 +186,7 @@ export default function HomePage() {
             <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">
               Richiedi Preventivo
             </Link>
-            <a href="tel:+390212345678" className="btn-outline-white text-lg px-8 py-4">
+            <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
               📞 Chiama ora
             </a>
           </div>

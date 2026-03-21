@@ -337,8 +337,8 @@ export default async function BlogPostPage({ params }: Props) {
                     <Link href="/preventivo" className="btn-primary text-sm px-5 py-2.5">
                       Richiedi Preventivo Gratuito
                     </Link>
-                    <a href="tel:+390212345678" className="btn-secondary text-sm px-5 py-2.5">
-                      📞 02 1234567
+                    <a href="tel:+390696883381" className="btn-secondary text-sm px-5 py-2.5">
+                      📞 06 96883381
                     </a>
                   </div>
                 </div>
@@ -355,8 +355,8 @@ export default async function BlogPostPage({ params }: Props) {
                 <Link href="/preventivo" className="btn-primary w-full text-center block mb-3 text-sm">
                   Richiedi Preventivo
                 </Link>
-                <a href="tel:+390212345678" className="btn-outline-white w-full text-center block text-sm">
-                  📞 02 1234567
+                <a href="tel:+390696883381" className="btn-outline-white w-full text-center block text-sm">
+                  📞 06 96883381
                 </a>
               </Card>
 

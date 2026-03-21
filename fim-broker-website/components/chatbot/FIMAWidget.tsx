@@ -96,7 +96,7 @@ export default function FIMAWidget() {
         ...prev,
         {
           role: 'assistant',
-          content: 'Mi dispiace, si è verificato un errore. Riprova o contattaci direttamente al +39 02 1234567.',
+          content: 'Mi dispiace, si è verificato un errore. Riprova o contattaci direttamente al +39 06 96883381.',
         },
       ])
       setStreamingContent('')

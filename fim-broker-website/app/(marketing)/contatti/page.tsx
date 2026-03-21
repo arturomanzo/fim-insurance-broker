@@ -4,31 +4,31 @@ import Card from '@/components/ui/Card'
 
 export const metadata: Metadata = {
   title: 'Contatti',
-  description: 'Contatta FIM Insurance Broker. Siamo disponibili per consulenze telefoniche, via email o di persona nel nostro ufficio di Milano.',
+  description: 'Contatta FIM Insurance Broker. Siamo disponibili per consulenze telefoniche, via email o di persona nel nostro ufficio di Cisterna di Latina.',
 }
 
 const contactInfo = [
   {
     icon: '📍',
     title: 'Sede',
-    lines: ['Via Roma 123', '20121 Milano MI'],
+    lines: ['Via Roma 41', '04012 Cisterna di Latina (LT)'],
   },
   {
     icon: '📞',
     title: 'Telefono',
-    lines: ['+39 02 1234567', 'Lun-Ven 9:00 - 18:00'],
-    href: 'tel:+390212345678',
+    lines: ['+39 06 96883381', 'Fax: 06 45220215', 'Lun-Ven 9:30-13:00 / 15:30-18:30'],
+    href: 'tel:+390696883381',
   },
   {
     icon: '📧',
     title: 'Email',
-    lines: ['info@fimbroker.it', 'sinistri@fimbroker.it'],
+    lines: ['info@fimbroker.it'],
     href: 'mailto:info@fimbroker.it',
   },
   {
     icon: '⏰',
     title: 'Orari',
-    lines: ['Lun - Ven: 9:00 - 18:00', 'Sab: 9:00 - 13:00'],
+    lines: ['Lun - Ven: 9:30-13:00 / 15:30-18:30', 'Sab - Dom: Chiuso'],
   },
 ]
 
@@ -83,9 +83,9 @@ export default function ContattiPage() {
                 <div className="bg-gray-100 h-48 flex items-center justify-center">
                   <div className="text-center text-gray-500">
                     <div className="text-4xl mb-2">🗺️</div>
-                    <p className="text-sm font-medium">Via Roma 123, Milano</p>
+                    <p className="text-sm font-medium">Via Roma 41, Cisterna di Latina</p>
                     <a
-                      href="https://maps.google.com"
+                      href="https://www.google.com/maps/search/?api=1&query=Via+Roma+41+04012+Cisterna+di+Latina+LT"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary text-sm hover:underline mt-1 block"
@@ -111,7 +111,7 @@ export default function ContattiPage() {
               </p>
             </div>
             <a
-              href="tel:+390212345678"
+              href="tel:+390696883381"
               className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-colors whitespace-nowrap"
             >
               📞 Assistenza Sinistri 24/7

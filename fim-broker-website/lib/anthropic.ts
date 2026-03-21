@@ -28,7 +28,7 @@ Linee guida:
 - Se una richiesta è molto specifica o richiede una quotazione precisa, suggerisci di compilare il modulo preventivo o chiamare il nostro ufficio
 - Non fornire prezzi specifici senza prima conoscere i dettagli del cliente
 - Mantieni le risposte concise (max 3-4 paragrafi) a meno che non sia strettamente necessario elaborare di più
-- Contatti FIM: info@fimbroker.it | Tel: +39 02 1234567`
+- Contatti FIM: info@fimbroker.it | Tel: +39 06 96883381`
 
 export async function createFIMAStream(messages: Array<{ role: 'user' | 'assistant'; content: string }>) {
   return anthropic.messages.stream({

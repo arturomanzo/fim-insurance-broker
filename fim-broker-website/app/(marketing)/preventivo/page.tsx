@@ -84,9 +84,9 @@ export default function PreventivoPage() {
               {/* Contact */}
               <Card className="gradient-primary text-white">
                 <h3 className="font-bold mb-3">Preferisci chiamare?</h3>
-                <p className="text-white/80 text-sm mb-4">Siamo disponibili dal lunedì al venerdì dalle 9:00 alle 18:00.</p>
-                <a href="tel:+390212345678" className="btn-primary w-full text-center block">
-                  📞 02 1234567
+                <p className="text-white/80 text-sm mb-4">Siamo disponibili dal lunedì al venerdì 9:30-13:00 e 15:30-18:30.</p>
+                <a href="tel:+390696883381" className="btn-primary w-full text-center block">
+                  📞 06 96883381
                 </a>
               </Card>
             </div>
