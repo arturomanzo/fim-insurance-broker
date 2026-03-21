@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Privacy Policy</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Gennaio 2024</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Gennaio 2025</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
               <ul>
                 <li><strong>Dati di navigazione</strong>: indirizzo IP, tipo di browser, pagine visitate, per finalità statistiche anonime</li>
                 <li><strong>Dati forniti dall&apos;utente</strong>: nome, cognome, email, telefono, richiesti per l&apos;erogazione dei servizi di preventivazione e consulenza</li>
-                <li><strong>Dati di comunicazione</strong>: messaggi inviati tramite form di contatto o chatbot</li>
+                <li><strong>Dati di comunicazione</strong>: messaggi inviati tramite form di contatto o tramite l&apos;assistente virtuale FIMA (elaborati da Anthropic AI per generare le risposte)</li>
               </ul>
               <p>Le finalità del trattamento sono:</p>
               <ul>
@@ -76,10 +76,25 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>5. Trasferimento dati</h2>
+              <h2>5. Trasferimento dati extra-UE</h2>
               <p>
-                I dati non sono trasferiti fuori dall&apos;Unione Europea. I fornitori di servizi
-                tecnologici utilizzati sono conformi al GDPR.
+                Alcuni fornitori di servizi tecnologici utilizzati operano al di fuori dell&apos;Unione Europea:
+              </p>
+              <ul>
+                <li>
+                  <strong>Anthropic, Inc.</strong> (San Francisco, USA) — elabora i messaggi inviati
+                  tramite l&apos;assistente virtuale FIMA. Il trasferimento avviene sulla base delle
+                  Clausole Contrattuali Standard (SCC) approvate dalla Commissione Europea.
+                </li>
+                <li>
+                  <strong>Resend, Inc.</strong> (USA) — gestisce l&apos;invio delle email di conferma
+                  per richieste di preventivo e messaggi di contatto. Il trasferimento avviene sulla
+                  base delle Clausole Contrattuali Standard (SCC).
+                </li>
+              </ul>
+              <p>
+                I predetti fornitori garantiscono un livello di protezione adeguato ai sensi dell&apos;art. 46 GDPR.
+                Per maggiori informazioni sui trasferimenti puoi scrivere a: privacy@fimbroker.it
               </p>
             </section>
 

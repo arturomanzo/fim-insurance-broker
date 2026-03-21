@@ -12,7 +12,7 @@ export default function NoteLegaliPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Note Legali</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Gennaio 2024</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Gennaio 2025</p>
 
           <div className="prose-fim space-y-8">
             <section>
