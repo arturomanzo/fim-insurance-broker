@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2d6b"/>
+      <stop offset="100%" stop-color="#00b4c8"/>
+    </linearGradient>
+  </defs>
+  <!-- Background rounded -->
+  <rect width="180" height="180" rx="40" fill="url(#g)"/>
+  <!-- Shield -->
+  <path d="M90 18 L155 42 L155 95 C155 135 128 158 90 170 C52 158 25 135 25 95 L25 42 Z" fill="white" opacity="0.15"/>
+  <!-- F shape -->
+  <path d="M58 52 L126 52 L112 67 L80 67 L80 84 L108 84 L95 99 L80 99 L80 128 L60 128 L60 52 Z" fill="white" opacity="0.95"/>
+  <!-- Arrow -->
+  <path d="M115 38 L148 72 L132 72 L132 52 L112 52 Z" fill="#33c7d8" opacity="0.9"/>
+</svg>

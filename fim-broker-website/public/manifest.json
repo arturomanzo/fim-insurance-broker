@@ -1,0 +1,17 @@
+{
+  "name": "FIM Insurance Broker",
+  "short_name": "FIM Broker",
+  "description": "Soluzioni assicurative personalizzate per privati e aziende",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f2d6b",
+  "theme_color": "#0f2d6b",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
