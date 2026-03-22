@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com wss://*.firebaseio.com; img-src 'self' data: blob:; frame-src 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FIM Insurance Broker - Gestione Polizze</title>
@@ -1075,6 +1079,30 @@ tr.collab-row:hover { background: #e3f0ff !important; }
 </style>
 </head>
 <body>
+<div id="loginOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,sans-serif;">
+  <div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="font-size:48px;margin-bottom:8px;">&#x1F6E1;&#xFE0F;</div>
+      <h2 style="margin:0 0 4px;color:#1a1a2e;font-size:22px;">FIM Insurance Broker</h2>
+      <p style="margin:0;color:#666;font-size:13px;">Database Gestionale — Accesso Protetto</p>
+    </div>
+    <div id="loginError" style="display:none;background:#fee;color:#c00;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;text-align:center;"></div>
+    <div id="loginForm">
+      <div style="margin-bottom:16px;"><label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333;">Email</label><input type="email" id="loginEmail" placeholder="email@fimbroker.it" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;box-sizing:border-box;"></div>
+      <div style="margin-bottom:20px;"><label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333;">Password</label><input type="password" id="loginPassword" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;box-sizing:border-box;" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button onclick="doLogin()" id="loginBtn" style="width:100%;padding:14px;background:linear-gradient(135deg,#0f3460,#1a1a2e);color:white;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">&#x1F510; Accedi</button>
+    </div>
+    <div id="setupForm" style="display:none;">
+      <p style="font-size:13px;color:#666;text-align:center;margin-bottom:16px;">Primo accesso — Crea il tuo account amministratore</p>
+      <div style="margin-bottom:12px;"><label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333;">Email</label><input type="email" id="setupEmail" value="arturomanzo@outlook.com" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;box-sizing:border-box;"></div>
+      <div style="margin-bottom:12px;"><label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333;">Password (min. 8 caratteri)</label><input type="password" id="setupPassword" placeholder="Scegli password sicura" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;box-sizing:border-box;"></div>
+      <div style="margin-bottom:20px;"><label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#333;">Conferma Password</label><input type="password" id="setupPasswordConfirm" placeholder="Ripeti password" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;box-sizing:border-box;" onkeydown="if(event.key==='Enter')doSetup()"></div>
+      <button onclick="doSetup()" style="width:100%;padding:14px;background:linear-gradient(135deg,#0f3460,#1a1a2e);color:white;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">&#x1F527; Crea Account e Accedi</button>
+    </div>
+    <p style="text-align:center;margin-top:16px;font-size:11px;color:#999;">RUI Sez. B — N. B000405449 | IVASS</p>
+  </div>
+</div>
+
 
 <!-- LOGIN SCREEN -->
 <div id="loginOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#1a365d 0%,#2b6cb0 100%);display:flex;align-items:center;justify-content:center;z-index:10000;">
@@ -1181,6 +1209,13 @@ tr.collab-row:hover { background: #e3f0ff !important; }
   <div class="sync-status">
     <span id="syncStatusHeader">⚪ Offline</span>
   </div>
+  <div id="userBadge" style="font-size:11px;color:#666;padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg-light);margin-top:4px;text-align:center;">&#x1F512; <span id="userEmailDisplay">-</span> <button onclick="doLogout()" style="background:none;border:none;color:#e74c3c;cursor:pointer;font-size:11px;margin-left:4px;" title="Logout">&#x1F6AA;</button></div>
+
+<div class="sidebar-title">Sicurezza</div>
+<button class="tab" onclick="downloadBackup()">&#x1F4BE; Backup</button>
+<button class="tab" onclick="restoreBackup()">&#x1F4E5; Ripristina</button>
+<button class="tab" onclick="showAuditLog()">&#x1F4CB; Audit Log</button>
+<button class="tab" onclick="doLogout()" style="color:#e74c3c;">&#x1F6AA; Logout</button>
 </nav>
 
 <!-- MAIN CONTENT (sinistra) -->
@@ -3173,6 +3208,54 @@ Tel: {brokerTel}</textarea>
     .legend-color { width:12px; height:12px; border-radius:2px; }
   </style>
   <script>
+// ======================= SICUREZZA FIM — PRODUZIONE =======================
+var FIM_SESSION_TIMEOUT=30*60*1000;var _lastActivity=Date.now();var _sessionTimer=null;var _currentUser=null;
+
+function doLogin(){var email=document.getElementById("loginEmail").value.trim();var pass=document.getElementById("loginPassword").value;if(!email||!pass){showLoginError("Inserisci email e password");return;}var btn=document.getElementById("loginBtn");btn.disabled=true;btn.textContent="Accesso in corso...";firebase.auth().signInWithEmailAndPassword(email,pass).then(function(cred){_currentUser=cred.user;_logAudit("LOGIN",email);localStorage.setItem("fim_account_setup","true");hideLoginOverlay();startSessionTimer();initAfterLogin();}).catch(function(err){btn.disabled=false;btn.textContent="\uD83D\uDD10 Accedi";if(err.code==="auth/user-not-found"||err.code==="auth/invalid-credential")showLoginError("Credenziali non valide");else if(err.code==="auth/too-many-requests")showLoginError("Troppi tentativi. Riprova tra qualche minuto.");else showLoginError("Errore: "+err.message);_logAudit("LOGIN_FAILED",email);});}
+
+function doSetup(){var email=document.getElementById("setupEmail").value.trim();var pass=document.getElementById("setupPassword").value;var pass2=document.getElementById("setupPasswordConfirm").value;if(!email||!pass){showLoginError("Compila tutti i campi");return;}if(pass.length<8){showLoginError("Password minimo 8 caratteri");return;}if(pass!==pass2){showLoginError("Le password non coincidono");return;}firebase.auth().createUserWithEmailAndPassword(email,pass).then(function(cred){_currentUser=cred.user;localStorage.setItem("fim_account_setup","true");_logAudit("ACCOUNT_CREATED",email);hideLoginOverlay();startSessionTimer();initAfterLogin();showToast("Account creato con successo! Benvenuto.","success");}).catch(function(err){showLoginError("Errore creazione: "+err.message);});}
+
+function doLogout(){if(!confirm("Confermi il logout?"))return;_logAudit("LOGOUT",_currentUser?_currentUser.email:"");firebase.auth().signOut().then(function(){_currentUser=null;clearInterval(_sessionTimer);document.getElementById("loginOverlay").style.display="flex";document.getElementById("loginPassword").value="";document.getElementById("loginError").style.display="none";});}
+
+function showLoginError(msg){var el=document.getElementById("loginError");el.textContent=msg;el.style.display="block";setTimeout(function(){el.style.display="none";},5000);}
+
+function hideLoginOverlay(){document.getElementById("loginOverlay").style.display="none";var badge=document.getElementById("userEmailDisplay");if(badge&&_currentUser)badge.textContent=_currentUser.email;}
+
+// --- SESSION TIMEOUT ---
+function startSessionTimer(){_lastActivity=Date.now();document.addEventListener("click",_resetActivity);document.addEventListener("keydown",_resetActivity);_sessionTimer=setInterval(function(){if(Date.now()-_lastActivity>FIM_SESSION_TIMEOUT){clearInterval(_sessionTimer);_logAudit("SESSION_TIMEOUT",_currentUser?_currentUser.email:"");firebase.auth().signOut().then(function(){_currentUser=null;document.getElementById("loginOverlay").style.display="flex";document.getElementById("loginPassword").value="";showLoginError("Sessione scaduta per inattivita (30 min). Effettua nuovamente il login.");});}},60000);}function _resetActivity(){_lastActivity=Date.now();}
+
+// --- AUDIT LOG ---
+function _logAudit(action,detail){try{var logs=JSON.parse(localStorage.getItem("fim_audit_log")||"[]");logs.push({ts:new Date().toISOString(),action:action,detail:detail||""});if(logs.length>500)logs=logs.slice(-500);localStorage.setItem("fim_audit_log",JSON.stringify(logs));if(typeof firebase!=="undefined"&&firebase.database&&_currentUser){firebase.database().ref("audit/"+_currentUser.uid).push({ts:new Date().toISOString(),action:action,detail:detail||""});}}catch(e){console.warn("[AUDIT]",e);}}
+
+// --- CRITTOGRAFIA AES-GCM ---
+var _encKey=null;async function _getEncryptionKey(){if(_encKey)return _encKey;var stored=localStorage.getItem("fim_enc_key");if(stored){var raw=Uint8Array.from(atob(stored),function(c){return c.charCodeAt(0);});_encKey=await crypto.subtle.importKey("raw",raw,"AES-GCM",false,["encrypt","decrypt"]);return _encKey;}var key=await crypto.subtle.generateKey({name:"AES-GCM",length:256},true,["encrypt","decrypt"]);var exported=await crypto.subtle.exportKey("raw",key);localStorage.setItem("fim_enc_key",btoa(String.fromCharCode.apply(null,new Uint8Array(exported))));_encKey=key;return key;}
+async function encryptField(plaintext){if(!plaintext||typeof plaintext!=="string"||plaintext.length===0)return plaintext;try{var key=await _getEncryptionKey();var iv=crypto.getRandomValues(new Uint8Array(12));var enc=await crypto.subtle.encrypt({name:"AES-GCM",iv:iv},key,new TextEncoder().encode(plaintext));var combined=new Uint8Array(iv.length+new Uint8Array(enc).length);combined.set(iv);combined.set(new Uint8Array(enc),iv.length);return"ENC:"+btoa(String.fromCharCode.apply(null,combined));}catch(e){return plaintext;}}
+async function decryptField(ciphertext){if(!ciphertext||typeof ciphertext!=="string"||!ciphertext.startsWith("ENC:"))return ciphertext;try{var key=await _getEncryptionKey();var data=Uint8Array.from(atob(ciphertext.substring(4)),function(c){return c.charCodeAt(0);});var iv=data.slice(0,12);var encrypted=data.slice(12);var dec=await crypto.subtle.decrypt({name:"AES-GCM",iv:iv},key,encrypted);return new TextDecoder().decode(dec);}catch(e){return ciphertext;}}
+var SENSITIVE_FIELDS=["codiceFiscale","partitaIva","telefono","whatsapp","email","pec","iban","docIdentitaNumero"];
+async function encryptSensitiveData(obj){if(!obj||typeof obj!=="object")return obj;var clone=JSON.parse(JSON.stringify(obj));for(var i=0;i<SENSITIVE_FIELDS.length;i++){var f=SENSITIVE_FIELDS[i];if(clone[f]&&typeof clone[f]==="string"&&!clone[f].startsWith("ENC:")){clone[f]=await encryptField(clone[f]);}}return clone;}
+async function decryptSensitiveData(obj){if(!obj||typeof obj!=="object")return obj;var clone=JSON.parse(JSON.stringify(obj));for(var i=0;i<SENSITIVE_FIELDS.length;i++){var f=SENSITIVE_FIELDS[i];if(clone[f]&&typeof clone[f]==="string"&&clone[f].startsWith("ENC:")){clone[f]=await decryptField(clone[f]);}}return clone;}
+
+// --- SANITIZZAZIONE INPUT ---
+function sanitizeInput(str){if(typeof str!=="string")return str;return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;");}
+
+// --- BACKUP AUTOMATICO ---
+function checkAutoBackup(){var last=localStorage.getItem("fim_last_backup");var today=new Date().toISOString().split("T")[0];if(last===today)return;try{var backup={timestamp:new Date().toISOString(),version:"FIM_BACKUP_v2",polizze:JSON.parse(localStorage.getItem("fim_polizze_db")||"[]"),clienti:JSON.parse(localStorage.getItem("fim_clienti")||"[]"),quotazioni:JSON.parse(localStorage.getItem("fim_quotazioni")||"[]"),versamenti:JSON.parse(localStorage.getItem("fimVersamenti")||"[]"),compagnie:JSON.parse(localStorage.getItem("fim_compagnie")||"[]"),collaboratori:JSON.parse(localStorage.getItem("fim_collaboratori")||"[]"),fatture:JSON.parse(localStorage.getItem("fim_fatture")||"[]"),provOverrides:JSON.parse(localStorage.getItem("fim_prov_overrides")||"{}")};var backups=JSON.parse(localStorage.getItem("fim_backups")||"[]");backups.push({date:today,data:JSON.stringify(backup)});if(backups.length>3)backups=backups.slice(-3);localStorage.setItem("fim_backups",JSON.stringify(backups));localStorage.setItem("fim_last_backup",today);_logAudit("AUTO_BACKUP","Backup automatico: "+today);console.log("[FIM] Backup automatico: "+today);}catch(e){console.warn("[BACKUP]",e);}}
+
+function downloadBackup(){var backup={timestamp:new Date().toISOString(),version:"FIM_BACKUP_v2",polizze:JSON.parse(localStorage.getItem("fim_polizze_db")||"[]"),clienti:JSON.parse(localStorage.getItem("fim_clienti")||"[]"),quotazioni:JSON.parse(localStorage.getItem("fim_quotazioni")||"[]"),versamenti:JSON.parse(localStorage.getItem("fimVersamenti")||"[]"),compagnie:JSON.parse(localStorage.getItem("fim_compagnie")||"[]"),collaboratori:JSON.parse(localStorage.getItem("fim_collaboratori")||"[]"),fatture:JSON.parse(localStorage.getItem("fim_fatture")||"[]"),provOverrides:JSON.parse(localStorage.getItem("fim_prov_overrides")||"{}")};var blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});var url=URL.createObjectURL(blob);var a=document.createElement("a");a.href=url;a.download="FIM_Backup_"+new Date().toISOString().split("T")[0]+".json";a.click();URL.revokeObjectURL(url);_logAudit("MANUAL_BACKUP","Download manuale");showToast("Backup scaricato","success");}
+
+function restoreBackup(){var input=document.createElement("input");input.type="file";input.accept=".json";input.onchange=function(e){var file=e.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(ev){try{var data=JSON.parse(ev.target.result);if(!data.version||!data.version.startsWith("FIM_BACKUP")){showToast("File non valido","error");return;}if(!confirm("Ripristinare il backup del "+data.timestamp+"? I dati attuali verranno sovrascritti."))return;if(data.polizze)localStorage.setItem("fim_polizze_db",JSON.stringify(data.polizze));if(data.clienti)localStorage.setItem("fim_clienti",JSON.stringify(data.clienti));if(data.quotazioni)localStorage.setItem("fim_quotazioni",JSON.stringify(data.quotazioni));if(data.versamenti)localStorage.setItem("fimVersamenti",JSON.stringify(data.versamenti));if(data.compagnie)localStorage.setItem("fim_compagnie",JSON.stringify(data.compagnie));if(data.collaboratori)localStorage.setItem("fim_collaboratori",JSON.stringify(data.collaboratori));if(data.fatture)localStorage.setItem("fim_fatture",JSON.stringify(data.fatture));if(data.provOverrides)localStorage.setItem("fim_prov_overrides",JSON.stringify(data.provOverrides));_logAudit("RESTORE_BACKUP","Ripristino da "+data.timestamp);showToast("Backup ripristinato! Ricarico...","success");setTimeout(function(){location.reload();},1500);}catch(err){showToast("Errore: "+err.message,"error");}};reader.readAsText(file);};input.click();}
+
+function showAuditLog(){var logs=JSON.parse(localStorage.getItem("fim_audit_log")||"[]");logs.reverse();var html="<div style=\"max-height:60vh;overflow-y:auto;\"><table style=\"width:100%;border-collapse:collapse;font-size:12px;\"><thead><tr style=\"background:var(--primary);color:white;\"><th style=\"padding:8px;text-align:left;\">Data/Ora</th><th style=\"padding:8px;text-align:left;\">Azione</th><th style=\"padding:8px;text-align:left;\">Dettaglio</th></tr></thead><tbody>";if(logs.length===0)html+="<tr><td colspan=3 style=\"padding:20px;text-align:center;color:#999;\">Nessun evento registrato</td></tr>";logs.slice(0,100).forEach(function(l){var d=new Date(l.ts);var ds=d.toLocaleDateString("it-IT")+" "+d.toLocaleTimeString("it-IT");html+="<tr style=\"border-bottom:1px solid #eee;\"><td style=\"padding:6px 8px;\">"+ds+"</td><td style=\"padding:6px 8px;\"><strong>"+l.action+"</strong></td><td style=\"padding:6px 8px;\">"+(l.detail||"-")+"</td></tr>";});html+="</tbody></table></div>";var modal=document.createElement("div");modal.className="modal-overlay";modal.id="auditLogModal";modal.classList.add("active");modal.innerHTML='<div class="modal" style="max-width:800px;max-height:85vh;overflow-y:auto;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;">Audit Log — Registro Accessi</h3><button onclick="document.getElementById(\'auditLogModal\').remove()" style="background:none;border:none;font-size:24px;cursor:pointer;">&times;</button></div>'+html+'<div style="margin-top:16px;text-align:right;"><button class="btn btn-outline" onclick="if(confirm(\'Cancellare tutto il log?\')) { localStorage.removeItem(\'fim_audit_log\'); document.getElementById(\'auditLogModal\').remove(); showToast(\'Log cancellato\'); }">Cancella Log</button></div></div>';document.body.appendChild(modal);}
+
+function initAfterLogin(){checkAutoBackup();}
+
+function checkFirstTimeSetup(){var hasSetup=localStorage.getItem("fim_account_setup");if(!hasSetup){document.getElementById("loginForm").style.display="none";document.getElementById("setupForm").style.display="block";}else{document.getElementById("loginForm").style.display="block";document.getElementById("setupForm").style.display="none";}}
+
+
+
+
+
+
     function renderAnalyticsDashboard(){
       var data=computeAnalyticsData();
       var c=document.getElementById("analytics-dashboard");
@@ -4018,54 +4101,30 @@ const FIREBASE_DEFAULTS = {
 };
 
 function initFirebase() {
-  const settings = JSON.parse(localStorage.getItem('fim_settings') || '{}');
-  // Use saved settings or fall back to hardcoded defaults
-  const apiKey = settings.firebaseApiKey || FIREBASE_DEFAULTS.apiKey;
-  const dbUrl = settings.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL;
-  const projId = settings.firebaseProjectId || FIREBASE_DEFAULTS.projectId;
-
-  if (!apiKey || !dbUrl) {
-    cloudSyncEnabled = false;
-    return;
-  }
   try {
-    const config = {
-      apiKey: apiKey,
-      databaseURL: dbUrl,
-      projectId: projId
-    };
-    // Check if Firebase was already initialized (e.g. by IIFE password recovery)
-    if (firebase.apps && firebase.apps.length > 0) {
-      firebaseApp = firebase.apps[0];
-    } else {
-      firebaseApp = firebase.initializeApp(config);
-    }
-    firebaseDb = firebase.database();
-    // Anonymous Auth for security
-    firebase.auth().signInAnonymously().then(() => {
-      console.log('Firebase Auth: signed in anonymously');
-      cloudSyncEnabled = true;
-      updateSyncStatus('connected');
-      startRealtimeSync();
-      setTimeout(function() { cloudPullSilent(); }, 1500);
-    }).catch((err) => {
-      console.error('Firebase Auth error:', err);
-      // Fallback: try without auth
-      cloudSyncEnabled = true;
-      updateSyncStatus('connected');
-      startRealtimeSync();
-      setTimeout(function() { cloudPullSilent(); }, 1500);
+    if (!firebase || !firebase.app) { console.warn("[FIM] Firebase SDK non caricato"); return; }
+    var app = firebase.app();
+    window._fbDb = firebase.database();
+    console.log("[FIM] Firebase connesso");
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        _currentUser = user;
+        console.log("[FIM] Utente autenticato: " + user.email);
+        document.getElementById("loginOverlay").style.display = "none";
+        var ub = document.getElementById("userEmailDisplay"); if (ub) ub.textContent = user.email;
+        startSessionTimer();
+        checkAutoBackup();
+        setTimeout(function() { cloudPullSilent(); }, 1500);
+        startRealtimeSync();
+      } else {
+        _currentUser = null;
+        console.log("[FIM] Nessun utente - mostra login");
+        document.getElementById("loginOverlay").style.display = "flex";
+        checkFirstTimeSetup();
+      }
     });
-    // Don't set cloudSyncEnabled here - wait for auth
-    return;
-    console.log('Firebase connected to: ' + dbUrl + ' | Device: ' + _deviceId);
-    updateSyncStatus('connected');
-    // Avvia listener real-time dopo connessione
-    startRealtimeSync();
   } catch(e) {
-    console.error('Firebase init error:', e);
-    cloudSyncEnabled = false;
-    updateSyncStatus('error');
+    console.error("[FIM] Errore Firebase:", e);
   }
 }
 
@@ -4218,7 +4277,7 @@ function emergencyCloudRecovery() {
     console.log('[EmergencyRecovery] Firebase connesso a: ' + config.databaseURL);
 
     // Authenticate before accessing data
-    firebase.auth().signInAnonymously().then(() => {
+    (firebase.auth().currentUser ? Promise.resolve() : Promise.reject(new Error("Non autenticato"))).then(() => {
       cloudSyncEnabled = true;
       console.log('[EmergencyRecovery] Auth OK');
       return firebaseDb.ref('fim_data').once('value');
