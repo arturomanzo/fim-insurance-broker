@@ -11,6 +11,7 @@ interface PreventivoRequest {
   messaggio?: string
   oggetto?: string
   privacy: boolean
+  website?: string // honeypot — deve essere assente o vuoto
 }
 
 function validateEmail(email: string): boolean {
@@ -125,7 +126,7 @@ function buildTeamEmailHtml(data: {
     <!-- Footer -->
     <div style="background: #f8fafc; padding: 16px 32px; border-top: 1px solid #e2e8f0;">
       <p style="margin: 0; font-size: 12px; color: #94a3b8; text-align: center;">
-        FIM Insurance Broker S.r.l. — Via Roma 123, 20121 Milano — info@fimbroker.it
+        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
       </p>
     </div>
   </div>
@@ -162,7 +163,7 @@ function buildClientEmailHtml(rawNome: string, rawTipo: string): string {
         <p style="margin: 0 0 12px; font-weight: 700; color: #0f2d6b; font-size: 14px;">Cosa aspettarti:</p>
         <ul style="margin: 0; padding-left: 20px; color: #475569; font-size: 14px; line-height: 2;">
           <li>Analisi personalizzata della tua richiesta</li>
-          <li>Confronto tra le offerte di oltre 50 compagnie</li>
+          <li>Confronto tra le offerte delle principali compagnie assicurative</li>
           <li>Preventivo dettagliato e senza impegno</li>
           <li>Supporto di un consulente dedicato</li>
         </ul>
@@ -173,17 +174,17 @@ function buildClientEmailHtml(rawNome: string, rawTipo: string): string {
       </p>
 
       <div style="text-align: center; margin: 0 0 32px;">
-        <a href="tel:+390212345678"
+        <a href="tel:+390696883381"
            style="display: inline-block; background: #00b4c8; color: white; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;">
-          📞 02 1234567
+          📞 06 96883381
         </a>
       </div>
     </div>
 
     <div style="background: #0f2d6b; padding: 20px 32px;">
       <p style="margin: 0; font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.8;">
-        FIM Insurance Broker S.r.l. — Via Roma 123, 20121 Milano<br>
-        Iscrizione RUI n. B000XXXXX — <a href="https://www.fimbroker.it" style="color: rgba(255,255,255,0.5);">www.fimbroker.it</a>
+        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina<br>
+        Iscrizione RUI n. B000405449 — <a href="https://www.fimbroker.it" style="color: rgba(255,255,255,0.5);">www.fimbroker.it</a>
       </p>
     </div>
   </div>
@@ -209,6 +210,11 @@ export async function POST(req: NextRequest) {
     const telefono = sanitize(body.telefono)
     const tipo = sanitize(body.tipo)
     const messaggio = sanitize(body.messaggio)
+
+    // Honeypot: se il campo "website" è compilato, è quasi certamente un bot
+    if (body.website) {
+      return NextResponse.json({ success: true }, { status: 200 })
+    }
 
     if (!nome || !cognome || !email || !telefono || !tipo) {
       return NextResponse.json({ error: 'Campi obbligatori mancanti' }, { status: 400 })
@@ -244,8 +250,7 @@ export async function POST(req: NextRequest) {
           html: buildClientEmailHtml(nome, tipo),
         }),
       ])
-    } else {
-      // Modalità sviluppo: log in console
+    } else if (process.env.NODE_ENV !== 'production') {
       console.log('[DEV] Preventivo ricevuto (email non inviata — imposta RESEND_API_KEY):', preventivoData)
     }
 

@@ -11,6 +11,7 @@ interface FormData {
   telefono: string
   messaggio: string
   privacy: boolean
+  website: string // honeypot — deve restare vuoto
 }
 
 type FormErrors = Partial<Record<keyof FormData, string>>
@@ -34,6 +35,7 @@ export default function PreventivoForm() {
     telefono: '',
     messaggio: '',
     privacy: false,
+    website: '',
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errors, setErrors] = useState<FormErrors>({})
@@ -102,6 +104,20 @@ export default function PreventivoForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {/* Honeypot anti-bot: nascosto visivamente, mai compilato da utenti reali */}
+      <div style={{ position: 'absolute', left: '-9999px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <label htmlFor="prev-website">Non compilare questo campo</label>
+        <input
+          id="prev-website"
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       {/* Tipo polizza */}
       <div>
         <label htmlFor="prev-tipo" className="label-field">Tipo di assicurazione *</label>

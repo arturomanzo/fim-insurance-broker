@@ -57,12 +57,12 @@ export default function OgImage() {
 
         {/* Subline */}
         <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '26px', marginTop: '24px', maxWidth: '700px', lineHeight: 1.4 }}>
-          Confrontiamo le offerte di oltre 50 compagnie per trovare la polizza perfetta per te.
+          Confrontiamo le offerte delle principali compagnie assicurative per trovare la polizza perfetta per te.
         </div>
 
         {/* Trust badges */}
         <div style={{ display: 'flex', gap: '32px', marginTop: '48px' }}>
-          {['20+ anni', '5.000+ clienti', 'Preventivo gratuito'].map((badge) => (
+          {['20+ anni', 'Clienti soddisfatti', 'Preventivo gratuito'].map((badge) => (
             <div
               key={badge}
               style={{

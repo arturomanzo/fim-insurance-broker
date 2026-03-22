@@ -1,7 +1,7 @@
 const stats = [
   { value: '20+', label: 'Anni di esperienza', description: 'Sul mercato assicurativo italiano' },
-  { value: '5.000+', label: 'Clienti soddisfatti', description: 'Privati e aziende' },
-  { value: '50+', label: 'Compagnie partner', description: 'Confrontiamo per voi' },
+  { value: '★★★★★', label: 'Clienti soddisfatti', description: 'Privati e aziende' },
+  { value: 'Multi', label: 'Compagnie partner', description: 'Confrontiamo per voi' },
   { value: '98%', label: 'Clienti fedeli', description: 'Ci rinnovano ogni anno' },
 ]
 

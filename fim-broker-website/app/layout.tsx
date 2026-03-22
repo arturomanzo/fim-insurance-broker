@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
+
+const GA_ID = 'G-F6DB47VZ4Z'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -44,36 +47,41 @@ const jsonLd = {
   image: `${BASE_URL}/opengraph-image`,
   description:
     'Broker assicurativo indipendente con oltre 20 anni di esperienza. Soluzioni assicurative personalizzate per privati e aziende.',
-  telephone: '+390212345678',
+  telephone: '+390696883381',
+  faxNumber: '+390645220215',
   email: 'info@fimbroker.it',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Via Roma 123',
-    addressLocality: 'Milano',
-    addressRegion: 'MI',
-    postalCode: '20121',
+    streetAddress: 'Via Roma 41',
+    addressLocality: 'Cisterna di Latina',
+    addressRegion: 'LT',
+    postalCode: '04012',
     addressCountry: 'IT',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 45.464664,
-    longitude: 9.18854,
+    latitude: 41.5939662,
+    longitude: 12.8234096,
   },
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '18:00',
+      opens: '09:30',
+      closes: '13:00',
     },
     {
       '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Saturday'],
-      opens: '09:00',
-      closes: '13:00',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '15:30',
+      closes: '18:30',
     },
   ],
-  sameAs: [],
+  sameAs: [
+    'https://www.facebook.com/FimInsuranceBroker/',
+    'https://www.instagram.com/fiminsurancebroker/',
+    'https://x.com/fimbroker',
+  ],
   areaServed: {
     '@type': 'Country',
     name: 'Italy',
@@ -124,6 +132,19 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
         {children}
       </body>
     </html>

@@ -4,31 +4,31 @@ import Card from '@/components/ui/Card'
 
 export const metadata: Metadata = {
   title: 'Contatti',
-  description: 'Contatta FIM Insurance Broker. Siamo disponibili per consulenze telefoniche, via email o di persona nel nostro ufficio di Milano.',
+  description: 'Contatta FIM Insurance Broker. Siamo disponibili per consulenze telefoniche, via email o di persona nel nostro ufficio di Cisterna di Latina.',
 }
 
 const contactInfo = [
   {
     icon: '📍',
     title: 'Sede',
-    lines: ['Via Roma 123', '20121 Milano MI'],
+    lines: ['Via Roma 41', '04012 Cisterna di Latina (LT)'],
   },
   {
     icon: '📞',
     title: 'Telefono',
-    lines: ['+39 02 1234567', 'Lun-Ven 9:00 - 18:00'],
-    href: 'tel:+390212345678',
+    lines: ['+39 06 96883381', 'Fax: 06 45220215', 'Lun-Ven 9:30-13:00 / 15:30-18:30'],
+    href: 'tel:+390696883381',
   },
   {
     icon: '📧',
     title: 'Email',
-    lines: ['info@fimbroker.it', 'sinistri@fimbroker.it'],
+    lines: ['info@fimbroker.it'],
     href: 'mailto:info@fimbroker.it',
   },
   {
     icon: '⏰',
     title: 'Orari',
-    lines: ['Lun - Ven: 9:00 - 18:00', 'Sab: 9:00 - 13:00'],
+    lines: ['Lun - Ven: 9:30-13:00 / 15:30-18:30', 'Sab - Dom: Chiuso'],
   },
 ]
 
@@ -78,21 +78,27 @@ export default function ContattiPage() {
                 </Card>
               ))}
 
-              {/* Map placeholder */}
+              {/* Google Maps embed */}
               <Card padding="none" className="overflow-hidden">
-                <div className="bg-gray-100 h-48 flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <div className="text-4xl mb-2">🗺️</div>
-                    <p className="text-sm font-medium">Via Roma 123, Milano</p>
-                    <a
-                      href="https://maps.google.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary text-sm hover:underline mt-1 block"
-                    >
-                      Apri in Google Maps →
-                    </a>
-                  </div>
+                <iframe
+                  src="https://maps.google.com/maps?q=Via+Roma,+41,+04012+Cisterna+di+Latina+LT,+Italy&output=embed&z=16"
+                  width="100%"
+                  height="220"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="FIM Insurance Broker - Via Roma 41, Cisterna di Latina"
+                />
+                <div className="px-4 py-2 bg-gray-50 text-center">
+                  <a
+                    href="https://www.google.com/maps/place/Via+Roma,+41,+04012+Cisterna+di+Latina+LT/@41.5939662,12.8234096,17z"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary text-sm hover:underline"
+                  >
+                    Apri in Google Maps →
+                  </a>
                 </div>
               </Card>
             </div>
@@ -111,7 +117,7 @@ export default function ContattiPage() {
               </p>
             </div>
             <a
-              href="tel:+390212345678"
+              href="tel:+390696883381"
               className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-colors whitespace-nowrap"
             >
               📞 Assistenza Sinistri 24/7

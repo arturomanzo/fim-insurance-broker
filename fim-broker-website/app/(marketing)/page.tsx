@@ -29,7 +29,7 @@ const whyFIM = [
   {
     icon: '🔍',
     title: 'Confrontiamo per te',
-    desc: 'Analizziamo le offerte di oltre 50 compagnie per trovare la soluzione migliore al prezzo più competitivo.',
+    desc: 'Analizziamo le offerte delle principali compagnie assicurative per trovare la soluzione migliore al prezzo più competitivo.',
   },
   {
     icon: '🤝',
@@ -84,7 +84,7 @@ export default function HomePage() {
                   step: '02',
                   icon: '🔎',
                   title: 'Analizziamo il mercato',
-                  desc: 'I nostri consulenti confrontano le offerte di oltre 50 compagnie assicurative per trovare la soluzione ideale.',
+                  desc: 'I nostri consulenti confrontano le offerte delle principali compagnie assicurative per trovare la soluzione ideale.',
                 },
                 {
                   step: '03',
@@ -186,7 +186,7 @@ export default function HomePage() {
             <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">
               Richiedi Preventivo
             </Link>
-            <a href="tel:+390212345678" className="btn-outline-white text-lg px-8 py-4">
+            <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
               📞 Chiama ora
             </a>
           </div>

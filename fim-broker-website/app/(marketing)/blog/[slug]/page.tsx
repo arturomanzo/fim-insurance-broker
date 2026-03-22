@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import Badge from '@/components/ui/Badge'
 import Card from '@/components/ui/Card'
 
@@ -50,7 +51,7 @@ const blogPosts: Record<string, BlogPost> = {
       },
       {
         heading: 'Come risparmiare senza rinunciare alla protezione',
-        body: "Il mercato della RC Auto è molto competitivo. FIM confronta le offerte di oltre 50 compagnie per trovare la polizza più conveniente in base al tuo profilo. In media i nostri clienti risparmiano il 25% rispetto al preventivo precedente, mantenendo le stesse coperture o migliorandole.",
+        body: "Il mercato della RC Auto è molto competitivo. FIM confronta le offerte delle principali compagnie per trovare la polizza più conveniente in base al tuo profilo. In media i nostri clienti risparmiano il 25% rispetto al preventivo precedente, mantenendo le stesse coperture o migliorandole.",
       },
       {
         heading: 'Classe di merito e bonus-malus',
@@ -232,6 +233,15 @@ const blogPosts: Record<string, BlogPost> = {
   },
 }
 
+const postImages: Record<string, string> = {
+  'come-scegliere-polizza-auto': 'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=1200&q=80&fit=crop&auto=format',
+  'assicurazione-vita-guida': 'https://images.unsplash.com/photo-1475503572774-15a45e5d60b9?w=1200&q=80&fit=crop&auto=format',
+  'cyber-risk-pmi': 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80&fit=crop&auto=format',
+  'novita-rc-auto-2024': 'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=1200&q=80&fit=crop&auto=format',
+  'polizza-casa-alluvioni': 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1200&q=80&fit=crop&auto=format',
+  'previdenza-complementare': 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=1200&q=80&fit=crop&auto=format',
+}
+
 const categoryColors: Record<string, 'primary' | 'accent' | 'success' | 'warning'> = {
   Auto: 'primary',
   Vita: 'success',
@@ -261,6 +271,7 @@ export default async function BlogPostPage({ params }: Props) {
   const category = post?.category ?? 'Assicurazioni'
   const date = post?.date ?? 'Ottobre 2024'
   const readTime = post?.readTime ?? '5 min'
+  const featuredImage = postImages[slug]
 
   return (
     <div>
@@ -285,6 +296,22 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Featured image */}
+      {featuredImage && (
+        <div className="container-custom pt-8">
+          <div className="relative rounded-2xl overflow-hidden aspect-[21/9]">
+            <Image
+              src={featuredImage}
+              alt={title}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
+          </div>
+        </div>
+      )}
 
       <section className="section-padding">
         <div className="container-custom">
@@ -337,8 +364,8 @@ export default async function BlogPostPage({ params }: Props) {
                     <Link href="/preventivo" className="btn-primary text-sm px-5 py-2.5">
                       Richiedi Preventivo Gratuito
                     </Link>
-                    <a href="tel:+390212345678" className="btn-secondary text-sm px-5 py-2.5">
-                      📞 02 1234567
+                    <a href="tel:+390696883381" className="btn-secondary text-sm px-5 py-2.5">
+                      📞 06 96883381
                     </a>
                   </div>
                 </div>
@@ -355,8 +382,8 @@ export default async function BlogPostPage({ params }: Props) {
                 <Link href="/preventivo" className="btn-primary w-full text-center block mb-3 text-sm">
                   Richiedi Preventivo
                 </Link>
-                <a href="tel:+390212345678" className="btn-outline-white w-full text-center block text-sm">
-                  📞 02 1234567
+                <a href="tel:+390696883381" className="btn-outline-white w-full text-center block text-sm">
+                  📞 06 96883381
                 </a>
               </Card>
 

@@ -18,8 +18,8 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2>1. Titolare del trattamento</h2>
               <p>
-                FIM Insurance Broker S.r.l., con sede legale in Via Roma 123, 20121 Milano (MI),
-                P.IVA 12345678901, è il Titolare del trattamento dei dati personali degli utenti
+                FIM Insurance Broker S.r.l., con sede legale in Via Roma 41, 04012 Cisterna di Latina (LT),
+                P.IVA 02637640596, è il Titolare del trattamento dei dati personali degli utenti
                 che visitano il presente sito web e che richiedono i nostri servizi.
               </p>
               <p>

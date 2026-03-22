@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 
@@ -16,6 +17,7 @@ const posts = [
     category: 'Auto',
     date: '15 Novembre 2024',
     readTime: '5 min',
+    image: 'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=1200&q=80&fit=crop&auto=format',
   },
   {
     slug: 'assicurazione-vita-guida',
@@ -24,6 +26,7 @@ const posts = [
     category: 'Vita',
     date: '8 Novembre 2024',
     readTime: '7 min',
+    image: 'https://images.unsplash.com/photo-1475503572774-15a45e5d60b9?w=800&q=80&fit=crop&auto=format',
   },
   {
     slug: 'cyber-risk-pmi',
@@ -32,6 +35,7 @@ const posts = [
     category: 'Aziendale',
     date: '1 Novembre 2024',
     readTime: '6 min',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80&fit=crop&auto=format',
   },
   {
     slug: 'novita-rc-auto-2024',
@@ -40,6 +44,7 @@ const posts = [
     category: 'Auto',
     date: '25 Ottobre 2024',
     readTime: '4 min',
+    image: 'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80&fit=crop&auto=format',
   },
   {
     slug: 'polizza-casa-alluvioni',
@@ -48,6 +53,7 @@ const posts = [
     category: 'Casa',
     date: '18 Ottobre 2024',
     readTime: '5 min',
+    image: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&q=80&fit=crop&auto=format',
   },
   {
     slug: 'previdenza-complementare',
@@ -56,6 +62,7 @@ const posts = [
     category: 'Vita',
     date: '10 Ottobre 2024',
     readTime: '8 min',
+    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&q=80&fit=crop&auto=format',
   },
 ]
 
@@ -92,8 +99,15 @@ export default function BlogPage() {
           <div className="mb-10">
             <Link href={`/blog/${featured.slug}`} className="group">
               <Card hover className="grid grid-cols-1 md:grid-cols-2 gap-0 overflow-hidden" padding="none">
-                <div className="bg-primary/10 aspect-video md:aspect-auto min-h-48 flex items-center justify-center">
-                  <span className="text-6xl opacity-30">📰</span>
+                <div className="relative aspect-video md:aspect-auto min-h-48 overflow-hidden">
+                  <Image
+                    src={featured.image}
+                    alt={featured.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
                 </div>
                 <div className="p-8">
                   <div className="flex items-center gap-3 mb-4">
@@ -122,10 +136,17 @@ export default function BlogPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
-                <Card hover className="h-full flex flex-col">
-                  <div className="bg-gray-100 rounded-lg aspect-video flex items-center justify-center mb-4">
-                    <span className="text-4xl opacity-30">📄</span>
+                <Card hover className="h-full flex flex-col overflow-hidden" padding="none">
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
                   </div>
+                  <div className="p-5 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-3">
                     <Badge variant={categoryColors[post.category] || 'primary'}>{post.category}</Badge>
                     <span className="text-gray-500 text-xs">{post.readTime}</span>
@@ -135,6 +156,7 @@ export default function BlogPage() {
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{post.excerpt}</p>
                   <div className="text-gray-500 text-xs pt-4 border-t border-gray-100">{post.date}</div>
+                  </div>
                 </Card>
               </Link>
             ))}
