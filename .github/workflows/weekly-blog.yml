@@ -1,0 +1,66 @@
+name: Generazione Articolo Blog Settimanale
+
+on:
+  # Ogni lunedì alle 08:00 CET (07:00 UTC)
+  schedule:
+    - cron: '0 7 * * 1'
+  # Trigger manuale dalla tab Actions di GitHub
+  workflow_dispatch:
+
+jobs:
+  generate-blog-post:
+    name: Genera e pubblica nuovo articolo blog
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: fim-broker-website/package-lock.json
+
+      - name: Install dependencies
+        working-directory: fim-broker-website
+        run: npm ci --omit=dev
+
+      - name: Genera nuovo articolo con AI
+        working-directory: fim-broker-website
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+        run: node scripts/generate-blog-post.mjs
+
+      - name: Verifica modifiche al blog
+        id: check_changes
+        run: |
+          if git diff --quiet fim-broker-website/data/blog-posts.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit e push del nuovo articolo
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "FIM Blog Bot"
+          git config user.email "bot@fimbroker.it"
+          git add fim-broker-website/data/blog-posts.json
+          TITLE=$(node -e "
+            const d = JSON.parse(require('fs').readFileSync('fim-broker-website/data/blog-posts.json','utf8'));
+            console.log(d.posts[0].title);
+          ")
+          git commit -m "blog: pubblica nuovo articolo settimanale — $TITLE"
+          git push origin HEAD
+
+      - name: Nessuna modifica rilevata
+        if: steps.check_changes.outputs.changed == 'false'
+        run: echo "ℹ️ Nessun nuovo articolo generato (nessuna modifica rilevata)."
