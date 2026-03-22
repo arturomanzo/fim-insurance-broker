@@ -3237,7 +3237,7 @@ function showAuditLog(){var logs=JSON.parse(localStorage.getItem("fim_audit_log"
 
 function initAfterLogin(){checkAutoBackup();}
 
-function checkFirstTimeSetup(){var hasSetup=localStorage.getItem("fim_account_setup");if(!hasSetup){document.getElementById("loginForm").style.display="none";document.getElementById("setupForm").style.display="block";}else{document.getElementById("loginForm").style.display="block";document.getElementById("setupForm").style.display="none";}}
+function checkFirstTimeSetup(){ var lf=document.getElementById("loginForm"); var sf=document.getElementById("setupForm"); if(lf) lf.style.display="block"; if(sf) sf.style.display="none"; }
 
 
 
@@ -4100,6 +4100,7 @@ function initFirebase() {
         _currentUser = user;
         console.log("[FIM] Utente autenticato: " + user.email);
         document.getElementById("loginOverlay").style.display = "none";
+            localStorage.setItem("fim_account_setup","true");
         var ub = document.getElementById("userEmailDisplay"); if (ub) ub.textContent = user.email;
         startSessionTimer();
         checkAutoBackup();
