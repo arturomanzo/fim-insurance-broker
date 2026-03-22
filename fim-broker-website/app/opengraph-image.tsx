@@ -62,7 +62,7 @@ export default function OgImage() {
 
         {/* Trust badges */}
         <div style={{ display: 'flex', gap: '32px', marginTop: '48px' }}>
-          {['20+ anni', '5.000+ clienti', 'Preventivo gratuito'].map((badge) => (
+          {['20+ anni', 'Clienti soddisfatti', 'Preventivo gratuito'].map((badge) => (
             <div
               key={badge}
               style={{

@@ -50,7 +50,7 @@ export default function Hero() {
               { icon: '✓', label: 'Consulenza gratuita' },
               { icon: '✓', label: 'Nessun costo aggiuntivo' },
               { icon: '✓', label: 'Oltre 20 anni di esperienza' },
-              { icon: '✓', label: '+5.000 clienti soddisfatti' },
+              { icon: '✓', label: 'Clienti soddisfatti' },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-2">
                 <span className="text-accent font-bold">{item.icon}</span>

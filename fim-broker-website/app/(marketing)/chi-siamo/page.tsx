@@ -41,7 +41,7 @@ const milestones = [
   { year: '2016', event: 'Lancio del portale online per preventivi digitali' },
   { year: '2019', event: 'Espansione delle partnership con le principali compagnie assicurative' },
   { year: '2023', event: 'Integrazione assistente AI FIMA per supporto clienti' },
-  { year: '2024', event: 'Superata quota 5.000 clienti soddisfatti' },
+  { year: '2024', event: 'Crescita continua del portafoglio clienti soddisfatti' },
 ]
 
 export default function ChiSiamoPage() {
@@ -88,7 +88,7 @@ export default function ChiSiamoPage() {
               <div className="grid grid-cols-3 gap-4">
                 {[
                   { value: '20+', label: 'Anni' },
-                  { value: '5K+', label: 'Clienti' },
+                  { value: '✓', label: 'Clienti fidelizzati' },
                   { value: '✓', label: 'Multi-compagnia' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center p-4 bg-gray-50 rounded-xl">
