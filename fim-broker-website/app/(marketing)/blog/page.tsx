@@ -3,77 +3,24 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
+import { getAllPosts } from '@/lib/blog'
 
 export const metadata: Metadata = {
   title: 'Blog & News Assicurative',
   description: 'Rimani aggiornato con guide, news e consigli dal mondo delle assicurazioni. FIM Insurance Broker.',
 }
 
-const posts = [
-  {
-    slug: 'come-scegliere-polizza-auto',
-    title: 'Come scegliere la polizza auto giusta nel 2024',
-    excerpt: 'Una guida completa per orientarsi tra RC Auto, Kasko e garanzie accessorie. Ecco cosa valutare prima di firmare.',
-    category: 'Auto',
-    date: '15 Novembre 2024',
-    readTime: '5 min',
-    image: 'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=1200&q=80&fit=crop&auto=format',
-  },
-  {
-    slug: 'assicurazione-vita-guida',
-    title: 'Assicurazione vita: perché è importante e quando stipularla',
-    excerpt: 'Scopri come una polizza vita può proteggere la tua famiglia e garantire serenità finanziaria nel lungo periodo.',
-    category: 'Vita',
-    date: '8 Novembre 2024',
-    readTime: '7 min',
-    image: 'https://images.unsplash.com/photo-1475503572774-15a45e5d60b9?w=800&q=80&fit=crop&auto=format',
-  },
-  {
-    slug: 'cyber-risk-pmi',
-    title: 'Cyber risk: perché le PMI devono assicurarsi contro gli attacchi informatici',
-    excerpt: 'Il 40% delle PMI italiane ha subito un attacco informatico. Scopri come proteggere la tua azienda.',
-    category: 'Aziendale',
-    date: '1 Novembre 2024',
-    readTime: '6 min',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80&fit=crop&auto=format',
-  },
-  {
-    slug: 'novita-rc-auto-2024',
-    title: 'Novità RC Auto 2024: cosa cambia con il nuovo regolamento europeo',
-    excerpt: 'Il nuovo regolamento UE introduce importanti modifiche alla RC Auto. Ecco tutto quello che devi sapere.',
-    category: 'Auto',
-    date: '25 Ottobre 2024',
-    readTime: '4 min',
-    image: 'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80&fit=crop&auto=format',
-  },
-  {
-    slug: 'polizza-casa-alluvioni',
-    title: 'Polizza casa e rischio alluvioni: sei davvero coperto?',
-    excerpt: 'Con i cambiamenti climatici, le inondazioni sono sempre più frequenti. Verifica se la tua polizza casa ti protegge davvero.',
-    category: 'Casa',
-    date: '18 Ottobre 2024',
-    readTime: '5 min',
-    image: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&q=80&fit=crop&auto=format',
-  },
-  {
-    slug: 'previdenza-complementare',
-    title: 'Previdenza complementare: come integrare la pensione pubblica',
-    excerpt: 'Il sistema pensionistico italiano non sarà sufficiente. Scopri come costruire una pensione integrativa efficace.',
-    category: 'Vita',
-    date: '10 Ottobre 2024',
-    readTime: '8 min',
-    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&q=80&fit=crop&auto=format',
-  },
-]
-
 const categoryColors: Record<string, 'primary' | 'accent' | 'success' | 'warning'> = {
   Auto: 'primary',
   Vita: 'success',
   Aziendale: 'warning',
   Casa: 'accent',
+  Salute: 'accent',
+  Viaggio: 'primary',
 }
 
 export default function BlogPage() {
+  const posts = getAllPosts()
   const [featured, ...rest] = posts
 
   return (
@@ -89,6 +36,7 @@ export default function BlogPage() {
           </h1>
           <p className="text-xl text-white/80 max-w-2xl">
             Guide pratiche, novità normative e consigli degli esperti FIM per fare scelte assicurative consapevoli.
+            Aggiornato ogni settimana con le ultime notizie dal settore.
           </p>
         </div>
       </section>
@@ -147,15 +95,15 @@ export default function BlogPage() {
                     />
                   </div>
                   <div className="p-5 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Badge variant={categoryColors[post.category] || 'primary'}>{post.category}</Badge>
-                    <span className="text-gray-500 text-xs">{post.readTime}</span>
-                  </div>
-                  <h3 className="font-bold text-primary mb-2 group-hover:text-primary-light transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{post.excerpt}</p>
-                  <div className="text-gray-500 text-xs pt-4 border-t border-gray-100">{post.date}</div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Badge variant={categoryColors[post.category] || 'primary'}>{post.category}</Badge>
+                      <span className="text-gray-500 text-xs">{post.readTime}</span>
+                    </div>
+                    <h3 className="font-bold text-primary mb-2 group-hover:text-primary-light transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{post.excerpt}</p>
+                    <div className="text-gray-500 text-xs pt-4 border-t border-gray-100">{post.date}</div>
                   </div>
                 </Card>
               </Link>

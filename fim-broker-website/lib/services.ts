@@ -56,7 +56,7 @@ export const services: Service[] = [
       'Le polizze vita FIM garantiscono serenità finanziaria a te e alla tua famiglia. Offriamo soluzioni temporanee caso morte, miste, unit-linked e piani di accumulo previdenziale.',
     icon: '❤️',
     color: 'red',
-    image: 'https://images.unsplash.com/photo-1511895426328-dc8714191011?w=800&q=80&fit=crop&auto=format',
+    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&fit=crop&auto=format',
     features: [
       'Vita temporanea caso morte',
       'Polizze miste',
