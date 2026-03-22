@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Link from 'next/link'
 
@@ -9,28 +10,28 @@ export const metadata: Metadata = {
 
 const team = [
   {
-    name: 'Francesco Mancini',
+    name: 'Arturo Manzo',
     role: 'Fondatore & CEO',
-    bio: 'Con oltre 25 anni nel settore assicurativo, Francesco ha fondato FIM con la visione di portare trasparenza e professionalità nel brokeraggio.',
-    initials: 'FM',
+    bio: 'Con oltre 25 anni nel settore assicurativo, Arturo ha fondato FIM con la visione di portare trasparenza e professionalità nel brokeraggio assicurativo italiano.',
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&fit=crop&auto=format',
   },
   {
     name: 'Isabella Romano',
     role: 'Responsabile Polizze Vita',
     bio: 'Specializzata in pianificazione previdenziale e protezione familiare, Isabella guida il team vita da 12 anni.',
-    initials: 'IR',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&fit=crop&auto=format',
   },
   {
     name: 'Marco Tessari',
     role: 'Responsabile Polizze Aziendali',
     bio: 'Esperto di risk management aziendale, Marco gestisce i portafogli corporate e la consulenza per le imprese.',
-    initials: 'MT',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80&fit=crop&auto=format',
   },
   {
     name: 'Giulia Conti',
     role: 'Claims Manager',
     bio: 'Giulia guida il team sinistri garantendo la liquidazione rapida e la tutela dei nostri clienti in ogni fase.',
-    initials: 'GC',
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&fit=crop&auto=format',
   },
 ]
 
@@ -69,6 +70,15 @@ export default function ChiSiamoPage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] order-last lg:order-first">
+              <Image
+                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80&fit=crop&auto=format"
+                alt="Consulenza assicurativa professionale FIM"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
             <div>
               <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
                 La nostra missione
@@ -97,39 +107,22 @@ export default function ChiSiamoPage() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                {
-                  icon: '🎯',
-                  title: 'Indipendenza',
-                  desc: 'Nessun legame con le compagnie. Lavoriamo solo per te.',
-                },
-                {
-                  icon: '💡',
-                  title: 'Competenza',
-                  desc: 'Team di esperti certificati con esperienza pluriennale.',
-                },
-                {
-                  icon: '🤝',
-                  title: 'Fiducia',
-                  desc: 'Relazioni durature basate su onestà e trasparenza.',
-                },
-                {
-                  icon: '🔧',
-                  title: 'Supporto continuo',
-                  desc: 'Presenti in ogni momento, dalla polizza alla liquidazione.',
-                },
-              ].map((val) => (
-                <Card key={val.title} className="flex items-start gap-4">
-                  <span className="text-3xl flex-shrink-0">{val.icon}</span>
-                  <div>
-                    <h3 className="font-bold text-primary mb-1">{val.title}</h3>
-                    <p className="text-gray-600 text-sm">{val.desc}</p>
-                  </div>
-                </Card>
-              ))}
+              <div className="space-y-3 mt-6">
+                {[
+                  { icon: '🎯', title: 'Indipendenza', desc: 'Nessun legame con le compagnie. Lavoriamo solo per te.' },
+                  { icon: '💡', title: 'Competenza', desc: 'Team di esperti certificati con esperienza pluriennale.' },
+                  { icon: '🤝', title: 'Fiducia', desc: 'Relazioni durature basate su onestà e trasparenza.' },
+                  { icon: '🔧', title: 'Supporto continuo', desc: 'Presenti in ogni momento, dalla polizza alla liquidazione.' },
+                ].map((val) => (
+                  <Card key={val.title} className="flex items-start gap-4">
+                    <span className="text-2xl flex-shrink-0">{val.icon}</span>
+                    <div>
+                      <h3 className="font-bold text-primary mb-0.5">{val.title}</h3>
+                      <p className="text-gray-600 text-sm">{val.desc}</p>
+                    </div>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -174,13 +167,21 @@ export default function ChiSiamoPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member) => (
-              <Card key={member.name} className="text-center">
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-accent font-black text-xl">{member.initials}</span>
+              <Card key={member.name} className="text-center overflow-hidden" padding="none">
+                <div className="relative w-full aspect-square overflow-hidden">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
                 </div>
-                <h3 className="font-bold text-primary mb-1">{member.name}</h3>
-                <p className="text-accent text-sm font-semibold mb-3">{member.role}</p>
-                <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
+                <div className="p-5">
+                  <h3 className="font-bold text-primary mb-1">{member.name}</h3>
+                  <p className="text-accent text-sm font-semibold mb-3">{member.role}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
+                </div>
               </Card>
             ))}
           </div>

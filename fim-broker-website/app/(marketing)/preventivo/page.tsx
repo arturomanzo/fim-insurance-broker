@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import PreventivoForm from '@/components/forms/PreventivoForm'
 import Card from '@/components/ui/Card'
 
@@ -64,6 +65,16 @@ export default function PreventivoPage() {
             </div>
 
             <div className="space-y-6">
+              {/* Trust image */}
+              <div className="relative rounded-2xl overflow-hidden aspect-video">
+                <Image
+                  src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80&fit=crop&auto=format"
+                  alt="Consulente assicurativo FIM al lavoro"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+              </div>
               {/* Why FIM */}
               <Card>
                 <h3 className="font-bold text-primary mb-4">Perché FIM?</h3>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import PrenotazioneForm from '@/components/forms/PrenotazioneForm'
@@ -76,6 +77,16 @@ export default function PrenotaConsulenzaPage() {
 
             {/* Sidebar */}
             <div className="space-y-6">
+              {/* Consulting image */}
+              <div className="relative rounded-2xl overflow-hidden aspect-video">
+                <Image
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&fit=crop&auto=format"
+                  alt="Consulenza assicurativa personalizzata FIM"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+              </div>
               {/* Vantaggi */}
               <Card>
                 <h3 className="font-black text-primary text-lg mb-5">Perché scegliere FIM</h3>
