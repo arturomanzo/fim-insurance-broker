@@ -14,6 +14,8 @@ const navLinks = [
   { href: '/contatti', label: 'Contatti' },
 ]
 
+const PRENOTA_HREF = '/prenota-consulenza'
+
 export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -78,6 +80,17 @@ export default function Navbar() {
               06 96883381
             </a>
             <Link
+              href={PRENOTA_HREF}
+              className={clsx(
+                'text-sm font-medium px-4 py-2 rounded-lg border border-primary transition-all duration-200',
+                pathname.startsWith(PRENOTA_HREF)
+                  ? 'bg-primary text-white'
+                  : 'text-primary hover:bg-primary hover:text-white'
+              )}
+            >
+              Prenota Consulenza
+            </Link>
+            <Link
               href="/preventivo"
               className="btn-primary text-sm px-5 py-2.5"
             >
@@ -136,6 +149,9 @@ export default function Navbar() {
                 </svg>
                 06 96883381
               </a>
+              <Link href={PRENOTA_HREF} className="btn-secondary w-full text-center text-sm">
+                Prenota Consulenza
+              </Link>
               <Link href="/preventivo" className="btn-primary w-full text-center text-sm">
                 Preventivo Gratuito
               </Link>
