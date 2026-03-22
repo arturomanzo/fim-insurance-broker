@@ -78,21 +78,27 @@ export default function ContattiPage() {
                 </Card>
               ))}
 
-              {/* Map placeholder */}
+              {/* Google Maps embed */}
               <Card padding="none" className="overflow-hidden">
-                <div className="bg-gray-100 h-48 flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <div className="text-4xl mb-2">🗺️</div>
-                    <p className="text-sm font-medium">Via Roma 41, Cisterna di Latina</p>
-                    <a
-                      href="https://www.google.com/maps/search/?api=1&query=Via+Roma+41+04012+Cisterna+di+Latina+LT"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary text-sm hover:underline mt-1 block"
-                    >
-                      Apri in Google Maps →
-                    </a>
-                  </div>
+                <iframe
+                  src="https://maps.google.com/maps?q=Via+Roma,+41,+04012+Cisterna+di+Latina+LT,+Italy&output=embed&z=16"
+                  width="100%"
+                  height="220"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="FIM Insurance Broker - Via Roma 41, Cisterna di Latina"
+                />
+                <div className="px-4 py-2 bg-gray-50 text-center">
+                  <a
+                    href="https://www.google.com/maps/place/Via+Roma,+41,+04012+Cisterna+di+Latina+LT/@41.5939662,12.8234096,17z"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary text-sm hover:underline"
+                  >
+                    Apri in Google Maps →
+                  </a>
                 </div>
               </Card>
             </div>
