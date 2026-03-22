@@ -40,10 +40,25 @@ function maybeCleanup() {
   }
 }
 
+// Regex per validare IPv4 e IPv6 (previene injection nel key della store)
+const IPV4_RE =
+  /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)){3}$/
+const IPV6_RE = /^[0-9a-fA-F:]{2,39}$/
+
+function isValidIp(ip: string): boolean {
+  return IPV4_RE.test(ip) || IPV6_RE.test(ip)
+}
+
 function getIp(request: Request): string {
-  // Vercel e altri proxy impostano x-forwarded-for
+  // Vercel e altri proxy impostano x-forwarded-for.
+  // Prendiamo solo il primo indirizzo (client originale) e lo validiamo
+  // per prevenire header injection nella chiave della store.
   const forwarded = (request.headers as Headers).get('x-forwarded-for')
-  if (forwarded) return forwarded.split(',')[0].trim()
+  if (forwarded) {
+    const candidate = forwarded.split(',')[0].trim()
+    if (isValidIp(candidate)) return candidate
+  }
+  // IP non identificabile → bucket comune (non bypassa il limite)
   return 'unknown'
 }
 
@@ -55,7 +70,9 @@ export function rateLimit(
 
   const ip = getIp(request)
   const now = Date.now()
-  const key = `${request.url}::${ip}`
+  // Usa solo pathname (non query string o full URL) per evitare bypass tramite URL crafting
+  const url = new URL(request.url)
+  const key = `${url.pathname}::${ip}`
 
   const entry = store.get(key)
 

@@ -11,6 +11,7 @@ interface PreventivoRequest {
   messaggio?: string
   oggetto?: string
   privacy: boolean
+  website?: string // honeypot — deve essere assente o vuoto
 }
 
 function validateEmail(email: string): boolean {
@@ -210,6 +211,11 @@ export async function POST(req: NextRequest) {
     const tipo = sanitize(body.tipo)
     const messaggio = sanitize(body.messaggio)
 
+    // Honeypot: se il campo "website" è compilato, è quasi certamente un bot
+    if (body.website) {
+      return NextResponse.json({ success: true }, { status: 200 })
+    }
+
     if (!nome || !cognome || !email || !telefono || !tipo) {
       return NextResponse.json({ error: 'Campi obbligatori mancanti' }, { status: 400 })
     }
@@ -244,8 +250,7 @@ export async function POST(req: NextRequest) {
           html: buildClientEmailHtml(nome, tipo),
         }),
       ])
-    } else {
-      // Modalità sviluppo: log in console
+    } else if (process.env.NODE_ENV !== 'production') {
       console.log('[DEV] Preventivo ricevuto (email non inviata — imposta RESEND_API_KEY):', preventivoData)
     }
 

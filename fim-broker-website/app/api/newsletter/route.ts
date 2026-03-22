@@ -15,6 +15,12 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
+
+    // Honeypot: campo "website" compilato → bot, rispondi OK senza elaborare
+    if (body?.website) {
+      return NextResponse.json({ ok: true })
+    }
+
     const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : ''
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -24,8 +30,9 @@ export async function POST(req: Request) {
     const audienceId = process.env.RESEND_AUDIENCE_ID
 
     if (!resend || !audienceId) {
-      // In sviluppo, logga e rispondi OK per non bloccare il frontend
-      console.log('[newsletter] RESEND_API_KEY o RESEND_AUDIENCE_ID non configurati — iscrizione saltata:', email)
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('[newsletter] RESEND_API_KEY o RESEND_AUDIENCE_ID non configurati — iscrizione saltata:', email)
+      }
       return NextResponse.json({ ok: true })
     }
 

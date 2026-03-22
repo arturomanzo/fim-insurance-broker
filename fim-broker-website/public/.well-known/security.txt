@@ -1,0 +1,5 @@
+Contact: mailto:info@fimbroker.it
+Preferred-Languages: it, en
+Canonical: https://www.fimbroker.it/.well-known/security.txt
+Policy: https://www.fimbroker.it/privacy-policy
+Expires: 2027-01-01T00:00:00.000Z

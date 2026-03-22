@@ -9,6 +9,7 @@ interface ContactRequest {
   oggetto?: string
   messaggio: string
   privacy: boolean
+  website?: string // honeypot — deve essere assente o vuoto
 }
 
 function validateEmail(email: string): boolean {
@@ -187,6 +188,11 @@ export async function POST(req: NextRequest) {
     const oggetto = sanitize(body.oggetto)
     const messaggio = sanitize(body.messaggio)
 
+    // Honeypot: se il campo "website" è compilato, è quasi certamente un bot
+    if (body.website) {
+      return NextResponse.json({ success: true }, { status: 200 })
+    }
+
     if (!nome || !email || !messaggio) {
       return NextResponse.json({ error: 'Campi obbligatori mancanti' }, { status: 400 })
     }
@@ -218,7 +224,7 @@ export async function POST(req: NextRequest) {
           html: buildClientConfirmHtml(nome),
         }),
       ])
-    } else {
+    } else if (process.env.NODE_ENV !== 'production') {
       console.log('[DEV] Contatto ricevuto (email non inviata — imposta RESEND_API_KEY):', contactData)
     }
 

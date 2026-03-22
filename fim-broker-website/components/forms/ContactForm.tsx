@@ -10,6 +10,7 @@ interface FormData {
   oggetto: string
   messaggio: string
   privacy: boolean
+  website: string // honeypot — deve restare vuoto
 }
 
 export default function ContactForm() {
@@ -20,6 +21,7 @@ export default function ContactForm() {
     oggetto: '',
     messaggio: '',
     privacy: false,
+    website: '',
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
@@ -65,6 +67,19 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {/* Honeypot anti-bot: nascosto visivamente, mai compilato da utenti reali */}
+      <div style={{ position: 'absolute', left: '-9999px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <label htmlFor="contact-website">Non compilare questo campo</label>
+        <input
+          id="contact-website"
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="contact-nome" className="label-field">Nome e Cognome *</label>
