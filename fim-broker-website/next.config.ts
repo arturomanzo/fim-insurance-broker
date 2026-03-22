@@ -57,7 +57,7 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https://maps.gstatic.com https://www.google-analytics.com",
+      "img-src 'self' data: blob: https://maps.gstatic.com https://www.google-analytics.com https://images.unsplash.com",
       "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net",
       "frame-src 'self' https://maps.google.com https://www.google.com",
       "frame-ancestors 'self'",
@@ -74,8 +74,13 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
-    // Aggiungi qui eventuali domini esterni per immagini remote
-    // remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/photo-*',
+      },
+    ],
   },
   async headers() {
     return [

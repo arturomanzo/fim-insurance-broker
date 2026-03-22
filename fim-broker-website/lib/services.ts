@@ -5,6 +5,7 @@ export interface Service {
   description: string
   icon: string
   color: string
+  image: string
   features: string[]
   benefits: string[]
   faq: Array<{ question: string; answer: string }>
@@ -19,6 +20,7 @@ export const services: Service[] = [
       'Proteggi il tuo veicolo con le soluzioni assicurative più complete del mercato. Da FIM trovi polizze personalizzate per ogni esigenza, dalla semplice RC obbligatoria fino alla Kasko totale.',
     icon: '🚗',
     color: 'blue',
+    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80&fit=crop&auto=format',
     features: [
       'RC Auto obbligatoria',
       'Kasko completa o parziale',
@@ -54,6 +56,7 @@ export const services: Service[] = [
       'Le polizze vita FIM garantiscono serenità finanziaria a te e alla tua famiglia. Offriamo soluzioni temporanee caso morte, miste, unit-linked e piani di accumulo previdenziale.',
     icon: '❤️',
     color: 'red',
+    image: 'https://images.unsplash.com/photo-1511895426328-dc8714191011?w=800&q=80&fit=crop&auto=format',
     features: [
       'Vita temporanea caso morte',
       'Polizze miste',
@@ -89,6 +92,7 @@ export const services: Service[] = [
       'La tua casa è il tuo bene più prezioso. FIM offre polizze globali fabbricato e multirischio casa che coprono ogni tipo di danno, dal furto agli eventi atmosferici.',
     icon: '🏠',
     color: 'green',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&fit=crop&auto=format',
     features: [
       'Incendio e scoppio',
       'Furto e rapina',
@@ -124,6 +128,7 @@ export const services: Service[] = [
       'La salute è il bene più prezioso. Le nostre polizze sanitarie ti garantiscono accesso alle migliori strutture private, rimborso spese mediche e indennità per infortuni.',
     icon: '🏥',
     color: 'teal',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&fit=crop&auto=format',
     features: [
       'Ricoveri ospedalieri',
       'Visite specialistiche',
@@ -159,6 +164,7 @@ export const services: Service[] = [
       'FIM è il partner assicurativo di fiducia per le imprese. Dalla RC professionale alla cyber risk, dalle polizze property ai piani welfare aziendale, proteggiamo ogni aspetto della tua attività.',
     icon: '🏢',
     color: 'purple',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop&auto=format',
     features: [
       'Responsabilità civile professionale',
       'Directors & Officers (D&O)',
@@ -194,6 +200,7 @@ export const services: Service[] = [
       'Parti senza preoccupazioni con le polizze viaggio FIM. Dalla gita in Europa al viaggio intercontinentale, copriamo spese mediche, annullamento, ritardi e perdita bagagli.',
     icon: '✈️',
     color: 'orange',
+    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80&fit=crop&auto=format',
     features: [
       'Spese mediche allestero',
       'Rimpatrio durgenza',
