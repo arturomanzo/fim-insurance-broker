@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { services, getServiceBySlug } from '@/lib/services'
 import Card from '@/components/ui/Card'
+import FaqAccordion from '@/components/ui/FaqAccordion'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -93,14 +94,7 @@ export default async function ServizioPage({ params }: Props) {
               {/* FAQ */}
               <Card>
                 <h2 className="text-2xl font-black text-primary mb-6">Domande frequenti</h2>
-                <div className="space-y-5">
-                  {service.faq.map((item) => (
-                    <div key={item.question} className="border-b border-gray-100 pb-5 last:border-0 last:pb-0">
-                      <h3 className="font-bold text-primary mb-2">{item.question}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{item.answer}</p>
-                    </div>
-                  ))}
-                </div>
+                <FaqAccordion items={service.faq} />
               </Card>
             </div>
 
