@@ -4103,7 +4103,8 @@ const FIREBASE_DEFAULTS = {
 function initFirebase() {
   try {
     if (!firebase || !firebase.app) { console.warn("[FIM] Firebase SDK non caricato"); return; }
-    var app = firebase.app();
+    try { firebase.initializeApp(FIREBASE_DEFAULTS); } catch(initErr) { /* already initialized */ }
+      var app = firebase.app();
     window._fbDb = firebase.database();
     console.log("[FIM] Firebase connesso");
     firebase.auth().onAuthStateChanged(function(user) {
