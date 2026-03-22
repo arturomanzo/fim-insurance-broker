@@ -1105,24 +1105,7 @@ tr.collab-row:hover { background: #e3f0ff !important; }
 
 
 <!-- LOGIN SCREEN -->
-<div id="loginOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#1a365d 0%,#2b6cb0 100%);display:flex;align-items:center;justify-content:center;z-index:10000;">
-  <div style="background:white;border-radius:20px;padding:50px 40px;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center;max-width:400px;width:90%;">
-    <div style="width:80px;height:80px;background:#1a365d;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-      <span style="color:#e8a838;font-size:28px;font-weight:900;">FIM</span>
-    </div>
-    <h2 style="color:#1a365d;margin-bottom:8px;">FIM Insurance Broker</h2>
-    <p style="color:#718096;font-size:14px;margin-bottom:24px;">Inserisci la password per accedere al gestionale</p>
-    <input type="password" id="loginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')checkLogin()" style="width:100%;padding:14px 18px;border:2px solid #e2e8f0;border-radius:10px;font-size:16px;margin-bottom:16px;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='#2b6cb0'" onblur="this.style.borderColor='#e2e8f0'">
-    <div id="loginError" style="color:#e53e3e;font-size:13px;margin-bottom:12px;display:none;">Password non corretta</div>
-    <button onclick="checkLogin()" style="width:100%;padding:14px;background:#1a365d;color:white;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#2b6cb0'" onmouseout="this.style.background='#1a365d'">Accedi</button>
-    <div id="firstSetupSection" style="display:none;margin-top:20px;padding-top:20px;border-top:1px solid #e2e8f0;">
-      <p style="color:#718096;font-size:13px;margin-bottom:12px;">Prima configurazione: imposta una password</p>
-      <input type="password" id="newPassword1" placeholder="Nuova password" style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:14px;margin-bottom:8px;outline:none;">
-      <input type="password" id="newPassword2" placeholder="Conferma password" style="width:100%;padding:12px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:14px;margin-bottom:12px;outline:none;">
-      <button onclick="setFirstPassword()" style="width:100%;padding:12px;background:#38a169;color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;">Imposta Password</button>
-    </div>
-  </div>
-</div>
+<!-- Old loginOverlay removed -->
 
 <!-- HEADER -->
 <div class="header">
@@ -13639,28 +13622,7 @@ function _savePasswordToFirebase(pwdHash) {
 
 var _fimPasswordReady = !!localStorage.getItem(PWD_KEY);
 
-function checkLogin() {
-  var pwd = document.getElementById('loginPassword').value;
-  var stored = localStorage.getItem(PWD_KEY);
-  if (!stored && !_fimPasswordReady) {
-    document.getElementById('loginError').textContent = 'Connessione al cloud in corso, riprova tra un istante...';
-    document.getElementById('loginError').style.display = 'block';
-    document.getElementById('loginError').style.color = '#2b6cb0';
-    setTimeout(function() { document.getElementById('loginError').style.display = 'none'; document.getElementById('loginError').style.color = '#e53e3e'; document.getElementById('loginError').textContent = 'Password non corretta'; }, 2500);
-    return;
-  }
-  if (!stored && _fimPasswordReady) { document.getElementById('firstSetupSection').style.display = 'block'; return; }
-  if (simpleHash(pwd) === stored) {
-    document.getElementById('loginOverlay').style.display = 'none';
-    sessionStorage.setItem('fim_authenticated', 'true');
-    _savePasswordToFirebase(stored);
-  } else {
-    document.getElementById('loginError').textContent = 'Password non corretta';
-    document.getElementById('loginError').style.display = 'block';
-    document.getElementById('loginPassword').style.borderColor = '#e53e3e';
-    setTimeout(function() { document.getElementById('loginError').style.display = 'none'; document.getElementById('loginPassword').style.borderColor = '#e2e8f0'; }, 3000);
-  }
-}
+/* checkLogin removed - replaced by Firebase auth */
 
 function setFirstPassword() {
   var p1 = document.getElementById('newPassword1').value;
