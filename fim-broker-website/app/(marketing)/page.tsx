@@ -29,7 +29,7 @@ const whyFIM = [
   {
     icon: '🔍',
     title: 'Confrontiamo per te',
-    desc: 'Analizziamo le offerte di oltre 50 compagnie per trovare la soluzione migliore al prezzo più competitivo.',
+    desc: 'Analizziamo le offerte delle principali compagnie assicurative per trovare la soluzione migliore al prezzo più competitivo.',
   },
   {
     icon: '🤝',
@@ -84,7 +84,7 @@ export default function HomePage() {
                   step: '02',
                   icon: '🔎',
                   title: 'Analizziamo il mercato',
-                  desc: 'I nostri consulenti confrontano le offerte di oltre 50 compagnie assicurative per trovare la soluzione ideale.',
+                  desc: 'I nostri consulenti confrontano le offerte delle principali compagnie assicurative per trovare la soluzione ideale.',
                 },
                 {
                   step: '03',

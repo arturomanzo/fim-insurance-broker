@@ -50,7 +50,7 @@ const blogPosts: Record<string, BlogPost> = {
       },
       {
         heading: 'Come risparmiare senza rinunciare alla protezione',
-        body: "Il mercato della RC Auto è molto competitivo. FIM confronta le offerte di oltre 50 compagnie per trovare la polizza più conveniente in base al tuo profilo. In media i nostri clienti risparmiano il 25% rispetto al preventivo precedente, mantenendo le stesse coperture o migliorandole.",
+        body: "Il mercato della RC Auto è molto competitivo. FIM confronta le offerte delle principali compagnie per trovare la polizza più conveniente in base al tuo profilo. In media i nostri clienti risparmiano il 25% rispetto al preventivo precedente, mantenendo le stesse coperture o migliorandole.",
       },
       {
         heading: 'Classe di merito e bonus-malus',

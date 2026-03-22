@@ -35,11 +35,11 @@ const team = [
 ]
 
 const milestones = [
-  { year: '2004', event: 'Fondazione di FIM Insurance Broker a Milano' },
-  { year: '2008', event: 'Apertura ufficio di Roma e ampliamento team' },
+  { year: '2004', event: 'Fondazione di FIM Insurance Broker a Cisterna di Latina' },
+  { year: '2008', event: 'Ampliamento del team e apertura a nuovi segmenti di mercato' },
   { year: '2012', event: 'Superata quota 1.000 clienti attivi' },
   { year: '2016', event: 'Lancio del portale online per preventivi digitali' },
-  { year: '2019', event: 'Partnership con 50+ compagnie assicurative' },
+  { year: '2019', event: 'Espansione delle partnership con le principali compagnie assicurative' },
   { year: '2023', event: 'Integrazione assistente AI FIMA per supporto clienti' },
   { year: '2024', event: 'Superata quota 5.000 clienti soddisfatti' },
 ]
@@ -79,7 +79,7 @@ export default function ChiSiamoPage() {
               <p className="text-gray-700 leading-relaxed mb-4">
                 In FIM crediamo che ogni persona e ogni azienda meriti la copertura assicurativa più adatta
                 alle proprie esigenze, al prezzo più competitivo del mercato. Per questo confrontiamo
-                le offerte di oltre 50 compagnie per trovare la soluzione perfetta per te.
+                le offerte delle principali compagnie assicurative per trovare la soluzione perfetta per te.
               </p>
               <p className="text-gray-700 leading-relaxed mb-6">
                 Come broker indipendente, siamo liberi da vincoli con le compagnie: il nostro unico
@@ -89,7 +89,7 @@ export default function ChiSiamoPage() {
                 {[
                   { value: '20+', label: 'Anni' },
                   { value: '5K+', label: 'Clienti' },
-                  { value: '50+', label: 'Partner' },
+                  { value: '✓', label: 'Multi-compagnia' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center p-4 bg-gray-50 rounded-xl">
                     <div className="text-2xl font-black text-primary">{stat.value}</div>

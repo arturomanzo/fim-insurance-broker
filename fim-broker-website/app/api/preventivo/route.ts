@@ -162,7 +162,7 @@ function buildClientEmailHtml(rawNome: string, rawTipo: string): string {
         <p style="margin: 0 0 12px; font-weight: 700; color: #0f2d6b; font-size: 14px;">Cosa aspettarti:</p>
         <ul style="margin: 0; padding-left: 20px; color: #475569; font-size: 14px; line-height: 2;">
           <li>Analisi personalizzata della tua richiesta</li>
-          <li>Confronto tra le offerte di oltre 50 compagnie</li>
+          <li>Confronto tra le offerte delle principali compagnie assicurative</li>
           <li>Preventivo dettagliato e senza impegno</li>
           <li>Supporto di un consulente dedicato</li>
         </ul>
