@@ -60,8 +60,8 @@ const jsonLd = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 41.5924,
-    longitude: 12.8294,
+    latitude: 41.5939662,
+    longitude: 12.8234096,
   },
   openingHoursSpecification: [
     {
@@ -77,7 +77,11 @@ const jsonLd = {
       closes: '18:30',
     },
   ],
-  sameAs: [],
+  sameAs: [
+    'https://www.facebook.com/FimInsuranceBroker/',
+    'https://www.instagram.com/fiminsurancebroker/',
+    'https://x.com/fimbroker',
+  ],
   areaServed: {
     '@type': 'Country',
     name: 'Italy',
