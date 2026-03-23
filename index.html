@@ -12234,14 +12234,13 @@ async function processDocAI(file) {
       '  "note_importanti": "eventuali punti critici o attenzioni particolari per il broker",\n' +
       '  "confidenza": "alta|media|bassa"\n}\n\n' +
       'Se un campo non e presente nel documento, usa null. Per le date usa formato YYYY-MM-DD. Per gli importi usa numeri senza simbolo euro. Rispondi SOLO con il JSON.';
-    var response = await fetch('https://api.anthropic.com/v1/messages', {
+    var response = await fetch('https://fim-insurance-broker.vercel.app/api/claude', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': claudeKey,
         'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
+        },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 4096,
@@ -14188,7 +14187,7 @@ async function processPDFFile(file) {
       prog.style.width = '50%';
       var textForAI = fullText.length > 15000 ? fullText.substring(0, 15000) + '\n\n[...TESTO TRONCATO...]' : fullText;
       var aiPrompt = 'Sei un esperto analista assicurativo italiano. Analizza questa polizza assicurativa e restituisci un JSON strutturato.\n\nDOCUMENTO:\n\`\`\`\n' + textForAI + '\n\`\`\`\n\nRispondi SOLO con un oggetto JSON valido (senza markdown, senza \`\`\`), con questa struttura:\n{\n  "compagnia": "nome compagnia assicurativa",\n  "numPolizza": "numero polizza",\n  "cliente": "nome completo contraente (COGNOME NOME o Ragione Sociale)",\n  "cf": "codice fiscale del contraente se presente",\n  "piva": "partita IVA se presente",\n  "indirizzo": "indirizzo del contraente se presente",\n  "telefono": "telefono se presente",\n  "email": "email se presente",\n  "targa": "targa veicolo se polizza auto",\n  "veicolo": "marca e modello veicolo se presente",\n  "decorrenza": "YYYY-MM-DD",\n  "scadenza": "YYYY-MM-DD",\n  "frazionamento": "Annuale|Semestrale|Trimestrale|Mensile",\n  "tipoGaranzia": "RCA|CVT|Incendio|Furto|RCProfessionale|Vita|Infortuni|Multirischio|MultirischioCasa|Trasporti|TutelaLegale|Altro",\n  "premioNetto": 0,\n  "importoImposte": 0,\n  "importoSSN": 0,\n  "premioLordo": 0,\n  "garanzie": ["lista garanzie incluse"],\n  "confidenza": "alta|media|bassa"\n}\n\nREGOLE IMPORTANTI:\n- Per le date usa SEMPRE formato YYYY-MM-DD\n- Per gli importi usa numeri decimali senza simbolo euro (es: 450.00)\n- premioNetto = premio imponibile (senza tasse e SSN)\n- premioLordo = totale che il cliente paga\n- Se un campo non e presente, usa null\n- Rispondi SOLO con il JSON, nessun testo aggiuntivo';
-      var aiResp = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': claudeKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' }, body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 2048, messages: [{ role: 'user', content: aiPrompt }] }) });
+      var aiResp = await fetch('https://fim-insurance-broker.vercel.app/api/claude', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': claudeKey, 'anthropic-version': '2023-06-01', }, body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 2048, messages: [{ role: 'user', content: aiPrompt }] }) });
       if (!aiResp.ok) { var errData = await aiResp.text(); throw new Error('Claude API error (' + aiResp.status + '): ' + errData.substring(0, 200)); }
       var aiData = await aiResp.json();
       var aiText = aiData.content && aiData.content[0] ? aiData.content[0].text : '';
