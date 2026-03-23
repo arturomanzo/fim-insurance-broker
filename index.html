@@ -31,6 +31,7 @@
   --text-light: #718096;
   --border: #e2e8f0;
   --shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06);
+
   --shadow-lg: 0 8px 25px rgba(0,0,0,.1), 0 4px 10px rgba(0,0,0,.05); 
   --radius: 14px;
 }
@@ -8440,8 +8441,7 @@ function _openDocWindow(title, htmlContent) {
   w.document.write('<div id="docContent">');
   w.document.write(htmlContent);
   w.document.write('</div>');
-  w.document.write('    <script src="briefing_patch.js"></script>
-</body></html>');
+  w.document.write('</body></html>');
   w.document.close();
   // Attach PDF download handler after load
   var safeTitle = title.replace(/[^a-zA-Z0-9_\- ]/g, '').replace(/\s+/g, '_');
@@ -15001,5 +15001,6 @@ function initAnalytics() {
 
 <!-- FIMA Chatbot Widget -->
 <script src="fima-chatbot.js"></script>
+<script src="briefing_patch.js"></script>
 </body>
 </html>
