@@ -5,33 +5,44 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Chi Siamo',
-  description: 'FIM Insurance Broker: 20 anni di esperienza al servizio di privati e aziende. Scopri la nostra storia, i nostri valori e il nostro team.',
+  description: 'FIM Insurance Broker: 20 anni di esperienza al servizio di privati e aziende. Broker indipendente iscritto RUI IVASS, partner delle principali compagnie assicurative.',
 }
 
-const team = [
+const partners = [
+  { name: 'Generali', logo: '/images/partners/generali.svg' },
+  { name: 'AXA', logo: '/images/partners/axa.svg' },
+  { name: 'Allianz', logo: '/images/partners/allianz.svg' },
+  { name: 'UnipolSai', logo: '/images/partners/unipolsai.svg' },
+  { name: 'Zurich', logo: '/images/partners/zurich.svg' },
+  { name: 'Groupama', logo: '/images/partners/groupama.svg' },
+  { name: 'HDI', logo: '/images/partners/hdi.svg' },
+  { name: 'Cattolica', logo: '/images/partners/cattolica.svg' },
+]
+
+const certifications = [
   {
-    name: 'Arturo Manzo',
-    role: 'Fondatore & CEO',
-    bio: 'Con oltre 25 anni nel settore assicurativo, Arturo ha fondato FIM con la visione di portare trasparenza e professionalità nel brokeraggio assicurativo italiano.',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&fit=crop&auto=format',
+    icon: '🏛️',
+    title: 'Iscrizione RUI IVASS',
+    desc: 'Regolarmente iscritti nel Registro Unico degli Intermediari Assicurativi (RUI) tenuto dall\'IVASS.',
+    badge: 'Sezione B',
   },
   {
-    name: 'Isabella Romano',
-    role: 'Responsabile Polizze Vita',
-    bio: 'Specializzata in pianificazione previdenziale e protezione familiare, Isabella guida il team vita da 12 anni.',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&fit=crop&auto=format',
+    icon: '🔒',
+    title: 'Garanzia RC Professionale',
+    desc: 'Copertura assicurativa per responsabilità civile professionale come previsto dalla normativa vigente.',
+    badge: 'D.Lgs 209/2005',
   },
   {
-    name: 'Marco Tessari',
-    role: 'Responsabile Polizze Aziendali',
-    bio: 'Esperto di risk management aziendale, Marco gestisce i portafogli corporate e la consulenza per le imprese.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80&fit=crop&auto=format',
+    icon: '🛡️',
+    title: 'Conformità GDPR',
+    desc: 'Trattamento dei dati personali nel pieno rispetto del Regolamento UE 2016/679 e del Codice Privacy.',
+    badge: 'Reg. UE 2016/679',
   },
   {
-    name: 'Giulia Conti',
-    role: 'Claims Manager',
-    bio: 'Giulia guida il team sinistri garantendo la liquidazione rapida e la tutela dei nostri clienti in ogni fase.',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&fit=crop&auto=format',
+    icon: '📋',
+    title: 'Codice di Condotta IDD',
+    desc: 'Distribuzione assicurativa conforme alla Direttiva IDD recepita in Italia con il D.Lgs. 68/2018.',
+    badge: 'D.Lgs 68/2018',
   },
 ]
 
@@ -154,37 +165,80 @@ export default function ChiSiamoPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Certifications & Compliance */}
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-12">
             <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Il Team
+              Autorizzazioni & Conformità
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-              Professionisti al tuo servizio
+              Professionisti certificati e regolamentati
             </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Operiamo nel pieno rispetto della normativa italiana ed europea in materia di intermediazione assicurativa.
+            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member) => (
-              <Card key={member.name} className="text-center overflow-hidden" padding="none">
-                <div className="relative w-full aspect-square overflow-hidden">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-primary mb-1">{member.name}</h3>
-                  <p className="text-accent text-sm font-semibold mb-3">{member.role}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
-                </div>
+            {certifications.map((cert) => (
+              <Card key={cert.title} className="text-center">
+                <div className="text-4xl mb-4">{cert.icon}</div>
+                <span className="inline-block bg-accent/10 text-accent text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">
+                  {cert.badge}
+                </span>
+                <h3 className="font-bold text-primary mb-2">{cert.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{cert.desc}</p>
               </Card>
             ))}
           </div>
+          {/* IVASS verification note */}
+          <div className="mt-8 p-5 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4 max-w-3xl mx-auto">
+            <span className="text-3xl flex-shrink-0">ℹ️</span>
+            <div>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <strong className="text-primary">Verifica la nostra iscrizione:</strong> Puoi controllare i dati di FIM Insurance Broker S.a.s. sul sito ufficiale IVASS all&apos;indirizzo{' '}
+                <a
+                  href="https://www.ivass.it/consumatori/rui/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent underline underline-offset-2 hover:text-primary transition-colors"
+                >
+                  ivass.it/consumatori/rui
+                </a>
+                {' '}— P.IVA 02637640596.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partner Companies */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              Le Nostre Compagnie Partner
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
+              Accesso alle migliori compagnie del mercato
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Come broker indipendente, siamo convenzionati con le principali compagnie assicurative italiane e internazionali. Confrontiamo le offerte per trovare la soluzione più adatta a te.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {partners.map((partner) => (
+              <div
+                key={partner.name}
+                className="bg-white rounded-2xl px-6 py-8 flex items-center justify-center border border-gray-100 hover:shadow-md hover:border-primary/20 transition-all duration-200"
+              >
+                <span className="text-lg font-black text-primary/70 tracking-tight">{partner.name}</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-gray-500 text-sm mt-6">
+            + molte altre compagnie a seconda del prodotto assicurativo richiesto
+          </p>
         </div>
       </section>
 
