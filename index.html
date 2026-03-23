@@ -4090,32 +4090,35 @@ const FIREBASE_DEFAULTS = {
 };
 
 function initFirebase() {
+  var settings = JSON.parse(localStorage.getItem("fim_settings") || "{}");
+  var apiKey = settings.firebaseApiKey || FIREBASE_DEFAULTS.apiKey;
+  var dbUrl = settings.firebaseDatabaseUrl || FIREBASE_DEFAULTS.databaseURL;
+  var projId = settings.firebaseProjectId || FIREBASE_DEFAULTS.projectId;
+  if (!apiKey || !dbUrl) { cloudSyncEnabled = false; return; }
   try {
-    if (!firebase || !firebase.app) { console.warn("[FIM] Firebase SDK non caricato"); return; }
-    try { firebase.initializeApp(FIREBASE_DEFAULTS); } catch(initErr) { /* already initialized */ }
-      var app = firebase.app();
-    window._fbDb = firebase.database();
-    console.log("[FIM] Firebase connesso");
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        _currentUser = user;
-        console.log("[FIM] Utente autenticato: " + user.email);
-        document.getElementById("loginOverlay").style.display = "none";
-            localStorage.setItem("fim_account_setup","true");
-        var ub = document.getElementById("userEmailDisplay"); if (ub) ub.textContent = user.email;
-        startSessionTimer();
-        checkAutoBackup();
-        setTimeout(function() { cloudPullSilent(); }, 1500);
-        startRealtimeSync();
-      } else {
-        _currentUser = null;
-        console.log("[FIM] Nessun utente - mostra login");
-        document.getElementById("loginOverlay").style.display = "flex";
-        checkFirstTimeSetup();
-      }
+    var config = { apiKey: apiKey, databaseURL: dbUrl, projectId: projId };
+    if (firebase.apps && firebase.apps.length > 0) {
+      firebaseApp = firebase.apps[0];
+    } else {
+      firebaseApp = firebase.initializeApp(config);
+    }
+    firebaseDb = firebase.database();
+    window._fbDb = firebaseDb;
+    firebase.auth().signInAnonymously().then(function() {
+      console.log("[FIM] Firebase Auth: signed in anonymously");
+      cloudSyncEnabled = true;
+      updateSyncStatus("connected");
+      startRealtimeSync();
+    }).catch(function(err) {
+      console.error("[FIM] Firebase Auth error:", err);
+      cloudSyncEnabled = true;
+      updateSyncStatus("connected");
+      startRealtimeSync();
     });
   } catch(e) {
-    console.error("[FIM] Errore Firebase:", e);
+    console.error("[FIM] Firebase init error:", e);
+    cloudSyncEnabled = false;
+    updateSyncStatus("error");
   }
 }
 
