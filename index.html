@@ -3245,6 +3245,7 @@ function checkFirstTimeSetup(){ var lf=document.getElementById("loginForm"); var
 
 
     function renderAnalyticsDashboard(){
+      if(typeof computeAnalyticsData!=="function")return;
       var data=computeAnalyticsData();
       var c=document.getElementById("analytics-dashboard");
       if(!c) return;
@@ -3331,7 +3332,7 @@ function checkFirstTimeSetup(){ var lf=document.getElementById("loginForm"); var
       for(var i=0;i<=5;i++){var v=(mx/5)*i,x=pd.l+(cw/5)*i;ctx.fillText(formatCurrency(v),x,h-20);}
       ctx.strokeStyle="#2d3748";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pd.l,pd.t);ctx.lineTo(pd.l,h-pd.b);ctx.lineTo(w-pd.r,h-pd.b);ctx.stroke();
     }
-    renderAnalyticsDashboard();
+    document.addEventListener("DOMContentLoaded",function(){if(typeof computeAnalyticsData==="function")renderAnalyticsDashboard();});
   </script>
 </div>
 
