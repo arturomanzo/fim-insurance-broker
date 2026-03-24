@@ -103,8 +103,14 @@ export default async function ServizioPage({ params }: Props) {
               {/* CTA Card */}
               <Card className="gradient-primary text-white sticky top-24" padding="lg">
                 <h3 className="text-xl font-black mb-3">Preventivo gratuito</h3>
-                <p className="text-white/80 text-sm mb-6">
-                  Ricevi un preventivo personalizzato per {service.title.toLowerCase()} entro 24 ore.
+                {/* Price indicator */}
+                <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-5">
+                  <p className="text-white/60 text-xs uppercase tracking-wider font-semibold mb-1">Costo indicativo</p>
+                  <p className="text-accent text-2xl font-black">{service.priceFrom}</p>
+                  <p className="text-white/60 text-xs mt-1 leading-snug">{service.priceNote}</p>
+                </div>
+                <p className="text-white/80 text-sm mb-5">
+                  Ricevi un preventivo personalizzato entro 24 ore. Consulenza gratuita, nessun impegno.
                 </p>
                 <Link href="/preventivo" className="btn-primary w-full text-center block mb-3">
                   Richiedi Preventivo

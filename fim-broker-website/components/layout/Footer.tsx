@@ -13,12 +13,19 @@ const serviceLinks = [
   { href: '/servizi/assicurazione-viaggio', label: 'Assicurazione Viaggio' },
 ]
 
+const soluzioniLinks = [
+  { href: '/soluzioni/professionisti', label: 'Per Professionisti' },
+  { href: '/soluzioni/artigiani-pmi', label: 'Per Artigiani e PMI' },
+  { href: '/soluzioni/catastrofi-naturali', label: 'Catastrofi Naturali' },
+  { href: '/risorse/guida-pmi', label: '📋 Guida PMI 2025 (gratis)' },
+]
+
 const companyLinks = [
   { href: '/chi-siamo', label: 'Chi Siamo' },
-  { href: '/servizi', label: 'I Nostri Servizi' },
   { href: '/blog', label: 'Blog & News' },
-  { href: '/contatti', label: 'Contatti' },
+  { href: '/prenota-consulenza', label: 'Prenota Consulenza' },
   { href: '/preventivo', label: 'Richiedi Preventivo' },
+  { href: '/contatti', label: 'Contatti' },
 ]
 
 const socialLinks = [
@@ -140,9 +147,9 @@ export default function Footer() {
   return (
     <footer className="bg-primary text-white">
       <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 md:col-span-2">
             <Link href="/" className="inline-flex mb-5" aria-label="FIM Insurance Broker — Home">
               <FimLogo variant="full" theme="white" height={44} />
             </Link>
@@ -192,6 +199,20 @@ export default function Footer() {
             <h3 className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">Servizi</h3>
             <ul className="space-y-2">
               {serviceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Soluzioni */}
+          <div>
+            <h3 className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">Soluzioni</h3>
+            <ul className="space-y-2">
+              {soluzioniLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
                     {link.label}

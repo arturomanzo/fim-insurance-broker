@@ -20,8 +20,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/chi-siamo`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/servizi`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/preventivo`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/prenota-consulenza`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE_URL}/contatti`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    // Soluzioni per settore
+    { url: `${BASE_URL}/soluzioni`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/professionisti`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/artigiani-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/catastrofi-naturali`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    // Risorse
+    { url: `${BASE_URL}/risorse/guida-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    // Legal
     { url: `${BASE_URL}/privacy-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/cookie-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/note-legali`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
