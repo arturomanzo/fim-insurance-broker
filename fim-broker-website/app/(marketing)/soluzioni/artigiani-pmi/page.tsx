@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import FaqAccordion from '@/components/ui/FaqAccordion'
+import LeadMagnet from '@/components/home/LeadMagnet'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Artigiani e PMI — Proteggi la tua Attività',
@@ -291,6 +292,8 @@ export default function ArtigianiPmiPage() {
           </div>
         </div>
       </section>
+
+      <LeadMagnet />
 
       {/* FAQ */}
       <section className="section-padding bg-gray-50">

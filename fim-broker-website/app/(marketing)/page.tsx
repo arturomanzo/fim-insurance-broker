@@ -2,6 +2,7 @@ import Hero from '@/components/home/Hero'
 import Stats from '@/components/home/Stats'
 import ServicesGrid from '@/components/home/ServicesGrid'
 import TrustedBrands from '@/components/home/TrustedBrands'
+import LeadMagnet from '@/components/home/LeadMagnet'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 
@@ -295,6 +296,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <LeadMagnet />
 
       {/* CTA Banner */}
       <section className="gradient-primary py-16">
