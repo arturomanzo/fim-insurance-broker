@@ -289,7 +289,7 @@ function generateBriefingSettimanale() {
 
   // === SEZ 1: SCADENZE CRITICHE ===
   html += '<div style="background:#fff5f5;border-radius:10px;padding:16px;margin-bottom:16px;border-left:4px solid #e53e3e;">';
-  html += '<h3 style="margin:0 0 10px;color:#c53030;font-size:15px;">ð¨ Scadenze Critiche</h3>';
+  html += '<h3 style="margin:0 0 10px;color:#c53030;font-size:15px;"> Scadenze Critiche</h3>';
   if (scadute.length === 0 && entro7.length === 0 && entro14.length === 0) {
     html += '<p style="color:#38a169;font-weight:600;">Nessuna scadenza critica nei prossimi 14 giorni.</p>';
   } else {
@@ -315,7 +315,7 @@ function generateBriefingSettimanale() {
 
   // === SEZ 2: CLIENTI DA CHIAMARE ===
   html += '<div style="background:#ebf8ff;border-radius:10px;padding:16px;margin-bottom:16px;border-left:4px solid #3182ce;">';
-  html += '<h3 style="margin:0 0 10px;color:#2b6cb0;font-size:15px;">ð Clienti da Chiamare (' + clientiDaChiamare.length + ')</h3>';
+  html += '<h3 style="margin:0 0 10px;color:#2b6cb0;font-size:15px;"> Clienti da Chiamare (' + clientiDaChiamare.length + ')</h3>';
   if (clientiDaChiamare.length === 0) {
     html += '<p style="color:#38a169;font-weight:600;">Nessun cliente da contattare con urgenza.</p>';
   } else {
@@ -336,7 +336,7 @@ function generateBriefingSettimanale() {
 
   // === SEZ 3: CROSS-SELLING ===
   html += '<div style="background:#f0fff4;border-radius:10px;padding:16px;margin-bottom:16px;border-left:4px solid #38a169;">';
-  html += '<h3 style="margin:0 0 10px;color:#276749;font-size:15px;">ð¡ Opportunita Cross-Selling (Top ' + topCross.length + ')</h3>';
+  html += '<h3 style="margin:0 0 10px;color:#276749;font-size:15px;"> Opportunita Cross-Selling (Top ' + topCross.length + ')</h3>';
   if (topCross.length === 0) {
     html += '<p style="color:#718096;">Nessuna opportunita di cross-selling rilevata.</p>';
   } else {
@@ -355,7 +355,7 @@ function generateBriefingSettimanale() {
 
   // === SEZ 4: PROVVIGIONI PER COLLABORATORE ===
   html += '<div style="background:#faf5ff;border-radius:10px;padding:16px;margin-bottom:16px;border-left:4px solid #805ad5;">';
-  html += '<h3 style="margin:0 0 10px;color:#553c9a;font-size:15px;">ð° Performance Provvigioni</h3>';
+  html += '<h3 style="margin:0 0 10px;color:#553c9a;font-size:15px;"> Performance Provvigioni</h3>';
   html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
   html += '<thead><tr style="background:#553c9a;color:white;"><th style="padding:6px 8px;text-align:left;">Collaboratore</th><th style="padding:6px 8px;text-align:center;">N. Polizze</th><th style="padding:6px 8px;text-align:right;">Premi</th><th style="padding:6px 8px;text-align:right;">Imponibile</th><th style="padding:6px 8px;text-align:right;">Provvigioni</th><th style="padding:6px 8px;text-align:center;">% Media</th><th style="padding:6px 8px;">Barra</th></tr></thead><tbody>';
   var maxProv = collabList.length > 0 ? collabList[0].provvigioni : 1;
@@ -375,7 +375,7 @@ function generateBriefingSettimanale() {
 
   // === SEZ 5: ANDAMENTO PER COMPAGNIA ===
   html += '<div style="background:#fffbeb;border-radius:10px;padding:16px;margin-bottom:16px;border-left:4px solid #d69e2e;">';
-  html += '<h3 style="margin:0 0 10px;color:#975a16;font-size:15px;">ð¢ Andamento per Compagnia</h3>';
+  html += '<h3 style="margin:0 0 10px;color:#975a16;font-size:15px;"> Andamento per Compagnia</h3>';
   html += '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
   html += '<thead><tr style="background:#975a16;color:white;"><th style="padding:6px 8px;text-align:left;">Compagnia</th><th style="padding:6px 8px;text-align:center;">Polizze</th><th style="padding:6px 8px;text-align:center;">Attive</th><th style="padding:6px 8px;text-align:center;">Scadute</th><th style="padding:6px 8px;text-align:right;">Premi Totali</th><th style="padding:6px 8px;text-align:center;">Quota %</th><th style="padding:6px 8px;">Distribuzione</th></tr></thead><tbody>';
   compList.forEach(function(c, i) {
@@ -395,7 +395,7 @@ function generateBriefingSettimanale() {
   // Footer
   html += '<div style="text-align:center;color:var(--text-light);font-size:11px;padding:10px;">';
   html += 'Briefing generato il ' + new Date().toLocaleDateString('it-IT') + ' alle ' + new Date().toLocaleTimeString('it-IT', {hour:'2-digit',minute:'2-digit'});
-  html += ' | FIM Insurance Broker S.a.s. â RUI Sez. B N. B000405449</div>';
+  html += ' | FIM Insurance Broker S.a.s.  -  RUI Sez. B N. B000405449</div>';
 
   document.getElementById('briefingResult').innerHTML = html;
   document.getElementById('briefingActions').style.display = 'flex';
@@ -433,7 +433,7 @@ function printBriefing() {
     '.footer{text-align:center;font-size:9px;color:#888;margin-top:20px;border-top:1px solid #e2e8f0;padding-top:8px;}' +
     '@media print{body{padding:15px;}.header{padding:12px 16px;}}</style></head><body>';
   // Header
-  html += '<div class="header"><h1>ð Briefing Settimanale â FIM Insurance Broker</h1>';
+  html += '<div class="header"><h1> Briefing Settimanale  -  FIM Insurance Broker</h1>';
   html += '<p>' + (settings.indirizzo || '') + ' | ' + (settings.telefono || '') + ' | ' + (settings.email || '') + ' | RUI: ' + (settings.rui || 'B000405449') + ' Sez. B</p>';
   html += '<p style="margin-top:6px;font-size:11px;">Data riferimento: ' + formatDate(b.dataRif) + '</p></div>';
   // Summary cards
@@ -444,7 +444,7 @@ function printBriefing() {
   html += '<div class="summary-card" style="border-color:#805ad5;"><div class="num" style="color:#805ad5;">' + formatCurrency(b.provvTotale) + '</div><div class="lbl">Provvigioni</div></div>';
   html += '</div>';
   // Sez 1: Scadenze
-  html += '<div class="section"><h3 style="background:#c53030;">ð¨ Scadenze Critiche</h3>';
+  html += '<div class="section"><h3 style="background:#c53030;"> Scadenze Critiche</h3>';
   var allUrgent = b.scadute.concat(b.entro7).concat(b.entro14);
   if (allUrgent.length > 0) {
     html += '<table><thead><tr style="background:#c53030;"><th>Stato</th><th>Cliente</th><th>Compagnia</th><th>Polizza</th><th>Ramo</th><th>Scadenza</th><th class="right">Premio</th></tr></thead><tbody>';
@@ -458,7 +458,7 @@ function printBriefing() {
   } else { html += '<p style="color:#38a169;">Nessuna scadenza critica.</p>'; }
   html += '</div>';
   // Sez 2: Clienti da chiamare
-  html += '<div class="section"><h3 style="background:#2b6cb0;">ð Clienti da Chiamare (' + b.clientiDaChiamare.length + ')</h3>';
+  html += '<div class="section"><h3 style="background:#2b6cb0;"> Clienti da Chiamare (' + b.clientiDaChiamare.length + ')</h3>';
   if (b.clientiDaChiamare.length > 0) {
     html += '<table><thead><tr style="background:#2b6cb0;"><th>Cliente</th><th>Telefono</th><th>Email</th><th>Motivo</th><th>Polizza</th><th class="right">Premio</th></tr></thead><tbody>';
     b.clientiDaChiamare.forEach(function(c) {
@@ -468,7 +468,7 @@ function printBriefing() {
   } else { html += '<p style="color:#38a169;">Nessun cliente urgente.</p>'; }
   html += '</div>';
   // Sez 3: Cross-selling
-  html += '<div class="section"><h3 style="background:#276749;">ð¡ Cross-Selling</h3>';
+  html += '<div class="section"><h3 style="background:#276749;"> Cross-Selling</h3>';
   if (b.topCross.length > 0) {
     html += '<table><thead><tr style="background:#276749;"><th>Cliente</th><th class="center">Polizze</th><th>Rami</th><th>Suggerimenti</th></tr></thead><tbody>';
     b.topCross.forEach(function(c) {
@@ -478,7 +478,7 @@ function printBriefing() {
   } else { html += '<p>Nessuna opportunita rilevata.</p>'; }
   html += '</div>';
   // Sez 4: Provvigioni
-  html += '<div class="section"><h3 style="background:#553c9a;">ð° Provvigioni</h3>';
+  html += '<div class="section"><h3 style="background:#553c9a;"> Provvigioni</h3>';
   html += '<table><thead><tr style="background:#553c9a;"><th>Collaboratore</th><th class="center">Polizze</th><th class="right">Premi</th><th class="right">Imponibile</th><th class="right">Provvigioni</th><th class="center">%</th></tr></thead><tbody>';
   b.collabList.forEach(function(c) {
     html += '<tr><td style="font-weight:600;">' + c.nome + '</td><td class="center">' + c.numPolizze + '</td><td class="right">' + formatCurrency(c.premi) + '</td><td class="right">' + formatCurrency(c.imponibile) + '</td><td class="right" style="font-weight:700;color:#553c9a;">' + formatCurrency(c.provvigioni) + '</td><td class="center">' + c.percMedia.toFixed(1) + '%</td></tr>';
@@ -486,7 +486,7 @@ function printBriefing() {
   html += '<tr style="background:#553c9a;color:white;font-weight:700;"><td>TOTALE</td><td class="center">' + polizze.length + '</td><td class="right">' + formatCurrency(b.premiTotali) + '</td><td></td><td class="right">' + formatCurrency(b.provvTotale) + '</td><td></td></tr>';
   html += '</tbody></table></div>';
   // Sez 5: Compagnie
-  html += '<div class="section"><h3 style="background:#975a16;">ð¢ Compagnie</h3>';
+  html += '<div class="section"><h3 style="background:#975a16;"> Compagnie</h3>';
   html += '<table><thead><tr style="background:#975a16;"><th>Compagnia</th><th class="center">Polizze</th><th class="center">Attive</th><th class="center">Scadute</th><th class="right">Premi</th><th class="center">Quota</th></tr></thead><tbody>';
   b.compList.forEach(function(c) {
     var q = b.premiTotali > 0 ? (c.premi / b.premiTotali * 100) : 0;
@@ -494,7 +494,7 @@ function printBriefing() {
   });
   html += '</tbody></table></div>';
   // Footer
-  html += '<div class="footer">Briefing generato il ' + new Date().toLocaleDateString('it-IT') + ' alle ' + new Date().toLocaleTimeString('it-IT', {hour:'2-digit',minute:'2-digit'}) + ' | FIM Insurance Broker S.a.s. â RUI Sez. B N. B000405449</div>';
+  html += '<div class="footer">Briefing generato il ' + new Date().toLocaleDateString('it-IT') + ' alle ' + new Date().toLocaleTimeString('it-IT', {hour:'2-digit',minute:'2-digit'}) + ' | FIM Insurance Broker S.a.s.  -  RUI Sez. B N. B000405449</div>';
   html += '</body></html>';
   var w = window.open('', '_blank'); w.document.write(html); w.document.close(); setTimeout(function(){ w.print(); }, 400);
 }
@@ -516,7 +516,7 @@ function downloadBriefingPDF() {
   doc.rect(0, 0, W, 28, 'F');
   doc.setTextColor(255,255,255);
   doc.setFontSize(14); doc.setFont('helvetica','bold');
-  doc.text('Briefing Settimanale â FIM Insurance Broker', ML, 11);
+  doc.text('Briefing Settimanale  -  FIM Insurance Broker', ML, 11);
   doc.setFontSize(8); doc.setFont('helvetica','normal');
   doc.text((settings.indirizzo||'') + ' | ' + (settings.telefono||'') + ' | RUI: ' + (settings.rui||'B000405449') + ' Sez. B', ML, 17);
   doc.text('Data riferimento: ' + fD(b.dataRif) + '  |  Generato: ' + new Date().toLocaleDateString('it-IT'), ML, 22);
@@ -564,7 +564,7 @@ function downloadBriefingPDF() {
   doc.rect(ML, y, cW, 6, 'F');
   doc.setTextColor.apply(doc, sc('#c53030'));
   doc.setFontSize(9); doc.setFont('helvetica','bold');
-  doc.text('ð¨ Scadenze Critiche', ML + 3, y + 4);
+  doc.text('[!] Scadenze Critiche', ML + 3, y + 4);
   y += 7;
   var urgAll = b.scadute.concat(b.entro7).concat(b.entro14);
   if (urgAll.length > 0) {
@@ -599,7 +599,7 @@ function downloadBriefingPDF() {
   doc.rect(ML, y, cW, 6, 'F');
   doc.setTextColor.apply(doc, sc('#2b6cb0'));
   doc.setFontSize(9); doc.setFont('helvetica','bold');
-  doc.text('ð Clienti da Chiamare (' + b.clientiDaChiamare.length + ')', ML + 3, y + 4);
+  doc.text(' Clienti da Chiamare (' + b.clientiDaChiamare.length + ')', ML + 3, y + 4);
   y += 7;
   if (b.clientiDaChiamare.length > 0) {
     var cc = [ML+2, ML+40, ML+72, ML+105, ML+145];
@@ -627,7 +627,7 @@ function downloadBriefingPDF() {
   doc.rect(ML, y, cW, 6, 'F');
   doc.setTextColor.apply(doc, sc('#276749'));
   doc.setFontSize(9); doc.setFont('helvetica','bold');
-  doc.text('ð¡ Cross-Selling (Top ' + b.topCross.length + ')', ML + 3, y + 4);
+  doc.text(' Cross-Selling (Top ' + b.topCross.length + ')', ML + 3, y + 4);
   y += 7;
   if (b.topCross.length > 0) {
     var cs = [ML+2, ML+40, ML+55, ML+95];
@@ -655,7 +655,7 @@ function downloadBriefingPDF() {
   doc.rect(ML, y, cW, 6, 'F');
   doc.setTextColor.apply(doc, sc('#553c9a'));
   doc.setFontSize(9); doc.setFont('helvetica','bold');
-  doc.text('ð° Performance Provvigioni', ML + 3, y + 4);
+  doc.text('Performance Provvigioni', ML + 3, y + 4);
   y += 7;
   var cp = [ML+2, ML+42, ML+55, ML+85, ML+115, ML+145];
   tblHeader([
@@ -692,7 +692,7 @@ function downloadBriefingPDF() {
   doc.rect(ML, y, cW, 6, 'F');
   doc.setTextColor.apply(doc, sc('#975a16'));
   doc.setFontSize(9); doc.setFont('helvetica','bold');
-  doc.text('ð¢ Andamento per Compagnia', ML + 3, y + 4);
+  doc.text('Andamento per Compagnia', ML + 3, y + 4);
   y += 7;
   var cg = [ML+2, ML+50, ML+68, ML+86, ML+108, ML+145];
   tblHeader([
@@ -716,7 +716,7 @@ function downloadBriefingPDF() {
 
   // === FOOTER ===
   doc.setTextColor(150,150,150); doc.setFontSize(7); doc.setFont('helvetica','normal');
-  doc.text('Briefing Settimanale â FIM Insurance Broker S.a.s. â RUI Sez. B N. B000405449 â Generato il ' + new Date().toLocaleDateString('it-IT'), W/2, H-8, {align:'center'});
+  doc.text('Briefing Settimanale  -  FIM Insurance Broker S.a.s.  -  RUI Sez. B N. B000405449  -  Generato il ' + new Date().toLocaleDateString('it-IT'), W/2, H-8, {align:'center'});
 
   var filename = 'Briefing_FIM_' + b.dataRif + '.pdf';
   doc.save(filename);
