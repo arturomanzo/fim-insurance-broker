@@ -61,6 +61,83 @@
   }
 })();
 
+// ======================= HELPER: Risolvi nome collaboratore =======================
+function _briefGetCollabNome(collabId) {
+  if (!collabId) return 'Diretto FIM';
+  if (typeof collaboratori !== 'undefined' && Array.isArray(collaboratori)) {
+    var c = collaboratori.find(function(x) { return x.id === collabId; });
+    if (c) return (c.cognome || '') + ' ' + (c.nome || '');
+  }
+  return 'Diretto FIM';
+}
+
+// ======================= HELPER: Ottieni ruolo collaboratore =======================
+function _briefGetCollabRuolo(collabId) {
+  if (!collabId) return '';
+  if (typeof collaboratori !== 'undefined' && Array.isArray(collaboratori)) {
+    var c = collaboratori.find(function(x) { return x.id === collabId; });
+    if (c) return c.ruolo || '';
+  }
+  return '';
+}
+
+// ======================= HELPER: Calcola provvigione per polizza =======================
+function _briefCalcProvvigione(p) {
+  var collabId = p.collaboratore || '';
+  if (!collabId) return 0;
+  var ruolo = _briefGetCollabRuolo(collabId);
+  var tipoGar = p.tipoGaranzia || p.ramo || '';
+  if (typeof getProvPercentage === 'function') {
+    var perc = getProvPercentage(tipoGar, ruolo, collabId);
+    var imp = (typeof calcImponibile === 'function') ? calcImponibile(p) : { imponibile: parseFloat(p.premio) || 0 };
+    return (imp.imponibile || 0) * perc / 100;
+  }
+  var perc2 = 0;
+  if (typeof indivProvTables !== 'undefined' && indivProvTables[collabId]) {
+    var indiv = indivProvTables[collabId];
+    var keys = Object.keys(indiv);
+    for (var i = 0; i < keys.length; i++) {
+      if (tipoGar.toLowerCase().indexOf(keys[i].toLowerCase()) >= 0 || keys[i].toLowerCase().indexOf(tipoGar.toLowerCase()) >= 0) { perc2 = indiv[keys[i]]; break; }
+    }
+  }
+  if (perc2 === 0 && typeof provTable !== 'undefined' && ruolo) {
+    var rami = Object.keys(provTable);
+    for (var j = 0; j < rami.length; j++) {
+      if (tipoGar.toLowerCase().indexOf(rami[j].toLowerCase()) >= 0 || rami[j].toLowerCase().indexOf(tipoGar.toLowerCase()) >= 0) { perc2 = (provTable[rami[j]] && provTable[rami[j]][ruolo]) || 0; break; }
+    }
+  }
+  var imp2 = (typeof calcImponibile === 'function') ? calcImponibile(p) : { imponibile: parseFloat(p.premio) || 0 };
+  return (imp2.imponibile || 0) * perc2 / 100;
+}
+
+// ======================= HELPER: Normalizza nome compagnia =======================
+function _briefNormalizzaCompagnia(nomeRaw) {
+  if (!nomeRaw) return 'Non specificata';
+  var n = nomeRaw.trim();
+  var mappa = [
+    { canon: 'Allianz', match: ['allianz s.p.a', 'allianz spa', 'allianz direct'] },
+    { canon: 'Bene Assicurazioni', match: ['bene assicurazioni spa', 'bene assicurazioni s.p.a', 'bene assicurazioni spa socie'] },
+    { canon: 'HDI Assicurazioni', match: ['hdi assicurazioni s.p.a', 'hdi assicurazioni spa'] },
+    { canon: 'Great Lakes (Prima)', match: ['great lakes insurance se', 'great lakes insurance (prima', 'great lakes insurance'] },
+    { canon: 'WAKAM', match: ['wakam sa', 'wakam s.a'] },
+    { canon: "Lloyd's", match: ["lloyd's of london", "lloyd's"] }
+  ];
+  var lower = n.toLowerCase();
+  for (var i = 0; i < mappa.length; i++) {
+    if (lower === mappa[i].canon.toLowerCase()) return mappa[i].canon;
+    for (var j = 0; j < mappa[i].match.length; j++) {
+      if (lower.indexOf(mappa[i].match[j]) >= 0 || mappa[i].match[j].indexOf(lower) >= 0) return mappa[i].canon;
+    }
+  }
+  return n;
+}
+
+// ======================= HELPER: Testo sicuro per jsPDF =======================
+function _briefSafeText(str) {
+  if (!str) return '';
+  return str.replace(/[\u{1F000}-\u{1FFFF}]/gu, '').replace(/[\u2014\u2013]/g, '-').replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"').replace(/[\u2022]/g, '-').replace(/[\u00A0]/g, ' ');
+}
+
 // ======================= BRIEFING SETTIMANALE =======================
 function openBriefingModal() {
   var dataInput = document.getElementById('briefingData');
@@ -161,19 +238,19 @@ function generateBriefingSettimanale() {
   });
   clientiDaChiamare.sort(function(a, b) { return new Date(a.scadenza) - new Date(b.scadenza); });
 
-  // === 4. PERFORMANCE PROVVIGIONI ===
+  // === 4. PERFORMANCE PROVVIGIONI (v2: risolvi nomi, calcola da tabelle) ===
   var provvPerCollab = {};
   var provvTotale = 0;
   polizze.forEach(function(p) {
-    var collab = p.collaboratore || 'Diretto FIM';
-    var imp = calcImponibile(p);
-    var percProv = parseFloat(p.percProvvigione) || 0;
-    var provv = imp.imponibile * percProv / 100;
-    if (!provvPerCollab[collab]) provvPerCollab[collab] = { premi: 0, imponibile: 0, provvigioni: 0, numPolizze: 0 };
-    provvPerCollab[collab].premi += imp.premio;
-    provvPerCollab[collab].imponibile += imp.imponibile;
-    provvPerCollab[collab].provvigioni += provv;
-    provvPerCollab[collab].numPolizze += 1;
+    var collabId = p.collaboratore || '';
+    var collabNome = _briefGetCollabNome(collabId);
+    var imp = (typeof calcImponibile === 'function') ? calcImponibile(p) : { imponibile: parseFloat(p.premio)||0, premio: parseFloat(p.premio)||0 };
+    var provv = _briefCalcProvvigione(p);
+    if (!provvPerCollab[collabNome]) provvPerCollab[collabNome] = { premi: 0, imponibile: 0, provvigioni: 0, numPolizze: 0 };
+    provvPerCollab[collabNome].premi += imp.premio || (parseFloat(p.premio)||0);
+    provvPerCollab[collabNome].imponibile += imp.imponibile || 0;
+    provvPerCollab[collabNome].provvigioni += provv;
+    provvPerCollab[collabNome].numPolizze += 1;
     provvTotale += provv;
   });
   var collabList = Object.keys(provvPerCollab).map(function(k) {
@@ -185,7 +262,7 @@ function generateBriefingSettimanale() {
   // === 5. ANDAMENTO PER COMPAGNIA ===
   var perCompagnia = {};
   polizze.forEach(function(p) {
-    var comp = p.compagnia || 'Non specificata';
+    var comp = _briefNormalizzaCompagnia(p.compagnia);
     if (!perCompagnia[comp]) perCompagnia[comp] = { premi: 0, numPolizze: 0, scadute: 0, attive: 0 };
     perCompagnia[comp].premi += parseFloat(p.premio) || 0;
     perCompagnia[comp].numPolizze += 1;
