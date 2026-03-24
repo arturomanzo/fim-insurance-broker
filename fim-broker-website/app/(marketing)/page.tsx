@@ -206,6 +206,56 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Calculator CTA Banner */}
+      <section className="py-14 bg-white">
+        <div className="container-custom">
+          <div className="relative rounded-3xl overflow-hidden gradient-primary p-8 md:p-12">
+            {/* Decorative circles */}
+            <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5" />
+            <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-accent/10" />
+            <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12">
+              <div className="flex-1 text-center md:text-left">
+                <span className="inline-block bg-accent/20 text-accent-light text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+                  Strumento gratuito
+                </span>
+                <h2 className="text-2xl md:text-3xl font-black text-white mb-3">
+                  Non sai da dove iniziare?
+                </h2>
+                <p className="text-white/80 text-lg mb-2">
+                  Usa il nostro <strong className="text-white">Calcolatore del Rischio</strong> — 2 minuti, nessun impegno.
+                </p>
+                <ul className="space-y-1.5 text-white/70 text-sm">
+                  {[
+                    'Scopri il tuo profilo di rischio assicurativo',
+                    'Ricevi le coperture raccomandate per la tua situazione',
+                    'Ottieni una stima del costo annuo',
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2">
+                      <svg className="w-4 h-4 text-accent-light flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-col items-center gap-3 flex-shrink-0">
+                <div className="w-24 h-24 bg-white/10 rounded-3xl flex items-center justify-center text-5xl">
+                  📊
+                </div>
+                <Link
+                  href="/calcolatore-rischi"
+                  className="btn-primary bg-accent hover:bg-accent-dark text-white px-8 py-4 text-base font-bold shadow-lg"
+                >
+                  Calcola il mio rischio →
+                </Link>
+                <span className="text-white/50 text-xs">Gratuito · Nessun impegno · 2 minuti</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why FIM */}
       <section className="section-padding bg-white">
         <div className="container-custom">

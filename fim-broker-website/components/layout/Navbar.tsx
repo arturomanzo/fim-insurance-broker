@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/chi-siamo', label: 'Chi Siamo' },
   { href: '/servizi', label: 'Servizi' },
   { href: '/soluzioni', label: 'Soluzioni' },
+  { href: '/calcolatore-rischi', label: 'Calcolatore', badge: 'Nuovo' },
   { href: '/blog', label: 'Blog' },
   { href: '/contatti', label: 'Contatti' },
 ]
@@ -57,13 +58,18 @@ export default function Navbar() {
                   href={link.href}
                   aria-current={isActive ? 'page' : undefined}
                   className={clsx(
-                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
+                    'relative px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center gap-1.5',
                     isActive
                       ? 'bg-primary/10 text-primary'
                       : 'text-gray-600 hover:text-primary hover:bg-gray-100'
                   )}
                 >
                   {link.label}
+                  {'badge' in link && link.badge && (
+                    <span className="bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               )
             })}
@@ -130,13 +136,18 @@ export default function Navbar() {
                   href={link.href}
                   aria-current={isActive ? 'page' : undefined}
                   className={clsx(
-                    'block px-4 py-3 rounded-lg text-sm font-medium transition-colors',
+                    'flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-primary/10 text-primary'
                       : 'text-gray-600 hover:text-primary hover:bg-gray-50'
                   )}
                 >
                   {link.label}
+                  {'badge' in link && link.badge && (
+                    <span className="bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               )
             })}
