@@ -1,4 +1,4 @@
-import type { NextConfig } from 'next'
+/** @type {import('next').NextConfig} */
 
 const securityHeaders = [
   // Previene MIME sniffing sul Content-Type dichiarato
@@ -45,11 +45,6 @@ const securityHeaders = [
   },
 
   // Content Security Policy
-  // - unsafe-inline su script-src: richiesto da Next.js (idratazione React) e Google Tag Manager
-  // - googletagmanager.com: Google Analytics 4
-  // - maps.google.com + www.google.com in frame-src: Google Maps embed
-  // - fonts.googleapis.com + fonts.gstatic.com: Google Fonts
-  // - google-analytics.com + doubleclick.net in connect-src: beaconing GA4
   {
     key: 'Content-Security-Policy',
     value: [
@@ -71,7 +66,7 @@ const securityHeaders = [
   },
 ]
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -85,7 +80,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Applica gli header di sicurezza a tutte le route
         source: '/(.*)',
         headers: securityHeaders,
       },
