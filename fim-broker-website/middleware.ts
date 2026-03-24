@@ -1,44 +1,63 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { hasTokenFormat, SESSION_COOKIE } from '@/lib/clientAuth'
+
+// GET is allowed only for these specific API paths
+const API_GET_ALLOWED = new Set([
+  '/api/area-cliente/verify',
+  '/api/cron/reminder-rinnovi',
+])
 
 /**
- * Security middleware — applicato solo alle route /api/*.
+ * Security middleware
  *
- * Controlli:
- * 1. Content-Type: le richieste POST alle API devono dichiarare application/json
- * 2. User-Agent: blocca richieste prive di User-Agent (automated tool senza header)
- * 3. Aggiunge X-Robots-Tag alle risposte API per impedire indicizzazione
+ * 1. Protects /area-cliente/dashboard and /area-cliente/polizza with session check
+ * 2. Enforces Content-Type, User-Agent and method restrictions on /api/* routes
  */
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const method = request.method
 
-  // --- 1. User-Agent vuoto → 400 -----------------------------------------------
-  // I bot più elementari non inviano User-Agent.
-  // Nota: un attaccante può facilmente falsificarlo, ma filtra la maggior parte
-  // dei tool automatizzati non configurati.
-  const userAgent = request.headers.get('user-agent') ?? ''
-  if (!userAgent.trim()) {
-    return NextResponse.json(
-      { error: 'Richiesta non valida' },
-      { status: 400 },
-    )
+  // ── Area Cliente auth protection ──────────────────────────────────────────
+  if (
+    pathname.startsWith('/area-cliente/dashboard') ||
+    pathname.startsWith('/area-cliente/polizza')
+  ) {
+    const session = request.cookies.get(SESSION_COOKIE)
+    if (!session?.value || !hasTokenFormat(session.value)) {
+      const loginUrl = new URL('/area-cliente', request.url)
+      loginUrl.searchParams.set('expired', '1')
+      return NextResponse.redirect(loginUrl)
+    }
+    // Full cryptographic verify happens in the server component
+    return NextResponse.next()
   }
 
-  // --- 2. Content-Type enforcement per POST ------------------------------------
-  // Le API del sito accettano esclusivamente JSON.
-  // Un Content-Type errato indica richieste malformate o cross-site (CSRF probe).
+  // ── API security ───────────────────────────────────────────────────────────
+  if (!pathname.startsWith('/api/')) return NextResponse.next()
+
+  // User-Agent check — blocks basic automated tools without UA
+  const userAgent = request.headers.get('user-agent') ?? ''
+  if (!userAgent.trim()) {
+    return NextResponse.json({ error: 'Richiesta non valida' }, { status: 400 })
+  }
+
+  // Allow GET for specific whitelisted API endpoints
+  if (method === 'GET' && API_GET_ALLOWED.has(pathname)) {
+    const response = NextResponse.next()
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow')
+    response.headers.set('Cache-Control', 'no-store')
+    return response
+  }
+
+  // Content-Type enforcement for POST
   if (method === 'POST') {
     const ct = request.headers.get('content-type') ?? ''
     if (!ct.includes('application/json')) {
-      return NextResponse.json(
-        { error: 'Content-Type non supportato' },
-        { status: 415 },
-      )
+      return NextResponse.json({ error: 'Content-Type non supportato' }, { status: 415 })
     }
   }
 
-  // --- 3. Blocca metodi non consentiti sulle API --------------------------------
-  // Le API del sito usano solo POST. HEAD e OPTIONS sono consentiti dai browser.
+  // Block any other non-allowed methods
   const allowedMethods = ['POST', 'OPTIONS', 'HEAD']
   if (!allowedMethods.includes(method)) {
     return NextResponse.json(
@@ -47,19 +66,16 @@ export function middleware(request: NextRequest) {
     )
   }
 
-  // --- Pass-through con header aggiuntivi --------------------------------------
   const response = NextResponse.next()
-
-  // Impedisce ai crawler di indicizzare le risposte API
   response.headers.set('X-Robots-Tag', 'noindex, nofollow')
-
-  // Evita che il browser memorizzi le risposte API
   response.headers.set('Cache-Control', 'no-store')
-
   return response
 }
 
 export const config = {
-  // Applica il middleware solo alle route /api/* (non alle pagine)
-  matcher: '/api/:path*',
+  matcher: [
+    '/api/:path*',
+    '/area-cliente/dashboard/:path*',
+    '/area-cliente/polizza/:path*',
+  ],
 }

@@ -28,6 +28,7 @@ const companyLinks = [
   { href: '/prenota-consulenza', label: 'Prenota Consulenza' },
   { href: '/preventivo', label: 'Richiedi Preventivo' },
   { href: '/contatti', label: 'Contatti' },
+  { href: '/area-cliente', label: '🔐 Area Cliente' },
 ]
 
 const socialLinks = [
