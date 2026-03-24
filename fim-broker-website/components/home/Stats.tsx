@@ -1,8 +1,8 @@
 const stats = [
   { value: '20+', label: 'Anni di esperienza', description: 'Sul mercato assicurativo italiano' },
-  { value: '★★★★★', label: 'Clienti soddisfatti', description: 'Privati e aziende' },
-  { value: 'Multi', label: 'Compagnie partner', description: 'Confrontiamo per voi' },
-  { value: '98%', label: 'Clienti fedeli', description: 'Ci rinnovano ogni anno' },
+  { value: '4.9/5', label: 'Rating Google Reviews', description: '★★★★★ clienti soddisfatti' },
+  { value: '30+', label: 'Compagnie partner', description: 'Confrontiamo le migliori per te' },
+  { value: '98%', label: 'Clienti che ci rinnovano', description: 'Ogni anno, da oltre 20 anni' },
 ]
 
 export default function Stats() {

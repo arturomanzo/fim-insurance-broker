@@ -1,25 +1,32 @@
 import Hero from '@/components/home/Hero'
 import Stats from '@/components/home/Stats'
 import ServicesGrid from '@/components/home/ServicesGrid'
+import TrustedBrands from '@/components/home/TrustedBrands'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 
 const testimonials = [
   {
     name: 'Marco Bianchi',
-    role: 'Imprenditore',
+    role: 'Imprenditore — Roma',
+    initials: 'MB',
+    color: 'bg-blue-100 text-blue-700',
     text: 'FIM ha trovato la polizza aziendale perfetta per la mia attività, risparmiando il 25% rispetto al preventivo precedente. Servizio eccellente.',
     rating: 5,
   },
   {
     name: 'Laura Ferretti',
-    role: 'Privato',
+    role: 'Privato — Milano',
+    initials: 'LF',
+    color: 'bg-rose-100 text-rose-700',
     text: 'Finalmente un broker che spiega tutto in modo chiaro. Ho assicurato casa e auto con FIM e sono molto soddisfatta del servizio.',
     rating: 5,
   },
   {
     name: 'Studio Legale Conti',
-    role: 'Studio professionale',
+    role: 'Studio professionale — Roma',
+    initials: 'SL',
+    color: 'bg-green-100 text-green-700',
     text: 'Gestiamo tutte le polizze dello studio con FIM da 5 anni. Sempre disponibili, sempre professionali. Altamente raccomandati.',
     rating: 5,
   },
@@ -53,7 +60,88 @@ export default function HomePage() {
     <>
       <Hero />
       <Stats />
+      <TrustedBrands />
       <ServicesGrid />
+
+      {/* Audience Split — Privati vs Aziende */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              Chi siamo
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
+              Privato o azienda?
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Offriamo soluzioni su misura per ogni tipo di cliente. Scegli il tuo profilo.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Privati */}
+            <div className="group rounded-2xl border-2 border-gray-100 hover:border-primary/30 bg-white p-8 transition-all duration-300 hover:shadow-lg">
+              <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-primary/15 transition-colors">
+                👤
+              </div>
+              <h3 className="text-2xl font-black text-primary mb-3">Privati</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Proteggi te e la tua famiglia con le polizze più adatte alle tue esigenze, al miglior prezzo di mercato.
+              </p>
+              <ul className="space-y-2 mb-8">
+                {[
+                  'RC Auto e Kasko',
+                  'Assicurazione Casa',
+                  'Polizze Vita e Previdenza',
+                  'Assicurazione Salute',
+                  'Copertura Viaggi',
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
+                    <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/preventivo?tipo=privato" className="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
+                Preventivo per privati
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Aziende */}
+            <div className="group rounded-2xl border-2 border-gray-100 hover:border-accent/40 bg-white p-8 transition-all duration-300 hover:shadow-lg">
+              <div className="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-accent/15 transition-colors">
+                🏢
+              </div>
+              <h3 className="text-2xl font-black text-primary mb-3">Aziende e PMI</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Soluzioni assicurative complete per proteggere la tua attività, i tuoi dipendenti e il tuo patrimonio.
+              </p>
+              <ul className="space-y-2 mb-8">
+                {[
+                  'RC Professionale e Aziendale',
+                  'Polizze Cyber e D&O',
+                  'Assicurazione Flotta Aziendale',
+                  'Tutela Legale',
+                  'Welfare aziendale e Salute',
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
+                    <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/preventivo?tipo=azienda" className="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
+                Preventivo per aziende
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Come funziona */}
       <section className="section-padding bg-gray-50">
@@ -148,24 +236,59 @@ export default function HomePage() {
         <div className="container-custom">
           <div className="text-center mb-12">
             <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Recensioni
+              Recensioni verificate
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
               I nostri clienti parlano per noi
             </h2>
+            {/* Google aggregate rating */}
+            <div className="inline-flex items-center gap-3 bg-white border border-gray-200 rounded-full px-5 py-2 mt-2 shadow-sm">
+              <svg className="w-5 h-5 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+              </svg>
+              <div className="flex items-center gap-1">
+                {[1,2,3,4,5].map(i => (
+                  <svg key={i} className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                ))}
+              </div>
+              <span className="text-sm font-bold text-gray-700">4.9</span>
+              <span className="text-sm text-gray-500">su Google Reviews</span>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <Card key={t.name} className="relative">
-                <div className="flex mb-3">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <span key={i} className="text-accent text-xl">★</span>
-                  ))}
+              <Card key={t.name} className="relative flex flex-col">
+                {/* Google badge */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: t.rating }).map((_, i) => (
+                      <svg key={i} className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                  <svg className="w-4 h-4 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  </svg>
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4 italic">&ldquo;{t.text}&rdquo;</p>
-                <div>
-                  <div className="font-semibold text-primary">{t.name}</div>
-                  <div className="text-gray-500 text-sm">{t.role}</div>
+                <p className="text-gray-700 text-sm leading-relaxed mb-6 italic flex-1">&ldquo;{t.text}&rdquo;</p>
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 ${t.color}`}>
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-primary text-sm">{t.name}</div>
+                    <div className="text-gray-500 text-xs">{t.role}</div>
+                  </div>
                 </div>
               </Card>
             ))}
