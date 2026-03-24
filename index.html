@@ -3839,18 +3839,24 @@ function checkFirstTimeSetup(){ var lf=document.getElementById("loginForm"); var
       <button class="modal-close" onclick="closeModal('ecClienteModal')">✕</button>
     </div>
     <div class="modal-body">
-      <div style="display:flex;gap:12px;align-items:flex-end;margin-bottom:16px;">
-        <div style="flex:1;">
-          <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Cliente</label>
-          <select id="ecClienteSelect" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;">
-            <option value="">-- Seleziona cliente --</option>
-          </select>
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;gap:12px;align-items:flex-end;margin-bottom:10px;">
+          <div style="flex:1;">
+            <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Aggiungi Cliente/i</label>
+            <div style="display:flex;gap:6px;">
+              <select id="ecClienteSelect" style="flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;">
+                <option value="">-- Seleziona cliente --</option>
+              </select>
+              <button class="btn btn-outline btn-sm" onclick="ecAggiungiCliente()" style="border-color:var(--primary);color:var(--primary);white-space:nowrap;padding:8px 14px;">+ Aggiungi</button>
+            </div>
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Data Riferimento</label>
+            <input type="date" id="ecClienteData" style="padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;">
+          </div>
+          <button class="btn btn-primary" onclick="generateECCliente()">Genera</button>
         </div>
-        <div>
-          <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;">Data Riferimento</label>
-          <input type="date" id="ecClienteData" style="padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;">
-        </div>
-        <button class="btn btn-primary" onclick="generateECCliente()">Genera</button>
+        <div id="ecClientiSelezionati" style="display:flex;flex-wrap:wrap;gap:6px;min-height:28px;"></div>
       </div>
       <div style="margin-bottom:12px;display:flex;align-items:center;gap:16px;">
         <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;">
@@ -11685,20 +11691,12 @@ function _generateAvvisoScadenzaPDF() {
   showToast('PDF scaricato!','success');
 }
 
+var ecClientiSelezionatiArr = [];
+
 function openECClienteModal() {
-  var sel = document.getElementById('ecClienteSelect');
-  var nomi = [];
-  polizze.forEach(function(p) {
-    if (p.cliente && nomi.indexOf(p.cliente) === -1) nomi.push(p.cliente);
-  });
-  // Aggiungi anche clienti da fatture/proforme
-  fatture.forEach(function(f) {
-    var nome = f.clienteNome || f.destinatario;
-    if (nome && nomi.indexOf(nome) === -1) nomi.push(nome);
-  });
-  nomi.sort();
-  sel.innerHTML = '<option value="">-- Seleziona cliente --</option>' +
-    nomi.map(function(n) { return '<option value="' + n.replace(/"/g, '&quot;') + '">' + n + '</option>'; }).join('');
+  ecClientiSelezionatiArr = [];
+  ecAggiornaDropdownClienti();
+  ecRenderChips();
   var dataInput = document.getElementById('ecClienteData');
   if (!dataInput.value) {
     var now = new Date();
@@ -11709,20 +11707,60 @@ function openECClienteModal() {
   document.getElementById('ecClienteModal').classList.add('active');
 }
 
+function ecAggiornaDropdownClienti() {
+  var sel = document.getElementById('ecClienteSelect');
+  var nomi = [];
+  polizze.forEach(function(p) { if (p.cliente && nomi.indexOf(p.cliente) === -1) nomi.push(p.cliente); });
+  fatture.forEach(function(f) { var nome = f.clienteNome || f.destinatario; if (nome && nomi.indexOf(nome) === -1) nomi.push(nome); });
+  nomi.sort();
+  nomi = nomi.filter(function(n) { return ecClientiSelezionatiArr.indexOf(n) === -1; });
+  sel.innerHTML = '<option value="">-- Seleziona cliente --</option>' +
+    nomi.map(function(n) { return '<option value="' + n.replace(/"/g, '&quot;') + '">' + n + '</option>'; }).join('');
+}
+
+function ecAggiungiCliente() {
+  var sel = document.getElementById('ecClienteSelect');
+  var nome = sel.value;
+  if (!nome) { showToast('Seleziona un cliente dal menu', 'warning'); return; }
+  if (ecClientiSelezionatiArr.indexOf(nome) === -1) ecClientiSelezionatiArr.push(nome);
+  ecRenderChips();
+  ecAggiornaDropdownClienti();
+}
+
+function ecRimuoviCliente(nome) {
+  ecClientiSelezionatiArr = ecClientiSelezionatiArr.filter(function(n) { return n !== nome; });
+  ecRenderChips();
+  ecAggiornaDropdownClienti();
+}
+
+function ecRenderChips() {
+  var container = document.getElementById('ecClientiSelezionati');
+  if (ecClientiSelezionatiArr.length === 0) {
+    container.innerHTML = '<span style="font-size:12px;color:var(--text-light);padding:4px 0;">Nessun cliente selezionato \u2014 aggiungi uno o pi\u00f9 nominativi</span>';
+    return;
+  }
+  container.innerHTML = ecClientiSelezionatiArr.map(function(n) {
+    return '<span style="display:inline-flex;align-items:center;gap:4px;background:var(--primary);color:white;padding:4px 10px;border-radius:16px;font-size:13px;font-weight:500;">' +
+      n + ' <button onclick="ecRimuoviCliente(\x27' + n.replace(/'/g, "\\x27") + '\x27)" style="background:none;border:none;color:white;cursor:pointer;font-size:15px;line-height:1;padding:0 2px;opacity:0.8;">\u2715</button></span>';
+  }).join('');
+}
+
 function generateECCliente() {
-  var cliente = document.getElementById('ecClienteSelect').value;
-  if (!cliente) { showToast('Seleziona un cliente', 'error'); return; }
+  var clientiArr = ecClientiSelezionatiArr.length > 0 ? ecClientiSelezionatiArr.slice() : [];
+  if (clientiArr.length === 0) { var selVal = document.getElementById('ecClienteSelect').value; if (selVal) clientiArr = [selVal]; }
+  if (clientiArr.length === 0) { showToast('Seleziona almeno un cliente', 'error'); return; }
+  var cliente = clientiArr.join(' / ');
   var dataRif = document.getElementById('ecClienteData').value;
   var oggi = dataRif ? new Date(dataRif) : new Date();
 
-  // Tutte le polizze del cliente (attive)
+  // Tutte le polizze dei clienti selezionati (attive)
   var polCliente = polizze.filter(function(p) {
-    return p.cliente === cliente && new Date(p.scadenza) >= oggi;
+    return clientiArr.indexOf(p.cliente) !== -1 && new Date(p.scadenza) >= oggi;
   });
 
-  // Fatture e proforme del cliente
+  // Fatture e proforme dei clienti selezionati
   var fattCliente = fatture.filter(function(f) {
-    return (f.clienteNome === cliente || f.destinatario === cliente);
+    return clientiArr.indexOf(f.clienteNome) !== -1 || clientiArr.indexOf(f.destinatario) !== -1;
   });
 
   if (polCliente.length === 0 && fattCliente.length === 0) { showToast('Nessuna polizza o fattura trovata per ' + cliente, 'error'); return; }
@@ -11738,16 +11776,16 @@ function generateECCliente() {
     var scadenza = p.scadenza || '';
     // Controlla se ha rate (quietanze) da generare
     if (p.rateScadenze && p.rateScadenze.length > 0 && p.frazionamento && p.frazionamento !== 'annuale') {
-      righe.push({ compagnia: p.compagnia || '-', ramo: ramo, numPolizza: p.numPolizza || '-', operazione: operazione, scadenza: scadenza, importo: premio, tipo: 'polizza' });
+      righe.push({ assicurato: p.cliente || '-', compagnia: p.compagnia || '-', ramo: ramo, numPolizza: p.numPolizza || '-', operazione: operazione, scadenza: scadenza, importo: premio, tipo: 'polizza' });
       totale += premio;
       p.rateScadenze.forEach(function(dataRata, idx) {
         if (new Date(dataRata) >= oggi) {
           var premioRata = premio / p.rateScadenze.length;
-          righe.push({ compagnia: p.compagnia || '-', ramo: ramo, numPolizza: p.numPolizza || '-', operazione: 'QUIETANZA Rata ' + (idx+1), scadenza: dataRata, importo: premioRata, tipo: 'quietanza' });
+          righe.push({ assicurato: p.cliente || '-', compagnia: p.compagnia || '-', ramo: ramo, numPolizza: p.numPolizza || '-', operazione: 'QUIETANZA Rata ' + (idx+1), scadenza: dataRata, importo: premioRata, tipo: 'quietanza' });
         }
       });
     } else {
-      righe.push({ compagnia: p.compagnia || '-', ramo: ramo, numPolizza: p.numPolizza || '-', operazione: operazione, scadenza: scadenza, importo: premio, tipo: 'polizza' });
+      righe.push({ assicurato: p.cliente || '-', compagnia: p.compagnia || '-', ramo: ramo, numPolizza: p.numPolizza || '-', operazione: operazione, scadenza: scadenza, importo: premio, tipo: 'polizza' });
       totale += premio;
     }
   });
@@ -11757,6 +11795,7 @@ function generateECCliente() {
     var tipoFatt = f.tipo === 'proforma' ? 'PROFORMA' : 'FATTURA';
     var importoFatt = parseFloat(f.totale) || 0;
     righe.push({
+      assicurato: f.clienteNome || f.destinatario || '-',
       compagnia: '-',
       ramo: f.descrizione ? f.descrizione.substring(0, 30) : 'Consulenza',
       numPolizza: f.numero || '-',
@@ -11821,6 +11860,7 @@ function generateECCliente() {
     '<div style="text-align:right;"><div style="font-size:24px;font-weight:800;color:var(--primary);">' + formatCurrency(totale) + '</div>' +
     '<div style="font-size:12px;color:var(--text-light);">Totale Euro</div></div></div>' +
     '<table class="prov-table" style="width:100%;margin:0;"><thead><tr>' +
+    (clientiArr.length > 1 ? '<th>Assicurato</th>' : '') +
     '<th>Compagnia</th><th>Ramo / Descrizione</th><th>N. Polizza / Doc.</th><th>Operazione</th><th>Scadenza</th><th style="text-align:right;">Importo</th><th style="text-align:center;width:80px;">Azione</th></tr></thead><tbody>' +
     righe.map(function(r) {
       var isSecondary = r.tipo === 'quietanza';
@@ -11837,12 +11877,13 @@ function generateECCliente() {
       var btnColor = isSaldata ? '#ff9800' : '#4caf50';
       var btnHtml = '<button onclick="togglePolizzaSaldata(\'' + r._key.replace(/'/g, "\\'") + '\', \'' + cliente.replace(/'/g, "\\'") + '\')" style="padding:2px 8px;font-size:11px;border:none;border-radius:4px;cursor:pointer;background:' + btnColor + ';color:white;">' + btnLabel + '</button>';
       return '<tr' + rowStyle + '>' +
+        (clientiArr.length > 1 ? '<td style="font-size:12px;">' + (r.assicurato || '-') + '</td>' : '') +
         '<td>' + r.compagnia + '</td><td>' + r.ramo + '</td><td>' + r.numPolizza + '</td>' +
         '<td>' + opLabel + '</td><td>' + formatDate(r.scadenza) + '</td>' +
         '<td style="text-align:right;font-weight:' + (isSecondary ? '400' : '600') + ';">' + formatCurrency(r.importo) + '</td>' +
         '<td style="text-align:center;">' + (isSecondary ? '' : btnHtml) + '</td></tr>';
     }).join('') +
-    '<tr style="background:var(--primary);color:white;font-weight:700;"><td colspan="6">TOTALE EURO</td>' +
+    '<tr style="background:var(--primary);color:white;font-weight:700;"><td colspan="' + (clientiArr.length > 1 ? 7 : 6) + '">TOTALE EURO</td>' +
     '<td style="text-align:right;">' + formatCurrency(totale) + '</td></tr>' +
     '</tbody></table>' +
     '<div style="margin-top:12px;padding:10px;background:#edf2f7;border-radius:8px;font-size:12px;color:var(--text-light);">' +
@@ -11852,6 +11893,7 @@ function generateECCliente() {
 
   window._lastECCliente = {
     cliente: cliente,
+    clientiArr: clientiArr,
     datiCliente: datiCliente,
     righe: righe,
     totale: totale,
