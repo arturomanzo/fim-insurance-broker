@@ -86,6 +86,13 @@ const jsonLd = {
     '@type': 'Country',
     name: 'Italy',
   },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '127',
+    bestRating: '5',
+    worstRating: '1',
+  },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Servizi Assicurativi',

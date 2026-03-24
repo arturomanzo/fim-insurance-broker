@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/calcolatore-rischi`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     // Risorse
     { url: `${BASE_URL}/risorse/guida-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/risorse/osservatorio-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     // Legal
     { url: `${BASE_URL}/privacy-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/cookie-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },

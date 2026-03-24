@@ -19,6 +19,7 @@ const soluzioniLinks = [
   { href: '/soluzioni/catastrofi-naturali', label: 'Catastrofi Naturali' },
   { href: '/calcolatore-rischi', label: '📊 Calcolatore del Rischio' },
   { href: '/risorse/guida-pmi', label: '📋 Guida PMI 2025 (gratis)' },
+  { href: '/risorse/osservatorio-pmi', label: '📈 Osservatorio PMI 2025' },
 ]
 
 const companyLinks = [

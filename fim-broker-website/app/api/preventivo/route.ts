@@ -206,6 +206,7 @@ function buildFollowUpEmailHtml(rawNome: string, rawTipo: string): string {
   const nome = escapeHtml(rawNome)
   const tipo = escapeHtml(rawTipo)
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
+  const GOOGLE_REVIEW_URL = 'https://g.page/r/CfimbrokerReview/review'
   return `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
 <body style="font-family:system-ui,sans-serif;background:#f8fafc;margin:0;padding:20px;">
   <div style="max-width:600px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.07);">
@@ -228,10 +229,27 @@ function buildFollowUpEmailHtml(rawNome: string, rawTipo: string): string {
           Prenota consulenza gratuita →
         </a>
       </div>
-      <p style="font-size:13px;color:#94a3b8;text-align:center;">
+      <p style="font-size:13px;color:#94a3b8;text-align:center;margin:0 0 32px;">
         Oppure chiamaci: <a href="tel:+390696883381" style="color:#0f2d6b;">06 96883381</a>
         &nbsp;·&nbsp; Lun–Ven 9:30–13:00 e 15:30–18:30
       </p>
+
+      <!-- Review request -->
+      <div style="border-top:1px solid #f1f5f9;padding-top:24px;">
+        <p style="font-size:14px;color:#475569;margin:0 0 12px;text-align:center;">
+          Se hai già avuto modo di parlarci, la tua opinione ci aiuta moltissimo:
+        </p>
+        <div style="text-align:center;">
+          <a href="${GOOGLE_REVIEW_URL}"
+             target="_blank"
+             style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid #e2e8f0;color:#1e293b;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;">
+            ⭐ Lascia una recensione su Google
+          </a>
+        </div>
+        <p style="font-size:12px;color:#cbd5e1;text-align:center;margin:10px 0 0;">
+          Ci vogliono meno di 2 minuti — grazie in anticipo!
+        </p>
+      </div>
     </div>
     <div style="background:#0f2d6b;padding:16px 32px;">
       <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.4);text-align:center;">

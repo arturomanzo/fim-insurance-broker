@@ -1,6 +1,38 @@
 import type { Metadata } from 'next'
 import RiskCalculator from '@/components/calculator/RiskCalculator'
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Il calcolatore del rischio è davvero gratuito?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Sì, il calcolatore è completamente gratuito e senza impegno. Non è richiesto alcun pagamento né la stipula di una polizza. Puoi ottenere la tua analisi del rischio in 2 minuti inserendo solo nome e email.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Come funziona il calcolatore del rischio assicurativo?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Il calcolatore analizza il tuo profilo (privato, professionista, PMI o grande impresa), il settore di attività e le risposte a domande specifiche sui rischi della tua attività. Un algoritmo proprietario calcola un punteggio di rischio da 0 a 100 e identifica le coperture più urgenti e consigliate per il tuo profilo.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Quali coperture assicurative vengono raccomandate?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Le raccomandazioni dipendono dal profilo. Per i privati: auto, casa, vita, salute. Per i professionisti: RC professionale, cyber, previdenza complementare. Per le PMI: RC impresa, All Risk aziendale, Cyber Risk, polizza catastrofale obbligatoria dal 2025, welfare dipendenti.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Quanto costa una polizza assicurativa per la mia azienda?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Il costo dipende da settore, dimensione aziendale e coperture scelte. Il calcolatore fornisce un range di stima basato su dati reali di mercato. Per una PMI con 5–20 dipendenti la spesa tipica è tra €2.800 e €12.000 annui. Richiedi un preventivo gratuito per dati precisi.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'La polizza catastrofale è obbligatoria per le imprese?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Sì, dal 1° aprile 2025 tutte le imprese con sede legale in Italia sono obbligate ad assicurarsi contro calamità naturali (alluvioni, terremoti, frane) per legge (D.L. 18/2023, L. 17/2024). Le imprese non in regola rischiano esclusione da contributi pubblici.' },
+    },
+  ],
+}
+
 export const metadata: Metadata = {
   title: 'Calcolatore Rischio Assicurativo Gratuito | FIM Insurance Broker',
   description: 'Scopri in 2 minuti il tuo profilo di rischio assicurativo. Analisi gratuita personalizzata per privati, professionisti, PMI e imprese. Coperture raccomandate e preventivo immediato.',
@@ -13,6 +45,10 @@ export const metadata: Metadata = {
 export default function CalcolatoreRischiPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-20">
         <div className="container-custom text-center">
