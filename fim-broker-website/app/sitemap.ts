@@ -10,6 +10,9 @@ const blogSlugs = [
   'novita-rc-auto-2024',
   'polizza-casa-alluvioni',
   'previdenza-complementare',
+  'rc-professionale-liberi-professionisti-2025',
+  'polizze-obbligatorie-aziende-italia-2025',
+  'assicurazioni-pmi-guida-completa',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -28,6 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/soluzioni/professionisti`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/artigiani-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/catastrofi-naturali`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    // Strumenti
+    { url: `${BASE_URL}/calcolatore-rischi`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     // Risorse
     { url: `${BASE_URL}/risorse/guida-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     // Legal

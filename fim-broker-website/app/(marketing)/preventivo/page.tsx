@@ -14,7 +14,15 @@ const steps = [
   { n: '3', title: 'Ti contattiamo', desc: 'Entro 24 ore ti presentiamo il preventivo più conveniente.' },
 ]
 
-export default function PreventivoPage() {
+interface PageProps {
+  searchParams: Promise<{ profilo?: string; tipo?: string; settore?: string }>
+}
+
+export default async function PreventivoPage({ searchParams }: PageProps) {
+  const params = await searchParams
+  const initialProfile = params.profilo ?? params.tipo ?? null
+  const initialSettore = params.settore ?? null
+
   return (
     <div>
       {/* Hero */}
@@ -60,7 +68,7 @@ export default function PreventivoPage() {
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-black text-primary mb-6">Inserisci i tuoi dati</h2>
               <Card padding="lg">
-                <PreventivoForm />
+                <PreventivoForm initialProfile={initialProfile} initialSettore={initialSettore} />
               </Card>
             </div>
 
