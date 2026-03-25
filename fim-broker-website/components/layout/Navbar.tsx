@@ -162,7 +162,23 @@ export default function Navbar() {
                 </Link>
               )
             })}
-            <div className="pt-4 border-t border-gray-100 space-y-2">
+            <div className="pt-3 border-t border-gray-100">
+              <Link
+                href={AREA_CLIENTE_HREF}
+                className={clsx(
+                  'flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-colors',
+                  pathname.startsWith(AREA_CLIENTE_HREF)
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-gray-600 hover:text-primary hover:bg-gray-50'
+                )}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Area Cliente
+              </Link>
+            </div>
+            <div className="pt-3 border-t border-gray-100 space-y-2">
               <a
                 href="tel:+390696883381"
                 className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600"
