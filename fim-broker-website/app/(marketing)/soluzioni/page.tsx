@@ -4,10 +4,22 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Soluzioni per Settore — FIM Insurance Broker',
   description:
-    'Soluzioni assicurative specializzate per professionisti, artigiani e PMI, catastrofi naturali. FIM Insurance Broker: consulenza su misura per ogni categoria.',
+    'Soluzioni assicurative per famiglie, professionisti, artigiani, PMI, condomini e rischi catastrofali. FIM Insurance Broker: consulenza su misura per ogni categoria.',
 }
 
 const solutions = [
+  {
+    href: '/soluzioni/famiglie',
+    icon: '🏠',
+    tag: 'Per privati e nuclei familiari',
+    tagColor: 'bg-purple-100 text-purple-700',
+    title: 'Famiglie e Privati',
+    subtitle: 'Coppie, famiglie, proprietari di casa, affittuari',
+    desc: 'Casa, vita, salute, infortuni: le polizze giuste per ogni fase della vita. FIM analizza le coperture già in essere, identifica i gap e seleziona solo ciò che serve davvero.',
+    highlights: ['Polizza Casa', 'Vita TCM', 'Salute Integrativa', 'Tutela Legale'],
+    cta: 'Scopri le soluzioni per famiglie',
+    price: 'da 150€/anno',
+  },
   {
     href: '/soluzioni/professionisti',
     icon: '⚖️',
@@ -31,6 +43,18 @@ const solutions = [
     highlights: ['RC Impresa', 'All-risk capannone', 'Infortuni dipendenti', 'Flotta aziendale'],
     cta: 'Scopri le soluzioni per PMI',
     price: 'da 300€/anno',
+  },
+  {
+    href: '/soluzioni/condomini',
+    icon: '🏢',
+    tag: 'RC Amministratore obbligatoria per legge',
+    tagColor: 'bg-orange-100 text-orange-700',
+    title: 'Condomini',
+    subtitle: 'Amministratori, assemblee condominiali, stabili residenziali',
+    desc: 'Globale fabbricato, RC ascensori, RC Amministratore (obbligatoria L. 220/2012) e tutela legale condominiale. FIM segue sinistri e rinnovi per conto del condominio.',
+    highlights: ['Globale Fabbricato', 'RC Amministratore', 'RC Ascensori', 'Tutela Legale'],
+    cta: 'Scopri le soluzioni per condomini',
+    price: 'da 400€/anno',
   },
   {
     href: '/soluzioni/catastrofi-naturali',
@@ -71,7 +95,7 @@ export default function SoluzioniPage() {
       {/* Solutions grid */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {solutions.map((sol) => (
               <div key={sol.href} className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group flex flex-col">
                 {/* Top section */}
