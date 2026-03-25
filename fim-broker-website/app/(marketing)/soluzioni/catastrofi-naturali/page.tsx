@@ -257,7 +257,7 @@ export default function CatastrofiNaturaliPage() {
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black text-primary mb-3">Domande frequenti</h2>
           </div>
-          <FaqAccordion faqs={faqs} />
+          <FaqAccordion items={faqs} />
         </div>
       </section>
 
