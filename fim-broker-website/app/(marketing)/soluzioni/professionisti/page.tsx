@@ -129,7 +129,7 @@ export default function ProfessionistiPage() {
                 </svg>
               </Link>
               <a
-                href="https://wa.me/390696883381?text=Ciao,%20cerco%20una%20RC%20professionale"
+                href="https://wa.me/393473312330?text=Ciao,%20cerco%20una%20RC%20professionale"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20c05c] text-white font-semibold text-lg px-8 py-4 rounded-lg transition-colors"

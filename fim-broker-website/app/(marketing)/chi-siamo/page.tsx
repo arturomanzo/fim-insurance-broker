@@ -237,7 +237,7 @@ export default function ChiSiamoPage() {
                 Prenota consulenza
               </Link>
               <a
-                href="https://wa.me/390696883381?text=Ciao,%20vorrei%20parlare%20con%20un%20consulente"
+                href="https://wa.me/393473312330?text=Ciao,%20vorrei%20parlare%20con%20un%20consulente"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20c05c] text-white font-semibold px-6 py-3 rounded-lg transition-colors"

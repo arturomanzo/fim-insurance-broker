@@ -1,7 +1,7 @@
 'use client'
 
 export default function WhatsAppButton() {
-  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '390696883381'
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '393473312330'
   const message = encodeURIComponent('Salve, vorrei richiedere informazioni sulle vostre polizze assicurative.')
   const href = `https://wa.me/${phoneNumber}?text=${message}`
 

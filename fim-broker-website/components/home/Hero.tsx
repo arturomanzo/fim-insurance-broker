@@ -51,7 +51,7 @@ export default function Hero() {
                 </svg>
               </Link>
               <a
-                href="https://wa.me/390696883381?text=Ciao,%20vorrei%20un%20preventivo%20assicurativo"
+                href="https://wa.me/393473312330?text=Ciao,%20vorrei%20un%20preventivo%20assicurativo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20c05c] text-white font-semibold text-lg px-8 py-4 rounded-lg transition-colors duration-200"
