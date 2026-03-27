@@ -6,6 +6,7 @@ import { hasAdminTokenFormat, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth'
 const API_GET_ALLOWED = new Set([
   '/api/area-cliente/verify',
   '/api/cron/reminder-rinnovi',
+  '/api/og',
 ])
 
 /**

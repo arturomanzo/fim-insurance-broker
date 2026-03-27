@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Hero from '@/components/home/Hero'
 import Stats from '@/components/home/Stats'
 import ServicesGrid from '@/components/home/ServicesGrid'
@@ -5,6 +6,27 @@ import TrustedBrands from '@/components/home/TrustedBrands'
 import LeadMagnet from '@/components/home/LeadMagnet'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
+
+export const metadata: Metadata = {
+  title: 'FIM Insurance Broker | Soluzioni Assicurative Personalizzate per Privati e Aziende',
+  description:
+    'Broker assicurativo indipendente a Roma e nel Lazio. Confrontiamo le offerte di 30+ compagnie per trovare la polizza giusta per te: auto, casa, vita, salute, azienda. Preventivo gratuito in 24 ore.',
+  openGraph: {
+    title: 'FIM Insurance Broker — Soluzioni Assicurative Personalizzate',
+    description: 'Broker indipendente con 20 anni di esperienza. Confrontiamo 30+ compagnie per trovare la polizza giusta per te.',
+    images: [
+      {
+        url: '/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20Roma%20e%20Lazio.',
+        width: 1200,
+        height: 630,
+        alt: 'FIM Insurance Broker — Soluzioni Assicurative Personalizzate',
+      },
+    ],
+  },
+  twitter: {
+    images: ['/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20Roma%20e%20Lazio.'],
+  },
+}
 
 const testimonials = [
   {

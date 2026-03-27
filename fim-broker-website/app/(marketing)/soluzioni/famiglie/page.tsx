@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: 'Assicurazioni per Famiglie e Privati — Casa, Vita, Salute | FIM',
   description:
     'Polizze assicurative per famiglie e privati: casa, vita, infortuni, salute integrativa, tutela legale e viaggi. FIM Insurance Broker: consulenza gratuita a Roma e nel Lazio.',
+  openGraph: {
+    images: [{ url: '/api/og?title=Famiglie+e+Privati&tag=Soluzioni&sub=Casa%2C+vita%2C+salute%2C+infortuni%3A+le+polizze+giuste+per+ogni+fase+della+vita.', width: 1200, height: 630 }],
+  },
+  twitter: { images: ['/api/og?title=Famiglie+e+Privati&tag=Soluzioni&sub=Casa%2C+vita%2C+salute%2C+infortuni%3A+le+polizze+giuste+per+ogni+fase+della+vita.'] },
 }
 
 const coverages = [

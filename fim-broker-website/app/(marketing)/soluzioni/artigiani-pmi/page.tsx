@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: 'Assicurazione Artigiani e PMI — Proteggi la tua Attività',
   description:
     'Polizze assicurative per artigiani, commercianti e PMI italiane. RC impresa, all-risk capannone, infortuni dipendenti, flotta aziendale. Preventivo gratuito in 24 ore.',
+  openGraph: {
+    images: [{ url: '/api/og?title=Artigiani+e+PMI&tag=Soluzioni&sub=RC+impresa%2C+all-risk+capannone%2C+infortuni+dipendenti%2C+flotta+aziendale.', width: 1200, height: 630 }],
+  },
+  twitter: {
+    images: ['/api/og?title=Artigiani+e+PMI&tag=Soluzioni&sub=RC+impresa%2C+all-risk+capannone%2C+infortuni+dipendenti%2C+flotta+aziendale.'],
+  },
 }
 
 const coverages = [
