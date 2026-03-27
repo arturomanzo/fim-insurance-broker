@@ -17,9 +17,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const service = getServiceBySlug(slug)
   if (!service) return { title: 'Servizio non trovato' }
+  const ogUrl = `/api/og?title=${encodeURIComponent(service.title)}&tag=Servizi&sub=${encodeURIComponent(service.shortDescription.slice(0, 90))}`
   return {
     title: service.title,
     description: service.shortDescription,
+    openGraph: {
+      images: [{ url: ogUrl, width: 1200, height: 630 }],
+    },
+    twitter: {
+      images: [ogUrl],
+    },
   }
 }
 

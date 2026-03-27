@@ -6,6 +6,12 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Chi Siamo',
   description: 'FIM Insurance Broker: 20 anni di esperienza al servizio di privati e aziende. Broker indipendente iscritto RUI IVASS, partner delle principali compagnie assicurative.',
+  openGraph: {
+    images: [{ url: '/api/og?title=Chi+Siamo&tag=FIM+Insurance+Broker&sub=20+anni+di+esperienza.+Broker+indipendente+iscritto+RUI+IVASS.', width: 1200, height: 630 }],
+  },
+  twitter: {
+    images: ['/api/og?title=Chi+Siamo&tag=FIM+Insurance+Broker&sub=20+anni+di+esperienza.+Broker+indipendente+iscritto+RUI+IVASS.'],
+  },
 }
 
 const team = [

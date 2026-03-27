@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: 'Soluzioni per Settore — FIM Insurance Broker',
   description:
     'Soluzioni assicurative per famiglie, professionisti, artigiani, PMI, condomini e rischi catastrofali. FIM Insurance Broker: consulenza su misura per ogni categoria.',
+  openGraph: {
+    images: [{ url: '/api/og?title=Soluzioni+per+Settore&tag=FIM+Insurance+Broker&sub=Famiglie%2C+professionisti%2C+PMI%2C+condomini%2C+catastrofi+naturali.', width: 1200, height: 630 }],
+  },
+  twitter: {
+    images: ['/api/og?title=Soluzioni+per+Settore&tag=FIM+Insurance+Broker&sub=Famiglie%2C+professionisti%2C+PMI%2C+condomini%2C+catastrofi+naturali.'],
+  },
 }
 
 const solutions = [
