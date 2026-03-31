@@ -1,17 +1,17 @@
 /**
- * FimLogo — componente SVG vettoriale del brand FIM Insurance Broker.
- * Riproduce fedelmente il logo: scudo con freccia (F) + wordmark "FIM INSURANCE BROKER".
+ * FimLogo — riproduce il logo reale FIM Insurance Broker in SVG vettoriale.
+ * Scudo con gradiente navy→teal, F stilizzata con effetto profondità, freccia diagonale.
  *
  * Props:
- *  - variant: 'full' (scudo + testo) | 'icon' (solo scudo) | 'wordmark' (solo testo)
- *  - theme:   'color' (gradiente navy/teal) | 'white' (tutto bianco, per sfondi scuri) | 'dark' (navy pieno)
- *  - height:  altezza in px (default 48)
+ *  variant: 'full' (scudo + wordmark) | 'icon' (solo scudo)
+ *  theme:   'color' | 'white' (per sfondi scuri) | 'dark'
+ *  height:  altezza px (default 48)
  */
 
 import { useId } from 'react'
 
 interface FimLogoProps {
-  variant?: 'full' | 'icon' | 'wordmark'
+  variant?: 'full' | 'icon'
   theme?: 'color' | 'white' | 'dark'
   height?: number
   className?: string
@@ -23,101 +23,35 @@ export default function FimLogo({
   height = 48,
   className,
 }: FimLogoProps) {
-  // Colori per ciascun tema
-  const navy = theme === 'white' ? '#ffffff' : '#0f2d6b'
-  const teal = theme === 'white' ? '#ffffff' : theme === 'dark' ? '#0f2d6b' : '#00b4c8'
-  const tealLight = theme === 'white' ? '#ffffff' : theme === 'dark' ? '#1a4a9e' : '#33c7d8'
-  const uid = useId()
-  const gradId = `fim-grad-${uid}`
+  const uid = useId().replace(/:/g, '')
 
-  // Proporzioni: icona 1:1, full circa 3.5:1
-  const iconSize = height
-  const fullWidth = variant === 'icon' ? height : Math.round(height * 3.6)
-  const fullHeight = height
+  const isWhite = theme === 'white'
+  const isDark  = theme === 'dark'
 
-  if (variant === 'icon') {
-    return (
-      <svg
-        width={iconSize}
-        height={iconSize}
-        viewBox="0 0 100 100"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-        aria-label="FIM Insurance Broker"
-      >
-        <defs>
-          <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={navy} />
-            <stop offset="100%" stopColor={teal} />
-          </linearGradient>
-        </defs>
-        {/* Scudo */}
-        <path
-          d="M50 5 L90 22 L90 52 C90 74 72 88 50 95 C28 88 10 74 10 52 L10 22 Z"
-          fill={`url(#${gradId})`}
-        />
-        {/* F stilizzata con freccia */}
-        <path
-          d="M32 30 L68 30 L60 38 L44 38 L44 47 L60 47 L54 55 L44 55 L44 70 L34 70 L34 30 Z"
-          fill="#ffffff"
-          opacity="0.95"
-        />
-        {/* Punta freccia in alto a destra */}
-        <path
-          d="M62 22 L80 40 L70 40 L70 30 L60 30 Z"
-          fill={tealLight}
-          opacity="0.9"
-        />
-      </svg>
-    )
-  }
+  // Colori testo / monochrome
+  const textColor   = isWhite ? '#ffffff' : '#0f2d6b'
+  const subColor    = isWhite ? '#ffffff' : isDark ? '#0f2d6b' : '#0f2d6b'
 
-  if (variant === 'wordmark') {
-    return (
-      <svg
-        width={Math.round(height * 2.8)}
-        height={height}
-        viewBox="0 0 280 80"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-        aria-label="FIM Insurance Broker"
-      >
-        {/* FIM */}
-        <text
-          x="0"
-          y="54"
-          fontFamily="'Arial Black', 'Arial Bold', system-ui"
-          fontWeight="900"
-          fontSize="52"
-          fill={navy}
-          letterSpacing="-1"
-        >
-          FIM
-        </text>
-        {/* INSURANCE BROKER */}
-        <text
-          x="2"
-          y="74"
-          fontFamily="'Arial', system-ui"
-          fontWeight="600"
-          fontSize="14"
-          fill={teal}
-          letterSpacing="3"
-        >
-          INSURANCE BROKER
-        </text>
-      </svg>
-    )
-  }
+  // Gradient stops
+  const gradFrom = isWhite ? '#ffffff' : isDark ? '#0f2d6b' : '#091c4a'
+  const gradMid  = isWhite ? '#ffffff' : isDark ? '#0f2d6b' : '#0b4a7a'
+  const gradTo   = isWhite ? '#ffffff' : isDark ? '#1a4a9e' : '#00b4c8'
 
-  // variant === 'full'
-  return (
+  // Arrow gradient
+  const arrowFrom = isWhite ? '#ffffff' : isDark ? '#1a4a9e' : '#00b4c8'
+  const arrowTo   = isWhite ? '#ffffff' : isDark ? '#1a4a9e' : '#40e4f8'
+
+  // ID univoci per evitare conflitti se il componente appare più volte
+  const gShield = `fsg-${uid}`
+  const gArrow  = `fag-${uid}`
+
+  // ── ICON ONLY ──────────────────────────────────────────────────────────────
+  // ViewBox 100×100: scudo largo 86px centrato, freccia che rompe l'angolo sup-dx
+  const iconSVG = (
     <svg
-      width={fullWidth}
-      height={fullHeight}
-      viewBox="0 0 360 100"
+      width={height}
+      height={height}
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -125,52 +59,112 @@ export default function FimLogo({
       role="img"
     >
       <defs>
-        <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={navy} />
-          <stop offset="100%" stopColor={teal} />
+        <linearGradient id={gShield} x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stopColor={gradFrom} />
+          <stop offset="50%"  stopColor={gradMid}  />
+          <stop offset="100%" stopColor={gradTo}   />
+        </linearGradient>
+        <linearGradient id={gArrow} x1="55" y1="30" x2="93" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stopColor={arrowFrom} />
+          <stop offset="100%" stopColor={arrowTo}   />
         </linearGradient>
       </defs>
 
-      {/* ── Scudo ── */}
+      {/* Scudo */}
       <path
-        d="M50 5 L90 22 L90 52 C90 74 72 88 50 95 C28 88 10 74 10 52 L10 22 Z"
-        fill={`url(#${gradId})`}
-      />
-      {/* F stilizzata */}
-      <path
-        d="M32 28 L70 28 L62 37 L44 37 L44 47 L60 47 L53 55 L44 55 L44 72 L33 72 L33 28 Z"
-        fill="#ffffff"
-        opacity="0.95"
-      />
-      {/* Freccia teal in alto a destra dello scudo */}
-      <path
-        d="M64 20 L82 38 L73 38 L73 27 L62 27 Z"
-        fill={tealLight}
-        opacity="0.9"
+        d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z"
+        fill={`url(#${gShield})`}
       />
 
+      {/* F — strato profondità (ombra) */}
+      <path
+        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
+        fill="white" opacity="0.18" transform="translate(5,4)"
+      />
+      {/* F — strato intermedio */}
+      <path
+        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
+        fill="white" opacity="0.35" transform="translate(2.5,2)"
+      />
+      {/* F — primo piano */}
+      <path
+        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
+        fill="white"
+      />
+
+      {/* Freccia: testa triangolare nell'angolo sup-dx */}
+      <polygon points="66,1 93,1 93,28" fill={`url(#${gArrow})`} />
+      {/* Freccia: asta diagonale */}
+      <polygon points="50,28 59,18 84,5 75,15" fill={`url(#${gArrow})`} />
+    </svg>
+  )
+
+  if (variant === 'icon') return iconSVG
+
+  // ── FULL LOGO ──────────────────────────────────────────────────────────────
+  // ViewBox 380×100: icona 0-100, testo da 110
+  const fullWidth = Math.round(height * 3.8)
+  return (
+    <svg
+      width={fullWidth}
+      height={height}
+      viewBox="0 0 380 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-label="FIM Insurance Broker"
+      role="img"
+    >
+      <defs>
+        <linearGradient id={gShield} x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stopColor={gradFrom} />
+          <stop offset="50%"  stopColor={gradMid}  />
+          <stop offset="100%" stopColor={gradTo}   />
+        </linearGradient>
+        <linearGradient id={gArrow} x1="55" y1="30" x2="93" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stopColor={arrowFrom} />
+          <stop offset="100%" stopColor={arrowTo}   />
+        </linearGradient>
+      </defs>
+
+      {/* ── Icona (stessi path del variant=icon, 100×100) ── */}
+      <path
+        d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z"
+        fill={`url(#${gShield})`}
+      />
+      <path
+        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
+        fill="white" opacity="0.18" transform="translate(5,4)"
+      />
+      <path
+        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
+        fill="white" opacity="0.35" transform="translate(2.5,2)"
+      />
+      <path
+        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
+        fill="white"
+      />
+      <polygon points="66,1 93,1 93,28" fill={`url(#${gArrow})`} />
+      <polygon points="50,28 59,18 84,5 75,15" fill={`url(#${gArrow})`} />
+
       {/* ── Wordmark ── */}
-      {/* FIM */}
       <text
-        x="108"
-        y="62"
-        fontFamily="'Arial Black', 'Arial Bold', system-ui"
+        x="110" y="64"
+        fontFamily="'Arial Black','Helvetica Neue',Arial,sans-serif"
         fontWeight="900"
-        fontSize="54"
-        fill={navy}
-        letterSpacing="-1"
+        fontSize="58"
+        fill={textColor}
+        letterSpacing="1"
       >
         FIM
       </text>
-      {/* INSURANCE BROKER */}
       <text
-        x="110"
-        y="82"
-        fontFamily="'Arial', system-ui"
-        fontWeight="600"
-        fontSize="13"
-        fill={teal}
-        letterSpacing="3.5"
+        x="113" y="83"
+        fontFamily="Arial,'Helvetica Neue',sans-serif"
+        fontWeight="700"
+        fontSize="13.5"
+        fill={subColor}
+        letterSpacing="4"
       >
         INSURANCE BROKER
       </text>
