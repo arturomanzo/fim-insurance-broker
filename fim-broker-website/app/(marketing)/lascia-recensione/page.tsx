@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   robots: { index: false }, // non vogliamo che questa pagina appaia in SERP
 }
 
-const GOOGLE_REVIEW_URL = 'https://g.page/r/CavV7RV_K7S6EBM/review'
+const GOOGLE_REVIEW_URL = 'https://g.page/r/CavV7RV_K7S6EBE/review'
 
 const steps = [
   { n: '1', text: 'Clicca il pulsante "Scrivi una recensione"' },

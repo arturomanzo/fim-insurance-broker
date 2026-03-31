@@ -206,7 +206,7 @@ function buildFollowUpEmailHtml(rawNome: string, rawTipo: string): string {
   const nome = escapeHtml(rawNome)
   const tipo = escapeHtml(rawTipo)
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
-  const GOOGLE_REVIEW_URL = 'https://g.page/r/CfimbrokerReview/review'
+  const GOOGLE_REVIEW_URL = 'https://g.page/r/CavV7RV_K7S6EBE/review'
   return `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
 <body style="font-family:system-ui,sans-serif;background:#f8fafc;margin:0;padding:20px;">
   <div style="max-width:600px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.07);">
