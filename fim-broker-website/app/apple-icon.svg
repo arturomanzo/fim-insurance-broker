@@ -1,16 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f2d6b"/>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#091c4a"/>
+      <stop offset="100%" stop-color="#1a5a8a"/>
+    </linearGradient>
+    <linearGradient id="sg" x1="14" y1="174" x2="166" y2="5" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#091c4a"/>
+      <stop offset="50%"  stop-color="#0b4a7a"/>
       <stop offset="100%" stop-color="#00b4c8"/>
     </linearGradient>
+    <linearGradient id="ag" x1="100" y1="55" x2="168" y2="5" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#00b4c8"/>
+      <stop offset="100%" stop-color="#40e4f8"/>
+    </linearGradient>
   </defs>
-  <!-- Background rounded -->
-  <rect width="180" height="180" rx="40" fill="url(#g)"/>
-  <!-- Shield -->
-  <path d="M90 18 L155 42 L155 95 C155 135 128 158 90 170 C52 158 25 135 25 95 L25 42 Z" fill="white" opacity="0.15"/>
-  <!-- F shape -->
-  <path d="M58 52 L126 52 L112 67 L80 67 L80 84 L108 84 L95 99 L80 99 L80 128 L60 128 L60 52 Z" fill="white" opacity="0.95"/>
-  <!-- Arrow -->
-  <path d="M115 38 L148 72 L132 72 L132 52 L112 52 Z" fill="#33c7d8" opacity="0.9"/>
+  <!-- Sfondo arrotondato -->
+  <rect width="180" height="180" rx="36" fill="url(#bg)"/>
+  <!-- Scudo centrato -->
+  <path d="M22,47 C22,32 33,22 47,22 L133,22 C147,22 158,32 158,47 L158,110 C158,148 90,168 90,168 C90,168 22,148 22,110 Z" fill="url(#sg)"/>
+  <!-- F profondità -->
+  <path d="M49,43 L49,136 L67,136 L67,95 L107,95 L107,77 L67,77 L67,60 L114,60 L114,43 Z" fill="white" opacity="0.2" transform="translate(8,6)"/>
+  <!-- F principale -->
+  <path d="M49,43 L49,136 L67,136 L67,95 L107,95 L107,77 L67,77 L67,60 L114,60 L114,43 Z" fill="white"/>
+  <!-- Freccia testa -->
+  <polygon points="118,22 158,22 158,62" fill="url(#ag)"/>
+  <!-- Freccia asta -->
+  <polygon points="90,50 107,32 152,10 135,28" fill="url(#ag)"/>
 </svg>

@@ -23,21 +23,27 @@ export default function OgImage() {
       >
         {/* Logo area */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '48px' }}>
-          {/* Shield icon */}
-          <div
-            style={{
-              width: '80px',
-              height: '80px',
-              background: 'linear-gradient(135deg, #0f2d6b 0%, #00b4c8 100%)',
-              borderRadius: '20px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 8px 32px rgba(0,180,200,0.3)',
-            }}
-          >
-            <span style={{ color: 'white', fontWeight: '900', fontSize: '32px' }}>F</span>
-          </div>
+          {/* Shield SVG — Satori supports basic svg elements */}
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-ignore */}
+          <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="osg" x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#091c4a" />
+                <stop offset="50%" stopColor="#0b4a7a" />
+                <stop offset="100%" stopColor="#00b4c8" />
+              </linearGradient>
+              <linearGradient id="oag" x1="55" y1="30" x2="93" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#00b4c8" />
+                <stop offset="100%" stopColor="#40e4f8" />
+              </linearGradient>
+            </defs>
+            <path d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z" fill="url(#osg)" />
+            <path d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z" fill="white" fillOpacity="0.25" transform="translate(5,4)" />
+            <path d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z" fill="white" />
+            <polygon points="66,1 93,1 93,28" fill="url(#oag)" />
+            <polygon points="50,28 59,18 84,5 75,15" fill="url(#oag)" />
+          </svg>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ color: 'white', fontWeight: '900', fontSize: '42px', letterSpacing: '-1px', lineHeight: 1 }}>
               FIM

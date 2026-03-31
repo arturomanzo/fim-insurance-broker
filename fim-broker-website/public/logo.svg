@@ -10,11 +10,25 @@
       <stop offset="100%" stop-color="#40e4f8"/>
     </linearGradient>
   </defs>
+
+  <!-- Scudo -->
   <path d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z" fill="url(#sg)"/>
-  <path d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z" fill="white" opacity="0.2" transform="translate(5,4)"/>
+  <!-- F profondità -->
+  <path d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z" fill="white" opacity="0.18" transform="translate(5,4)"/>
+  <path d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z" fill="white" opacity="0.35" transform="translate(2.5,2)"/>
+  <!-- F principale -->
   <path d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z" fill="white"/>
+  <!-- Freccia testa -->
   <polygon points="66,1 93,1 93,28" fill="url(#ag)"/>
+  <!-- Freccia asta -->
   <polygon points="50,28 59,18 84,5 75,15" fill="url(#ag)"/>
-  <text x="110" y="64" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="58" fill="#0f2d6b" letter-spacing="1">FIM</text>
-  <text x="113" y="83" font-family="Arial,'Helvetica Neue',sans-serif" font-weight="700" font-size="13.5" fill="#0f2d6b" letter-spacing="4">INSURANCE BROKER</text>
+
+  <!-- FIM -->
+  <text x="110" y="64"
+    font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
+    font-weight="900" font-size="58" fill="#0f2d6b" letter-spacing="1">FIM</text>
+  <!-- INSURANCE BROKER -->
+  <text x="113" y="83"
+    font-family="Arial,'Helvetica Neue',sans-serif"
+    font-weight="700" font-size="13.5" fill="#0f2d6b" letter-spacing="4">INSURANCE BROKER</text>
 </svg>
