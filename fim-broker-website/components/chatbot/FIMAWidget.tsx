@@ -255,11 +255,14 @@ export default function FIMAWidget() {
       {/* Toggle button */}
       <button
         onClick={() => { setIsOpen(!isOpen); setHasProactiveBadge(false) }}
-        className="w-14 h-14 gradient-primary text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        className="relative w-14 h-14 gradient-primary text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
         aria-label={isOpen ? 'Chiudi chat' : 'Apri chat FIMA'}
         aria-expanded={isOpen}
         aria-controls="fima-chat-window"
       >
+        {hasProactiveBadge && !isOpen && (
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-bounce-slow" />
+        )}
         {isOpen ? (
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
