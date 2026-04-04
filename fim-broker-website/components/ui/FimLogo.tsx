@@ -28,18 +28,19 @@ export default function FimLogo({
   const isWhite = theme === 'white'
   const isDark  = theme === 'dark'
 
-  // Colori testo / monochrome
-  const textColor   = isWhite ? '#ffffff' : '#0f2d6b'
-  const subColor    = isWhite ? '#ffffff' : isDark ? '#0f2d6b' : '#0f2d6b'
+  // Colori testo: bianco su sfondi scuri, navy su sfondi chiari
+  const textColor = isWhite ? '#ffffff' : '#0f2d6b'
+  const subColor  = isWhite ? 'rgba(255,255,255,0.75)' : '#0f2d6b'
 
-  // Gradient stops
-  const gradFrom = isWhite ? '#ffffff' : isDark ? '#0f2d6b' : '#091c4a'
-  const gradMid  = isWhite ? '#ffffff' : isDark ? '#0f2d6b' : '#0b4a7a'
-  const gradTo   = isWhite ? '#ffffff' : isDark ? '#1a4a9e' : '#00b4c8'
+  // Gradient stops dello scudo: stesso gradiente colorato per color e white
+  // (su sfondo scuro il gradiente navy→teal è visibile e identico al navbar)
+  const gradFrom = isDark ? '#0f2d6b' : '#091c4a'
+  const gradMid  = isDark ? '#0f2d6b' : '#0b4a7a'
+  const gradTo   = isDark ? '#1a4a9e' : '#00b4c8'
 
   // Arrow gradient
-  const arrowFrom = isWhite ? '#ffffff' : isDark ? '#1a4a9e' : '#00b4c8'
-  const arrowTo   = isWhite ? '#ffffff' : isDark ? '#1a4a9e' : '#40e4f8'
+  const arrowFrom = isDark ? '#1a4a9e' : '#00b4c8'
+  const arrowTo   = isDark ? '#1a4a9e' : '#40e4f8'
 
   // ID univoci per evitare conflitti se il componente appare più volte
   const gShield = `fsg-${uid}`
