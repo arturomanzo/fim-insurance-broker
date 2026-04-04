@@ -193,7 +193,7 @@ export default function ProfessionistiPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono orientativi per professionisti con fatturato fino a 150.000€/anno. Il premio effettivo dipende da categoria, massimale e storico sinistri.
+            * I prezzi indicati sono puramente orientativi per professionisti con fatturato fino a 150.000€/anno e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base a categoria professionale, massimale scelto e storico sinistri. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
           </p>
         </div>
       </section>

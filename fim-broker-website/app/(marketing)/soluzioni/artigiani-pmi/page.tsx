@@ -226,7 +226,7 @@ export default function ArtigianiPmiPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono orientativi. Il premio effettivo dipende dal settore di attività, fatturato e valori assicurati.
+            * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al settore di attività, fatturato e valori assicurati. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
           </p>
         </div>
       </section>
