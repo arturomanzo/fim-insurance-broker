@@ -24,8 +24,6 @@ export default function OgImage() {
         {/* Logo area */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '48px' }}>
           {/* Shield SVG — Satori supports basic svg elements */}
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/* @ts-ignore */}
           <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="osg" x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
