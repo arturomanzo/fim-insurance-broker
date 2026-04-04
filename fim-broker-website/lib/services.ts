@@ -9,6 +9,8 @@ export interface Service {
   features: string[]
   benefits: string[]
   faq: Array<{ question: string; answer: string }>
+  priceFrom: string
+  priceNote: string
 }
 
 export const services: Service[] = [
@@ -47,6 +49,8 @@ export const services: Service[] = [
           'La Kasko copre i danni al tuo veicolo indipendentemente da chi ha causato il sinistro, inclusi incidenti colpa tua, grandine e altri eventi.',
       },
     ],
+    priceFrom: 'da 250€/anno',
+    priceNote: 'RC Auto base. Kasko e garanzie accessorie a partire da 80€ in più.',
   },
   {
     slug: 'assicurazione-vita',
@@ -83,6 +87,8 @@ export const services: Service[] = [
           'Una unit-linked collega il capitale assicurato alle performance di fondi di investimento, combinando protezione e potenziale di crescita.',
       },
     ],
+    priceFrom: 'da 15€/mese',
+    priceNote: 'Polizza temporanea caso morte. Piani previdenziali da 50€/mese.',
   },
   {
     slug: 'assicurazione-casa',
@@ -119,6 +125,8 @@ export const services: Service[] = [
           "Copre i danni accidentali causati a terzi connessi alla proprietà o alla conduzione dell'abitazione.",
       },
     ],
+    priceFrom: 'da 100€/anno',
+    priceNote: 'Polizza base incendio e furto. Multirischio completo da 180€/anno.',
   },
   {
     slug: 'assicurazione-salute',
@@ -155,6 +163,8 @@ export const services: Service[] = [
           "Molte nostre polizze prevedono copertura internazionale, ideale per chi viaggia o vive periodi all'estero.",
       },
     ],
+    priceFrom: 'da 25€/mese',
+    priceNote: 'Polizza individuale con ricoveri. Piani famiglia da 60€/mese.',
   },
   {
     slug: 'polizze-aziendali',
@@ -191,6 +201,8 @@ export const services: Service[] = [
           'Copre i costi conseguenti a violazioni di dati, attacchi informatici, interruzioni di business e sanzioni per violazioni del GDPR.',
       },
     ],
+    priceFrom: 'su preventivo',
+    priceNote: 'RC impresa da 300€/anno. Pacchetti completi da 800€/anno.',
   },
   {
     slug: 'assicurazione-viaggio',
@@ -227,6 +239,8 @@ export const services: Service[] = [
           'Non è obbligatoria ma è fortemente consigliata, specialmente per viaggi extra-UE dove le spese mediche possono essere molto elevate.',
       },
     ],
+    priceFrom: 'da 15€ a viaggio',
+    priceNote: 'Singolo viaggio Europa. Long-stay e polizze annuali disponibili.',
   },
 ]
 

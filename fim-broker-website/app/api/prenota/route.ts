@@ -171,7 +171,7 @@ function buildClientConfirmHtml(rawNome: string, rawData: string, rawOrario: str
            style="display: inline-block; background: #00b4c8; color: white; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px; margin-right: 12px;">
           📞 06 96883381
         </a>
-        <a href="https://wa.me/390696883381"
+        <a href="https://wa.me/393473312330"
            style="display: inline-block; background: #25d366; color: white; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px;">
           WhatsApp
         </a>

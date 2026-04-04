@@ -1,69 +1,88 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import Button from '@/components/ui/Button'
 
-interface FormData {
-  tipo: string
-  nome: string
-  cognome: string
-  email: string
-  telefono: string
-  messaggio: string
-  privacy: boolean
-  website: string // honeypot — deve restare vuoto
+interface Props {
+  initialProfile?: string | null
+  initialSettore?: string | null
 }
 
-type FormErrors = Partial<Record<keyof FormData, string>>
+type Profile = 'privato' | 'professionista' | 'pmi' | 'impresa'
 
-const TIPI_POLIZZA = [
-  'Assicurazione Auto',
-  'Assicurazione Vita',
-  'Assicurazione Casa',
-  'Assicurazione Salute',
-  'Polizze Aziendali',
-  'Assicurazione Viaggio',
-  'Altro',
+const PROFILES = [
+  { id: 'privato' as Profile, emoji: '👤', label: 'Privato', desc: 'Auto, casa, vita, salute, viaggio' },
+  { id: 'professionista' as Profile, emoji: '💼', label: 'Libero Professionista', desc: 'RC professionale, cyber, previdenza' },
+  { id: 'pmi' as Profile, emoji: '🏢', label: 'PMI / Artigiano', desc: 'RC impresa, all-risk, flotta, welfare' },
+  { id: 'impresa' as Profile, emoji: '🏭', label: 'Grande Impresa', desc: 'Programma assicurativo integrato' },
 ]
 
-export default function PreventivoForm() {
-  const [formData, setFormData] = useState<FormData>({
-    tipo: '',
-    nome: '',
-    cognome: '',
-    email: '',
-    telefono: '',
-    messaggio: '',
-    privacy: false,
-    website: '',
-  })
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [errors, setErrors] = useState<FormErrors>({})
+const COPERTURE: Record<Profile, string[]> = {
+  privato: ['Assicurazione Auto', 'Assicurazione Casa', 'Assicurazione Vita', 'Assicurazione Salute', 'Assicurazione Viaggio', 'Più coperture / Altro'],
+  professionista: ['RC Professionale', 'Polizza Cyber & Privacy', 'Tutela Legale', 'Previdenza Complementare', 'Assicurazione Vita', 'Più coperture / Altro'],
+  pmi: ['RC Impresa / Prodotti', 'All Risk Aziendale', 'Flotta Aziendale', 'Cyber Risk Insurance', 'Welfare & Salute Dipendenti', 'Polizza Catastrofale 2025', 'Più coperture / Altro'],
+  impresa: ['Programma Assicurativo Integrato', 'Cyber Insurance Enterprise', 'D&O (Directors & Officers)', 'All Risk Multi-Sede', 'Welfare & Benefits Aziendali', 'Altro'],
+}
 
-  const validate = (): boolean => {
-    const newErrors: FormErrors = {}
-    if (!formData.tipo) newErrors.tipo = 'Seleziona il tipo di polizza'
-    if (!formData.nome.trim()) newErrors.nome = 'Il nome è obbligatorio'
-    if (!formData.cognome.trim()) newErrors.cognome = 'Il cognome è obbligatorio'
-    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Inserisci un'email valida"
-    }
-    if (!formData.telefono.trim()) newErrors.telefono = 'Il telefono è obbligatorio'
-    if (!formData.privacy) newErrors.privacy = 'Devi accettare la privacy policy'
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+function resolveProfile(raw: string | null | undefined): Profile | null {
+  if (!raw) return null
+  const map: Record<string, Profile> = {
+    privato: 'privato',
+    professionista: 'professionista',
+    pmi: 'pmi',
+    impresa: 'impresa',
+    azienda: 'pmi',
+  }
+  return map[raw.toLowerCase()] ?? null
+}
+
+export default function PreventivoForm({ initialProfile, initialSettore }: Props) {
+  const resolved = resolveProfile(initialProfile)
+  const [step, setStep] = useState<1 | 2 | 3>(resolved ? 2 : 1)
+  const [profile, setProfile] = useState<Profile | null>(resolved)
+  const [copertura, setCopertura] = useState(initialSettore ?? '')
+  const [note, setNote] = useState('')
+  const [nome, setNome] = useState('')
+  const [cognome, setCognome] = useState('')
+  const [email, setEmail] = useState('')
+  const [telefono, setTelefono] = useState('')
+  const [privacy, setPrivacy] = useState(false)
+  const [website, setWebsite] = useState('') // honeypot
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  const profileLabel = profile ? PROFILES.find((p) => p.id === profile)?.label : ''
+
+  const validateStep3 = () => {
+    const e: Record<string, string> = {}
+    if (!nome.trim()) e.nome = 'Campo obbligatorio'
+    if (!cognome.trim()) e.cognome = 'Campo obbligatorio'
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Email non valida"
+    if (!telefono.trim()) e.telefono = 'Campo obbligatorio'
+    if (!privacy) e.privacy = 'Accetta la privacy policy per continuare'
+    setErrors(e)
+    return Object.keys(e).length === 0
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!validate()) return
+    if (website) return // honeypot
+    if (!validateStep3()) return
 
     setStatus('loading')
     try {
       const res = await fetch('/api/preventivo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          tipo: copertura || 'Preventivo generico',
+          profilo: profile,
+          nome, cognome, email, telefono,
+          messaggio: note,
+          privacy: true,
+          website,
+        }),
       })
       if (!res.ok) throw new Error()
       setStatus('success')
@@ -72,186 +91,173 @@ export default function PreventivoForm() {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
-    }))
-    if (errors[name as keyof FormData]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }))
-    }
-  }
-
+  // ── Success ──────────────────────────────────────────────────────────────
   if (status === 'success') {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-10">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-primary mb-2">Richiesta inviata!</h3>
-        <p className="text-gray-600 mb-6">
-          Ti contatteremo entro 24 ore lavorative per il tuo preventivo personalizzato.
-        </p>
-        <Button onClick={() => setStatus('idle')} variant="outline">
-          Invia un&apos;altra richiesta
-        </Button>
+        <h3 className="text-2xl font-black text-primary mb-2">Richiesta inviata!</h3>
+        <p className="text-gray-600 mb-1">Ciao <strong>{nome}</strong>, abbiamo ricevuto la tua richiesta.</p>
+        <p className="text-gray-600 mb-6">Ti contatteremo entro <strong>24 ore lavorative</strong> con il preventivo personalizzato.</p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="tel:+390696883381" className="btn-primary">📞 Chiama subito: 06 96883381</a>
+          <Link href="/prenota-consulenza" className="btn-secondary">Prenota una slot</Link>
+        </div>
+        <button onClick={() => { setStatus('idle'); setStep(1); setProfile(null); setCopertura(''); setNome(''); setCognome(''); setEmail(''); setTelefono('') }}
+          className="mt-6 text-sm text-gray-400 hover:text-gray-600 transition-colors">
+          ↺ Invia un&apos;altra richiesta
+        </button>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      {/* Honeypot anti-bot: nascosto visivamente, mai compilato da utenti reali */}
-      <div style={{ position: 'absolute', left: '-9999px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
-        <label htmlFor="prev-website">Non compilare questo campo</label>
-        <input
-          id="prev-website"
-          type="text"
-          name="website"
-          value={formData.website}
-          onChange={handleChange}
-          tabIndex={-1}
-          autoComplete="off"
-        />
+    <div>
+      {/* Progress */}
+      <div className="flex items-center gap-2 mb-8">
+        {([1, 2, 3] as const).map((s, i) => (
+          <div key={s} className="flex items-center gap-2 flex-1">
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all ${step === s ? 'bg-primary text-white' : step > s ? 'bg-accent text-white' : 'bg-gray-200 text-gray-500'}`}>
+              {step > s ? (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : s}
+            </div>
+            <span className={`text-xs font-medium hidden sm:block ${step === s ? 'text-primary' : step > s ? 'text-accent' : 'text-gray-400'}`}>
+              {['Profilo', 'Copertura', 'Dati'][i]}
+            </span>
+            {i < 2 && <div className={`flex-1 h-0.5 mx-1 rounded ${step > s ? 'bg-accent' : 'bg-gray-200'}`} />}
+          </div>
+        ))}
       </div>
 
-      {/* Tipo polizza */}
-      <div>
-        <label htmlFor="prev-tipo" className="label-field">Tipo di assicurazione *</label>
-        <select
-          id="prev-tipo"
-          name="tipo"
-          value={formData.tipo}
-          onChange={handleChange}
-          aria-describedby={errors.tipo ? 'prev-tipo-err' : undefined}
-          aria-invalid={!!errors.tipo}
-          className="input-field"
-        >
-          <option value="">Seleziona il tipo...</option>
-          {TIPI_POLIZZA.map((t) => (
-            <option key={t} value={t}>{t}</option>
-          ))}
-        </select>
-        {errors.tipo && <p id="prev-tipo-err" role="alert" className="text-red-500 text-sm mt-1">{errors.tipo}</p>}
-      </div>
-
-      {/* Nome e cognome */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="prev-nome" className="label-field">Nome *</label>
-          <input
-            id="prev-nome"
-            type="text"
-            name="nome"
-            value={formData.nome}
-            onChange={handleChange}
-            placeholder="Mario"
-            aria-describedby={errors.nome ? 'prev-nome-err' : undefined}
-            aria-invalid={!!errors.nome}
-            className="input-field"
-          />
-          {errors.nome && <p id="prev-nome-err" role="alert" className="text-red-500 text-sm mt-1">{errors.nome}</p>}
-        </div>
-        <div>
-          <label htmlFor="prev-cognome" className="label-field">Cognome *</label>
-          <input
-            id="prev-cognome"
-            type="text"
-            name="cognome"
-            value={formData.cognome}
-            onChange={handleChange}
-            placeholder="Rossi"
-            aria-describedby={errors.cognome ? 'prev-cognome-err' : undefined}
-            aria-invalid={!!errors.cognome}
-            className="input-field"
-          />
-          {errors.cognome && <p id="prev-cognome-err" role="alert" className="text-red-500 text-sm mt-1">{errors.cognome}</p>}
-        </div>
-      </div>
-
-      {/* Email e telefono */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="prev-email" className="label-field">Email *</label>
-          <input
-            id="prev-email"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="mario.rossi@email.it"
-            aria-describedby={errors.email ? 'prev-email-err' : undefined}
-            aria-invalid={!!errors.email}
-            className="input-field"
-          />
-          {errors.email && <p id="prev-email-err" role="alert" className="text-red-500 text-sm mt-1">{errors.email}</p>}
-        </div>
-        <div>
-          <label htmlFor="prev-telefono" className="label-field">Telefono *</label>
-          <input
-            id="prev-telefono"
-            type="tel"
-            name="telefono"
-            value={formData.telefono}
-            onChange={handleChange}
-            placeholder="+39 333 1234567"
-            aria-describedby={errors.telefono ? 'prev-telefono-err' : undefined}
-            aria-invalid={!!errors.telefono}
-            className="input-field"
-          />
-          {errors.telefono && <p id="prev-telefono-err" role="alert" className="text-red-500 text-sm mt-1">{errors.telefono}</p>}
-        </div>
-      </div>
-
-      {/* Messaggio */}
-      <div>
-        <label htmlFor="prev-messaggio" className="label-field">Informazioni aggiuntive</label>
-        <textarea
-          id="prev-messaggio"
-          name="messaggio"
-          value={formData.messaggio}
-          onChange={handleChange}
-          rows={4}
-          placeholder="Descrivi brevemente le tue esigenze assicurative..."
-          className="input-field resize-none"
-        />
-      </div>
-
-      {/* Privacy */}
-      <div>
-        <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            name="privacy"
-            checked={formData.privacy}
-            onChange={handleChange}
-            aria-describedby={errors.privacy ? 'prev-privacy-err' : undefined}
-            aria-invalid={!!errors.privacy}
-            className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
-          />
-          <span className="text-sm text-gray-600">
-            Ho letto e accetto la{' '}
-            <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">
-              Privacy Policy
-            </a>{' '}
-            e acconsento al trattamento dei miei dati personali per ricevere il preventivo. *
-          </span>
-        </label>
-        {errors.privacy && <p id="prev-privacy-err" role="alert" className="text-red-500 text-sm mt-1">{errors.privacy}</p>}
-      </div>
-
-      {status === 'error' && (
-        <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
-          Si è verificato un errore. Riprova o contattaci direttamente.
+      {/* Step 1 — Profilo */}
+      {step === 1 && (
+        <div className="animate-fade-in">
+          <h2 className="text-xl font-black text-primary mb-1">Chi sei?</h2>
+          <p className="text-gray-500 text-sm mb-5">Seleziona il profilo che ti descrive meglio.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {PROFILES.map((p) => (
+              <button key={p.id} onClick={() => { setProfile(p.id); setStep(2) }}
+                className="group text-left p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition-all duration-200">
+                <div className="text-2xl mb-2">{p.emoji}</div>
+                <div className="font-bold text-primary text-sm mb-0.5 group-hover:text-primary-light">{p.label}</div>
+                <div className="text-gray-400 text-xs">{p.desc}</div>
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
-      <Button type="submit" loading={status === 'loading'} size="lg" className="w-full">
-        {status === 'loading' ? 'Invio in corso...' : 'Richiedi Preventivo Gratuito'}
-      </Button>
-    </form>
+      {/* Step 2 — Copertura */}
+      {step === 2 && profile && (
+        <div className="animate-fade-in">
+          <button onClick={() => setStep(1)} className="flex items-center gap-1 text-sm text-gray-400 hover:text-primary mb-5 transition-colors">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Indietro
+          </button>
+          <h2 className="text-xl font-black text-primary mb-1">Cosa ti serve?</h2>
+          <p className="text-gray-500 text-sm mb-5">
+            Profilo selezionato: <span className="font-semibold text-primary">{profileLabel}</span>
+          </p>
+          <div className="flex flex-wrap gap-2 mb-5">
+            {COPERTURE[profile].map((c) => (
+              <button key={c} onClick={() => setCopertura(c)}
+                className={`px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all ${copertura === c ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-600 hover:border-primary/50 hover:text-primary'}`}>
+                {c}
+              </button>
+            ))}
+          </div>
+          <div className="mb-5">
+            <label className="label-field">Note aggiuntive (facoltativo)</label>
+            <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3}
+              placeholder="Descrivi brevemente le tue esigenze o situazione attuale..."
+              className="input-field resize-none text-sm" maxLength={600} />
+          </div>
+          <button onClick={() => setStep(3)}
+            className="w-full btn-primary py-3.5">
+            Continua →
+          </button>
+        </div>
+      )}
+
+      {/* Step 3 — Dati */}
+      {step === 3 && (
+        <form onSubmit={handleSubmit} noValidate className="animate-fade-in">
+          {/* Honeypot */}
+          <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+            <input type="text" name="website" value={website} onChange={(e) => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" />
+          </div>
+          <button type="button" onClick={() => setStep(2)} className="flex items-center gap-1 text-sm text-gray-400 hover:text-primary mb-5 transition-colors">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Indietro
+          </button>
+          <h2 className="text-xl font-black text-primary mb-1">I tuoi dati</h2>
+          <p className="text-gray-500 text-sm mb-5">
+            {copertura ? <><span className="font-semibold text-primary">{copertura}</span> · </> : ''}{profileLabel}
+          </p>
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="label-field">Nome *</label>
+                <input type="text" value={nome} onChange={(e) => { setNome(e.target.value); setErrors((p) => ({ ...p, nome: '' })) }}
+                  placeholder="Mario" className="input-field" maxLength={100} />
+                {errors.nome && <p className="text-red-500 text-xs mt-1">{errors.nome}</p>}
+              </div>
+              <div>
+                <label className="label-field">Cognome *</label>
+                <input type="text" value={cognome} onChange={(e) => { setCognome(e.target.value); setErrors((p) => ({ ...p, cognome: '' })) }}
+                  placeholder="Rossi" className="input-field" maxLength={100} />
+                {errors.cognome && <p className="text-red-500 text-xs mt-1">{errors.cognome}</p>}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="label-field">Email *</label>
+                <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: '' })) }}
+                  placeholder="mario@email.it" className="input-field" maxLength={200} />
+                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              </div>
+              <div>
+                <label className="label-field">Telefono *</label>
+                <input type="tel" value={telefono} onChange={(e) => { setTelefono(e.target.value); setErrors((p) => ({ ...p, telefono: '' })) }}
+                  placeholder="+39 333 1234567" className="input-field" maxLength={30} />
+                {errors.telefono && <p className="text-red-500 text-xs mt-1">{errors.telefono}</p>}
+              </div>
+            </div>
+            <div>
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input type="checkbox" checked={privacy} onChange={(e) => { setPrivacy(e.target.checked); setErrors((p) => ({ ...p, privacy: '' })) }}
+                  className="mt-1 w-4 h-4 rounded border-gray-300 text-primary accent-primary" />
+                <span className="text-sm text-gray-600">
+                  Ho letto e accetto la{' '}
+                  <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Policy</Link>{' '}
+                  e acconsento al trattamento dei miei dati per ricevere il preventivo. *
+                </span>
+              </label>
+              {errors.privacy && <p className="text-red-500 text-xs mt-1">{errors.privacy}</p>}
+            </div>
+            {status === 'error' && (
+              <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                Si è verificato un errore. Riprova o contattaci direttamente al 06 96883381.
+              </div>
+            )}
+            <Button type="submit" loading={status === 'loading'} size="lg" className="w-full">
+              {status === 'loading' ? 'Invio in corso...' : 'Richiedi Preventivo Gratuito'}
+            </Button>
+            <p className="text-center text-xs text-gray-400">Risposta garantita entro 24 ore lavorative · Nessun impegno</p>
+          </div>
+        </form>
+      )}
+    </div>
   )
 }

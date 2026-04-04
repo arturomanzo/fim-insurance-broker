@@ -4,6 +4,7 @@ import { rateLimit } from '@/lib/rateLimit'
 
 interface PreventivoRequest {
   tipo: string
+  profilo?: string // privato | professionista | pmi | impresa
   nome: string
   cognome: string
   email: string
@@ -40,6 +41,7 @@ const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fi
 function buildTeamEmailHtml(data: {
   id: string
   tipo: string
+  profilo?: string
   nome: string
   cognome: string
   email: string
@@ -68,6 +70,14 @@ function buildTeamEmailHtml(data: {
     <!-- Body -->
     <div style="padding: 28px 32px;">
       <table style="width: 100%; border-collapse: collapse;">
+        ${data.profilo ? `<tr>
+          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; width: 40%;">
+            <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Profilo cliente</span>
+          </td>
+          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
+            <span style="font-size: 15px; font-weight: 700; color: #0f2d6b;">${escapeHtml(data.profilo)}</span>
+          </td>
+        </tr>` : ''}
         <tr>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; width: 40%;">
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Tipo polizza</span>
@@ -192,6 +202,64 @@ function buildClientEmailHtml(rawNome: string, rawTipo: string): string {
 </html>`
 }
 
+function buildFollowUpEmailHtml(rawNome: string, rawTipo: string): string {
+  const nome = escapeHtml(rawNome)
+  const tipo = escapeHtml(rawTipo)
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
+  const GOOGLE_REVIEW_URL = 'https://g.page/r/CavV7RV_K7S6EBE/review'
+  return `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="font-family:system-ui,sans-serif;background:#f8fafc;margin:0;padding:20px;">
+  <div style="max-width:600px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.07);">
+    <div style="background:linear-gradient(135deg,#091d47,#0f2d6b,#1a4a9e);padding:32px;text-align:center;">
+      <h1 style="color:white;margin:0;font-size:20px;font-weight:900;">Un aggiornamento sulla tua richiesta</h1>
+    </div>
+    <div style="padding:32px;">
+      <p style="font-size:15px;color:#1e293b;margin:0 0 16px;">Ciao <strong>${nome}</strong>,</p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 20px;">
+        Ci tenevi al preventivo per <strong>${tipo}</strong> che hai richiesto qualche giorno fa.
+        Speriamo che tu abbia già sentito uno dei nostri consulenti!
+      </p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 24px;">
+        Se non ti abbiamo ancora contattato, o se hai nuove domande, puoi prenotare direttamente
+        una consulenza gratuita nel momento che preferisci:
+      </p>
+      <div style="text-align:center;margin:0 0 28px;">
+        <a href="${BASE_URL}/prenota-consulenza"
+           style="display:inline-block;background:#00b4c8;color:white;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;">
+          Prenota consulenza gratuita →
+        </a>
+      </div>
+      <p style="font-size:13px;color:#94a3b8;text-align:center;margin:0 0 32px;">
+        Oppure chiamaci: <a href="tel:+390696883381" style="color:#0f2d6b;">06 96883381</a>
+        &nbsp;·&nbsp; Lun–Ven 9:30–13:00 e 15:30–18:30
+      </p>
+
+      <!-- Review request -->
+      <div style="border-top:1px solid #f1f5f9;padding-top:24px;">
+        <p style="font-size:14px;color:#475569;margin:0 0 12px;text-align:center;">
+          Se hai già avuto modo di parlarci, la tua opinione ci aiuta moltissimo:
+        </p>
+        <div style="text-align:center;">
+          <a href="${GOOGLE_REVIEW_URL}"
+             target="_blank"
+             style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid #e2e8f0;color:#1e293b;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;">
+            ⭐ Lascia una recensione su Google
+          </a>
+        </div>
+        <p style="font-size:12px;color:#cbd5e1;text-align:center;margin:10px 0 0;">
+          Ci vogliono meno di 2 minuti — grazie in anticipo!
+        </p>
+      </div>
+    </div>
+    <div style="background:#0f2d6b;padding:16px 32px;">
+      <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.4);text-align:center;">
+        FIM Insurance Broker S.r.l. — <a href="${BASE_URL}/privacy-policy" style="color:rgba(255,255,255,0.4);">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</body></html>`
+}
+
 export async function POST(req: NextRequest) {
   const { ok, retryAfter } = rateLimit(req, { limit: 5, windowMs: 60 * 60_000 })
   if (!ok) {
@@ -226,11 +294,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Consenso privacy obbligatorio' }, { status: 400 })
     }
 
+    const profilo = sanitize(body.profilo).slice(0, 50)
+
     const preventivoData = {
       id: `FIM-${Date.now()}`,
-      tipo, nome, cognome, email, telefono, messaggio,
+      tipo, profilo: profilo || undefined, nome, cognome, email, telefono, messaggio,
       timestamp: new Date().toISOString(),
     }
+
+    // Follow-up schedulato a 72 ore
+    const followUpAt = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
 
     // Invia email se Resend è configurato
     if (resend) {
@@ -239,7 +312,7 @@ export async function POST(req: NextRequest) {
         resend.emails.send({
           from: FIM_FROM,
           to: [FIM_EMAIL],
-          subject: `[Preventivo] ${tipo} — ${nome} ${cognome}`,
+          subject: `[Preventivo] ${tipo} — ${nome} ${cognome}${profilo ? ` (${profilo})` : ''}`,
           html: buildTeamEmailHtml(preventivoData),
         }),
         // Email di conferma al cliente
@@ -248,6 +321,14 @@ export async function POST(req: NextRequest) {
           to: [email],
           subject: 'Richiesta preventivo ricevuta — FIM Insurance Broker',
           html: buildClientEmailHtml(nome, tipo),
+        }),
+        // Follow-up schedulato a 72 ore
+        resend.emails.send({
+          from: FIM_FROM,
+          to: [email],
+          subject: `Aggiornamento preventivo ${tipo} — FIM Insurance Broker`,
+          html: buildFollowUpEmailHtml(nome, tipo),
+          scheduledAt: followUpAt,
         }),
       ])
     } else if (process.env.NODE_ENV !== 'production') {

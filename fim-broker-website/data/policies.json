@@ -1,0 +1,103 @@
+[
+  {
+    "id": "pol-001",
+    "clientEmail": "demo@fimbroker.it",
+    "clientName": "Mario Rossi",
+    "tipo": "Assicurazione Auto",
+    "compagnia": "Generali",
+    "numeroPolizza": "AUT-2024-001234",
+    "dataInizio": "2024-04-01",
+    "dataScadenza": "2025-04-01",
+    "premioAnnuo": 850,
+    "massimale": "RCA illimitato + Kasko €35.000",
+    "note": "Targa: AB 123 CD — Volkswagen Golf 1.6 TDI 2019",
+    "documenti": [
+      { "nome": "Polizza RC Auto 2024", "url": "#", "tipo": "polizza" },
+      { "nome": "Contrassegno assicurativo", "url": "#", "tipo": "altro" },
+      { "nome": "Quietanza premio 2024", "url": "#", "tipo": "quietanza" }
+    ]
+  },
+  {
+    "id": "pol-002",
+    "clientEmail": "demo@fimbroker.it",
+    "clientName": "Mario Rossi",
+    "tipo": "Assicurazione Casa",
+    "compagnia": "Zurich",
+    "numeroPolizza": "CAS-2023-009876",
+    "dataInizio": "2023-06-15",
+    "dataScadenza": "2025-06-15",
+    "premioAnnuo": 420,
+    "massimale": "Fabbricato €250.000 — Contenuto €50.000",
+    "note": "Via Roma 14, Roma — Appartamento 85 mq",
+    "documenti": [
+      { "nome": "Polizza Abitazione 2023", "url": "#", "tipo": "polizza" },
+      { "nome": "Quietanza 2024", "url": "#", "tipo": "quietanza" }
+    ]
+  },
+  {
+    "id": "pol-003",
+    "clientEmail": "demo@fimbroker.it",
+    "clientName": "Mario Rossi",
+    "tipo": "Assicurazione Vita",
+    "compagnia": "Allianz",
+    "numeroPolizza": "VIT-2022-445521",
+    "dataInizio": "2022-01-01",
+    "dataScadenza": "2032-01-01",
+    "premioAnnuo": 1200,
+    "massimale": "Capitale assicurato €150.000",
+    "note": "Polizza temporanea caso morte — Beneficiaria: Anna Rossi",
+    "documenti": [
+      { "nome": "Polizza Vita 2022", "url": "#", "tipo": "polizza" },
+      { "nome": "Appendice beneficiari 2023", "url": "#", "tipo": "appendice" }
+    ]
+  },
+  {
+    "id": "pol-pmi-001",
+    "clientEmail": "azienda@fimbroker.it",
+    "clientName": "Rossi Costruzioni S.r.l.",
+    "tipo": "RC Impresa",
+    "compagnia": "AXA",
+    "numeroPolizza": "RCI-2024-007721",
+    "dataInizio": "2024-03-01",
+    "dataScadenza": "2025-03-01",
+    "premioAnnuo": 2800,
+    "massimale": "RCT/RCO €2.000.000 — RC Prodotti €1.000.000",
+    "note": "Settore: Edilizia e costruzioni — 12 dipendenti",
+    "documenti": [
+      { "nome": "Polizza RC Impresa 2024", "url": "#", "tipo": "polizza" },
+      { "nome": "Attestato DURC assicurativo", "url": "#", "tipo": "altro" }
+    ]
+  },
+  {
+    "id": "pol-pmi-002",
+    "clientEmail": "azienda@fimbroker.it",
+    "clientName": "Rossi Costruzioni S.r.l.",
+    "tipo": "All Risk Aziendale",
+    "compagnia": "Generali",
+    "numeroPolizza": "ARZ-2024-001199",
+    "dataInizio": "2024-03-01",
+    "dataScadenza": "2025-03-01",
+    "premioAnnuo": 3500,
+    "massimale": "Beni strumentali €800.000 — Merce €200.000",
+    "note": "Sede operativa: Via Industriale 5, Latina — Include furto e incendio",
+    "documenti": [
+      { "nome": "Polizza All Risk 2024", "url": "#", "tipo": "polizza" }
+    ]
+  },
+  {
+    "id": "pol-pmi-003",
+    "clientEmail": "azienda@fimbroker.it",
+    "clientName": "Rossi Costruzioni S.r.l.",
+    "tipo": "Polizza Catastrofale",
+    "compagnia": "Cattolica",
+    "numeroPolizza": "CAT-2025-000443",
+    "dataInizio": "2025-04-01",
+    "dataScadenza": "2026-04-01",
+    "premioAnnuo": 650,
+    "massimale": "€500.000 — Alluvione, terremoto, frana",
+    "note": "Polizza obbligatoria L. 17/2024 — Stipulata il 28/03/2025",
+    "documenti": [
+      { "nome": "Polizza Catastrofale 2025", "url": "#", "tipo": "polizza" }
+    ]
+  }
+]

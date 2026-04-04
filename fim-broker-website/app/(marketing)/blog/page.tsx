@@ -8,6 +8,12 @@ import { getAllPosts } from '@/lib/blog'
 export const metadata: Metadata = {
   title: 'Blog & News Assicurative',
   description: 'Rimani aggiornato con guide, news e consigli dal mondo delle assicurazioni. FIM Insurance Broker.',
+  openGraph: {
+    images: [{ url: '/api/og?title=Blog+%26+News&tag=FIM+Insurance+Broker&sub=Guide%2C+news+e+consigli+dal+mondo+delle+assicurazioni.', width: 1200, height: 630 }],
+  },
+  twitter: {
+    images: ['/api/og?title=Blog+%26+News&tag=FIM+Insurance+Broker&sub=Guide%2C+news+e+consigli+dal+mondo+delle+assicurazioni.'],
+  },
 }
 
 const categoryColors: Record<string, 'primary' | 'accent' | 'success' | 'warning'> = {

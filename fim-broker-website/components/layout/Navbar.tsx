@@ -10,11 +10,14 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/chi-siamo', label: 'Chi Siamo' },
   { href: '/servizi', label: 'Servizi' },
+  { href: '/soluzioni', label: 'Soluzioni' },
+  { href: '/calcolatore-rischi', label: 'Calcolatore', badge: 'Nuovo' },
   { href: '/blog', label: 'Blog' },
   { href: '/contatti', label: 'Contatti' },
 ]
 
 const PRENOTA_HREF = '/prenota-consulenza'
+const AREA_CLIENTE_HREF = '/area-cliente'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -56,13 +59,18 @@ export default function Navbar() {
                   href={link.href}
                   aria-current={isActive ? 'page' : undefined}
                   className={clsx(
-                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
+                    'relative px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center gap-1.5',
                     isActive
                       ? 'bg-primary/10 text-primary'
                       : 'text-gray-600 hover:text-primary hover:bg-gray-100'
                   )}
                 >
                   {link.label}
+                  {'badge' in link && link.badge && (
+                    <span className="bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               )
             })}
@@ -70,6 +78,16 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
+            <Link
+              href={AREA_CLIENTE_HREF}
+              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary transition-colors"
+              title="Area Cliente"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span className="hidden lg:inline">Area Cliente</span>
+            </Link>
             <a
               href="tel:+390696883381"
               className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors"
@@ -129,17 +147,38 @@ export default function Navbar() {
                   href={link.href}
                   aria-current={isActive ? 'page' : undefined}
                   className={clsx(
-                    'block px-4 py-3 rounded-lg text-sm font-medium transition-colors',
+                    'flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-primary/10 text-primary'
                       : 'text-gray-600 hover:text-primary hover:bg-gray-50'
                   )}
                 >
                   {link.label}
+                  {'badge' in link && link.badge && (
+                    <span className="bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               )
             })}
-            <div className="pt-4 border-t border-gray-100 space-y-2">
+            <div className="pt-3 border-t border-gray-100">
+              <Link
+                href={AREA_CLIENTE_HREF}
+                className={clsx(
+                  'flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-colors',
+                  pathname.startsWith(AREA_CLIENTE_HREF)
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-gray-600 hover:text-primary hover:bg-gray-50'
+                )}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Area Cliente
+              </Link>
+            </div>
+            <div className="pt-3 border-t border-gray-100 space-y-2">
               <a
                 href="tel:+390696883381"
                 className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600"

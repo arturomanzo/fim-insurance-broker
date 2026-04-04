@@ -26,11 +26,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) return { title: 'Articolo non trovato' }
+  const ogImageUrl = `/api/og?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.category)}&sub=${encodeURIComponent(post.excerpt.slice(0, 90))}`
   return {
     title: post.title,
     description: post.excerpt,
     openGraph: {
-      images: [post.image],
+      type: 'article',
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      images: [ogImageUrl],
     },
   }
 }

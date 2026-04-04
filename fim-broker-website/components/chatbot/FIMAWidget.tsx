@@ -9,11 +9,14 @@ interface Message {
 }
 
 const SUGGESTED_QUESTIONS = [
-  "Che polizze auto offrite?",
-  "Come funziona l'assicurazione vita?",
+  "Non so da dove iniziare, aiutami",
+  "Quali coperture servono alla mia azienda?",
+  "Come funziona la RC Professionale?",
   "Posso fare un preventivo online?",
-  "Quali coperture per la mia azienda?",
 ]
+
+const PROACTIVE_DELAY_MS = 45_000 // 45 seconds
+const PROACTIVE_SESSION_KEY = 'fima_proactive_shown'
 
 export default function FIMAWidget() {
   const [isOpen, setIsOpen] = useState(false)
@@ -23,6 +26,7 @@ export default function FIMAWidget() {
       content: 'Ciao! Sono FIMA, il tuo assistente assicurativo virtuale. Come posso aiutarti oggi?',
     },
   ])
+  const [hasProactiveBadge, setHasProactiveBadge] = useState(false)
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [streamingContent, setStreamingContent] = useState('')
@@ -40,6 +44,30 @@ export default function FIMAWidget() {
       setTimeout(() => inputRef.current?.focus(), 100)
     }
   }, [isOpen])
+
+  // Proactive trigger: auto-open after delay if not already opened this session
+  useEffect(() => {
+    if (typeof sessionStorage === 'undefined') return
+    if (sessionStorage.getItem(PROACTIVE_SESSION_KEY)) return
+
+    const timer = setTimeout(() => {
+      if (!isOpen) {
+        setHasProactiveBadge(true)
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: 'assistant',
+            content: 'Ciao! Stai esplorando le nostre soluzioni assicurative? Se hai dubbi o vuoi sapere da dove iniziare, sono qui — basta scrivere. 😊',
+          },
+        ])
+        setIsOpen(true)
+        sessionStorage.setItem(PROACTIVE_SESSION_KEY, '1')
+      }
+    }, PROACTIVE_DELAY_MS)
+
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const sendMessage = async (text: string) => {
     if (!text.trim() || isLoading) return
@@ -226,12 +254,15 @@ export default function FIMAWidget() {
 
       {/* Toggle button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 gradient-primary text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        onClick={() => { setIsOpen(!isOpen); setHasProactiveBadge(false) }}
+        className="relative w-14 h-14 gradient-primary text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
         aria-label={isOpen ? 'Chiudi chat' : 'Apri chat FIMA'}
         aria-expanded={isOpen}
         aria-controls="fima-chat-window"
       >
+        {hasProactiveBadge && !isOpen && (
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-bounce-slow" />
+        )}
         {isOpen ? (
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

@@ -342,5 +342,166 @@
         }
       ]
     }
+    ,{
+      "slug": "rc-professionale-liberi-professionisti-2025",
+      "title": "RC Professionale per Liberi Professionisti: Guida Completa 2025",
+      "excerpt": "Obbligatoria per molte categorie, essenziale per tutte. Scopri cos'è la RC professionale, chi deve averla, quanto costa e come sceglierla.",
+      "category": "Professionisti",
+      "date": "20 Marzo 2025",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Cos'è la RC Professionale e perché è diversa dalla RC ordinaria",
+          "body": "La Responsabilità Civile Professionale (RC Prof) tutela il professionista dai danni patrimoniali causati ai clienti nell'esercizio della propria attività. A differenza della RC ordinaria (che copre danni fisici a terzi), la RC professionale copre gli errori, le omissioni e i ritardi che causano una perdita economica al cliente. Ad esempio: un consulente che fornisce una strategia fiscale errata, un medico che sbaglia una diagnosi, un architetto con un errore progettuale."
+        },
+        {
+          "heading": "Chi è obbligato per legge ad averla",
+          "body": "In Italia la RC professionale è obbligatoria per legge per diverse categorie:",
+          "list": [
+            "Avvocati e praticanti avvocati (L. 247/2012)",
+            "Medici, odontoiatri e strutture sanitarie (L. 24/2017 — Legge Gelli-Bianco)",
+            "Ingegneri e architetti iscritti agli ordini (D.P.R. 137/2012)",
+            "Geometri, periti industriali e agronomi",
+            "Consulenti del lavoro e commercialisti (D.Lgs. 139/2005)",
+            "Agenti immobiliari (L. 39/1989)",
+            "Intermediari assicurativi (Regolamento IVASS)"
+          ]
+        },
+        {
+          "heading": "Perché anche chi non è obbligato dovrebbe stipularla",
+          "body": "Anche per i professionisti non soggetti a obbligo, la RC professionale è fortemente consigliata. Qualsiasi consulente, formatore, coach, IT specialist o libero professionista può essere chiamato a rispondere di danni economici causati ai propri clienti. Un'unica richiesta di risarcimento non coperta può essere sufficiente a mettere in crisi l'attività — o il patrimonio personale."
+        },
+        {
+          "heading": "Come funziona: massimali, franchigie e claims made",
+          "body": "I parametri principali da valutare in una polizza RC professionale sono:",
+          "list": [
+            "Massimale: l'importo massimo rimborsabile per sinistro o per anno. Per un professionista con clienti importanti, non scendere sotto i 500.000 euro",
+            "Franchigia: la quota di danno che rimane a carico del professionista. Una franchigia bassa aumenta il premio ma riduce l'esposizione",
+            "Retroattività: molte polizze coprono anche danni derivanti da prestazioni svolte prima della stipula (importante: verificare sempre)",
+            "Claims made: la maggior parte delle polizze RC prof copre i sinistri denunciati durante il periodo di validità, non quando si è verificato il fatto"
+          ]
+        },
+        {
+          "heading": "Quanto costa e da cosa dipende il premio",
+          "body": "Il costo di una polizza RC professionale varia in base a: categoria professionale, volume di fatturato, numero di clienti, tipo di prestazioni erogate e massimale richiesto. In media i premi per liberi professionisti in Italia si collocano tra 300 e 2.500 euro/anno. Un medico specialista o un avvocato con clientela strutturata può avere premi più elevati. Con FIM è possibile confrontare le proposte di 15+ compagnie per trovare la copertura adeguata al costo più competitivo."
+        }
+      ]
+    },
+    {
+      "slug": "polizze-obbligatorie-aziende-italia-2025",
+      "title": "Polizze Assicurative Obbligatorie per le Aziende in Italia: Guida 2025",
+      "excerpt": "Quali assicurazioni sono obbligatorie per legge per la tua impresa? Una guida chiara e aggiornata su RC Auto flotte, infortuni, catastrofi naturali e molto altro.",
+      "category": "Aziendale",
+      "date": "10 Marzo 2025",
+      "readTime": "8 min",
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Il quadro normativo: cosa impone la legge italiana",
+          "body": "Le imprese italiane sono soggette a diversi obblighi assicurativi introdotti da normative specifiche. Il mancato rispetto espone a sanzioni amministrative, blocco dell'attività e responsabilità personale dell'amministratore. Conoscere gli obblighi è il primo passo per costruire un programma assicurativo compliant ed efficiente."
+        },
+        {
+          "heading": "RC Auto e flotta aziendale (obbligatoria)",
+          "body": "Ogni veicolo aziendale che circola su strada pubblica deve avere la RC Auto. Per le aziende con più veicoli, la polizza flotta consente di assicurarli tutti con un unico contratto a condizioni più vantaggiose. L'uso di un veicolo aziendale senza copertura RC è reato, con sanzioni che vanno da 866 a 3.464 euro e fermo del mezzo."
+        },
+        {
+          "heading": "Infortuni e malattie professionali INAIL (obbligatoria)",
+          "body": "Tutte le aziende con lavoratori dipendenti o assimilati devono assicurarsi obbligatoriamente contro gli infortuni sul lavoro e le malattie professionali tramite INAIL. L'obbligo vale anche per alcune categorie di lavoratori autonomi e per collaboratori parasubordinati. Il premio INAIL è calcolato in base al settore di attività (voce di tariffa) e alla retribuzione dei dipendenti."
+        },
+        {
+          "heading": "Polizza catastrofale per le imprese (obbligatoria dal 2025)",
+          "body": "Dal 1° gennaio 2025, il Decreto Legge 155/2024 rende obbligatoria per tutte le imprese italiane con sede in Italia (con alcuni requisiti dimensionali) la stipula di polizze contro i rischi catastrofali. La copertura deve includere:",
+          "list": [
+            "Terremoti",
+            "Alluvioni e inondazioni",
+            "Frane e smottamenti",
+            "Esondazioni",
+            "Altri eventi catastrofali di origine naturale"
+          ]
+        },
+        {
+          "heading": "RC Professionale (obbligatoria per specifiche categorie)",
+          "body": "Come descritto nella guida dedicata, la RC professionale è obbligatoria per legge per numerose categorie di professionisti e imprese di servizi. Tra cui: studi medici e strutture sanitarie, studi legali, studi di ingegneria e architettura, agenzie immobiliari, mediatori creditizi, intermediari assicurativi."
+        },
+        {
+          "heading": "Polizze consigliate ma non obbligatorie",
+          "body": "Al di là degli obblighi di legge, alcune coperture sono quasi imprescindibili per qualsiasi impresa:",
+          "list": [
+            "RC Impresa: copre i danni causati a terzi nell'esercizio dell'attività, non già coperti da specifiche polizze RC",
+            "All Risk Aziendale: protegge sede, macchinari e merci da tutti i rischi fisici",
+            "D&O (Directors & Officers): protegge gli amministratori da responsabilità personali",
+            "Cyber Risk: sempre più essenziale con l'aumento degli attacchi informatici",
+            "Business Interruption: copre la perdita di fatturato in caso di fermo operativo"
+          ]
+        },
+        {
+          "heading": "Come costruire un programma assicurativo efficiente",
+          "body": "Il programma assicurativo aziendale ottimale non si costruisce polizza per polizza, ma partendo da un'analisi dei rischi specifici dell'impresa. FIM offre un'analisi gratuita del profilo di rischio aziendale, verificando gli obblighi di legge applicabili e identificando le coperture raccomandate. Il tutto confrontando le proposte delle principali compagnie per massimizzare la protezione al costo più contenuto."
+        }
+      ]
+    },
+    {
+      "slug": "assicurazioni-pmi-guida-completa",
+      "title": "Assicurazioni per PMI: Quali Coperture Servono Davvero alla Tua Azienda",
+      "excerpt": "Guida pratica per imprenditori e artigiani: dalle polizze obbligatorie a quelle consigliate, con una stima dei costi e i criteri per scegliere bene.",
+      "category": "Aziendale",
+      "date": "1 Marzo 2025",
+      "readTime": "9 min",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Le sfide assicurative specifiche delle PMI italiane",
+          "body": "Le piccole e medie imprese italiane rappresentano il 99,9% del tessuto produttivo nazionale. Eppure, secondo le stime ANIA, oltre il 60% delle PMI risulta sottoassicurata o ha coperture non adeguate ai rischi reali. Le ragioni sono molteplici: budget limitati, mancanza di un risk manager interno, difficoltà a orientarsi in un mercato complesso. Questa guida vuole essere un punto di partenza concreto."
+        },
+        {
+          "heading": "Il punto di partenza: la mappa dei rischi",
+          "body": "Prima di acquistare qualsiasi polizza, è utile fare una mappa dei rischi della propria azienda. Le categorie principali sono:",
+          "list": [
+            "Rischi sui beni (incendio, furto, danni accidentali a sede e attrezzature)",
+            "Rischi sulla responsabilità civile (danni a clienti, fornitori, terzi)",
+            "Rischi sul personale (infortuni, malattie, assenza prolungata di figure chiave)",
+            "Rischi finanziari (perdita di fatturato, insolvenze di clienti importanti)",
+            "Rischi informatici (attacchi ransomware, data breach, blocco dei sistemi)",
+            "Rischi legali e normativi (contenzioso con dipendenti, clienti, autorità)"
+          ]
+        },
+        {
+          "heading": "Le 5 coperture fondamentali per una PMI",
+          "body": "Partendo dalla mappa dei rischi, queste sono le 5 polizze che quasi ogni PMI dovrebbe avere:",
+          "list": [
+            "RC Impresa: copre i danni causati a terzi nell'esercizio dell'attività. Il massimale minimo consigliato per una PMI con clientela B2B è 1 milione di euro",
+            "All Risk Aziendale (Property): sede, macchinari, scorte e attrezzature assicurati contro tutti i rischi fisici",
+            "Infortuni dipendenti (integrativa INAIL): una polizza integrativa all'INAIL obbligatorio aumenta significativamente la tutela dei lavoratori",
+            "Business Interruption: spesso sottovalutata, copre la perdita di margine in caso di fermo operativo (incendio, guasto grave, evento catastrofale)",
+            "Polizza catastrofale: diventata obbligatoria per le imprese dal 2025 — copre terremoti, alluvioni e frane"
+          ]
+        },
+        {
+          "heading": "Coperture avanzate per PMI in crescita",
+          "body": "Man mano che l'azienda cresce, alcune coperture diventano sempre più rilevanti:",
+          "list": [
+            "Cyber Risk: fondamentale per PMI che gestiscono dati di clienti o che dipendono fortemente da sistemi IT",
+            "D&O (Directors & Officers): protegge i soci e gli amministratori da responsabilità personali derivanti da decisioni gestionali",
+            "Tutela Legale Aziendale: copre le spese legali per contenziosi con dipendenti, fornitori, clienti o autorità",
+            "Flotta Aziendale: polizza unica per tutti i veicoli, più conveniente della gestione singola"
+          ]
+        },
+        {
+          "heading": "Quanto spende mediamente una PMI per le assicurazioni",
+          "body": "Il budget assicurativo di una PMI dipende molto dal settore, dal fatturato e dai beni da tutelare. A titolo orientativo:",
+          "list": [
+            "PMI artigiana (5-10 dipendenti, capannone 500 mq): 3.000 – 7.000 €/anno",
+            "Studio professionale (10-20 persone, attività consulenziale): 2.000 – 5.000 €/anno",
+            "PMI commerciale (20-50 dipendenti, magazzino): 5.000 – 15.000 €/anno",
+            "PMI tecnologica/IT (15-30 persone, dati clienti): 4.000 – 12.000 €/anno"
+          ]
+        },
+        {
+          "heading": "Come ottimizzare il budget assicurativo",
+          "body": "Affidarsi a un broker indipendente come FIM permette di ottenere coperture adeguate al costo più competitivo, confrontando le proposte di 30+ compagnie. In media le PMI che si rivolgono a FIM ottengono un risparmio del 20-30% rispetto alle polizze precedenti, con coperture uguali o migliori. La consulenza iniziale è sempre gratuita e senza impegno."
+        }
+      ]
+    }
   ]
 }

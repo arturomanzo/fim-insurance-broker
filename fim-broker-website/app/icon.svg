@@ -1,14 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f2d6b"/>
+    <linearGradient id="sg" x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#091c4a"/>
+      <stop offset="50%"  stop-color="#0b4a7a"/>
       <stop offset="100%" stop-color="#00b4c8"/>
     </linearGradient>
+    <linearGradient id="ag" x1="55" y1="30" x2="93" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#00b4c8"/>
+      <stop offset="100%" stop-color="#40e4f8"/>
+    </linearGradient>
   </defs>
-  <!-- Shield -->
-  <path d="M50 5 L90 22 L90 52 C90 74 72 88 50 95 C28 88 10 74 10 52 L10 22 Z" fill="url(#g)"/>
-  <!-- F shape -->
-  <path d="M32 28 L70 28 L62 37 L44 37 L44 47 L60 47 L53 55 L44 55 L44 72 L33 72 L33 28 Z" fill="white" opacity="0.95"/>
-  <!-- Arrow tip -->
-  <path d="M64 20 L82 38 L73 38 L73 27 L62 27 Z" fill="#33c7d8" opacity="0.9"/>
+  <!-- Scudo -->
+  <path d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z" fill="url(#sg)"/>
+  <!-- F profondità -->
+  <path d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z" fill="white" opacity="0.2" transform="translate(5,4)"/>
+  <!-- F principale -->
+  <path d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z" fill="white"/>
+  <!-- Freccia testa -->
+  <polygon points="66,1 93,1 93,28" fill="url(#ag)"/>
+  <!-- Freccia asta -->
+  <polygon points="50,28 59,18 84,5 75,15" fill="url(#ag)"/>
 </svg>
