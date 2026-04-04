@@ -20,7 +20,7 @@ const team = [
     role: 'CEO & Fondatore',
     bio: 'Fondatore di FIM nel 2004, Arturo guida l\'azienda con oltre 20 anni di esperienza nel brokeraggio assicurativo. Specializzato in polizze aziendali complesse e risk management per PMI.',
     specializations: ['Polizze Aziendali', 'Risk Management', 'D&O'],
-    photo: '/images/team/arturo-manzo.jpg',
+    photo: '/images/team/arturomanzo.jpg',
   },
   {
     name: 'Giulia Romano',
