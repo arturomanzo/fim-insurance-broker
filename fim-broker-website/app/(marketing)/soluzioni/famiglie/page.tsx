@@ -275,6 +275,9 @@ export default function FamigliePage() {
                 </div>
                 <p className="text-xs text-gray-500 mt-1">ca. 52€/mese per proteggere l&apos;intera famiglia</p>
               </div>
+              <p className="text-xs text-gray-400 mb-4">
+                * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al profilo del cliente, alla storia assicurativa, ai massimali scelti e alle condizioni di polizza. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
+              </p>
               <Link href="/preventivo" className="btn-primary w-full text-center block">
                 Richiedi il tuo preventivo
               </Link>

@@ -211,7 +211,7 @@ export default function CondominiPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono orientativi per condomini medio-piccoli (10-20 unità). Il premio dipende dal numero di unità, dai valori a rischio e dalla zona geografica.
+            * I prezzi indicati sono puramente orientativi per condomini medio-piccoli (10-20 unità) e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al numero di unità, ai valori a rischio e alla zona geografica. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
           </p>
         </div>
       </section>

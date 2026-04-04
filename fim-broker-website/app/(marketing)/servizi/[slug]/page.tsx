@@ -115,6 +115,9 @@ export default async function ServizioPage({ params }: Props) {
                   <p className="text-white/60 text-xs uppercase tracking-wider font-semibold mb-1">Costo indicativo</p>
                   <p className="text-accent text-2xl font-black">{service.priceFrom}</p>
                   <p className="text-white/60 text-xs mt-1 leading-snug">{service.priceNote}</p>
+                  <p className="text-white/40 text-xs mt-2 leading-snug">
+                    Prezzo puramente orientativo. Non costituisce offerta contrattuale ai sensi del D.Lgs. 209/2005. Premio effettivo determinato dalla compagnia in base al profilo del cliente. FIM opera come intermediario iscritto al RUI IVASS.
+                  </p>
                 </div>
                 <p className="text-white/80 text-sm mb-5">
                   Ricevi un preventivo personalizzato entro 24 ore. Consulenza gratuita, nessun impegno.
