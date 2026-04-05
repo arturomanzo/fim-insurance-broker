@@ -10,7 +10,6 @@ const RiskCalculator = dynamic(() => import('@/components/calculator/RiskCalcula
       </div>
     </div>
   ),
-  ssr: false,
 })
 
 const faqJsonLd = {
