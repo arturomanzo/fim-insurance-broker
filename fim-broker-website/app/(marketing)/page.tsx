@@ -41,7 +41,7 @@ const testimonials = [
   },
   {
     name: 'Laura Ferretti',
-    role: 'Privato — Milano',
+    role: 'Privato — Roma',
     initials: 'LF',
     color: 'bg-rose-100 text-rose-700',
     text: 'Finalmente un broker che spiega tutto in modo chiaro. Ho assicurato casa e auto con FIM e sono molto soddisfatta del servizio.',
@@ -53,6 +53,14 @@ const testimonials = [
     initials: 'SL',
     color: 'bg-green-100 text-green-700',
     text: 'Gestiamo tutte le polizze dello studio con FIM da 5 anni. Sempre disponibili, sempre professionali. Altamente raccomandati.',
+    rating: 5,
+  },
+  {
+    name: 'Famiglia Rossi',
+    role: 'Famiglia — Latina',
+    initials: 'FR',
+    color: 'bg-amber-100 text-amber-700',
+    text: 'Avevamo un sinistro complicato e FIM ci ha seguiti passo per passo fino alla liquidazione. Senza di loro non avremmo saputo come muoverci.',
     rating: 5,
   },
 ]
@@ -230,50 +238,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Calculator CTA Banner */}
+      {/* Tools CTA Banner */}
       <section className="py-14 bg-white">
         <div className="container-custom">
-          <div className="relative rounded-3xl overflow-hidden gradient-primary p-8 md:p-12">
-            {/* Decorative circles */}
-            <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5" />
-            <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-accent/10" />
-            <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12">
-              <div className="flex-1 text-center md:text-left">
-                <span className="inline-block bg-accent/20 text-accent-light text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-                  Strumento gratuito
-                </span>
-                <h2 className="text-2xl md:text-3xl font-black text-white mb-3">
-                  Non sai da dove iniziare?
-                </h2>
-                <p className="text-white/80 text-lg mb-2">
-                  Usa il nostro <strong className="text-white">Calcolatore del Rischio</strong> — 2 minuti, nessun impegno.
-                </p>
-                <ul className="space-y-1.5 text-white/70 text-sm">
-                  {[
-                    'Scopri il tuo profilo di rischio assicurativo',
-                    'Ricevi le coperture raccomandate per la tua situazione',
-                    'Ottieni una stima del costo annuo',
-                  ].map((item) => (
-                    <li key={item} className="flex items-center gap-2">
-                      <svg className="w-4 h-4 text-accent-light flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+          <div className="text-center mb-6">
+            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full">
+              Strumenti gratuiti
+            </span>
+            <h2 className="text-2xl md:text-3xl font-black text-primary mt-3 mb-1">Non sai da dove iniziare?</h2>
+            <p className="text-gray-600">Prova uno dei nostri strumenti gratuiti — nessun impegno, risposta immediata.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Quiz */}
+            <div className="relative rounded-3xl overflow-hidden gradient-primary p-8">
+              <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/5" />
+              <div className="relative">
+                <div className="w-16 h-16 bg-white/15 rounded-2xl flex items-center justify-center text-4xl mb-4">❓</div>
+                <h3 className="text-xl font-black text-white mb-2">Quiz: che polizza ti serve?</h3>
+                <p className="text-white/70 text-sm mb-4 leading-relaxed">4 domande per scoprire le coperture su misura per il tuo profilo.</p>
+                <Link
+                  href="/quiz-polizza"
+                  className="inline-block bg-accent hover:bg-accent-dark text-primary font-bold px-6 py-3 rounded-xl transition-colors text-sm"
+                >
+                  Inizia il quiz →
+                </Link>
+                <p className="text-white/40 text-xs mt-3">1 minuto · Gratuito · Senza dati personali</p>
               </div>
-              <div className="flex flex-col items-center gap-3 flex-shrink-0">
-                <div className="w-24 h-24 bg-white/10 rounded-3xl flex items-center justify-center text-5xl">
-                  📊
-                </div>
+            </div>
+            {/* Calcolatore */}
+            <div className="relative rounded-3xl overflow-hidden bg-gray-900 p-8">
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-accent/10" />
+              <div className="relative">
+                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-4xl mb-4">📊</div>
+                <h3 className="text-xl font-black text-white mb-2">Calcolatore del Rischio</h3>
+                <p className="text-white/70 text-sm mb-4 leading-relaxed">Analisi approfondita con punteggio di rischio e stima del costo annuo.</p>
                 <Link
                   href="/calcolatore-rischi"
-                  className="btn-primary bg-accent hover:bg-accent-dark text-white px-8 py-4 text-base font-bold shadow-lg"
+                  className="inline-block bg-white text-primary hover:bg-gray-100 font-bold px-6 py-3 rounded-xl transition-colors text-sm"
                 >
                   Calcola il mio rischio →
                 </Link>
-                <span className="text-white/50 text-xs">Gratuito · Nessun impegno · 2 minuti</span>
+                <p className="text-white/40 text-xs mt-3">2 minuti · Gratuito · Analisi personalizzata</p>
               </div>
             </div>
           </div>
@@ -335,7 +340,7 @@ export default function HomePage() {
               <span className="text-sm text-gray-500">su Google Reviews</span>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {testimonials.map((t) => (
               <Card key={t.name} className="relative flex flex-col">
                 {/* Google badge */}
@@ -367,6 +372,18 @@ export default function HomePage() {
                 </div>
               </Card>
             ))}
+          </div>
+          {/* CTA lascia recensione */}
+          <div className="text-center mt-10">
+            <Link
+              href="/lascia-recensione"
+              className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-primary border border-gray-200 hover:border-primary/30 px-5 py-2.5 rounded-full transition-all"
+            >
+              <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              Sei già cliente FIM? Lascia la tua recensione
+            </Link>
           </div>
         </div>
       </section>

@@ -47,6 +47,18 @@ function getSuggestedQuestions(path: string): string[] {
     "Come funziona la copertura alluvione?",
     "Quanto costa assicurarsi contro le calamità?",
   ]
+  if (path.includes('sinistri')) return [
+    "Come denuncio un sinistro?",
+    "Quanto tempo ho per segnalare il sinistro?",
+    "La compagnia mi ha rifiutato il rimborso, cosa faccio?",
+    "Il servizio sinistri ha un costo?",
+  ]
+  if (path.includes('quiz')) return [
+    "Come funziona il quiz?",
+    "Il risultato è vincolante?",
+    "Posso avere un preventivo dopo il quiz?",
+    "Cosa succede se non so rispondere?",
+  ]
   if (path.includes('calcolatore')) return [
     "Come interpreto il mio punteggio di rischio?",
     "Quali coperture mi consiglia?",
