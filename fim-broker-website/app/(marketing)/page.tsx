@@ -8,7 +8,9 @@ import Link from 'next/link'
 import Card from '@/components/ui/Card'
 
 export const metadata: Metadata = {
-  title: 'FIM Insurance Broker | Soluzioni Assicurative Personalizzate per Privati e Aziende',
+  title: {
+    absolute: 'FIM Insurance Broker | Soluzioni Assicurative Personalizzate per Privati e Aziende',
+  },
   description:
     'Broker assicurativo indipendente a Roma e nel Lazio. Confrontiamo le offerte di 30+ compagnie per trovare la polizza giusta per te: auto, casa, vita, salute, azienda. Preventivo gratuito in 24 ore.',
   openGraph: {
