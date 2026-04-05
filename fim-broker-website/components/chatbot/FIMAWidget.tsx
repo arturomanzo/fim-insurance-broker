@@ -8,18 +8,67 @@ interface Message {
   content: string
 }
 
-const SUGGESTED_QUESTIONS = [
+const DEFAULT_QUESTIONS = [
   "Non so da dove iniziare, aiutami",
   "Quali coperture servono alla mia azienda?",
   "Come funziona la RC Professionale?",
   "Posso fare un preventivo online?",
 ]
 
+// Domande contestuali in base alla pagina visitata
+function getSuggestedQuestions(path: string): string[] {
+  if (path.includes('professionisti')) return [
+    "Cos'è la RC Professionale?",
+    "Ho bisogno di RC professionale?",
+    "Quanto costa una polizza professionale?",
+    "Copre anche i danni ai clienti?",
+  ]
+  if (path.includes('famiglie')) return [
+    "Come proteggo la mia famiglia?",
+    "Cosa copre l'assicurazione casa?",
+    "Conviene la polizza vita?",
+    "Posso assicurare auto e casa insieme?",
+  ]
+  if (path.includes('artigiani') || path.includes('pmi')) return [
+    "Quali polizze servono alla mia impresa?",
+    "Cos'è la RC prodotti?",
+    "Come mi tutelo dai danni a terzi?",
+    "Ho dipendenti, cosa devo assicurare?",
+  ]
+  if (path.includes('condomini')) return [
+    "Cosa copre la polizza condominio?",
+    "È obbligatoria l'assicurazione condominio?",
+    "Chi paga i danni nelle parti comuni?",
+    "Come faccio un preventivo per il mio condominio?",
+  ]
+  if (path.includes('catastrofi')) return [
+    "Cosa copre una polizza catastrofi naturali?",
+    "Il terremoto è coperto dalla mia polizza casa?",
+    "Come funziona la copertura alluvione?",
+    "Quanto costa assicurarsi contro le calamità?",
+  ]
+  if (path.includes('calcolatore')) return [
+    "Come interpreto il mio punteggio di rischio?",
+    "Quali coperture mi consiglia?",
+    "Posso avere un preventivo personalizzato?",
+    "Cosa significa 'rischio elevato'?",
+  ]
+  if (path.includes('preventivo')) return [
+    "Come funziona la richiesta preventivo?",
+    "Quanto tempo ci vuole per una risposta?",
+    "Il preventivo è gratuito?",
+    "Posso preventivare più polizze insieme?",
+  ]
+  return DEFAULT_QUESTIONS
+}
+
 const PROACTIVE_DELAY_MS = 45_000 // 45 seconds
 const PROACTIVE_SESSION_KEY = 'fima_proactive_shown'
 
 export default function FIMAWidget() {
   const [isOpen, setIsOpen] = useState(false)
+  const [pageContext, setPageContext] = useState('')
+  const [suggestedQuestions, setSuggestedQuestions] = useState(DEFAULT_QUESTIONS)
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
@@ -44,6 +93,13 @@ export default function FIMAWidget() {
       setTimeout(() => inputRef.current?.focus(), 100)
     }
   }, [isOpen])
+
+  // Rileva la pagina corrente e aggiorna le domande suggerite
+  useEffect(() => {
+    const path = window.location.pathname
+    setPageContext(path)
+    setSuggestedQuestions(getSuggestedQuestions(path))
+  }, [])
 
   // Proactive trigger: auto-open after delay if not already opened this session
   useEffect(() => {
@@ -82,7 +138,7 @@ export default function FIMAWidget() {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMessage] }),
+        body: JSON.stringify({ messages: [...messages, userMessage], pageContext }),
       })
 
       if (!response.ok) throw new Error('Errore nella risposta')
@@ -211,7 +267,7 @@ export default function FIMAWidget() {
             <div className="px-4 pb-2 flex-shrink-0">
               <p className="text-xs text-gray-500 mb-2">Domande frequenti:</p>
               <div className="flex flex-wrap gap-1.5">
-                {SUGGESTED_QUESTIONS.map((q) => (
+                {suggestedQuestions.map((q) => (
                   <button
                     key={q}
                     onClick={() => sendMessage(q)}

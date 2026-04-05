@@ -5,7 +5,7 @@ import { rateLimit } from '@/lib/rateLimit'
 export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
-  const { ok, retryAfter } = rateLimit(req, { limit: 20, windowMs: 60_000 })
+  const { ok, retryAfter } = rateLimit(req, { limit: 40, windowMs: 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppe richieste. Attendi qualche secondo e riprova.' },
@@ -15,33 +15,38 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json()
-    const { messages } = body
+    const { messages, pageContext } = body
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json({ error: 'Messaggi non validi' }, { status: 400 })
     }
 
-    // Sanitize messages: only keep role and content, cap history at 20 turns
+    // Sanitize messages: only keep role and content, cap history at 30 turns
     const sanitizedMessages = messages
       .filter((m: { role: string; content: string }) =>
         m.role === 'user' || m.role === 'assistant'
       )
-      .slice(-20)
+      .slice(-30)
       .map((m: { role: 'user' | 'assistant'; content: string }) => ({
         role: m.role,
-        content: String(m.content).slice(0, 4000), // limit content length
+        content: String(m.content).slice(0, 4000),
       }))
 
     if (sanitizedMessages.length === 0) {
       return NextResponse.json({ error: 'Nessun messaggio valido' }, { status: 400 })
     }
 
+    // Sanitize page context
+    const sanitizedPageContext = pageContext
+      ? String(pageContext).slice(0, 100).replace(/[^a-z0-9\-\/]/gi, '')
+      : undefined
+
     // Create streaming response
     const encoder = new TextEncoder()
     const stream = new ReadableStream({
       async start(controller) {
         try {
-          const anthropicStream = await createFIMAStream(sanitizedMessages)
+          const anthropicStream = await createFIMAStream(sanitizedMessages, sanitizedPageContext)
 
           for await (const chunk of anthropicStream) {
             if (

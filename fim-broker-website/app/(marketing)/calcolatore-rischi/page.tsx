@@ -1,5 +1,17 @@
 import type { Metadata } from 'next'
-import RiskCalculator from '@/components/calculator/RiskCalculator'
+import dynamic from 'next/dynamic'
+
+const RiskCalculator = dynamic(() => import('@/components/calculator/RiskCalculator'), {
+  loading: () => (
+    <div className="flex items-center justify-center py-24">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+        <p className="text-gray-500 text-sm">Caricamento calcolatore...</p>
+      </div>
+    </div>
+  ),
+  ssr: false,
+})
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
