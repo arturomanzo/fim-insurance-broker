@@ -39,14 +39,28 @@ export const services: Service[] = [
     ],
     faq: [
       {
-        question: "Cosa include la RC Auto obbligatoria?",
-        answer:
-          'La RC Auto copre i danni causati a terzi (persone e cose) in caso di incidente. Non copre i danni al tuo veicolo.',
+        question: 'Cosa include la RC Auto obbligatoria?',
+        answer: 'La RC Auto copre i danni causati a terzi (persone e cose) in caso di incidente. Non copre i danni al tuo veicolo: per quello servono garanzie accessorie come la Kasko o la copertura eventi naturali.',
       },
       {
-        question: 'Cosa è la polizza Kasko?',
-        answer:
-          'La Kasko copre i danni al tuo veicolo indipendentemente da chi ha causato il sinistro, inclusi incidenti colpa tua, grandine e altri eventi.',
+        question: 'Cosa è la polizza Kasko e quando conviene?',
+        answer: 'La Kasko copre i danni al tuo veicolo indipendentemente da chi ha causato il sinistro: incidenti colpa tua, grandine, atti vandalici e danni in sosta. Conviene su auto nuove o di valore superiore a 15.000€, o se percorri molti km/anno.',
+      },
+      {
+        question: 'Posso cambiare assicurazione auto a metà anno?',
+        answer: 'Sì. Dopo il primo anno puoi disdire la polizza con 15 giorni di preavviso rispetto alla scadenza oppure aspettare la scadenza annuale. In alcuni casi la legge ti consente il recesso anticipato (es. vendita del veicolo, sinistro con liquidazione parziale).',
+      },
+      {
+        question: 'Come funziona la classe di merito bonus/malus?',
+        answer: 'La classe di merito va dalla 1 (la migliore) alla 18 (la peggiore). Ogni anno senza sinistri sali di una classe e paghi meno. Ogni sinistro con colpa retrocedi di 2 classi. FIM analizza la tua attestazione di rischio per trovare la compagnia più conveniente per il tuo profilo.',
+      },
+      {
+        question: 'La mia polizza auto copre anche la grandine e gli eventi atmosferici?',
+        answer: 'Dipende dalla polizza. La RC Auto base non copre gli eventi atmosferici. Servono garanzie specifiche: "Kasko eventi naturali" o "Furto e incendio con eventi atmosferici". Verifica le condizioni della tua polizza attuale o contattaci per un\'analisi gratuita.',
+      },
+      {
+        question: 'Cosa fare subito dopo un incidente stradale?',
+        answer: 'Compila e firma il Modulo CID (Constatazione Amichevole) con l\'altro conducente. Scatta foto ai danni e alla posizione dei veicoli. Entro 3 giorni denuncia il sinistro alla compagnia. Se ci sono feriti, chiama immediatamente il 118 e le forze dell\'ordine. Il nostro team sinistri ti affianca in ogni fase.',
       },
     ],
     priceFrom: 'da 250€/anno',
@@ -78,13 +92,27 @@ export const services: Service[] = [
     faq: [
       {
         question: 'Posso dedurre i premi vita dalle tasse?',
-        answer:
-          'Sì, i premi per polizze vita caso morte e invalidità permanente sono detraibili al 19% fino a 530€ annui.',
+        answer: 'Sì. I premi per polizze vita caso morte e invalidità permanente sono detraibili al 19% fino a 530€ annui (art. 15 TUIR). Le polizze previdenziali complementari sono invece deducibili dal reddito fino a 5.164,57€/anno.',
       },
       {
         question: "Cos'è una polizza unit-linked?",
-        answer:
-          'Una unit-linked collega il capitale assicurato alle performance di fondi di investimento, combinando protezione e potenziale di crescita.',
+        answer: 'Una unit-linked collega il capitale assicurato alle performance di fondi di investimento, combinando protezione assicurativa e potenziale di crescita finanziaria. Il capitale non è garantito ma offre maggiore rendimento potenziale rispetto alle polizze tradizionali a capitale garantito.',
+      },
+      {
+        question: 'Quanto capitale dovrei assicurare con una polizza vita?',
+        answer: 'La regola generale è 5-10 volte il reddito annuo netto, sufficienti a coprire il mutuo residuo, i costi di mantenimento della famiglia per 3-5 anni e le spese di istruzione dei figli. Un consulente FIM calcola con te il capitale necessario senza sovrastimare.',
+      },
+      {
+        question: "Cosa succede se smetto di pagare i premi della polizza vita?",
+        answer: 'Dipende dal tipo di polizza. Le temporanee caso morte cessano la copertura. Le polizze miste e le unit-linked possono essere messe "in riduzione" (si mantiene una copertura ridotta senza pagare premi) o riscattate (rimborso del valore accumulato, con possibili penali). Contattaci prima di sospendere i pagamenti.',
+      },
+      {
+        question: "La polizza vita è pignorabile o tassabile in caso di eredità?",
+        answer: 'No. Il capitale liquidato ai beneficiari di una polizza vita caso morte è esente dall\'imposta di successione (art. 12 D.Lgs. 346/1990) e non è pignorabile né sequestrabile (art. 1923 Codice Civile). È uno degli strumenti di protezione patrimoniale più efficaci.',
+      },
+      {
+        question: 'Come scelgo i beneficiari della polizza vita?',
+        answer: 'Puoi indicare chiunque: coniuge, figli, partner, terzi. I beneficiari non devono necessariamente essere gli eredi legali. Puoi cambiarli in qualsiasi momento, salvo che il beneficiario abbia già accettato per iscritto la designazione. Ti consigliamo di indicare anche un beneficiario secondario.',
       },
     ],
     priceFrom: 'da 15€/mese',
@@ -116,13 +144,27 @@ export const services: Service[] = [
     faq: [
       {
         question: 'La polizza casa copre anche il condominio?',
-        answer:
-          'Le polizze globale fabbricato coprono le parti comuni del condominio. Le polizze multirischio coprono invece appartamento e contenuto.',
+        answer: 'Le polizze globale fabbricato coprono le parti comuni del condominio (scale, tetto, facciata). Le polizze multirischio abitazione coprono invece il singolo appartamento e il contenuto. Per il condominio esiste una polizza dedicata che va stipulata dall\'amministratore.',
       },
       {
         question: 'Cosa si intende per RC del proprietario?',
-        answer:
-          "Copre i danni accidentali causati a terzi connessi alla proprietà o alla conduzione dell'abitazione.",
+        answer: 'Copre i danni accidentali causati a terzi connessi alla proprietà o alla conduzione dell\'abitazione: ad esempio una perdita d\'acqua che danneggia l\'appartamento del vicino, o una tegola che cade su un\'auto in sosta. È fortemente consigliata anche per gli inquilini (RC del conduttore).',
+      },
+      {
+        question: 'Sono in affitto: devo comunque assicurare la casa?',
+        answer: 'Il proprietario assicura il fabbricato. Come inquilino dovresti avere almeno la RC del conduttore (copre i danni che causi all\'immobile, es. incendio) e la copertura del contenuto (mobili, elettrodomestici, oggetti di valore). Alcune compagnie offrono polizze dedicate agli affittuari da 50-80€/anno.',
+      },
+      {
+        question: 'La polizza casa copre l\'alluvione e il terremoto?',
+        answer: 'Le polizze standard generalmente no: coprono incendio, furto e danni da acqua (rottura tubazioni). Per alluvione, esondazione e terremoto servono estensioni specifiche o una polizza catastrofi naturali. Dal 2025 questa copertura è obbligatoria per le imprese.',
+      },
+      {
+        question: 'Cosa si intende per "sottoassicurazione"?',
+        answer: 'Accade quando il valore assicurato è inferiore al valore reale dell\'immobile o del contenuto. In caso di sinistro, la compagnia rimborsa solo proporzionalmente (es. se hai assicurato il 50% del valore, ricevi solo il 50% del danno). FIM verifica che il tuo valore assicurato sia adeguato.',
+      },
+      {
+        question: 'Posso assicurare anche la casa vacanze o un immobile affittato?',
+        answer: 'Sì, anche seconde case, case vacanza, B&B e immobili affittati possono essere assicurati. Le tariffe variano in base all\'uso (abitazione principale vs secondaria) e alla presenza continua. Gli immobili in affitto possono avere coperture specifiche per il rischio inquilino.',
       },
     ],
     priceFrom: 'da 100€/anno',
@@ -154,13 +196,27 @@ export const services: Service[] = [
     faq: [
       {
         question: 'Posso assicurare anche i miei familiari?',
-        answer:
-          'Sì, offriamo polizze familiari che coprono il nucleo familiare con premi vantaggiosi rispetto alle polizze individuali.',
+        answer: 'Sì. Le polizze familiari coprono il nucleo convivente (coniuge/partner, figli) con premi vantaggiosi rispetto alle polizze individuali separate. Alcune compagnie estendono la copertura anche ai genitori conviventi o ai figli studenti fuori sede.',
       },
       {
         question: "Sono coperto anche all'estero?",
-        answer:
-          "Molte nostre polizze prevedono copertura internazionale, ideale per chi viaggia o vive periodi all'estero.",
+        answer: "Molte polizze salute prevedono copertura internazionale per cure urgenti all'estero. Per soggiorni lunghi o trasferimenti, esistono polizze internazionali dedicate. In Europa, la Tessera Europea di Assicurazione Malattia (TEAM) garantisce le cure urgenti nel pubblico, ma non i ricoveri programmati o le strutture private.",
+      },
+      {
+        question: "Cos'è il massimale e perché è importante?",
+        answer: 'Il massimale è il limite massimo che la compagnia rimborsa per sinistro o anno. Un massimale basso (es. 50.000€) può essere insufficiente in caso di ricovero in una clinica privata di alto livello o di cure oncologiche. FIM consiglia massimali da 500.000€ in su per una copertura realmente efficace.',
+      },
+      {
+        question: 'La polizza salute vale anche per le visite di prevenzione e i check-up?',
+        answer: 'Dipende dalla polizza. Le coperture base rimborsano solo spese a seguito di malattia o infortunio. Le polizze più complete includono anche visite preventive, screening oncologici, odontoiatria e fisioterapia. Ti aiutiamo a scegliere il livello di copertura più adatto al tuo profilo di salute.',
+      },
+      {
+        question: "Cosa succede se mi ammalo prima di stipulare la polizza (malattia preesistente)?",
+        answer: 'Le malattie preesistenti alla stipula sono generalmente escluse dalla copertura, o richiedono una dichiarazione nel questionario sanitario. Alcune compagnie le escludono definitivamente, altre le includono dopo un periodo di carenza (solitamente 1-2 anni). È fondamentale compilare il questionario con accuratezza per evitare problemi in caso di sinistro.',
+      },
+      {
+        question: 'Come funziona il rimborso delle spese mediche?',
+        answer: 'Ci sono due modalità: rimborso diretto (vai dal medico/clinica convenzionata, la compagnia paga direttamente) oppure rimborso a piè di lista (paghi tu e poi presenti le ricevute alla compagnia). Alcune polizze prevedono una franchigia (quota a tuo carico) e un limite percentuale di rimborso (es. 80% delle spese).',
       },
     ],
     priceFrom: 'da 25€/mese',
@@ -191,14 +247,28 @@ export const services: Service[] = [
     ],
     faq: [
       {
-        question: "Cos'è la RC professionale?",
-        answer:
-          "Copre i danni causati ai clienti nell'esercizio dell'attività professionale, tutelandoti da richieste di risarcimento per errori o omissioni.",
+        question: "Cos'è la RC professionale e chi è obbligato ad averla?",
+        answer: "Copre i danni causati ai clienti nell'esercizio dell'attività professionale per errori, omissioni o negligenze. È obbligatoria per legge per: medici, avvocati, ingegneri, architetti, notai, revisori contabili, agenti immobiliari, intermediari assicurativi e altre categorie regolamentate. Anche se non obbligatoria, è fortemente consigliata per qualsiasi professionista.",
       },
       {
         question: "Perché un'azienda ha bisogno della cyber risk?",
-        answer:
-          'Copre i costi conseguenti a violazioni di dati, attacchi informatici, interruzioni di business e sanzioni per violazioni del GDPR.',
+        answer: 'La cyber risk copre i costi conseguenti a: violazioni di dati personali (data breach), attacchi ransomware con blocco dei sistemi, interruzione dell\'attività digitale, sanzioni GDPR, spese legali e di notifica agli interessati. Con l\'aumento degli attacchi informatici alle PMI (+65% nel 2024), è diventata una copertura essenziale.',
+      },
+      {
+        question: "Cos'è la polizza D&O (Directors & Officers)?",
+        answer: 'La D&O protegge gli amministratori e i dirigenti di una società da richieste di risarcimento personali per decisioni prese nell\'esercizio del loro ruolo: errori di gestione, violazioni di normative, contenziosi con soci di minoranza. Senza questa polizza, gli amministratori rischiano il proprio patrimonio personale.',
+      },
+      {
+        question: "Cosa copre l'assicurazione infortuni dipendenti?",
+        answer: "Integra l'INAIL (che copre gli infortuni sul lavoro) con indennità aggiuntive: invalidità permanente, morte, diaria da ricovero, rimborso spese mediche. Alcune aziende la estendono anche agli infortuni extralavorativi come benefit ai dipendenti. Rientra spesso nei piani di welfare aziendale con vantaggi fiscali.",
+      },
+      {
+        question: "Dal 2025 le aziende sono obbligate ad assicurarsi contro le catastrofi naturali?",
+        answer: "Sì. La Legge di Bilancio 2024 (L. 213/2023) ha introdotto l'obbligo per tutte le imprese italiane di stipulare una polizza catastrofi naturali su immobili, terreni, impianti e macchinari iscritti in bilancio entro il 31 marzo 2025. FIM ha già assistito decine di aziende nell'adeguamento: contattaci subito se non sei in regola.",
+      },
+      {
+        question: "Come funziona il risk management per le PMI?",
+        answer: "Il risk management aziendale parte da un'analisi dei rischi specifici dell'attività (operativi, legali, finanziari, reputazionali), poi si costruisce un programma assicurativo che copra i rischi più critici nel modo più efficiente. FIM offre consulenza di risk assessment gratuita per le aziende clienti, con revisione annuale del programma.",
       },
     ],
     priceFrom: 'su preventivo',
@@ -230,13 +300,27 @@ export const services: Service[] = [
     faq: [
       {
         question: 'Posso stipulare la polizza dopo essere già partito?',
-        answer:
-          'No, la polizza viaggio deve essere stipulata prima della partenza per essere valida.',
+        answer: 'No. La polizza viaggio deve essere stipulata prima della partenza per essere valida. L\'acquisto last-minute è possibile fino alla mezzanotte del giorno prima della partenza. Se sei già all\'estero e non hai copertura, alcune compagnie offrono polizze "in viaggio" ma con limitazioni significative.',
       },
       {
         question: 'È obbligatoria la polizza viaggio?',
-        answer:
-          'Non è obbligatoria ma è fortemente consigliata, specialmente per viaggi extra-UE dove le spese mediche possono essere molto elevate.',
+        answer: 'Non è obbligatoria in generale, ma è richiesta obbligatoriamente per il visto Schengen (minimo 30.000€ di copertura medica). È fortemente consigliata per viaggi extra-UE, dove una sola notte in ospedale può costare migliaia di euro (USA: 5.000-15.000€/notte in media).',
+      },
+      {
+        question: 'La polizza viaggio copre anche la cancellazione per malattia?',
+        answer: 'Sì, se hai scelto la garanzia "Annullamento viaggio". Copre il rimborso delle spese non rimborsabili (voli, hotel, tour) se sei costretto ad annullare per malattia, infortunio, lutto o altre cause previste. È fondamentale per viaggi di valore superiore a 1.000€.',
+      },
+      {
+        question: 'La mia carta di credito include già una copertura viaggio?',
+        answer: 'Alcune carte di credito premium (Visa Platinum, Mastercard Gold, Amex) includono coperture viaggio di base. Tuttavia, spesso hanno massimali bassi, escludono attività sportive o avventura, e richiedono che il viaggio sia pagato con quella carta. Verifica le condizioni prima di partire: FIM può confrontare la copertura della tua carta con una polizza dedicata.',
+      },
+      {
+        question: 'Sono coperto per attività sportive e avventura?',
+        answer: 'Dipende dalla polizza. Le coperture standard escludono sport ad alto rischio (sci fuori pista, alpinismo, immersioni, moto d\'acqua). Esistono estensioni specifiche per sport invernali, trekking, immersioni e altre attività. Se pratichi sport durante il viaggio, comunicalo al momento della stipula.',
+      },
+      {
+        question: 'Come funziona il rimpatrio di emergenza?',
+        answer: 'In caso di ricovero grave o decesso all\'estero, la compagnia organizza e paga il rimpatrio sanitario (ambulanza aerea attrezzata) o il trasferimento della salma. Questo servizio può costare 10.000-50.000€ se non assicurato. È attivabile H24 chiamando la centrale operativa della compagnia, disponibile in più lingue.',
       },
     ],
     priceFrom: 'da 15€ a viaggio',

@@ -37,8 +37,22 @@ export default async function ServizioPage({ params }: Props) {
 
   const otherServices = services.filter((s) => s.slug !== service.slug).slice(0, 3)
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: service.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  }
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-20 text-white">
         <div className="container-custom">

@@ -20,7 +20,8 @@ const soluzioniLinks = [
   { href: '/sinistri', label: '🛡️ Gestione Sinistri' },
   { href: '/quiz-polizza', label: '❓ Quiz: che polizza ti serve?' },
   { href: '/calcolatore-rischi', label: '📊 Calcolatore del Rischio' },
-  { href: '/risorse/guida-pmi', label: '📋 Guida PMI 2025 (gratis)' },
+  { href: '/osservatorio-prezzi', label: '📈 Osservatorio Prezzi 2025' },
+  { href: '/glossario', label: '📖 Glossario Assicurativo' },
 ]
 
 const companyLinks = [
