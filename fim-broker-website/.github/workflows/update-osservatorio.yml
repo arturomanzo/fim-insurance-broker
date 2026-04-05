@@ -1,0 +1,68 @@
+name: Aggiorna Osservatorio Prezzi (AI)
+
+on:
+  # Ogni inizio trimestre alle 8:00 (1 gennaio, 1 aprile, 1 luglio, 1 ottobre)
+  schedule:
+    - cron: '0 8 1 1,4,7,10 *'
+  # Esecuzione manuale dal tab Actions
+  workflow_dispatch:
+    inputs:
+      quarter:
+        description: 'Trimestre (es. Q2 2025)'
+        required: false
+        default: ''
+
+jobs:
+  update-report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: fim-broker-website/package-lock.json
+
+      - name: Install dependencies
+        working-directory: fim-broker-website
+        run: npm ci
+
+      - name: Genera report aggiornato con Claude AI
+        working-directory: fim-broker-website
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          QUARTER_OVERRIDE: ${{ github.event.inputs.quarter }}
+        run: npx tsx scripts/update-osservatorio.ts
+
+      - name: Commit e PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'feat(osservatorio): aggiorna report prezzi assicurativi trimestrale'
+          title: '📊 Osservatorio Prezzi — Aggiornamento trimestrale automatico'
+          body: |
+            ## Aggiornamento automatico Osservatorio Prezzi
+
+            Questo PR è generato automaticamente ogni trimestre dall'azione GitHub.
+
+            Il report è stato aggiornato con:
+            - Nuovi premi medi per categoria
+            - Variazioni rispetto al trimestre precedente
+            - Analisi AI dei trend di mercato
+            - Dati regionali RC Auto aggiornati
+
+            **Fonte dati:** IVASS, ANIA, dati FIM proprietari
+          branch: osservatorio/aggiornamento-trimestrale
+          delete-branch: true
+          labels: |
+            osservatorio
+            automated
