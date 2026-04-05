@@ -11,7 +11,9 @@ const navLinks = [
   { href: '/chi-siamo', label: 'Chi Siamo' },
   { href: '/servizi', label: 'Servizi' },
   { href: '/soluzioni', label: 'Soluzioni' },
-  { href: '/calcolatore-rischi', label: 'Calcolatore', badge: 'Nuovo' },
+  { href: '/sinistri', label: 'Sinistri' },
+  { href: '/quiz-polizza', label: 'Quiz Polizza', badge: 'Nuovo' },
+  { href: '/calcolatore-rischi', label: 'Calcolatore' },
   { href: '/blog', label: 'Blog' },
   { href: '/contatti', label: 'Contatti' },
 ]
