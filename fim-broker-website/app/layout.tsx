@@ -27,6 +27,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
   },
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon', type: 'image/png', sizes: '192x192' },
+    ],
+    apple: [{ url: '/apple-icon', type: 'image/png', sizes: '180x180' }],
+    shortcut: '/icon',
+  },
   robots: {
     index: true,
     follow: true,
