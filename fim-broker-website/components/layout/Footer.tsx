@@ -17,9 +17,10 @@ const soluzioniLinks = [
   { href: '/soluzioni/professionisti', label: 'Per Professionisti' },
   { href: '/soluzioni/artigiani-pmi', label: 'Per Artigiani e PMI' },
   { href: '/soluzioni/catastrofi-naturali', label: 'Catastrofi Naturali' },
+  { href: '/sinistri', label: '🛡️ Gestione Sinistri' },
+  { href: '/quiz-polizza', label: '❓ Quiz: che polizza ti serve?' },
   { href: '/calcolatore-rischi', label: '📊 Calcolatore del Rischio' },
   { href: '/risorse/guida-pmi', label: '📋 Guida PMI 2025 (gratis)' },
-  { href: '/risorse/osservatorio-pmi', label: '📈 Osservatorio PMI 2025' },
 ]
 
 const companyLinks = [
