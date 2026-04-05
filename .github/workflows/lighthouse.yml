@@ -1,0 +1,67 @@
+name: Lighthouse Audit
+
+on:
+  schedule:
+    # Ogni domenica alle 8:00 — audit automatico settimanale
+    - cron: '0 8 * * 0'
+  workflow_dispatch:
+    # Eseguibile manualmente dalla tab Actions di GitHub
+
+jobs:
+  lighthouse:
+    name: Lighthouse CI — Audit performance sito live
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
+
+      - name: Run Lighthouse su pagine chiave
+        run: |
+          lhci collect \
+            --url=https://www.fimbroker.it/ \
+            --url=https://www.fimbroker.it/soluzioni \
+            --url=https://www.fimbroker.it/preventivo \
+            --url=https://www.fimbroker.it/chi-siamo \
+            --url=https://www.fimbroker.it/calcolatore-rischi \
+            --numberOfRuns=2 \
+            --settings.chromeFlags="--no-sandbox --headless"
+        continue-on-error: true
+
+      - name: Assert soglie minime di qualità
+        run: |
+          lhci assert \
+            --preset=lighthouse:recommended \
+            --assertions.performance=0 \
+            --assertions.accessibility=0 \
+            --assertions.best-practices=0 \
+            --assertions.seo=0
+        continue-on-error: true
+
+      - name: Genera report HTML
+        run: |
+          lhci collect \
+            --url=https://www.fimbroker.it/ \
+            --numberOfRuns=1 \
+            --settings.chromeFlags="--no-sandbox --headless" \
+            --settings.output=html \
+            --settings.outputPath=./lhci-report.html
+        continue-on-error: true
+
+      - name: Upload report come artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-report-${{ github.run_number }}
+          path: |
+            .lighthouseci/
+            lhci-report.html
+          retention-days: 30

@@ -51,3 +51,7 @@ jobs:
           FIM_FROM_EMAIL: 'FIM Insurance Broker <noreply@fimbroker.it>'
           NEXT_PUBLIC_BASE_URL: https://www.fimbroker.it
           NEXT_PUBLIC_WHATSAPP_NUMBER: '390212345678'
+
+      - name: Audit dipendenze (sicurezza)
+        run: npm audit --audit-level=high
+        continue-on-error: true
