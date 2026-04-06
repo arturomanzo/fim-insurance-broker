@@ -3,7 +3,31 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Badge from '@/components/ui/Badge'
 import Card from '@/components/ui/Card'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { getAllPosts, getPostBySlug } from '@/lib/blog'
+
+const BASE_URL = 'https://www.fimbroker.it'
+
+const ITALIAN_MONTHS: Record<string, string> = {
+  Gennaio: '01', Febbraio: '02', Marzo: '03', Aprile: '04',
+  Maggio: '05', Giugno: '06', Luglio: '07', Agosto: '08',
+  Settembre: '09', Ottobre: '10', Novembre: '11', Dicembre: '12',
+}
+
+function parseItalianDate(dateStr: string): string {
+  if (!dateStr) return new Date().toISOString()
+  try {
+    const parts = dateStr.trim().split(' ')
+    if (parts.length === 3) {
+      const [day, monthIt, year] = parts
+      const month = ITALIAN_MONTHS[monthIt]
+      if (month) return new Date(`${year}-${month}-${day.padStart(2, '0')}`).toISOString()
+    }
+    const d = new Date(dateStr)
+    if (!isNaN(d.getTime())) return d.toISOString()
+  } catch {}
+  return new Date().toISOString()
+}
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -50,8 +74,38 @@ export default async function BlogPostPage({ params }: Props) {
   const date = post?.date ?? ''
   const readTime = post?.readTime ?? '5 min'
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description: post?.excerpt ?? '',
+    image: post?.image ? [post.image] : [`${BASE_URL}/opengraph-image`],
+    datePublished: parseItalianDate(date),
+    dateModified: parseItalianDate(date),
+    author: {
+      '@type': 'Organization',
+      name: 'FIM Insurance Broker',
+      url: BASE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'FIM Insurance Broker',
+      logo: { '@type': 'ImageObject', url: `${BASE_URL}/icon.svg` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/blog/${slug}` },
+  }
+
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Blog', href: '/blog' },
+          { name: category, href: `/blog` },
+          { name: title, href: `/blog/${slug}` },
+        ]}
+      />
       {/* Hero */}
       <section className="gradient-primary py-16 text-white">
         <div className="container-custom">

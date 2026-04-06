@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 const InsuranceQuiz = dynamic(() => import('@/components/ui/InsuranceQuiz'), {
   loading: () => (
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
 export default function QuizPolizzaPage() {
   return (
     <div>
+      <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: 'Quiz Polizza', href: '/quiz-polizza' }]} />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-20">
         <div className="container-custom text-center">

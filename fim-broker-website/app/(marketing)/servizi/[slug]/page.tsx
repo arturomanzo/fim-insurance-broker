@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { services, getServiceBySlug } from '@/lib/services'
 import Card from '@/components/ui/Card'
 import FaqAccordion from '@/components/ui/FaqAccordion'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -52,6 +53,13 @@ export default async function ServizioPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Servizi', href: '/servizi' },
+          { name: service.title, href: `/servizi/${service.slug}` },
+        ]}
       />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-20 text-white">
@@ -143,6 +151,25 @@ export default async function ServizioPage({ params }: Props) {
                   📞 06 96883381
                 </a>
               </Card>
+
+              {/* Strumenti utili */}
+              <div className="bg-accent/5 border border-accent/20 rounded-2xl p-4">
+                <h3 className="font-bold text-primary mb-3 text-sm">🛠 Strumenti gratuiti</h3>
+                <div className="space-y-2">
+                  <Link href="/quiz-polizza" className="flex items-center gap-2 text-sm text-gray-700 hover:text-primary transition-colors">
+                    <span>❓</span> Quiz: che polizza ti serve?
+                  </Link>
+                  <Link href="/calcolatore-rischi" className="flex items-center gap-2 text-sm text-gray-700 hover:text-primary transition-colors">
+                    <span>📊</span> Calcolatore del rischio
+                  </Link>
+                  <Link href="/glossario" className="flex items-center gap-2 text-sm text-gray-700 hover:text-primary transition-colors">
+                    <span>📖</span> Glossario assicurativo
+                  </Link>
+                  <Link href="/sinistri" className="flex items-center gap-2 text-sm text-gray-700 hover:text-primary transition-colors">
+                    <span>🛡️</span> Gestione sinistri
+                  </Link>
+                </div>
+              </div>
 
               {/* Other services */}
               <div>

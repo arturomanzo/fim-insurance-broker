@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { reportData } from '@/lib/osservatorio-data'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = {
   title: 'Osservatorio Prezzi Assicurativi 2025 — Trend e Analisi del Mercato Italiano',
@@ -44,6 +45,7 @@ export default function OsservatorioPrezziPage() {
 
   return (
     <div>
+      <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: 'Osservatorio Prezzi', href: '/osservatorio-prezzi' }]} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = {
   title: 'Glossario Assicurativo — Tutti i Termini Spiegati in Modo Semplice',
@@ -262,6 +263,7 @@ const presentLetters = new Set(glossary.map((g) => g.letter))
 export default function GlossarioPage() {
   return (
     <div>
+      <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: 'Glossario Assicurativo', href: '/glossario' }]} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(glossarySchema) }}

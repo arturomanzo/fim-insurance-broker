@@ -68,7 +68,6 @@ type Result = {
 function getResult(answers: Answers): Result {
   const { profile, priority, concern, current } = answers
 
-  const isPrivato = profile === 'privato'
   const isProfessionista = profile === 'professionista'
   const isPMI = profile === 'pmi' || profile === 'grande-impresa'
 
