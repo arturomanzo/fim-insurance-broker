@@ -19,8 +19,8 @@ export default async function AdminSinistriPage() {
   const session = cookieStore.get(ADMIN_SESSION_COOKIE)
   if (!session?.value || !(await verifyAdminToken(session.value))) redirect('/admin/login')
 
-  const sinistri = getAllSinistri()
-  const stats = getSinistriStats()
+  const sinistri = await getAllSinistri()
+  const stats = await getSinistriStats()
 
   return (
     <AdminShell title="Sinistri">

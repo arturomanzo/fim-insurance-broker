@@ -15,7 +15,7 @@ export async function GET() {
   if (!(await checkAuth())) {
     return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
   }
-  return NextResponse.json(getAllSinistri())
+  return NextResponse.json(await getAllSinistri())
 }
 
 export async function PATCH(req: NextRequest) {
@@ -23,7 +23,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
   }
   const { id, stato } = await req.json() as { id: string; stato: SinistroRecord['stato'] }
-  const ok = updateSinistrStato(id, stato)
+  const ok = await updateSinistrStato(id, stato)
   if (!ok) return NextResponse.json({ error: 'Sinistro non trovato' }, { status: 404 })
   return NextResponse.json({ success: true })
 }

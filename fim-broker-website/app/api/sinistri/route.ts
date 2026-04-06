@@ -102,9 +102,9 @@ export async function POST(req: NextRequest) {
 
     const id = `SIN-${Date.now()}`
 
-    // Salva sinistro localmente nel gestionale
+    // Salva sinistro su Supabase (o fallback JSON locale)
     try {
-      saveSinistro({
+      await saveSinistro({
         id,
         nome, cognome, email, telefono,
         tipoSinistro, dataEvento,

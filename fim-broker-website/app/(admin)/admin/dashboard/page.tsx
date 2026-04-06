@@ -26,8 +26,8 @@ export default async function AdminDashboardPage() {
   if (!session?.value || !(await verifyAdminToken(session.value))) redirect('/admin/login')
 
   const stats = getDashboardStats()
-  const leadsStats = getLeadsStats()
-  const sinistriStats = getSinistriStats()
+  const leadsStats = await getLeadsStats()
+  const sinistriStats = await getSinistriStats()
   const allPolicies = getAllPolicies()
   const expiring = allPolicies
     .filter((p) => p.stato === 'in-scadenza')

@@ -19,8 +19,8 @@ export default async function AdminLeadsPage() {
   const session = cookieStore.get(ADMIN_SESSION_COOKIE)
   if (!session?.value || !(await verifyAdminToken(session.value))) redirect('/admin/login')
 
-  const leads = getAllLeads()
-  const stats = getLeadsStats()
+  const leads = await getAllLeads()
+  const stats = await getLeadsStats()
 
   return (
     <AdminShell title="Lead — Richieste Preventivo">

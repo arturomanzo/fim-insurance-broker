@@ -335,9 +335,9 @@ export async function POST(req: NextRequest) {
     // Follow-up schedulato a 72 ore
     const followUpAt = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
 
-    // Salva lead localmente nel gestionale
+    // Salva lead su Supabase (o fallback JSON locale)
     try {
-      saveLead({ id: preventivoData.id, nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined, timestamp: preventivoData.timestamp })
+      await saveLead({ id: preventivoData.id, nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined, timestamp: preventivoData.timestamp })
     } catch { /* non blocca */ }
 
     // Sincronizza lead nel gestionale esterno (fire-and-forget)
