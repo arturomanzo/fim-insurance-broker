@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import SinistriForm from '@/components/forms/SinistriForm'
 
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
@@ -203,6 +204,17 @@ export default function SinistriPage() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Form apertura sinistro */}
+      <section className="section-padding">
+        <div className="container-custom max-w-2xl">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-black text-primary mb-3">Apri una pratica sinistro</h2>
+            <p className="text-gray-600">Compila il modulo e il nostro team ti contatterà entro 24 ore lavorative.</p>
+          </div>
+          <SinistriForm />
         </div>
       </section>
 
