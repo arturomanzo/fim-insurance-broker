@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
+import { saveLead } from '@/lib/leadStore'
 
 interface PreventivoRequest {
   tipo: string
@@ -327,7 +328,12 @@ export async function POST(req: NextRequest) {
     // Follow-up schedulato a 72 ore
     const followUpAt = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
 
-    // Sincronizza lead nel gestionale (fire-and-forget)
+    // Salva lead localmente nel gestionale
+    try {
+      saveLead({ id: preventivoData.id, nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined, timestamp: preventivoData.timestamp })
+    } catch { /* non blocca */ }
+
+    // Sincronizza lead nel gestionale esterno (fire-and-forget)
     syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined })
 
     // Invia email se Resend è configurato

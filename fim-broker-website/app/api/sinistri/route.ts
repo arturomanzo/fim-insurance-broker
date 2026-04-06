@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
+import { saveSinistro } from '@/lib/sinistriStore'
 
 interface SinistriRequest {
   nome: string
@@ -94,7 +95,20 @@ export async function POST(req: NextRequest) {
 
     const id = `SIN-${Date.now()}`
 
-    // Sincronizza nel gestionale (fire-and-forget)
+    // Salva sinistro localmente nel gestionale
+    try {
+      saveSinistro({
+        id,
+        nome, cognome, email, telefono,
+        tipoSinistro, dataEvento,
+        numeroPolizza: numeroPolizza || undefined,
+        compagnia: compagnia || undefined,
+        descrizione,
+        timestamp: new Date().toISOString(),
+      })
+    } catch { /* non blocca */ }
+
+    // Sincronizza nel gestionale esterno (fire-and-forget)
     syncSinistrToGestionale({
       nome, cognome, email, telefono, tipo_sinistro: tipoSinistro,
       data_evento: dataEvento,
