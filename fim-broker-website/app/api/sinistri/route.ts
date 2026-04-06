@@ -42,9 +42,12 @@ async function syncSinistrToGestionale(data: {
   tipo_sinistro: string; data_evento: string
   numero_polizza?: string; compagnia?: string; descrizione: string
 }) {
-  if (!GESTIONALE_SECRET) return
+  if (!GESTIONALE_SECRET) {
+    console.warn('[gestionale] WEBSITE_API_SECRET non configurata — sync sinistro saltata')
+    return
+  }
   try {
-    await fetch(`${GESTIONALE_URL}/api/website/sinistro`, {
+    const res = await fetch(`${GESTIONALE_URL}/api/website/sinistro`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,8 +55,12 @@ async function syncSinistrToGestionale(data: {
       },
       body: JSON.stringify(data),
     })
-  } catch {
-    // fire-and-forget
+    if (!res.ok) {
+      const text = await res.text().catch(() => '')
+      console.error(`[gestionale] Sync sinistro fallita: HTTP ${res.status} — ${text}`)
+    }
+  } catch (err) {
+    console.error('[gestionale] Sync sinistro — errore di rete:', err)
   }
 }
 

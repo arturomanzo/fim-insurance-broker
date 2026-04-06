@@ -43,9 +43,12 @@ async function syncLeadToGestionale(data: {
   nome: string; cognome: string; email: string; telefono: string
   tipo: string; profilo?: string; messaggio?: string
 }) {
-  if (!GESTIONALE_SECRET) return
+  if (!GESTIONALE_SECRET) {
+    console.warn('[gestionale] WEBSITE_API_SECRET non configurata — sync lead saltata')
+    return
+  }
   try {
-    await fetch(`${GESTIONALE_URL}/api/website/lead`, {
+    const res = await fetch(`${GESTIONALE_URL}/api/website/lead`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,8 +56,12 @@ async function syncLeadToGestionale(data: {
       },
       body: JSON.stringify(data),
     })
-  } catch {
-    // Non blocca il flusso principale — log silenzioso
+    if (!res.ok) {
+      const text = await res.text().catch(() => '')
+      console.error(`[gestionale] Sync lead fallita: HTTP ${res.status} — ${text}`)
+    }
+  } catch (err) {
+    console.error('[gestionale] Sync lead — errore di rete:', err)
   }
 }
 
