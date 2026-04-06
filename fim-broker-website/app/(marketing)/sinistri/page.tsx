@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
@@ -81,6 +82,7 @@ const faqs = [
 export default function SinistriPage() {
   return (
     <div>
+      <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: 'Sinistri', href: '/sinistri' }]} />
       {/* Hero */}
       <section className="gradient-primary py-20 md:py-28">
         <div className="container-custom">

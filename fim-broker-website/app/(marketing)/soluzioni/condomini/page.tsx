@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import FaqAccordion from '@/components/ui/FaqAccordion'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 
 export const metadata: Metadata = {
@@ -98,9 +99,30 @@ const faqs = [
   },
 ]
 
+
+function buildFaqSchema(items: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  }
+}
+
 export default function CondominiPage() {
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(faqs)) }} />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Soluzioni', href: '/soluzioni' },
+          { name: 'Condomini', href: '/soluzioni/condomini' },
+        ]}
+      />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-24 text-white relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
