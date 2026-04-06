@@ -252,9 +252,10 @@ export default function Footer() {
             {/* RUI */}
             <div className="mt-6 p-3 bg-white/5 rounded-lg border border-white/10">
               <p className="text-white/50 text-xs">
-                FIM Insurance Broker S.r.l.<br />
+                FIM Insurance Broker S.a.s. di Manzo Arturo & C.<br />
                 Iscrizione RUI n. B000405449<br />
-                P.IVA 02637640596 — REA LT 187466
+                P.IVA 02637640596 — REA LT 187466<br />
+                PEC fiminsurancebrokersas@pec.it — info@fimbroker.it
               </p>
             </div>
           </div>
@@ -265,7 +266,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-custom py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/50 text-sm">
-            &copy; {new Date().getFullYear()} FIM Insurance Broker S.r.l. Tutti i diritti riservati.
+            &copy; {new Date().getFullYear()} FIM Insurance Broker S.a.s. di Manzo Arturo & C. Tutti i diritti riservati.
           </p>
           <div className="flex items-center gap-4">
             {legalLinks.map((link) => (

@@ -75,7 +75,7 @@ function buildGuideEmailHtml(nome: string, tipo: string): string {
     </div>
     <div style="background: #0f2d6b; padding: 20px 32px;">
       <p style="margin: 0; font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.8;">
-        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina<br>
+        FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina<br>
         Iscrizione RUI n. B000405449 — <a href="${BASE_URL}" style="color: rgba(255,255,255,0.5);">www.fimbroker.it</a><br>
         Hai ricevuto questa email perché hai richiesto la guida PMI. <a href="${BASE_URL}/privacy-policy" style="color: rgba(255,255,255,0.4);">Privacy Policy</a>
       </p>

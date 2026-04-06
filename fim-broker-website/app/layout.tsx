@@ -71,7 +71,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': ['InsuranceAgency', 'LocalBusiness'],
   name: 'FIM Insurance Broker',
-  legalName: 'FIM Insurance Broker S.r.l.',
+  legalName: 'FIM Insurance Broker S.a.s. di Manzo Arturo & C.',
   url: BASE_URL,
   logo: `${BASE_URL}/icon.svg`,
   image: `${BASE_URL}/opengraph-image`,

@@ -203,7 +203,7 @@ export async function POST(req: NextRequest) {
     </div>
     <div style="background:#0f2d6b;padding:20px 32px;">
       <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.5);text-align:center;">
-        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
+        FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
       </p>
     </div>
   </div>

@@ -3,7 +3,7 @@ import Card from '@/components/ui/Card'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Informativa sul trattamento dei dati personali di FIM Insurance Broker S.r.l. ai sensi del GDPR.',
+  description: 'Informativa sul trattamento dei dati personali di FIM Insurance Broker S.a.s. di Manzo Arturo & C. ai sensi del GDPR.',
 }
 
 export default function PrivacyPolicyPage() {
@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2>1. Titolare del trattamento</h2>
               <p>
-                FIM Insurance Broker S.r.l., con sede legale in Via Roma 41, 04012 Cisterna di Latina (LT),
+                FIM Insurance Broker S.a.s. di Manzo Arturo & C., con sede legale in Via Roma 41, 04012 Cisterna di Latina (LT),
                 P.IVA 02637640596, è il Titolare del trattamento dei dati personali degli utenti
                 che visitano il presente sito web e che richiedono i nostri servizi.
               </p>
