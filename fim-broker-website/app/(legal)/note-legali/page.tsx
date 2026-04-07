@@ -21,10 +21,9 @@ export default function NoteLegaliPage() {
                 <strong>FIM Insurance Broker S.a.s. di Manzo Arturo & C.</strong><br />
                 Sede legale: Via Roma 41, 04012 Cisterna di Latina (LT)<br />
                 P.IVA e C.F.: 02637640596<br />
-                REA: LT 187466<br />
+                REA: LT - 187466<br />
                 PEC: fiminsurancebrokersas@pec.it<br />
-                Email: info@fimbroker.it<br />
-                Capitale sociale: € 50.000,00 i.v.
+                Email: info@fimbroker.it
               </p>
             </section>
 

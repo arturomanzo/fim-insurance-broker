@@ -254,7 +254,7 @@ export default function Footer() {
               <p className="text-white/50 text-xs">
                 FIM Insurance Broker S.a.s. di Manzo Arturo & C.<br />
                 Iscrizione RUI n. B000405449<br />
-                P.IVA 02637640596 — REA LT 187466<br />
+                P.IVA 02637640596 — REA LT - 187466<br />
                 PEC fiminsurancebrokersas@pec.it — info@fimbroker.it
               </p>
             </div>
