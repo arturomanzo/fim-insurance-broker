@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 
 const GA_ID = 'G-F6DB47VZ4Z'
+const AW_ID = 'AW-18034188310'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -175,6 +176,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
+            gtag('config', '${AW_ID}');
           `}
         </Script>
         {children}
