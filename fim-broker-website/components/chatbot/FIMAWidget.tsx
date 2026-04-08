@@ -99,14 +99,47 @@ function getProactiveMessage(path: string): string {
   return 'Ciao! Stai esplorando le nostre soluzioni assicurative? Se hai dubbi o vuoi sapere da dove iniziare, sono qui — basta scrivere.'
 }
 
-// Messaggio exit intent — appare quando il cursore lascia la pagina verso l'alto
-const EXIT_INTENT_MESSAGE =
-  'Prima di andare — hai 2 minuti per un preventivo gratuito? Nessun impegno, risposta in 24 ore. Posso aiutarti subito!'
+// Messaggio exit intent contestuale — specifico per pagina
+function getExitIntentMessage(path: string): string {
+  if (path.includes('preventivo'))
+    return 'Stai per uscire senza completare il preventivo! Ci vogliono solo 2 minuti e nessun impegno. Vuoi che ti aiuto a finire?'
+  if (path.includes('sinistri'))
+    return 'Prima di andare — stai gestendo un sinistro? Posso guidarti subito nella denuncia, senza attese. Dimmi cosa è successo.'
+  if (path.includes('prenota'))
+    return 'Quasi fatta! Vuoi prenotare una consulenza gratuita prima di uscire? Bastano 2 minuti e un nostro esperto ti richiama.'
+  if (path.includes('professionisti') || path.includes('artigiani') || path.includes('pmi'))
+    return 'Prima di andare — ti bastano 2 minuti per scoprire se sei adeguatamente coperto. Vuoi un check gratuito della tua situazione?'
+  if (path.includes('famiglie'))
+    return 'Prima di andare — vuoi proteggere la tua famiglia senza spendere troppo? Posso mostrarti le soluzioni più adatte in meno di 2 minuti.'
+  if (path.includes('calcolatore') || path.includes('quiz'))
+    return 'Hai già il tuo profilo di rischio — non lasciarlo senza una copertura adeguata! Vuoi un preventivo gratuito adesso?'
+  return 'Prima di andare — hai 2 minuti per un preventivo gratuito? Nessun impegno, risposta in 24 ore. Posso aiutarti subito!'
+}
 
-const PROACTIVE_DELAY_MS = 45_000
+// Ritardo proattivo variabile: più basso sulle pagine ad alto intento di acquisto
+function getProactiveDelay(path: string): number {
+  if (path.includes('sinistri') || path.includes('preventivo') || path.includes('prenota'))
+    return 20_000
+  if (
+    path.includes('quiz') || path.includes('calcolatore') ||
+    path.includes('professionisti') || path.includes('famiglie') ||
+    path.includes('artigiani') || path.includes('pmi') ||
+    path.includes('condomini') || path.includes('catastrofi')
+  )
+    return 25_000
+  return 45_000
+}
+
+// Messaggio attivo di FIMA che propone WhatsApp dopo N scambi senza conversione
+const WHATSAPP_ESCALATION_MESSAGE =
+  'Ho capito che hai qualche domanda in più — posso metterti in contatto diretto con un nostro consulente su WhatsApp. Risponde in pochi minuti e può prepararti un preventivo su misura. Clicca il pulsante qui sotto!'
+
+// URL di conversione: se FIMA li menziona, l'utente è già stato indirizzato correttamente
+const CONVERSION_URLS = ['/preventivo', '/prenota-consulenza']
+
 const PROACTIVE_SESSION_KEY = 'fima_proactive_shown'
 const EXIT_INTENT_SESSION_KEY = 'fima_exit_intent_shown'
-// Mostrare il CTA WhatsApp dopo questo numero di scambi (messaggi utente)
+// Proporre WhatsApp dopo questo numero di messaggi utente (se senza conversione)
 const WHATSAPP_ESCALATION_AFTER = 3
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '393801234567'
@@ -126,6 +159,8 @@ export default function FIMAWidget() {
   const [isLoading, setIsLoading] = useState(false)
   const [streamingContent, setStreamingContent] = useState('')
   const [userMessageCount, setUserMessageCount] = useState(0)
+  // Traccia se FIMA ha già proposto WhatsApp in questa sessione
+  const [whatsAppProposalSent, setWhatsAppProposalSent] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const isOpenRef = useRef(isOpen)
@@ -168,10 +203,11 @@ export default function FIMAWidget() {
     if (typeof sessionStorage === 'undefined') return
     if (sessionStorage.getItem(PROACTIVE_SESSION_KEY)) return
 
+    const delay = getProactiveDelay(window.location.pathname)
     const timer = setTimeout(() => {
       triggerProactive()
       sessionStorage.setItem(PROACTIVE_SESSION_KEY, '1')
-    }, PROACTIVE_DELAY_MS)
+    }, delay)
 
     return () => clearTimeout(timer)
   }, [triggerProactive])
@@ -190,7 +226,7 @@ export default function FIMAWidget() {
       setHasProactiveBadge(true)
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: EXIT_INTENT_MESSAGE },
+        { role: 'assistant', content: getExitIntentMessage(window.location.pathname) },
       ])
       setIsOpen(true)
     }
@@ -203,17 +239,19 @@ export default function FIMAWidget() {
     if (!text.trim() || isLoading) return
 
     const userMessage: Message = { role: 'user', content: text.trim() }
-    setMessages((prev) => [...prev, userMessage])
+    const updatedMessages = [...messages, userMessage]
+    setMessages(updatedMessages)
     setInput('')
     setIsLoading(true)
     setStreamingContent('')
-    setUserMessageCount((c) => c + 1)
+    const newCount = userMessageCount + 1
+    setUserMessageCount(newCount)
 
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMessage], pageContext }),
+        body: JSON.stringify({ messages: updatedMessages, pageContext }),
       })
 
       if (!response.ok) throw new Error('Errore nella risposta')
@@ -248,7 +286,26 @@ export default function FIMAWidget() {
         }
       }
 
-      setMessages((prev) => [...prev, { role: 'assistant', content: fullContent }])
+      setMessages((prev) => {
+        const withAssistant = [...prev, { role: 'assistant' as const, content: fullContent }]
+
+        // Dopo WHATSAPP_ESCALATION_AFTER scambi, se FIMA non ha ancora indirizzato
+        // l'utente a una URL di conversione, propone WhatsApp attivamente
+        if (
+          newCount >= WHATSAPP_ESCALATION_AFTER &&
+          !whatsAppProposalSent
+        ) {
+          const hasConversion = withAssistant.some(
+            (m) => m.role === 'assistant' && CONVERSION_URLS.some((url) => m.content.includes(url))
+          )
+          if (!hasConversion) {
+            setWhatsAppProposalSent(true)
+            return [...withAssistant, { role: 'assistant', content: WHATSAPP_ESCALATION_MESSAGE }]
+          }
+        }
+
+        return withAssistant
+      })
       setStreamingContent('')
     } catch {
       setMessages((prev) => [
