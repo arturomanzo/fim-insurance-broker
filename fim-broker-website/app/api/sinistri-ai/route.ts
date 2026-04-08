@@ -114,7 +114,7 @@ Se il cliente usa parole come "urgente", "emergenza", "non so cosa fare", "è gr
 FIM Insurance Broker — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it`
 
 export async function POST(req: NextRequest) {
-  const { ok, retryAfter } = rateLimit(req, { limit: 30, windowMs: 60_000 })
+  const { ok, retryAfter } = await rateLimit(req, { limit: 30, windowMs: 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppe richieste. Attendi qualche secondo e riprova.' },

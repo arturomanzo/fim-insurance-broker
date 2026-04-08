@@ -12,7 +12,7 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 const MAX_BASE64_LENGTH = 4_200_000
 
 export async function POST(request: NextRequest) {
-  const { ok, retryAfter } = rateLimit(request, { limit: 3, windowMs: 60_000 })
+  const { ok, retryAfter } = await rateLimit(request, { limit: 3, windowMs: 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppe richieste. Attendi qualche momento e riprova.' },

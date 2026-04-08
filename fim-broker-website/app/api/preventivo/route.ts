@@ -312,7 +312,7 @@ function buildFollowUpEmailHtml(rawNome: string, rawTipo: string): string {
 }
 
 export async function POST(req: NextRequest) {
-  const { ok, retryAfter } = rateLimit(req, { limit: 5, windowMs: 60 * 60_000 })
+  const { ok, retryAfter } = await rateLimit(req, { limit: 5, windowMs: 60 * 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppe richieste. Riprova tra qualche ora.' },
