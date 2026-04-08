@@ -1,8 +1,40 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
+
+interface UtmData {
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
+  referrer?: string
+}
+
+const UTM_SESSION_KEY = 'fim_utm'
+
+function captureUtm(): UtmData {
+  if (typeof window === 'undefined') return {}
+  // Se già catturati in questa sessione, riusali (l'utente potrebbe aver navigato)
+  const stored = sessionStorage.getItem(UTM_SESSION_KEY)
+  if (stored) {
+    try { return JSON.parse(stored) } catch { /* ignora */ }
+  }
+  const params = new URLSearchParams(window.location.search)
+  const utm: UtmData = {}
+  if (params.get('utm_source')) utm.utm_source = params.get('utm_source')!.slice(0, 100)
+  if (params.get('utm_medium')) utm.utm_medium = params.get('utm_medium')!.slice(0, 100)
+  if (params.get('utm_campaign')) utm.utm_campaign = params.get('utm_campaign')!.slice(0, 150)
+  if (params.get('utm_content')) utm.utm_content = params.get('utm_content')!.slice(0, 150)
+  if (params.get('utm_term')) utm.utm_term = params.get('utm_term')!.slice(0, 150)
+  if (document.referrer) utm.referrer = document.referrer.slice(0, 300)
+  if (Object.keys(utm).length > 0) {
+    sessionStorage.setItem(UTM_SESSION_KEY, JSON.stringify(utm))
+  }
+  return utm
+}
 
 interface Props {
   initialProfile?: string | null
@@ -51,6 +83,11 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
   const [website, setWebsite] = useState('') // honeypot
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [utm, setUtm] = useState<UtmData>({})
+
+  useEffect(() => {
+    setUtm(captureUtm())
+  }, [])
 
   const profileLabel = profile ? PROFILES.find((p) => p.id === profile)?.label : ''
 
@@ -82,6 +119,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           messaggio: note,
           privacy: true,
           website,
+          ...utm,
         }),
       })
       if (!res.ok) throw new Error()

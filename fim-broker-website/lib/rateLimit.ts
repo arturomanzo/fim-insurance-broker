@@ -1,6 +1,11 @@
 /**
- * Rate limiter in-memory basato su IP.
- * Adatto per deployment su singola istanza (Vercel serverless con warm instance).
+ * Rate limiter in-memory con algoritmo a finestra scorrevole (sliding window).
+ * Più accurato del fixed window: non azzera il contatore all'inizio di ogni
+ * finestra, ma considera solo i timestamp degli ultimi windowMs millisecondi.
+ *
+ * Limitazione nota: su Vercel serverless, il contatore si azzera ad ogni cold
+ * start. Per un rate limiting persistente tra istanze, usare @upstash/ratelimit
+ * con Redis (richiede UPSTASH_REDIS_REST_URL e UPSTASH_REDIS_REST_TOKEN).
  *
  * Uso:
  *   const { ok, retryAfter } = rateLimit(request, { limit: 5, windowMs: 60_000 })
@@ -8,9 +13,9 @@
  */
 
 interface RateLimitOptions {
-  /** Numero massimo di richieste consentite nella finestra */
+  /** Numero massimo di richieste consentite nella finestra scorrevole */
   limit: number
-  /** Finestra temporale in millisecondi */
+  /** Ampiezza della finestra scorrevole in millisecondi */
   windowMs: number
 }
 
@@ -21,22 +26,26 @@ interface RateLimitResult {
 }
 
 interface Entry {
-  count: number
-  resetAt: number
+  /** Timestamp (ms) di ogni richiesta nella finestra corrente */
+  timestamps: number[]
 }
 
-// Map globale: chiave → { count, resetAt }
-// In produzione (Vercel) sopravvive tra le richieste finché la lambda è "warm".
+// Map globale: chiave → lista di timestamp
 const store = new Map<string, Entry>()
 
 // Pulizia periodica per evitare memory leak su istanze long-lived
 let lastCleanup = Date.now()
-function maybeCleanup() {
+function maybeCleanup(windowMs: number) {
   const now = Date.now()
   if (now - lastCleanup < 60_000) return
   lastCleanup = now
   for (const [key, entry] of store) {
-    if (entry.resetAt < now) store.delete(key)
+    const active = entry.timestamps.filter((t) => now - t < windowMs)
+    if (active.length === 0) {
+      store.delete(key)
+    } else {
+      entry.timestamps = active
+    }
   }
 }
 
@@ -50,15 +59,11 @@ function isValidIp(ip: string): boolean {
 }
 
 function getIp(request: Request): string {
-  // Vercel e altri proxy impostano x-forwarded-for.
-  // Prendiamo solo il primo indirizzo (client originale) e lo validiamo
-  // per prevenire header injection nella chiave della store.
   const forwarded = (request.headers as Headers).get('x-forwarded-for')
   if (forwarded) {
     const candidate = forwarded.split(',')[0].trim()
     if (isValidIp(candidate)) return candidate
   }
-  // IP non identificabile → bucket comune (non bypassa il limite)
   return 'unknown'
 }
 
@@ -66,26 +71,27 @@ export function rateLimit(
   request: Request,
   { limit, windowMs }: RateLimitOptions,
 ): RateLimitResult {
-  maybeCleanup()
+  maybeCleanup(windowMs)
 
   const ip = getIp(request)
   const now = Date.now()
-  // Usa solo pathname (non query string o full URL) per evitare bypass tramite URL crafting
   const url = new URL(request.url)
   const key = `${url.pathname}::${ip}`
 
-  const entry = store.get(key)
+  const entry = store.get(key) ?? { timestamps: [] }
 
-  if (!entry || entry.resetAt < now) {
-    store.set(key, { count: 1, resetAt: now + windowMs })
-    return { ok: true, retryAfter: 0 }
+  // Mantieni solo i timestamp nella finestra scorrevole corrente
+  entry.timestamps = entry.timestamps.filter((t) => now - t < windowMs)
+
+  if (entry.timestamps.length >= limit) {
+    // Il primo timestamp nella finestra indica quando scade il blocco
+    const oldestInWindow = entry.timestamps[0]
+    const retryAfter = Math.ceil((oldestInWindow + windowMs - now) / 1000)
+    store.set(key, entry)
+    return { ok: false, retryAfter: Math.max(1, retryAfter) }
   }
 
-  if (entry.count >= limit) {
-    const retryAfter = Math.ceil((entry.resetAt - now) / 1000)
-    return { ok: false, retryAfter }
-  }
-
-  entry.count += 1
+  entry.timestamps.push(now)
+  store.set(key, entry)
   return { ok: true, retryAfter: 0 }
 }

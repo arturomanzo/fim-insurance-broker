@@ -14,6 +14,13 @@ interface PreventivoRequest {
   oggetto?: string
   privacy: boolean
   website?: string // honeypot — deve essere assente o vuoto
+  // UTM attribution
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
+  referrer?: string
 }
 
 function validateEmail(email: string): boolean {
@@ -78,6 +85,10 @@ function buildTeamEmailHtml(data: {
   telefono: string
   messaggio: string
   timestamp: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  referrer?: string
 }): string {
   const tipo = escapeHtml(data.tipo)
   const nome = escapeHtml(data.nome)
@@ -154,6 +165,16 @@ function buildTeamEmailHtml(data: {
           ⏰ Ricevuta il <strong>${new Date(data.timestamp).toLocaleString('it-IT')}</strong> — Rispondere entro 24 ore lavorative.
         </p>
       </div>
+      ${(data.utm_source || data.utm_medium || data.utm_campaign || data.referrer) ? `
+      <div style="margin-top: 16px; padding: 14px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <p style="margin: 0 0 8px; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Sorgente traffico</p>
+        <div style="font-size: 12px; color: #64748b; line-height: 1.8;">
+          ${data.utm_source ? `<span style="margin-right:12px;">📌 Fonte: <strong>${escapeHtml(data.utm_source)}</strong></span>` : ''}
+          ${data.utm_medium ? `<span style="margin-right:12px;">📣 Mezzo: <strong>${escapeHtml(data.utm_medium)}</strong></span>` : ''}
+          ${data.utm_campaign ? `<span style="margin-right:12px;">🎯 Campagna: <strong>${escapeHtml(data.utm_campaign)}</strong></span>` : ''}
+          ${data.referrer ? `<div style="margin-top:4px;">🔗 Referrer: <span style="color:#0f2d6b;">${escapeHtml(data.referrer)}</span></div>` : ''}
+        </div>
+      </div>` : ''}
 
       <div style="margin-top: 20px; text-align: center;">
         <a href="mailto:${email}?subject=Preventivo ${tipo} - FIM Insurance Broker&amp;body=Gentile ${nome},"
@@ -326,10 +347,21 @@ export async function POST(req: NextRequest) {
 
     const profilo = sanitize(body.profilo).slice(0, 50)
 
+    // UTM attribution — sanitizzati e troncati
+    const utm = {
+      utm_source: body.utm_source ? sanitize(body.utm_source).slice(0, 100) : undefined,
+      utm_medium: body.utm_medium ? sanitize(body.utm_medium).slice(0, 100) : undefined,
+      utm_campaign: body.utm_campaign ? sanitize(body.utm_campaign).slice(0, 150) : undefined,
+      utm_content: body.utm_content ? sanitize(body.utm_content).slice(0, 150) : undefined,
+      utm_term: body.utm_term ? sanitize(body.utm_term).slice(0, 150) : undefined,
+      referrer: body.referrer ? sanitize(body.referrer).slice(0, 300) : undefined,
+    }
+
     const preventivoData = {
       id: `FIM-${Date.now()}`,
       tipo, profilo: profilo || undefined, nome, cognome, email, telefono, messaggio,
       timestamp: new Date().toISOString(),
+      ...utm,
     }
 
     // Follow-up schedulato a 72 ore
@@ -351,7 +383,13 @@ export async function POST(req: NextRequest) {
           from: FIM_FROM,
           to: [FIM_EMAIL],
           subject: `[Preventivo] ${tipo} — ${nome} ${cognome}${profilo ? ` (${profilo})` : ''}`,
-          html: buildTeamEmailHtml(preventivoData),
+          html: buildTeamEmailHtml({
+            ...preventivoData,
+            utm_source: utm.utm_source,
+            utm_medium: utm.utm_medium,
+            utm_campaign: utm.utm_campaign,
+            referrer: utm.referrer,
+          }),
         }),
         // Email di conferma al cliente
         resend.emails.send({
