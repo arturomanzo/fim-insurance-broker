@@ -3,7 +3,7 @@ import { verifyAdminPassword, generateAdminToken, ADMIN_SESSION_COOKIE, ADMIN_SE
 import { rateLimit } from '@/lib/rateLimit'
 
 export async function POST(req: NextRequest) {
-  const { ok, retryAfter } = rateLimit(req, { limit: 10, windowMs: 15 * 60_000 })
+  const { ok, retryAfter } = await rateLimit(req, { limit: 10, windowMs: 15 * 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppi tentativi. Riprova tra qualche minuto.' },

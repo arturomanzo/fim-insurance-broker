@@ -1,8 +1,47 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
+import {
+  trackPreventivoStep1,
+  trackPreventivoStep2,
+  trackPreventivoSubmit,
+  trackPreventivoError,
+  trackPreventivoAbandonment,
+} from '@/lib/analytics'
+
+interface UtmData {
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
+  referrer?: string
+}
+
+const UTM_SESSION_KEY = 'fim_utm'
+
+function captureUtm(): UtmData {
+  if (typeof window === 'undefined') return {}
+  // Se già catturati in questa sessione, riusali (l'utente potrebbe aver navigato)
+  const stored = sessionStorage.getItem(UTM_SESSION_KEY)
+  if (stored) {
+    try { return JSON.parse(stored) } catch { /* ignora */ }
+  }
+  const params = new URLSearchParams(window.location.search)
+  const utm: UtmData = {}
+  if (params.get('utm_source')) utm.utm_source = params.get('utm_source')!.slice(0, 100)
+  if (params.get('utm_medium')) utm.utm_medium = params.get('utm_medium')!.slice(0, 100)
+  if (params.get('utm_campaign')) utm.utm_campaign = params.get('utm_campaign')!.slice(0, 150)
+  if (params.get('utm_content')) utm.utm_content = params.get('utm_content')!.slice(0, 150)
+  if (params.get('utm_term')) utm.utm_term = params.get('utm_term')!.slice(0, 150)
+  if (document.referrer) utm.referrer = document.referrer.slice(0, 300)
+  if (Object.keys(utm).length > 0) {
+    sessionStorage.setItem(UTM_SESSION_KEY, JSON.stringify(utm))
+  }
+  return utm
+}
 
 interface Props {
   initialProfile?: string | null
@@ -51,6 +90,33 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
   const [website, setWebsite] = useState('') // honeypot
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [utm, setUtm] = useState<UtmData>({})
+  // Ref per tracciare l'abbandono senza stale closures
+  const abandonRef = useRef({ step, profile })
+
+  useEffect(() => {
+    setUtm(captureUtm())
+  }, [])
+
+  // Aggiorna il ref ogni volta che step/profile cambiano
+  useEffect(() => {
+    abandonRef.current = { step, profile }
+  }, [step, profile])
+
+  // Traccia abbandono quando l'utente lascia la pagina senza completare
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        const { step: s, profile: p } = abandonRef.current
+        if (s < 3 || (s === 3 && status !== 'success')) {
+          trackPreventivoAbandonment(s, p)
+        }
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const profileLabel = profile ? PROFILES.find((p) => p.id === profile)?.label : ''
 
@@ -82,11 +148,14 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           messaggio: note,
           privacy: true,
           website,
+          ...utm,
         }),
       })
       if (!res.ok) throw new Error()
+      trackPreventivoSubmit(profile ?? 'unknown', copertura || 'generico', utm.utm_source)
       setStatus('success')
     } catch {
+      trackPreventivoError()
       setStatus('error')
     }
   }
@@ -143,7 +212,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <p className="text-gray-500 text-sm mb-5">Seleziona il profilo che ti descrive meglio.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {PROFILES.map((p) => (
-              <button key={p.id} onClick={() => { setProfile(p.id); setStep(2) }}
+              <button key={p.id} onClick={() => { setProfile(p.id); setStep(2); trackPreventivoStep1(p.id) }}
                 className="group text-left p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition-all duration-200">
                 <div className="text-2xl mb-2">{p.emoji}</div>
                 <div className="font-bold text-primary text-sm mb-0.5 group-hover:text-primary-light">{p.label}</div>
@@ -181,7 +250,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
               placeholder="Descrivi brevemente le tue esigenze o situazione attuale..."
               className="input-field resize-none text-sm" maxLength={600} />
           </div>
-          <button onClick={() => setStep(3)}
+          <button onClick={() => { setStep(3); trackPreventivoStep2(profile, copertura || 'non selezionata') }}
             className="w-full btn-primary py-3.5">
             Continua →
           </button>

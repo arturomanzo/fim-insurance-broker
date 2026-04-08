@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
+import { saveLead } from '@/lib/leadStore'
 
 interface PreventivoRequest {
   tipo: string
@@ -13,6 +14,13 @@ interface PreventivoRequest {
   oggetto?: string
   privacy: boolean
   website?: string // honeypot — deve essere assente o vuoto
+  // UTM attribution
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
+  referrer?: string
 }
 
 function validateEmail(email: string): boolean {
@@ -42,9 +50,12 @@ async function syncLeadToGestionale(data: {
   nome: string; cognome: string; email: string; telefono: string
   tipo: string; profilo?: string; messaggio?: string
 }) {
-  if (!GESTIONALE_SECRET) return
+  if (!GESTIONALE_SECRET) {
+    console.warn('[gestionale] WEBSITE_API_SECRET non configurata — sync lead saltata')
+    return
+  }
   try {
-    await fetch(`${GESTIONALE_URL}/api/website/lead`, {
+    const res = await fetch(`${GESTIONALE_URL}/api/website/lead`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,8 +63,12 @@ async function syncLeadToGestionale(data: {
       },
       body: JSON.stringify(data),
     })
-  } catch {
-    // Non blocca il flusso principale — log silenzioso
+    if (!res.ok) {
+      const text = await res.text().catch(() => '')
+      console.error(`[gestionale] Sync lead fallita: HTTP ${res.status} — ${text}`)
+    }
+  } catch (err) {
+    console.error('[gestionale] Sync lead — errore di rete:', err)
   }
 }
 
@@ -70,6 +85,10 @@ function buildTeamEmailHtml(data: {
   telefono: string
   messaggio: string
   timestamp: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  referrer?: string
 }): string {
   const tipo = escapeHtml(data.tipo)
   const nome = escapeHtml(data.nome)
@@ -146,6 +165,16 @@ function buildTeamEmailHtml(data: {
           ⏰ Ricevuta il <strong>${new Date(data.timestamp).toLocaleString('it-IT')}</strong> — Rispondere entro 24 ore lavorative.
         </p>
       </div>
+      ${(data.utm_source || data.utm_medium || data.utm_campaign || data.referrer) ? `
+      <div style="margin-top: 16px; padding: 14px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <p style="margin: 0 0 8px; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Sorgente traffico</p>
+        <div style="font-size: 12px; color: #64748b; line-height: 1.8;">
+          ${data.utm_source ? `<span style="margin-right:12px;">📌 Fonte: <strong>${escapeHtml(data.utm_source)}</strong></span>` : ''}
+          ${data.utm_medium ? `<span style="margin-right:12px;">📣 Mezzo: <strong>${escapeHtml(data.utm_medium)}</strong></span>` : ''}
+          ${data.utm_campaign ? `<span style="margin-right:12px;">🎯 Campagna: <strong>${escapeHtml(data.utm_campaign)}</strong></span>` : ''}
+          ${data.referrer ? `<div style="margin-top:4px;">🔗 Referrer: <span style="color:#0f2d6b;">${escapeHtml(data.referrer)}</span></div>` : ''}
+        </div>
+      </div>` : ''}
 
       <div style="margin-top: 20px; text-align: center;">
         <a href="mailto:${email}?subject=Preventivo ${tipo} - FIM Insurance Broker&amp;body=Gentile ${nome},"
@@ -158,7 +187,7 @@ function buildTeamEmailHtml(data: {
     <!-- Footer -->
     <div style="background: #f8fafc; padding: 16px 32px; border-top: 1px solid #e2e8f0;">
       <p style="margin: 0; font-size: 12px; color: #94a3b8; text-align: center;">
-        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
+        FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
       </p>
     </div>
   </div>
@@ -215,7 +244,7 @@ function buildClientEmailHtml(rawNome: string, rawTipo: string): string {
 
     <div style="background: #0f2d6b; padding: 20px 32px;">
       <p style="margin: 0; font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.8;">
-        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina<br>
+        FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina<br>
         Iscrizione RUI n. B000405449 — <a href="https://www.fimbroker.it" style="color: rgba(255,255,255,0.5);">www.fimbroker.it</a>
       </p>
     </div>
@@ -275,7 +304,7 @@ function buildFollowUpEmailHtml(rawNome: string, rawTipo: string): string {
     </div>
     <div style="background:#0f2d6b;padding:16px 32px;">
       <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.4);text-align:center;">
-        FIM Insurance Broker S.r.l. — <a href="${BASE_URL}/privacy-policy" style="color:rgba(255,255,255,0.4);">Privacy Policy</a>
+        FIM Insurance Broker S.a.s. — <a href="${BASE_URL}/privacy-policy" style="color:rgba(255,255,255,0.4);">Privacy Policy</a>
       </p>
     </div>
   </div>
@@ -283,7 +312,7 @@ function buildFollowUpEmailHtml(rawNome: string, rawTipo: string): string {
 }
 
 export async function POST(req: NextRequest) {
-  const { ok, retryAfter } = rateLimit(req, { limit: 5, windowMs: 60 * 60_000 })
+  const { ok, retryAfter } = await rateLimit(req, { limit: 5, windowMs: 60 * 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppe richieste. Riprova tra qualche ora.' },
@@ -318,16 +347,32 @@ export async function POST(req: NextRequest) {
 
     const profilo = sanitize(body.profilo).slice(0, 50)
 
+    // UTM attribution — sanitizzati e troncati
+    const utm = {
+      utm_source: body.utm_source ? sanitize(body.utm_source).slice(0, 100) : undefined,
+      utm_medium: body.utm_medium ? sanitize(body.utm_medium).slice(0, 100) : undefined,
+      utm_campaign: body.utm_campaign ? sanitize(body.utm_campaign).slice(0, 150) : undefined,
+      utm_content: body.utm_content ? sanitize(body.utm_content).slice(0, 150) : undefined,
+      utm_term: body.utm_term ? sanitize(body.utm_term).slice(0, 150) : undefined,
+      referrer: body.referrer ? sanitize(body.referrer).slice(0, 300) : undefined,
+    }
+
     const preventivoData = {
       id: `FIM-${Date.now()}`,
       tipo, profilo: profilo || undefined, nome, cognome, email, telefono, messaggio,
       timestamp: new Date().toISOString(),
+      ...utm,
     }
 
     // Follow-up schedulato a 72 ore
     const followUpAt = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
 
-    // Sincronizza lead nel gestionale (fire-and-forget)
+    // Salva lead su Supabase (o fallback JSON locale)
+    try {
+      await saveLead({ id: preventivoData.id, nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined, timestamp: preventivoData.timestamp })
+    } catch { /* non blocca */ }
+
+    // Sincronizza lead nel gestionale esterno (fire-and-forget)
     syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined })
 
     // Invia email se Resend è configurato
@@ -338,7 +383,13 @@ export async function POST(req: NextRequest) {
           from: FIM_FROM,
           to: [FIM_EMAIL],
           subject: `[Preventivo] ${tipo} — ${nome} ${cognome}${profilo ? ` (${profilo})` : ''}`,
-          html: buildTeamEmailHtml(preventivoData),
+          html: buildTeamEmailHtml({
+            ...preventivoData,
+            utm_source: utm.utm_source,
+            utm_medium: utm.utm_medium,
+            utm_campaign: utm.utm_campaign,
+            referrer: utm.referrer,
+          }),
         }),
         // Email di conferma al cliente
         resend.emails.send({

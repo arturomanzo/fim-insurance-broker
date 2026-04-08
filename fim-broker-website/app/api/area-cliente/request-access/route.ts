@@ -39,7 +39,7 @@ function buildMagicLinkEmail(nome: string, magicLink: string): string {
     </div>
     <div style="background:#0f2d6b;padding:16px 32px;">
       <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.4);text-align:center;">
-        FIM Insurance Broker S.r.l. — <a href="${BASE_URL}/privacy-policy" style="color:rgba(255,255,255,0.4);">Privacy Policy</a>
+        FIM Insurance Broker S.a.s. — <a href="${BASE_URL}/privacy-policy" style="color:rgba(255,255,255,0.4);">Privacy Policy</a>
       </p>
     </div>
   </div>
@@ -47,7 +47,7 @@ function buildMagicLinkEmail(nome: string, magicLink: string): string {
 }
 
 export async function POST(req: NextRequest) {
-  const { ok, retryAfter } = rateLimit(req, { limit: 5, windowMs: 15 * 60_000 })
+  const { ok, retryAfter } = await rateLimit(req, { limit: 5, windowMs: 15 * 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppi tentativi. Riprova tra qualche minuto.' },

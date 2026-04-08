@@ -3,7 +3,7 @@ import Card from '@/components/ui/Card'
 
 export const metadata: Metadata = {
   title: 'Note Legali',
-  description: 'Note legali e informazioni societarie di FIM Insurance Broker S.r.l.',
+  description: 'Note legali e informazioni societarie di FIM Insurance Broker S.a.s.',
 }
 
 export default function NoteLegaliPage() {
@@ -18,18 +18,19 @@ export default function NoteLegaliPage() {
             <section>
               <h2>Informazioni societarie</h2>
               <p>
-                <strong>FIM Insurance Broker S.r.l.</strong><br />
+                <strong>FIM Insurance Broker S.a.s. di Manzo Arturo & C.</strong><br />
                 Sede legale: Via Roma 41, 04012 Cisterna di Latina (LT)<br />
                 P.IVA e C.F.: 02637640596<br />
-                REA: LT 187466<br />
-                Capitale sociale: € 50.000,00 i.v.
+                REA: LT - 187466<br />
+                PEC: fiminsurancebrokersas@pec.it<br />
+                Email: info@fimbroker.it
               </p>
             </section>
 
             <section>
               <h2>Iscrizione al Registro Unico degli Intermediari (RUI)</h2>
               <p>
-                FIM Insurance Broker S.r.l. è iscritta alla sezione B del Registro Unico degli
+                FIM Insurance Broker S.a.s. di Manzo Arturo & C. è iscritta alla sezione B del Registro Unico degli
                 Intermediari assicurativi e riassicurativi tenuto dall&apos;IVASS (Istituto per la
                 Vigilanza sulle Assicurazioni) con il numero <strong>B000405449</strong>.
               </p>
@@ -41,7 +42,7 @@ export default function NoteLegaliPage() {
             <section>
               <h2>Attività svolta</h2>
               <p>
-                FIM Insurance Broker S.r.l. svolge attività di intermediazione assicurativa in
+                FIM Insurance Broker S.a.s. di Manzo Arturo & C. svolge attività di intermediazione assicurativa in
                 qualità di broker. Non rappresenta alcuna compagnia assicurativa: agisce
                 nell&apos;esclusivo interesse dei propri clienti nella ricerca e negoziazione di
                 coperture assicurative.
@@ -52,7 +53,7 @@ export default function NoteLegaliPage() {
               <h2>Proprietà intellettuale</h2>
               <p>
                 Tutti i contenuti del presente sito web (testi, immagini, loghi, grafica) sono
-                di proprietà esclusiva di FIM Insurance Broker S.r.l. o dei rispettivi titolari
+                di proprietà esclusiva di FIM Insurance Broker S.a.s. di Manzo Arturo & C. o dei rispettivi titolari
                 e sono protetti dalle norme vigenti in materia di diritto d&apos;autore.
               </p>
               <p>
@@ -68,7 +69,7 @@ export default function NoteLegaliPage() {
                 assicurative sono quelle contenute nei contratti sottoscritti.
               </p>
               <p>
-                FIM Insurance Broker S.r.l. non è responsabile per eventuali danni derivanti
+                FIM Insurance Broker S.a.s. di Manzo Arturo & C. non è responsabile per eventuali danni derivanti
                 dall&apos;uso del sito o dall&apos;inaccessibilità temporanea dello stesso.
               </p>
             </section>
@@ -84,7 +85,7 @@ export default function NoteLegaliPage() {
             <section>
               <h2>Risoluzione alternativa delle controversie (ADR)</h2>
               <p>
-                In caso di controversie con i clienti, FIM Insurance Broker S.r.l. aderisce
+                In caso di controversie con i clienti, FIM Insurance Broker S.a.s. di Manzo Arturo & C. aderisce
                 alle procedure di risoluzione alternativa delle controversie previste dalla
                 normativa IVASS. Per informazioni: www.ivass.it/consumatori/reclami
               </p>

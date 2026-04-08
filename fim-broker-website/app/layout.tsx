@@ -3,6 +3,8 @@ import Script from 'next/script'
 import './globals.css'
 
 const GA_ID = 'G-F6DB47VZ4Z'
+const AW_ID = 'AW-18034188310'
+const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -71,7 +73,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': ['InsuranceAgency', 'LocalBusiness'],
   name: 'FIM Insurance Broker',
-  legalName: 'FIM Insurance Broker S.r.l.',
+  legalName: 'FIM Insurance Broker S.a.s. di Manzo Arturo & C.',
   url: BASE_URL,
   logo: `${BASE_URL}/icon.svg`,
   image: `${BASE_URL}/opengraph-image`,
@@ -175,8 +177,21 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
+            gtag('config', '${AW_ID}');
           `}
         </Script>
+        {/* Microsoft Clarity — heatmaps e session recordings */}
+        {CLARITY_ID && (
+          <Script id="microsoft-clarity" strategy="afterInteractive">
+            {`
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window,document,"clarity","script","${CLARITY_ID}");
+            `}
+          </Script>
+        )}
         {children}
       </body>
     </html>

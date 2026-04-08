@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
+import { saveSinistro } from '@/lib/sinistriStore'
 
 interface SinistriRequest {
   nome: string
@@ -14,6 +15,7 @@ interface SinistriRequest {
   descrizione: string
   privacy: boolean
   website?: string // honeypot
+  ai_summary?: string // summary from AI assistant conversation
 }
 
 function validateEmail(email: string): boolean {
@@ -41,9 +43,12 @@ async function syncSinistrToGestionale(data: {
   tipo_sinistro: string; data_evento: string
   numero_polizza?: string; compagnia?: string; descrizione: string
 }) {
-  if (!GESTIONALE_SECRET) return
+  if (!GESTIONALE_SECRET) {
+    console.warn('[gestionale] WEBSITE_API_SECRET non configurata — sync sinistro saltata')
+    return
+  }
   try {
-    await fetch(`${GESTIONALE_URL}/api/website/sinistro`, {
+    const res = await fetch(`${GESTIONALE_URL}/api/website/sinistro`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,13 +56,17 @@ async function syncSinistrToGestionale(data: {
       },
       body: JSON.stringify(data),
     })
-  } catch {
-    // fire-and-forget
+    if (!res.ok) {
+      const text = await res.text().catch(() => '')
+      console.error(`[gestionale] Sync sinistro fallita: HTTP ${res.status} — ${text}`)
+    }
+  } catch (err) {
+    console.error('[gestionale] Sync sinistro — errore di rete:', err)
   }
 }
 
 export async function POST(req: NextRequest) {
-  const { ok, retryAfter } = rateLimit(req, { limit: 5, windowMs: 60 * 60_000 })
+  const { ok, retryAfter } = await rateLimit(req, { limit: 5, windowMs: 60 * 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppe richieste. Riprova tra qualche ora.' },
@@ -81,6 +90,7 @@ export async function POST(req: NextRequest) {
     const numeroPolizza = sanitize(body.numero_polizza).slice(0, 100)
     const compagnia = sanitize(body.compagnia).slice(0, 100)
     const descrizione = sanitize(body.descrizione)
+    const aiSummary = body.ai_summary ? sanitize(body.ai_summary).slice(0, 3000) : ''
 
     if (!nome || !cognome || !email || !telefono || !tipoSinistro || !dataEvento || !descrizione) {
       return NextResponse.json({ error: 'Campi obbligatori mancanti' }, { status: 400 })
@@ -94,7 +104,20 @@ export async function POST(req: NextRequest) {
 
     const id = `SIN-${Date.now()}`
 
-    // Sincronizza nel gestionale (fire-and-forget)
+    // Salva sinistro su Supabase (o fallback JSON locale)
+    try {
+      await saveSinistro({
+        id,
+        nome, cognome, email, telefono,
+        tipoSinistro, dataEvento,
+        numeroPolizza: numeroPolizza || undefined,
+        compagnia: compagnia || undefined,
+        descrizione,
+        timestamp: new Date().toISOString(),
+      })
+    } catch { /* non blocca */ }
+
+    // Sincronizza nel gestionale esterno (fire-and-forget)
     syncSinistrToGestionale({
       nome, cognome, email, telefono, tipo_sinistro: tipoSinistro,
       data_evento: dataEvento,
@@ -138,6 +161,11 @@ export async function POST(req: NextRequest) {
         <p style="margin:0 0 8px;font-size:12px;color:#991b1b;font-weight:600;text-transform:uppercase;">Descrizione evento</p>
         <p style="margin:0;color:#475569;font-size:14px;line-height:1.6;">${escapeHtml(descrizione)}</p>
       </div>
+      ${aiSummary ? `
+      <div style="margin-top:16px;padding:16px;background:#f0fdf4;border-radius:8px;border-left:4px solid #16a34a;">
+        <p style="margin:0 0 8px;font-size:12px;color:#15803d;font-weight:600;text-transform:uppercase;">🤖 Sommario AI — conversazione con il cliente</p>
+        <p style="margin:0;color:#374151;font-size:13px;line-height:1.7;white-space:pre-line;">${escapeHtml(aiSummary)}</p>
+      </div>` : ''}
       <div style="margin-top:20px;text-align:center;">
         <a href="https://fim-gestionale-next.vercel.app/comunicazioni"
            style="display:inline-block;background:#0f2d6b;color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
@@ -182,7 +210,7 @@ export async function POST(req: NextRequest) {
     </div>
     <div style="background:#0f2d6b;padding:20px 32px;">
       <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.5);text-align:center;">
-        FIM Insurance Broker S.r.l. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
+        FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
       </p>
     </div>
   </div>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
-import SinistriForm from '@/components/forms/SinistriForm'
+import SinistriAIAssistant from '@/components/forms/SinistriAIAssistant'
 
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
@@ -207,14 +207,19 @@ export default function SinistriPage() {
         </div>
       </section>
 
-      {/* Form apertura sinistro */}
+      {/* AI Claims Assistant */}
       <section className="section-padding">
         <div className="container-custom max-w-2xl">
           <div className="text-center mb-10">
+            <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              Nuovo
+            </span>
             <h2 className="text-3xl font-black text-primary mb-3">Apri una pratica sinistro</h2>
-            <p className="text-gray-600">Compila il modulo e il nostro team ti contatterà entro 24 ore lavorative.</p>
+            <p className="text-gray-600">
+              Il nostro agente AI ti guida nella raccolta dei documenti giusti, pre-compila il modulo e notifica subito il team.
+            </p>
           </div>
-          <SinistriForm />
+          <SinistriAIAssistant />
         </div>
       </section>
 

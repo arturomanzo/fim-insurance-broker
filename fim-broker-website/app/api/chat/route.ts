@@ -5,7 +5,7 @@ import { rateLimit } from '@/lib/rateLimit'
 export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
-  const { ok, retryAfter } = rateLimit(req, { limit: 40, windowMs: 60_000 })
+  const { ok, retryAfter } = await rateLimit(req, { limit: 40, windowMs: 60_000 })
   if (!ok) {
     return NextResponse.json(
       { error: 'Troppe richieste. Attendi qualche secondo e riprova.' },

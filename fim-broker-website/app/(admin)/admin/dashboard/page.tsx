@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { verifyAdminToken, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth'
 import { getDashboardStats, getAllPolicies } from '@/lib/policyStore'
+import { getLeadsStats } from '@/lib/leadStore'
+import { getSinistriStats } from '@/lib/sinistriStore'
 import AdminShell from '@/components/admin/AdminShell'
 
 export const metadata: Metadata = { title: 'Dashboard' }
@@ -24,6 +26,8 @@ export default async function AdminDashboardPage() {
   if (!session?.value || !(await verifyAdminToken(session.value))) redirect('/admin/login')
 
   const stats = getDashboardStats()
+  const leadsStats = await getLeadsStats()
+  const sinistriStats = await getSinistriStats()
   const allPolicies = getAllPolicies()
   const expiring = allPolicies
     .filter((p) => p.stato === 'in-scadenza')
@@ -47,6 +51,14 @@ export default async function AdminDashboardPage() {
           value={`€${stats.totalPremioAnnuo.toLocaleString('it-IT')}`}
           sub="polizze attive e in-scadenza"
         />
+      </div>
+
+      {/* Lead e Sinistri */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <KpiCard label="Lead nuovi" value={leadsStats.nuovi} sub={`${leadsStats.total} totali`} color={leadsStats.nuovi > 0 ? 'text-blue-600' : 'text-gray-400'} />
+        <KpiCard label="Lead contattati" value={leadsStats.contattati} color="text-yellow-600" />
+        <KpiCard label="Sinistri aperti" value={sinistriStats.aperti} sub={`${sinistriStats.total} totali`} color={sinistriStats.aperti > 0 ? 'text-red-600' : 'text-gray-400'} />
+        <KpiCard label="Sinistri in lavorazione" value={sinistriStats.inLavorazione} color={sinistriStats.inLavorazione > 0 ? 'text-orange-600' : 'text-gray-400'} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">

@@ -1,7 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from '@/components/ui/Button'
+import { trackContactSubmit } from '@/lib/analytics'
+
+const UTM_SESSION_KEY = 'fim_utm'
+
+function getStoredUtmSource(): string | undefined {
+  if (typeof window === 'undefined') return undefined
+  try {
+    const raw = sessionStorage.getItem(UTM_SESSION_KEY)
+    if (raw) return JSON.parse(raw)?.utm_source
+  } catch { /* ignora */ }
+  return undefined
+}
 
 interface FormData {
   nome: string
@@ -24,6 +36,11 @@ export default function ContactForm() {
     website: '',
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [utmSource, setUtmSource] = useState<string | undefined>()
+
+  useEffect(() => {
+    setUtmSource(getStoredUtmSource())
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,6 +54,7 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       })
       if (!res.ok) throw new Error()
+      trackContactSubmit(utmSource)
       setStatus('success')
     } catch {
       setStatus('error')
