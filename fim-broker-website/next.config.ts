@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+import { withSentryConfig } from '@sentry/nextjs'
 
 const securityHeaders = [
   // Previene MIME sniffing sul Content-Type dichiarato
@@ -50,15 +51,17 @@ const securityHeaders = [
   // - maps.google.com + www.google.com in frame-src: Google Maps embed
   // - fonts.googleapis.com + fonts.gstatic.com: Google Fonts
   // - google-analytics.com + doubleclick.net in connect-src: beaconing GA4
+  // - *.sentry.io + *.ingest.sentry.io: error reporting
+  // - www.clarity.ms + c.bing.com: Microsoft Clarity heatmaps
   {
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https://maps.gstatic.com https://www.google-analytics.com https://images.unsplash.com",
-      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net",
+      "img-src 'self' data: blob: https://maps.gstatic.com https://www.google-analytics.com https://images.unsplash.com https://www.clarity.ms",
+      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://*.sentry.io https://*.ingest.sentry.io https://www.clarity.ms",
       "frame-src 'self' https://maps.google.com https://www.google.com",
       "frame-ancestors 'self'",
       "object-src 'none'",
@@ -93,4 +96,25 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+export default withSentryConfig(nextConfig, {
+  // Token per upload delle source maps (opzionale ma raccomandato)
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+
+  // Org e project Sentry
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+
+  // Non mostrare output verboso durante la build
+  silent: true,
+
+  // Disabilita telemetria verso Sentry durante la build
+  telemetry: false,
+
+  // Upload source maps solo in produzione
+  sourcemaps: {
+    disable: process.env.NODE_ENV !== 'production',
+  },
+
+  // Tunnel Sentry tramite il proprio dominio per bypassare ad-blocker
+  tunnelRoute: '/monitoring',
+})

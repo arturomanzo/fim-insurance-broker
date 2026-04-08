@@ -2,6 +2,18 @@
 
 import { useState, useEffect } from 'react'
 import Button from '@/components/ui/Button'
+import { trackPrenotazioneSubmit } from '@/lib/analytics'
+
+const UTM_SESSION_KEY = 'fim_utm'
+
+function getStoredUtmSource(): string | undefined {
+  if (typeof window === 'undefined') return undefined
+  try {
+    const raw = sessionStorage.getItem(UTM_SESSION_KEY)
+    if (raw) return JSON.parse(raw)?.utm_source
+  } catch { /* ignora */ }
+  return undefined
+}
 
 const SERVIZI = [
   'Assicurazione Auto',
@@ -44,6 +56,11 @@ export default function PrenotazioneForm() {
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [minDate, setMinDate] = useState('')
+  const [utmSource, setUtmSource] = useState<string | undefined>()
+
+  useEffect(() => {
+    setUtmSource(getStoredUtmSource())
+  }, [])
 
   useEffect(() => {
     // Calcola il giorno lavorativo successivo
@@ -77,6 +94,7 @@ export default function PrenotazioneForm() {
         body: JSON.stringify(formData),
       })
       if (!res.ok) throw new Error()
+      trackPrenotazioneSubmit(formData.servizio || 'non specificato', utmSource)
       setStatus('success')
     } catch {
       setStatus('error')
