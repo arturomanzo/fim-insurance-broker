@@ -19,13 +19,21 @@ export default async function AdminLeadsPage() {
   const session = cookieStore.get(ADMIN_SESSION_COOKIE)
   if (!session?.value || !(await verifyAdminToken(session.value))) redirect('/admin/login')
 
-  const leads = await getAllLeads()
+  const rawLeads = await getAllLeads()
+  // Ordina: prima per priorità (alta > media > bassa > non analizzato), poi per timestamp
+  const PRIORITY_ORDER = { alta: 0, media: 1, bassa: 2 }
+  const leads = [...rawLeads].sort((a, b) => {
+    const pa = a.ai_priority ? PRIORITY_ORDER[a.ai_priority] : 3
+    const pb = b.ai_priority ? PRIORITY_ORDER[b.ai_priority] : 3
+    if (pa !== pb) return pa - pb
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+  })
   const stats = await getLeadsStats()
 
   return (
     <AdminShell title="Lead — Richieste Preventivo">
       {/* KPI */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
         <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
           <div className="text-2xl font-black mb-1 text-primary">{stats.total}</div>
           <div className="text-sm font-medium text-gray-700">Totali</div>
@@ -41,6 +49,12 @@ export default async function AdminLeadsPage() {
         <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
           <div className="text-2xl font-black mb-1 text-green-600">{stats.chiusi}</div>
           <div className="text-sm font-medium text-gray-700">Chiusi</div>
+        </div>
+        <div className="bg-red-50 rounded-2xl border border-red-100 p-5 shadow-sm">
+          <div className="text-2xl font-black mb-1 text-red-600">
+            {leads.filter((l) => l.ai_priority === 'alta').length}
+          </div>
+          <div className="text-sm font-medium text-red-700">🔴 Alta priorità</div>
         </div>
       </div>
 

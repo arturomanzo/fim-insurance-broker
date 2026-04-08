@@ -21,6 +21,17 @@ create table if not exists website_leads (
 -- Indice per visualizzare i lead più recenti per primi
 create index if not exists website_leads_timestamp_idx on website_leads (timestamp desc);
 
+-- ── Migrazione: Lead Scoring AI ───────────────────────────────────────────────
+-- Da eseguire se la tabella website_leads esiste già
+alter table website_leads
+  add column if not exists ai_score      integer,
+  add column if not exists ai_priority   text check (ai_priority in ('alta', 'media', 'bassa')),
+  add column if not exists ai_reason     text,
+  add column if not exists ai_scored_at  timestamptz;
+
+-- Indice per filtrare/ordinare per score nell'admin
+create index if not exists website_leads_ai_score_idx on website_leads (ai_score desc nulls last);
+
 -- Segnalazioni sinistro dal form del sito
 create table if not exists website_sinistri (
   id              text primary key,
