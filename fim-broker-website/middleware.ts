@@ -54,6 +54,7 @@ export function middleware(request: NextRequest) {
   }
 
   // ── Admin API: full REST methods, requires admin session ──────────────────
+  // Allow login and logout endpoints without session
   if (pathname.startsWith('/api/admin/') && pathname !== '/api/admin/login' && pathname !== '/api/admin/logout') {
     const session = request.cookies.get(ADMIN_SESSION_COOKIE)
     if (!session?.value || !hasAdminTokenFormat(session.value)) {
