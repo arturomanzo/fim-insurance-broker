@@ -5,6 +5,17 @@ import { rateLimit } from '@/lib/rateLimit'
 export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
+  // Diagnostica API key all'avvio
+  const apiKey = process.env.ANTHROPIC_API_KEY ?? ''
+  if (!apiKey) {
+    console.error('FIMA: ANTHROPIC_API_KEY mancante')
+    return NextResponse.json({ error: 'Configurazione mancante' }, { status: 500 })
+  }
+  if (!apiKey.startsWith('sk-ant-')) {
+    console.error('FIMA: ANTHROPIC_API_KEY non valida — primi 20 char:', apiKey.slice(0, 20))
+    return NextResponse.json({ error: 'Configurazione non valida' }, { status: 500 })
+  }
+
   const { ok, retryAfter } = await rateLimit(req, { limit: 40, windowMs: 60_000 })
   if (!ok) {
     return NextResponse.json(
@@ -41,13 +52,23 @@ export async function POST(req: NextRequest) {
       ? String(pageContext).slice(0, 100).replace(/[^a-z0-9\-\/]/gi, '')
       : undefined
 
+    // Prima prova a creare lo stream per catturare errori prima di inviare la risposta
+    let anthropicStream
+    try {
+      anthropicStream = await createFIMAStream(sanitizedMessages, sanitizedPageContext)
+    } catch (initError) {
+      console.error('FIMA: Errore inizializzazione stream Anthropic:', initError)
+      return NextResponse.json(
+        { error: 'Errore di connessione al servizio AI' },
+        { status: 500 }
+      )
+    }
+
     // Create streaming response
     const encoder = new TextEncoder()
     const stream = new ReadableStream({
       async start(controller) {
         try {
-          const anthropicStream = await createFIMAStream(sanitizedMessages, sanitizedPageContext)
-
           for await (const chunk of anthropicStream) {
             if (
               chunk.type === 'content_block_delta' &&
@@ -61,7 +82,7 @@ export async function POST(req: NextRequest) {
           controller.enqueue(encoder.encode('data: [DONE]\n\n'))
           controller.close()
         } catch (error) {
-          console.error('Stream error:', error)
+          console.error('FIMA: Stream error:', error)
           const errData = JSON.stringify({ error: 'Errore durante lo streaming' })
           controller.enqueue(encoder.encode(`data: ${errData}\n\n`))
           controller.close()
@@ -77,7 +98,7 @@ export async function POST(req: NextRequest) {
       },
     })
   } catch (error) {
-    console.error('Chat API error:', error)
+    console.error('FIMA: Chat API error:', error)
     return NextResponse.json(
       { error: 'Errore interno del server' },
       { status: 500 }
