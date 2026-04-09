@@ -54,8 +54,10 @@ async function syncLeadToGestionale(data: {
     console.warn('[gestionale] WEBSITE_API_SECRET non configurata — sync lead saltata')
     return
   }
+  const url = `${GESTIONALE_URL}/api/website/lead`
+  console.log(`[gestionale] Invio lead a ${url} — ${data.nome} ${data.cognome}`)
   try {
-    const res = await fetch(`${GESTIONALE_URL}/api/website/lead`, {
+    const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -66,6 +68,9 @@ async function syncLeadToGestionale(data: {
     if (!res.ok) {
       const text = await res.text().catch(() => '')
       console.error(`[gestionale] Sync lead fallita: HTTP ${res.status} — ${text}`)
+    } else {
+      const result = await res.json().catch(() => ({}))
+      console.log(`[gestionale] Lead sincronizzata OK:`, result)
     }
   } catch (err) {
     console.error('[gestionale] Sync lead — errore di rete:', err)
@@ -367,13 +372,17 @@ export async function POST(req: NextRequest) {
     // Follow-up schedulato a 72 ore
     const followUpAt = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
 
-    // Salva lead su Supabase (o fallback JSON locale)
+    // Sincronizza lead nel gestionale esterno (PRIORITÀ — con await)
+    try {
+      await syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined })
+    } catch (syncErr) {
+      console.error('[preventivo] Sync gestionale fallita:', syncErr)
+    }
+
+    // Salva lead su Supabase locale del sito (secondario)
     try {
       await saveLead({ id: preventivoData.id, nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined, timestamp: preventivoData.timestamp })
     } catch { /* non blocca */ }
-
-    // Sincronizza lead nel gestionale esterno (fire-and-forget)
-    syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined })
 
     // Invia email se Resend è configurato
     if (resend) {
