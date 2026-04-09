@@ -97,10 +97,9 @@ export async function POST(req: NextRequest) {
       },
     })
   } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error)
-    console.error('FIMA: Chat API error:', msg, error)
+    console.error('FIMA: Chat API error:', error)
     return NextResponse.json(
-      { error: 'Errore interno del server', debug: msg },
+      { error: 'Errore interno del server' },
       { status: 500 }
     )
   }
