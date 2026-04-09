@@ -16,15 +16,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Configurazione non valida' }, { status: 500 })
   }
 
-  const { ok, retryAfter } = await rateLimit(req, { limit: 40, windowMs: 60_000 })
-  if (!ok) {
-    return NextResponse.json(
-      { error: 'Troppe richieste. Attendi qualche secondo e riprova.' },
-      { status: 429, headers: { 'Retry-After': String(retryAfter) } },
-    )
-  }
-
   try {
+    const { ok, retryAfter } = await rateLimit(req, { limit: 40, windowMs: 60_000 })
+    if (!ok) {
+      return NextResponse.json(
+        { error: 'Troppe richieste. Attendi qualche secondo e riprova.' },
+        { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+      )
+    }
     const body = await req.json()
     const { messages, pageContext } = body
 
