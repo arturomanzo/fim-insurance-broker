@@ -1,7 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '@/components/ui/Button'
+import { trackCollaboraSubmit } from '@/lib/analytics'
+import { PROFILI, ESPERIENZE } from '@/lib/collabora'
+
+const UTM_SESSION_KEY = 'fim_utm'
+
+function getStoredUtmSource(): string | undefined {
+  if (typeof window === 'undefined') return undefined
+  try {
+    const raw = sessionStorage.getItem(UTM_SESSION_KEY)
+    if (raw) return JSON.parse(raw)?.utm_source
+  } catch { /* ignora */ }
+  return undefined
+}
 
 interface FormData {
   nome: string
@@ -16,25 +29,6 @@ interface FormData {
   privacy: boolean
   website: string // honeypot
 }
-
-const profili = [
-  { value: '', label: 'Seleziona il tuo profilo' },
-  { value: 'subagente', label: 'Subagente / Collaboratore (RUI Sez. E)' },
-  { value: 'broker', label: 'Broker (RUI Sez. B)' },
-  { value: 'agente', label: 'Agente (RUI Sez. A)' },
-  { value: 'segnalatore', label: 'Segnalatore / Introduttore' },
-  { value: 'giovane-talento', label: 'Giovane talento / Neolaureato' },
-  { value: 'altro', label: 'Altro' },
-]
-
-const esperienze = [
-  { value: '', label: 'Seleziona la tua esperienza' },
-  { value: 'nessuna', label: 'Nessuna esperienza nel settore' },
-  { value: '1-3', label: '1 - 3 anni' },
-  { value: '3-5', label: '3 - 5 anni' },
-  { value: '5-10', label: '5 - 10 anni' },
-  { value: '10+', label: 'Oltre 10 anni' },
-]
 
 export default function CollaboraForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -52,6 +46,11 @@ export default function CollaboraForm() {
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const [utmSource, setUtmSource] = useState<string | undefined>()
+
+  useEffect(() => {
+    setUtmSource(getStoredUtmSource())
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -71,6 +70,7 @@ export default function CollaboraForm() {
         setStatus('error')
         return
       }
+      trackCollaboraSubmit(formData.profilo, utmSource)
       setStatus('success')
     } catch {
       setErrorMsg('Errore di rete. Riprova.')
@@ -190,8 +190,9 @@ export default function CollaboraForm() {
           required
           className="input-field"
         >
-          {profili.map((p) => (
-            <option key={p.value} value={p.value} disabled={p.value === ''}>
+          <option value="" disabled>Seleziona il tuo profilo</option>
+          {PROFILI.map((p) => (
+            <option key={p.value} value={p.value}>
               {p.label}
             </option>
           ))}
@@ -207,8 +208,9 @@ export default function CollaboraForm() {
           onChange={handleChange}
           className="input-field"
         >
-          {esperienze.map((e) => (
-            <option key={e.value} value={e.value} disabled={e.value === ''}>
+          <option value="" disabled>Seleziona la tua esperienza</option>
+          {ESPERIENZE.map((e) => (
+            <option key={e.value} value={e.value}>
               {e.label}
             </option>
           ))}

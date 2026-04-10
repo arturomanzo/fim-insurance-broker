@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
+import { PROFILO_LABELS, ESPERIENZA_LABELS, isValidProfilo } from '@/lib/collabora'
 
 interface CollaboraRequest {
   nome: string
@@ -21,7 +22,7 @@ function validateEmail(email: string): boolean {
 }
 
 function sanitize(value: unknown): string {
-  return String(value ?? '').trim().slice(0, 2000)
+  return String(value ?? '').trim().slice(0, 1000)
 }
 
 function escapeHtml(str: string): string {
@@ -33,21 +34,12 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#39;')
 }
 
-const profiloLabels: Record<string, string> = {
-  subagente: 'Subagente / Collaboratore (RUI Sez. E)',
-  broker: 'Broker (RUI Sez. B)',
-  agente: 'Agente (RUI Sez. A)',
-  segnalatore: 'Segnalatore / Introduttore',
-  'giovane-talento': 'Giovane talento / Neolaureato',
-  altro: 'Altro',
+function getProfiloLabel(value: string): string {
+  return isValidProfilo(value) ? PROFILO_LABELS[value] : value
 }
 
-const esperienzaLabels: Record<string, string> = {
-  nessuna: 'Nessuna esperienza',
-  '1-3': '1 - 3 anni',
-  '3-5': '3 - 5 anni',
-  '5-10': '5 - 10 anni',
-  '10+': 'Oltre 10 anni',
+function getEsperienzaLabel(value: string): string {
+  return (ESPERIENZA_LABELS as Record<string, string>)[value] || value
 }
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
@@ -70,10 +62,10 @@ function buildTeamEmailHtml(data: {
   const nome = escapeHtml(data.nome)
   const email = escapeHtml(data.email)
   const telefono = escapeHtml(data.telefono)
-  const profilo = escapeHtml(profiloLabels[data.profilo] || data.profilo)
+  const profilo = escapeHtml(getProfiloLabel(data.profilo))
   const iscrizioneRui = escapeHtml(data.iscrizioneRui)
   const numeroRui = escapeHtml(data.numeroRui)
-  const esperienza = escapeHtml(esperienzaLabels[data.esperienza] || data.esperienza)
+  const esperienza = escapeHtml(getEsperienzaLabel(data.esperienza))
   const zona = escapeHtml(data.zona)
   const messaggio = escapeHtml(data.messaggio)
 
@@ -252,7 +244,7 @@ export async function POST(req: NextRequest) {
     if (!body.privacy) {
       return NextResponse.json({ error: 'Consenso privacy obbligatorio' }, { status: 400 })
     }
-    if (!profiloLabels[profilo]) {
+    if (!isValidProfilo(profilo)) {
       return NextResponse.json({ error: 'Profilo non valido' }, { status: 400 })
     }
 
@@ -275,7 +267,7 @@ export async function POST(req: NextRequest) {
         resend.emails.send({
           from: FIM_FROM,
           to: [FIM_EMAIL],
-          subject: `[Collabora con Noi] ${profiloLabels[profilo] || profilo} — ${nome}`,
+          subject: `[Collabora con Noi] ${getProfiloLabel(profilo)} — ${nome}`,
           html: buildTeamEmailHtml(candidaturaData),
         }),
         resend.emails.send({

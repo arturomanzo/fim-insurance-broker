@@ -61,6 +61,17 @@ export function trackPrenotazioneSubmit(servizio: string, utmSource?: string) {
   })
 }
 
+// ── Funnel collabora con noi ─────────────────────────────────────────────────
+
+/** Form candidatura collabora inviato */
+export function trackCollaboraSubmit(profilo: string, utmSource?: string) {
+  track('generate_lead', {
+    event_category: 'collabora',
+    profilo,
+    utm_source: utmSource ?? '(direct)',
+  })
+}
+
 // ── Abbandono funnel ─────────────────────────────────────────────────────────
 
 /**
