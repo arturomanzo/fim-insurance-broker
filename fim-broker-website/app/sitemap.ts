@@ -27,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/area-cliente`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE_URL}/contatti`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE_URL}/collabora-con-noi`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     // Soluzioni per settore
     { url: `${BASE_URL}/soluzioni`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/famiglie`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
