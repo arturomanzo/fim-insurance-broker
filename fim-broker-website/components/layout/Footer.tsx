@@ -29,6 +29,7 @@ const companyLinks = [
   { href: '/blog', label: 'Blog & News' },
   { href: '/prenota-consulenza', label: 'Prenota Consulenza' },
   { href: '/preventivo', label: 'Richiedi Preventivo' },
+  { href: '/collabora-con-noi', label: 'Collabora con Noi' },
   { href: '/contatti', label: 'Contatti' },
   { href: '/area-cliente', label: '🔐 Area Cliente' },
 ]
