@@ -3,6 +3,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm ci",
+  "redirects": [
+    { "source": "/Post", "destination": "/blog", "permanent": true },
+    { "source": "/post", "destination": "/blog", "permanent": true }
+  ],
   "crons": [
     {
       "path": "/api/cron/reminder-rinnovi",
