@@ -30,6 +30,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE_URL}/contatti`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE_URL}/collabora-con-noi`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    // Geo-landing pages SEO locale
+    { url: `${BASE_URL}/broker-assicurativo-latina`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/broker-assicurativo-cisterna-di-latina`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/broker-assicurativo-aprilia`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     // Soluzioni per settore
     { url: `${BASE_URL}/soluzioni`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/famiglie`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
