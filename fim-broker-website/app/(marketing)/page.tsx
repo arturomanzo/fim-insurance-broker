@@ -223,7 +223,7 @@ export default function HomePage() {
                 <div key={item.step} className="flex flex-col items-center text-center group">
                   <div className="relative mb-5">
                     <div className="w-20 h-20 rounded-2xl gradient-primary flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
-                      <span className="text-3xl">{item.icon}</span>
+                      <span className="text-3xl" aria-hidden="true">{item.icon}</span>
                     </div>
                     <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-accent text-white text-xs font-black flex items-center justify-center shadow">
                       {item.step}
@@ -302,7 +302,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyFIM.map((item) => (
               <Card key={item.title} className="text-center">
-                <div className="text-4xl mb-4">{item.icon}</div>
+                <div className="text-4xl mb-4" aria-hidden="true">{item.icon}</div>
                 <h3 className="font-bold text-primary mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
               </Card>

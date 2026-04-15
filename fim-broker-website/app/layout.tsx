@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
 const GA_ID = 'G-F6DB47VZ4Z'
 const AW_ID = 'AW-18034188310'
@@ -113,6 +120,7 @@ const jsonLd = {
     'https://www.facebook.com/FimInsuranceBroker/',
     'https://www.instagram.com/fiminsurancebroker/',
     'https://x.com/fimbroker',
+    'https://www.linkedin.com/company/fim-insurance-broker',
   ],
   areaServed: {
     '@type': 'Country',
@@ -145,13 +153,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="it">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&display=swap" />
-      </head>
-      <body className="min-h-screen flex flex-col">
+    <html lang="it" className={inter.variable}>
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
         <noscript>
           <div style={{
             position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
