@@ -1,6 +1,66 @@
 {
   "posts": [
     {
+      "slug": "come-scegliere-polizza-cyber-pmi",
+      "title": "Come Scegliere la Polizza Cyber Giusta per la Tua PMI: Guida Pratica 2026",
+      "excerpt": "La tua azienda è davvero protetta da un attacco informatico? Ecco come scegliere la polizza cyber più adatta, evitando errori comuni e coperture inutili.",
+      "category": "Aziendale",
+      "date": "17 Aprile 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1563986768609-322da13575f2?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Perché nel 2026 una PMI non può più ignorare il rischio cyber",
+          "body": "Se gestisci una piccola o media impresa in Italia, probabilmente pensi che gli attacchi informatici colpiscano solo le grandi aziende. La realtà è molto diversa: secondo i dati del Clusit, oltre il 40% degli attacchi informatici in Italia colpisce le PMI, spesso con conseguenze devastanti. Un ransomware che blocca i sistemi per una settimana, un furto di dati clienti che viola il GDPR, un attacco alla posta elettronica aziendale che devia un bonifico verso un conto fraudolento — sono scenari che vediamo sempre più spesso tra i nostri clienti. Con l'entrata in vigore della Direttiva NIS2, recepita in Italia con il D.Lgs. 138/2024, le aziende di settori critici e importanti hanno nuovi obblighi di sicurezza informatica. Anche se la NIS2 non impone esplicitamente una polizza cyber, le sanzioni per inadempienza alle misure di sicurezza rendono la copertura assicurativa una scelta strategica per qualsiasi impresa che tratti dati digitali.",
+          "list": [
+            "Il costo medio di un data breach per una PMI italiana supera i 50.000 euro tra fermo attività, ripristino e sanzioni",
+            "Il ransomware è la minaccia numero uno: blocca i sistemi e chiede un riscatto per sbloccarli",
+            "Il GDPR (Reg. UE 2016/679) prevede sanzioni fino al 4% del fatturato per violazioni dei dati personali",
+            "La Direttiva NIS2 (D.Lgs. 138/2024) amplia gli obblighi di cybersicurezza a nuovi settori",
+            "Le PMI sono bersagli preferiti perché hanno difese meno sofisticate rispetto alle grandi aziende"
+          ]
+        },
+        {
+          "heading": "Cosa copre realmente una polizza cyber (e cosa no)",
+          "body": "Una polizza cyber non è un prodotto standard: le coperture variano enormemente da una compagnia all'altra e il diavolo si nasconde nei dettagli. Una polizza ben strutturata dovrebbe coprire tre macro-aree: i danni diretti alla tua azienda, i danni a terzi e i servizi di assistenza post-incidente. Ma attenzione alle esclusioni, che sono spesso la parte più importante del contratto. Molte polizze escludono i danni causati da errori umani dei dipendenti (che rappresentano oltre il 70% delle cause di incidenti cyber), i danni da fornitori terzi compromessi (il cosiddetto supply chain attack) o gli eventi di guerra cibernetica. Leggere e comprendere queste esclusioni prima di firmare è fondamentale — ed è esattamente il tipo di lavoro che un broker indipendente come FIM fa per te.",
+          "list": [
+            "Danni diretti: costi di ripristino sistemi, perdita di dati, fermo attività (business interruption), pagamento del riscatto (attenzione: non tutte le polizze lo coprono)",
+            "Responsabilità civile verso terzi: risarcimento clienti/fornitori per violazione dei loro dati personali o aziendali",
+            "Spese legali e normative: difesa in caso di procedimenti GDPR, notifiche al Garante Privacy, comunicazione agli interessati",
+            "Servizi di incident response: accesso a team di esperti forensi, gestione crisi comunicativa, consulenza legale specializzata",
+            "Esclusioni comuni: danni da guerra cibernetica, vulnerabilità note non corrette, mancato aggiornamento software, frode interna dolosa"
+          ]
+        },
+        {
+          "heading": "I 5 errori che le PMI commettono quando scelgono una polizza cyber",
+          "body": "Nella nostra esperienza di broker specializzato in coperture aziendali, vediamo ripetersi sempre gli stessi errori quando le PMI si avvicinano per la prima volta alla polizza cyber. Conoscerli in anticipo ti permette di evitare coperture inadeguate e brutte sorprese al momento del sinistro.",
+          "list": [
+            "Scegliere solo in base al prezzo: una polizza da 500 euro l'anno che esclude il ransomware e il fermo attività non ti protegge da nulla. Meglio spendere qualcosa in più per una copertura reale",
+            "Non dichiarare correttamente il profilo di rischio: se nel questionario ometti che non fai backup regolari o che usi software obsoleto, la compagnia può rifiutare il risarcimento per dichiarazione inesatta",
+            "Ignorare i sublimiti: molte polizze hanno un massimale apparentemente alto (es. 500.000 euro) ma con sublimiti per voce (es. max 50.000 per ransomware, max 30.000 per business interruption). Controlla sempre i sublimiti, non solo il massimale",
+            "Non aggiornare la polizza: se la tua azienda cresce, acquisisce nuovi clienti, apre un e-commerce o adotta il lavoro da remoto, il profilo di rischio cambia. La polizza va aggiornata di conseguenza",
+            "Pensare che l'antivirus basti: la polizza cyber non sostituisce le misure di sicurezza, ma le integra. Le compagnie premiano le aziende che investono in prevenzione con premi più bassi e coperture più ampie"
+          ]
+        },
+        {
+          "heading": "Come valutare il premio: quanto costa e da cosa dipende",
+          "body": "Il costo di una polizza cyber per una PMI italiana dipende da diversi fattori che la compagnia valuta attraverso un questionario dettagliato. Conoscere questi fattori ti aiuta a capire perché il premio varia e come ottimizzarlo. In linea generale, per una PMI con fatturato fino a 2 milioni di euro, il premio annuo di una buona polizza cyber oscilla tra 800 e 3.000 euro — una cifra che va confrontata con il costo potenziale di un singolo incidente (spesso superiore a 50.000 euro). Le aziende che dimostrano buone pratiche di sicurezza informatica — backup regolari, autenticazione a due fattori, formazione del personale, aggiornamenti tempestivi — ottengono premi significativamente più bassi. Richiedere più preventivi attraverso un broker è il modo più efficace per trovare il miglior rapporto copertura-prezzo, perché il broker conosce i questionari delle varie compagnie e ti aiuta a presentare il profilo nel modo più favorevole possibile.",
+          "list": [
+            "Settore di attività: sanità, finanza e e-commerce pagano di più per il maggior volume di dati sensibili trattati",
+            "Fatturato e numero dipendenti: dimensioni maggiori = esposizione maggiore = premio più alto",
+            "Misure di sicurezza adottate: backup, MFA, formazione, firewall, SOC/SIEM riducono il premio",
+            "Storico sinistri: precedenti incidenti informatici aumentano il premio o limitano le compagnie disponibili",
+            "Massimale e franchigia scelti: massimali più alti e franchigie più basse costano di più ma proteggono meglio",
+            "Tipologia claims made vs loss occurrence: la maggior parte delle polizze cyber è claims made — verifica sempre la retroattività"
+          ]
+        },
+        {
+          "heading": "FIM Insurance Broker: il tuo consulente cyber indipendente",
+          "body": "Scegliere la polizza cyber giusta per la tua PMI richiede competenza specifica: non basta confrontare i prezzi, bisogna comprendere le esclusioni, i sublimiti, le clausole di retroattività e le condizioni di incident response di ogni compagnia. In FIM Insurance Broker, con sede a Cisterna di Latina, analizziamo il profilo di rischio della tua azienda e confrontiamo le offerte di oltre 30 compagnie partner per costruire la copertura più adatta alle tue esigenze reali. Non lavoriamo per nessuna compagnia: lavoriamo per te. Se vuoi capire se la tua azienda è adeguatamente protetta dal rischio informatico — o se stai pagando troppo per una copertura inadeguata — contattaci per una consulenza gratuita e senza impegno. Chiamaci al +39 06 96883381, scrivici a info@fimbroker.it o prenota direttamente un appuntamento dal nostro sito."
+        }
+      ]
+    },
+    {
       "slug": "polizza-sanitaria-integrativa-2025-2026",
       "title": "Polizza Sanitaria Integrativa 2025-2026: Perché Sempre Più Italiani Scelgono una Copertura Privata",
       "excerpt": "Il Servizio Sanitario Nazionale garantisce assistenza a tutti, ma lunghe liste d'attesa e costi crescenti spingono privati e aziende a valutare una polizza sanitaria integrativa. Scopri come funziona, cosa copre e come scegliere quella giusta.",
