@@ -224,6 +224,20 @@ npx tsc --noEmit      # typecheck (non c'è script dedicato in package.json)
 
 ---
 
+## Skill custom FIM (in `.claude/skills/`)
+
+Il repo contiene skill custom che Claude Code può invocare automaticamente quando l'utente chiede determinati task. Sono cucite su misura per il business FIM (tono, compliance, stack).
+
+| Skill | Quando si attiva |
+|---|---|
+| **`fim-blog-writer`** | Utente chiede di scrivere articoli blog SEO in italiano seguendo brand voice e struttura JSON del sito |
+| **`fim-policy-analyzer`** | Utente fornisce un PDF di polizza/contratto/denuncia sinistro o chiede analisi/confronto polizze |
+| **`fim-ivass-watcher`** | Utente chiede novità IVASS/ANIA/settore o idee per contenuti blog/newsletter |
+
+Le skill sono documentate in `.claude/skills/<nome>/SKILL.md`. Per aggiungerne di nuove segui lo stesso formato (frontmatter YAML con `name` + `description` che funge da trigger + body markdown con istruzioni).
+
+---
+
 ## Mantenere questo file aggiornato
 
 Quando il progetto evolve in modo non banale (nuovi pattern, nuovi pacchetti, nuove convenzioni, breaking change architetturali), aggiorna questo file nello stesso commit del cambiamento. Le sessioni future avranno sempre il contesto giusto senza dover rifare discovery da zero.
