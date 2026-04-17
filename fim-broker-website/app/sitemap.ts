@@ -4,6 +4,7 @@ import { services } from '@/lib/services'
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
 const blogSlugs = [
+  'legge-34-2026-addio-rc-auto-muletti-mezzi-agricoli',
   'come-scegliere-polizza-cyber-pmi',
   'assicurazione-condominio-guida-completa',
   'differenza-broker-agente-assicurativo',
