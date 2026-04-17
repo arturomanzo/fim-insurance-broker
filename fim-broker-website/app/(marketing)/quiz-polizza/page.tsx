@@ -17,6 +17,7 @@ const InsuranceQuiz = dynamic(() => import('@/components/ui/InsuranceQuiz'), {
 export const metadata: Metadata = {
   title: 'Di che polizza hai bisogno? — Quiz Gratuito',
   description: 'Rispondi a 4 domande e scopri quali coperture assicurative ti servono davvero. Quiz gratuito e personalizzato per privati, professionisti e aziende.',
+  alternates: { canonical: '/quiz-polizza' },
   openGraph: {
     title: 'Di che polizza hai bisogno? — FIM Insurance Broker',
     description: '4 domande per scoprire le coperture giuste per te. Gratis, senza impegno.',

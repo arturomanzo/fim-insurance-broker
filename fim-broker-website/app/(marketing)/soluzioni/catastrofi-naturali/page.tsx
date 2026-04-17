@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'Assicurazione Catastrofi Naturali — Alluvioni, Terremoti, Grandinate',
   description:
     "Polizze per catastrofi naturali: alluvioni, terremoti, grandinate, frane. Dal 2025 obbligatoria per le imprese italiane. Preventivo gratuito da FIM Insurance Broker.",
+  alternates: { canonical: '/soluzioni/catastrofi-naturali' },
   openGraph: {
     images: [{ url: '/api/og?title=Catastrofi+Naturali&tag=Soluzioni&sub=Alluvioni%2C+terremoti%2C+grandinate%2C+frane.+Obbligatoria+per+le+imprese+dal+2025.', width: 1200, height: 630 }],
   },

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Glossario Assicurativo — Tutti i Termini Spiegati in Modo Semplice',
   description:
     'Scopri il significato di franchigia, massimale, rivalsa, coassicurazione e altri termini assicurativi. Glossario gratuito curato dai broker FIM.',
+  alternates: { canonical: '/glossario' },
   openGraph: {
     title: 'Glossario Assicurativo — FIM Insurance Broker',
     description: 'Tutti i termini assicurativi spiegati in modo chiaro. Franchigia, massimale, rivalsa e molto altro.',

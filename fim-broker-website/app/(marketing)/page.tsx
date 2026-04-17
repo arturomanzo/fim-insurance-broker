@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   },
   description:
     'Broker assicurativo indipendente a Roma e nel Lazio. Confrontiamo le offerte di 30+ compagnie per trovare la polizza giusta per te: auto, casa, vita, salute, azienda. Preventivo gratuito in 24 ore.',
+  alternates: { canonical: '/' },
   openGraph: {
     title: 'FIM Insurance Broker — Soluzioni Assicurative Personalizzate',
     description: 'Broker indipendente con 20 anni di esperienza. Confrontiamo 30+ compagnie per trovare la polizza giusta per te.',

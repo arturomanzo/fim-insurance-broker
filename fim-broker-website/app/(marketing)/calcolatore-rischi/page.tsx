@@ -47,6 +47,7 @@ const faqJsonLd = {
 export const metadata: Metadata = {
   title: 'Calcolatore Rischio Assicurativo Gratuito | FIM Insurance Broker',
   description: 'Scopri in 2 minuti il tuo profilo di rischio assicurativo. Analisi gratuita personalizzata per privati, professionisti, PMI e imprese. Coperture raccomandate e preventivo immediato.',
+  alternates: { canonical: '/calcolatore-rischi' },
   openGraph: {
     title: 'Calcolatore Rischio Assicurativo Gratuito — FIM Insurance Broker',
     description: 'Analisi del rischio personalizzata in 2 minuti. Scopri quali coperture ti servono davvero.',

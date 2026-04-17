@@ -8,6 +8,7 @@ import { getAllPosts } from '@/lib/blog'
 export const metadata: Metadata = {
   title: 'Blog & News Assicurative',
   description: 'Rimani aggiornato con guide, news e consigli dal mondo delle assicurazioni. FIM Insurance Broker.',
+  alternates: { canonical: '/blog' },
   openGraph: {
     images: [{ url: '/api/og?title=Blog+%26+News&tag=FIM+Insurance+Broker&sub=Guide%2C+news+e+consigli+dal+mondo+delle+assicurazioni.', width: 1200, height: 630 }],
   },

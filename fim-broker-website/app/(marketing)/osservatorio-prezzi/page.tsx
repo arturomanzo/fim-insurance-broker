@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'Osservatorio Prezzi Assicurativi 2025 — Trend e Analisi del Mercato Italiano',
   description:
     'Dati aggiornati sui prezzi delle polizze assicurative in Italia: RC Auto, casa, vita, salute e aziendali. Report trimestrale con trend, variazioni e previsioni. Curato dai broker FIM.',
+  alternates: { canonical: '/osservatorio-prezzi' },
   openGraph: {
     title: 'Osservatorio Prezzi Assicurativi 2025 — FIM Insurance Broker',
     description: 'Trend aggiornati sui premi assicurativi italiani. RC Auto, casa, vita, salute, aziendali.',

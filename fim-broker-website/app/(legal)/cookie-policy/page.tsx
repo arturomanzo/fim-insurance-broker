@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 export const metadata: Metadata = {
   title: 'Cookie Policy',
   description: 'Informativa sull\'uso dei cookie sul sito FIM Insurance Broker.',
+  alternates: { canonical: '/cookie-policy' },
 }
 
 export default function CookiePolicyPage() {

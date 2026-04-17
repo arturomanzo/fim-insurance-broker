@@ -6,6 +6,7 @@ import Card from '@/components/ui/Card'
 export const metadata: Metadata = {
   title: 'Servizi Assicurativi',
   description: 'Scopri tutti i servizi assicurativi FIM: auto, vita, casa, salute, polizze aziendali e viaggio. Soluzioni personalizzate per privati e imprese.',
+  alternates: { canonical: '/servizi' },
   openGraph: {
     images: [{ url: '/api/og?title=Servizi+Assicurativi&tag=FIM+Insurance+Broker&sub=Auto%2C+vita%2C+casa%2C+salute%2C+polizze+aziendali+e+viaggio.+Soluzioni+personalizzate.', width: 1200, height: 630 }],
   },

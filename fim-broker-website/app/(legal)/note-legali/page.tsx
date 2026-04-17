@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 export const metadata: Metadata = {
   title: 'Note Legali',
   description: 'Note legali e informazioni societarie di FIM Insurance Broker S.a.s.',
+  alternates: { canonical: '/note-legali' },
 }
 
 export default function NoteLegaliPage() {

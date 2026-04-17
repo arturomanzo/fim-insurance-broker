@@ -54,6 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       type: 'article',
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],

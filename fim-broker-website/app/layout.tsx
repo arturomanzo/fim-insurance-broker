@@ -33,9 +33,6 @@ export const metadata: Metadata = {
     'assicurazione azienda',
   ],
   metadataBase: new URL(BASE_URL),
-  alternates: {
-    canonical: BASE_URL,
-  },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },

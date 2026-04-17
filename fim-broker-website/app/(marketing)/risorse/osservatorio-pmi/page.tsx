@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     'polizza aziendale quanto costa',
     'osservatorio assicurazioni pmi italia',
   ],
+  alternates: { canonical: '/risorse/osservatorio-pmi' },
   openGraph: {
     title: 'Osservatorio PMI Assicurazioni 2025',
     description: 'Benchmark esclusivi sui costi assicurativi per le PMI italiane: dati per settore, dimensione aziendale e tipologia di copertura.',

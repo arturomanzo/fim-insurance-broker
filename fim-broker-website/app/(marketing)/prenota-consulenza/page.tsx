@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'Prenota una Consulenza Gratuita | FIM Insurance Broker',
   description:
     'Prenota un appuntamento con un consulente FIM. Consulenza assicurativa gratuita e senza impegno, in ufficio o in videochiamata. Risposta entro poche ore.',
+  alternates: { canonical: '/prenota-consulenza' },
   openGraph: {
     images: [{ url: '/api/og?title=Prenota+Consulenza&tag=FIM+Insurance+Broker&sub=Consulenza+gratuita+e+senza+impegno.+In+ufficio+o+in+videochiamata.', width: 1200, height: 630 }],
   },
