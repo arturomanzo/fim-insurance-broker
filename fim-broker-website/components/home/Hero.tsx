@@ -86,8 +86,8 @@ export default function Hero() {
           <div className="hidden lg:block relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
               <Image
-                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1000&q=80&fit=crop&auto=format"
-                alt="Consulente FIM Insurance Broker con cliente"
+                src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?w=1000&q=80&fit=crop&auto=format"
+                alt="Consulente FIM Insurance Broker durante una consulenza con cliente"
                 fill
                 className="object-cover"
                 priority
