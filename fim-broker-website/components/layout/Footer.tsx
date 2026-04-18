@@ -11,6 +11,7 @@ const serviceLinks = [
   { href: '/servizi/assicurazione-salute', label: 'Assicurazione Salute' },
   { href: '/servizi/polizze-aziendali', label: 'Polizze Aziendali' },
   { href: '/servizi/assicurazione-viaggio', label: 'Assicurazione Viaggio' },
+  { href: '/servizi/cauzioni-fideiussioni', label: 'Cauzioni e Fideiussioni' },
 ]
 
 const soluzioniLinks = [
