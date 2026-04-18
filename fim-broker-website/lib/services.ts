@@ -326,6 +326,58 @@ export const services: Service[] = [
     priceFrom: 'da 15€ a viaggio',
     priceNote: 'Singolo viaggio Europa. Long-stay e polizze annuali disponibili.',
   },
+  {
+    slug: 'cauzioni-fideiussioni',
+    title: 'Cauzioni e Fideiussioni',
+    shortDescription: 'Fideiussioni assicurative per appalti, locazioni, doganali, fiscali e molto altro. Emissione in 24-48 ore.',
+    description:
+      'Le cauzioni e fideiussioni assicurative sostituiscono le garanzie bancarie tradizionali, liberando liquidità e linee di credito per la tua impresa. Come broker indipendente confrontiamo le offerte delle compagnie specializzate per ottenere la cauzione giusta al costo più competitivo, con tempi di emissione rapidi — generalmente entro 24-48 ore lavorative.',
+    icon: '🔐',
+    color: 'amber',
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80&fit=crop&auto=format',
+    features: [
+      'Cauzioni per appalti pubblici (provvisorie e definitive)',
+      'Cauzioni per appalti privati',
+      'Cauzioni doganali (IVA, dazi, accise)',
+      'Cauzioni fiscali (rateizzazioni Agenzia delle Entrate)',
+      'Fideiussioni per locazioni commerciali e abitative',
+      'Cauzioni edilizie (oneri urbanistici, scomputo)',
+      'Cauzioni giudiziarie',
+      'Cauzioni per rimborso IVA',
+    ],
+    benefits: [
+      'Emissione in 24-48 ore lavorative',
+      'Importi fino a 500.000€',
+      'Nessun blocco di liquidità (a differenza della fideiussione bancaria)',
+      'Nessun impatto sulle linee di credito bancarie',
+      'Confronto tra compagnie specializzate',
+      'Assistenza completa nella documentazione',
+    ],
+    faq: [
+      {
+        question: 'Qual è la differenza tra fideiussione bancaria e fideiussione assicurativa?',
+        answer: 'La fideiussione bancaria viene emessa dalla banca e blocca una quota del tuo plafond creditizio: in pratica, riduce la capacità della tua azienda di ottenere altri finanziamenti. La fideiussione assicurativa viene emessa da una compagnia assicurativa e non incide sulle tue linee di credito. L\'effetto giuridico è identico — il beneficiario è garantito allo stesso modo — ma quella assicurativa ti lascia libero di usare il credito bancario per il tuo business.',
+      },
+      {
+        question: 'Quanto tempo serve per ottenere una fideiussione assicurativa?',
+        answer: 'Con FIM Insurance Broker i tempi di emissione sono generalmente di 24-48 ore lavorative dalla ricezione della documentazione completa. Per importi standard e aziende con bilancio regolare, spesso riusciamo a ottenere la polizza fideiussoria entro la giornata. Per casi complessi (importi elevati, aziende in fase di startup) i tempi possono allungarsi fino a 5-7 giorni lavorativi.',
+      },
+      {
+        question: 'Quanto costa una fideiussione assicurativa?',
+        answer: 'Il premio varia in base all\'importo garantito, alla durata, alla tipologia di cauzione e al profilo di rischio dell\'azienda. Indicativamente, per una cauzione di importo medio, il premio annuo oscilla tra l\'1% e il 3% dell\'importo garantito. Ad esempio, per una cauzione di 100.000€ il premio annuo può andare da 1.000 a 3.000€. Come broker confrontiamo più compagnie per trovare la tariffa più competitiva per il tuo caso specifico.',
+      },
+      {
+        question: 'Quali documenti servono per richiedere una fideiussione?',
+        answer: 'Generalmente servono: visura camerale aggiornata, ultimi 2-3 bilanci approvati (o dichiarazioni dei redditi per le ditte individuali), copia del contratto o del bando che richiede la garanzia, e un documento di identità del legale rappresentante. Per alcune tipologie (cauzioni doganali, fiscali) possono essere richiesti documenti aggiuntivi specifici. Il nostro team ti guida nella raccolta della documentazione.',
+      },
+      {
+        question: 'La fideiussione assicurativa è accettata dalla Pubblica Amministrazione?',
+        answer: 'Sì, assolutamente. Il Codice degli Appalti (D.Lgs. 36/2023) prevede espressamente che le garanzie fideiussorie possano essere rilasciate da imprese di assicurazione autorizzate. La fideiussione assicurativa ha lo stesso valore legale di quella bancaria per gare d\'appalto, concessioni e contratti pubblici.',
+      },
+    ],
+    priceFrom: 'dall\'1% dell\'importo garantito',
+    priceNote: 'Premio annuo indicativo. Varia in base a importo, durata e profilo aziendale. Importi fino a 500.000€.',
+  },
 ]
 
 export function getServiceBySlug(slug: string): Service | undefined {
@@ -339,4 +391,5 @@ export const serviceColorMap: Record<string, string> = {
   teal: 'bg-teal-100 text-teal-800',
   purple: 'bg-purple-100 text-purple-800',
   orange: 'bg-orange-100 text-orange-800',
+  amber: 'bg-amber-100 text-amber-800',
 }
