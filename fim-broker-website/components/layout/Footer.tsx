@@ -276,7 +276,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container-custom py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/50 text-sm">
+          <p className="text-white/50 text-sm" suppressHydrationWarning>
             &copy; {new Date().getFullYear()} FIM Insurance Broker S.a.s. di Manzo Arturo & C. Tutti i diritti riservati.
           </p>
           <div className="flex items-center gap-4">
