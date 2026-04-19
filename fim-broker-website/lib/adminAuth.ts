@@ -4,9 +4,13 @@
  */
 
 export const ADMIN_SESSION_COOKIE = 'fim_admin_session'
-export const ADMIN_SESSION_TTL = 8 * 60 * 60 // 8 hours
+export const ADMIN_SESSION_TTL = 4 * 60 * 60 // 4 hours
 
-const SECRET = process.env.ADMIN_AUTH_SECRET || process.env.CLIENT_AUTH_SECRET || 'fim-admin-dev-secret-CHANGE-IN-PRODUCTION'
+const SECRET = process.env.ADMIN_AUTH_SECRET || process.env.CLIENT_AUTH_SECRET || (
+  process.env.NODE_ENV === 'production'
+    ? (() => { throw new Error('ADMIN_AUTH_SECRET non configurato in produzione') })()
+    : 'fim-admin-dev-secret-DO-NOT-USE-IN-PRODUCTION'
+)
 
 function b64urlEncode(str: string): string {
   return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
