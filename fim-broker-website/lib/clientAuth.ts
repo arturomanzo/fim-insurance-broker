@@ -6,11 +6,14 @@
  * Payload: { email: string, exp: number (unix seconds) }
  */
 
-const SECRET = process.env.CLIENT_AUTH_SECRET || (
-  process.env.NODE_ENV === 'production'
-    ? (() => { throw new Error('CLIENT_AUTH_SECRET non configurato in produzione') })()
-    : 'fim-dev-secret-DO-NOT-USE-IN-PRODUCTION'
-)
+function getSecret(): string {
+  const envSecret = process.env.CLIENT_AUTH_SECRET
+  if (envSecret) return envSecret
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('CLIENT_AUTH_SECRET non configurato in produzione')
+  }
+  return 'fim-dev-secret-DO-NOT-USE-IN-PRODUCTION'
+}
 
 export const SESSION_COOKIE = 'fim_session'
 export const SESSION_TTL_SECONDS = 30 * 24 * 60 * 60 // 30 days
@@ -29,7 +32,7 @@ async function getKey(): Promise<CryptoKey> {
   const enc = new TextEncoder()
   return crypto.subtle.importKey(
     'raw',
-    enc.encode(SECRET),
+    enc.encode(getSecret()),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     ['sign', 'verify'],
