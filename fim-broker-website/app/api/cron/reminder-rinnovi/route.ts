@@ -19,7 +19,7 @@ import { generateRenewalProposal, buildAIRenewalEmail } from '@/lib/renewalAgent
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
-const CRON_SECRET = process.env.CRON_SECRET || ''
+const CRON_SECRET = process.env.CRON_SECRET
 
 // ── Standard template (60-day and 7-day) ──────────────────────────────────────
 
@@ -86,11 +86,13 @@ function buildReminderEmail(policy: Policy, daysLeft: number): string {
 // ── Cron handler ──────────────────────────────────────────────────────────────
 
 export async function GET(req: NextRequest) {
-  if (CRON_SECRET) {
-    const auth = req.headers.get('authorization') ?? ''
-    if (auth !== `Bearer ${CRON_SECRET}`) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+  if (!CRON_SECRET) {
+    console.error('[CRON] CRON_SECRET non configurato — endpoint disabilitato')
+    return NextResponse.json({ error: 'Cron non configurato' }, { status: 503 })
+  }
+  const auth = req.headers.get('authorization') ?? ''
+  if (auth !== `Bearer ${CRON_SECRET}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   const REMINDER_DAYS = [60, 30, 7] as const
