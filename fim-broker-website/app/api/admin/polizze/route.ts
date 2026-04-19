@@ -1,8 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
+import { verifyAdminToken, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth'
 import { createPolicy } from '@/lib/policyStore'
 import type { Policy } from '@/lib/policyData'
 
+async function checkAuth() {
+  const cookieStore = await cookies()
+  const session = cookieStore.get(ADMIN_SESSION_COOKIE)
+  if (!session?.value) return false
+  return verifyAdminToken(session.value)
+}
+
 export async function POST(req: NextRequest) {
+  if (!(await checkAuth())) {
+    return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
+  }
+
   try {
     const body = await req.json()
 

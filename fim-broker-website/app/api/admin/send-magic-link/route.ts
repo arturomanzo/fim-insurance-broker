@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 import { Resend } from 'resend'
+import { verifyAdminToken, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth'
 import { generateToken, MAGIC_LINK_TTL_SECONDS } from '@/lib/clientAuth'
 import { getAllClients } from '@/lib/policyStore'
 
@@ -7,7 +9,18 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
+async function checkAuth() {
+  const cookieStore = await cookies()
+  const session = cookieStore.get(ADMIN_SESSION_COOKIE)
+  if (!session?.value) return false
+  return verifyAdminToken(session.value)
+}
+
 export async function POST(req: NextRequest) {
+  if (!(await checkAuth())) {
+    return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
+  }
+
   try {
     const { email } = await req.json()
     if (!email) return NextResponse.json({ error: 'Email mancante.' }, { status: 400 })
