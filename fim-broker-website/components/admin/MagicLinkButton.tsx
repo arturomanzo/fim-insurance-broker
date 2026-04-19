@@ -1,11 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface Props { email: string; clientName: string }
 
 export default function MagicLinkButton({ email, clientName }: Props) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'sent' | 'error'>('idle')
+  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    if (status === 'sent' || status === 'error') {
+      resetTimerRef.current = setTimeout(() => setStatus('idle'), status === 'sent' ? 4000 : 5000)
+    }
+    return () => {
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current)
+    }
+  }, [status])
 
   async function handleSend() {
     setStatus('loading')
@@ -16,11 +26,9 @@ export default function MagicLinkButton({ email, clientName }: Props) {
         body: JSON.stringify({ email }),
       })
       setStatus(res.ok ? 'sent' : 'error')
-      if (status === 'sent') setTimeout(() => setStatus('idle'), 4000)
     } catch {
       setStatus('error')
     }
-    setTimeout(() => setStatus('idle'), 5000)
   }
 
   const labels = {
