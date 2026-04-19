@@ -6,11 +6,14 @@
 export const ADMIN_SESSION_COOKIE = 'fim_admin_session'
 export const ADMIN_SESSION_TTL = 4 * 60 * 60 // 4 hours
 
-const SECRET = process.env.ADMIN_AUTH_SECRET || process.env.CLIENT_AUTH_SECRET || (
-  process.env.NODE_ENV === 'production'
-    ? (() => { throw new Error('ADMIN_AUTH_SECRET non configurato in produzione') })()
-    : 'fim-admin-dev-secret-DO-NOT-USE-IN-PRODUCTION'
-)
+function getSecret(): string {
+  const envSecret = process.env.ADMIN_AUTH_SECRET || process.env.CLIENT_AUTH_SECRET
+  if (envSecret) return envSecret
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('ADMIN_AUTH_SECRET non configurato in produzione')
+  }
+  return 'fim-admin-dev-secret-DO-NOT-USE-IN-PRODUCTION'
+}
 
 function b64urlEncode(str: string): string {
   return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
@@ -24,7 +27,7 @@ function b64urlDecode(str: string): string {
 async function getKey(): Promise<CryptoKey> {
   return crypto.subtle.importKey(
     'raw',
-    new TextEncoder().encode(SECRET),
+    new TextEncoder().encode(getSecret()),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     ['sign', 'verify'],

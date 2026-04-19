@@ -378,6 +378,61 @@ export const services: Service[] = [
     priceFrom: 'dall\'1% dell\'importo garantito',
     priceNote: 'Premio annuo indicativo. Varia in base a importo, durata e profilo aziendale. Importi fino a 500.000€.',
   },
+  {
+    slug: 'tutela-legale-aziende',
+    title: 'Tutela Legale Aziende',
+    shortDescription: 'Protezione legale a 360° per imprenditori, amministratori e aziende: tutela penale, D&O e controversie commerciali.',
+    description:
+      'La RC Azienda copre i danni causati a terzi, ma lascia scoperti i costi legali dell\'imprenditore e dei suoi amministratori. Con la Tutela Legale Aziende completiamo la protezione: spese di avvocato, perito, CTU e consulenti in procedimenti penali, contenziosi con dipendenti, fornitori e clienti, e azioni di responsabilità contro amministratori e sindaci. Una copertura indispensabile in un\'epoca in cui un procedimento penale per reati colposi o la responsabilità amministrativa ex D.Lgs. 231/2001 possono colpire qualsiasi impresa.',
+    icon: '⚖️',
+    color: 'indigo',
+    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&fit=crop&auto=format',
+    features: [
+      'Tutela penale per reati colposi (sicurezza sul lavoro, ambientali, fiscali)',
+      'Responsabilità amministrativa ex D.Lgs. 231/2001',
+      'Danni patrimoniali amministratori e sindaci (D&O)',
+      'Controversie con dipendenti e collaboratori',
+      'Recupero danni da terzi (fornitori, clienti, vandalismo)',
+      'Controversie contrattuali e condizioni di vendita',
+      'Conciliazione stragiudiziale e arbitrato',
+      'Libera scelta del legale in tutta Italia',
+    ],
+    benefits: [
+      'Completa la RC Azienda: protegge l\'imprenditore oltre i danni a terzi',
+      'Massimali fino a 500.000€ per sinistro',
+      'Nessuna franchigia sulle spese legali',
+      'Rete di studi legali convenzionati o libera scelta',
+      'Consulenza legale telefonica illimitata',
+    ],
+    faq: [
+      {
+        question: 'Perché la RC Azienda non basta e serve anche la Tutela Legale?',
+        answer: 'La RC Azienda copre i danni materiali e corporali causati a terzi nell\'esercizio dell\'attività, ma non copre le spese legali che l\'imprenditore sostiene per difendersi in procedimenti penali, per recuperare crediti da un cliente moroso, per contestare un licenziamento o per azioni di responsabilità contro amministratori. La Tutela Legale completa la protezione pagando avvocati, periti, CTU e spese processuali — anche in caso di esito favorevole, dove altrimenti non c\'è risarcimento a coprire i costi.',
+      },
+      {
+        question: 'Cos\'è la responsabilità ex D.Lgs. 231/2001 e come mi protegge la polizza?',
+        answer: 'Il D.Lgs. 231/2001 introduce la responsabilità amministrativa delle società per reati commessi nel loro interesse da amministratori, dirigenti o dipendenti (corruzione, reati societari, ambientali, sicurezza sul lavoro, riciclaggio). Le sanzioni pecuniarie possono arrivare a 1,5 milioni di euro, con possibile interdizione dall\'attività. La Tutela Legale rimborsa le spese di difesa dell\'ente in sede penale e amministrativa, inclusi i costi dei consulenti tecnici per dimostrare l\'adozione di un modello organizzativo 231 idoneo.',
+      },
+      {
+        question: 'La polizza D&O (Directors & Officers) è la stessa cosa della Tutela Legale?',
+        answer: 'No, sono complementari. La D&O indennizza i danni patrimoniali che gli amministratori devono risarcire personalmente (es. azione sociale di responsabilità per mala gestio); la Tutela Legale paga invece le spese di difesa legale degli amministratori nei procedimenti penali o civili. FIM costruisce programmi integrati D&O + Tutela Legale per CdA, sindaci e dirigenti di PMI, con un approccio modulare in base alla dimensione aziendale.',
+      },
+      {
+        question: 'La polizza copre le controversie con i dipendenti?',
+        answer: 'Sì. La Tutela Legale del datore di lavoro copre le spese per contenziosi in materia di rapporto di lavoro: impugnazione licenziamenti, richieste di differenze retributive, demansionamento, mobbing, trasferimenti contestati, ricorsi contro INPS/INAIL, verifiche ispettive. È una copertura fondamentale per PMI con oltre 5 dipendenti, dove il rischio di vertenze è statisticamente alto e un singolo procedimento davanti al Giudice del Lavoro può costare 8.000-15.000€ di sole spese legali.',
+      },
+      {
+        question: 'Posso scegliere liberamente il mio avvocato di fiducia?',
+        answer: 'Sì. La normativa europea (Direttiva 87/344/CEE recepita in Italia dall\'art. 164 del Codice delle Assicurazioni) garantisce la libera scelta del legale in caso di procedimento giudiziario o conflitto di interessi. Puoi quindi affidarti all\'avvocato di tua fiducia, che la compagnia liquiderà secondo i parametri forensi vigenti. In alternativa, puoi usare la rete di studi legali convenzionati della compagnia, che offrono condizioni preferenziali.',
+      },
+      {
+        question: 'Quanto costa la Tutela Legale per una PMI?',
+        answer: 'Il premio dipende dal fatturato, dal settore di attività, dal numero di dipendenti e dal massimale scelto. Indicativamente, per una PMI con fatturato fino a 2 milioni di euro il premio annuo va da 400€ a 1.200€ per massimali di 50.000-100.000€ per sinistro. Per aziende più strutturate con massimali da 250.000€ in su, i premi oscillano tra 1.500€ e 4.000€/anno. Come broker indipendenti confrontiamo 5+ compagnie specializzate (Roland, Das, Arag, Coface, Itas) per trovare la soluzione più efficiente.',
+      },
+    ],
+    priceFrom: 'da 400€/anno',
+    priceNote: 'PMI con fatturato fino a 2 mln€ e massimale 50.000€. Programmi strutturati su preventivo.',
+  },
 ]
 
 export function getServiceBySlug(slug: string): Service | undefined {
@@ -392,4 +447,5 @@ export const serviceColorMap: Record<string, string> = {
   purple: 'bg-purple-100 text-purple-800',
   orange: 'bg-orange-100 text-orange-800',
   amber: 'bg-amber-100 text-amber-800',
+  indigo: 'bg-indigo-100 text-indigo-800',
 }

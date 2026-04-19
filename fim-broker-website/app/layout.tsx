@@ -144,6 +144,7 @@ const jsonLd = {
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Polizze Aziendali' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Assicurazione Viaggio' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cauzioni e Fideiussioni' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Tutela Legale Aziende' } },
     ],
   },
 }
