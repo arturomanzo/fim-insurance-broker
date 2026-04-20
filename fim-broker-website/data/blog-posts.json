@@ -1,6 +1,64 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-droni-nuove-tecnologie-2026",
+      "title": "Assicurazione per Droni e Nuove Tecnologie: Cosa Devi Sapere nel 2026",
+      "excerpt": "L'uso di droni e tecnologie avanzate è in forte crescita tra privati e imprese italiane. Scopri quali coperture assicurative sono obbligatorie per legge e come proteggere la tua attività dai rischi connessi.",
+      "category": "Aziendale",
+      "date": "20 Aprile 2026",
+      "readTime": "6 min",
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Droni in Italia: un mercato in rapida espansione",
+          "body": "Negli ultimi anni l'utilizzo di droni in Italia è cresciuto in modo esponenziale, non solo tra gli appassionati, ma soprattutto in ambito professionale: fotografia aerea, agricoltura di precisione, ispezioni industriali, consegne e sorveglianza sono solo alcuni dei settori coinvolti. Con l'entrata in vigore del Regolamento Europeo EASA (EU) 2019/947 e i successivi aggiornamenti recepiti anche dall'ENAC, oggi operare con un drone senza le giuste coperture assicurative espone a sanzioni significative e a responsabilità civili molto rilevanti. Conoscere il quadro normativo è il primo passo per operare in sicurezza e in modo conforme.",
+          "list": [
+            "Agricoltura di precisione e trattamenti fitosanitari",
+            "Riprese fotografiche e video professionali",
+            "Ispezioni di infrastrutture (ponti, tralicci, coperture)",
+            "Topografia e rilievi cartografici",
+            "Sorveglianza e sicurezza perimetrale",
+            "Logistica e consegna merci (in fase sperimentale)"
+          ]
+        },
+        {
+          "heading": "RC Droni: l'obbligo assicurativo che molti ignorano",
+          "body": "La normativa europea e italiana impone l'obbligo di stipulare una polizza di Responsabilità Civile per qualsiasi drone con massa operativa superiore a 250 grammi, sia per uso privato che professionale. Questo significa che anche un semplice hobbysta che vola nel fine settimana con un drone da 500 grammi è soggetto all'obbligo assicurativo. La polizza RC Droni copre i danni causati a terzi — persone, cose o animali — durante il volo, inclusi i danni a veicoli o proprietà private. I massimali minimi richiesti dalla normativa variano in base alla categoria operativa del drone (Open, Specific, Certified) e al peso del mezzo, e possono arrivare a diversi milioni di euro per operazioni più complesse.",
+          "list": [
+            "Categoria OPEN: droni leggeri per operazioni a basso rischio, RC obbligatoria da 250g in su",
+            "Categoria SPECIFIC: operazioni più complesse con autorizzazione ENAC, massimali più elevati",
+            "Categoria CERTIFIED: droni di grande dimensione o trasporto persone, equiparata all'aviazione civile"
+          ]
+        },
+        {
+          "heading": "Polizze per droni: cosa copre davvero una buona assicurazione",
+          "body": "Una polizza base per droni si limita spesso alla sola RC verso terzi, ma un operatore professionale ha bisogno di garanzie molto più ampie. Sul mercato esistono soluzioni modulari che consentono di costruire una copertura su misura in base al tipo di attività svolta. È fondamentale leggere attentamente le esclusioni: molte polizze economiche escludono i danni durante il decollo e l'atterraggio, le operazioni notturne o i voli in zone urbane, proprio quelle situazioni in cui il rischio è più elevato. Affidarsi a un broker assicurativo esperto come FIM permette di identificare la copertura realmente adeguata alla propria operatività, evitando sorprese al momento del sinistro.",
+          "list": [
+            "RC verso terzi per danni a persone, cose e animali",
+            "Casco drone: danni accidentali, crash, guasti elettronici",
+            "Furto e atti vandalici del velivolo e dell'attrezzatura di bordo",
+            "Responsabilità del pilota remoto e dei suoi collaboratori",
+            "Copertura dati e privacy (GDPR): violazioni legate alle riprese",
+            "Tutela legale in caso di contestazioni normative"
+          ]
+        },
+        {
+          "heading": "Nuove tecnologie aziendali: rischi emergenti da non sottovalutare",
+          "body": "Il tema assicurativo non riguarda solo i droni, ma si estende a tutte le nuove tecnologie sempre più diffuse nelle PMI italiane: robot collaborativi (cobot), stampanti 3D industriali, sistemi IoT e automazione dei processi produttivi. Questi strumenti aumentano la produttività, ma introducono nuove categorie di rischio che le polizze tradizionali spesso non coprono adeguatamente. Un guasto a un cobot che provoca lesioni a un operaio, o un errore di stampa 3D che genera un prodotto difettoso causa di danni a terzi, rientrano in scenari che richiedono coperture specifiche di RC Prodotti, RC Datori di Lavoro e All Risks Macchinari aggiornate alle nuove realtà tecnologiche."
+        },
+        {
+          "heading": "Come FIM Insurance Broker può aiutarti",
+          "body": "Il mondo delle coperture assicurative per droni e nuove tecnologie è ancora poco conosciuto e spesso mal gestito da polizze standardizzate che non rispecchiano le reali esigenze dell'operatore. FIM Insurance Broker, con sede a Cisterna di Latina, ha maturato una solida esperienza nell'analisi dei rischi emergenti per privati, professionisti e PMI. Il nostro approccio prevede un'analisi personalizzata della tua attività operativa, l'identificazione delle coperture obbligatorie e di quelle consigliate, e la ricerca della soluzione più conveniente tra le principali compagnie del mercato. Contattaci per una consulenza gratuita: volare in sicurezza — e in regola — è più semplice di quanto pensi.",
+          "list": [
+            "Analisi gratuita del profilo di rischio del tuo drone o tecnologia",
+            "Confronto tra più compagnie specializzate nel settore",
+            "Assistenza nella gestione dei sinistri",
+            "Aggiornamento della copertura al variare delle normative ENAC/EASA"
+          ]
+        }
+      ]
+    },
+    {
       "slug": "legge-34-2026-addio-rc-auto-muletti-mezzi-agricoli",
       "title": "Addio Obbligo RC Auto per Muletti e Mezzi Agricoli: La Legge 34/2026 Premia il Buon Senso",
       "excerpt": "Dal 7 aprile 2026 i mezzi che operano esclusivamente in aree private non sono più obbligati ad avere la RC auto. Cosa cambia per le PMI italiane e cosa fare subito.",
