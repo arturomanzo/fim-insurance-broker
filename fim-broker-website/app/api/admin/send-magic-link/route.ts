@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         subject: 'Accedi alla tua Area Cliente FIM — link di accesso',
         html: `<!DOCTYPE html><html lang="it"><body style="font-family:system-ui,sans-serif;background:#f8fafc;margin:0;padding:20px;">
   <div style="max-width:520px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.07);">
-    <div style="background:linear-gradient(135deg,#091d47,#0f2d6b);padding:32px;text-align:center;">
+    <div style="background:linear-gradient(135deg,#060f1d,#0B1F3A);padding:32px;text-align:center;">
       <h1 style="color:white;margin:0;font-size:20px;font-weight:900;">Accedi alla tua Area Cliente</h1>
     </div>
     <div style="padding:36px 32px;text-align:center;">
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         Il tuo consulente FIM ti ha inviato un link di accesso sicuro alla tua area personale.<br>
         Valido per <strong>1 ora</strong>.
       </p>
-      <a href="${magicLink}" style="display:inline-block;background:#0f2d6b;color:white;padding:16px 40px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;">
+      <a href="${magicLink}" style="display:inline-block;background:#0B1F3A;color:white;padding:16px 40px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;">
         Accedi all'Area Cliente →
       </a>
     </div>

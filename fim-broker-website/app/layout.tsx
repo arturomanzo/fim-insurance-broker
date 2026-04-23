@@ -1,12 +1,18 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat, Source_Serif_4 } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-montserrat',
+})
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-source-serif',
 })
 
 const GA_ID = 'G-F6DB47VZ4Z'
@@ -155,12 +161,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="it" className={inter.variable}>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+    <html lang="it" className={`${montserrat.variable} ${sourceSerif.variable}`}>
+      <body className={`${montserrat.className} min-h-screen flex flex-col`}>
         <noscript>
           <div style={{
             position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
-            background: '#0f2d6b', color: '#fff', textAlign: 'center',
+            background: '#0B1F3A', color: '#fff', textAlign: 'center',
             padding: '12px 16px', fontSize: '14px', lineHeight: '1.5',
           }}>
             <strong>JavaScript disabilitato.</strong> Alcune funzionalità del sito (form di contatto, preventivo, assistente FIMA) richiedono JavaScript per funzionare.

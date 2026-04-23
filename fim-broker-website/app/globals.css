@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --primary: #0f2d6b;
-  --primary-light: #1a4a9e;
-  --primary-dark: #091d47;
-  --accent: #00b4c8;
-  --accent-dark: #008fa0;
-  --accent-light: #33c7d8;
+  --primary: #0B1F3A;
+  --primary-light: #132d52;
+  --primary-dark: #060f1d;
+  --accent: #2FA36B;
+  --accent-dark: #258755;
+  --accent-light: #4aba83;
+  --gold: #C8A96A;
 }
 
 /* Logo brand gradient (shield icon style) */
 .gradient-logo {
-  background: linear-gradient(135deg, #0f2d6b 0%, #00b4c8 100%);
+  background: linear-gradient(135deg, #0B1F3A 0%, #2FA36B 100%);
 }
 
 @layer base {

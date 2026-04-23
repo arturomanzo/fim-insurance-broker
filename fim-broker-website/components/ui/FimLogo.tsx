@@ -1,14 +1,12 @@
 /**
- * FimLogo — riproduce il logo reale FIM Insurance Broker in SVG vettoriale.
- * Scudo con gradiente navy→teal, F stilizzata con effetto profondità, freccia diagonale.
+ * FimLogo — riproduce il logo ufficiale FIM Insurance Broker in SVG.
+ * Scudo Blu Profondo con F stilizzata bianca e chevron Verde Sicurezza.
  *
  * Props:
  *  variant: 'full' (scudo + wordmark) | 'icon' (solo scudo)
  *  theme:   'color' | 'white' (per sfondi scuri) | 'dark'
  *  height:  altezza px (default 48)
  */
-
-import { useId } from 'react'
 
 interface FimLogoProps {
   variant?: 'full' | 'icon'
@@ -23,149 +21,103 @@ export default function FimLogo({
   height = 48,
   className,
 }: FimLogoProps) {
-  const uid = useId().replace(/:/g, '')
-
   const isWhite = theme === 'white'
-  const isDark  = theme === 'dark'
 
-  // Colori testo: bianco su sfondi scuri, navy su sfondi chiari
-  const textColor = isWhite ? '#ffffff' : '#0f2d6b'
-  const subColor  = isWhite ? 'rgba(255,255,255,0.75)' : '#0f2d6b'
+  const shieldColor = isWhite ? '#ffffff' : '#0B1F3A'
+  const chevronColor = isWhite ? '#4aba83' : '#2FA36B'
+  const fColor = isWhite ? '#0B1F3A' : '#ffffff'
+  const fStroke = isWhite ? 'none' : 'none'
+  const textColor = isWhite ? '#ffffff' : '#0B1F3A'
+  const subColor = isWhite ? '#2FA36B' : '#2FA36B'
 
-  // Gradient stops dello scudo: stesso gradiente colorato per color e white
-  // (su sfondo scuro il gradiente navy→teal è visibile e identico al navbar)
-  const gradFrom = isDark ? '#0f2d6b' : '#091c4a'
-  const gradMid  = isDark ? '#0f2d6b' : '#0b4a7a'
-  const gradTo   = isDark ? '#1a4a9e' : '#00b4c8'
-
-  // Arrow gradient
-  const arrowFrom = isDark ? '#1a4a9e' : '#00b4c8'
-  const arrowTo   = isDark ? '#1a4a9e' : '#40e4f8'
-
-  // ID univoci per evitare conflitti se il componente appare più volte
-  const gShield = `fsg-${uid}`
-  const gArrow  = `fag-${uid}`
-
-  // ── ICON ONLY ──────────────────────────────────────────────────────────────
-  // ViewBox 100×100: scudo largo 86px centrato, freccia che rompe l'angolo sup-dx
   const iconSVG = (
     <svg
       width={height}
       height={height}
-      viewBox="0 0 100 100"
+      viewBox="0 0 100 110"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-label="FIM Insurance Broker"
       role="img"
     >
-      <defs>
-        <linearGradient id={gShield} x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
-          <stop offset="0%"   stopColor={gradFrom} />
-          <stop offset="50%"  stopColor={gradMid}  />
-          <stop offset="100%" stopColor={gradTo}   />
-        </linearGradient>
-        <linearGradient id={gArrow} x1="55" y1="30" x2="93" y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0%"   stopColor={arrowFrom} />
-          <stop offset="100%" stopColor={arrowTo}   />
-        </linearGradient>
-      </defs>
-
+      {/* Chevron verde in cima */}
+      <path
+        d="M50,0 L78,18 L50,12 L22,18 Z"
+        fill={chevronColor}
+      />
       {/* Scudo */}
       <path
-        d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z"
-        fill={`url(#${gShield})`}
+        d="M15,22 L15,65 C15,82 50,105 50,105 C50,105 85,82 85,65 L85,22 L50,14 Z"
+        fill={shieldColor}
+        stroke={isWhite ? 'none' : shieldColor}
+        strokeWidth="1"
       />
-
-      {/* F — strato profondità (ombra) */}
+      {/* Bordo interno scudo (leggero rilievo) */}
       <path
-        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
-        fill="white" opacity="0.18" transform="translate(5,4)"
+        d="M20,26 L20,63 C20,78 50,98 50,98 C50,98 80,78 80,63 L80,26 L50,19 Z"
+        fill="none"
+        stroke={isWhite ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)'}
+        strokeWidth="1.5"
       />
-      {/* F — strato intermedio */}
+      {/* F stilizzata */}
       <path
-        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
-        fill="white" opacity="0.35" transform="translate(2.5,2)"
+        d="M35,36 L35,80 L44,80 L44,62 L62,62 L62,54 L44,54 L44,44 L65,44 L65,36 Z"
+        fill={fColor}
+        stroke={fStroke}
       />
-      {/* F — primo piano */}
-      <path
-        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
-        fill="white"
-      />
-
-      {/* Freccia: testa triangolare nell'angolo sup-dx */}
-      <polygon points="66,1 93,1 93,28" fill={`url(#${gArrow})`} />
-      {/* Freccia: asta diagonale */}
-      <polygon points="50,28 59,18 84,5 75,15" fill={`url(#${gArrow})`} />
     </svg>
   )
 
   if (variant === 'icon') return iconSVG
 
-  // ── FULL LOGO ──────────────────────────────────────────────────────────────
-  // ViewBox 380×100: icona 0-100, testo da 110
   const fullWidth = Math.round(height * 3.8)
   return (
     <svg
       width={fullWidth}
       height={height}
-      viewBox="0 0 380 100"
+      viewBox="0 0 380 110"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-label="FIM Insurance Broker"
       role="img"
     >
-      <defs>
-        <linearGradient id={gShield} x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
-          <stop offset="0%"   stopColor={gradFrom} />
-          <stop offset="50%"  stopColor={gradMid}  />
-          <stop offset="100%" stopColor={gradTo}   />
-        </linearGradient>
-        <linearGradient id={gArrow} x1="55" y1="30" x2="93" y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0%"   stopColor={arrowFrom} />
-          <stop offset="100%" stopColor={arrowTo}   />
-        </linearGradient>
-      </defs>
-
-      {/* ── Icona (stessi path del variant=icon, 100×100) ── */}
+      {/* ── Icona ── */}
+      <path d="M50,0 L78,18 L50,12 L22,18 Z" fill={chevronColor} />
       <path
-        d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z"
-        fill={`url(#${gShield})`}
+        d="M15,22 L15,65 C15,82 50,105 50,105 C50,105 85,82 85,65 L85,22 L50,14 Z"
+        fill={shieldColor}
       />
       <path
-        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
-        fill="white" opacity="0.18" transform="translate(5,4)"
+        d="M20,26 L20,63 C20,78 50,98 50,98 C50,98 80,78 80,63 L80,26 L50,19 Z"
+        fill="none"
+        stroke={isWhite ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)'}
+        strokeWidth="1.5"
       />
       <path
-        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
-        fill="white" opacity="0.35" transform="translate(2.5,2)"
+        d="M35,36 L35,80 L44,80 L44,62 L62,62 L62,54 L44,54 L44,44 L65,44 L65,36 Z"
+        fill={fColor}
       />
-      <path
-        d="M26,24 L26,75 L37,75 L37,52 L59,52 L59,42 L37,42 L37,33 L63,33 L63,24 Z"
-        fill="white"
-      />
-      <polygon points="66,1 93,1 93,28" fill={`url(#${gArrow})`} />
-      <polygon points="50,28 59,18 84,5 75,15" fill={`url(#${gArrow})`} />
 
       {/* ── Wordmark ── */}
       <text
-        x="110" y="64"
-        fontFamily="'Arial Black','Helvetica Neue',Arial,sans-serif"
+        x="110" y="70"
+        fontFamily="'Montserrat','Arial Black','Helvetica Neue',sans-serif"
         fontWeight="900"
-        fontSize="58"
+        fontSize="60"
         fill={textColor}
-        letterSpacing="1"
+        letterSpacing="2"
       >
         FIM
       </text>
       <text
-        x="113" y="83"
-        fontFamily="Arial,'Helvetica Neue',sans-serif"
+        x="113" y="93"
+        fontFamily="'Montserrat','Arial','Helvetica Neue',sans-serif"
         fontWeight="700"
-        fontSize="13.5"
+        fontSize="14"
         fill={subColor}
-        letterSpacing="4"
+        letterSpacing="5"
       >
         INSURANCE BROKER
       </text>

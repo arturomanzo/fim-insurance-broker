@@ -28,7 +28,7 @@ function buildReminderEmail(policy: Policy, daysLeft: number): string {
     day: '2-digit', month: 'long', year: 'numeric',
   })
   const urgency = daysLeft <= 7 ? '⚠️ Urgente: ' : '📬 '
-  const headerColor = daysLeft <= 7 ? '#dc2626' : '#0f2d6b'
+  const headerColor = daysLeft <= 7 ? '#dc2626' : '#0B1F3A'
   const renewUrl = `${BASE_URL}/preventivo?tipo=${encodeURIComponent(policy.tipo)}`
   const dashUrl = `${BASE_URL}/area-cliente`
 
@@ -43,7 +43,7 @@ function buildReminderEmail(policy: Policy, daysLeft: number): string {
     <div style="padding:32px;">
       <p style="font-size:15px;color:#1e293b;margin:0 0 16px;">Gentile <strong>${policy.clientName}</strong>,</p>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 20px;">
-        Ti ricordiamo che la tua polizza <strong style="color:#0f2d6b;">${policy.tipo}</strong>
+        Ti ricordiamo che la tua polizza <strong style="color:#0B1F3A;">${policy.tipo}</strong>
         (${policy.compagnia} — n. ${policy.numeroPolizza}) scadrà il
         <strong>${expiryDate}</strong>, tra <strong>${daysLeft} giorni</strong>.
       </p>
@@ -51,7 +51,7 @@ function buildReminderEmail(policy: Policy, daysLeft: number): string {
       <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin:0 0 24px;">
         <p style="margin:0 0 8px;font-size:13px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Riepilogo polizza</p>
         <table style="width:100%;font-size:13px;color:#475569;border-collapse:collapse;">
-          <tr><td style="padding:4px 0;width:40%;">Tipo</td><td style="font-weight:600;color:#0f2d6b;">${policy.tipo}</td></tr>
+          <tr><td style="padding:4px 0;width:40%;">Tipo</td><td style="font-weight:600;color:#0B1F3A;">${policy.tipo}</td></tr>
           <tr><td style="padding:4px 0;">Compagnia</td><td style="font-weight:600;">${policy.compagnia}</td></tr>
           <tr><td style="padding:4px 0;">N. polizza</td><td>${policy.numeroPolizza}</td></tr>
           <tr><td style="padding:4px 0;">Scadenza</td><td style="font-weight:600;color:${daysLeft <= 7 ? '#dc2626' : '#ea580c'};">${expiryDate}</td></tr>
@@ -64,16 +64,16 @@ function buildReminderEmail(policy: Policy, daysLeft: number): string {
       </p>
       <div style="text-align:center;margin:0 0 24px;">
         <a href="${renewUrl}"
-           style="display:inline-block;background:#00b4c8;color:white;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;">
+           style="display:inline-block;background:#2FA36B;color:white;padding:14px 36px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;">
           Richiedi rinnovo →
         </a>
       </div>
       <p style="font-size:13px;color:#94a3b8;text-align:center;">
-        Oppure accedi alla tua <a href="${dashUrl}" style="color:#0f2d6b;">Area Cliente</a>
-        · Chiama: <a href="tel:+390696883381" style="color:#0f2d6b;">06 96883381</a>
+        Oppure accedi alla tua <a href="${dashUrl}" style="color:#0B1F3A;">Area Cliente</a>
+        · Chiama: <a href="tel:+390696883381" style="color:#0B1F3A;">06 96883381</a>
       </p>
     </div>
-    <div style="background:#0f2d6b;padding:16px 32px;">
+    <div style="background:#0B1F3A;padding:16px 32px;">
       <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.4);text-align:center;">
         FIM Insurance Broker S.a.s.
         — <a href="${BASE_URL}/privacy-policy" style="color:rgba(255,255,255,0.4);">Privacy Policy</a>

@@ -135,11 +135,11 @@ export function buildAIRenewalEmail(
       (opt, i) => `
     <div style="background:white;border:1.5px solid #e2e8f0;border-radius:10px;padding:18px;margin:0 0 12px;">
       <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="width:28px;height:28px;background:#0f2d6b;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:white;text-align:center;line-height:28px;">
+        <div style="width:28px;height:28px;background:#0B1F3A;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:white;text-align:center;line-height:28px;">
           ${i + 1}
         </div>
         <div style="flex:1;">
-          <p style="margin:0 0 5px;font-weight:700;color:#0f2d6b;font-size:14px;">${esc(opt.titolo)}</p>
+          <p style="margin:0 0 5px;font-weight:700;color:#0B1F3A;font-size:14px;">${esc(opt.titolo)}</p>
           <p style="margin:0 0 8px;font-size:13px;color:#475569;line-height:1.6;">${esc(opt.descrizione)}</p>
           <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:6px 10px;border-radius:0 6px 6px 0;">
             <p style="margin:0;font-size:12px;color:#15803d;font-weight:600;">✓ ${esc(opt.vantaggio)}</p>
@@ -160,10 +160,10 @@ export function buildAIRenewalEmail(
   <div style="max-width:580px;margin:0 auto;">
 
     <!-- Header -->
-    <div style="background:linear-gradient(135deg,#091d47,#1a4a9e);padding:24px 32px;border-radius:12px 12px 0 0;">
+    <div style="background:linear-gradient(135deg,#060f1d,#132d52);padding:24px 32px;border-radius:12px 12px 0 0;">
       <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;">FIM Insurance Broker</p>
       <h1 style="margin:8px 0 0;font-size:20px;color:white;font-weight:800;line-height:1.3;">
-        La tua polizza ${esc(policy.tipo)} scade tra <span style="color:#00b4c8;">${daysLeft} giorni</span>
+        La tua polizza ${esc(policy.tipo)} scade tra <span style="color:#2FA36B;">${daysLeft} giorni</span>
       </h1>
     </div>
 
@@ -184,7 +184,7 @@ export function buildAIRenewalEmail(
       <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px 18px;margin:0 0 24px;">
         <p style="margin:0 0 8px;font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;">La tua polizza attuale</p>
         <table style="width:100%;font-size:13px;color:#475569;border-collapse:collapse;">
-          <tr><td style="padding:3px 0;width:38%;">Tipo</td><td style="font-weight:700;color:#0f2d6b;">${esc(policy.tipo)}</td></tr>
+          <tr><td style="padding:3px 0;width:38%;">Tipo</td><td style="font-weight:700;color:#0B1F3A;">${esc(policy.tipo)}</td></tr>
           <tr><td style="padding:3px 0;">Compagnia</td><td style="font-weight:600;">${esc(policy.compagnia)}</td></tr>
           <tr><td style="padding:3px 0;">N. polizza</td><td>${esc(policy.numeroPolizza)}</td></tr>
           <tr><td style="padding:3px 0;">Scadenza</td><td style="font-weight:700;color:#ea580c;">${esc(expiryDate)}</td></tr>
@@ -193,17 +193,17 @@ export function buildAIRenewalEmail(
       </div>
 
       <!-- Options -->
-      <p style="font-size:14px;font-weight:700;color:#0f2d6b;margin:0 0 12px;">Le tue 3 opzioni</p>
+      <p style="font-size:14px;font-weight:700;color:#0B1F3A;margin:0 0 12px;">Le tue 3 opzioni</p>
       ${optionsHtml}
 
       <!-- CTAs -->
       <div style="margin:28px 0 20px;text-align:center;">
         <a href="${esc(renewUrl)}"
-           style="display:inline-block;background:#00b4c8;color:white;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:800;font-size:15px;margin:0 6px 8px;">
+           style="display:inline-block;background:#2FA36B;color:white;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:800;font-size:15px;margin:0 6px 8px;">
           Rinnova ora →
         </a>
         <a href="${esc(consultUrl)}"
-           style="display:inline-block;background:white;color:#0f2d6b;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;border:2px solid #0f2d6b;margin:0 6px 8px;">
+           style="display:inline-block;background:white;color:#0B1F3A;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;border:2px solid #0B1F3A;margin:0 6px 8px;">
           Prenota consulenza
         </a>
       </div>
@@ -213,16 +213,16 @@ export function buildAIRenewalEmail(
 
       <!-- Contact info -->
       <div style="border-top:1px solid #f1f5f9;padding-top:16px;font-size:12px;color:#94a3b8;text-align:center;">
-        <a href="${esc(dashUrl)}" style="color:#0f2d6b;text-decoration:none;">Area Cliente</a>
+        <a href="${esc(dashUrl)}" style="color:#0B1F3A;text-decoration:none;">Area Cliente</a>
         &nbsp;·&nbsp;
-        <a href="tel:+390696883381" style="color:#0f2d6b;text-decoration:none;">06 96883381</a>
+        <a href="tel:+390696883381" style="color:#0B1F3A;text-decoration:none;">06 96883381</a>
         &nbsp;·&nbsp;
-        <a href="mailto:info@fimbroker.it" style="color:#0f2d6b;text-decoration:none;">info@fimbroker.it</a>
+        <a href="mailto:info@fimbroker.it" style="color:#0B1F3A;text-decoration:none;">info@fimbroker.it</a>
       </div>
     </div>
 
     <!-- Footer -->
-    <div style="background:#0f2d6b;padding:14px 32px;border-radius:0 0 12px 12px;">
+    <div style="background:#0B1F3A;padding:14px 32px;border-radius:0 0 12px 12px;">
       <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.35);text-align:center;">
         FIM Insurance Broker S.a.s. · Via Roma 41, Cisterna di Latina
         &nbsp;·&nbsp;
