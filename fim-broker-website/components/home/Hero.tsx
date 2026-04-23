@@ -29,9 +29,13 @@ export default function Hero() {
               per trasformarlo in opportunità
             </h1>
 
+            <p className="text-lg md:text-xl text-accent font-semibold mb-3 tracking-wide">
+              Chiarezza in Azione.
+            </p>
+
             <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed">
-              Nel labirinto dell&apos;incertezza, la chiarezza è il lusso più grande.
-              FIM non si limita a proteggerti: crea le fondamenta su cui costruire il tuo domani.
+              Architetti della tua sicurezza: traduciamo la complessità del mercato assicurativo
+              in strategie di protezione su misura.
             </p>
 
             {/* Response time promise */}
