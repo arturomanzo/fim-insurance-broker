@@ -120,8 +120,8 @@ export default function ChiSiamoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] order-last lg:order-first">
               <Image
-                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80&fit=crop&auto=format"
-                alt="Consulenza assicurativa professionale FIM con cliente"
+                src="/images/brand/consultant.jpg"
+                alt="Consulente FIM Insurance Broker — esperienza e competenza al tuo servizio"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

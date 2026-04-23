@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Hero from '@/components/home/Hero'
 import Stats from '@/components/home/Stats'
 import ServicesGrid from '@/components/home/ServicesGrid'
@@ -288,25 +289,39 @@ export default function HomePage() {
       {/* Why FIM */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Perché sceglierci
-            </span>
-            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-              Il vantaggio FIM
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Come broker indipendente, lavoriamo esclusivamente nell&apos;interesse dei nostri clienti.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyFIM.map((item) => (
-              <Card key={item.title} className="text-center">
-                <div className="text-4xl mb-4" aria-hidden="true">{item.icon}</div>
-                <h3 className="font-bold text-primary mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl">
+              <Image
+                src="/images/brand/bridge-fim.jpg"
+                alt="Ponte moderno con logo FIM — il collegamento tra te e la protezione giusta"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <div>
+              <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+                Perché sceglierci
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
+                Il vantaggio FIM
+              </h2>
+              <p className="text-gray-600 text-lg mb-6">
+                Come broker indipendente, lavoriamo esclusivamente nell&apos;interesse dei nostri clienti.
+                Siamo il ponte tra te e le migliori soluzioni assicurative del mercato.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {whyFIM.map((item) => (
+                  <div key={item.title} className="flex items-start gap-3">
+                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                    <div>
+                      <h3 className="font-bold text-primary mb-1">{item.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

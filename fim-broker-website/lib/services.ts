@@ -441,7 +441,7 @@ export const services: Service[] = [
       'Il Risk Management è il cuore del lavoro di un vero broker. Non partiamo dalla polizza ma dall\'analisi dei rischi reali della tua attività: operativi, patrimoniali, legali, reputazionali e di business continuity. Solo dopo aver mappato e pesato ogni esposizione costruiamo il programma assicurativo ottimale — nessuna copertura inutile, nessun gap pericoloso. Questo approccio consulenziale è ciò che distingue FIM da un semplice intermediario: non vendiamo polizze, gestiamo rischi.',
     icon: '🎯',
     color: 'slate',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/blueprint-analysis.jpg',
     features: [
       'Risk assessment: mappatura completa dei rischi aziendali',
       'Analisi di impatto (BIA — Business Impact Analysis)',
