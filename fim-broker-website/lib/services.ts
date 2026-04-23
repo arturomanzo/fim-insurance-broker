@@ -230,7 +230,7 @@ export const services: Service[] = [
       'FIM è il partner assicurativo di fiducia per le imprese. Dalla RC professionale alla cyber risk, dalle polizze property ai piani welfare aziendale, proteggiamo ogni aspetto della tua attività.',
     icon: '🏢',
     color: 'purple',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/cyber-chain.jpg',
     features: [
       'Responsabilità civile professionale',
       'Directors & Officers (D&O)',
@@ -386,7 +386,7 @@ export const services: Service[] = [
       'La RC Azienda copre i danni causati a terzi, ma lascia scoperti i costi legali dell\'imprenditore e dei suoi amministratori. Con la Tutela Legale Aziende completiamo la protezione: spese di avvocato, perito, CTU e consulenti in procedimenti penali, contenziosi con dipendenti, fornitori e clienti, e azioni di responsabilità contro amministratori e sindaci. Una copertura indispensabile in un\'epoca in cui un procedimento penale per reati colposi o la responsabilità amministrativa ex D.Lgs. 231/2001 possono colpire qualsiasi impresa.',
     icon: '⚖️',
     color: 'indigo',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/crystal-sculpture.jpg',
     features: [
       'Tutela penale per reati colposi (sicurezza sul lavoro, ambientali, fiscali)',
       'Responsabilità amministrativa ex D.Lgs. 231/2001',
@@ -441,7 +441,7 @@ export const services: Service[] = [
       'Il Risk Management è il cuore del lavoro di un vero broker. Non partiamo dalla polizza ma dall\'analisi dei rischi reali della tua attività: operativi, patrimoniali, legali, reputazionali e di business continuity. Solo dopo aver mappato e pesato ogni esposizione costruiamo il programma assicurativo ottimale — nessuna copertura inutile, nessun gap pericoloso. Questo approccio consulenziale è ciò che distingue FIM da un semplice intermediario: non vendiamo polizze, gestiamo rischi.',
     icon: '🎯',
     color: 'slate',
-    image: '/images/brand/blueprint-analysis.jpg',
+    image: '/images/brand/shield-craft.jpg',
     features: [
       'Risk assessment: mappatura completa dei rischi aziendali',
       'Analisi di impatto (BIA — Business Impact Analysis)',
