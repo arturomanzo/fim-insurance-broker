@@ -104,11 +104,11 @@ export default function ChiSiamoPage() {
               Chi Siamo
             </span>
             <h1 className="text-4xl md:text-5xl font-black mb-6">
-              Il tuo partner assicurativo <span className="text-accent">dal 2004</span>
+              I traduttori della <span className="text-accent">complessità</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed">
-              FIM Insurance Broker nasce dalla passione per la protezione delle persone e delle imprese.
-              Siamo un broker indipendente: non rappresentiamo nessuna compagnia, ma solo i tuoi interessi.
+              Nel labirinto dell&apos;incertezza, la chiarezza è il lusso più grande.
+              FIM non si limita a proteggere ciò che hai costruito: crea le fondamenta sicure su cui puoi costruire il tuo domani.
             </p>
           </div>
         </div>
@@ -132,16 +132,16 @@ export default function ChiSiamoPage() {
                 La nostra missione
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
-                Protezione intelligente, persone al centro
+                Il Saggio e il Navigatore
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                In FIM crediamo che ogni persona e ogni azienda meriti la copertura assicurativa più adatta
-                alle proprie esigenze, al prezzo più competitivo del mercato. Per questo confrontiamo
-                le offerte delle principali compagnie assicurative per trovare la soluzione perfetta per te.
+                Decodifichiamo il rischio per trasformarlo in opportunità. Con FIM, l&apos;assicurazione smette
+                di essere un obbligo difensivo e diventa la tua mossa più strategica.
               </p>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Come broker indipendente, siamo liberi da vincoli con le compagnie: il nostro unico
-                obiettivo è la tua soddisfazione e la tua protezione.
+                Il <strong className="text-primary">Saggio</strong> in noi ricerca la verità: analisi oggettive, competenza tecnica, trasparenza assoluta.
+                Il <strong className="text-primary">Navigatore</strong> prende il timone quando le cose si fanno complesse: sinistri, contenziosi, scadenze critiche.
+                Insieme, siamo il partner che ogni imprenditore e ogni famiglia merita.
               </p>
               <div className="grid grid-cols-3 gap-4">
                 {[
@@ -157,10 +157,10 @@ export default function ChiSiamoPage() {
               </div>
               <div className="space-y-3 mt-6">
                 {[
-                  { icon: '🎯', title: 'Indipendenza', desc: 'Nessun legame con le compagnie. Lavoriamo solo per te.' },
-                  { icon: '💡', title: 'Competenza', desc: 'Team di esperti certificati con esperienza pluriennale.' },
-                  { icon: '🤝', title: 'Fiducia', desc: 'Relazioni durature basate su onestà e trasparenza.' },
-                  { icon: '🔧', title: 'Supporto continuo', desc: 'Presenti in ogni momento, dalla polizza alla liquidazione.' },
+                  { icon: '🔍', title: 'Analisi oggettiva', desc: 'Dati concreti, non opinioni. Cerchiamo la verità nei numeri per consigliarti senza conflitti di interesse.' },
+                  { icon: '🧭', title: 'Guida nella complessità', desc: 'Prendiamo il timone nei momenti critici: sinistri, contenziosi, rinnovi strategici.' },
+                  { icon: '🎯', title: 'Visione strategica', desc: 'L\'assicurazione non è un costo: è un investimento. Ti aiutiamo a pianificare per crescere.' },
+                  { icon: '🤝', title: 'Indipendenza assoluta', desc: 'Non rappresentiamo compagnie. 30+ offerte confrontate con un solo obiettivo: il tuo.' },
                 ].map((val) => (
                   <Card key={val.title} className="flex items-start gap-4">
                     <span className="text-2xl flex-shrink-0">{val.icon}</span>
