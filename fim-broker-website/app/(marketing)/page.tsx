@@ -10,13 +10,13 @@ import Card from '@/components/ui/Card'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'FIM Insurance Broker | Soluzioni Assicurative Personalizzate per Privati e Aziende',
+    absolute: 'FIM Insurance Broker | Chiarezza in Azione — Architetti della Tua Sicurezza',
   },
   description:
-    'Broker assicurativo indipendente a Roma e nel Lazio. Confrontiamo le offerte di 30+ compagnie per trovare la polizza giusta per te: auto, casa, vita, salute, azienda. Preventivo gratuito in 24 ore.',
+    'Broker assicurativo indipendente a Roma e nel Lazio. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura. 30+ compagnie confrontate per te. Analisi gratuita.',
   openGraph: {
-    title: 'FIM Insurance Broker — Soluzioni Assicurative Personalizzate',
-    description: 'Broker indipendente con 20 anni di esperienza. Confrontiamo 30+ compagnie per trovare la polizza giusta per te.',
+    title: 'FIM Insurance Broker — Chiarezza in Azione',
+    description: 'Architetti della tua sicurezza. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.',
     images: [
       {
         url: '/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20Roma%20e%20Lazio.',
@@ -173,6 +173,43 @@ export default function HomePage() {
                 </svg>
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Pillars */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">I nostri pilastri</p>
+            <h2 className="text-3xl md:text-4xl font-black">
+              Su cosa costruiamo la tua protezione
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                icon: '🔍',
+                title: 'Trasparenza Assoluta',
+                desc: 'Nessun conflitto di interesse, nessun costo nascosto. Ogni clausola spiegata, ogni alternativa mostrata. Vedi esattamente cosa paghi e perché.',
+              },
+              {
+                icon: '✏️',
+                title: 'Design su Misura',
+                desc: 'Non esistono soluzioni standard. Analizziamo il tuo profilo di rischio unico e progettiamo la copertura che serve a te — niente di più, niente di meno.',
+              },
+              {
+                icon: '🔭',
+                title: 'Visione a Lungo Termine',
+                desc: 'Non pensiamo alla polizza di oggi. Costruiamo un piano di protezione che evolve con te: revisione annuale, adeguamento alle nuove esigenze, strategia continua.',
+              },
+            ].map((pillar) => (
+              <div key={pillar.title} className="text-center p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors">
+                <div className="text-4xl mb-5">{pillar.icon}</div>
+                <h3 className="text-xl font-black text-accent mb-3">{pillar.title}</h3>
+                <p className="text-white/70 leading-relaxed text-sm">{pillar.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

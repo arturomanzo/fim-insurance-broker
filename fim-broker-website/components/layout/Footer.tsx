@@ -171,8 +171,9 @@ export default function Footer() {
             <Link href="/" className="inline-flex mb-5" aria-label="FIM Insurance Broker — Home">
               <FimLogo variant="full" theme="white" height={44} />
             </Link>
+            <p className="text-accent text-sm font-semibold mb-2 tracking-wide">Chiarezza in Azione.</p>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
-              Da oltre 20 anni al fianco di privati e aziende per offrire le migliori soluzioni assicurative personalizzate.
+              Architetti della tua sicurezza: traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.
             </p>
             <div className="space-y-2 text-sm">
               <a href="tel:+390696883381" className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors">
