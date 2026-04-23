@@ -10,24 +10,30 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#0f2d6b',
-          light: '#1a4a9e',
-          dark: '#091d47',
-          50: '#eef4ff',
-          100: '#d9e8ff',
-          700: '#1a4a9e',
-          800: '#0f2d6b',
-          900: '#091d47',
+          DEFAULT: '#0B1F3A',
+          light: '#132d52',
+          dark: '#060f1d',
+          50: '#e8edf4',
+          100: '#c5d0e0',
+          700: '#132d52',
+          800: '#0B1F3A',
+          900: '#060f1d',
         },
         accent: {
-          DEFAULT: '#00b4c8',
-          dark: '#008fa0',
-          light: '#33c7d8',
-          gradient: '#00d4e8',
+          DEFAULT: '#2FA36B',
+          dark: '#258755',
+          light: '#4aba83',
+          gradient: '#38c77e',
+        },
+        gold: {
+          DEFAULT: '#C8A96A',
+          dark: '#b0914e',
+          light: '#d9c08a',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        sans: ['Montserrat', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        serif: ['Source Serif 4', 'Georgia', 'Times New Roman', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

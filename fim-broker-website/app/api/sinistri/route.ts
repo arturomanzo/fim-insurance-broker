@@ -168,7 +168,7 @@ export async function POST(req: NextRequest) {
       </div>` : ''}
       <div style="margin-top:20px;text-align:center;">
         <a href="https://fim-gestionale-next.vercel.app/comunicazioni"
-           style="display:inline-block;background:#0f2d6b;color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
+           style="display:inline-block;background:#0B1F3A;color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
           Apri nel gestionale →
         </a>
       </div>
@@ -187,7 +187,7 @@ export async function POST(req: NextRequest) {
 <!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"></head>
 <body style="font-family:system-ui,sans-serif;background:#f8fafc;margin:0;padding:20px;">
   <div style="max-width:600px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;">
-    <div style="background:linear-gradient(135deg,#091d47,#0f2d6b,#1a4a9e);padding:36px 32px;text-align:center;">
+    <div style="background:linear-gradient(135deg,#060f1d,#0B1F3A,#132d52);padding:36px 32px;text-align:center;">
       <h1 style="color:white;margin:0;font-size:22px;font-weight:900;">Pratica ricevuta</h1>
       <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;">FIM Insurance Broker</p>
     </div>
@@ -198,17 +198,17 @@ export async function POST(req: NextRequest) {
         Il nostro team la prenderà in carico e ti contatterà entro <strong>24 ore lavorative</strong>.
       </p>
       <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:20px;margin:24px 0;">
-        <p style="margin:0 0 8px;font-weight:700;color:#0f2d6b;font-size:14px;">Riferimento pratica: ${id}</p>
+        <p style="margin:0 0 8px;font-weight:700;color:#0B1F3A;font-size:14px;">Riferimento pratica: ${id}</p>
         <p style="margin:0;font-size:13px;color:#64748b;">Conserva questo numero per eventuali comunicazioni.</p>
       </div>
       <div style="text-align:center;">
         <a href="tel:+390696883381"
-           style="display:inline-block;background:#00b4c8;color:white;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:700;font-size:16px;">
+           style="display:inline-block;background:#2FA36B;color:white;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:700;font-size:16px;">
           📞 06 96883381
         </a>
       </div>
     </div>
-    <div style="background:#0f2d6b;padding:20px 32px;">
+    <div style="background:#0B1F3A;padding:20px 32px;">
       <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.5);text-align:center;">
         FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
       </p>

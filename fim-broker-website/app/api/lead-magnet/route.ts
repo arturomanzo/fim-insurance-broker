@@ -26,8 +26,8 @@ function buildGuideEmailHtml(nome: string, tipo: string): string {
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="font-family: system-ui, sans-serif; background: #f8fafc; margin: 0; padding: 20px;">
   <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.07);">
-    <div style="background: linear-gradient(135deg, #091d47, #0f2d6b, #1a4a9e); padding: 36px 32px; text-align: center;">
-      <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #0f2d6b, #00b4c8); border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+    <div style="background: linear-gradient(135deg, #060f1d, #0B1F3A, #132d52); padding: 36px 32px; text-align: center;">
+      <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #0B1F3A, #2FA36B); border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
         <span style="color: white; font-weight: 900; font-size: 28px;">📋</span>
       </div>
       <h1 style="color: white; margin: 0; font-size: 22px; font-weight: 900;">La tua guida è pronta!</h1>
@@ -51,7 +51,7 @@ function buildGuideEmailHtml(nome: string, tipo: string): string {
       </ul>
       <div style="text-align: center; margin: 0 0 32px;">
         <a href="${guideUrl}"
-           style="display: inline-block; background: #00b4c8; color: white; padding: 16px 36px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 16px;">
+           style="display: inline-block; background: #2FA36B; color: white; padding: 16px 36px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 16px;">
           📖 Leggi la Guida Completa →
         </a>
       </div>
@@ -64,16 +64,16 @@ function buildGuideEmailHtml(nome: string, tipo: string): string {
       </div>
       <div style="display: flex; gap: 12px; justify-content: center;">
         <a href="${BASE_URL}/prenota-consulenza"
-           style="display: inline-block; background: #0f2d6b; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; margin-right: 12px;">
+           style="display: inline-block; background: #0B1F3A; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; margin-right: 12px;">
           Prenota consulenza
         </a>
         <a href="${BASE_URL}/preventivo"
-           style="display: inline-block; background: #f1f5f9; color: #0f2d6b; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
+           style="display: inline-block; background: #f1f5f9; color: #0B1F3A; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
           Richiedi preventivo
         </a>
       </div>
     </div>
-    <div style="background: #0f2d6b; padding: 20px 32px;">
+    <div style="background: #0B1F3A; padding: 20px 32px;">
       <p style="margin: 0; font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.8;">
         FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina<br>
         Iscrizione RUI n. B000405449 — <a href="${BASE_URL}" style="color: rgba(255,255,255,0.5);">www.fimbroker.it</a><br>
@@ -92,12 +92,12 @@ function buildTeamNotificationHtml(nome: string, email: string, tipo: string): s
 <head><meta charset="UTF-8"></head>
 <body style="font-family: system-ui, sans-serif; background: #f8fafc; margin: 0; padding: 20px;">
   <div style="max-width: 500px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.07);">
-    <div style="background: #0f2d6b; padding: 20px 24px;">
+    <div style="background: #0B1F3A; padding: 20px 24px;">
       <h2 style="color: white; margin: 0; font-size: 16px;">📥 Nuovo Lead Magnet — Guida PMI</h2>
     </div>
     <div style="padding: 20px 24px;">
       <p style="margin: 0 0 8px; font-size: 14px; color: #64748b;">Lead da: <strong style="color: #1e293b;">${escapeHtml(nome)}</strong></p>
-      <p style="margin: 0 0 8px; font-size: 14px; color: #64748b;">Email: <a href="mailto:${escapeHtml(email)}" style="color: #0f2d6b;">${escapeHtml(email)}</a></p>
+      <p style="margin: 0 0 8px; font-size: 14px; color: #64748b;">Email: <a href="mailto:${escapeHtml(email)}" style="color: #0B1F3A;">${escapeHtml(email)}</a></p>
       <p style="margin: 0 0 16px; font-size: 14px; color: #64748b;">Tipo attività: <strong>${escapeHtml(tipo || 'Non specificato')}</strong></p>
       <p style="margin: 0; font-size: 12px; color: #94a3b8;">Ricevuto il ${new Date().toLocaleString('it-IT')}</p>
     </div>

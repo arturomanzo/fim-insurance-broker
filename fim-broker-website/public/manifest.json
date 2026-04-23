@@ -4,8 +4,8 @@
   "description": "Soluzioni assicurative personalizzate per privati e aziende",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f2d6b",
-  "theme_color": "#0f2d6b",
+  "background_color": "#0B1F3A",
+  "theme_color": "#0B1F3A",
   "icons": [
     {
       "src": "/icon",

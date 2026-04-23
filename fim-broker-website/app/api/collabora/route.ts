@@ -85,7 +85,7 @@ function buildTeamEmailHtml(data: {
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="font-family: system-ui, sans-serif; background: #f8fafc; margin: 0; padding: 20px;">
   <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.07);">
-    <div style="background: linear-gradient(135deg, #091d47, #0f2d6b, #1a4a9e); padding: 28px 32px;">
+    <div style="background: linear-gradient(135deg, #060f1d, #0B1F3A, #132d52); padding: 28px 32px;">
       <h1 style="color: white; margin: 0; font-size: 20px; font-weight: 900;">🤝 Nuova Candidatura — Collabora con Noi</h1>
       <p style="color: rgba(255,255,255,0.7); margin: 6px 0 0; font-size: 13px;">ID: ${data.id}</p>
     </div>
@@ -104,7 +104,7 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Email</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <a href="mailto:${email}" style="color: #0f2d6b; font-size: 15px;">${email}</a>
+            <a href="mailto:${email}" style="color: #0B1F3A; font-size: 15px;">${email}</a>
           </td>
         </tr>
         ${telefono ? `
@@ -113,7 +113,7 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Telefono</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <a href="tel:${telefono}" style="color: #0f2d6b; font-size: 15px;">${telefono}</a>
+            <a href="tel:${telefono}" style="color: #0B1F3A; font-size: 15px;">${telefono}</a>
           </td>
         </tr>` : ''}
         <tr>
@@ -121,7 +121,7 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Profilo</span>
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 15px; font-weight: 600; color: #00b4c8;">${profilo}</span>
+            <span style="font-size: 15px; font-weight: 600; color: #2FA36B;">${profilo}</span>
           </td>
         </tr>
         ${row('Iscrizione RUI', iscrizioneRui === 'si' ? `Sì${numeroRui ? ` — ${numeroRui}` : ''}` : iscrizioneRui === 'no' ? 'No' : '')}
@@ -130,7 +130,7 @@ function buildTeamEmailHtml(data: {
         <tr>
           <td style="padding: 10px 0;" colspan="2">
             <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Messaggio / Motivazioni</span>
-            <p style="margin: 8px 0 0; color: #475569; font-size: 14px; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 3px solid #00b4c8; white-space: pre-wrap;">${messaggio}</p>
+            <p style="margin: 8px 0 0; color: #475569; font-size: 14px; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 3px solid #2FA36B; white-space: pre-wrap;">${messaggio}</p>
           </td>
         </tr>
       </table>
@@ -143,7 +143,7 @@ function buildTeamEmailHtml(data: {
 
       <div style="margin-top: 20px; text-align: center;">
         <a href="mailto:${email}?subject=Re: La tua candidatura — FIM Insurance Broker"
-           style="display: inline-block; background: #0f2d6b; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
+           style="display: inline-block; background: #0B1F3A; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
           Rispondi al candidato →
         </a>
       </div>
@@ -166,8 +166,8 @@ function buildCandidateConfirmHtml(rawNome: string): string {
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="font-family: system-ui, sans-serif; background: #f8fafc; margin: 0; padding: 20px;">
   <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.07);">
-    <div style="background: linear-gradient(135deg, #091d47, #0f2d6b, #1a4a9e); padding: 36px 32px; text-align: center;">
-      <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #0f2d6b, #00b4c8); border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+    <div style="background: linear-gradient(135deg, #060f1d, #0B1F3A, #132d52); padding: 36px 32px; text-align: center;">
+      <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #0B1F3A, #2FA36B); border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
         <span style="color: white; font-weight: 900; font-size: 28px;">F</span>
       </div>
       <h1 style="color: white; margin: 0; font-size: 22px; font-weight: 900;">Candidatura ricevuta!</h1>
@@ -188,16 +188,16 @@ function buildCandidateConfirmHtml(rawNome: string): string {
       </p>
       <div style="text-align: center; margin: 0 0 32px;">
         <a href="https://www.fimbroker.it/chi-siamo"
-           style="display: inline-block; background: #00b4c8; color: white; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px; margin-right: 12px;">
+           style="display: inline-block; background: #2FA36B; color: white; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px; margin-right: 12px;">
           Chi Siamo
         </a>
         <a href="tel:+390696883381"
-           style="display: inline-block; background: #f1f5f9; color: #0f2d6b; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px;">
+           style="display: inline-block; background: #f1f5f9; color: #0B1F3A; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px;">
           📞 06 96883381
         </a>
       </div>
     </div>
-    <div style="background: #0f2d6b; padding: 20px 32px;">
+    <div style="background: #0B1F3A; padding: 20px 32px;">
       <p style="margin: 0; font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.8;">
         FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina<br>
         Iscrizione RUI n. B000405449 — <a href="https://www.fimbroker.it" style="color: rgba(255,255,255,0.5);">www.fimbroker.it</a>
