@@ -433,6 +433,61 @@ export const services: Service[] = [
     priceFrom: 'da 400€/anno',
     priceNote: 'PMI con fatturato fino a 2 mln€ e massimale 50.000€. Programmi strutturati su preventivo.',
   },
+  {
+    slug: 'risk-management',
+    title: 'Risk Management',
+    shortDescription: 'Analisi dei rischi, programmi assicurativi su misura e monitoraggio continuo. Prima i rischi, poi la copertura.',
+    description:
+      'Il Risk Management è il cuore del lavoro di un vero broker. Non partiamo dalla polizza ma dall\'analisi dei rischi reali della tua attività: operativi, patrimoniali, legali, reputazionali e di business continuity. Solo dopo aver mappato e pesato ogni esposizione costruiamo il programma assicurativo ottimale — nessuna copertura inutile, nessun gap pericoloso. Questo approccio consulenziale è ciò che distingue FIM da un semplice intermediario: non vendiamo polizze, gestiamo rischi.',
+    icon: '🎯',
+    color: 'slate',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop&auto=format',
+    features: [
+      'Risk assessment: mappatura completa dei rischi aziendali',
+      'Analisi di impatto (BIA — Business Impact Analysis)',
+      'Progettazione del programma assicurativo ottimale',
+      'Selezione e piazzamento presso 30+ compagnie partner',
+      'Revisione annuale del portafoglio e adeguamento coperture',
+      'Claims management: gestione sinistri dalla denuncia alla liquidazione',
+      'Business Continuity Planning (BCP)',
+      'Compliance assicurativa (catastrofi naturali, D.Lgs. 231, GDPR)',
+    ],
+    benefits: [
+      'Visione completa dei rischi: nessun punto cieco nel programma assicurativo',
+      'Ottimizzazione dei premi: coperture mirate riducono la spesa fino al 25%',
+      'Un unico interlocutore per tutte le polizze e tutti i sinistri',
+      'Report annuale di risk review con raccomandazioni concrete',
+      'Consulenza gratuita: la prima analisi non costa nulla',
+    ],
+    faq: [
+      {
+        question: 'Cos\'è il Risk Management assicurativo e perché serve alla mia azienda?',
+        answer: 'Il Risk Management assicurativo è un processo strutturato che identifica, valuta e tratta i rischi della tua attività attraverso strumenti assicurativi e non (prevenzione, piani di emergenza, contratti). Serve perché ogni azienda ha un profilo di rischio unico: copiare la polizza di un concorrente significa quasi sempre pagare troppo per coperture inutili e restare scoperti su rischi reali. FIM parte dalla tua attività, non dal listino di una compagnia.',
+      },
+      {
+        question: 'Come funziona il percorso di Risk Management con FIM?',
+        answer: 'Il percorso si articola in 4 fasi: 1) Mappatura dei rischi — sopralluogo, intervista con la direzione, analisi bilancio e contratti; 2) Analisi di impatto — ogni rischio viene classificato per probabilità e gravità, con una matrice dei rischi visuale; 3) Programma assicurativo — progettiamo le coperture, chiediamo preventivi a 30+ compagnie, ti presentiamo un confronto trasparente; 4) Monitoraggio — ogni anno rivediamo il programma, adeguiamo le coperture all\'evoluzione dell\'azienda e gestiamo i sinistri.',
+      },
+      {
+        question: 'Il Risk Assessment iniziale è gratuito?',
+        answer: 'Sì. La prima analisi dei rischi è completamente gratuita e senza impegno. Produciamo un report sintetico con la mappa dei rischi, le eventuali criticità e le raccomandazioni. Se decidi di affidarci il programma assicurativo, la consulenza di risk management resta inclusa nel servizio — non applichiamo compensi separati per la consulenza.',
+      },
+      {
+        question: 'In cosa si differenzia il Risk Management di FIM rispetto a un agente assicurativo?',
+        answer: 'Un agente rappresenta una o poche compagnie e propone i prodotti del suo mandato. FIM è un broker indipendente iscritto al RUI (Sez. B n. B000405449): non rappresentiamo nessuna compagnia, ma solo i tuoi interessi. Questo significa che analizziamo i rischi in modo oggettivo, confrontiamo le offerte di 30+ compagnie e scegliamo la soluzione migliore per te — non per la compagnia. Inoltre, gestiamo i sinistri dalla tua parte, negoziando con la compagnia per ottenere la liquidazione più rapida e completa.',
+      },
+      {
+        question: 'Il Risk Management è utile anche per una piccola impresa?',
+        answer: 'Assolutamente sì. Le PMI sono spesso le più esposte perché non hanno un risk manager interno. Un singolo sinistro grave (incendio, causa di lavoro, attacco informatico) può mettere a rischio la sopravvivenza dell\'azienda. Il nostro servizio è calibrato sulla dimensione: per una micro-impresa bastano poche ore di analisi per individuare le 3-4 coperture critiche e ottimizzare la spesa assicurativa. Molti clienti PMI scoprono che stavano pagando troppo per coperture non prioritarie.',
+      },
+      {
+        question: 'Cosa include il report annuale di Risk Review?',
+        answer: 'Il report annuale include: aggiornamento della mappa dei rischi (nuove attività, nuovi asset, cambiamenti normativi), verifica dell\'adeguatezza dei massimali e dei valori assicurati, analisi dell\'andamento sinistri, raccomandazioni su coperture da aggiungere, rimuovere o modificare, e un benchmark dei premi rispetto al mercato. Lo presentiamo in un incontro dedicato con la direzione, in modo da prendere decisioni informate.',
+      },
+    ],
+    priceFrom: 'consulenza gratuita',
+    priceNote: 'Risk assessment iniziale senza impegno. Il servizio di risk management è incluso nella gestione del portafoglio assicurativo.',
+  },
 ]
 
 export function getServiceBySlug(slug: string): Service | undefined {
@@ -448,4 +503,5 @@ export const serviceColorMap: Record<string, string> = {
   orange: 'bg-orange-100 text-orange-800',
   amber: 'bg-amber-100 text-amber-800',
   indigo: 'bg-indigo-100 text-indigo-800',
+  slate: 'bg-slate-100 text-slate-800',
 }
