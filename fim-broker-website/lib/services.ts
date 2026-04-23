@@ -22,7 +22,7 @@ export const services: Service[] = [
       'Proteggi il tuo veicolo con le soluzioni assicurative più complete del mercato. Da FIM trovi polizze personalizzate per ogni esigenza, dalla semplice RC obbligatoria fino alla Kasko totale.',
     icon: '🚗',
     color: 'blue',
-    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/auto-road.jpg',
     features: [
       'RC Auto obbligatoria',
       'Kasko completa o parziale',
@@ -74,7 +74,7 @@ export const services: Service[] = [
       'Le polizze vita FIM garantiscono serenità finanziaria a te e alla tua famiglia. Offriamo soluzioni temporanee caso morte, miste, unit-linked e piani di accumulo previdenziale.',
     icon: '❤️',
     color: 'red',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/vita-structure.jpg',
     features: [
       'Vita temporanea caso morte',
       'Polizze miste',
@@ -126,7 +126,7 @@ export const services: Service[] = [
       'La tua casa è il tuo bene più prezioso. FIM offre polizze globali fabbricato e multirischio casa che coprono ogni tipo di danno, dal furto agli eventi atmosferici.',
     icon: '🏠',
     color: 'green',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/casa-model.jpg',
     features: [
       'Incendio e scoppio',
       'Furto e rapina',
@@ -178,7 +178,7 @@ export const services: Service[] = [
       'La salute è il bene più prezioso. Le nostre polizze sanitarie ti garantiscono accesso alle migliori strutture private, rimborso spese mediche e indennità per infortuni.',
     icon: '🏥',
     color: 'teal',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/salute-dna.jpg',
     features: [
       'Ricoveri ospedalieri',
       'Visite specialistiche',
@@ -334,7 +334,7 @@ export const services: Service[] = [
       'Le cauzioni e fideiussioni assicurative sostituiscono le garanzie bancarie tradizionali, liberando liquidità e linee di credito per la tua impresa. Come broker indipendente confrontiamo le offerte delle compagnie specializzate per ottenere la cauzione giusta al costo più competitivo, con tempi di emissione rapidi — generalmente entro 24-48 ore lavorative.',
     icon: '🔐',
     color: 'amber',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/cauzioni-seal.jpg',
     features: [
       'Cauzioni per appalti pubblici (provvisorie e definitive)',
       'Cauzioni per appalti privati',
