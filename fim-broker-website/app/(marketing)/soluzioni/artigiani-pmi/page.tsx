@@ -74,6 +74,13 @@ const coverages = [
     price: 'su preventivo',
     mandatory: false,
   },
+  {
+    icon: '⚖️',
+    title: 'Tutela Legale Aziende',
+    desc: 'Copre le spese di avvocato, perito e CTU in caso di procedimenti penali (D.Lgs. 231/2001), controversie con dipendenti, fornitori o clienti, e azioni di responsabilità contro amministratori. Completa la RC proteggendo anche l\'imprenditore.',
+    price: 'da 400€/anno',
+    mandatory: false,
+  },
 ]
 
 const sectors = [
@@ -250,6 +257,55 @@ export default function ArtigianiPmiPage() {
           <p className="text-center text-xs text-gray-400 mt-6">
             * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al settore di attività, fatturato e valori assicurati. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
           </p>
+
+          {/* Tutela Legale spotlight */}
+          <div className="mt-12 bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-8 md:p-10 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full -translate-y-20 translate-x-20" />
+            <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+              <div className="lg:col-span-2">
+                <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-3 py-1 text-xs font-bold text-accent mb-4">
+                  <span>⚖️</span>
+                  NUOVO SERVIZIO
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black mb-3">
+                  RC + Tutela Legale = protezione a 360° dell&apos;imprenditore
+                </h3>
+                <p className="text-white/80 leading-relaxed mb-4">
+                  La RC Azienda copre i danni che causi a terzi, ma non paga gli avvocati quando sei tu a dover difenderti:
+                  un procedimento penale per reati colposi (sicurezza sul lavoro, ambientali), una verifica ex D.Lgs. 231/2001,
+                  un contenzioso con un dipendente. La <strong className="text-accent">Tutela Legale Aziende</strong> completa
+                  la copertura: avvocati, periti, CTU e consulenti pagati dalla compagnia.
+                </p>
+                <Link
+                  href="/servizi/tutela-legale-aziende"
+                  className="inline-flex items-center gap-2 text-accent font-semibold hover:text-white transition-colors"
+                >
+                  Scopri la Tutela Legale Aziende
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3 text-sm">
+                <div className="flex items-start gap-2">
+                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-white/90">Tutela penale D.Lgs. 231/2001</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-white/90">Danni patrimoniali (D&amp;O) amministratori e sindaci</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-white/90">Controversie con dipendenti e fornitori</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-white/90">Libera scelta dell&apos;avvocato di fiducia</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
