@@ -13,6 +13,7 @@ const serviceLinks = [
   { href: '/servizi/assicurazione-viaggio', label: 'Assicurazione Viaggio' },
   { href: '/servizi/cauzioni-fideiussioni', label: 'Cauzioni e Fideiussioni' },
   { href: '/servizi/tutela-legale-aziende', label: 'Tutela Legale Aziende' },
+  { href: '/servizi/risk-management', label: 'Risk Management' },
 ]
 
 const soluzioniLinks = [
