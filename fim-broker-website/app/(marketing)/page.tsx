@@ -69,23 +69,23 @@ const testimonials = [
 const whyFIM = [
   {
     icon: '🔍',
-    title: 'Confrontiamo per te',
-    desc: 'Analizziamo le offerte delle principali compagnie assicurative per trovare la soluzione migliore al prezzo più competitivo.',
+    title: 'La competenza del Saggio',
+    desc: 'Analisi oggettiva, dati concreti, trasparenza assoluta. Non vendiamo prodotti: traduciamo la complessità assicurativa in decisioni chiare.',
+  },
+  {
+    icon: '🧭',
+    title: 'La guida del Navigatore',
+    desc: 'Quando le acque si fanno tempestose — un sinistro, una scadenza critica, un contenzioso — prendiamo il timone al tuo fianco.',
+  },
+  {
+    icon: '🎯',
+    title: 'Strategia, non burocrazia',
+    desc: 'L\'assicurazione non è un obbligo difensivo. Con FIM diventa la tua mossa più strategica: protezione mirata, zero sprechi.',
   },
   {
     icon: '🤝',
-    title: 'Consulenza personalizzata',
-    desc: 'Un consulente dedicato analizza le tue esigenze e costruisce la copertura ideale per te.',
-  },
-  {
-    icon: '⚡',
-    title: 'Gestione sinistri',
-    desc: 'Ti affianchiamo in ogni fase del sinistro, dalla denuncia alla liquidazione, con massima efficienza.',
-  },
-  {
-    icon: '💯',
-    title: 'Trasparenza totale',
-    desc: 'Nessun costo nascosto, nessuna sorpresa. Ti spieghiamo ogni clausola con chiarezza.',
+    title: 'Indipendenza totale',
+    desc: 'Non rappresentiamo nessuna compagnia. Confrontiamo 30+ offerte con un solo obiettivo: il tuo interesse.',
   },
 ]
 
@@ -301,14 +301,14 @@ export default function HomePage() {
             </div>
             <div>
               <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-                Perché sceglierci
+                Il Saggio e il Navigatore
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-                Il vantaggio FIM
+                Competenza e guida.<br />Il vantaggio FIM.
               </h2>
               <p className="text-gray-600 text-lg mb-6">
-                Come broker indipendente, lavoriamo esclusivamente nell&apos;interesse dei nostri clienti.
-                Siamo il ponte tra te e le migliori soluzioni assicurative del mercato.
+                Siamo i traduttori della complessità: decodifichiamo il rischio per trasformarlo in opportunità.
+                Con FIM, l&apos;assicurazione smette di essere un obbligo difensivo.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {whyFIM.map((item) => (
@@ -409,10 +409,10 @@ export default function HomePage() {
       <section className="gradient-primary py-16">
         <div className="container-custom text-center">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            Pronto per il tuo preventivo gratuito?
+            La tua mossa più strategica inizia qui
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Compila il modulo o chiama ora. Risponderemo entro 24 ore con un preventivo personalizzato.
+            Un&apos;analisi gratuita dei tuoi rischi, senza impegno. Decodifichiamo la complessità e ti presentiamo la soluzione giusta in 24 ore.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">
