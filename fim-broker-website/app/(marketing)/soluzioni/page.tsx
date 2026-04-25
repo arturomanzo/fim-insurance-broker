@@ -149,8 +149,50 @@ export default function SoluzioniPage() {
         </div>
       </section>
 
-      {/* Other needs */}
+      {/* Settori verticali B2B */}
       <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-10">
+            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              Landing verticali
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-primary mb-3">
+              Soluzioni dedicate per settore B2B
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Approfondimenti specifici per chi cerca polizze costruite sui rischi reali della propria categoria — coperture chiave, esempi concreti, riferimenti normativi.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { href: '/soluzioni/settori/edilizia', icon: '🏗️', title: 'Edilizia', desc: 'CAR, fideiussioni, infortuni operai, RC subappaltatori, decennale postuma.' },
+              { href: '/soluzioni/settori/medico', icon: '⚕️', title: 'Settore Medico', desc: 'RC sanitaria Gelli-Bianco, Colpa Grave SSN, tutela legale, cyber GDPR.' },
+              { href: '/soluzioni/settori/manifatturiero', icon: '🏭', title: 'Manifatturiero', desc: 'All Risk Property, Business Interruption, RC Prodotto export, Cyber OT.' },
+            ].map((s) => (
+              <Link
+                key={s.href}
+                href={s.href}
+                className="group bg-gray-50 hover:bg-primary/5 border border-gray-100 hover:border-primary/30 rounded-2xl p-6 transition-all"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">{s.icon}</span>
+                  <h3 className="font-bold text-primary group-hover:text-primary-light text-lg">{s.title}</h3>
+                </div>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">{s.desc}</p>
+                <span className="inline-flex items-center gap-1 text-accent text-sm font-semibold">
+                  Approfondisci
+                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Other needs */}
+      <section className="section-padding bg-gray-50">
         <div className="container-custom text-center">
           <h2 className="text-2xl font-black text-primary mb-3">Non trovi la tua categoria?</h2>
           <p className="text-gray-600 max-w-xl mx-auto mb-8">

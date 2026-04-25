@@ -43,6 +43,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/soluzioni/artigiani-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/condomini`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/catastrofi-naturali`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    // Landing page verticali B2B
+    { url: `${BASE_URL}/soluzioni/settori/edilizia`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/settori/medico`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/settori/manifatturiero`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     // Strumenti & guide
     { url: `${BASE_URL}/sinistri`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/quiz-polizza`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
