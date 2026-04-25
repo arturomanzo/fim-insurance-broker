@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Hero from '@/components/home/Hero'
 import Stats from '@/components/home/Stats'
 import ServicesGrid from '@/components/home/ServicesGrid'
@@ -9,13 +10,13 @@ import Card from '@/components/ui/Card'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'FIM Insurance Broker | Soluzioni Assicurative Personalizzate per Privati e Aziende',
+    absolute: 'FIM Insurance Broker | Chiarezza in Azione — Architetti della Tua Sicurezza',
   },
   description:
-    'Broker assicurativo indipendente a Roma e nel Lazio. Confrontiamo le offerte di 30+ compagnie per trovare la polizza giusta per te: auto, casa, vita, salute, azienda. Preventivo gratuito in 24 ore.',
+    'Broker assicurativo indipendente a Roma e nel Lazio. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura. 30+ compagnie confrontate per te. Analisi gratuita.',
   openGraph: {
-    title: 'FIM Insurance Broker — Soluzioni Assicurative Personalizzate',
-    description: 'Broker indipendente con 20 anni di esperienza. Confrontiamo 30+ compagnie per trovare la polizza giusta per te.',
+    title: 'FIM Insurance Broker — Chiarezza in Azione',
+    description: 'Architetti della tua sicurezza. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.',
     images: [
       {
         url: '/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20Roma%20e%20Lazio.',
@@ -68,23 +69,23 @@ const testimonials = [
 const whyFIM = [
   {
     icon: '🔍',
-    title: 'Confrontiamo per te',
-    desc: 'Analizziamo le offerte delle principali compagnie assicurative per trovare la soluzione migliore al prezzo più competitivo.',
+    title: 'La competenza del Saggio',
+    desc: 'Analisi oggettiva, dati concreti, trasparenza assoluta. Non vendiamo prodotti: traduciamo la complessità assicurativa in decisioni chiare.',
+  },
+  {
+    icon: '🧭',
+    title: 'La guida del Navigatore',
+    desc: 'Quando le acque si fanno tempestose — un sinistro, una scadenza critica, un contenzioso — prendiamo il timone al tuo fianco.',
+  },
+  {
+    icon: '🎯',
+    title: 'Strategia, non burocrazia',
+    desc: 'L\'assicurazione non è un obbligo difensivo. Con FIM diventa la tua mossa più strategica: protezione mirata, zero sprechi.',
   },
   {
     icon: '🤝',
-    title: 'Consulenza personalizzata',
-    desc: 'Un consulente dedicato analizza le tue esigenze e costruisce la copertura ideale per te.',
-  },
-  {
-    icon: '⚡',
-    title: 'Gestione sinistri',
-    desc: 'Ti affianchiamo in ogni fase del sinistro, dalla denuncia alla liquidazione, con massima efficienza.',
-  },
-  {
-    icon: '💯',
-    title: 'Trasparenza totale',
-    desc: 'Nessun costo nascosto, nessuna sorpresa. Ti spieghiamo ogni clausola con chiarezza.',
+    title: 'Indipendenza totale',
+    desc: 'Non rappresentiamo nessuna compagnia. Confrontiamo 30+ offerte con un solo obiettivo: il tuo interesse.',
   },
 ]
 
@@ -176,6 +177,43 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Core Pillars */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <p className="text-accent font-semibold text-sm uppercase tracking-widest mb-3">I nostri pilastri</p>
+            <h2 className="text-3xl md:text-4xl font-black">
+              Su cosa costruiamo la tua protezione
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                icon: '🔍',
+                title: 'Trasparenza Assoluta',
+                desc: 'Nessun conflitto di interesse, nessun costo nascosto. Ogni clausola spiegata, ogni alternativa mostrata. Vedi esattamente cosa paghi e perché.',
+              },
+              {
+                icon: '✏️',
+                title: 'Design su Misura',
+                desc: 'Non esistono soluzioni standard. Analizziamo il tuo profilo di rischio unico e progettiamo la copertura che serve a te — niente di più, niente di meno.',
+              },
+              {
+                icon: '🔭',
+                title: 'Visione a Lungo Termine',
+                desc: 'Non pensiamo alla polizza di oggi. Costruiamo un piano di protezione che evolve con te: revisione annuale, adeguamento alle nuove esigenze, strategia continua.',
+              },
+            ].map((pillar) => (
+              <div key={pillar.title} className="text-center p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors">
+                <div className="text-4xl mb-5">{pillar.icon}</div>
+                <h3 className="text-xl font-black text-accent mb-3">{pillar.title}</h3>
+                <p className="text-white/70 leading-relaxed text-sm">{pillar.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Come funziona */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
@@ -223,7 +261,7 @@ export default function HomePage() {
                 <div key={item.step} className="flex flex-col items-center text-center group">
                   <div className="relative mb-5">
                     <div className="w-20 h-20 rounded-2xl gradient-primary flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
-                      <span className="text-3xl">{item.icon}</span>
+                      <span className="text-3xl" aria-hidden="true">{item.icon}</span>
                     </div>
                     <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-accent text-white text-xs font-black flex items-center justify-center shadow">
                       {item.step}
@@ -288,25 +326,39 @@ export default function HomePage() {
       {/* Why FIM */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Perché sceglierci
-            </span>
-            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-              Il vantaggio FIM
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Come broker indipendente, lavoriamo esclusivamente nell&apos;interesse dei nostri clienti.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyFIM.map((item) => (
-              <Card key={item.title} className="text-center">
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="font-bold text-primary mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl">
+              <Image
+                src="/images/brand/strategy-mapping.jpg"
+                alt="Professionista analizza connessioni strategiche — l'intelligenza umana dietro la protezione FIM"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <div>
+              <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+                Il Saggio e il Navigatore
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
+                Competenza e guida.<br />Il vantaggio FIM.
+              </h2>
+              <p className="text-gray-600 text-lg mb-6">
+                Siamo i traduttori della complessità: decodifichiamo il rischio per trasformarlo in opportunità.
+                Con FIM, l&apos;assicurazione smette di essere un obbligo difensivo.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {whyFIM.map((item) => (
+                  <div key={item.title} className="flex items-start gap-3">
+                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                    <div>
+                      <h3 className="font-bold text-primary mb-1">{item.title}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -394,10 +446,10 @@ export default function HomePage() {
       <section className="gradient-primary py-16">
         <div className="container-custom text-center">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            Pronto per il tuo preventivo gratuito?
+            La tua mossa più strategica inizia qui
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Compila il modulo o chiama ora. Risponderemo entro 24 ore con un preventivo personalizzato.
+            Un&apos;analisi gratuita dei tuoi rischi, senza impegno. Decodifichiamo la complessità e ti presentiamo la soluzione giusta in 24 ore.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">
