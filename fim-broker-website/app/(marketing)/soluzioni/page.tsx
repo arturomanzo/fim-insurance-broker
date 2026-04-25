@@ -163,11 +163,12 @@ export default function SoluzioniPage() {
               Approfondimenti specifici per chi cerca polizze costruite sui rischi reali della propria categoria — coperture chiave, esempi concreti, riferimenti normativi.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { href: '/soluzioni/settori/edilizia', icon: '🏗️', title: 'Edilizia', desc: 'CAR, fideiussioni, infortuni operai, RC subappaltatori, decennale postuma.' },
               { href: '/soluzioni/settori/medico', icon: '⚕️', title: 'Settore Medico', desc: 'RC sanitaria Gelli-Bianco, Colpa Grave SSN, tutela legale, cyber GDPR.' },
               { href: '/soluzioni/settori/manifatturiero', icon: '🏭', title: 'Manifatturiero', desc: 'All Risk Property, Business Interruption, RC Prodotto export, Cyber OT.' },
+              { href: '/soluzioni/settori/welfare-aziendale', icon: '💼', title: 'Welfare Aziendale', desc: 'Polizze collettive deducibili, fidelizzano i dipendenti, abbattono le tasse.' },
             ].map((s) => (
               <Link
                 key={s.href}
