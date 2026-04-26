@@ -389,6 +389,21 @@ export default function ArtigianiPmiPage() {
         </div>
       </section>
 
+      {/* Second Opinion */}
+      <section className="section-padding bg-primary/5 border-t border-primary/10">
+        <div className="container-custom max-w-3xl text-center">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">Solo per PMI e artigiani</p>
+          <h2 className="text-2xl font-bold text-primary mb-3">Hai già delle polizze? Scopri se ti coprono davvero</h2>
+          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+            Inviaci i PDF dei tuoi contratti attuali. Un consulente FIM fa la <strong>Gap Analysis gratuita</strong>
+            su RC, incendio, catastrofale e cyber — e ti dice dove sei scoperto, entro 48 ore.
+          </p>
+          <Link href="/seconda-opinione" className="btn-primary inline-block">
+            Richiedi la Second Opinion gratuita →
+          </Link>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="gradient-primary py-16">
         <div className="container-custom text-center">
