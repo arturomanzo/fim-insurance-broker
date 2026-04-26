@@ -296,7 +296,7 @@ export default function SecondOpinionForm() {
             onChange={handleChange}
             className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
           />
-          <span className="text-sm text-gray-500">Ho oscurato i premi nei documenti prima dell'invio</span>
+          <span className="text-sm text-gray-500">Ho oscurato i premi nei documenti prima dell&apos;invio</span>
         </label>
       </div>
 
