@@ -86,8 +86,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Hero image — visible solo su desktop */}
-          <div className="hidden lg:block relative">
+          {/* Hero image — visible da tablet in su */}
+          <div className="hidden md:block relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
               <Image
                 src="/images/brand/prism.jpg"
@@ -95,7 +95,7 @@ export default function Hero() {
                 fill
                 className="object-cover"
                 priority
-                sizes="(max-width: 1024px) 0px, 50vw"
+                sizes="(max-width: 768px) 0px, (max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
             </div>

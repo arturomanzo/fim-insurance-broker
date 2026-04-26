@@ -412,7 +412,7 @@ export default function HomePage() {
               <span className="text-sm text-gray-500">su Google Reviews</span>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {testimonials.map((t) => (
               <Card key={t.name} className="relative flex flex-col">
                 {/* Google badge */}
