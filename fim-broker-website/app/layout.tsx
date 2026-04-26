@@ -21,6 +21,11 @@ const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   title: {
     default: 'FIM Insurance Broker | Soluzioni Assicurative Personalizzate',
