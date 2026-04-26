@@ -301,6 +301,21 @@ export default function ProfessionistiPage() {
         </div>
       </section>
 
+      {/* Second Opinion */}
+      <section className="section-padding bg-primary/5 border-t border-primary/10">
+        <div className="container-custom max-w-3xl text-center">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">Per professionisti con polizze esistenti</p>
+          <h2 className="text-2xl font-bold text-primary mb-3">Hai già una RC professionale? Scopri se ti copre davvero</h2>
+          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+            Inviaci il PDF del tuo contratto attuale. Un consulente FIM analizza massimali, esclusioni e lacune
+            e ti risponde con la <strong>Gap Analysis gratuita</strong> entro 48 ore — senza impegno.
+          </p>
+          <Link href="/seconda-opinione" className="btn-primary inline-block">
+            Richiedi la Second Opinion gratuita →
+          </Link>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="gradient-primary py-16">
         <div className="container-custom text-center">

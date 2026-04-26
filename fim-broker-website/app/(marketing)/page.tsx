@@ -320,6 +320,26 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+
+          {/* Second Opinion — banner full-width per PMI */}
+          <div className="mt-6 rounded-3xl border border-primary/20 bg-primary/5 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">🔍</div>
+              <div>
+                <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-1">Per PMI e professionisti</p>
+                <h3 className="text-lg font-black text-primary mb-1">Second Opinion assicurativa gratuita</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Hai già delle polizze? Inviaci i PDF: un consulente FIM analizza le lacune e ti risponde entro 48 ore.
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/seconda-opinione"
+              className="btn-primary whitespace-nowrap flex-shrink-0"
+            >
+              Richiedi la Gap Analysis →
+            </Link>
+          </div>
         </div>
       </section>
 

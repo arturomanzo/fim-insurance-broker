@@ -185,6 +185,22 @@ export default function AnalizzaPolizzaPage() {
         </div>
       </section>
 
+      {/* ── Cross-link Second Opinion ── */}
+      <section className="section-padding bg-primary/5 border-t border-primary/10">
+        <div className="container-custom max-w-3xl text-center">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">Per PMI e professionisti</p>
+          <h2 className="text-2xl font-bold text-primary mb-3">Hai più polizze da analizzare insieme?</h2>
+          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+            L&apos;analisi AI è ottima per una singola polizza. Se hai un portafoglio complesso — RC, incendio, cyber, catastrofale —
+            richiedi la <strong>Second Opinion gratuita</strong>: un consulente FIM fa la Gap Analysis su tutte le tue coperture
+            e ti ricontatta entro 48 ore.
+          </p>
+          <a href="/seconda-opinione" className="btn-primary inline-block">
+            Richiedi la Second Opinion gratuita →
+          </a>
+        </div>
+      </section>
+
       {/* ── Bottom CTA ── */}
       <section className="gradient-primary py-14 text-white text-center">
         <div className="container-custom max-w-xl">

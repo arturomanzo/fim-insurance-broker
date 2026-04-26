@@ -72,6 +72,17 @@ export function trackCollaboraSubmit(profilo: string, utmSource?: string) {
   })
 }
 
+// ── Funnel second opinion ────────────────────────────────────────────────────
+
+/** Richiesta Second Opinion inviata */
+export function trackSecondOpinionSubmit(settore: string, utmSource?: string) {
+  track('generate_lead', {
+    event_category: 'second_opinion',
+    settore: settore || '(non specificato)',
+    utm_source: utmSource ?? '(direct)',
+  })
+}
+
 // ── Abbandono funnel ─────────────────────────────────────────────────────────
 
 /**
