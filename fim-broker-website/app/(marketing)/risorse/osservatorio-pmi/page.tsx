@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import FaqSection from '@/components/ui/FaqSection'
+import { osservatorioPmiFaq } from '@/lib/faq/osservatorio-pmi'
 
 export const metadata: Metadata = {
   title: 'Osservatorio PMI Assicurazioni 2025 | Costi e Benchmark per Settore',
@@ -38,29 +40,6 @@ const jsonLdArticle = {
     name: 'Assicurazioni PMI Italia',
   },
 }
-
-const faqs = [
-  {
-    q: 'Quanto costa in media un pacchetto assicurativo per una PMI?',
-    a: 'Il costo medio annuo per una PMI con 5–20 dipendenti varia tra €2.800 e €12.000 a seconda del settore e delle coperture scelte. Le imprese manifatturiere e costruzioni pagano di più (rischio fisico elevato), mentre il terziario tende a spendere meno per i rischi materiali ma di più per RC e cyber.',
-  },
-  {
-    q: 'La polizza catastrofale è obbligatoria per le imprese nel 2025?',
-    a: 'Sì. Il D.L. 18/2023 convertito con L. 17/2024 ha introdotto l\'obbligo di assicurazione contro le calamità naturali (alluvioni, terremoti, frane, inondazioni) per tutte le imprese con sede legale in Italia a partire dal 1° aprile 2025. Le imprese non in regola rischiano sanzioni e l\'esclusione da contributi pubblici.',
-  },
-  {
-    q: 'Cosa include la RC Impresa e quanto costa?',
-    a: 'La RC Impresa copre i danni causati a terzi nell\'esercizio dell\'attività. Il costo dipende dal fatturato, numero di dipendenti e settore: per una PMI con fatturato fino a €500K si parte da €600–1.200/anno per la sola RC. Molte imprese la integrano con polizze All-Risk per una copertura completa.',
-  },
-  {
-    q: 'Il Cyber Risk Insurance è necessario per le PMI?',
-    a: 'Con l\'entrata in vigore del Regolamento NIS2 (ottobre 2024), migliaia di PMI italiane rientrano nell\'ambito di applicazione. Anche senza obbligo diretto, il costo medio di un attacco ransomware per una PMI italiana è di €85.000 tra fermo operativo, recupero dati e danni reputazionali. Una polizza cyber entry-level parte da €800–1.500/anno.',
-  },
-  {
-    q: 'Come si calcola il premio di un\'assicurazione aziendale?',
-    a: 'I fattori principali sono: settore di attività (codice ATECO), fatturato annuo, numero di dipendenti, presenza di impianti/macchinari, storico sinistri, e coperture richieste. Un broker indipendente come FIM può confrontare le offerte di 30+ compagnie per trovare il miglior rapporto qualità-prezzo.',
-  },
-]
 
 const sectorData = [
   { sector: 'Edilizia & Costruzioni', rc: '€1.800–4.500', allRisk: '€2.500–7.000', cyber: '€800–1.500', catastrofale: '€400–900', total: '€5.500–14.000', risk: 'alto' },
@@ -289,41 +268,11 @@ export default function OsservatorioPmiPage() {
               </div>
             </div>
 
-            {/* FAQ */}
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-primary mb-6">
-                Domande frequenti
-              </h2>
-              <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                  __html: JSON.stringify({
-                    '@context': 'https://schema.org',
-                    '@type': 'FAQPage',
-                    mainEntity: faqs.map((faq) => ({
-                      '@type': 'Question',
-                      name: faq.q,
-                      acceptedAnswer: { '@type': 'Answer', text: faq.a },
-                    })),
-                  }),
-                }}
-              />
-              <div className="space-y-4">
-                {faqs.map((faq) => (
-                  <details key={faq.q} className="bg-white rounded-2xl shadow-sm border border-gray-100 group">
-                    <summary className="px-6 py-4 cursor-pointer font-semibold text-primary hover:text-primary-light list-none flex justify-between items-center">
-                      {faq.q}
-                      <svg className="w-5 h-5 text-gray-400 flex-shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </summary>
-                    <div className="px-6 pb-5 text-gray-600 text-sm leading-relaxed border-t border-gray-50 pt-4">
-                      {faq.a}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </div>
+            <FaqSection
+              items={osservatorioPmiFaq.items}
+              cta={osservatorioPmiFaq.cta}
+              background="none"
+            />
 
             {/* Methodology note */}
             <div className="bg-gray-100 rounded-2xl p-6 text-sm text-gray-600">

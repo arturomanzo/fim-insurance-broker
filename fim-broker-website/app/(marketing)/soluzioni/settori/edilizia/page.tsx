@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
-import FaqAccordion from '@/components/ui/FaqAccordion'
+import FaqSection from '@/components/ui/FaqSection'
+import { ediliziaFaq } from '@/lib/faq/edilizia'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 const SETTORE_QS = '?profilo=pmi&settore=Edilizia'
@@ -71,45 +72,9 @@ const coverages = [
   },
 ]
 
-const faqs = [
-  {
-    question: 'La polizza CAR è obbligatoria per legge?',
-    answer:
-      'La CAR (Contractors All Risk) non è obbligatoria per legge in senso stretto, ma è quasi sempre richiesta dai capitolati di gara — sia in appalti pubblici (in base al D.Lgs. 36/2023) che privati. Per opere finanziate o vendute al consumatore finale è inoltre prassi consolidata richiederla. Senza CAR, l\'impresa risponde con il proprio patrimonio dei danni in cantiere.',
-  },
-  {
-    question: 'Quanto costa una polizza CAR per un cantiere medio?',
-    answer:
-      'Il premio dipende dal valore dell\'opera, dalla durata dei lavori, dalla tipologia (nuova costruzione, ristrutturazione, demolizione) e dalla presenza di rischi particolari (cantieri in centri storici, vicino a opere preesistenti, scavi profondi). Indicativamente, per un cantiere residenziale di media complessità, il premio CAR oscilla tra lo 0,3% e l\'1% del valore dell\'opera. Confrontiamo offerte di compagnie specializzate (Generali, AXA, HDI, ITAS) per ottimizzare il rapporto copertura/prezzo.',
-  },
-  {
-    question: 'Posso ottenere una fideiussione anche se la mia banca dice di no?',
-    answer:
-      'Sì. FIM lavora con compagnie e intermediari fideiussori specializzati che valutano le pratiche con criteri diversi rispetto agli istituti bancari. Spesso accettano imprese edili di piccole e medie dimensioni che faticano a ottenere fidi bancari, basandosi su bilanci, casellario imprese e regolarità contributiva. Tempi di rilascio: tipicamente 48-72 ore per cauzioni standard.',
-  },
-  {
-    question: 'La decennale postuma copre anche le ristrutturazioni?',
-    answer:
-      'La decennale postuma del D.M. 154/2016 è obbligatoria per gli immobili di nuova costruzione venduti al consumatore. Per le ristrutturazioni rilevanti esistono polizze postume specifiche (2, 5 o 10 anni) che coprono vizi e difetti dell\'opera secondo l\'art. 1669 del Codice Civile. Per interventi del Superbonus 110%, alcune coperture postume sono richieste anche dal protocollo di asseverazione.',
-  },
-]
-
-function buildFaqSchema(items: { question: string; answer: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
-  }
-}
-
 export default function EdiliziaPage() {
   return (
     <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(faqs)) }} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', href: '/' },
@@ -279,15 +244,11 @@ export default function EdiliziaPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom max-w-3xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-primary mb-3">Domande frequenti — Edilizia</h2>
-          </div>
-          <FaqAccordion items={faqs} />
-        </div>
-      </section>
+      <FaqSection
+        title="Domande frequenti — Edilizia"
+        items={ediliziaFaq.items}
+        cta={ediliziaFaq.cta}
+      />
 
       {/* CTA */}
       <section className="gradient-primary py-16">

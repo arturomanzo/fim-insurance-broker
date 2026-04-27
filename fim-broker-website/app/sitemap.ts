@@ -55,6 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/seconda-opinione`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/osservatorio-prezzi`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/glossario`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/faq`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     // Risorse
     { url: `${BASE_URL}/risorse/guida-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/risorse/osservatorio-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },

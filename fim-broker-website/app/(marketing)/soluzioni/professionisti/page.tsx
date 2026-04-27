@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
-import FaqAccordion from '@/components/ui/FaqAccordion'
+import FaqSection from '@/components/ui/FaqSection'
+import { professionistiFaq } from '@/lib/faq/professionisti'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = {
@@ -66,51 +67,9 @@ const categories = [
   { name: 'Consulenti IT e Digital', icon: '💻', obligation: 'Raccomandata — alta esposizione cyber' },
 ]
 
-const faqs = [
-  {
-    question: 'La RC professionale è obbligatoria per tutti i professionisti?',
-    answer:
-      'Per molte categorie sì: avvocati (L. 247/2012), ingegneri e architetti (D.P.R. 137/2012), medici e sanitari (L. 24/2017), commercialisti (D.Lgs. 139/2005). Anche per i liberi professionisti non soggetti a obbligo di legge, la RC professionale è fortemente raccomandata: una singola contestazione non coperta può azzzerare anni di lavoro.',
-  },
-  {
-    question: 'Cosa succede concretamente se faccio un errore professionale?',
-    answer:
-      "Il cliente subisce un danno economico per colpa tua (es. un avvocato perde un'udienza per dimenticanza, un commercialista sbaglia una dichiarazione IVA). Il cliente ti chiede un risarcimento. La RC professionale copre: le spese legali per difenderti, l'eventuale risarcimento al cliente fino al massimale della polizza, e il costo peritale per valutare il danno.",
-  },
-  {
-    question: 'Come si calcola il premio della RC professionale?',
-    answer:
-      "Il premio dipende da: categoria professionale, volume d'affari/fatturato annuo, massimale richiesto (in genere da 500.000€ a 3M€), storico sinistri, e eventuali attività specifiche ad alto rischio. FIM confronta le offerte delle principali compagnie per trovare il miglior rapporto qualità/prezzo per la tua situazione specifica.",
-  },
-  {
-    question: 'Posso stipulare una sola polizza per tutto lo studio?',
-    answer:
-      "Sì, per studi associati, STP o studi con dipendenti/collaboratori è possibile stipulare una polizza di studio che copra tutti i professionisti. In genere è più economica rispetto a più polizze individuali e semplifica la gestione. Verifichiamo insieme la struttura più adatta al tuo studio.",
-  },
-  {
-    question: 'La polizza copre anche errori commessi in passato?',
-    answer:
-      "Le RC professionali possono avere clausola 'claims made' (copertura per richieste ricevute durante la validità della polizza) o 'loss occurrence' (copertura per danni avvenuti durante la validità). La scelta influisce significativamente sulla continuità della protezione: ti spieghiamo la differenza e quale conviene nel tuo caso.",
-  },
-]
-
-
-function buildFaqSchema(items: { question: string; answer: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
-  }
-}
-
 export default function ProfessionistiPage() {
   return (
     <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(faqs)) }} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', href: '/' },
@@ -290,16 +249,7 @@ export default function ProfessionistiPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom max-w-3xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-primary mb-3">Domande frequenti</h2>
-            <p className="text-gray-600">Risposte chiare alle domande più comuni sulla RC professionale.</p>
-          </div>
-          <FaqAccordion items={faqs} />
-        </div>
-      </section>
+      <FaqSection items={professionistiFaq.items} cta={professionistiFaq.cta} />
 
       {/* Second Opinion */}
       <section className="section-padding bg-primary/5 border-t border-primary/10">
