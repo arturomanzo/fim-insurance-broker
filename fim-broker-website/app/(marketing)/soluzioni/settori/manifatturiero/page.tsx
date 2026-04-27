@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
-import FaqAccordion from '@/components/ui/FaqAccordion'
+import FaqSection from '@/components/ui/FaqSection'
+import { manifatturieroFaq } from '@/lib/faq/manifatturiero'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 const SETTORE_QS = '?profilo=pmi&settore=Manifatturiero'
@@ -71,45 +72,9 @@ const coverages = [
   },
 ]
 
-const faqs = [
-  {
-    question: 'Cos\'è la Business Interruption e perché è così importante?',
-    answer:
-      'La Business Interruption (BI) è la copertura che indennizza il mancato margine di contribuzione e i costi fissi che l\'azienda continua a sostenere durante il periodo di fermo produzione causato da un sinistro indennizzabile (incendio, allagamento, danno macchinario, ecc.). Senza BI, anche un\'impresa con polizza Property completa rischia di non riprendersi: quando il capannone o le macchine vengono ripristinati, i clienti potrebbero aver già spostato gli ordini su altri fornitori. La BI è la copertura che statisticamente fa la differenza tra le aziende che riaprono dopo un sinistro grave e quelle che chiudono definitivamente.',
-  },
-  {
-    question: 'Vendo i miei prodotti negli Stati Uniti: la mia RC prodotto è valida?',
-    answer:
-      'La maggior parte delle polizze RC Prodotto italiane esclude espressamente USA, Canada e talvolta UK perché in questi paesi vige un sistema di responsabilità (strict liability, punitive damages, class action) che genera richieste danni di ordini di grandezza superiori a quelli italiani ed europei. Per esportare in sicurezza serve un\'estensione territoriale specifica con limiti dedicati e a volte una polizza separata. FIM lavora con compagnie internazionali (AIG, Zurich, Allianz Global Corporate) specializzate nella copertura export USA/UK.',
-  },
-  {
-    question: 'L\'obbligo catastrofi naturali del 2025 si applica anche alle PMI?',
-    answer:
-      'Sì. La L. 213/2023 (Legge di Bilancio 2024), art. 1 comma 101, ha introdotto per tutte le imprese iscritte al Registro Imprese — dalle ditte individuali alle grandi società — l\'obbligo di stipulare entro il 31/03/2025 (poi prorogato) una copertura assicurativa contro i danni causati da terremoti, alluvioni, frane, inondazioni ed esondazioni su immobili, terreni, impianti e attrezzature. La mancata adesione comporta sanzioni e l\'esclusione da contributi e agevolazioni statali. Per le micro e piccole imprese sono previste tempistiche e modalità adattate.',
-  },
-  {
-    question: 'Come si valutano i massimali su una polizza All Risk industriale?',
-    answer:
-      'I massimali Property si determinano sui valori a nuovo dei beni assicurati: capannone (costo di ricostruzione a regola d\'arte, non valore di mercato), macchinari (valore a nuovo non ammortizzato), scorte (valore di acquisto medio nei 12 mesi). Per la Business Interruption il massimale si calcola sul margine di contribuzione (fatturato meno costi variabili) per il periodo massimo di indennizzo (tipicamente 12-18-24 mesi). Una sotto-assicurazione attiva la "regola proporzionale": il sinistro viene indennizzato in proporzione al rapporto tra valore assicurato e valore reale.',
-  },
-]
-
-function buildFaqSchema(items: { question: string; answer: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
-  }
-}
-
 export default function ManifatturieroPage() {
   return (
     <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(faqs)) }} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', href: '/' },
@@ -279,15 +244,11 @@ export default function ManifatturieroPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom max-w-3xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-primary mb-3">Domande frequenti — Manifatturiero</h2>
-          </div>
-          <FaqAccordion items={faqs} />
-        </div>
-      </section>
+      <FaqSection
+        title="Domande frequenti — Manifatturiero"
+        items={manifatturieroFaq.items}
+        cta={manifatturieroFaq.cta}
+      />
 
       {/* CTA */}
       <section className="gradient-primary py-16">
