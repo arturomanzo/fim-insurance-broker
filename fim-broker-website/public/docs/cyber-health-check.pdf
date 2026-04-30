@@ -1,0 +1,504 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 6208 >>
+stream
+0.059 0.176 0.42 rg
+0 792 595 50 re F
+1 1 1 rg
+BT
+/F2 18 Tf
+30 808 Td
+(CYBER HEALTH CHECK) Tj
+ET
+BT
+/F1 10 Tf
+30 792 Td
+(FIM Insurance Broker - Autovalutazione Cyber Risk Aziendale) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 16 Tf
+30 740 Td
+(La tua azienda e pronta contro i cyber attacchi?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 9 Tf
+30 718 Td
+(Rispondi a queste 10 domande per scoprire il tuo livello di esposizione al rischio cyber.) Tj
+ET
+BT
+/F1 9 Tf
+30 706 Td
+(Per ogni domanda: SI = 2 punti  |  PARZIALMENTE = 1 punto  |  NO = 0 punti) Tj
+ET
+0.8 0.8 0.8 rg
+30 698 535 0.5 re F
+0.059 0.176 0.42 rg
+30 678 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 681 Td
+(1.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 682 Td
+(HAI UN BACKUP REGOLARE DEI DATI?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 674 Td
+(Backup automatico giornaliero, testato almeno ogni 3 mesi, con copia offsite o cloud.) Tj
+ET
+0.8 0.8 0.8 rg
+400 678 30 14 re S
+435 678 40 14 re S
+480 678 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 682 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 682 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 682 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 620 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 623 Td
+(2.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 624 Td
+(I TUOI DIPENDENTI RICEVONO FORMAZIONE CYBER?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 616 Td
+(Training annuale su phishing, password sicure, comportamenti a rischio.) Tj
+ET
+0.8 0.8 0.8 rg
+400 620 30 14 re S
+435 620 40 14 re S
+480 620 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 624 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 624 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 624 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 562 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 565 Td
+(3.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 566 Td
+(HAI L'AUTENTICAZIONE A DUE FATTORI \(2FA\)?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 558 Td
+(2FA attivo su email aziendale, VPN, accessi remoti e sistemi critici.) Tj
+ET
+0.8 0.8 0.8 rg
+400 562 30 14 re S
+435 562 40 14 re S
+480 562 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 566 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 566 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 566 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 504 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 507 Td
+(4.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 508 Td
+(HAI UN PIANO DI RISPOSTA AGLI INCIDENTI?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 500 Td
+(Procedura scritta su cosa fare in caso di attacco: chi avvisare, come isolare i sistemi.) Tj
+ET
+0.8 0.8 0.8 rg
+400 504 30 14 re S
+435 504 40 14 re S
+480 504 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 508 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 508 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 508 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 446 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 449 Td
+(5.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 450 Td
+(I TUOI SISTEMI SONO AGGIORNATI?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 442 Td
+(Patch di sicurezza applicate entro 30 giorni dal rilascio. Antivirus aggiornato.) Tj
+ET
+0.8 0.8 0.8 rg
+400 446 30 14 re S
+435 446 40 14 re S
+480 446 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 450 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 450 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 450 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 388 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 391 Td
+(6.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 392 Td
+(HAI CENSITO I TUOI DATI PERSONALI \(GDPR\)?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 384 Td
+(Registro del trattamento, DPA con fornitori, procedura per data breach.) Tj
+ET
+0.8 0.8 0.8 rg
+400 388 30 14 re S
+435 388 40 14 re S
+480 388 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 392 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 392 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 392 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 330 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 333 Td
+(7.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 334 Td
+(HAI VALUTATO I RISCHI DEI TUOI FORNITORI?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 326 Td
+(Hai verificato le misure di sicurezza di chi accede ai tuoi sistemi o dati.) Tj
+ET
+0.8 0.8 0.8 rg
+400 330 30 14 re S
+435 330 40 14 re S
+480 330 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 334 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 334 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 334 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 272 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 275 Td
+(8.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 276 Td
+(HAI SEPARATO LE RETI \(SEGMENTAZIONE\)?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 268 Td
+(Rete uffici separata da quella di produzione/server. Wi-Fi ospiti isolato.) Tj
+ET
+0.8 0.8 0.8 rg
+400 272 30 14 re S
+435 272 40 14 re S
+480 272 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 276 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 276 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 276 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 214 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 217 Td
+(9.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 218 Td
+(HAI DEFINITO CONTROLLI SUGLI ACCESSI?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 210 Td
+(Accesso ai dati solo a chi ne ha bisogno. Password policy con rotazione obbligatoria.) Tj
+ET
+0.8 0.8 0.8 rg
+400 214 30 14 re S
+435 214 40 14 re S
+480 214 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 218 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 218 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 218 Td
+(NO) Tj
+ET
+0.059 0.176 0.42 rg
+30 156 18 14 re F
+1 1 1 rg
+BT
+/F2 8 Tf
+33 159 Td
+(10.) Tj
+ET
+0.059 0.176 0.42 rg
+BT
+/F2 9 Tf
+52 160 Td
+(HAI UNA COPERTURA ASSICURATIVA CYBER?) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 8 Tf
+52 152 Td
+(Polizza cyber attiva che copra: ripristino dati, interruzione attivita, responsabilita terzi.) Tj
+ET
+0.8 0.8 0.8 rg
+400 156 30 14 re S
+435 156 40 14 re S
+480 156 25 14 re S
+0.5 0.5 0.5 rg
+BT
+/F1 7 Tf
+403 160 Td
+(SI) Tj
+ET
+BT
+/F1 7 Tf
+438 160 Td
+(PARZ.) Tj
+ET
+BT
+/F1 7 Tf
+483 160 Td
+(NO) Tj
+ET
+0.8 0.8 0.8 rg
+30 103 535 0.5 re F
+0.059 0.176 0.42 rg
+BT
+/F2 11 Tf
+30 88 Td
+(RISULTATO: somma i tuoi punti) Tj
+ET
+0.3 0.3 0.3 rg
+BT
+/F1 9 Tf
+30 72 Td
+(16-20 punti: Buona base. Valuta una polizza cyber per trasferire il rischio residuo.) Tj
+ET
+BT
+/F1 9 Tf
+30 58 Td
+(8-15 punti: Esposizione media. Priorita: backup, 2FA e formazione. Polizza cyber consigliata.) Tj
+ET
+BT
+/F1 9 Tf
+30 44 Td
+(0-7 punti: Esposizione alta. Agisci subito. Una polizza cyber e urgente.) Tj
+ET
+0.059 0.176 0.42 rg
+0 0 595 40 re F
+1 1 1 rg
+BT
+/F2 9 Tf
+30 18 Td
+(FIM Insurance Broker S.a.s. - RUI IVASS Sez. B n. B000405449 - info@fimbroker.it - Tel. 06 96883381) Tj
+ET
+BT
+/F1 8 Tf
+30 7 Td
+(Richiedi il tuo preventivo cyber personalizzato su www.fimbroker.it/preventivo?profilo=azienda&tipo=cyber) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000006511 00000 n 
+0000006608 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+6710
+%%EOF

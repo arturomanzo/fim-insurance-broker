@@ -3,6 +3,7 @@ import { professionistiFaq } from './professionisti'
 import { artigianiPmiFaq } from './artigiani-pmi'
 import { condominiFaq } from './condomini'
 import { catastrofiNaturaliFaq } from './catastrofi-naturali'
+import { cyberRiskFaq } from './cyber-risk'
 import { manifatturieroFaq } from './manifatturiero'
 import { ediliziaFaq } from './edilizia'
 import { medicoFaq } from './medico'
@@ -36,6 +37,7 @@ export const ALL_FAQS: readonly FaqCategory[] = [
   artigianiPmiFaq,
   condominiFaq,
   catastrofiNaturaliFaq,
+  cyberRiskFaq,
   manifatturieroFaq,
   ediliziaFaq,
   medicoFaq,
