@@ -74,6 +74,18 @@ const solutions = [
     cta: 'Scopri le coperture catastrofali',
     price: 'da 80€/anno',
   },
+  {
+    href: '/soluzioni/cyber-risk',
+    icon: '🔒',
+    tag: 'NIS2 — Obblighi per 66.000 aziende italiane',
+    tagColor: 'bg-cyan-100 text-cyan-700',
+    title: 'Cyber Risk',
+    subtitle: 'PMI, professionisti e settori critici NIS2',
+    desc: 'Ransomware, data breach, sanzioni GDPR: il 68% delle PMI italiane ha subìto almeno un attacco negli ultimi 2 anni. Polizza DUAL Cyber Smart Plus con retroattività illimitata e copertura mondo intero.',
+    highlights: ['Ransomware e malware', 'Data breach GDPR', 'Business interruption', 'Retroattività illimitata'],
+    cta: 'Scopri la copertura cyber',
+    price: 'da 800€/anno',
+  },
 ]
 
 export default function SoluzioniPage() {
