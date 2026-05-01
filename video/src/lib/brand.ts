@@ -1,13 +1,14 @@
 export const BRAND = {
-  primary: '#0f2d6b',
-  primaryDark: '#091d47',
-  primaryLight: '#1a4a9e',
-  accent: '#00b4c8',
-  accentDark: '#008fa0',
+  primary: '#0B1F3A',
+  primaryDark: '#060f1e',
+  primaryLight: '#1a3a6b',
+  accent: '#2FA36B',
+  accentDark: '#238a56',
+  accentLight: '#3dba7e',
   white: '#ffffff',
-  gray: '#f0f4f8',
+  gray: '#6B7280',
 } as const;
 
 export const FONTS = {
-  heading: 'system-ui, -apple-system, "Segoe UI", sans-serif',
+  heading: '"Montserrat", system-ui, -apple-system, sans-serif',
 } as const;
