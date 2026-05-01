@@ -9,7 +9,7 @@ import {
   useVideoConfig,
   Sequence,
 } from 'remotion';
-import { BRAND } from '../lib/brand';
+import { BRAND, FONTS } from '../lib/brand';
 import { FimLogo } from '../components/FimLogo';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -72,7 +72,7 @@ const IntroScene: React.FC = () => {
           transform: `translateY(${taglineY}px)`,
           color: `${BRAND.white}bb`,
           fontSize: 28,
-          fontFamily: BRAND.fonts,
+          fontFamily: FONTS.heading,
           letterSpacing: 3,
           textTransform: 'uppercase',
           textAlign: 'center',
