@@ -189,6 +189,14 @@ export default function CyberRiskPage() {
               >
                 📋 Scarica Cyber Health Check
               </a>
+              <a
+                href="/docs/cyber-risk-presentazione-pmi.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline-white text-lg px-8 py-4"
+              >
+                📊 Presentazione PMI (PDF)
+              </a>
             </div>
           </div>
         </div>
