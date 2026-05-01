@@ -1,14 +1,17 @@
 import React from 'react';
 import {
   AbsoluteFill,
+  Audio,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
   Sequence,
   Easing,
 } from 'remotion';
 import { BRAND } from '../lib/brand';
+import { FimLogo } from '../components/FimLogo';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -45,7 +48,6 @@ const HookScene: React.FC = () => {
         padding: 80,
       }}
     >
-      {/* Cerchio decorativo accent */}
       <div
         style={{
           position: 'absolute',
@@ -54,7 +56,7 @@ const HookScene: React.FC = () => {
           width: 500,
           height: 500,
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${BRAND.accent}33 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${BRAND.accent}28 0%, transparent 70%)`,
           transform: `scale(${accentScale})`,
         }}
       />
@@ -65,7 +67,6 @@ const HookScene: React.FC = () => {
           transform: `translateY(${line1Y}px)`,
           color: BRAND.accent,
           fontSize: 36,
-          fontFamily: BRAND.fonts,
           fontWeight: 600,
           letterSpacing: 3,
           textTransform: 'uppercase',
@@ -156,47 +157,16 @@ const SolutionScene: React.FC = () => {
         FIM confronta per te
       </div>
 
-      {/* Counter */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'flex-end',
-          gap: 8,
-          marginBottom: 16,
-        }}
-      >
-        <span
-          style={{
-            fontSize: 160,
-            fontWeight: 900,
-            color: BRAND.accent,
-            lineHeight: 1,
-          }}
-        >
+      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, marginBottom: 16 }}>
+        <span style={{ fontSize: 160, fontWeight: 900, color: BRAND.accent, lineHeight: 1 }}>
           {counterValue}
         </span>
-        <span
-          style={{
-            fontSize: 80,
-            fontWeight: 900,
-            color: BRAND.accent,
-            lineHeight: 1,
-            paddingBottom: 16,
-          }}
-        >
+        <span style={{ fontSize: 80, fontWeight: 900, color: BRAND.accent, lineHeight: 1, paddingBottom: 16 }}>
           +
         </span>
       </div>
 
-      <div
-        style={{
-          color: BRAND.primary,
-          fontSize: 40,
-          fontWeight: 600,
-          textAlign: 'center',
-          marginBottom: 40,
-        }}
-      >
+      <div style={{ color: BRAND.primary, fontSize: 40, fontWeight: 600, textAlign: 'center', marginBottom: 40 }}>
         compagnie assicurative
       </div>
 
@@ -283,17 +253,12 @@ const CTAScene: React.FC = () => {
   const s = spring({ frame, fps, config: { damping: 12, stiffness: 80 } });
   const scale = interpolate(s, [0, 1], [0.8, 1]);
   const op = interpolate(s, [0, 1], [0, 1]);
-
-  const pulse = interpolate(
-    Math.sin((frame / 6) * Math.PI),
-    [-1, 1],
-    [0.95, 1.05]
-  );
+  const pulse = interpolate(Math.sin((frame / 6) * Math.PI), [-1, 1], [0.95, 1.05]);
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: BRAND.accent,
+        backgroundColor: BRAND.white,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
@@ -301,33 +266,9 @@ const CTAScene: React.FC = () => {
         gap: 32,
       }}
     >
-      <div
-        style={{
-          opacity: op,
-          transform: `scale(${scale})`,
-          textAlign: 'center',
-        }}
-      >
-        <div
-          style={{
-            color: BRAND.primary,
-            fontSize: 44,
-            fontWeight: 900,
-            letterSpacing: -1,
-            marginBottom: 12,
-          }}
-        >
-          FIM Insurance Broker
-        </div>
-        <div
-          style={{
-            color: BRAND.primaryDark,
-            fontSize: 28,
-            fontWeight: 500,
-            marginBottom: 48,
-          }}
-        >
-          Broker indipendente · RUI B000405449
+      <div style={{ opacity: op, transform: `scale(${scale})`, textAlign: 'center' }}>
+        <div style={{ marginBottom: 40 }}>
+          <FimLogo width={400} variant="dark" />
         </div>
 
         <div
@@ -346,14 +287,7 @@ const CTAScene: React.FC = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            color: BRAND.primaryDark,
-            fontSize: 28,
-            marginTop: 32,
-            fontWeight: 500,
-          }}
-        >
+        <div style={{ color: BRAND.primary, fontSize: 28, marginTop: 32, fontWeight: 500 }}>
           📞 06 96883381
         </div>
       </div>
@@ -364,10 +298,25 @@ const CTAScene: React.FC = () => {
 // ─── Composizione principale ─────────────────────────────────────────────────
 
 export const RCAutoSpot: React.FC = () => {
-  const { fps } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
+
+  const musicVolume = (frame: number) =>
+    interpolate(
+      frame,
+      [0, 20, durationInFrames - 40, durationInFrames],
+      [0, 0.3, 0.3, 0],
+      { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+    );
 
   return (
     <AbsoluteFill>
+      {/* Musica di sottofondo — metti music.mp3 in ~/my-video/public/ */}
+      <Audio
+        src={staticFile('music.mp3')}
+        volume={(f) => musicVolume(f)}
+        startFrom={0}
+      />
+
       <Sequence from={0} durationInFrames={fps * 9}>
         <HookScene />
       </Sequence>

@@ -1,13 +1,16 @@
 import React from 'react';
 import {
   AbsoluteFill,
+  Audio,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
   Sequence,
 } from 'remotion';
 import { BRAND } from '../lib/brand';
+import { FimLogo } from '../components/FimLogo';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -27,12 +30,9 @@ const IntroScene: React.FC = () => {
   const { fps } = useVideoConfig();
 
   const logoScale = spring({ frame: frame - 10, fps, config: { damping: 10, stiffness: 60 } });
-  const logoOp = fadeIn(frame, 10, 20);
-  const lineOp = fadeIn(frame, 35, 20);
-  const lineW = interpolate(frame, [35, 70], [0, 300], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  const logoOp = fadeIn(frame, 10, 25);
+  const taglineOp = fadeIn(frame, 45, 20);
+  const taglineY = interpolate(slideUp(frame, fps, 45), [0, 1], [30, 0]);
 
   return (
     <AbsoluteFill
@@ -41,10 +41,9 @@ const IntroScene: React.FC = () => {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        gap: 24,
+        gap: 32,
       }}
     >
-      {/* Sfondo decorativo */}
       <div
         style={{
           position: 'absolute',
@@ -53,51 +52,33 @@ const IntroScene: React.FC = () => {
           width: 700,
           height: 700,
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${BRAND.accent}22 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${BRAND.accent}18 0%, transparent 70%)`,
         }}
       />
 
       <div
         style={{
           opacity: logoOp,
-          transform: `scale(${interpolate(logoScale, [0, 1], [0.5, 1])})`,
+          transform: `scale(${interpolate(logoScale, [0, 1], [0.6, 1])})`,
           textAlign: 'center',
         }}
       >
-        {/* Logo testuale FIM */}
-        <div
-          style={{
-            fontSize: 120,
-            fontWeight: 900,
-            color: BRAND.white,
-            letterSpacing: -4,
-            lineHeight: 1,
-          }}
-        >
-          FIM
-        </div>
-        <div
-          style={{
-            opacity: lineOp,
-            width: lineW,
-            height: 4,
-            backgroundColor: BRAND.accent,
-            borderRadius: 2,
-            margin: '16px auto',
-          }}
-        />
-        <div
-          style={{
-            opacity: lineOp,
-            color: BRAND.accent,
-            fontSize: 30,
-            fontWeight: 600,
-            letterSpacing: 6,
-            textTransform: 'uppercase',
-          }}
-        >
-          Insurance Broker
-        </div>
+        <FimLogo width={480} variant="light" />
+      </div>
+
+      <div
+        style={{
+          opacity: taglineOp,
+          transform: `translateY(${taglineY}px)`,
+          color: `${BRAND.white}bb`,
+          fontSize: 28,
+          fontFamily: BRAND.fonts,
+          letterSpacing: 3,
+          textTransform: 'uppercase',
+          textAlign: 'center',
+        }}
+      >
+        La tua sicurezza. Le nostre soluzioni.
       </div>
     </AbsoluteFill>
   );
@@ -128,7 +109,7 @@ const ChiSiamoScene: React.FC = () => {
           opacity: interpolate(s1, [0, 1], [0, 1]),
           transform: `translateY(${interpolate(s1, [0, 1], [40, 0])}px)`,
           color: BRAND.accent,
-          fontSize: 30,
+          fontSize: 28,
           fontWeight: 600,
           letterSpacing: 4,
           textTransform: 'uppercase',
@@ -174,21 +155,9 @@ const ChiSiamoScene: React.FC = () => {
 // ─── Scene 3: I nostri valori (15–23s) ──────────────────────────────────────
 
 const values = [
-  {
-    icon: '⚖️',
-    title: 'Indipendenza',
-    desc: '30+ compagnie partner, scegliamo la migliore per te',
-  },
-  {
-    icon: '🤝',
-    title: 'Relazione',
-    desc: 'Un consulente dedicato, sempre disponibile',
-  },
-  {
-    icon: '🛡️',
-    title: 'Tutela',
-    desc: 'Ti assistiamo dalla polizza al sinistro',
-  },
+  { icon: '⚖️', title: 'Indipendenza', desc: '30+ compagnie partner, scegliamo la migliore per te' },
+  { icon: '🤝', title: 'Relazione', desc: 'Un consulente dedicato, sempre disponibile' },
+  { icon: '🛡️', title: 'Tutela', desc: 'Ti assistiamo dalla polizza al sinistro' },
 ];
 
 const ValoriScene: React.FC = () => {
@@ -233,6 +202,7 @@ const ValoriScene: React.FC = () => {
               borderRadius: 20,
               padding: '24px 36px',
               width: '100%',
+              borderLeft: `6px solid ${BRAND.accent}`,
             }}
           >
             <span style={{ fontSize: 50 }}>{v.icon}</span>
@@ -256,17 +226,12 @@ const ContattiScene: React.FC = () => {
   const s = spring({ frame, fps, config: { damping: 12, stiffness: 70 } });
   const scale = interpolate(s, [0, 1], [0.85, 1]);
   const op = interpolate(s, [0, 1], [0, 1]);
-
-  const pulse = interpolate(
-    Math.sin((frame / 6) * Math.PI),
-    [-1, 1],
-    [0.97, 1.03]
-  );
+  const pulse = interpolate(Math.sin((frame / 6) * Math.PI), [-1, 1], [0.97, 1.03]);
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: BRAND.accent,
+        backgroundColor: BRAND.white,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
@@ -274,36 +239,9 @@ const ContattiScene: React.FC = () => {
         gap: 24,
       }}
     >
-      <div
-        style={{
-          opacity: op,
-          transform: `scale(${scale})`,
-          textAlign: 'center',
-        }}
-      >
-        <div
-          style={{
-            fontSize: 96,
-            fontWeight: 900,
-            color: BRAND.primary,
-            letterSpacing: -3,
-            lineHeight: 1,
-            marginBottom: 8,
-          }}
-        >
-          FIM
-        </div>
-        <div
-          style={{
-            color: BRAND.primaryDark,
-            fontSize: 26,
-            fontWeight: 600,
-            letterSpacing: 3,
-            textTransform: 'uppercase',
-            marginBottom: 48,
-          }}
-        >
-          Insurance Broker
+      <div style={{ opacity: op, transform: `scale(${scale})`, textAlign: 'center' }}>
+        <div style={{ marginBottom: 40 }}>
+          <FimLogo width={420} variant="dark" />
         </div>
 
         <div
@@ -323,7 +261,7 @@ const ContattiScene: React.FC = () => {
           </div>
         </div>
 
-        <div style={{ color: BRAND.primaryDark, fontSize: 28, fontWeight: 500 }}>
+        <div style={{ color: BRAND.primary, fontSize: 28, fontWeight: 500 }}>
           📍 Cisterna di Latina · 📞 06 96883381
         </div>
       </div>
@@ -334,10 +272,25 @@ const ContattiScene: React.FC = () => {
 // ─── Composizione principale ─────────────────────────────────────────────────
 
 export const ChiSiamo: React.FC = () => {
-  const { fps } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
+
+  const musicVolume = (frame: number) =>
+    interpolate(
+      frame,
+      [0, 20, durationInFrames - 40, durationInFrames],
+      [0, 0.3, 0.3, 0],
+      { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+    );
 
   return (
     <AbsoluteFill>
+      {/* Musica di sottofondo — metti music.mp3 in ~/my-video/public/ */}
+      <Audio
+        src={staticFile('music.mp3')}
+        volume={(f) => musicVolume(f)}
+        startFrom={0}
+      />
+
       <Sequence from={0} durationInFrames={fps * 7}>
         <IntroScene />
       </Sequence>
