@@ -1,6 +1,73 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-smart-working-lavoratori-2026",
+      "title": "Assicurazione per Smart Working: cosa rischia chi lavora da casa (e come proteggersi)",
+      "excerpt": "Il lavoro agile è ormai una realtà consolidata in Italia, ma pochi sanno che lavorare da casa espone a rischi assicurativi spesso non coperti né dal datore di lavoro né dalla polizza casa tradizionale. Scopri come tutelarti.",
+      "category": "Aziendale",
+      "date": "4 Maggio 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Smart working: una rivoluzione senza rete di protezione adeguata",
+          "body": "Secondo i dati dell'Osservatorio Smart Working del Politecnico di Milano, nel 2025 oltre 3,7 milioni di lavoratori italiani svolgono regolarmente la propria attività in modalità agile. Eppure, la maggior parte di loro opera in una zona grigia assicurativa pericolosa: le coperture tradizionali — sia aziendali che personali — non sono state progettate per questa nuova realtà ibrida. Il risultato è che in caso di infortunio domestico durante l'orario di lavoro, danni all'attrezzatura aziendale o problemi di responsabilità civile, il lavoratore rischia di trovarsi scoperto.",
+          "list": [
+            "Infortuni occorsi in casa durante l'orario di lavoro: spesso non coperti dall'INAIL in modo automatico",
+            "Danni a strumenti aziendali (PC, monitor, telefoni) causati da sinistri domestici",
+            "Responsabilità civile verso terzi in caso di attività professionale svolta da casa",
+            "Furto di attrezzature aziendali dall'abitazione del dipendente"
+          ]
+        },
+        {
+          "heading": "Cosa copre (e cosa NON copre) la polizza casa tradizionale",
+          "body": "La polizza abitazione standard tutela i beni personali del nucleo familiare e la responsabilità civile del privato cittadino. Tuttavia, quando l'abitazione diventa anche luogo di lavoro, si aprono esclusioni importanti che molti titolari di polizza non conoscono. Le attrezzature fornite dall'azienda — come il laptop aziendale o un monitor esterno — non rientrano nel patrimonio personale dell'assicurato e quindi non sono coperte in caso di furto, incendio o allagamento. Analogamente, se durante una videochiamata di lavoro si cagiona accidentalmente un danno a un cliente (si pensi a una consulenza che genera una perdita economica), la RC privata della polizza casa non interviene perché si tratta di responsabilità professionale.",
+          "list": [
+            "Attrezzature di proprietà aziendale: escluse dalla copertura furti/danni della polizza casa",
+            "Danni professionali a clienti o terzi: non coperti dalla RC privata standard",
+            "Infortuni in fascia oraria lavorativa: iter INAIL complesso e spesso contestato",
+            "Stress da lavoro correlato e malattie professionali: quasi mai inclusi nelle polizze base"
+          ]
+        },
+        {
+          "heading": "Il quadro normativo: cosa dice la legge italiana sullo smart working nel 2026",
+          "body": "La Legge 81/2017 rimane il riferimento principale per il lavoro agile in Italia, ma la sua applicazione in materia assicurativa ha generato contenziosi crescenti. Il datore di lavoro è tenuto a garantire la salute e la sicurezza del lavoratore anche in modalità remota, il che implica una copertura INAIL per gli infortuni 'in itinere virtuale' e durante l'attività lavorativa. Tuttavia, dimostrare che un infortunio avvenuto in casa sia effettivamente avvenuto 'durante l'orario e nello svolgimento dell'attività lavorativa' è molto più complesso rispetto a un infortunio in ufficio. Le aziende più strutturate stanno quindi integrando le coperture INAIL obbligatorie con polizze infortuni complementari dedicate ai lavoratori in smart working, una pratica che FIM consiglia fortemente anche alle PMI.",
+          "list": [
+            "Legge 81/2017: obbligo di informativa sui rischi e copertura INAIL per lo smart worker",
+            "Circolare INAIL 48/2017: chiarisce (parzialmente) la tutela per gli infortuni in ambiente domestico",
+            "Accordi aziendali integrativi: sempre più diffusi per colmare i vuoti normativi",
+            "DPCM e circolari 2025-2026: tendenza verso obblighi assicurativi più stringenti per i datori di lavoro"
+          ]
+        },
+        {
+          "heading": "Le soluzioni assicurative disponibili: dalla polizza infortuni alla RC professionale",
+          "body": "Fortunatamente il mercato assicurativo italiano ha risposto a questa esigenza con soluzioni sempre più mirate. Per il lavoratore dipendente in smart working, le opzioni principali si articolano su due livelli: quello aziendale, con polizze collettive che il datore di lavoro attiva per tutti i dipendenti, e quello individuale, con coperture che il lavoratore può sottoscrivere autonomamente. Per i freelance e le partite IVA che lavorano da casa, il quadro si intreccia con la RC professionale — già trattata in un nostro articolo dedicato — ma esistono prodotti specifici che combinano tutela dell'infortunio, copertura delle attrezzature e responsabilità civile professionale in un'unica polizza modulare.",
+          "list": [
+            "Polizza infortuni complementare per smart worker (individuale o collettiva aziendale)",
+            "Estensione della polizza casa con clausola 'uso professionale dell'abitazione'",
+            "RC professionale per attività svolte in remoto (essenziale per freelance e consulenti)",
+            "Polizza 'all risks' sulle attrezzature informatiche aziendali e personali",
+            "Tutela legale: sempre più utile in caso di contenzioso con il datore di lavoro su infortuni da remoto"
+          ]
+        },
+        {
+          "heading": "Consigli pratici: come valutare la tua situazione attuale",
+          "body": "Prima di sottoscrivere qualsiasi polizza, è importante fare un'analisi onesta della propria situazione: quante ore settimanali lavori da casa? Usi attrezzatura aziendale o personale? Hai clienti con cui interagisci professionalmente anche da remoto? Le risposte a queste domande determinano il livello di esposizione al rischio e la tipologia di copertura più adatta. Un broker assicurativo indipendente — come FIM Insurance Broker — può effettuare questa analisi in modo obiettivo, confrontando le offerte di più compagnie e identificando i vuoti di copertura nella tua situazione specifica, senza essere vincolato a un unico prodotto o compagnia.",
+          "list": [
+            "Verifica subito se il tuo contratto di lavoro include una polizza infortuni per lo smart working",
+            "Controlla la tua polizza casa: è estesa all'uso professionale dell'abitazione?",
+            "Se sei freelance o partita IVA, valuta una RC professionale con clausola 'attività da remoto'",
+            "Chiedi al tuo datore di lavoro un'informativa scritta sulle coperture assicurative in vigore",
+            "Contatta FIM Insurance Broker per una consulenza gratuita e personalizzata sulla tua situazione"
+          ]
+        },
+        {
+          "heading": "Perché affidarsi a FIM Insurance Broker per proteggere il tuo smart working",
+          "body": "FIM Insurance Broker, con sede a Cisterna di Latina, assiste privati e imprese del territorio laziale e di tutta Italia nella costruzione di piani assicurativi su misura. In un ambito come quello dello smart working, dove i confini tra sfera privata e professionale si sovrappongono costantemente, avere al fianco un broker indipendente fa la differenza: non vendiamo un prodotto, costruiamo una soluzione. Che tu sia un lavoratore dipendente che vuole colmare le lacune della copertura aziendale, o un'azienda che vuole proteggere i propri dipendenti in smart working, il nostro team è a disposizione per una consulenza gratuita, senza impegno. Contattaci oggi stesso e scopri in pochi minuti se sei davvero protetto."
+        }
+      ]
+    },
+    {
       "slug": "welfare-aziendale-polizze-dipendenti-2026",
       "title": "Welfare Aziendale e Polizze per i Dipendenti: Come Proteggere il Tuo Team nel 2026",
       "excerpt": "Il welfare aziendale non è più un lusso riservato alle grandi imprese: anche le PMI possono offrire polizze assicurative ai dipendenti, con vantaggi fiscali concreti e un impatto reale sulla fidelizzazione del personale.",
