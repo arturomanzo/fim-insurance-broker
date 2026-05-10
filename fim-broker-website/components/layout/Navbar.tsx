@@ -10,9 +10,10 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/chi-siamo', label: 'Chi Siamo' },
   { href: '/servizi', label: 'Servizi' },
+  { href: '/servizi/tutela-legale-aziende', label: 'Tutela Legale', badge: 'Nuovo' },
   { href: '/soluzioni', label: 'Soluzioni' },
   { href: '/sinistri', label: 'Sinistri' },
-  { href: '/quiz-polizza', label: 'Quiz Polizza', badge: 'Nuovo' },
+  { href: '/quiz-polizza', label: 'Quiz Polizza' },
   { href: '/calcolatore-rischi', label: 'Calcolatore' },
   { href: '/blog', label: 'Blog' },
   { href: '/contatti', label: 'Contatti' },
@@ -20,6 +21,18 @@ const navLinks = [
 
 const PRENOTA_HREF = '/prenota-consulenza'
 const AREA_CLIENTE_HREF = '/area-cliente'
+
+function isNavLinkActive(href: string, pathname: string): boolean {
+  if (pathname === href) return true
+  if (href === '/') return false
+  if (!pathname.startsWith(href + '/')) return false
+  // Se esiste un link più specifico che matcha, il parent non è attivo
+  const moreSpecific = navLinks.some(
+    (l) => l.href !== href && l.href.startsWith(href + '/') &&
+      (pathname === l.href || pathname.startsWith(l.href + '/'))
+  )
+  return !moreSpecific
+}
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -54,7 +67,7 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+              const isActive = isNavLinkActive(link.href, pathname)
               return (
                 <Link
                   key={link.href}
@@ -142,7 +155,7 @@ export default function Navbar() {
         {isMenuOpen && (
           <div id="mobile-nav-menu" className="md:hidden border-t border-gray-100 py-4 space-y-1 animate-fade-in">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+              const isActive = isNavLinkActive(link.href, pathname)
               return (
                 <Link
                   key={link.href}

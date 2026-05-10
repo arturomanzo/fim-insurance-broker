@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 import { Resend } from 'resend'
+import { verifyAdminToken, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth'
 import { generateToken, MAGIC_LINK_TTL_SECONDS } from '@/lib/clientAuth'
 import { getAllClients } from '@/lib/policyStore'
 
@@ -7,7 +9,18 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
+async function checkAuth() {
+  const cookieStore = await cookies()
+  const session = cookieStore.get(ADMIN_SESSION_COOKIE)
+  if (!session?.value) return false
+  return verifyAdminToken(session.value)
+}
+
 export async function POST(req: NextRequest) {
+  if (!(await checkAuth())) {
+    return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
+  }
+
   try {
     const { email } = await req.json()
     if (!email) return NextResponse.json({ error: 'Email mancante.' }, { status: 400 })
@@ -26,7 +39,7 @@ export async function POST(req: NextRequest) {
         subject: 'Accedi alla tua Area Cliente FIM — link di accesso',
         html: `<!DOCTYPE html><html lang="it"><body style="font-family:system-ui,sans-serif;background:#f8fafc;margin:0;padding:20px;">
   <div style="max-width:520px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.07);">
-    <div style="background:linear-gradient(135deg,#091d47,#0f2d6b);padding:32px;text-align:center;">
+    <div style="background:linear-gradient(135deg,#060f1d,#0B1F3A);padding:32px;text-align:center;">
       <h1 style="color:white;margin:0;font-size:20px;font-weight:900;">Accedi alla tua Area Cliente</h1>
     </div>
     <div style="padding:36px 32px;text-align:center;">
@@ -35,7 +48,7 @@ export async function POST(req: NextRequest) {
         Il tuo consulente FIM ti ha inviato un link di accesso sicuro alla tua area personale.<br>
         Valido per <strong>1 ora</strong>.
       </p>
-      <a href="${magicLink}" style="display:inline-block;background:#0f2d6b;color:white;padding:16px 40px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;">
+      <a href="${magicLink}" style="display:inline-block;background:#0B1F3A;color:white;padding:16px 40px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;">
         Accedi all'Area Cliente →
       </a>
     </div>

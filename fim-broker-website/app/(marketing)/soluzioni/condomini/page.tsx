@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
-import FaqAccordion from '@/components/ui/FaqAccordion'
+import FaqSection from '@/components/ui/FaqSection'
+import { condominiFaq } from '@/lib/faq/condomini'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 
@@ -71,51 +72,9 @@ const buildingTypes = [
   { name: 'Residence e hotel residence', icon: '🏨' },
 ]
 
-const faqs = [
-  {
-    question: "La polizza globale fabbricato è obbligatoria per legge?",
-    answer:
-      "Non esiste un obbligo di legge generalizzato, ma la polizza incendio fabbricato è quasi sempre prevista dal regolamento condominiale e richiesta dalle banche per i mutui sulle singole unità. In pratica, un condominio senza copertura assicurativa è esposto a rischi enormi: in caso di incendio o crollo strutturale, tutti i condomini risponderebbero in proporzione alle quote millesimali, potenzialmente con il proprio patrimonio personale.",
-  },
-  {
-    question: "La RC Amministratore è davvero obbligatoria?",
-    answer:
-      "Sì. La Legge 220/2012 (riforma del condominio) prevede che l'amministratore sia tenuto ad avere una polizza di RC professionale, a pena di revoca dall'incarico. La polizza deve coprire i danni cagionati nell'esercizio del mandato, con massimale adeguato. Molti amministratori hanno polizze insufficienti o con clausole limitative: è importante verificare i massimali e le esclusioni.",
-  },
-  {
-    question: "Chi paga la polizza condominiale? Come si ripartisce il costo?",
-    answer:
-      "Le polizze condominiali (globale fabbricato, RC ascensore, ecc.) sono spese ordinarie di gestione condominiale: si ripartiscono tra i condomini in base alle quote millesimali della tabella generale. La RC Amministratore, invece, viene pagata o dal condominio come spesa di gestione (più comune) oppure direttamente dall'amministratore come costo professionale.",
-  },
-  {
-    question: "La polizza copre anche i danni ai singoli appartamenti?",
-    answer:
-      "La globale fabbricato copre le parti comuni (scale, tetto, muri perimetrali, impianti centralizzati) e spesso anche i danni derivanti dalle parti comuni alle proprietà individuali (es. infiltrazioni dal tetto). Non copre i beni personali nelle singole unità abitative né i danni interni causati da eventi all'interno dell'appartamento stesso — per questo ogni condomino dovrebbe avere la propria polizza casa individuale.",
-  },
-  {
-    question: "Come si gestisce un sinistro in un condominio assicurato da FIM?",
-    answer:
-      "In caso di sinistro, l'amministratore segnala il danno a FIM tramite email o telefono. FIM attiva la compagnia, coordina il sopralluogo del perito e segue l'istruttoria fino alla liquidazione. Il condominio non deve gestire direttamente la trattativa con la compagnia: ci pensiamo noi. Per i sinistri urgenti (es. allagamento, crollo) è disponibile un numero di assistenza H24.",
-  },
-]
-
-
-function buildFaqSchema(items: { question: string; answer: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
-  }
-}
-
 export default function CondominiPage() {
   return (
     <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(faqs)) }} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', href: '/' },
@@ -309,15 +268,7 @@ export default function CondominiPage() {
 
       <LeadMagnet />
 
-      {/* FAQ */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom max-w-3xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-primary mb-3">Domande frequenti</h2>
-          </div>
-          <FaqAccordion items={faqs} />
-        </div>
-      </section>
+      <FaqSection items={condominiFaq.items} cta={condominiFaq.cta} />
 
       {/* CTA */}
       <section className="gradient-primary py-16">

@@ -51,6 +51,22 @@ create table if not exists website_sinistri (
 
 create index if not exists website_sinistri_timestamp_idx on website_sinistri (timestamp desc);
 
--- RLS: solo il service role può leggere/scrivere (il sito usa SUPABASE_SERVICE_ROLE_KEY)
+-- RLS: solo il service role può leggere/scrivere (il sito usa SUPABASE_SERVICE_ROLE_KEY).
+-- Il service role bypassa RLS by design; le policy esplicite qui sotto garantiscono
+-- deny-all a anon/authenticated anche se l'API expose-schema viene abilitato per errore.
 alter table website_leads enable row level security;
 alter table website_sinistri enable row level security;
+
+drop policy if exists "deny_all_anon_website_leads" on website_leads;
+create policy "deny_all_anon_website_leads"
+  on website_leads for all
+  to anon, authenticated
+  using (false)
+  with check (false);
+
+drop policy if exists "deny_all_anon_website_sinistri" on website_sinistri;
+create policy "deny_all_anon_website_sinistri"
+  on website_sinistri for all
+  to anon, authenticated
+  using (false)
+  with check (false);

@@ -1,12 +1,30 @@
 import type { Metadata } from 'next'
+import { Montserrat, Source_Serif_4 } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat',
+})
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-source-serif',
+})
 
 const GA_ID = 'G-F6DB47VZ4Z'
 const AW_ID = 'AW-18034188310'
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
   title: {
@@ -113,6 +131,7 @@ const jsonLd = {
     'https://www.facebook.com/FimInsuranceBroker/',
     'https://www.instagram.com/fiminsurancebroker/',
     'https://x.com/fimbroker',
+    'https://www.linkedin.com/company/fim-insurance-broker',
   ],
   areaServed: {
     '@type': 'Country',
@@ -135,6 +154,9 @@ const jsonLd = {
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Assicurazione Salute' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Polizze Aziendali' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Assicurazione Viaggio' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cauzioni e Fideiussioni' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Tutela Legale Aziende' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Risk Management' } },
     ],
   },
 }
@@ -145,17 +167,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="it">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&display=swap" />
-      </head>
-      <body className="min-h-screen flex flex-col">
+    <html lang="it" className={`${montserrat.variable} ${sourceSerif.variable}`}>
+      <body className={`${montserrat.className} min-h-screen flex flex-col`}>
         <noscript>
           <div style={{
             position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
-            background: '#0f2d6b', color: '#fff', textAlign: 'center',
+            background: '#0B1F3A', color: '#fff', textAlign: 'center',
             padding: '12px 16px', fontSize: '14px', lineHeight: '1.5',
           }}>
             <strong>JavaScript disabilitato.</strong> Alcune funzionalità del sito (form di contatto, preventivo, assistente FIMA) richiedono JavaScript per funzionare.

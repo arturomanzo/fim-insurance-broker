@@ -4,6 +4,10 @@ import { services } from '@/lib/services'
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
 const blogSlugs = [
+  'legge-34-2026-addio-rc-auto-muletti-mezzi-agricoli',
+  'come-scegliere-polizza-cyber-pmi',
+  'assicurazione-condominio-guida-completa',
+  'differenza-broker-agente-assicurativo',
   'come-scegliere-polizza-auto',
   'assicurazione-vita-guida',
   'cyber-risk-pmi',
@@ -28,6 +32,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE_URL}/contatti`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE_URL}/collabora-con-noi`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    // Geo-landing pages SEO locale
+    { url: `${BASE_URL}/broker-assicurativo-latina`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/broker-assicurativo-cisterna-di-latina`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/broker-assicurativo-aprilia`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     // Soluzioni per settore
     { url: `${BASE_URL}/soluzioni`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/famiglie`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
@@ -35,12 +43,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/soluzioni/artigiani-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/condomini`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/catastrofi-naturali`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/cyber-risk`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    // Landing page verticali B2B
+    { url: `${BASE_URL}/soluzioni/settori/edilizia`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/settori/medico`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/settori/manifatturiero`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/settori/welfare-aziendale`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     // Strumenti & guide
     { url: `${BASE_URL}/sinistri`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/quiz-polizza`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/calcolatore-rischi`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/seconda-opinione`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/osservatorio-prezzi`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/glossario`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/faq`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
     // Risorse
     { url: `${BASE_URL}/risorse/guida-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/risorse/osservatorio-pmi`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },

@@ -11,6 +11,9 @@ const serviceLinks = [
   { href: '/servizi/assicurazione-salute', label: 'Assicurazione Salute' },
   { href: '/servizi/polizze-aziendali', label: 'Polizze Aziendali' },
   { href: '/servizi/assicurazione-viaggio', label: 'Assicurazione Viaggio' },
+  { href: '/servizi/cauzioni-fideiussioni', label: 'Cauzioni e Fideiussioni' },
+  { href: '/servizi/tutela-legale-aziende', label: 'Tutela Legale Aziende' },
+  { href: '/servizi/risk-management', label: 'Risk Management' },
 ]
 
 const soluzioniLinks = [
@@ -59,6 +62,15 @@ const socialLinks = [
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+  {
+    href: 'https://www.linkedin.com/company/fim-insurance-broker',
+    label: 'LinkedIn',
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
       </svg>
     ),
   },
@@ -159,8 +171,9 @@ export default function Footer() {
             <Link href="/" className="inline-flex mb-5" aria-label="FIM Insurance Broker — Home">
               <FimLogo variant="full" theme="white" height={44} />
             </Link>
+            <p className="text-accent text-sm font-semibold mb-2 tracking-wide">Chiarezza in Azione.</p>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
-              Da oltre 20 anni al fianco di privati e aziende per offrire le migliori soluzioni assicurative personalizzate.
+              Architetti della tua sicurezza: traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.
             </p>
             <div className="space-y-2 text-sm">
               <a href="tel:+390696883381" className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors">
@@ -266,7 +279,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container-custom py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/50 text-sm">
+          <p className="text-white/50 text-sm" suppressHydrationWarning>
             &copy; {new Date().getFullYear()} FIM Insurance Broker S.a.s. di Manzo Arturo & C. Tutti i diritti riservati.
           </p>
           <div className="flex items-center gap-4">

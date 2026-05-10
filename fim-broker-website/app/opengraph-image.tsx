@@ -10,7 +10,7 @@ export default function OgImage() {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #091d47 0%, #0f2d6b 60%, #1a4a9e 100%)',
+          background: 'linear-gradient(135deg, #060f1d 0%, #0B1F3A 60%, #132d52 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -27,13 +27,13 @@ export default function OgImage() {
           <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="osg" x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#091c4a" />
-                <stop offset="50%" stopColor="#0b4a7a" />
-                <stop offset="100%" stopColor="#00b4c8" />
+                <stop offset="0%" stopColor="#060f1d" />
+                <stop offset="50%" stopColor="#0d2945" />
+                <stop offset="100%" stopColor="#2FA36B" />
               </linearGradient>
               <linearGradient id="oag" x1="55" y1="30" x2="93" y2="0" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#00b4c8" />
-                <stop offset="100%" stopColor="#40e4f8" />
+                <stop offset="0%" stopColor="#2FA36B" />
+                <stop offset="100%" stopColor="#4aba83" />
               </linearGradient>
             </defs>
             <path d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z" fill="url(#osg)" />
@@ -46,7 +46,7 @@ export default function OgImage() {
             <span style={{ color: 'white', fontWeight: '900', fontSize: '42px', letterSpacing: '-1px', lineHeight: 1 }}>
               FIM
             </span>
-            <span style={{ color: '#00b4c8', fontWeight: '600', fontSize: '16px', letterSpacing: '4px', marginTop: '4px' }}>
+            <span style={{ color: '#2FA36B', fontWeight: '600', fontSize: '16px', letterSpacing: '4px', marginTop: '4px' }}>
               INSURANCE BROKER
             </span>
           </div>
@@ -56,7 +56,7 @@ export default function OgImage() {
         <div style={{ color: 'white', fontSize: '56px', fontWeight: '900', lineHeight: 1.1, maxWidth: '900px' }}>
           Soluzioni Assicurative
           <br />
-          <span style={{ color: '#00b4c8' }}>Personalizzate</span>
+          <span style={{ color: '#2FA36B' }}>Personalizzate</span>
         </div>
 
         {/* Subline */}

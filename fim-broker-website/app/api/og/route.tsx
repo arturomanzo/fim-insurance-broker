@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #091d47 0%, #0f2d6b 60%, #1a4a9e 100%)',
+          background: 'linear-gradient(135deg, #060f1d 0%, #0B1F3A 60%, #132d52 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -30,13 +30,13 @@ export async function GET(req: NextRequest) {
           <svg width="64" height="64" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="osg" x1="7" y1="97" x2="93" y2="1" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#091c4a" />
-                <stop offset="50%" stopColor="#0b4a7a" />
-                <stop offset="100%" stopColor="#00b4c8" />
+                <stop offset="0%" stopColor="#060f1d" />
+                <stop offset="50%" stopColor="#0d2945" />
+                <stop offset="100%" stopColor="#2FA36B" />
               </linearGradient>
               <linearGradient id="oag" x1="55" y1="30" x2="93" y2="0" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#00b4c8" />
-                <stop offset="100%" stopColor="#40e4f8" />
+                <stop offset="0%" stopColor="#2FA36B" />
+                <stop offset="100%" stopColor="#4aba83" />
               </linearGradient>
             </defs>
             <path d="M7,15 C7,5 15,1 24,1 L76,1 C85,1 93,5 93,15 L93,56 C93,78 50,97 50,97 C50,97 7,78 7,56 Z" fill="url(#osg)" />
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
             <span style={{ color: 'white', fontWeight: '900', fontSize: '34px', letterSpacing: '-1px', lineHeight: '1' }}>
               FIM
             </span>
-            <span style={{ color: '#00b4c8', fontWeight: '600', fontSize: '13px', letterSpacing: '4px', marginTop: '2px' }}>
+            <span style={{ color: '#2FA36B', fontWeight: '600', fontSize: '13px', letterSpacing: '4px', marginTop: '2px' }}>
               INSURANCE BROKER
             </span>
           </div>
@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
                 border: '1px solid rgba(0,180,200,0.4)',
                 borderRadius: '24px',
                 padding: '6px 18px',
-                color: '#00b4c8',
+                color: '#2FA36B',
                 fontSize: '14px',
                 fontWeight: '700',
                 letterSpacing: '1px',

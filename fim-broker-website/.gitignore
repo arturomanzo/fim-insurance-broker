@@ -14,6 +14,11 @@ node_modules/
 # Environment variables
 .env*.local
 
+# Runtime data files con potenziale PII
+# (policies.json è importato staticamente e resta in git)
+/data/leads.json
+/data/sinistri.json
+
 # Debug
 npm-debug.log*
 yarn-debug.log*

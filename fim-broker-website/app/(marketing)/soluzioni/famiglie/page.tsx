@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
-import FaqAccordion from '@/components/ui/FaqAccordion'
+import FaqSection from '@/components/ui/FaqSection'
+import { famiglieFaq } from '@/lib/faq/famiglie'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 
@@ -86,51 +87,9 @@ const profiles = [
   { name: 'Proprietari di animali', icon: '🐕' },
 ]
 
-const faqs = [
-  {
-    question: "La polizza casa è obbligatoria?",
-    answer:
-      "Non per legge, ma di fatto spesso sì: la maggior parte dei mutui richiede almeno una polizza incendio e scoppio sull'immobile come condizione per l'erogazione. La RC capofamiglia, inclusa nella polizza casa, è invece altamente raccomandata: copre danni causati a terzi da te, dai tuoi figli, dai domestici e dagli animali domestici. I costi di un risarcimento senza copertura possono essere devastanti.",
-  },
-  {
-    question: "Ho già il Servizio Sanitario Nazionale: perché fare anche la salute integrativa?",
-    answer:
-      "Il SSN garantisce le cure essenziali, ma con tempi di attesa spesso lunghi (mesi per una risonanza o una visita specialistica) e senza la possibilità di scegliere il medico. La polizza sanitaria integrativa ti permette di accedere a strutture private, scegliere il chirurgo, ed ottenere rimborsi per visite ed esami. In Italia il 70% delle spese sanitarie annue sono out-of-pocket: una polizza salute spesso si ripaga in pochi anni.",
-  },
-  {
-    question: "Quanto costa un'assicurazione vita e quando serve davvero?",
-    answer:
-      "Una polizza temporanea caso morte (TCM) per un 35enne non fumatore in buona salute parte da circa 100-150€/anno per un capitale assicurato di 100.000€. Serve soprattutto se hai persone economicamente dipendenti da te (figli, coniuge non lavorante), un mutuo in corso, o debiti che ricadrebbero sui tuoi familiari. È uno dei prodotti con il miglior rapporto protezione/costo del mercato assicurativo.",
-  },
-  {
-    question: "Cosa copre esattamente la polizza casa e cosa non copre?",
-    answer:
-      "Una polizza casa standard copre: incendio e scoppio, furto e rapina in abitazione, allagamento da impianti interni, danni da eventi atmosferici (grandine, vento), RC capofamiglia. Non copre solitamente: danni da alluvione o terremoto (richiedono copertura catastrofale separata), usura normale, danni dolosi. Le polizze più complete includono anche guasti agli impianti, rottura lastre e assistenza domiciliare urgente.",
-  },
-  {
-    question: "Come funziona la Long Term Care (LTC) e a chi serve?",
-    answer:
-      "La LTC eroga una rendita mensile (es. 1.000-2.000€/mese) se il titolare diventa non autosufficiente, ovvero non riesce autonomamente a svolgere almeno 3 delle 6 attività quotidiane di base (lavarsi, vestirsi, mangiare, spostarsi, continuenza, andare in bagno). I costi di una badante o di una RSA in Italia partono da 1.500-2.500€/mese. Stipulare la LTC prima dei 55-60 anni garantisce premi contenuti e una copertura duratura.",
-  },
-]
-
-
-function buildFaqSchema(items: { question: string; answer: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
-  }
-}
-
 export default function FamigliePage() {
   return (
     <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(faqs)) }} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', href: '/' },
@@ -310,15 +269,7 @@ export default function FamigliePage() {
 
       <LeadMagnet />
 
-      {/* FAQ */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom max-w-3xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-primary mb-3">Domande frequenti</h2>
-          </div>
-          <FaqAccordion items={faqs} />
-        </div>
-      </section>
+      <FaqSection items={famiglieFaq.items} cta={famiglieFaq.cta} />
 
       {/* CTA */}
       <section className="gradient-primary py-16">

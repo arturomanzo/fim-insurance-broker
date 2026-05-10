@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
-import FaqAccordion from '@/components/ui/FaqAccordion'
+import FaqSection from '@/components/ui/FaqSection'
+import { artigianiPmiFaq } from '@/lib/faq/artigiani-pmi'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 
@@ -74,6 +75,13 @@ const coverages = [
     price: 'su preventivo',
     mandatory: false,
   },
+  {
+    icon: '⚖️',
+    title: 'Tutela Legale Aziende',
+    desc: 'Copre le spese di avvocato, perito e CTU in caso di procedimenti penali (D.Lgs. 231/2001), controversie con dipendenti, fornitori o clienti, e azioni di responsabilità contro amministratori. Completa la RC proteggendo anche l\'imprenditore.',
+    price: 'da 400€/anno',
+    mandatory: false,
+  },
 ]
 
 const sectors = [
@@ -91,51 +99,9 @@ const sectors = [
   { name: 'IT e Software House', icon: '💻' },
 ]
 
-const faqs = [
-  {
-    question: "Quali assicurazioni sono obbligatorie per un datore di lavoro?",
-    answer:
-      "Per i datori di lavoro con dipendenti, la principale assicurazione obbligatoria è quella INAIL (Infortuni sul Lavoro), gestita direttamente dall'ente. A questa si aggiunge la RC auto per i veicoli aziendali (obbligatoria per legge). Per alcune attività specifiche (es. impianti termici, ascensori, gru) ci sono ulteriori obblighi. Molte altre coperture (RC impresa, incendio, ecc.) non sono obbligatorie per legge ma sono prassi comune e spesso richieste da clienti/appaltanti.",
-  },
-  {
-    question: "Ho già l'INAIL: perché dovrei fare anche la polizza infortuni integrativa?",
-    answer:
-      "L'INAIL copre solo gli infortuni sul lavoro e le malattie professionali, ma con limiti importanti: la rendita INAIL per invalidità permanente è calcolata sulla retribuzione dichiarata (spesso bassa per molti artigiani), non copre le prime 3 giorni di inabilità temporanea, e non copre le spese mediche eccedenti il Servizio Sanitario. La polizza integrativa colma questi gap: indennità giornaliera sin dal primo giorno, rimborso spese mediche private, e capitali aggiuntivi per invalidità grave.",
-  },
-  {
-    question: "Cosa copre esattamente la RC impresa e quanto costa?",
-    answer:
-      "La RC impresa copre i danni causati a terzi (clienti, fornitori, passanti) connessi allo svolgimento dell'attività: un cliente scivolato nel tuo negozio, un prodotto venduto che si rivela difettoso, danni causati da tuoi dipendenti durante il lavoro. Il costo dipende dal settore di attività, dal fatturato e dal massimale scelto. Per una piccola attività commerciale o artigianale si parte da circa 300€/anno.",
-  },
-  {
-    question: "Come funziona la polizza all-risk capannone?",
-    answer:
-      "La polizza all-risk (o multirischio) per attività copre la struttura fisica (muri, tetto, impianti fissi), le attrezzature e i macchinari, le merci e le scorte, e spesso include anche la copertura per interruzione di esercizio. Si tratta di una copertura 'a tutto rischio' che indennizza tutti i danni salvo quelli espressamente esclusi, a differenza delle polizze 'a rischi nominati' che coprono solo i rischi espressamente elencati.",
-  },
-  {
-    question: "Sono un piccolo artigiano con un solo dipendente: ho bisogno di tutto questo?",
-    answer:
-      "Non necessariamente tutto insieme. La priorità dipende dalla tua attività. Per un artigiano con un dipendente, il minimo consigliato è: RC impresa (per i danni a terzi) + infortuni integrativa per il dipendente + polizza incendio sul locale e le attrezzature. Insieme, per molte categorie, si parte da circa 800-1.000€/anno. Ti aiutiamo a capire cosa è davvero indispensabile per la tua situazione specifica.",
-  },
-]
-
-
-function buildFaqSchema(items: { question: string; answer: string }[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
-    })),
-  }
-}
-
 export default function ArtigianiPmiPage() {
   return (
     <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema(faqs)) }} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', href: '/' },
@@ -250,6 +216,55 @@ export default function ArtigianiPmiPage() {
           <p className="text-center text-xs text-gray-400 mt-6">
             * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al settore di attività, fatturato e valori assicurati. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
           </p>
+
+          {/* Tutela Legale spotlight */}
+          <div className="mt-12 bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-8 md:p-10 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full -translate-y-20 translate-x-20" />
+            <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+              <div className="lg:col-span-2">
+                <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-3 py-1 text-xs font-bold text-accent mb-4">
+                  <span>⚖️</span>
+                  NUOVO SERVIZIO
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black mb-3">
+                  RC + Tutela Legale = protezione a 360° dell&apos;imprenditore
+                </h3>
+                <p className="text-white/80 leading-relaxed mb-4">
+                  La RC Azienda copre i danni che causi a terzi, ma non paga gli avvocati quando sei tu a dover difenderti:
+                  un procedimento penale per reati colposi (sicurezza sul lavoro, ambientali), una verifica ex D.Lgs. 231/2001,
+                  un contenzioso con un dipendente. La <strong className="text-accent">Tutela Legale Aziende</strong> completa
+                  la copertura: avvocati, periti, CTU e consulenti pagati dalla compagnia.
+                </p>
+                <Link
+                  href="/servizi/tutela-legale-aziende"
+                  className="inline-flex items-center gap-2 text-accent font-semibold hover:text-white transition-colors"
+                >
+                  Scopri la Tutela Legale Aziende
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3 text-sm">
+                <div className="flex items-start gap-2">
+                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-white/90">Tutela penale D.Lgs. 231/2001</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-white/90">Danni patrimoniali (D&amp;O) amministratori e sindaci</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-white/90">Controversie con dipendenti e fornitori</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-white/90">Libera scelta dell&apos;avvocato di fiducia</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -323,13 +338,20 @@ export default function ArtigianiPmiPage() {
 
       <LeadMagnet />
 
-      {/* FAQ */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom max-w-3xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-primary mb-3">Domande frequenti</h2>
-          </div>
-          <FaqAccordion items={faqs} />
+      <FaqSection items={artigianiPmiFaq.items} cta={artigianiPmiFaq.cta} />
+
+      {/* Second Opinion */}
+      <section className="section-padding bg-primary/5 border-t border-primary/10">
+        <div className="container-custom max-w-3xl text-center">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">Solo per PMI e artigiani</p>
+          <h2 className="text-2xl font-bold text-primary mb-3">Hai già delle polizze? Scopri se ti coprono davvero</h2>
+          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+            Inviaci i PDF dei tuoi contratti attuali. Un consulente FIM fa la <strong>Gap Analysis gratuita</strong>
+            su RC, incendio, catastrofale e cyber — e ti dice dove sei scoperto, entro 48 ore.
+          </p>
+          <Link href="/seconda-opinione" className="btn-primary inline-block">
+            Richiedi la Second Opinion gratuita →
+          </Link>
         </div>
       </section>
 

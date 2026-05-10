@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
+import FaqSection from '@/components/ui/FaqSection'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import SinistriAIAssistant from '@/components/forms/SinistriAIAssistant'
+import { sinistriFaq } from '@/lib/faq/sinistri'
 
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
@@ -59,25 +61,6 @@ const sinistroTypes = [
   { icon: '💼', title: 'RC Professionale', desc: 'Danni causati a clienti nell\'esercizio dell\'attività professionale.' },
   { icon: '🏭', title: 'Sinistri Aziendali', desc: 'Danni alla proprietà, interruzione dell\'attività, responsabilità civile.' },
   { icon: '🌪️', title: 'Catastrofi Naturali', desc: 'Alluvioni, terremoti, trombe d\'aria, grandine su immobili e attrezzature.' },
-]
-
-const faqs = [
-  {
-    q: 'Quanto tempo ho per denunciare un sinistro?',
-    a: 'I tempi variano in base al tipo di polizza, ma in generale è bene denunciare entro 3 giorni dall\'evento. Per la RC Auto il termine è di 3 giorni dall\'incidente. Contattaci subito: ti diciamo esattamente cosa fare.',
-  },
-  {
-    q: 'Cosa succede se la compagnia non mi vuole risarcire?',
-    a: 'In caso di diniego o liquidazione parziale ingiusta, FIM può richiedere perizie di parte, attivare la procedura di mediazione assicurativa o supportarti nel ricorso all\'IVASS. Non sei solo.',
-  },
-  {
-    q: 'Il servizio di gestione sinistri ha un costo aggiuntivo?',
-    a: 'No. La gestione del sinistro è inclusa nel servizio di brokeraggio per tutti i clienti FIM. È uno dei principali vantaggi di avere un broker al tuo fianco rispetto ad acquistare direttamente da una compagnia.',
-  },
-  {
-    q: 'Posso gestire il sinistro anche se la polizza non è stata stipulata con FIM?',
-    a: 'Possiamo affiancarti anche in questo caso. Contattaci per una consulenza: valuteremo insieme la situazione e ti indicheremo il percorso migliore.',
-  },
 ]
 
 export default function SinistriPage() {
@@ -190,22 +173,7 @@ export default function SinistriPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom max-w-3xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-primary mb-3">Domande frequenti</h2>
-          </div>
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <Card key={faq.q} padding="md">
-                <h3 className="font-bold text-primary mb-2">{faq.q}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqSection items={sinistriFaq.items} cta={sinistriFaq.cta} />
 
       {/* AI Claims Assistant */}
       <section className="section-padding">

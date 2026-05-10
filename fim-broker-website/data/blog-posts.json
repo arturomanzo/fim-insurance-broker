@@ -1,6 +1,500 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-smart-working-lavoratori-2026",
+      "title": "Assicurazione per Smart Working: cosa rischia chi lavora da casa (e come proteggersi)",
+      "excerpt": "Il lavoro agile è ormai una realtà consolidata in Italia, ma pochi sanno che lavorare da casa espone a rischi assicurativi spesso non coperti né dal datore di lavoro né dalla polizza casa tradizionale. Scopri come tutelarti.",
+      "category": "Aziendale",
+      "date": "4 Maggio 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Smart working: una rivoluzione senza rete di protezione adeguata",
+          "body": "Secondo i dati dell'Osservatorio Smart Working del Politecnico di Milano, nel 2025 oltre 3,7 milioni di lavoratori italiani svolgono regolarmente la propria attività in modalità agile. Eppure, la maggior parte di loro opera in una zona grigia assicurativa pericolosa: le coperture tradizionali — sia aziendali che personali — non sono state progettate per questa nuova realtà ibrida. Il risultato è che in caso di infortunio domestico durante l'orario di lavoro, danni all'attrezzatura aziendale o problemi di responsabilità civile, il lavoratore rischia di trovarsi scoperto.",
+          "list": [
+            "Infortuni occorsi in casa durante l'orario di lavoro: spesso non coperti dall'INAIL in modo automatico",
+            "Danni a strumenti aziendali (PC, monitor, telefoni) causati da sinistri domestici",
+            "Responsabilità civile verso terzi in caso di attività professionale svolta da casa",
+            "Furto di attrezzature aziendali dall'abitazione del dipendente"
+          ]
+        },
+        {
+          "heading": "Cosa copre (e cosa NON copre) la polizza casa tradizionale",
+          "body": "La polizza abitazione standard tutela i beni personali del nucleo familiare e la responsabilità civile del privato cittadino. Tuttavia, quando l'abitazione diventa anche luogo di lavoro, si aprono esclusioni importanti che molti titolari di polizza non conoscono. Le attrezzature fornite dall'azienda — come il laptop aziendale o un monitor esterno — non rientrano nel patrimonio personale dell'assicurato e quindi non sono coperte in caso di furto, incendio o allagamento. Analogamente, se durante una videochiamata di lavoro si cagiona accidentalmente un danno a un cliente (si pensi a una consulenza che genera una perdita economica), la RC privata della polizza casa non interviene perché si tratta di responsabilità professionale.",
+          "list": [
+            "Attrezzature di proprietà aziendale: escluse dalla copertura furti/danni della polizza casa",
+            "Danni professionali a clienti o terzi: non coperti dalla RC privata standard",
+            "Infortuni in fascia oraria lavorativa: iter INAIL complesso e spesso contestato",
+            "Stress da lavoro correlato e malattie professionali: quasi mai inclusi nelle polizze base"
+          ]
+        },
+        {
+          "heading": "Il quadro normativo: cosa dice la legge italiana sullo smart working nel 2026",
+          "body": "La Legge 81/2017 rimane il riferimento principale per il lavoro agile in Italia, ma la sua applicazione in materia assicurativa ha generato contenziosi crescenti. Il datore di lavoro è tenuto a garantire la salute e la sicurezza del lavoratore anche in modalità remota, il che implica una copertura INAIL per gli infortuni 'in itinere virtuale' e durante l'attività lavorativa. Tuttavia, dimostrare che un infortunio avvenuto in casa sia effettivamente avvenuto 'durante l'orario e nello svolgimento dell'attività lavorativa' è molto più complesso rispetto a un infortunio in ufficio. Le aziende più strutturate stanno quindi integrando le coperture INAIL obbligatorie con polizze infortuni complementari dedicate ai lavoratori in smart working, una pratica che FIM consiglia fortemente anche alle PMI.",
+          "list": [
+            "Legge 81/2017: obbligo di informativa sui rischi e copertura INAIL per lo smart worker",
+            "Circolare INAIL 48/2017: chiarisce (parzialmente) la tutela per gli infortuni in ambiente domestico",
+            "Accordi aziendali integrativi: sempre più diffusi per colmare i vuoti normativi",
+            "DPCM e circolari 2025-2026: tendenza verso obblighi assicurativi più stringenti per i datori di lavoro"
+          ]
+        },
+        {
+          "heading": "Le soluzioni assicurative disponibili: dalla polizza infortuni alla RC professionale",
+          "body": "Fortunatamente il mercato assicurativo italiano ha risposto a questa esigenza con soluzioni sempre più mirate. Per il lavoratore dipendente in smart working, le opzioni principali si articolano su due livelli: quello aziendale, con polizze collettive che il datore di lavoro attiva per tutti i dipendenti, e quello individuale, con coperture che il lavoratore può sottoscrivere autonomamente. Per i freelance e le partite IVA che lavorano da casa, il quadro si intreccia con la RC professionale — già trattata in un nostro articolo dedicato — ma esistono prodotti specifici che combinano tutela dell'infortunio, copertura delle attrezzature e responsabilità civile professionale in un'unica polizza modulare.",
+          "list": [
+            "Polizza infortuni complementare per smart worker (individuale o collettiva aziendale)",
+            "Estensione della polizza casa con clausola 'uso professionale dell'abitazione'",
+            "RC professionale per attività svolte in remoto (essenziale per freelance e consulenti)",
+            "Polizza 'all risks' sulle attrezzature informatiche aziendali e personali",
+            "Tutela legale: sempre più utile in caso di contenzioso con il datore di lavoro su infortuni da remoto"
+          ]
+        },
+        {
+          "heading": "Consigli pratici: come valutare la tua situazione attuale",
+          "body": "Prima di sottoscrivere qualsiasi polizza, è importante fare un'analisi onesta della propria situazione: quante ore settimanali lavori da casa? Usi attrezzatura aziendale o personale? Hai clienti con cui interagisci professionalmente anche da remoto? Le risposte a queste domande determinano il livello di esposizione al rischio e la tipologia di copertura più adatta. Un broker assicurativo indipendente — come FIM Insurance Broker — può effettuare questa analisi in modo obiettivo, confrontando le offerte di più compagnie e identificando i vuoti di copertura nella tua situazione specifica, senza essere vincolato a un unico prodotto o compagnia.",
+          "list": [
+            "Verifica subito se il tuo contratto di lavoro include una polizza infortuni per lo smart working",
+            "Controlla la tua polizza casa: è estesa all'uso professionale dell'abitazione?",
+            "Se sei freelance o partita IVA, valuta una RC professionale con clausola 'attività da remoto'",
+            "Chiedi al tuo datore di lavoro un'informativa scritta sulle coperture assicurative in vigore",
+            "Contatta FIM Insurance Broker per una consulenza gratuita e personalizzata sulla tua situazione"
+          ]
+        },
+        {
+          "heading": "Perché affidarsi a FIM Insurance Broker per proteggere il tuo smart working",
+          "body": "FIM Insurance Broker, con sede a Cisterna di Latina, assiste privati e imprese del territorio laziale e di tutta Italia nella costruzione di piani assicurativi su misura. In un ambito come quello dello smart working, dove i confini tra sfera privata e professionale si sovrappongono costantemente, avere al fianco un broker indipendente fa la differenza: non vendiamo un prodotto, costruiamo una soluzione. Che tu sia un lavoratore dipendente che vuole colmare le lacune della copertura aziendale, o un'azienda che vuole proteggere i propri dipendenti in smart working, il nostro team è a disposizione per una consulenza gratuita, senza impegno. Contattaci oggi stesso e scopri in pochi minuti se sei davvero protetto."
+        }
+      ]
+    },
+    {
+      "slug": "welfare-aziendale-polizze-dipendenti-2026",
+      "title": "Welfare Aziendale e Polizze per i Dipendenti: Come Proteggere il Tuo Team nel 2026",
+      "excerpt": "Il welfare aziendale non è più un lusso riservato alle grandi imprese: anche le PMI possono offrire polizze assicurative ai dipendenti, con vantaggi fiscali concreti e un impatto reale sulla fidelizzazione del personale.",
+      "category": "Aziendale",
+      "date": "27 Aprile 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Cos'è il Welfare Aziendale e Perché Interessa Anche le PMI",
+          "body": "Il welfare aziendale è l'insieme di benefit non monetari che un'azienda offre ai propri dipendenti per migliorarne la qualità di vita lavorativa ed extra-lavorativa. In Italia, il quadro normativo — in particolare il TUIR (Testo Unico delle Imposte sui Redditi) e le successive modifiche introdotte fino al 2026 — prevede significative agevolazioni fiscali per le aziende che inseriscono polizze assicurative nei piani di welfare. Non si tratta di una prerogativa delle grandi corporation: le piccole e medie imprese possono accedere agli stessi strumenti, spesso con costi più contenuti di quanto si pensi e con ritorni immediati in termini di produttività e riduzione del turnover.",
+          "list": [
+            "Deducibilità dei premi versati dall'azienda dal reddito d'impresa",
+            "Esenzione contributiva per il dipendente su molte tipologie di polizza",
+            "Miglioramento del clima aziendale e riduzione dell'assenteismo",
+            "Vantaggio competitivo nel mercato del lavoro per attrarre talenti"
+          ]
+        },
+        {
+          "heading": "Le Polizze Assicurative più Utilizzate nei Piani di Welfare",
+          "body": "Non tutte le polizze sono uguali e non tutte godono dello stesso trattamento fiscale. È fondamentale scegliere le coperture più adatte alla propria realtà aziendale e alla composizione del team. Le soluzioni più diffuse e fiscalmente efficienti nel panorama italiano del 2025-2026 comprendono polizze sanitarie integrative, coperture caso morte e invalidità permanente, e polizze per la non autosufficienza (Long Term Care). Ogni strumento risponde a bisogni specifici dei lavoratori e può essere modulato in base al budget aziendale.",
+          "list": [
+            "Polizza sanitaria integrativa di gruppo: rimborso spese mediche, visite specialistiche, ricoveri e indennità da ricovero",
+            "Polizza vita e infortuni collettiva: tutela i dipendenti in caso di morte o invalidità permanente da infortunio o malattia",
+            "Long Term Care (LTC): garantisce una rendita in caso di perdita dell'autosufficienza",
+            "Polizza infortuni extra-professionali: estende la copertura INAIL alle ore fuori dal lavoro",
+            "Previdenza complementare aziendale: versamento di contributi al fondo pensione del dipendente"
+          ]
+        },
+        {
+          "heading": "Il Quadro Fiscale: Quanto Risparmia Davvero l'Azienda?",
+          "body": "Uno degli aspetti più interessanti del welfare assicurativo è l'efficienza fiscale. I premi versati dall'azienda per polizze sanitarie integrative di gruppo sono deducibili al 100% come costo del personale, entro i limiti previsti dalla normativa vigente. Per le polizze caso morte e invalidità permanente da qualsiasi causa, il beneficio è deducibile fino a 3.615,20 euro per dipendente all'anno. In più, per il lavoratore questi benefit non concorrono alla formazione del reddito imponibile — il che significa che un aumento 'in welfare' vale sostanzialmente di più, in termini di potere d'acquisto netto, rispetto a un aumento salariale equivalente. Questo meccanismo rende il welfare una leva straordinariamente potente per entrambe le parti.",
+          "list": [
+            "Premi sanitarie collettive: deducibili al 100% per l'azienda",
+            "Polizze vita/infortuni: deducibili fino a 3.615,20 € per dipendente/anno",
+            "Nessuna contribuzione INPS su molte voci di welfare assicurativo",
+            "Per il dipendente: benefit esente da IRPEF entro i limiti di legge",
+            "Risparmio complessivo stimato: fino al 40-50% rispetto a un aumento in busta paga di pari importo"
+          ]
+        },
+        {
+          "heading": "Come Strutturare un Piano di Welfare Assicurativo: i Passi Fondamentali",
+          "body": "Costruire un piano di welfare efficace non significa semplicemente acquistare una polizza collettiva 'standard': richiede un'analisi delle esigenze dei dipendenti, una valutazione del budget disponibile e una corretta integrazione con gli eventuali CCNL di riferimento. Alcuni contratti collettivi nazionali, come quelli del settore commercio, metalmeccanico o edile, prevedono già obblighi minimi in materia di assistenza sanitaria integrativa (ad esempio, l'iscrizione a fondi come EBITER, METASALUTE o FASCHIM). Un broker assicurativo indipendente può aiutarti a capire cosa è già dovuto per legge contrattuale e cosa puoi aggiungere per differenziarti davvero come datore di lavoro.",
+          "list": [
+            "1. Analisi del CCNL applicato e delle coperture già obbligatorie per legge o contratto",
+            "2. Mappatura dei bisogni reali dei dipendenti (età media, composizione familiare, rischi specifici)",
+            "3. Definizione del budget aziendale e degli obiettivi (fidelizzazione, recruiting, benessere)",
+            "4. Selezione delle polizze più adatte tramite comparazione di più compagnie assicurative",
+            "5. Formalizzazione nel regolamento aziendale o nel contratto integrativo",
+            "6. Monitoraggio annuale e revisione del piano in base alle esigenze evolutive"
+          ]
+        },
+        {
+          "heading": "Errori Comuni da Evitare e Perché Affidarsi a un Broker",
+          "body": "Molte aziende commettono l'errore di acquistare polizze collettive 'fai da te', senza verificare che le coperture siano effettivamente aderenti ai bisogni del personale o fiscalmente ottimizzate. Un altro errore frequente è non comunicare correttamente i benefit ai dipendenti: un piano di welfare che i lavoratori non conoscono o non capiscono non produce nessun effetto sulla loro soddisfazione. FIM Insurance Broker, con sede a Cisterna di Latina, supporta imprenditori e responsabili HR nella progettazione di piani welfare su misura: dalla valutazione iniziale alla scelta delle compagnie, fino alla gestione delle pratiche e al supporto in fase di sinistro. Contattaci per una consulenza gratuita e scopri quante risorse stai lasciando sul tavolo.",
+          "list": [
+            "Non verificare i minimi obbligatori previsti dal CCNL applicato",
+            "Scegliere polizze standardizzate senza adattarle alla propria forza lavoro",
+            "Ignorare la comunicazione interna: i dipendenti devono conoscere e percepire il valore del benefit",
+            "Non aggiornare il piano welfare al variare della normativa fiscale e previdenziale",
+            "Affidarsi a un unico preventivo senza comparare più compagnie assicurative"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "assicurazione-droni-nuove-tecnologie-2026",
+      "title": "Assicurazione per Droni e Nuove Tecnologie: Cosa Devi Sapere nel 2026",
+      "excerpt": "L'uso di droni e tecnologie avanzate è in forte crescita tra privati e imprese italiane. Scopri quali coperture assicurative sono obbligatorie per legge e come proteggere la tua attività dai rischi connessi.",
+      "category": "Aziendale",
+      "date": "20 Aprile 2026",
+      "readTime": "6 min",
+      "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Droni in Italia: un mercato in rapida espansione",
+          "body": "Negli ultimi anni l'utilizzo di droni in Italia è cresciuto in modo esponenziale, non solo tra gli appassionati, ma soprattutto in ambito professionale: fotografia aerea, agricoltura di precisione, ispezioni industriali, consegne e sorveglianza sono solo alcuni dei settori coinvolti. Con l'entrata in vigore del Regolamento Europeo EASA (EU) 2019/947 e i successivi aggiornamenti recepiti anche dall'ENAC, oggi operare con un drone senza le giuste coperture assicurative espone a sanzioni significative e a responsabilità civili molto rilevanti. Conoscere il quadro normativo è il primo passo per operare in sicurezza e in modo conforme.",
+          "list": [
+            "Agricoltura di precisione e trattamenti fitosanitari",
+            "Riprese fotografiche e video professionali",
+            "Ispezioni di infrastrutture (ponti, tralicci, coperture)",
+            "Topografia e rilievi cartografici",
+            "Sorveglianza e sicurezza perimetrale",
+            "Logistica e consegna merci (in fase sperimentale)"
+          ]
+        },
+        {
+          "heading": "RC Droni: l'obbligo assicurativo che molti ignorano",
+          "body": "La normativa europea e italiana impone l'obbligo di stipulare una polizza di Responsabilità Civile per qualsiasi drone con massa operativa superiore a 250 grammi, sia per uso privato che professionale. Questo significa che anche un semplice hobbysta che vola nel fine settimana con un drone da 500 grammi è soggetto all'obbligo assicurativo. La polizza RC Droni copre i danni causati a terzi — persone, cose o animali — durante il volo, inclusi i danni a veicoli o proprietà private. I massimali minimi richiesti dalla normativa variano in base alla categoria operativa del drone (Open, Specific, Certified) e al peso del mezzo, e possono arrivare a diversi milioni di euro per operazioni più complesse.",
+          "list": [
+            "Categoria OPEN: droni leggeri per operazioni a basso rischio, RC obbligatoria da 250g in su",
+            "Categoria SPECIFIC: operazioni più complesse con autorizzazione ENAC, massimali più elevati",
+            "Categoria CERTIFIED: droni di grande dimensione o trasporto persone, equiparata all'aviazione civile"
+          ]
+        },
+        {
+          "heading": "Polizze per droni: cosa copre davvero una buona assicurazione",
+          "body": "Una polizza base per droni si limita spesso alla sola RC verso terzi, ma un operatore professionale ha bisogno di garanzie molto più ampie. Sul mercato esistono soluzioni modulari che consentono di costruire una copertura su misura in base al tipo di attività svolta. È fondamentale leggere attentamente le esclusioni: molte polizze economiche escludono i danni durante il decollo e l'atterraggio, le operazioni notturne o i voli in zone urbane, proprio quelle situazioni in cui il rischio è più elevato. Affidarsi a un broker assicurativo esperto come FIM permette di identificare la copertura realmente adeguata alla propria operatività, evitando sorprese al momento del sinistro.",
+          "list": [
+            "RC verso terzi per danni a persone, cose e animali",
+            "Casco drone: danni accidentali, crash, guasti elettronici",
+            "Furto e atti vandalici del velivolo e dell'attrezzatura di bordo",
+            "Responsabilità del pilota remoto e dei suoi collaboratori",
+            "Copertura dati e privacy (GDPR): violazioni legate alle riprese",
+            "Tutela legale in caso di contestazioni normative"
+          ]
+        },
+        {
+          "heading": "Nuove tecnologie aziendali: rischi emergenti da non sottovalutare",
+          "body": "Il tema assicurativo non riguarda solo i droni, ma si estende a tutte le nuove tecnologie sempre più diffuse nelle PMI italiane: robot collaborativi (cobot), stampanti 3D industriali, sistemi IoT e automazione dei processi produttivi. Questi strumenti aumentano la produttività, ma introducono nuove categorie di rischio che le polizze tradizionali spesso non coprono adeguatamente. Un guasto a un cobot che provoca lesioni a un operaio, o un errore di stampa 3D che genera un prodotto difettoso causa di danni a terzi, rientrano in scenari che richiedono coperture specifiche di RC Prodotti, RC Datori di Lavoro e All Risks Macchinari aggiornate alle nuove realtà tecnologiche."
+        },
+        {
+          "heading": "Come FIM Insurance Broker può aiutarti",
+          "body": "Il mondo delle coperture assicurative per droni e nuove tecnologie è ancora poco conosciuto e spesso mal gestito da polizze standardizzate che non rispecchiano le reali esigenze dell'operatore. FIM Insurance Broker, con sede a Cisterna di Latina, ha maturato una solida esperienza nell'analisi dei rischi emergenti per privati, professionisti e PMI. Il nostro approccio prevede un'analisi personalizzata della tua attività operativa, l'identificazione delle coperture obbligatorie e di quelle consigliate, e la ricerca della soluzione più conveniente tra le principali compagnie del mercato. Contattaci per una consulenza gratuita: volare in sicurezza — e in regola — è più semplice di quanto pensi.",
+          "list": [
+            "Analisi gratuita del profilo di rischio del tuo drone o tecnologia",
+            "Confronto tra più compagnie specializzate nel settore",
+            "Assistenza nella gestione dei sinistri",
+            "Aggiornamento della copertura al variare delle normative ENAC/EASA"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "legge-34-2026-addio-rc-auto-muletti-mezzi-agricoli",
+      "title": "Addio Obbligo RC Auto per Muletti e Mezzi Agricoli: La Legge 34/2026 Premia il Buon Senso",
+      "excerpt": "Dal 7 aprile 2026 i mezzi che operano esclusivamente in aree private non sono più obbligati ad avere la RC auto. Cosa cambia per le PMI italiane e cosa fare subito.",
+      "category": "Aziendale",
+      "date": "17 Aprile 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Cosa cambia dal 7 aprile 2026",
+          "body": "Con l'entrata in vigore della Legge annuale per la tutela delle micro, piccole e medie imprese — Legge 34/2026 — il legislatore italiano ha posto fine a una delle disposizioni più contestate degli ultimi anni. Dal 7 aprile 2026 i veicoli a motore che operano esclusivamente in aree private non aperte alla circolazione stradale — come muletti, carrelli elevatori, trattori agricoli utilizzati su fondi aziendali, macchine per la movimentazione interna — non sono più soggetti all'obbligo di Responsabilità Civile Auto. Si tratta di una correzione di rotta importante rispetto al quadro normativo introdotto negli ultimi anni, che aveva esteso l'obbligo assicurativo a tutti i veicoli dotati di motore, indipendentemente dal contesto di utilizzo. Una misura che aveva generato rilevanti costi aggiuntivi per artigiani, agricoltori, logistica e industria, senza un reale beneficio in termini di tutela della sicurezza stradale pubblica.",
+          "list": [
+            "La Legge 34/2026 entra in vigore il 7 aprile 2026",
+            "L'obbligo RC auto viene eliminato per i veicoli che operano SOLO in aree private non accessibili al pubblico",
+            "Rientrano tra i mezzi esonerati: muletti, carrelli elevatori, trattori agricoli su fondi aziendali, macchine di movimentazione industriale",
+            "Restano obbligati all'RC auto tutti i mezzi che circolano, anche occasionalmente, su strade pubbliche o aree ad esse equiparate",
+            "Le polizze RC auto già stipulate possono essere disdette secondo le regole contrattuali ordinarie"
+          ]
+        },
+        {
+          "heading": "Il contesto: come eravamo arrivati all'obbligo generalizzato",
+          "body": "Per comprendere la portata di questo cambiamento occorre ripercorrere la cronologia normativa. La Direttiva UE 2021/2118, recepita in Italia con il D.Lgs. 184/2023, aveva ampliato la definizione di \"circolazione di veicolo\" includendo qualsiasi uso conforme alla funzione del veicolo, a prescindere dal luogo in cui avveniva. In concreto, questo aveva significato estendere l'obbligo di RC auto anche ai muletti operativi esclusivamente all'interno di un capannone, ai trattori impiegati su terreni privati, alle macchine utilizzate in cantieri recintati. Le associazioni di categoria — da Confartigianato a Coldiretti, fino a Confindustria — avevano segnalato da subito le criticità di una norma che imponeva costi assicurativi rilevanti alle imprese senza un corrispondente beneficio per la collettività, dato che i rischi per i terzi in area privata erano già coperti dalle polizze RC aziendali tradizionali. La Legge 34/2026 raccoglie queste istanze e introduce un'eccezione ragionevole, allineando il quadro italiano a un criterio di proporzionalità più volte invocato anche in sede europea.",
+          "list": [
+            "Direttiva UE 2021/2118: estensione del concetto di \"circolazione\" a qualsiasi uso conforme del veicolo",
+            "D.Lgs. 184/2023: recepimento italiano che aveva generalizzato l'obbligo anche in area privata",
+            "Le associazioni di categoria avevano denunciato un aggravio di costi sproporzionato per le PMI",
+            "Legge 34/2026: introduce l'eccezione per i veicoli confinati in aree non accessibili al pubblico",
+            "L'Italia torna a un criterio più aderente alla ratio originaria dell'obbligo assicurativo RC auto"
+          ]
+        },
+        {
+          "heading": "Chi ne beneficia davvero: esempi concreti per le PMI",
+          "body": "L'impatto pratico della nuova norma si traduce in un risparmio economico significativo per diverse categorie di imprese italiane. Un'azienda logistica con una flotta di 10 muletti operativi esclusivamente all'interno del proprio magazzino potrebbe risparmiare somme rilevanti ogni anno tra premi assicurativi e oneri amministrativi. Lo stesso vale per un'azienda agricola che utilizza trattori e mietitrebbie solo sui propri fondi, per un'officina meccanica con carrelli di movimentazione interna, per un cantiere edile con escavatori confinati nell'area di lavoro recintata. Oltre al risparmio diretto, si riducono gli adempimenti burocratici: niente più scadenze da gestire per ogni singolo mezzo, niente più targhe EE o contrassegni per veicoli che non escono dal perimetro aziendale. Un cambio di passo atteso da anni dal tessuto produttivo italiano, che ora richiede però un'attenta rivisitazione delle polizze aziendali per evitare che il risparmio diventi un buco di copertura.",
+          "list": [
+            "Aziende logistiche e magazzini: muletti e carrelli elevatori confinati",
+            "Aziende agricole: trattori e macchinari operativi solo su fondi di proprietà",
+            "Cantieri edili recintati: escavatori, pale, gru semoventi non circolanti su strada",
+            "Industrie manifatturiere: carrelli di movimentazione interna, transpallet elettrici",
+            "Officine e carrozzerie: mezzi di spostamento veicoli all'interno dell'area di lavoro",
+            "Stabilimenti produttivi con aree private estese: movimentazione interna completa"
+          ]
+        },
+        {
+          "heading": "Attenzione: niente più RC auto, ma la copertura aziendale resta fondamentale",
+          "body": "Qui arriva il punto più delicato, e quello su cui come broker indipendente sentiamo di dover richiamare la massima attenzione. Il venir meno dell'obbligo di RC auto non significa che i rischi di danni a terzi causati da muletti e mezzi agricoli siano scomparsi. Un incidente in cui un carrello elevatore investe un dipendente, un visitatore, un fornitore o un addetto alla manutenzione, oppure danneggia merci o strutture altrui, continua a generare responsabilità civile in capo all'azienda. La differenza è che ora questa copertura non passa più da una polizza RC auto dedicata, ma deve essere assicurata — è proprio il caso di dirlo — dalla polizza RC aziendale (la cosiddetta RC Operativa o Responsabilità Civile Terzi e Prestatori d'Opera, RCT/O). È quindi essenziale verificare che la propria polizza aziendale comprenda esplicitamente i danni causati da veicoli a motore in area privata, senza esclusioni che rimandino alla RC auto obbligatoria. Alcune polizze, redatte negli anni passati, contengono clausole di esclusione per \"danni da veicoli soggetti ad assicurazione obbligatoria\": una clausola che oggi potrebbe creare un pericoloso vuoto di copertura.",
+          "list": [
+            "I rischi di danni a terzi in area privata non scompaiono con l'abolizione dell'obbligo RC auto",
+            "La copertura dovrà essere garantita dalla polizza RC aziendale (RCT/O)",
+            "Verificare sempre che la RCT/O non escluda i \"danni da veicoli a motore\" con rinvio alla RC auto obbligatoria",
+            "Valutare eventuali estensioni specifiche per macchinari operativi, carrelli, mezzi agricoli",
+            "Attenzione ai danni ai dipendenti (RCO) e agli infortuni sul lavoro (INAIL): sono coperture distinte",
+            "Rivedere massimali e franchigie: con la dismissione della RC auto, la RCT/O diventa l'unica linea di difesa"
+          ]
+        },
+        {
+          "heading": "FIM Insurance Broker: come affrontare il cambiamento senza rischi",
+          "body": "La Legge 34/2026 rappresenta un'opportunità concreta di risparmio per molte imprese italiane, ma richiede una gestione attenta della transizione. In FIM Insurance Broker, con sede a Cisterna di Latina, aiutiamo le PMI a fare due cose essenziali: dismettere in modo corretto le polizze RC auto non più necessarie — verificando le modalità di disdetta, i rimborsi sui ratei già pagati e gli adempimenti formali — e contestualmente riqualificare la polizza RC aziendale per garantire che non si creino buchi di copertura sui rischi residui. Come broker indipendente analizziamo le tue polizze attuali, confrontiamo le offerte di oltre 30 compagnie partner e costruiamo una soluzione ottimizzata sul tuo profilo di rischio specifico. Se gestisci un magazzino, un'azienda agricola, un cantiere o uno stabilimento produttivo e vuoi capire cosa cambia concretamente per te, contattaci per una consulenza gratuita e senza impegno. Chiamaci al +39 06 96883381, scrivici a info@fimbroker.it o prenota direttamente un appuntamento dal nostro sito."
+        }
+      ]
+    },
+    {
+      "slug": "come-scegliere-polizza-cyber-pmi",
+      "title": "Come Scegliere la Polizza Cyber Giusta per la Tua PMI: Guida Pratica 2026",
+      "excerpt": "La tua azienda è davvero protetta da un attacco informatico? Ecco come scegliere la polizza cyber più adatta, evitando errori comuni e coperture inutili.",
+      "category": "Aziendale",
+      "date": "17 Aprile 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Perché nel 2026 una PMI non può più ignorare il rischio cyber",
+          "body": "Se gestisci una piccola o media impresa in Italia, probabilmente pensi che gli attacchi informatici colpiscano solo le grandi aziende. La realtà è molto diversa: secondo i dati del Clusit, oltre il 40% degli attacchi informatici in Italia colpisce le PMI, spesso con conseguenze devastanti. Un ransomware che blocca i sistemi per una settimana, un furto di dati clienti che viola il GDPR, un attacco alla posta elettronica aziendale che devia un bonifico verso un conto fraudolento — sono scenari che vediamo sempre più spesso tra i nostri clienti. Con l'entrata in vigore della Direttiva NIS2, recepita in Italia con il D.Lgs. 138/2024, le aziende di settori critici e importanti hanno nuovi obblighi di sicurezza informatica. Anche se la NIS2 non impone esplicitamente una polizza cyber, le sanzioni per inadempienza alle misure di sicurezza rendono la copertura assicurativa una scelta strategica per qualsiasi impresa che tratti dati digitali.",
+          "list": [
+            "Il costo medio di un data breach per una PMI italiana supera i 50.000 euro tra fermo attività, ripristino e sanzioni",
+            "Il ransomware è la minaccia numero uno: blocca i sistemi e chiede un riscatto per sbloccarli",
+            "Il GDPR (Reg. UE 2016/679) prevede sanzioni fino al 4% del fatturato per violazioni dei dati personali",
+            "La Direttiva NIS2 (D.Lgs. 138/2024) amplia gli obblighi di cybersicurezza a nuovi settori",
+            "Le PMI sono bersagli preferiti perché hanno difese meno sofisticate rispetto alle grandi aziende"
+          ]
+        },
+        {
+          "heading": "Cosa copre realmente una polizza cyber (e cosa no)",
+          "body": "Una polizza cyber non è un prodotto standard: le coperture variano enormemente da una compagnia all'altra e il diavolo si nasconde nei dettagli. Una polizza ben strutturata dovrebbe coprire tre macro-aree: i danni diretti alla tua azienda, i danni a terzi e i servizi di assistenza post-incidente. Ma attenzione alle esclusioni, che sono spesso la parte più importante del contratto. Molte polizze escludono i danni causati da errori umani dei dipendenti (che rappresentano oltre il 70% delle cause di incidenti cyber), i danni da fornitori terzi compromessi (il cosiddetto supply chain attack) o gli eventi di guerra cibernetica. Leggere e comprendere queste esclusioni prima di firmare è fondamentale — ed è esattamente il tipo di lavoro che un broker indipendente come FIM fa per te.",
+          "list": [
+            "Danni diretti: costi di ripristino sistemi, perdita di dati, fermo attività (business interruption), pagamento del riscatto (attenzione: non tutte le polizze lo coprono)",
+            "Responsabilità civile verso terzi: risarcimento clienti/fornitori per violazione dei loro dati personali o aziendali",
+            "Spese legali e normative: difesa in caso di procedimenti GDPR, notifiche al Garante Privacy, comunicazione agli interessati",
+            "Servizi di incident response: accesso a team di esperti forensi, gestione crisi comunicativa, consulenza legale specializzata",
+            "Esclusioni comuni: danni da guerra cibernetica, vulnerabilità note non corrette, mancato aggiornamento software, frode interna dolosa"
+          ]
+        },
+        {
+          "heading": "I 5 errori che le PMI commettono quando scelgono una polizza cyber",
+          "body": "Nella nostra esperienza di broker specializzato in coperture aziendali, vediamo ripetersi sempre gli stessi errori quando le PMI si avvicinano per la prima volta alla polizza cyber. Conoscerli in anticipo ti permette di evitare coperture inadeguate e brutte sorprese al momento del sinistro.",
+          "list": [
+            "Scegliere solo in base al prezzo: una polizza da 500 euro l'anno che esclude il ransomware e il fermo attività non ti protegge da nulla. Meglio spendere qualcosa in più per una copertura reale",
+            "Non dichiarare correttamente il profilo di rischio: se nel questionario ometti che non fai backup regolari o che usi software obsoleto, la compagnia può rifiutare il risarcimento per dichiarazione inesatta",
+            "Ignorare i sublimiti: molte polizze hanno un massimale apparentemente alto (es. 500.000 euro) ma con sublimiti per voce (es. max 50.000 per ransomware, max 30.000 per business interruption). Controlla sempre i sublimiti, non solo il massimale",
+            "Non aggiornare la polizza: se la tua azienda cresce, acquisisce nuovi clienti, apre un e-commerce o adotta il lavoro da remoto, il profilo di rischio cambia. La polizza va aggiornata di conseguenza",
+            "Pensare che l'antivirus basti: la polizza cyber non sostituisce le misure di sicurezza, ma le integra. Le compagnie premiano le aziende che investono in prevenzione con premi più bassi e coperture più ampie"
+          ]
+        },
+        {
+          "heading": "Come valutare il premio: quanto costa e da cosa dipende",
+          "body": "Il costo di una polizza cyber per una PMI italiana dipende da diversi fattori che la compagnia valuta attraverso un questionario dettagliato. Conoscere questi fattori ti aiuta a capire perché il premio varia e come ottimizzarlo. In linea generale, per una PMI con fatturato fino a 2 milioni di euro, il premio annuo di una buona polizza cyber oscilla tra 800 e 3.000 euro — una cifra che va confrontata con il costo potenziale di un singolo incidente (spesso superiore a 50.000 euro). Le aziende che dimostrano buone pratiche di sicurezza informatica — backup regolari, autenticazione a due fattori, formazione del personale, aggiornamenti tempestivi — ottengono premi significativamente più bassi. Richiedere più preventivi attraverso un broker è il modo più efficace per trovare il miglior rapporto copertura-prezzo, perché il broker conosce i questionari delle varie compagnie e ti aiuta a presentare il profilo nel modo più favorevole possibile.",
+          "list": [
+            "Settore di attività: sanità, finanza e e-commerce pagano di più per il maggior volume di dati sensibili trattati",
+            "Fatturato e numero dipendenti: dimensioni maggiori = esposizione maggiore = premio più alto",
+            "Misure di sicurezza adottate: backup, MFA, formazione, firewall, SOC/SIEM riducono il premio",
+            "Storico sinistri: precedenti incidenti informatici aumentano il premio o limitano le compagnie disponibili",
+            "Massimale e franchigia scelti: massimali più alti e franchigie più basse costano di più ma proteggono meglio",
+            "Tipologia claims made vs loss occurrence: la maggior parte delle polizze cyber è claims made — verifica sempre la retroattività"
+          ]
+        },
+        {
+          "heading": "FIM Insurance Broker: il tuo consulente cyber indipendente",
+          "body": "Scegliere la polizza cyber giusta per la tua PMI richiede competenza specifica: non basta confrontare i prezzi, bisogna comprendere le esclusioni, i sublimiti, le clausole di retroattività e le condizioni di incident response di ogni compagnia. In FIM Insurance Broker, con sede a Cisterna di Latina, analizziamo il profilo di rischio della tua azienda e confrontiamo le offerte di oltre 30 compagnie partner per costruire la copertura più adatta alle tue esigenze reali. Non lavoriamo per nessuna compagnia: lavoriamo per te. Se vuoi capire se la tua azienda è adeguatamente protetta dal rischio informatico — o se stai pagando troppo per una copertura inadeguata — contattaci per una consulenza gratuita e senza impegno. Chiamaci al +39 06 96883381, scrivici a info@fimbroker.it o prenota direttamente un appuntamento dal nostro sito."
+        }
+      ]
+    },
+    {
+      "slug": "polizza-sanitaria-integrativa-2025-2026",
+      "title": "Polizza Sanitaria Integrativa 2025-2026: Perché Sempre Più Italiani Scelgono una Copertura Privata",
+      "excerpt": "Il Servizio Sanitario Nazionale garantisce assistenza a tutti, ma lunghe liste d'attesa e costi crescenti spingono privati e aziende a valutare una polizza sanitaria integrativa. Scopri come funziona, cosa copre e come scegliere quella giusta.",
+      "category": "Salute",
+      "date": "13 Aprile 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Cos'è una Polizza Sanitaria Integrativa e Perché È Diventata Indispensabile",
+          "body": "Una polizza sanitaria integrativa è una copertura assicurativa che si affianca al Servizio Sanitario Nazionale (SSN), rimborsando in tutto o in parte le spese mediche sostenute privatamente. In Italia, il ricorso alla sanità privata è cresciuto in modo significativo negli ultimi anni: secondo i dati ISTAT più recenti, oltre 11 milioni di italiani hanno rinunciato a cure mediche nel 2024 a causa delle lunghe attese nel pubblico o per motivi economici. Le liste d'attesa per visite specialistiche e interventi chirurgici possono raggiungere mesi o addirittura anni in alcune regioni, rendendo la sanità integrativa non un lusso, ma una scelta concreta di tutela della propria salute.",
+          "list": [
+            "Tempi di attesa ridotti per visite specialistiche e diagnostica",
+            "Accesso a strutture private convenzionate in tutta Italia",
+            "Rimborso delle spese mediche anche all'estero",
+            "Copertura per interventi chirurgici e ricoveri ospedalieri",
+            "Indennità giornaliera in caso di ricovero o inabilità temporanea"
+          ]
+        },
+        {
+          "heading": "Cosa Copre una Polizza Sanitaria Integrativa: Le Garanzie Principali",
+          "body": "Le polizze sanitarie integrative non sono tutte uguali: le coperture variano sensibilmente da prodotto a prodotto, ed è fondamentale confrontare con attenzione le garanzie incluse, i massimali e le eventuali esclusioni. In linea generale, una buona polizza sanitaria integrativa prevede il rimborso delle spese ambulatoriali, la copertura per ricoveri ospedalieri (sia in caso di intervento chirurgico che di malattia), e spesso include anche la diagnostica avanzata come TAC, risonanze magnetiche ed esami del sangue. Alcune soluzioni più complete comprendono anche la tutela per grandi interventi, la medicina preventiva, le cure odontoiatriche e il supporto psicologico, un settore in forte crescita dopo la pandemia.",
+          "list": [
+            "Visite specialistiche e consulti medici privati",
+            "Ricovero ospedaliero in caso di intervento chirurgico o malattia",
+            "Diagnostica per immagini: TAC, risonanze, ecografie",
+            "Cure odontoiatriche (spesso opzionali o in pacchetti dedicati)",
+            "Supporto psicologico e salute mentale",
+            "Medicina preventiva e check-up periodici",
+            "Assistenza in viaggio e cure all'estero"
+          ]
+        },
+        {
+          "heading": "Polizza Individuale, Familiare o Aziendale: Quale Scegliere?",
+          "body": "La scelta tra una polizza sanitaria individuale, familiare o collettiva dipende dalla tua situazione personale e professionale. Per i privati, la polizza individuale è la soluzione più semplice, mentre quella familiare permette di estendere la copertura al coniuge e ai figli con un premio spesso più conveniente rispetto a più polizze separate. Per le aziende e i liberi professionisti con dipendenti, la polizza sanitaria collettiva rappresenta invece uno strumento di welfare aziendale sempre più apprezzato: non solo migliora il benessere dei lavoratori, ma offre anche vantaggi fiscali significativi per il datore di lavoro, con premi deducibili fino a 3.615,20 euro per dipendente all'anno. In un mercato del lavoro competitivo, offrire una copertura sanitaria integrativa aiuta le PMI ad attrarre e fidelizzare i talenti migliori.",
+          "list": [
+            "Polizza individuale: ideale per chi cerca protezione personale rapida e flessibile",
+            "Polizza familiare: copre coniuge e figli, spesso con premi vantaggiosi",
+            "Polizza collettiva aziendale: deducibile fiscalmente, strumento di welfare per i dipendenti",
+            "Fondi sanitari integrativi: soluzioni di categoria per lavoratori di specifici settori"
+          ]
+        },
+        {
+          "heading": "Quanto Costa una Polizza Sanitaria Integrativa nel 2025-2026?",
+          "body": "Il costo di una polizza sanitaria integrativa dipende da diversi fattori: l'età dell'assicurato, lo stato di salute al momento della stipula, le garanzie selezionate e la compagnia assicurativa scelta. In linea indicativa, per un adulto tra i 30 e i 45 anni con una copertura di base, i premi annuali partono da circa 300-500 euro, mentre soluzioni più complete con massimali elevati e coperture odontoiatriche possono superare i 1.000-1.500 euro all'anno. È importante ricordare che i premi per assicurazioni sanitarie integrative sono fiscalmente detraibili al 19% fino a un importo di 1.291,14 euro, riducendo così l'esborso effettivo per il contribuente. Un broker assicurativo indipendente come FIM può analizzare le diverse offerte del mercato e individuare la soluzione più adatta alle tue esigenze e al tuo budget, senza essere vincolato a un'unica compagnia.",
+          "list": [
+            "Età e stato di salute dell'assicurato influenzano il premio",
+            "Ampiezza delle garanzie e massimali scelti",
+            "Presenza o meno di franchigie e scoperti",
+            "Rete di strutture convenzionate disponibili sul territorio",
+            "Detrazione fiscale al 19% sui premi versati (fino a 1.291,14 €)"
+          ]
+        },
+        {
+          "heading": "Come Scegliere la Polizza Giusta: I Consigli di FIM Insurance Broker",
+          "body": "Scegliere una polizza sanitaria integrativa non è semplice: il mercato offre decine di prodotti con caratteristiche molto diverse tra loro, e le clausole scritte in piccolo possono nascondere esclusioni importanti. Prima di firmare qualsiasi contratto, è fondamentale verificare attentamente le esclusioni per condizioni preesistenti, i periodi di carenza (il tempo che deve trascorrere prima che determinate garanzie diventino operative) e l'ampiezza della rete di strutture convenzionate nella tua zona. Da Cisterna di Latina, il team di FIM Insurance Broker offre una consulenza personalizzata e gratuita per aiutarti a confrontare le migliori soluzioni disponibili sul mercato italiano, sia per privati che per aziende: contattaci per trovare insieme la copertura sanitaria integrativa più adatta a te e alla tua famiglia."
+        }
+      ]
+    },
+    {
+      "slug": "assicurazione-condominio-guida-completa",
+      "title": "Assicurazione Condominio 2026: Guida Completa per Amministratori e Condomini",
+      "excerpt": "Dalla polizza globale fabbricati alla nuova copertura catastrofale obbligatoria: tutto quello che amministratori e condomini devono sapere per proteggere il proprio edificio nel 2026.",
+      "category": "Casa",
+      "date": "12 Aprile 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Perché l'assicurazione condominiale è diventata indispensabile nel 2026",
+          "body": "L'assicurazione condominiale non è un semplice adempimento burocratico: è la protezione fondamentale di un patrimonio che spesso rappresenta l'investimento più importante nella vita di una famiglia. Nel 2026 il quadro normativo italiano si è evoluto in modo significativo, rendendo alcune coperture non più facoltative ma obbligatorie. La Legge di Bilancio 2024 ha introdotto l'obbligo di polizza catastrofale per le imprese, e il legislatore sta valutando l'estensione dell'obbligo anche ai condomini residenziali. Parallelamente, la frequenza e l'intensità degli eventi climatici estremi in Italia — alluvioni in Emilia-Romagna, grandinate record in Veneto, frane in Liguria — hanno reso evidente che nessun edificio può considerarsi al sicuro senza una copertura adeguata. Un condominio senza assicurazione espone ogni singolo proprietario a responsabilità personali potenzialmente devastanti.",
+          "list": [
+            "Il condominio è responsabile in solido per i danni a terzi causati dalle parti comuni",
+            "Senza polizza, ogni condomino risponde personalmente in proporzione ai millesimi",
+            "Gli eventi climatici estremi sono aumentati del 55% in Italia negli ultimi 10 anni",
+            "La normativa si sta evolvendo verso l'obbligo di copertura catastrofale anche per i condomini",
+            "L'assicurazione tutela il valore dell'immobile e la tranquillità di tutti i residenti"
+          ]
+        },
+        {
+          "heading": "Cosa copre la polizza globale fabbricati",
+          "body": "La polizza globale fabbricati è la copertura base di ogni condominio e protegge l'edificio nella sua interezza — struttura portante, parti comuni, impianti e pertinenze — dai principali rischi. Si tratta di una polizza multirischio che combina diverse garanzie in un unico contratto, semplificando la gestione per l'amministratore e garantendo una protezione organica. È fondamentale che il valore assicurato corrisponda al reale costo di ricostruzione a nuovo dell'intero fabbricato, per evitare la temuta clausola di sottossicurazione che ridurrebbe proporzionalmente ogni risarcimento.",
+          "list": [
+            "Incendio, fulmine, esplosione e scoppio: danni alla struttura e alle parti comuni",
+            "Danni da acqua: rottura di tubazioni, infiltrazioni, allagamenti da impianti condominiali",
+            "Responsabilità civile del condominio: danni a terzi causati da parti comuni (caduta calcinacci, ghiaccio, tegole)",
+            "Responsabilità civile dell'amministratore: errori e omissioni nella gestione condominiale",
+            "Ricorso terzi: danni subiti dai condomini a causa di eventi che colpiscono le parti comuni",
+            "Eventi atmosferici: grandine, vento forte, trombe d'aria, peso della neve",
+            "Atti vandalici e sociopolitici: danneggiamenti, graffiti, tumulti"
+          ]
+        },
+        {
+          "heading": "La copertura catastrofale: terremoto, alluvione e frane",
+          "body": "La garanzia contro le catastrofi naturali — terremoto, alluvione, inondazione, frana — merita un discorso a parte perché storicamente è stata la grande assente nelle polizze condominiali italiane. Secondo i dati ANIA, meno del 5% degli edifici residenziali italiani ha una copertura sismica, nonostante il 44% del territorio nazionale sia classificato a rischio sismico elevato o molto elevato. Con l'introduzione dell'obbligo catastrofale per le imprese nel 2025, è ragionevole aspettarsi un'estensione progressiva anche al settore residenziale. Anticipare questa tendenza non è solo prudente, ma spesso conviene economicamente: le tariffe per la copertura catastrofale sono attualmente contenute e destinate a salire man mano che l'obbligo si estenderà.",
+          "list": [
+            "Terremoto: copre i danni strutturali all'edificio e il costo di ricostruzione",
+            "Alluvione e inondazione: danni da esondazione di fiumi, allagamenti, bombe d'acqua",
+            "Frana e smottamento: movimenti del terreno che compromettono la stabilità dell'edificio",
+            "Meno del 5% dei condomini italiani ha oggi una copertura sismica",
+            "I premi per la garanzia catastrofale sono ancora accessibili e destinati a crescere"
+          ]
+        },
+        {
+          "heading": "Come scegliere la polizza giusta: 5 errori da evitare",
+          "body": "La scelta della polizza condominiale è una decisione che ha conseguenze concrete per anni. Troppo spesso gli amministratori si limitano a rinnovare automaticamente il contratto esistente senza verificare se le condizioni sono ancora adeguate, o peggio scelgono la polizza più economica senza leggere le esclusioni. Ecco i cinque errori più comuni che vediamo quotidianamente nella nostra attività di consulenza ai condomini.",
+          "list": [
+            "Sottossicurazione: assicurare l'edificio per un valore inferiore al costo di ricostruzione. In caso di sinistro, il risarcimento viene ridotto proporzionalmente (regola proporzionale)",
+            "Ignorare le esclusioni: molte polizze escludono danni da infiltrazioni 'lente', muffa, vetustà degli impianti. Leggere sempre le condizioni particolari",
+            "Non aggiornare il valore dopo lavori straordinari: ristrutturazioni, Superbonus 110%, cappotto termico aumentano il valore dell'edificio",
+            "Scegliere solo in base al prezzo: una polizza da 800 euro/anno che esclude i danni da acqua non è un risparmio, è un rischio",
+            "Non confrontare più preventivi: un broker indipendente confronta le offerte di diverse compagnie per trovare il miglior rapporto copertura-prezzo"
+          ]
+        },
+        {
+          "heading": "Il ruolo del broker indipendente per la protezione del condominio",
+          "body": "Un broker assicurativo indipendente come FIM Insurance Broker lavora esclusivamente nell'interesse del condominio, non di una compagnia assicurativa. Questo significa che analizziamo le caratteristiche specifiche del vostro edificio — anno di costruzione, zona sismica, materiali, impianti, lavori recenti — e confrontiamo le offerte di oltre 30 compagnie partner per costruire la copertura più adatta al miglior prezzo disponibile sul mercato. Per gli amministratori di condominio questo si traduce in un doppio vantaggio: la certezza di aver scelto la polizza giusta per i propri condomini, e la possibilità di presentare in assemblea un confronto trasparente tra diverse opzioni. Il nostro team segue il condominio anche nella gestione dei sinistri, garantendo tempi rapidi e assistenza completa dalla denuncia alla liquidazione. Se amministri uno o più condomini nella provincia di Latina o nel Lazio, contattaci per una consulenza gratuita: analizzeremo la vostra polizza attuale e vi mostreremo se e come è possibile migliorarla."
+        }
+      ]
+    },
+    {
+      "slug": "differenza-broker-agente-assicurativo",
+      "title": "Broker Assicurativo vs Agente: Le Differenze che Nessuno Ti Spiega",
+      "excerpt": "Broker e agente assicurativo non sono la stessa cosa: uno lavora per te, l'altro per la compagnia. Scopri le differenze concrete e perché la scelta cambia il tuo portafoglio e la tua protezione.",
+      "category": "Guide",
+      "date": "12 Aprile 2026",
+      "readTime": "6 min",
+      "image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Due figure professionali, due interessi opposti",
+          "body": "Nel mondo assicurativo italiano esistono diverse figure professionali abilitate a vendere polizze, ma le due principali — il broker e l'agente — hanno ruoli fondamentalmente diversi che la maggior parte delle persone non conosce. La differenza non è di forma ma di sostanza, e capirla può farti risparmiare centinaia di euro all'anno e, soprattutto, garantirti una protezione realmente adeguata alle tue esigenze. In sintesi: l'agente rappresenta una compagnia assicurativa e vende i suoi prodotti; il broker rappresenta te, il cliente, e cerca sul mercato la soluzione migliore per le tue esigenze. Questa distinzione è sancita dal Codice delle Assicurazioni Private (D.Lgs. 209/2005) e regolata dall'IVASS attraverso il Registro Unico degli Intermediari (RUI).",
+          "list": [
+            "L'agente (RUI Sez. A) ha un mandato con una o più compagnie e ne distribuisce i prodotti",
+            "Il broker (RUI Sez. B) non ha legami con nessuna compagnia e lavora solo per il cliente",
+            "L'agente è remunerato dalla compagnia con provvigioni sui prodotti venduti",
+            "Il broker è remunerato dalla compagnia scelta dal cliente, ma il suo dovere è verso il cliente",
+            "Entrambi sono professionisti regolamentati e iscritti al RUI presso l'IVASS"
+          ]
+        },
+        {
+          "heading": "Cosa cambia concretamente per te come cliente",
+          "body": "La differenza tra broker e agente non è solo teorica: ha conseguenze pratiche dirette sul prezzo che paghi, sulla qualità della copertura che ottieni e sull'assistenza che ricevi in caso di sinistro. Quando ti rivolgi a un agente, stai scegliendo tra i prodotti di una sola compagnia (o poche compagnie). È come entrare in un negozio monomarca: troverai sicuramente qualcosa, ma non saprai mai se altrove c'era di meglio a meno. Quando ti rivolgi a un broker, stai chiedendo a un professionista indipendente di scandagliare l'intero mercato per tuo conto. Il broker analizza le tue esigenze, confronta decine di offerte e ti propone le soluzioni più adatte — spesso di compagnie che non avresti mai considerato o contattato da solo.",
+          "list": [
+            "Accesso al mercato: l'agente offre 1-3 compagnie, il broker ne confronta 20-30+",
+            "Prezzo: il broker trova spesso tariffe più competitive perché confronta l'intero mercato",
+            "Personalizzazione: il broker costruisce la copertura sulle tue esigenze, non sul catalogo della compagnia",
+            "Sinistri: il broker ti assiste nella gestione del sinistro e negozia con la compagnia per tuo conto",
+            "Rinnovi: il broker verifica ogni anno se esistono condizioni migliori sul mercato",
+            "Conflitto di interessi: l'agente deve raggiungere obiettivi di vendita della compagnia; il broker no"
+          ]
+        },
+        {
+          "heading": "Il quadro normativo: come riconoscere un broker e un agente",
+          "body": "Sia broker che agenti sono professionisti regolamentati in Italia, iscritti al Registro Unico degli Intermediari (RUI) tenuto dall'IVASS. Ogni intermediario ha un numero di iscrizione verificabile sul sito ufficiale dell'IVASS. Le sezioni del RUI distinguono chiaramente le diverse figure: gli agenti sono iscritti nella Sezione A, i broker nella Sezione B, i produttori diretti nella Sezione C, le banche e gli intermediari finanziari nella Sezione D, i collaboratori di agenti e broker nella Sezione E. Prima di affidare le tue polizze a chiunque, verifica sempre l'iscrizione al RUI: è il tuo primo strumento di tutela contro abusivi e truffatori.",
+          "list": [
+            "Sezione A — Agenti: mandatari di una o più compagnie assicurative",
+            "Sezione B — Broker: intermediari indipendenti che agiscono su incarico del cliente",
+            "Sezione C — Produttori diretti: operano per conto della compagnia senza mandato formale",
+            "Sezione D — Banche e intermediari finanziari: distribuiscono polizze come attività accessoria",
+            "Sezione E — Collaboratori: operano sotto la responsabilità di agenti o broker",
+            "Verifica sempre l'iscrizione su ivass.it/consumatori/rui prima di sottoscrivere qualsiasi polizza"
+          ]
+        },
+        {
+          "heading": "Cinque situazioni in cui il broker fa davvero la differenza",
+          "body": "Ci sono momenti nella vita in cui affidarsi a un broker indipendente non è solo conveniente, ma può fare una differenza sostanziale nella qualità della protezione e nel risparmio economico. Queste sono le cinque situazioni in cui i nostri clienti ci dicono più spesso di aver apprezzato la differenza rispetto alla loro esperienza precedente con un agente monomandatario.",
+          "list": [
+            "Primo acquisto casa: il mutuo richiede una polizza incendio e scoppio. L'agente della banca ti propone la sua (spesso cara e limitata). Il broker confronta il mercato e trova soluzioni migliori al 30-50% in meno",
+            "Apertura partita IVA: la RC professionale è obbligatoria per molte categorie. Il broker trova la polizza specifica per la tua professione, non un prodotto generico",
+            "Gestione sinistro complesso: quando la compagnia nega o riduce il risarcimento, il broker negozia per tuo conto con competenza tecnica e giuridica",
+            "Rinnovo auto con sinistro: dopo un incidente il premio aumenta. Il broker cerca sul mercato la compagnia che penalizza meno il tuo profilo specifico",
+            "Polizza condominio o aziendale: coperture complesse dove la differenza tra una polizza e l'altra può valere migliaia di euro di risarcimento in più o in meno"
+          ]
+        },
+        {
+          "heading": "FIM Insurance Broker: il tuo broker indipendente dal 2004",
+          "body": "FIM Insurance Broker è un broker assicurativo indipendente iscritto alla Sezione B del RUI IVASS con il numero B000405449, attivo dal 2004 con sede a Cisterna di Latina. In oltre 20 anni di attività abbiamo costruito relazioni con più di 30 compagnie assicurative — da Generali ad AXA, da Allianz a UnipolSai, Zurich, Groupama e molte altre — per offrire ai nostri clienti la gamma più ampia possibile di soluzioni. Non lavoriamo per nessuna compagnia: lavoriamo per te. Se vuoi scoprire la differenza concreta tra affidarti a un agente e affidarti a un broker, contattaci per una consulenza gratuita e senza impegno. Analizzeremo le tue polizze attuali e ti mostreremo se e quanto puoi risparmiare migliorando allo stesso tempo la tua copertura. Puoi chiamarci al +39 06 96883381, scriverci a info@fimbroker.it o prenotare direttamente un appuntamento dal nostro sito."
+        }
+      ]
+    },
+    {
       "slug": "assicurazione-veicoli-elettrici-2026",
       "title": "Assicurazione per Veicoli Elettrici: Tutto Quello che Devi Sapere nel 2026",
       "excerpt": "Il mercato delle auto elettriche cresce rapidamente in Italia, ma le polizze assicurative hanno caratteristiche molto diverse da quelle tradizionali. Scopri come tutelarti al meglio.",
@@ -122,7 +616,7 @@
       "category": "Aziendale",
       "date": "23 Marzo 2026",
       "readTime": "6 min",
-      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&fit=crop&auto=format",
+      "image": "https://images.unsplash.com/photo-1547683905-f686c993aae5?w=1200&q=80&fit=crop&auto=format",
       "sections": [
         {
           "heading": "Cos'è la polizza catastrofale obbligatoria e da dove nasce",
@@ -452,7 +946,7 @@
       "category": "Aziendale",
       "date": "10 Marzo 2025",
       "readTime": "8 min",
-      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80&fit=crop&auto=format",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&fit=crop&auto=format",
       "sections": [
         {
           "heading": "Il quadro normativo: cosa impone la legge italiana",
@@ -505,7 +999,7 @@
       "category": "Aziendale",
       "date": "1 Marzo 2025",
       "readTime": "9 min",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80&fit=crop&auto=format",
+      "image": "https://images.unsplash.com/photo-1664575198308-3959904fa430?w=1200&q=80&fit=crop&auto=format",
       "sections": [
         {
           "heading": "Le sfide assicurative specifiche delle PMI italiane",

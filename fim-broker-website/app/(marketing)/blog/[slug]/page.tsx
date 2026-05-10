@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const articleSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: title,
     description: post?.excerpt ?? '',
     image: post?.image ? [post.image] : [`${BASE_URL}/opengraph-image`],

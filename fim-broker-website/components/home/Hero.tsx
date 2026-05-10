@@ -23,15 +23,19 @@ export default function Hero() {
 
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Confrontiamo{' '}
-              <span className="text-accent">30+ compagnie</span>
+              Decodifichiamo il{' '}
+              <span className="text-accent">rischio</span>
               <br />
-              per trovare la polizza giusta per te
+              per trasformarlo in opportunità
             </h1>
 
+            <p className="text-lg md:text-xl text-accent font-semibold mb-3 tracking-wide">
+              Chiarezza in Azione.
+            </p>
+
             <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed">
-              Lavoriamo nell&apos;interesse tuo — non delle compagnie assicurative.
-              Consulenza gratuita, preventivo in 24 ore, nessuna sorpresa in fattura.
+              Architetti della tua sicurezza: traduciamo la complessità del mercato assicurativo
+              in strategie di protezione su misura.
             </p>
 
             {/* Response time promise */}
@@ -39,13 +43,13 @@ export default function Hero() {
               <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Risposta garantita entro 24 ore lavorative
+              Analisi gratuita · Risposta in 24 ore
             </div>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 mb-10">
               <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">
-                Preventivo Gratuito
+                La tua mossa strategica
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -69,10 +73,10 @@ export default function Hero() {
             {/* Trust badges */}
             <div className="flex flex-wrap gap-5 text-white/70 text-sm">
               {[
-                { icon: '✓', label: 'Consulenza 100% gratuita' },
-                { icon: '✓', label: 'Nessun costo nascosto' },
+                { icon: '✓', label: 'Analisi oggettiva e trasparente' },
+                { icon: '✓', label: 'Guida esperta nella complessità' },
                 { icon: '✓', label: '20+ anni di esperienza' },
-                { icon: '✓', label: 'Provvigioni trasparenti per legge' },
+                { icon: '✓', label: '30+ compagnie confrontate' },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-2">
                   <span className="text-accent font-bold">{item.icon}</span>
@@ -82,18 +86,17 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Hero image — visible solo su desktop */}
-          <div className="hidden lg:block relative">
+          {/* Hero image — visible da tablet in su */}
+          <div className="hidden md:block relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
               <Image
-                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1000&q=80&fit=crop&auto=format"
-                alt="Consulente FIM Insurance Broker con cliente"
+                src="/images/brand/prism.jpg"
+                alt="Prisma di cristallo — FIM trasforma la complessità assicurativa in soluzioni chiare"
                 fill
                 className="object-cover"
                 priority
-                sizes="(max-width: 1024px) 0px, 50vw"
+                sizes="(max-width: 768px) 0px, (max-width: 1024px) 100vw, 50vw"
               />
-              {/* Overlay gradient per integrare col background */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
             </div>
 

@@ -44,12 +44,12 @@ function buildTeamEmail(data: {
   return `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"></head>
 <body style="font-family:system-ui,sans-serif;background:#f8fafc;margin:0;padding:20px;">
   <div style="max-width:520px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,0.07);">
-    <div style="background:#0f2d6b;padding:20px 24px;">
+    <div style="background:#0B1F3A;padding:20px 24px;">
       <h2 style="color:white;margin:0;font-size:16px;">📊 Nuovo Lead — Calcolatore Rischi</h2>
     </div>
     <div style="padding:20px 24px;">
       <p style="margin:0 0 6px;font-size:14px;color:#64748b;">Nome: <strong style="color:#1e293b;">${escapeHtml(data.nome)}</strong></p>
-      <p style="margin:0 0 6px;font-size:14px;color:#64748b;">Email: <a href="mailto:${escapeHtml(data.email)}" style="color:#0f2d6b;">${escapeHtml(data.email)}</a></p>
+      <p style="margin:0 0 6px;font-size:14px;color:#64748b;">Email: <a href="mailto:${escapeHtml(data.email)}" style="color:#0B1F3A;">${escapeHtml(data.email)}</a></p>
       <p style="margin:0 0 6px;font-size:14px;color:#64748b;">Profilo: <strong>${escapeHtml(PROFILE_LABELS[data.profile] || data.profile)}</strong></p>
       <p style="margin:0 0 6px;font-size:14px;color:#64748b;">Settore: <strong>${escapeHtml(data.settore || 'n/d')}</strong></p>
       <p style="margin:0 0 16px;font-size:14px;color:#64748b;">Livello rischio: <strong>${LEVEL_LABELS[data.livello] || data.livello}</strong> (${data.punteggio}/100)</p>

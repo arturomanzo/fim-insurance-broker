@@ -22,7 +22,7 @@ export const services: Service[] = [
       'Proteggi il tuo veicolo con le soluzioni assicurative più complete del mercato. Da FIM trovi polizze personalizzate per ogni esigenza, dalla semplice RC obbligatoria fino alla Kasko totale.',
     icon: '🚗',
     color: 'blue',
-    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/auto-road.jpg',
     features: [
       'RC Auto obbligatoria',
       'Kasko completa o parziale',
@@ -74,7 +74,7 @@ export const services: Service[] = [
       'Le polizze vita FIM garantiscono serenità finanziaria a te e alla tua famiglia. Offriamo soluzioni temporanee caso morte, miste, unit-linked e piani di accumulo previdenziale.',
     icon: '❤️',
     color: 'red',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/vita-structure.jpg',
     features: [
       'Vita temporanea caso morte',
       'Polizze miste',
@@ -126,7 +126,7 @@ export const services: Service[] = [
       'La tua casa è il tuo bene più prezioso. FIM offre polizze globali fabbricato e multirischio casa che coprono ogni tipo di danno, dal furto agli eventi atmosferici.',
     icon: '🏠',
     color: 'green',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/casa-model.jpg',
     features: [
       'Incendio e scoppio',
       'Furto e rapina',
@@ -178,7 +178,7 @@ export const services: Service[] = [
       'La salute è il bene più prezioso. Le nostre polizze sanitarie ti garantiscono accesso alle migliori strutture private, rimborso spese mediche e indennità per infortuni.',
     icon: '🏥',
     color: 'teal',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/salute-dna.jpg',
     features: [
       'Ricoveri ospedalieri',
       'Visite specialistiche',
@@ -230,7 +230,7 @@ export const services: Service[] = [
       'FIM è il partner assicurativo di fiducia per le imprese. Dalla RC professionale alla cyber risk, dalle polizze property ai piani welfare aziendale, proteggiamo ogni aspetto della tua attività.',
     icon: '🏢',
     color: 'purple',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop&auto=format',
+    image: '/images/brand/cyber-chain.jpg',
     features: [
       'Responsabilità civile professionale',
       'Directors & Officers (D&O)',
@@ -326,6 +326,168 @@ export const services: Service[] = [
     priceFrom: 'da 15€ a viaggio',
     priceNote: 'Singolo viaggio Europa. Long-stay e polizze annuali disponibili.',
   },
+  {
+    slug: 'cauzioni-fideiussioni',
+    title: 'Cauzioni e Fideiussioni',
+    shortDescription: 'Fideiussioni assicurative per appalti, locazioni, doganali, fiscali e molto altro. Emissione in 24-48 ore.',
+    description:
+      'Le cauzioni e fideiussioni assicurative sostituiscono le garanzie bancarie tradizionali, liberando liquidità e linee di credito per la tua impresa. Come broker indipendente confrontiamo le offerte delle compagnie specializzate per ottenere la cauzione giusta al costo più competitivo, con tempi di emissione rapidi — generalmente entro 24-48 ore lavorative.',
+    icon: '🔐',
+    color: 'amber',
+    image: '/images/brand/cauzioni-seal.jpg',
+    features: [
+      'Cauzioni per appalti pubblici (provvisorie e definitive)',
+      'Cauzioni per appalti privati',
+      'Cauzioni doganali (IVA, dazi, accise)',
+      'Cauzioni fiscali (rateizzazioni Agenzia delle Entrate)',
+      'Fideiussioni per locazioni commerciali e abitative',
+      'Cauzioni edilizie (oneri urbanistici, scomputo)',
+      'Cauzioni giudiziarie',
+      'Cauzioni per rimborso IVA',
+    ],
+    benefits: [
+      'Emissione in 24-48 ore lavorative',
+      'Importi fino a 500.000€',
+      'Nessun blocco di liquidità (a differenza della fideiussione bancaria)',
+      'Nessun impatto sulle linee di credito bancarie',
+      'Confronto tra compagnie specializzate',
+      'Assistenza completa nella documentazione',
+    ],
+    faq: [
+      {
+        question: 'Qual è la differenza tra fideiussione bancaria e fideiussione assicurativa?',
+        answer: 'La fideiussione bancaria viene emessa dalla banca e blocca una quota del tuo plafond creditizio: in pratica, riduce la capacità della tua azienda di ottenere altri finanziamenti. La fideiussione assicurativa viene emessa da una compagnia assicurativa e non incide sulle tue linee di credito. L\'effetto giuridico è identico — il beneficiario è garantito allo stesso modo — ma quella assicurativa ti lascia libero di usare il credito bancario per il tuo business.',
+      },
+      {
+        question: 'Quanto tempo serve per ottenere una fideiussione assicurativa?',
+        answer: 'Con FIM Insurance Broker i tempi di emissione sono generalmente di 24-48 ore lavorative dalla ricezione della documentazione completa. Per importi standard e aziende con bilancio regolare, spesso riusciamo a ottenere la polizza fideiussoria entro la giornata. Per casi complessi (importi elevati, aziende in fase di startup) i tempi possono allungarsi fino a 5-7 giorni lavorativi.',
+      },
+      {
+        question: 'Quanto costa una fideiussione assicurativa?',
+        answer: 'Il premio varia in base all\'importo garantito, alla durata, alla tipologia di cauzione e al profilo di rischio dell\'azienda. Indicativamente, per una cauzione di importo medio, il premio annuo oscilla tra l\'1% e il 3% dell\'importo garantito. Ad esempio, per una cauzione di 100.000€ il premio annuo può andare da 1.000 a 3.000€. Come broker confrontiamo più compagnie per trovare la tariffa più competitiva per il tuo caso specifico.',
+      },
+      {
+        question: 'Quali documenti servono per richiedere una fideiussione?',
+        answer: 'Generalmente servono: visura camerale aggiornata, ultimi 2-3 bilanci approvati (o dichiarazioni dei redditi per le ditte individuali), copia del contratto o del bando che richiede la garanzia, e un documento di identità del legale rappresentante. Per alcune tipologie (cauzioni doganali, fiscali) possono essere richiesti documenti aggiuntivi specifici. Il nostro team ti guida nella raccolta della documentazione.',
+      },
+      {
+        question: 'La fideiussione assicurativa è accettata dalla Pubblica Amministrazione?',
+        answer: 'Sì, assolutamente. Il Codice degli Appalti (D.Lgs. 36/2023) prevede espressamente che le garanzie fideiussorie possano essere rilasciate da imprese di assicurazione autorizzate. La fideiussione assicurativa ha lo stesso valore legale di quella bancaria per gare d\'appalto, concessioni e contratti pubblici.',
+      },
+    ],
+    priceFrom: 'dall\'1% dell\'importo garantito',
+    priceNote: 'Premio annuo indicativo. Varia in base a importo, durata e profilo aziendale. Importi fino a 500.000€.',
+  },
+  {
+    slug: 'tutela-legale-aziende',
+    title: 'Tutela Legale Aziende',
+    shortDescription: 'Protezione legale a 360° per imprenditori, amministratori e aziende: tutela penale, D&O e controversie commerciali.',
+    description:
+      'La RC Azienda copre i danni causati a terzi, ma lascia scoperti i costi legali dell\'imprenditore e dei suoi amministratori. Con la Tutela Legale Aziende completiamo la protezione: spese di avvocato, perito, CTU e consulenti in procedimenti penali, contenziosi con dipendenti, fornitori e clienti, e azioni di responsabilità contro amministratori e sindaci. Una copertura indispensabile in un\'epoca in cui un procedimento penale per reati colposi o la responsabilità amministrativa ex D.Lgs. 231/2001 possono colpire qualsiasi impresa.',
+    icon: '⚖️',
+    color: 'indigo',
+    image: '/images/brand/crystal-sculpture.jpg',
+    features: [
+      'Tutela penale per reati colposi (sicurezza sul lavoro, ambientali, fiscali)',
+      'Responsabilità amministrativa ex D.Lgs. 231/2001',
+      'Danni patrimoniali amministratori e sindaci (D&O)',
+      'Controversie con dipendenti e collaboratori',
+      'Recupero danni da terzi (fornitori, clienti, vandalismo)',
+      'Controversie contrattuali e condizioni di vendita',
+      'Conciliazione stragiudiziale e arbitrato',
+      'Libera scelta del legale in tutta Italia',
+    ],
+    benefits: [
+      'Completa la RC Azienda: protegge l\'imprenditore oltre i danni a terzi',
+      'Massimali fino a 500.000€ per sinistro',
+      'Nessuna franchigia sulle spese legali',
+      'Rete di studi legali convenzionati o libera scelta',
+      'Consulenza legale telefonica illimitata',
+    ],
+    faq: [
+      {
+        question: 'Perché la RC Azienda non basta e serve anche la Tutela Legale?',
+        answer: 'La RC Azienda copre i danni materiali e corporali causati a terzi nell\'esercizio dell\'attività, ma non copre le spese legali che l\'imprenditore sostiene per difendersi in procedimenti penali, per recuperare crediti da un cliente moroso, per contestare un licenziamento o per azioni di responsabilità contro amministratori. La Tutela Legale completa la protezione pagando avvocati, periti, CTU e spese processuali — anche in caso di esito favorevole, dove altrimenti non c\'è risarcimento a coprire i costi.',
+      },
+      {
+        question: 'Cos\'è la responsabilità ex D.Lgs. 231/2001 e come mi protegge la polizza?',
+        answer: 'Il D.Lgs. 231/2001 introduce la responsabilità amministrativa delle società per reati commessi nel loro interesse da amministratori, dirigenti o dipendenti (corruzione, reati societari, ambientali, sicurezza sul lavoro, riciclaggio). Le sanzioni pecuniarie possono arrivare a 1,5 milioni di euro, con possibile interdizione dall\'attività. La Tutela Legale rimborsa le spese di difesa dell\'ente in sede penale e amministrativa, inclusi i costi dei consulenti tecnici per dimostrare l\'adozione di un modello organizzativo 231 idoneo.',
+      },
+      {
+        question: 'La polizza D&O (Directors & Officers) è la stessa cosa della Tutela Legale?',
+        answer: 'No, sono complementari. La D&O indennizza i danni patrimoniali che gli amministratori devono risarcire personalmente (es. azione sociale di responsabilità per mala gestio); la Tutela Legale paga invece le spese di difesa legale degli amministratori nei procedimenti penali o civili. FIM costruisce programmi integrati D&O + Tutela Legale per CdA, sindaci e dirigenti di PMI, con un approccio modulare in base alla dimensione aziendale.',
+      },
+      {
+        question: 'La polizza copre le controversie con i dipendenti?',
+        answer: 'Sì. La Tutela Legale del datore di lavoro copre le spese per contenziosi in materia di rapporto di lavoro: impugnazione licenziamenti, richieste di differenze retributive, demansionamento, mobbing, trasferimenti contestati, ricorsi contro INPS/INAIL, verifiche ispettive. È una copertura fondamentale per PMI con oltre 5 dipendenti, dove il rischio di vertenze è statisticamente alto e un singolo procedimento davanti al Giudice del Lavoro può costare 8.000-15.000€ di sole spese legali.',
+      },
+      {
+        question: 'Posso scegliere liberamente il mio avvocato di fiducia?',
+        answer: 'Sì. La normativa europea (Direttiva 87/344/CEE recepita in Italia dall\'art. 164 del Codice delle Assicurazioni) garantisce la libera scelta del legale in caso di procedimento giudiziario o conflitto di interessi. Puoi quindi affidarti all\'avvocato di tua fiducia, che la compagnia liquiderà secondo i parametri forensi vigenti. In alternativa, puoi usare la rete di studi legali convenzionati della compagnia, che offrono condizioni preferenziali.',
+      },
+      {
+        question: 'Quanto costa la Tutela Legale per una PMI?',
+        answer: 'Il premio dipende dal fatturato, dal settore di attività, dal numero di dipendenti e dal massimale scelto. Indicativamente, per una PMI con fatturato fino a 2 milioni di euro il premio annuo va da 400€ a 1.200€ per massimali di 50.000-100.000€ per sinistro. Per aziende più strutturate con massimali da 250.000€ in su, i premi oscillano tra 1.500€ e 4.000€/anno. Come broker indipendenti confrontiamo 5+ compagnie specializzate (Roland, Das, Arag, Coface, Itas) per trovare la soluzione più efficiente.',
+      },
+    ],
+    priceFrom: 'da 400€/anno',
+    priceNote: 'PMI con fatturato fino a 2 mln€ e massimale 50.000€. Programmi strutturati su preventivo.',
+  },
+  {
+    slug: 'risk-management',
+    title: 'Risk Management',
+    shortDescription: 'Analisi dei rischi, programmi assicurativi su misura e monitoraggio continuo. Prima i rischi, poi la copertura.',
+    description:
+      'Il Risk Management è il cuore del lavoro di un vero broker. Non partiamo dalla polizza ma dall\'analisi dei rischi reali della tua attività: operativi, patrimoniali, legali, reputazionali e di business continuity. Solo dopo aver mappato e pesato ogni esposizione costruiamo il programma assicurativo ottimale — nessuna copertura inutile, nessun gap pericoloso. Questo approccio consulenziale è ciò che distingue FIM da un semplice intermediario: non vendiamo polizze, gestiamo rischi.',
+    icon: '🎯',
+    color: 'slate',
+    image: '/images/brand/shield-craft.jpg',
+    features: [
+      'Risk assessment: mappatura completa dei rischi aziendali',
+      'Analisi di impatto (BIA — Business Impact Analysis)',
+      'Progettazione del programma assicurativo ottimale',
+      'Selezione e piazzamento presso 30+ compagnie partner',
+      'Revisione annuale del portafoglio e adeguamento coperture',
+      'Claims management: gestione sinistri dalla denuncia alla liquidazione',
+      'Business Continuity Planning (BCP)',
+      'Compliance assicurativa (catastrofi naturali, D.Lgs. 231, GDPR)',
+    ],
+    benefits: [
+      'Visione completa dei rischi: nessun punto cieco nel programma assicurativo',
+      'Ottimizzazione dei premi: coperture mirate riducono la spesa fino al 25%',
+      'Un unico interlocutore per tutte le polizze e tutti i sinistri',
+      'Report annuale di risk review con raccomandazioni concrete',
+      'Consulenza gratuita: la prima analisi non costa nulla',
+    ],
+    faq: [
+      {
+        question: 'Cos\'è il Risk Management assicurativo e perché serve alla mia azienda?',
+        answer: 'Il Risk Management assicurativo è un processo strutturato che identifica, valuta e tratta i rischi della tua attività attraverso strumenti assicurativi e non (prevenzione, piani di emergenza, contratti). Serve perché ogni azienda ha un profilo di rischio unico: copiare la polizza di un concorrente significa quasi sempre pagare troppo per coperture inutili e restare scoperti su rischi reali. FIM parte dalla tua attività, non dal listino di una compagnia.',
+      },
+      {
+        question: 'Come funziona il percorso di Risk Management con FIM?',
+        answer: 'Il percorso si articola in 4 fasi: 1) Mappatura dei rischi — sopralluogo, intervista con la direzione, analisi bilancio e contratti; 2) Analisi di impatto — ogni rischio viene classificato per probabilità e gravità, con una matrice dei rischi visuale; 3) Programma assicurativo — progettiamo le coperture, chiediamo preventivi a 30+ compagnie, ti presentiamo un confronto trasparente; 4) Monitoraggio — ogni anno rivediamo il programma, adeguiamo le coperture all\'evoluzione dell\'azienda e gestiamo i sinistri.',
+      },
+      {
+        question: 'Il Risk Assessment iniziale è gratuito?',
+        answer: 'Sì. La prima analisi dei rischi è completamente gratuita e senza impegno. Produciamo un report sintetico con la mappa dei rischi, le eventuali criticità e le raccomandazioni. Se decidi di affidarci il programma assicurativo, la consulenza di risk management resta inclusa nel servizio — non applichiamo compensi separati per la consulenza.',
+      },
+      {
+        question: 'In cosa si differenzia il Risk Management di FIM rispetto a un agente assicurativo?',
+        answer: 'Un agente rappresenta una o poche compagnie e propone i prodotti del suo mandato. FIM è un broker indipendente iscritto al RUI (Sez. B n. B000405449): non rappresentiamo nessuna compagnia, ma solo i tuoi interessi. Questo significa che analizziamo i rischi in modo oggettivo, confrontiamo le offerte di 30+ compagnie e scegliamo la soluzione migliore per te — non per la compagnia. Inoltre, gestiamo i sinistri dalla tua parte, negoziando con la compagnia per ottenere la liquidazione più rapida e completa.',
+      },
+      {
+        question: 'Il Risk Management è utile anche per una piccola impresa?',
+        answer: 'Assolutamente sì. Le PMI sono spesso le più esposte perché non hanno un risk manager interno. Un singolo sinistro grave (incendio, causa di lavoro, attacco informatico) può mettere a rischio la sopravvivenza dell\'azienda. Il nostro servizio è calibrato sulla dimensione: per una micro-impresa bastano poche ore di analisi per individuare le 3-4 coperture critiche e ottimizzare la spesa assicurativa. Molti clienti PMI scoprono che stavano pagando troppo per coperture non prioritarie.',
+      },
+      {
+        question: 'Cosa include il report annuale di Risk Review?',
+        answer: 'Il report annuale include: aggiornamento della mappa dei rischi (nuove attività, nuovi asset, cambiamenti normativi), verifica dell\'adeguatezza dei massimali e dei valori assicurati, analisi dell\'andamento sinistri, raccomandazioni su coperture da aggiungere, rimuovere o modificare, e un benchmark dei premi rispetto al mercato. Lo presentiamo in un incontro dedicato con la direzione, in modo da prendere decisioni informate.',
+      },
+    ],
+    priceFrom: 'consulenza gratuita',
+    priceNote: 'Risk assessment iniziale senza impegno. Il servizio di risk management è incluso nella gestione del portafoglio assicurativo.',
+  },
 ]
 
 export function getServiceBySlug(slug: string): Service | undefined {
@@ -339,4 +501,7 @@ export const serviceColorMap: Record<string, string> = {
   teal: 'bg-teal-100 text-teal-800',
   purple: 'bg-purple-100 text-purple-800',
   orange: 'bg-orange-100 text-orange-800',
+  amber: 'bg-amber-100 text-amber-800',
+  indigo: 'bg-indigo-100 text-indigo-800',
+  slate: 'bg-slate-100 text-slate-800',
 }
