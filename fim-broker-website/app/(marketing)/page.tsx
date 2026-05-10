@@ -349,8 +349,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
             <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl">
               <Image
-                src="/images/brand/bridge-fim.jpg"
-                alt="Ponte moderno con logo FIM — il collegamento tra te e la protezione giusta"
+                src="/images/brand/strategy-mapping.jpg"
+                alt="Professionista analizza connessioni strategiche — l'intelligenza umana dietro la protezione FIM"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
