@@ -5,6 +5,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
 const blogSlugs = [
   'assicurazione-monopattini-elettrici-obbligo-luglio-2026',
+  'assicurazione-smart-working-lavoratori-2026',
   'legge-34-2026-addio-rc-auto-muletti-mezzi-agricoli',
   'come-scegliere-polizza-cyber-pmi',
   'assicurazione-condominio-guida-completa',

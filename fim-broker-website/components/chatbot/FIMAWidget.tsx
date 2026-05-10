@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import ChatBubble from './ChatBubble'
-import { FIMA_CONFIG } from '@/lib/anthropic'
+import { FIMA_CONFIG } from '@/lib/fima-config'
 
 interface Message {
   role: 'user' | 'assistant'

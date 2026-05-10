@@ -1,20 +1,11 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { FIMA_CONFIG } from './fima-config'
+
+export { FIMA_CONFIG }
 
 export const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
-
-export const FIMA_CONFIG = {
-  model: 'claude-sonnet-4-6',
-  maxTokens: 2048,
-  maxMessages: 20,
-  rui: 'Sez. B n. B000405449',
-  email: 'info@fimbroker.it',
-  telefono: '+39 06 96883381',
-  whatsapp: '393473312330',
-  sede: 'Via Roma 41, 04012 Cisterna di Latina (LT)',
-  sito: 'https://www.fimbroker.it',
-} as const
 
 export const FIMA_SYSTEM_PROMPT = `Sei FIMA, l'assistente virtuale di FIM Insurance Broker (RUI IVASS ${FIMA_CONFIG.rui}). Sei un esperto assicurativo cordiale, professionale e disponibile.
 

@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Risk — Guida per PMI e Professionisti | FIM Insurance Broker</title>
+  <style>
+    /* ── Reset & base ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+      background: #e8ecf4;
+      color: #1a1a2e;
+      line-height: 1.5;
+    }
+
+    /* ── Brand tokens ─────────────────────────────── */
+    :root {
+      --primary:       #0f2d6b;
+      --primary-light: #1a4a9e;
+      --primary-dark:  #091d47;
+      --accent:        #00b4c8;
+      --accent-dark:   #008fa0;
+      --accent-light:  #33c7d8;
+      --white:         #ffffff;
+      --gray-50:       #f8fafc;
+      --gray-100:      #f1f5f9;
+      --gray-200:      #e2e8f0;
+      --gray-500:      #64748b;
+      --gray-700:      #374151;
+      --red-500:       #ef4444;
+      --green-600:     #16a34a;
+    }
+
+    /* ── Print toolbar (screen only) ──────────────── */
+    #toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--primary-dark);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      gap: 16px;
+    }
+    #toolbar .brand { font-weight: 700; font-size: 0.9rem; opacity: 0.9; }
+    #toolbar .actions { display: flex; gap: 10px; }
+    #toolbar button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #toolbar button:hover { background: var(--accent-dark); }
+    #toolbar .hint { font-size: 0.75rem; opacity: 0.6; }
+
+    /* ── Slide wrapper ────────────────────────────── */
+    .slides { padding: 70px 32px 32px; display: flex; flex-direction: column; gap: 24px; }
+
+    /* ── Single slide ─────────────────────────────── */
+    .slide {
+      width: 297mm;
+      min-height: 210mm;
+      max-width: 100%;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Slide number badge ──────────────────────── */
+    .slide-num {
+      position: absolute;
+      bottom: 14px; right: 18px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .slide-num.dark { color: rgba(15,45,107,0.25); }
+
+    /* ── Footer bar ───────────────────────────────── */
+    .slide-footer {
+      margin-top: auto;
+      background: var(--primary);
+      color: rgba(255,255,255,0.55);
+      font-size: 0.65rem;
+      padding: 6px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .slide-footer.light {
+      background: var(--gray-100);
+      color: var(--gray-500);
+    }
+
+    /* ── Typography helpers ───────────────────────── */
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .eyebrow.accent { background: rgba(0,180,200,0.15); color: var(--accent-dark); }
+    .eyebrow.white  { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
+    .eyebrow.primary{ background: rgba(15,45,107,0.10); color: var(--primary); }
+
+    h2.title {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+    h2.title.white { color: #fff; }
+    .subtitle { font-size: 0.9rem; color: var(--gray-500); line-height: 1.55; }
+    .subtitle.white { color: rgba(255,255,255,0.75); }
+
+    /* ── Grid helpers ─────────────────────────────── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+    .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+
+    /* ── Card component ───────────────────────────── */
+    .card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .card.accent-border { border-left: 4px solid var(--accent); }
+    .card.primary-border { border-left: 4px solid var(--primary); }
+    .card.red-border { border-left: 4px solid var(--red-500); }
+    .card.green-border { border-left: 4px solid var(--green-600); }
+    .card h3 { font-size: 0.85rem; font-weight: 800; color: var(--primary); margin-bottom: 5px; }
+    .card p  { font-size: 0.75rem; color: var(--gray-700); line-height: 1.5; }
+
+    .icon-label {
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* ── Stat box ─────────────────────────────────── */
+    .stat-box {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 12px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+    .stat-value { font-size: 2.4rem; font-weight: 900; color: var(--accent); display: block; line-height: 1; }
+    .stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.7); margin-top: 6px; line-height: 1.4; }
+
+    /* ── Badge ────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.7rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px;
+    }
+    .badge.green { background: #dcfce7; color: #15803d; }
+    .badge.red   { background: #fee2e2; color: #b91c1c; }
+    .badge.blue  { background: #dbeafe; color: #1d4ed8; }
+
+    /* ── Check / cross list ───────────────────────── */
+    .check-list { list-style: none; space-y: 4px; }
+    .check-list li { display: flex; align-items: flex-start; gap: 7px; font-size: 0.75rem; color: var(--gray-700); padding: 3px 0; }
+    .check-list li::before { content: '✓'; color: var(--green-600); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .risk-list { list-style: none; }
+    .risk-list li { display: flex; align-items: flex-start; gap: 7px; font-size: 0.72rem; color: var(--gray-700); padding: 3px 0; }
+    .risk-list li::before { content: '▸'; color: var(--red-500); flex-shrink: 0; }
+
+    /* ── Step circles ─────────────────────────────── */
+    .step { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+    .step-circle {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-weight: 900; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step h3 { font-size: 0.8rem; font-weight: 800; color: var(--primary); }
+    .step p   { font-size: 0.7rem; color: var(--gray-500); }
+
+    /* ── Scenario box ─────────────────────────────── */
+    .scenario {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .scenario-head { background: #fef2f2; border-bottom: 1px solid #fecaca; padding: 10px 14px; }
+    .scenario-head .icon { font-size: 1.4rem; display: block; margin-bottom: 3px; }
+    .scenario-head h3 { font-size: 0.78rem; font-weight: 800; color: var(--primary); }
+    .scenario-head p  { font-size: 0.65rem; color: var(--gray-500); margin-top: 1px; }
+    .scenario-body { padding: 10px 14px; }
+    .scenario-row { margin-bottom: 7px; }
+    .scenario-row .label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+    .scenario-row.damage .label { color: var(--red-500); }
+    .scenario-row.cover  .label { color: var(--green-600); }
+    .scenario-row p { font-size: 0.7rem; color: var(--gray-700); }
+    .cost-badge { background: #dcfce7; color: #15803d; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; display: inline-block; margin-top: 5px; }
+
+    /* ── Table ────────────────────────────────────── */
+    .feature-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+    .feature-table th { background: var(--primary); color: #fff; padding: 7px 12px; text-align: left; font-size: 0.7rem; font-weight: 700; }
+    .feature-table td { padding: 7px 12px; border-bottom: 1px solid var(--gray-200); color: var(--gray-700); }
+    .feature-table tr:last-child td { border-bottom: none; }
+    .feature-table tr:nth-child(even) td { background: var(--gray-50); }
+    .feature-table .check { color: var(--green-600); font-weight: 900; }
+
+    /* ── Compliance pill ──────────────────────────── */
+    .compliance-box {
+      background: rgba(15,45,107,0.06);
+      border: 1px solid rgba(15,45,107,0.15);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .compliance-box h3 { font-size: 0.8rem; font-weight: 800; color: var(--primary); margin-bottom: 6px; }
+    .compliance-box p  { font-size: 0.72rem; color: var(--gray-700); line-height: 1.5; }
+    .compliance-box .tag { font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--primary); color: #fff; display: inline-block; margin-bottom: 7px; }
+
+    /* ── Contact block ────────────────────────────── */
+    .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .contact-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .contact-item h4 { font-size: 0.75rem; font-weight: 700; color: var(--primary); }
+    .contact-item p  { font-size: 0.72rem; color: var(--gray-700); }
+
+    /* ═══════════════════════════════════════════════
+       PRINT STYLES
+    ═══════════════════════════════════════════════ */
+    @media print {
+      @page { size: A4 landscape; margin: 0; }
+
+      #toolbar { display: none !important; }
+
+      body { background: #fff; }
+
+      .slides { padding: 0; gap: 0; }
+
+      .slide {
+        width: 297mm;
+        min-height: 210mm;
+        height: 210mm;
+        border-radius: 0;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+        overflow: hidden;
+      }
+
+      .slide:last-child { page-break-after: avoid; break-after: avoid; }
+    }
+
+    /* ── Gradient utilities ───────────────────────── */
+    .bg-gradient-primary {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    }
+    .bg-gradient-accent {
+      background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Screen toolbar ─────────────────────────────── -->
+<div id="toolbar">
+  <span class="brand">🛡️ FIM Insurance Broker — Presentazione Cyber Risk PMI</span>
+  <div class="actions">
+    <span class="hint">Apri nel browser → File → Stampa → Salva come PDF</span>
+    <button onclick="window.print()">📥 Scarica PDF</button>
+  </div>
+</div>
+
+<div class="slides">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 1 — COVER
+  ══════════════════════════════════════════ -->
+  <div class="slide bg-gradient-primary">
+    <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; padding: 40px 48px 0;">
+
+      <!-- Top: logo + tag -->
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:44px; height:44px; background:var(--accent); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.4rem;">🛡️</div>
+          <div>
+            <div style="color:#fff; font-weight:900; font-size:1rem; line-height:1.1;">FIM Insurance Broker</div>
+            <div style="color:rgba(255,255,255,0.55); font-size:0.65rem;">RUI Sez. B n. B000405449 — Broker Indipendente</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:6px 14px; color:rgba(255,255,255,0.8); font-size:0.7rem; font-weight:700;">
+          2025 — Edizione PMI & Professionisti
+        </div>
+      </div>
+
+      <!-- Center: headline -->
+      <div style="max-width:520px;">
+        <div class="eyebrow white" style="margin-bottom:14px;">GUIDA AL CYBER RISK</div>
+        <h1 style="color:#fff; font-size:3rem; font-weight:900; line-height:1.1; margin-bottom:14px;">
+          Un attacco cyber<br/>
+          può fermare<br/>
+          <span style="color:var(--accent);">la tua azienda.</span>
+        </h1>
+        <p style="color:rgba(255,255,255,0.75); font-size:1rem; line-height:1.55; max-width:420px;">
+          Come proteggere PMI, studi professionali e aziende<br/>
+          dal rischio informatico con la polizza giusta.
+        </p>
+      </div>
+
+      <!-- Decorative circles -->
+      <div style="position:absolute; right:0; top:0; bottom:0; width:340px; display:flex; align-items:center; justify-content:center; overflow:hidden; pointer-events:none;">
+        <div style="width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.04); position:absolute;"></div>
+        <div style="width:220px; height:220px; border-radius:50%; background:rgba(0,180,200,0.12); position:absolute;"></div>
+        <div style="font-size:8rem; opacity:0.15;">🔐</div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="slide-footer" style="margin: 0 -48px; padding: 10px 48px;">
+        <span>© 2025 FIM Insurance Broker S.a.s. di Manzo Arturo & C. — Via Roma 41, 04012 Cisterna di Latina (LT)</span>
+        <span>info@fimbroker.it · +39 06 96883381</span>
+      </div>
+    </div>
+    <span class="slide-num">1 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 2 — IL PANORAMA CYBER ITALIANO
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow accent">Il contesto</div>
+      <h2 class="title">Il rischio cyber in Italia: i numeri</h2>
+      <p class="subtitle" style="max-width:560px; margin-bottom:20px;">
+        L'Italia è tra i paesi più colpiti in Europa. Le PMI sono il bersaglio principale perché spesso
+        sottostimano il rischio e investono poco in sicurezza informatica.
+      </p>
+
+      <div class="grid-3" style="flex:1; margin-bottom:16px;">
+
+        <div class="stat-box bg-gradient-primary" style="border-radius:12px; padding:24px 16px; text-align:center; display:flex; flex-direction:column; justify-content:center; gap:8px;">
+          <span class="stat-value">68%</span>
+          <span class="stat-label">delle PMI italiane ha subìto almeno un attacco cyber negli ultimi 2 anni</span>
+        </div>
+
+        <div class="stat-box bg-gradient-primary" style="border-radius:12px; padding:24px 16px; text-align:center; display:flex; flex-direction:column; justify-content:center; gap:8px;">
+          <span class="stat-value">35K€</span>
+          <span class="stat-label">danno medio per le PMI dopo un attacco informatico (dati CLUSIT 2024)</span>
+        </div>
+
+        <div class="stat-box bg-gradient-primary" style="border-radius:12px; padding:24px 16px; text-align:center; display:flex; flex-direction:column; justify-content:center; gap:8px;">
+          <span class="stat-value">207</span>
+          <span class="stat-label">giorni: tempo medio in cui un attacco resta silente prima di essere scoperto</span>
+        </div>
+
+        <div class="card accent-border" style="display:flex; flex-direction:column; justify-content:center;">
+          <h3>+12% attacchi anno su anno</h3>
+          <p>Gli attacchi ransomware alle imprese italiane crescono ogni anno. Il settore manifatturiero, la sanità e i servizi professionali sono i più colpiti.</p>
+        </div>
+
+        <div class="card accent-border" style="display:flex; flex-direction:column; justify-content:center;">
+          <h3>90% parte da un errore umano</h3>
+          <p>Quasi la totalità degli incidenti cyber è innescata da phishing, social engineering o credenziali deboli. Non basta l'antivirus.</p>
+        </div>
+
+        <div class="card accent-border" style="display:flex; flex-direction:column; justify-content:center;">
+          <h3>Solo il 18% è assicurato</h3>
+          <p>Meno di 1 PMI su 5 ha una copertura cyber specifica. Il gap assicurativo lascia le aziende esposte a perdite non sostenibili.</p>
+        </div>
+
+      </div>
+
+      <div class="slide-footer light">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>Dati: CLUSIT Report 2024 / ACN / Eurostat</span>
+      </div>
+    </div>
+    <span class="slide-num dark">2 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 3 — CHI È NEL MIRINO
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow primary">Profili a rischio</div>
+      <h2 class="title">Chi è nel mirino degli hacker</h2>
+      <p class="subtitle" style="margin-bottom:20px;">Chiunque gestisca dati digitali è un bersaglio. Ecco i profili con esposizione più alta.</p>
+
+      <div class="grid-3" style="flex:1; margin-bottom:16px;">
+
+        <div style="background: linear-gradient(160deg, #f0f6ff 0%, #e8f0fe 100%); border:1px solid #c7d9f8; border-radius:12px; padding:20px 18px; display:flex; flex-direction:column; gap:10px;">
+          <span style="font-size:2.2rem;">🏭</span>
+          <div>
+            <h3 style="font-size:1rem; font-weight:900; color:var(--primary); margin-bottom:2px;">PMI e Aziende</h3>
+            <p style="font-size:0.7rem; color:var(--gray-500); margin-bottom:10px;">Fatturato fino a 50M€ · 1–250 dipendenti</p>
+            <p style="font-size:0.75rem; color:var(--gray-700); line-height:1.5;">Imprese manifatturiere, commerciali e di servizi che gestiscono dati clienti, ordini, fatture, ERP e CRM cloud.</p>
+          </div>
+          <ul class="risk-list" style="margin-top:4px;">
+            <li>Ransomware su server e NAS aziendali</li>
+            <li>Furto di listini, offerte e dati clienti</li>
+            <li>Fermo produzione / e-commerce down</li>
+            <li>Violazioni GDPR con sanzioni B2B</li>
+          </ul>
+        </div>
+
+        <div style="background: linear-gradient(160deg, #f0fdf4 0%, #dcfce7 100%); border:1px solid #86efac; border-radius:12px; padding:20px 18px; display:flex; flex-direction:column; gap:10px;">
+          <span style="font-size:2.2rem;">⚖️</span>
+          <div>
+            <h3 style="font-size:1rem; font-weight:900; color:var(--primary); margin-bottom:2px;">Professionisti e Studi</h3>
+            <p style="font-size:0.7rem; color:var(--gray-500); margin-bottom:10px;">Avvocati · Commercialisti · Medici · Consulenti</p>
+            <p style="font-size:0.75rem; color:var(--gray-700); line-height:1.5;">Trattano dati sensibili di clienti e pazienti. Soggetti al GDPR con obblighi specifici. Un breach può significare la sospensione dall'albo.</p>
+          </div>
+          <ul class="risk-list" style="margin-top:4px;">
+            <li>Furto cartelle pazienti / fascicoli legali</li>
+            <li>Violazione segreto professionale</li>
+            <li>Blocco studio per ransomware</li>
+            <li>Sanzioni Garante Privacy fino a €20M</li>
+          </ul>
+        </div>
+
+        <div style="background: linear-gradient(160deg, #fff7ed 0%, #fed7aa 100%); border:1px solid #fdba74; border-radius:12px; padding:20px 18px; display:flex; flex-direction:column; gap:10px;">
+          <span style="font-size:2.2rem;">🏥</span>
+          <div>
+            <h3 style="font-size:1rem; font-weight:900; color:var(--primary); margin-bottom:2px;">Settori Critici NIS2</h3>
+            <p style="font-size:0.7rem; color:var(--gray-500); margin-bottom:10px;">Sanità · Energia · Finanza · PA · ICT</p>
+            <p style="font-size:0.75rem; color:var(--gray-700); line-height:1.5;">Soggetti alla Direttiva NIS2 (D.Lgs. 138/2024). Obblighi di gestione del rischio cyber rafforzati e notifiche obbligatorie al CSIRT.</p>
+          </div>
+          <ul class="risk-list" style="margin-top:4px;">
+            <li>Obbligo NIS2 di risk management formale</li>
+            <li>Notifiche CSIRT entro 24h dall'incidente</li>
+            <li>Sanzioni fino a €10M o 2% fatturato globale</li>
+            <li>Responsabilità personale del management</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="slide-footer light">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>fimbroker.it/soluzioni/cyber-risk</span>
+      </div>
+    </div>
+    <span class="slide-num dark">3 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 4 — LE MINACCE PRINCIPALI
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow accent">Threat landscape</div>
+      <h2 class="title">Le 6 minacce cyber più comuni per le imprese</h2>
+      <p class="subtitle" style="margin-bottom:20px;">Conoscerle è il primo passo. Assicurarle è il secondo.</p>
+
+      <div class="grid-3" style="flex:1; margin-bottom:16px;">
+
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; padding:18px;">
+          <span style="font-size:2rem; flex-shrink:0; margin-top:2px;">🔒</span>
+          <div>
+            <h3>Ransomware</h3>
+            <p>Software malevolo che cifra tutti i dati aziendali e chiede un riscatto in criptovaluta per restituire l'accesso. Il costo medio di un attacco: <strong>40.000€</strong> tra riscatto + recovery.</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; padding:18px;">
+          <span style="font-size:2rem; flex-shrink:0; margin-top:2px;">🎣</span>
+          <div>
+            <h3>Phishing &amp; BEC</h3>
+            <p>Email fraudolente che imitano banche, fornitori o colleghi. La truffa BEC (Business Email Compromise) inganna i dipendenti a fare bonifici su conti degli hacker.</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; padding:18px;">
+          <span style="font-size:2rem; flex-shrink:0; margin-top:2px;">💾</span>
+          <div>
+            <h3>Data Breach</h3>
+            <p>Furto o esposizione non autorizzata di dati personali di clienti, dipendenti o pazienti. Obbligo di notifica al Garante entro <strong>72 ore</strong> con potenziali sanzioni GDPR.</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; padding:18px;">
+          <span style="font-size:2rem; flex-shrink:0; margin-top:2px;">🛑</span>
+          <div>
+            <h3>Interruzione operativa</h3>
+            <p>Sistemi ERP, CRM, e-commerce o produzione fermi per ore o giorni. Ogni ora di inattività ha un costo preciso: fatturato perso + clienti insoddisfatti + contratti a rischio.</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; padding:18px;">
+          <span style="font-size:2rem; flex-shrink:0; margin-top:2px;">⚖️</span>
+          <div>
+            <h3>Sanzioni GDPR</h3>
+            <p>Il Garante può sanzionare fino al <strong>4% del fatturato globale</strong> o €20M in caso di violazioni gravi. Anche un piccolo studio con 200 anagrafiche ha obblighi precisi.</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:14px; align-items:flex-start; padding:18px;">
+          <span style="font-size:2rem; flex-shrink:0; margin-top:2px;">🌐</span>
+          <div>
+            <h3>Supply Chain Attack</h3>
+            <p>Attacco veicolato attraverso software, fornitori IT o partner di cui ti fidi. Sempre più comune: il target sei tu, ma l'ingresso avviene da chi hai fuori controllo.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="slide-footer light">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>Dati: ENISA Threat Landscape 2024</span>
+      </div>
+    </div>
+    <span class="slide-num dark">4 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 5 — CONSEGUENZE DI UN ATTACCO
+  ══════════════════════════════════════════ -->
+  <div class="slide bg-gradient-primary" style="padding-bottom:0;">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow white">L'impatto reale</div>
+      <h2 class="title white">Le 4 conseguenze di un attacco cyber</h2>
+      <p class="subtitle white" style="margin-bottom:22px;">Non è solo un problema IT. È un problema di business.</p>
+
+      <div class="grid-2" style="flex:1; margin-bottom:16px; gap:16px;">
+
+        <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:12px; padding:20px 18px;">
+          <div style="font-size:1.8rem; margin-bottom:10px;">💸</div>
+          <h3 style="color:#fff; font-weight:800; font-size:0.9rem; margin-bottom:8px;">Danno economico diretto</h3>
+          <ul style="list-style:none; font-size:0.75rem; color:rgba(255,255,255,0.8); line-height:1.8;">
+            <li>▸ Costi di ripristino tecnico: €5.000–80.000</li>
+            <li>▸ Eventuale riscatto ransomware</li>
+            <li>▸ Mancato fatturato durante il fermo</li>
+            <li>▸ Ore di lavoro perse di tutto il personale</li>
+            <li>▸ Hardware/software da sostituire</li>
+          </ul>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:12px; padding:20px 18px;">
+          <div style="font-size:1.8rem; margin-bottom:10px;">⚖️</div>
+          <h3 style="color:#fff; font-weight:800; font-size:0.9rem; margin-bottom:8px;">Responsabilità legale e normativa</h3>
+          <ul style="list-style:none; font-size:0.75rem; color:rgba(255,255,255,0.8); line-height:1.8;">
+            <li>▸ Notifica obbligatoria al Garante Privacy (72h)</li>
+            <li>▸ Comunicazione agli interessati del breach</li>
+            <li>▸ Sanzioni GDPR fino al 4% del fatturato</li>
+            <li>▸ Richieste risarcimento da clienti/fornitori</li>
+            <li>▸ Responsabilità NIS2 per manager e CDA</li>
+          </ul>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:12px; padding:20px 18px;">
+          <div style="font-size:1.8rem; margin-bottom:10px;">🚫</div>
+          <h3 style="color:#fff; font-weight:800; font-size:0.9rem; margin-bottom:8px;">Interruzione dell'operatività</h3>
+          <ul style="list-style:none; font-size:0.75rem; color:rgba(255,255,255,0.8); line-height:1.8;">
+            <li>▸ Sistemi ERP / CRM / e-commerce offline</li>
+            <li>▸ Impossibilità di emettere fatture o ordini</li>
+            <li>▸ Email aziendali compromesse</li>
+            <li>▸ Perdita di dati non recuperabili</li>
+            <li>▸ Fermo produzione per sistemi OT/SCADA</li>
+          </ul>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:12px; padding:20px 18px;">
+          <div style="font-size:1.8rem; margin-bottom:10px;">📉</div>
+          <h3 style="color:#fff; font-weight:800; font-size:0.9rem; margin-bottom:8px;">Danno reputazionale</h3>
+          <ul style="list-style:none; font-size:0.75rem; color:rgba(255,255,255,0.8); line-height:1.8;">
+            <li>▸ Notizia sui media (soprattutto se ci sono dati sensibili)</li>
+            <li>▸ Perdita di fiducia da parte dei clienti</li>
+            <li>▸ Rescissione di contratti in corso</li>
+            <li>▸ Difficoltà a ottenere nuovi clienti</li>
+            <li>▸ Danno al brand costruito in anni</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="slide-footer" style="margin:0 -40px; padding:8px 40px;">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>fimbroker.it</span>
+      </div>
+    </div>
+    <span class="slide-num">5 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 6 — COSA COPRE LA POLIZZA CYBER
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow accent">Copertura assicurativa</div>
+      <h2 class="title">Cosa copre la polizza cyber</h2>
+      <p class="subtitle" style="margin-bottom:18px;">Una polizza cyber risponde sia ai danni propri (prima parte) che alle richieste di terzi (terza parte).</p>
+
+      <div class="grid-3" style="flex:1; margin-bottom:14px; align-items:start;">
+
+        <div class="card" style="padding:16px; height:100%;">
+          <span class="icon-label">💻</span>
+          <h3>Ripristino sistemi e dati</h3>
+          <p>Costi tecnici per recuperare dati criptati, ripristinare server, database e infrastrutture IT/OT compromesse da malware o ransomware.</p>
+        </div>
+
+        <div class="card" style="padding:16px; height:100%;">
+          <span class="icon-label">📉</span>
+          <h3>Interruzione attività (BI Cyber)</h3>
+          <p>Mancato guadagno durante il fermo operativo. Copertura fino a 30 giorni con franchigia temporale di 8 ore. Valida anche per cloud e SaaS.</p>
+        </div>
+
+        <div class="card" style="padding:16px; height:100%;">
+          <span class="icon-label">🛡️</span>
+          <h3>Responsabilità verso terzi</h3>
+          <p>Risarcimento a clienti, fornitori, dipendenti per violazione dei loro dati. Include spese legali, perizie e sanzioni GDPR già irrogate.</p>
+        </div>
+
+        <div class="card" style="padding:16px; height:100%;">
+          <span class="icon-label">🚨</span>
+          <h3>Gestione crisi e notifiche</h3>
+          <p>Rimborso dei costi per forensi IT, PR di crisi, notifiche obbligatorie al Garante Privacy entro le 72h GDPR e comunicazioni agli interessati.</p>
+        </div>
+
+        <div class="card" style="padding:16px; height:100%;">
+          <span class="icon-label">💰</span>
+          <h3>Estorsione e riscatto</h3>
+          <p>Gestione negoziale del riscatto ransomware: negoziatori specializzati, eventuale rimborso del pagamento e supporto specialistico per il recovery.</p>
+        </div>
+
+        <div class="card" style="padding:16px; height:100%;">
+          <span class="icon-label">⚡</span>
+          <h3>Retroattività illimitata</h3>
+          <p>Copertura per violazioni avvenute <em>prima</em> della stipula ma scoperte durante il periodo di validità. Cruciale: gli attacchi restano silenti in media 207 giorni.</p>
+        </div>
+
+      </div>
+
+      <div style="background: rgba(0,180,200,0.08); border:1px solid rgba(0,180,200,0.25); border-radius:8px; padding:8px 16px; margin-bottom:14px; font-size:0.7rem; color:var(--gray-700);">
+        <strong>Nota:</strong> La polizza cyber segue il sistema <em>claims-made</em>: conta il momento in cui il sinistro viene <em>scoperto e denunciato</em>, non quando è avvenuto.
+      </div>
+
+      <div class="slide-footer light">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>fimbroker.it/soluzioni/cyber-risk</span>
+      </div>
+    </div>
+    <span class="slide-num dark">6 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 7 — SCENARI REALI
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow primary">Case studies</div>
+      <h2 class="title">Scenari reali: quanto vale la copertura</h2>
+      <p class="subtitle" style="margin-bottom:18px;">Questi scenari sono basati su tipologie di sinistri reali nel mercato italiano.</p>
+
+      <div class="grid-3" style="flex:1; margin-bottom:16px; align-items:start;">
+
+        <div class="scenario">
+          <div class="scenario-head">
+            <span class="icon">🔓</span>
+            <h3>Ransomware blocca il gestionale</h3>
+            <p>Studio di commercialisti · 5 dipendenti · 400K€ fatturato</p>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-row damage">
+              <p class="label">Danno subìto</p>
+              <p>Sistemi bloccati per 4 giorni, impossibilità di accedere a dati fiscali clienti, dati di backup compromessi</p>
+            </div>
+            <div class="scenario-row cover">
+              <p class="label">La polizza copre</p>
+              <p>Ripristino tecnico + 4 giorni di mancato reddito + gestione comunicazione clienti</p>
+            </div>
+            <span class="cost-badge">~18.000€ coperti</span>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-head">
+            <span class="icon">📧</span>
+            <h3>Dipendente clicca su phishing</h3>
+            <p>PMI manifatturiera · 25 dipendenti · 2M€ fatturato</p>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-row damage">
+              <p class="label">Danno subìto</p>
+              <p>Credenziali rubate, accesso non autorizzato ai dati di 2.000 clienti, potenziale violazione GDPR</p>
+            </div>
+            <div class="scenario-row cover">
+              <p class="label">La polizza copre</p>
+              <p>Forensi IT, notifica Garante Privacy, comunicazione agli interessati, spese legali, gestione sanzione GDPR</p>
+            </div>
+            <span class="cost-badge">~45.000€ coperti</span>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-head">
+            <span class="icon">💳</span>
+            <h3>Attacco al sito e-commerce</h3>
+            <p>Negozio online · 3M€ fatturato · B2C</p>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-row damage">
+              <p class="label">Danno subìto</p>
+              <p>Sito down 18 ore, dati di pagamento di 500 clienti esposti, richieste risarcimento</p>
+            </div>
+            <div class="scenario-row cover">
+              <p class="label">La polizza copre</p>
+              <p>Mancati ricavi, forensi IT, notifiche PCI DSS e GDPR, gestione PR di crisi, spese legali</p>
+            </div>
+            <span class="cost-badge">~62.000€ coperti</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:9px 16px; margin-bottom:14px; font-size:0.72rem; color:#7f1d1d;">
+        ⚠️ <strong>Senza polizza cyber</strong>, tutti questi costi sarebbero a carico dell'azienda. In molti casi, un singolo incidente mette a rischio la sopravvivenza stessa dell'impresa.
+      </div>
+
+      <div class="slide-footer light">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>Scenari indicativi basati su tipologie di sinistri reali</span>
+      </div>
+    </div>
+    <span class="slide-num dark">7 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 8 — GDPR & NIS2
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow primary">Compliance</div>
+      <h2 class="title">GDPR &amp; NIS2: i tuoi obblighi di legge</h2>
+      <p class="subtitle" style="margin-bottom:20px;">
+        Non è solo una scelta prudenziale: ci sono precisi obblighi normativi che riguardano la gestione del rischio cyber.
+        La polizza ti aiuta a rispettarli — e a coprire le conseguenze in caso di violazione.
+      </p>
+
+      <div class="grid-2" style="flex:1; margin-bottom:16px; gap:20px;">
+
+        <div>
+          <div class="compliance-box" style="height:100%;">
+            <span class="tag">GDPR — Reg. UE 2016/679</span>
+            <h3>Obblighi per tutte le imprese</h3>
+            <p style="margin-bottom:10px;">Il GDPR si applica a <strong>qualsiasi organizzazione</strong> che tratti dati personali di persone fisiche nell'UE. Anche una PMI con 10 dipendenti o uno studio con 200 anagrafiche clienti è soggetta.</p>
+            <ul class="check-list" style="margin-top:8px;">
+              <li>Notifica al Garante Privacy entro 72 ore dalla scoperta del breach</li>
+              <li>Comunicazione agli interessati se il rischio per i loro diritti è elevato</li>
+              <li>Misure di sicurezza adeguate al rischio (art. 32)</li>
+              <li>Registro dei trattamenti aggiornato</li>
+              <li>Sanzioni fino a €20M o 4% del fatturato globale</li>
+            </ul>
+            <div style="margin-top:10px; padding:8px 12px; background:#fef3c7; border-radius:6px; font-size:0.7rem; color:#92400e;">
+              <strong>La polizza copre:</strong> notifiche obbligatorie, spese legali, forensi IT, gestione sanzione e risarcimento interessati.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="compliance-box" style="height:100%;">
+            <span class="tag">NIS2 — D.Lgs. 138/2024</span>
+            <h3>Nuovi obblighi per i settori critici</h3>
+            <p style="margin-bottom:10px;">La Direttiva NIS2, recepita in Italia con D.Lgs. 138/2024, estende significativamente il perimetro soggetto agli obblighi di cybersecurity. Riguarda oltre <strong>3.000 imprese italiane</strong> nei settori critici.</p>
+            <ul class="check-list" style="margin-top:8px;">
+              <li>Analisi e gestione formale del rischio cyber</li>
+              <li>Piani di continuità operativa e disaster recovery</li>
+              <li>Notifica al CSIRT entro 24h dall'incidente significativo</li>
+              <li>Responsabilità personale del management per la compliance</li>
+              <li>Sanzioni fino a €10M o 2% del fatturato globale</li>
+            </ul>
+            <div style="margin-top:10px; padding:8px 12px; background:#fef3c7; border-radius:6px; font-size:0.7rem; color:#92400e;">
+              <strong>La polizza aiuta:</strong> documenta la gestione del rischio, copre le sanzioni e le spese di notifica obbligatoria.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="slide-footer light">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>Riferimenti: Reg. UE 2016/679 · D.Lgs. 138/2024 · Garante Privacy</span>
+      </div>
+    </div>
+    <span class="slide-num dark">8 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 9 — DUAL CYBER SMART PLUS
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow accent">La nostra soluzione</div>
+      <h2 class="title">DUAL Cyber Smart Plus — Il prodotto FIM</h2>
+      <p class="subtitle" style="margin-bottom:18px;">
+        FIM Insurance Broker ha selezionato DUAL come compagnia partner per il cyber risk.
+        Grazie al <strong>mandato diretto</strong>, otteniamo condizioni e massimali non disponibili sul mercato standard.
+      </p>
+
+      <div style="display:grid; grid-template-columns: 1fr 1.3fr; gap:20px; flex:1; margin-bottom:14px;">
+
+        <!-- Features table -->
+        <div>
+          <table class="feature-table">
+            <thead>
+              <tr>
+                <th>Caratteristica</th>
+                <th>DUAL Cyber Smart Plus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Retroattività</td><td class="check">✓ Illimitata — inclusa</td></tr>
+              <tr><td>Copertura geografica</td><td class="check">✓ Mondo intero</td></tr>
+              <tr><td>Tipo di garanzia</td><td class="check">✓ Doppio binario (assist + risar.)</td></tr>
+              <tr><td>Franchigia minima</td><td>da €250</td></tr>
+              <tr><td>Business interruption</td><td>Fino a 30 giorni</td></tr>
+              <tr><td>Sconto alta franchigia</td><td>Fino al 33%</td></tr>
+              <tr><td>Copertura errore umano</td><td class="check">✓ Inclusa</td></tr>
+              <tr><td>Gestione crisi h24</td><td class="check">✓ Inclusa</td></tr>
+              <tr><td>Forensi IT inclusi</td><td class="check">✓ Inclusi</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pricing + why DUAL -->
+        <div style="display:flex; flex-direction:column; gap:14px;">
+
+          <div style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); border-radius:12px; padding:18px 20px; color:#fff;">
+            <p style="font-size:0.7rem; color:rgba(255,255,255,0.6); font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Premio indicativo</p>
+            <p style="font-size:2rem; font-weight:900; color:var(--accent); margin-bottom:2px;">da 800€/anno</p>
+            <p style="font-size:0.7rem; color:rgba(255,255,255,0.6);">PMI fino a 2M€ di fatturato · massimale 250K€</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.15); margin-top:10px; padding-top:10px; font-size:0.72rem; color:rgba(255,255,255,0.75);">
+              Il premio finale dipende da: fatturato, settore, dati trattati, misure di sicurezza in atto, franchigia scelta.
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="background:#f0fdf4; border:1px solid #86efac; border-radius:8px; padding:10px 14px; font-size:0.75rem; color:#14532d;">
+              <strong>🎯 Mandato diretto DUAL:</strong> FIM ha un accordo diretto con DUAL — accediamo a pricing e massimali riservati agli intermediari selezionati.
+            </div>
+            <div style="background:#f0f9ff; border:1px solid #7dd3fc; border-radius:8px; padding:10px 14px; font-size:0.75rem; color:#0c4a6e;">
+              <strong>🔍 Analisi del rischio inclusa:</strong> prima di quotare, analizziamo il profilo di rischio reale della tua azienda. Nessuna polizza standard uguale per tutti.
+            </div>
+            <div style="background:#fefce8; border:1px solid #fde047; border-radius:8px; padding:10px 14px; font-size:0.75rem; color:#713f12;">
+              <strong>🆘 Assistenza al sinistro:</strong> in caso di attacco, FIM è il tuo primo contatto. Coordiniamo DUAL e seguiamo l'intero processo liquidativo.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="font-size:0.62rem; color:var(--gray-500); margin-bottom:8px; line-height:1.4;">
+        * I premi indicati sono puramente orientativi. Il premio effettivo è determinato da DUAL in base a fatturato, settore, dati trattati e misure di sicurezza in atto. Non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005. FIM Insurance Broker opera come intermediario iscritto RUI IVASS Sez. B n. B000405449.
+      </div>
+
+      <div class="slide-footer light">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>DUAL — Lloyd's Coverholder</span>
+      </div>
+    </div>
+    <span class="slide-num dark">9 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 10 — PERCHÉ FIM INSURANCE BROKER
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 32px 40px 0;">
+
+      <div class="eyebrow primary">Il nostro valore</div>
+      <h2 class="title">Perché scegliere FIM Insurance Broker</h2>
+      <p class="subtitle" style="margin-bottom:24px;">Siamo un broker indipendente. Non rappresentiamo compagnie — rappresentiamo solo i tuoi interessi.</p>
+
+      <div class="grid-3" style="margin-bottom:20px;">
+
+        <div style="text-align:center; padding:20px 16px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:12px;">
+          <span style="font-size:2.6rem; display:block; margin-bottom:12px;">🎯</span>
+          <h3 style="font-size:0.9rem; font-weight:800; color:var(--primary); margin-bottom:8px;">Mandato diretto DUAL</h3>
+          <p style="font-size:0.73rem; color:var(--gray-700); line-height:1.55;">FIM ha un accordo diretto con DUAL — uno dei leader mondiali nel cyber risk e Lloyd's Coverholder. Questo ci permette di ottenere condizioni e massimali non disponibili tramite i canali standard.</p>
+        </div>
+
+        <div style="text-align:center; padding:20px 16px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:12px;">
+          <span style="font-size:2.6rem; display:block; margin-bottom:12px;">🔍</span>
+          <h3 style="font-size:0.9rem; font-weight:800; color:var(--primary); margin-bottom:8px;">Analisi del rischio reale</h3>
+          <p style="font-size:0.73rem; color:var(--gray-700); line-height:1.55;">Non vendiamo polizze: analizziamo prima il tuo profilo di rischio cyber. Valutiamo fatturato, dati trattati, settore, misure in atto e costruiamo la copertura giusta per te — non quella standard del catalogo.</p>
+        </div>
+
+        <div style="text-align:center; padding:20px 16px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:12px;">
+          <span style="font-size:2.6rem; display:block; margin-bottom:12px;">🆘</span>
+          <h3 style="font-size:0.9rem; font-weight:800; color:var(--primary); margin-bottom:8px;">Assistenza al sinistro</h3>
+          <p style="font-size:0.73rem; color:var(--gray-700); line-height:1.55;">In caso di attacco, siamo il tuo primo punto di contatto. Coordiniamo l'intervento degli esperti DUAL e seguiamo l'intero processo liquidativo al tuo posto. Non sei solo.</p>
+        </div>
+
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; margin-bottom:16px;">
+        <div style="background:rgba(15,45,107,0.05); border:1px solid rgba(15,45,107,0.12); border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:1.4rem; font-weight:900; color:var(--primary);">30+</div>
+          <div style="font-size:0.65rem; color:var(--gray-500); margin-top:2px;">Compagnie partner</div>
+        </div>
+        <div style="background:rgba(15,45,107,0.05); border:1px solid rgba(15,45,107,0.12); border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:1.4rem; font-weight:900; color:var(--primary);">100%</div>
+          <div style="font-size:0.65rem; color:var(--gray-500); margin-top:2px;">Indipendente</div>
+        </div>
+        <div style="background:rgba(15,45,107,0.05); border:1px solid rgba(15,45,107,0.12); border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:1.4rem; font-weight:900; color:var(--primary);">IVASS</div>
+          <div style="font-size:0.65rem; color:var(--gray-500); margin-top:2px;">RUI Sez. B n. B000405449</div>
+        </div>
+        <div style="background:rgba(15,45,107,0.05); border:1px solid rgba(15,45,107,0.12); border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:1.4rem; font-weight:900; color:var(--primary);">24h</div>
+          <div style="font-size:0.65rem; color:var(--gray-500); margin-top:2px;">Risposta preventivo</div>
+        </div>
+      </div>
+
+      <div class="slide-footer light">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>fimbroker.it</span>
+      </div>
+    </div>
+    <span class="slide-num dark">10 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 11 — I PROSSIMI PASSI
+  ══════════════════════════════════════════ -->
+  <div class="slide bg-gradient-primary">
+    <div style="display:flex; flex-direction:column; height:100%; padding: 36px 40px 0;">
+
+      <div class="eyebrow white">Come iniziare</div>
+      <h2 class="title white">Proteggi la tua azienda in 3 passi</h2>
+      <p class="subtitle white" style="margin-bottom:32px;">
+        Il processo è semplice e gratuito. Dal primo contatto al preventivo: meno di 24 ore.
+      </p>
+
+      <div class="grid-3" style="flex:1; max-width:780px; margin:0 auto 20px; align-items:start; gap:32px;">
+
+        <div class="step">
+          <div class="step-circle" style="background:var(--accent); font-size:1.4rem; width:56px; height:56px;">1</div>
+          <h3 style="color:#fff; font-size:0.9rem; font-weight:800; margin-top:2px;">Analisi gratuita del rischio</h3>
+          <p style="color:rgba(255,255,255,0.7); font-size:0.75rem; line-height:1.55; text-align:center;">
+            Compila il nostro breve questionario online oppure prenota una consulenza telefonica gratuita.
+            Valutiamo insieme la tua esposizione al rischio cyber in base a settore, fatturato e dati trattati.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-circle" style="background:var(--accent); font-size:1.4rem; width:56px; height:56px;">2</div>
+          <h3 style="color:#fff; font-size:0.9rem; font-weight:800; margin-top:2px;">Preventivo personalizzato</h3>
+          <p style="color:rgba(255,255,255,0.7); font-size:0.75rem; line-height:1.55; text-align:center;">
+            Entro 24 ore ricevi un preventivo DUAL Cyber Smart Plus su misura per la tua realtà.
+            Confrontiamo le opzioni di copertura e franchigia per ottimizzare il rapporto costo/protezione.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-circle" style="background:var(--accent); font-size:1.4rem; width:56px; height:56px;">3</div>
+          <h3 style="color:#fff; font-size:0.9rem; font-weight:800; margin-top:2px;">Attivazione e copertura immediata</h3>
+          <p style="color:rgba(255,255,255,0.7); font-size:0.75rem; line-height:1.55; text-align:center;">
+            Firmi la proposta digitalmente, effettui il pagamento e la copertura è attiva.
+            Da quel momento sei coperto. In caso di sinistro, FIM è il tuo punto di riferimento.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Connector line -->
+      <div style="display:flex; align-items:center; justify-content:center; gap:4px; margin-bottom:20px;">
+        <div style="height:2px; width:60px; background:var(--accent); border-radius:1px;"></div>
+        <div style="height:2px; width:60px; background:var(--accent); border-radius:1px;"></div>
+        <div style="height:2px; width:60px; background:var(--accent); border-radius:1px;"></div>
+      </div>
+
+      <div style="text-align:center; margin-bottom:20px;">
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.22); border-radius:999px; padding:8px 24px; color:#fff; font-size:0.8rem; font-weight:700; display:inline-block;">
+          🎁 Cyber Health Check gratuito incluso — 10 domande per misurare la tua esposizione
+        </span>
+      </div>
+
+      <div class="slide-footer" style="margin:0 -40px; padding:8px 40px;">
+        <span>FIM Insurance Broker · Presentazione Cyber Risk 2025</span>
+        <span>fimbroker.it</span>
+      </div>
+    </div>
+    <span class="slide-num">11 / 12</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 12 — CONTATTI
+  ══════════════════════════════════════════ -->
+  <div class="slide">
+    <div style="display:flex; height:100%;">
+
+      <!-- Left: gradient panel -->
+      <div style="width:45%; background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 100%); padding:36px 32px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
+            <div style="width:40px; height:40px; background:var(--accent); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.2rem;">🛡️</div>
+            <div>
+              <div style="color:#fff; font-weight:900; font-size:0.95rem;">FIM Insurance Broker</div>
+              <div style="color:rgba(255,255,255,0.5); font-size:0.62rem;">S.a.s. di Manzo Arturo & C.</div>
+            </div>
+          </div>
+
+          <h2 style="color:#fff; font-size:1.8rem; font-weight:900; line-height:1.2; margin-bottom:14px;">
+            Contattaci<br/>per un'analisi<br/>
+            <span style="color:var(--accent);">gratuita.</span>
+          </h2>
+          <p style="color:rgba(255,255,255,0.7); font-size:0.78rem; line-height:1.55; margin-bottom:20px;">
+            Risponderemo entro poche ore per fissare una chiamata conoscitiva e analizzare il rischio cyber della tua azienda. Nessun impegno.
+          </p>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:10px; padding:12px 14px;">
+          <p style="font-size:0.65rem; color:rgba(255,255,255,0.5); font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:5px;">Iscrizione IVASS</p>
+          <p style="font-size:0.72rem; color:rgba(255,255,255,0.8);">RUI Sez. B n. B000405449</p>
+          <p style="font-size:0.65rem; color:rgba(255,255,255,0.5); margin-top:4px;">Registrato presso l'Istituto per la Vigilanza sulle Assicurazioni</p>
+        </div>
+      </div>
+
+      <!-- Right: contact details -->
+      <div style="flex:1; padding:36px 32px; display:flex; flex-direction:column; justify-content:center; gap:4px;">
+
+        <div class="eyebrow primary" style="margin-bottom:16px;">Recapiti</div>
+
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div>
+            <h4>Sede</h4>
+            <p>Via Roma 41, 04012 Cisterna di Latina (LT)</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-icon">📞</span>
+          <div>
+            <h4>Telefono</h4>
+            <p>+39 06 96883381</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-icon">✉️</span>
+          <div>
+            <h4>Email</h4>
+            <p>info@fimbroker.it</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-icon">🔒</span>
+          <div>
+            <h4>PEC</h4>
+            <p>fiminsurancebrokersas@pec.it</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-icon">🌐</span>
+          <div>
+            <h4>Sito web</h4>
+            <p>www.fimbroker.it</p>
+          </div>
+        </div>
+
+        <div style="margin-top:20px; padding:14px 16px; background:rgba(0,180,200,0.08); border:1px solid rgba(0,180,200,0.25); border-radius:10px;">
+          <p style="font-size:0.75rem; font-weight:700; color:var(--primary); margin-bottom:5px;">Richiedi il preventivo online</p>
+          <p style="font-size:0.72rem; color:var(--gray-700); line-height:1.5;">
+            Vai su <strong>fimbroker.it/soluzioni/cyber-risk</strong> e clicca su "Richiedi Preventivo Cyber" —
+            compila il form in 2 minuti e ricevi un'analisi preliminare entro 24 ore.
+          </p>
+        </div>
+
+        <div style="margin-top:12px; font-size:0.6rem; color:var(--gray-500); line-height:1.5;">
+          Documento redatto da FIM Insurance Broker S.a.s. a scopo informativo. Non costituisce offerta contrattuale né consulenza legale.
+          Le informazioni su premi e coperture sono indicative. Per un'offerta vincolante contattare direttamente lo studio.
+          FIM opera ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni) e della normativa IVASS vigente.
+        </div>
+      </div>
+
+    </div>
+    <span class="slide-num dark">12 / 12</span>
+  </div>
+
+</div>
+
+</body>
+</html>
