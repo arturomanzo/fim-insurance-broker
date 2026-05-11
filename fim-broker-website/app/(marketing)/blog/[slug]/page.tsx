@@ -51,11 +51,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug)
   if (!post) return { title: 'Articolo non trovato' }
   const ogImageUrl = `/api/og?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.category)}&sub=${encodeURIComponent(post.excerpt.slice(0, 90))}`
+  const publishedTime = parseItalianDate(post.date)
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
     openGraph: {
       type: 'article',
+      publishedTime,
+      modifiedTime: publishedTime,
+      authors: ['FIM Insurance Broker'],
+      tags: [post.category, 'assicurazioni', 'broker assicurativo'],
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
