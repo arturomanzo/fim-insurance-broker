@@ -12,6 +12,7 @@ export interface BlogPost {
   excerpt: string
   category: string
   date: string
+  updatedDate?: string
   readTime: string
   image: string
   sections: BlogSection[]
