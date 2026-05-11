@@ -52,6 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: 'Articolo non trovato' }
   const ogImageUrl = `/api/og?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.category)}&sub=${encodeURIComponent(post.excerpt.slice(0, 90))}`
   const publishedTime = parseItalianDate(post.date)
+  const modifiedTime = parseItalianDate(post.updatedDate ?? post.date)
   return {
     title: post.title,
     description: post.excerpt,
@@ -61,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: 'article',
       publishedTime,
-      modifiedTime: publishedTime,
+      modifiedTime,
       authors: ['FIM Insurance Broker'],
       tags: [post.category, 'assicurazioni', 'broker assicurativo'],
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
@@ -89,7 +90,7 @@ export default async function BlogPostPage({ params }: Props) {
     description: post?.excerpt ?? '',
     image: post?.image ? [post.image] : [`${BASE_URL}/opengraph-image`],
     datePublished: parseItalianDate(date),
-    dateModified: parseItalianDate(date),
+    dateModified: parseItalianDate(post?.updatedDate ?? date),
     author: {
       '@type': 'Organization',
       name: 'FIM Insurance Broker',
