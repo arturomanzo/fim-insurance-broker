@@ -31,7 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/servizi`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/preventivo`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/prenota-consulenza`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/area-cliente`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE_URL}/contatti`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE_URL}/collabora-con-noi`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },

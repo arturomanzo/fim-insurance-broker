@@ -25,12 +25,30 @@ const categoryColors: Record<string, 'primary' | 'accent' | 'success' | 'warning
   Viaggio: 'primary',
 }
 
+const BASE_URL = 'https://www.fimbroker.it'
+
 export default function BlogPage() {
   const posts = getAllPosts()
   const [featured, ...rest] = posts
 
+  const blogListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Blog & News Assicurative — FIM Insurance Broker',
+    description: 'Guide, news e consigli dal mondo delle assicurazioni italiane',
+    url: `${BASE_URL}/blog`,
+    numberOfItems: posts.length,
+    itemListElement: posts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${BASE_URL}/blog/${post.slug}`,
+      name: post.title,
+    })),
+  }
+
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListSchema) }} />
       {/* Hero */}
       <section className="gradient-primary py-16 text-white">
         <div className="container-custom">
