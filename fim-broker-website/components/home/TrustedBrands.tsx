@@ -8,6 +8,8 @@ const companies = [
   'Groupama',
   'Reale Mutua',
   'Cattolica',
+  'Roland Italia',
+  'AEC Underwriting',
   'Aviva',
   'Ergo',
   'SACE',

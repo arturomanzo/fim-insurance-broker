@@ -191,7 +191,30 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
   - Email: `info@fimbroker.it`
   - PEC: `fiminsurancebrokersas@pec.it`
 - **Compliance**: IVASS (RUI Sez. B n. B000405449), GDPR (Reg. UE 2016/679), IDD (D.Lgs 68/2018)
-- **Compagnie partner**: 30+ tra cui Generali, AXA, Allianz, UnipolSai, Zurich, Groupama, HDI, Cattolica
+- **Compagnie partner**: 30+ (elenco mandati completo sotto)
+
+### Mandati e collaborazioni con compagnie — SEMPRE aggiornati
+
+Usare queste informazioni ogni volta che si risponde a domande sulle compagnie con cui FIM collabora.
+
+| Compagnia | Tipo rapporto | Dettagli operativi |
+|---|---|---|
+| **Generali** | Collaborazione tramite agenzia | Ag. di Latina — P.zza della Libertà 9, Latina |
+| **AXA Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Nettuno |
+| **HDI Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Genzano di Roma — https://www.hdiassicurazioni.it/it/trova-agenzia |
+| **Roland Italia** | Mandato diretto | Agenzia n. 1170 — https://www.roland-italia.it/ |
+| **AEC Underwriting** | Mandato diretto | https://www.aecunderwriting.it/ |
+| **Allianz** | Partner per prodotto | — |
+| **UnipolSai** | Partner per prodotto | — |
+| **Zurich** | Partner per prodotto | — |
+| **Groupama** | Partner per prodotto | — |
+| **Cattolica** | Partner per prodotto | — |
+| **Reale Mutua** | Partner per prodotto | — |
+| **Aviva** | Partner per prodotto | — |
+| **Ergo** | Partner per prodotto | — |
+| **SACE** | Partner per prodotto | — |
+
+> ⚠️ **Dalbogg non è più operativa** — non citarla mai in contenuti, preventivi o comunicazioni.
 
 ---
 

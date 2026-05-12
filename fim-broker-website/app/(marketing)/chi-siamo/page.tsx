@@ -54,6 +54,8 @@ const partners = [
   { name: 'Groupama', logo: '/images/partners/groupama.svg' },
   { name: 'HDI', logo: '/images/partners/hdi.svg' },
   { name: 'Cattolica', logo: '/images/partners/cattolica.svg' },
+  { name: 'Roland Italia', logo: '/images/partners/roland-italia.svg' },
+  { name: 'AEC Underwriting', logo: '/images/partners/aec-underwriting.svg' },
 ]
 
 const certifications = [
