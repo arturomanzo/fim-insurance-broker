@@ -1,9 +1,33 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 const CITY = 'Aprilia'
 const SLUG = 'broker-assicurativo-aprilia'
+const BASE_URL = 'https://www.fimbroker.it'
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['InsuranceAgency', 'LocalBusiness'],
+  name: 'FIM Insurance Broker',
+  url: BASE_URL,
+  telephone: '+390696883381',
+  email: 'info@fimbroker.it',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Via Roma 41',
+    addressLocality: 'Cisterna di Latina',
+    addressRegion: 'LT',
+    postalCode: '04012',
+    addressCountry: 'IT',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 41.5939662, longitude: 12.8234096 },
+  areaServed: [
+    { '@type': 'City', name: 'Aprilia' },
+    { '@type': 'AdministrativeArea', name: 'Provincia di Latina' },
+  ],
+}
 
 export const metadata: Metadata = {
   title: `Broker Assicurativo a ${CITY} — FIM Insurance Broker`,
@@ -33,6 +57,8 @@ const vantaggi = [
 export default function BrokerAprilia() {
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: `Broker a ${CITY}`, href: `/${SLUG}` }]} />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-24 text-white">
         <div className="container-custom">
