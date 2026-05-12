@@ -33,16 +33,6 @@ export const metadata: Metadata = {
   },
   description:
     'FIM Insurance Broker offre soluzioni assicurative personalizzate per privati e aziende. Polizze auto, vita, casa, salute e rischi aziendali. Preventivo gratuito.',
-  keywords: [
-    'assicurazioni',
-    'broker assicurativo',
-    'polizze assicurative',
-    'FIM Insurance',
-    'preventivo assicurazione',
-    'assicurazione auto',
-    'assicurazione vita',
-    'assicurazione azienda',
-  ],
   metadataBase: new URL(BASE_URL),
   alternates: {
     canonical: BASE_URL,
@@ -136,13 +126,6 @@ const jsonLd = {
   areaServed: {
     '@type': 'Country',
     name: 'Italy',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.8',
-    reviewCount: '127',
-    bestRating: '5',
-    worstRating: '1',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
