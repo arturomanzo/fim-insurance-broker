@@ -23,6 +23,8 @@ const categoryColors: Record<string, 'primary' | 'accent' | 'success' | 'warning
   Casa: 'accent',
   Salute: 'accent',
   Viaggio: 'primary',
+  Guide: 'accent',
+  Professionisti: 'success',
 }
 
 const BASE_URL = 'https://www.fimbroker.it'
