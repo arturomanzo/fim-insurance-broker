@@ -1,8 +1,8 @@
 const companies = [
   'Generali',
   'AXA',
-  'UnipolSai',
   'Allianz',
+  'UnipolSai',
   'Zurich',
   'HDI',
   'Groupama',
@@ -10,6 +10,8 @@ const companies = [
   'Cattolica',
   'Roland Italia',
   'AEC Underwriting',
+  'MetLife',
+  'Bene.it',
   'Aviva',
   'Ergo',
   'SACE',
