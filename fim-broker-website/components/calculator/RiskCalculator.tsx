@@ -261,6 +261,11 @@ export default function RiskCalculator() {
     setResult(res)
 
     try {
+      const answersDecoded = questions.map((q) => ({
+        domanda: q.label,
+        risposta: form.answers[q.id] ? q.yesLabel : q.noLabel,
+      }))
+
       await fetch('/api/calcolatore', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -270,8 +275,12 @@ export default function RiskCalculator() {
           profile: form.profile,
           settore: form.settore,
           answers: form.answers,
+          answersDecoded,
           livello: res.livello,
           punteggio: res.punteggio,
+          coperture: res.coperture,
+          prezzoMin: res.prezzoMin,
+          prezzoMax: res.prezzoMax,
           website: form.website,
         }),
       })

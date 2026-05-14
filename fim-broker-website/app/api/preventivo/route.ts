@@ -80,6 +80,53 @@ async function syncLeadToGestionale(data: {
 const FIM_EMAIL = process.env.FIM_EMAIL || 'info@fimbroker.it'
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
 
+const PROFILO_PRIORITY: Record<string, { label: string; color: string; bg: string; border: string; sla: string }> = {
+  impresa:      { label: '🔴 Alta priorità', color: '#b91c1c', bg: '#fff1f2', border: '#fecdd3', sla: 'Rispondere entro 4 ore lavorative' },
+  pmi:          { label: '🟠 Alta priorità', color: '#b45309', bg: '#fffbeb', border: '#fde68a', sla: 'Rispondere entro 24 ore lavorative' },
+  professionista:{ label: '🟡 Media priorità', color: '#854d0e', bg: '#fefce8', border: '#fef08a', sla: 'Rispondere entro 24 ore lavorative' },
+  privato:      { label: '🟢 Standard',       color: '#166534', bg: '#f0fdf4', border: '#bbf7d0', sla: 'Rispondere entro 24 ore lavorative' },
+}
+
+const PROFILO_LABELS_IT: Record<string, string> = {
+  privato: 'Privato',
+  professionista: 'Libero Professionista',
+  pmi: 'PMI / Artigiano',
+  impresa: 'Grande Impresa',
+}
+
+function getDocumentiDaRichiedere(tipo: string): string[] {
+  const t = tipo.toLowerCase()
+  if (t.includes('auto') || t.includes('kasko') || t.includes('flotta')) {
+    return ['Targa/targhe veicoli e carta di circolazione', 'Anni di patente e attestato di rischio (per auto)', 'Km annui percorsi / uso (privato o professionale)', 'Polizze RC auto in essere (compagnia + scadenza)']
+  }
+  if (t.includes('casa') || t.includes('immobil') || t.includes('catastrofi') || t.includes('catastrofal')) {
+    return ['Indirizzo immobile e anno di costruzione', 'Valore stimato di ricostruzione (€)', 'Proprietario o conduttore?', 'Polizze casa in essere (compagnia + massimale)']
+  }
+  if (t.includes('vita') || t.includes('caso morte') || t.includes('previdenza')) {
+    return ['Data di nascita e professione', 'Reddito annuo lordo indicativo', 'Familiari a carico e loro età', 'Polizze vita/previdenza già attive']
+  }
+  if (t.includes('salute') || t.includes('infortun') || t.includes('welfare')) {
+    return ['Data di nascita', 'Stato di salute generale (patologie rilevanti)', 'Professione e attività svolta', 'Polizze sanitarie in essere']
+  }
+  if (t.includes('rc profes') || t.includes('tutela legal')) {
+    return ['Ordine/albo professionale di appartenenza', 'Fatturato annuo e numero clienti/commesse', 'Massimale RC richiesto o già in essere', 'Polizze RC in essere (compagnia + scadenza + massimale)']
+  }
+  if (t.includes('cyber') || t.includes('privacy') || t.includes('gdpr')) {
+    return ['Numero dipendenti e fatturato annuo', 'Tipo di dati trattati (clienti, salute, finanziario…)', 'Sistemi IT principali (cloud, server on-premise, ERP)', 'Eventuali incidenti informatici negli ultimi 3 anni']
+  }
+  if (t.includes('rc impresa') || t.includes('rc prodott') || t.includes('all risk') || t.includes('aziendal') || t.includes('property')) {
+    return ['Visura camerale e ATECO', 'Fatturato annuo e numero dipendenti', 'Descrizione attività e prodotti/servizi offerti', 'Valore attrezzature/macchinari e magazzino', 'Polizze aziendali in essere']
+  }
+  if (t.includes('d&o') || t.includes('directors') || t.includes('officers')) {
+    return ['Struttura societaria (SRL, SPA, ecc.) e CDA', 'Fatturato e totale attivo bilancio', 'Settore e mercati in cui opera', 'Eventuali contenziosi societari in corso']
+  }
+  if (t.includes('condomin')) {
+    return ['Numero unità abitative e piano più alto', 'Anno di costruzione e valore stimato dell\'edificio', 'Presenza ascensori, impianti comuni (caldaia, piscina…)', 'Polizza condominiale in essere (massimale + scadenza)']
+  }
+  // Generico
+  return ['Profilo cliente (privato, professionista, azienda)', 'Esigenze specifiche e coperture già attive', 'Budget indicativo annuo', 'Eventuali sinistri negli ultimi 3 anni']
+}
+
 function buildTeamEmailHtml(data: {
   id: string
   tipo: string
@@ -101,97 +148,113 @@ function buildTeamEmailHtml(data: {
   const email = escapeHtml(data.email)
   const telefono = escapeHtml(data.telefono)
   const messaggio = escapeHtml(data.messaggio)
+
+  const profiloKey = (data.profilo ?? '').toLowerCase()
+  const priority = PROFILO_PRIORITY[profiloKey] ?? PROFILO_PRIORITY.privato
+  const profiloLabel = escapeHtml(PROFILO_LABELS_IT[profiloKey] || data.profilo || 'n/d')
+  const documenti = getDocumentiDaRichiedere(data.tipo)
+  const documentiHtml = documenti
+    .map((d) => `<li style="margin-bottom:5px;font-size:13px;color:#374151;">${escapeHtml(d)}</li>`)
+    .join('')
+
   return `
 <!DOCTYPE html>
 <html lang="it">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
-<body style="font-family: system-ui, sans-serif; background: #f8fafc; margin: 0; padding: 20px;">
-  <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.07);">
+<body style="font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; margin: 0; padding: 24px 16px;">
+  <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+
     <!-- Header -->
     <div style="background: linear-gradient(135deg, #060f1d, #0B1F3A, #132d52); padding: 28px 32px;">
-      <h1 style="color: white; margin: 0; font-size: 20px; font-weight: 900;">🔔 Nuova Richiesta Preventivo</h1>
-      <p style="color: rgba(255,255,255,0.7); margin: 6px 0 0; font-size: 13px;">ID: ${data.id}</p>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 8px;">🔔 Nuova Richiesta Preventivo</div>
+      <h1 style="color: white; margin: 0; font-size: 22px; font-weight: 900;">${tipo}</h1>
+      <p style="color: rgba(255,255,255,0.6); margin: 6px 0 0; font-size: 12px;">ID: ${data.id}</p>
     </div>
 
-    <!-- Body -->
-    <div style="padding: 28px 32px;">
+    <!-- Badge priorità -->
+    <div style="padding: 14px 32px; background: ${priority.bg}; border-bottom: 1px solid ${priority.border};">
+      <span style="font-size: 13px; font-weight: 700; color: ${priority.color};">${priority.label}</span>
+      <span style="font-size: 13px; color: ${priority.color}; margin-left: 8px;">— ${priority.sla}</span>
+    </div>
+
+    <!-- Dati cliente e polizza -->
+    <div style="padding: 24px 32px; border-bottom: 1px solid #f1f5f9;">
       <table style="width: 100%; border-collapse: collapse;">
-        ${data.profilo ? `<tr>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; width: 40%;">
-            <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Profilo cliente</span>
-          </td>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 15px; font-weight: 700; color: #0B1F3A;">${escapeHtml(data.profilo)}</span>
-          </td>
-        </tr>` : ''}
         <tr>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; width: 40%;">
-            <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Tipo polizza</span>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc; width: 38%;">
+            <span style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Cliente</span>
           </td>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 15px; font-weight: 700; color: #2FA36B;">${tipo}</span>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <span style="font-size: 16px; color: #0B1F3A; font-weight: 800;">${nome} ${cognome}</span>
           </td>
         </tr>
         <tr>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Cliente</span>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <span style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Profilo</span>
           </td>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 15px; color: #1e293b; font-weight: 600;">${nome} ${cognome}</span>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Email</span>
-          </td>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <a href="mailto:${email}" style="color: #0B1F3A; font-size: 15px;">${email}</a>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <span style="font-size: 14px; font-weight: 700; color: #1e293b;">${profiloLabel}</span>
           </td>
         </tr>
         <tr>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Telefono</span>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <span style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Email</span>
           </td>
-          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-            <a href="tel:${telefono}" style="color: #0B1F3A; font-size: 15px;">${telefono}</a>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <a href="mailto:${email}" style="color: #0B1F3A; font-size: 14px; text-decoration: none;">${email}</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <span style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Telefono</span>
+          </td>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <a href="tel:${telefono}" style="color: #0B1F3A; font-size: 14px; text-decoration: none; font-weight: 600;">${telefono}</a>
           </td>
         </tr>
         ${messaggio ? `
         <tr>
           <td style="padding: 10px 0;" colspan="2">
-            <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Messaggio</span>
-            <p style="margin: 8px 0 0; color: #475569; font-size: 14px; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 8px; border-left: 3px solid #2FA36B;">${messaggio}</p>
+            <span style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Note cliente</span>
+            <p style="margin: 8px 0 0; color: #475569; font-size: 14px; line-height: 1.6; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border-left: 3px solid #0B1F3A;">${messaggio}</p>
           </td>
         </tr>` : ''}
       </table>
+    </div>
 
-      <div style="margin-top: 24px; padding: 16px; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0;">
-        <p style="margin: 0; font-size: 13px; color: #166534;">
-          ⏰ Ricevuta il <strong>${new Date(data.timestamp).toLocaleString('it-IT')}</strong> — Rispondere entro 24 ore lavorative.
-        </p>
-      </div>
+    <!-- Documenti da richiedere -->
+    <div style="padding: 20px 32px; border-bottom: 1px solid #f1f5f9; background: #fafafa;">
+      <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 10px;">📋 Documenti / dati da richiedere al cliente</div>
+      <ul style="margin: 0; padding-left: 18px; line-height: 1.8;">
+        ${documentiHtml}
+      </ul>
+    </div>
+
+    <!-- Timestamp + UTM -->
+    <div style="padding: 16px 32px; border-bottom: 1px solid #f1f5f9;">
+      <p style="margin: 0; font-size: 13px; color: #64748b;">
+        ⏰ Ricevuta il <strong>${new Date(data.timestamp).toLocaleString('it-IT')}</strong>
+      </p>
       ${(data.utm_source || data.utm_medium || data.utm_campaign || data.referrer) ? `
-      <div style="margin-top: 16px; padding: 14px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-        <p style="margin: 0 0 8px; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Sorgente traffico</p>
-        <div style="font-size: 12px; color: #64748b; line-height: 1.8;">
-          ${data.utm_source ? `<span style="margin-right:12px;">📌 Fonte: <strong>${escapeHtml(data.utm_source)}</strong></span>` : ''}
-          ${data.utm_medium ? `<span style="margin-right:12px;">📣 Mezzo: <strong>${escapeHtml(data.utm_medium)}</strong></span>` : ''}
-          ${data.utm_campaign ? `<span style="margin-right:12px;">🎯 Campagna: <strong>${escapeHtml(data.utm_campaign)}</strong></span>` : ''}
-          ${data.referrer ? `<div style="margin-top:4px;">🔗 Referrer: <span style="color:#0B1F3A;">${escapeHtml(data.referrer)}</span></div>` : ''}
-        </div>
+      <div style="margin-top: 10px; font-size: 12px; color: #94a3b8; line-height: 1.8;">
+        ${data.utm_source ? `📌 Fonte: <strong>${escapeHtml(data.utm_source)}</strong>&nbsp;&nbsp;` : ''}
+        ${data.utm_medium ? `📣 Mezzo: <strong>${escapeHtml(data.utm_medium)}</strong>&nbsp;&nbsp;` : ''}
+        ${data.utm_campaign ? `🎯 Campagna: <strong>${escapeHtml(data.utm_campaign)}</strong>` : ''}
+        ${data.referrer ? `<br>🔗 Referrer: ${escapeHtml(data.referrer)}` : ''}
       </div>` : ''}
+    </div>
 
-      <div style="margin-top: 20px; text-align: center;">
-        <a href="mailto:${email}?subject=Preventivo ${tipo} - FIM Insurance Broker&amp;body=Gentile ${nome},"
-           style="display: inline-block; background: #0B1F3A; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
-          Rispondi al cliente →
-        </a>
-      </div>
+    <!-- CTA -->
+    <div style="padding: 24px 32px; text-align: center;">
+      <a href="mailto:${email}?subject=Preventivo ${tipo} — FIM Insurance Broker&amp;body=Gentile ${nome},"
+         style="display: inline-block; background: #0B1F3A; color: white; padding: 14px 36px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 14px;">
+        Rispondi al cliente →
+      </a>
     </div>
 
     <!-- Footer -->
-    <div style="background: #f8fafc; padding: 16px 32px; border-top: 1px solid #e2e8f0;">
-      <p style="margin: 0; font-size: 12px; color: #94a3b8; text-align: center;">
+    <div style="background: #f8fafc; padding: 14px 32px; border-top: 1px solid #e2e8f0;">
+      <p style="margin: 0; font-size: 11px; color: #94a3b8; text-align: center;">
         FIM Insurance Broker S.a.s. — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
       </p>
     </div>
