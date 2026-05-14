@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 type ConsentChoice = 'all' | 'essential' | null
@@ -9,6 +9,7 @@ export default function CookieBanner() {
   const [visible, setVisible] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
   const [analyticsChecked, setAnalyticsChecked] = useState(true)
+  const firstButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const consent = localStorage.getItem('fim-cookie-consent')
@@ -18,6 +19,20 @@ export default function CookieBanner() {
       return () => clearTimeout(timer)
     }
   }, [])
+
+  useEffect(() => {
+    if (!visible) return
+    firstButtonRef.current?.focus()
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      localStorage.setItem('fim-cookie-consent', JSON.stringify({
+        choice: 'essential', analytics: false, timestamp: new Date().toISOString(),
+      }))
+      setVisible(false)
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [visible])
 
   const saveConsent = (choice: ConsentChoice) => {
     localStorage.setItem('fim-cookie-consent', JSON.stringify({
@@ -35,13 +50,13 @@ export default function CookieBanner() {
       className="fixed bottom-0 left-0 right-0 z-[60] p-4 md:p-6 animate-slide-up"
       role="dialog"
       aria-modal="true"
-      aria-label="Preferenze cookie"
+      aria-labelledby="cookie-banner-title"
     >
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
         {/* Header */}
         <div className="gradient-primary px-6 py-4 flex items-center gap-3">
-          <span className="text-2xl">🍪</span>
-          <h2 className="text-white font-bold text-lg">Preferenze Cookie</h2>
+          <span className="text-2xl" aria-hidden="true">🍪</span>
+          <h2 className="text-white font-bold text-lg" id="cookie-banner-title">Preferenze Cookie</h2>
         </div>
 
         <div className="p-6">
@@ -101,6 +116,7 @@ export default function CookieBanner() {
           {/* Azioni */}
           <div className="flex flex-wrap items-center gap-3">
             <button
+              ref={firstButtonRef}
               onClick={() => saveConsent('all')}
               className="btn-primary text-sm px-5 py-2.5"
             >
