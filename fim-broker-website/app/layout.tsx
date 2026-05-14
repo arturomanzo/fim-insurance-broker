@@ -152,6 +152,12 @@ export default function RootLayout({
   return (
     <html lang="it" className={`${montserrat.variable} ${sourceSerif.variable}`}>
       <body className={`${montserrat.className} min-h-screen flex flex-col`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:px-4 focus:py-2 focus:text-primary focus:rounded-lg focus:shadow-lg focus:font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
+        >
+          Vai al contenuto principale
+        </a>
         <noscript>
           <div style={{
             position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
