@@ -99,39 +99,6 @@ function getSuggestedQuestions(path: string): string[] {
   return DEFAULT_QUESTIONS
 }
 
-// Messaggio proattivo contestuale — specifico per pagina
-function getProactiveMessage(path: string): string {
-  if (path.includes('preventivo'))
-    return 'Stai compilando il preventivo? Se hai dubbi su quale copertura scegliere o vuoi un consiglio rapido, sono qui. Basta scrivere!'
-  if (path.includes('sinistri'))
-    return 'Devi aprire un sinistro? Posso guidarti passo per passo nella denuncia e dirti esattamente quali documenti servono.'
-  if (path.includes('professionisti'))
-    return 'Sei un libero professionista? La RC Professionale ti protegge da richieste di risarcimento anche retroattive. Vuoi sapere quanto costa per la tua categoria?'
-  if (path.includes('artigiani') || path.includes('pmi'))
-    return "Gestisci un'impresa o sei artigiano? Posso aiutarti a capire quali coperture sono obbligatorie e quali proteggono davvero il tuo lavoro."
-  if (path.includes('famiglie'))
-    return 'Cerchi protezione per la tua famiglia? Posso mostrarti le soluzioni più adatte per casa, vita e salute — anche in bundle conveniente.'
-  if (path.includes('condomini'))
-    return 'Gestisci un condominio? La polizza condominiale protegge le parti comuni e i condomini da responsabilità civile. Vuoi un preventivo?'
-  if (path.includes('catastrofi'))
-    return "Dal 2025 la polizza catastrofi è obbligatoria per le imprese. Sei in regola? Posso spiegarti cosa copre e come attivarla velocemente."
-  if (path.includes('cyber'))
-    return "Stai valutando una polizza cyber? Posso spiegarti cosa copre DUAL Cyber Smart Plus, come funziona la retroattività illimitata e quanto potresti spendere per la tua azienda."
-  if (path.includes('welfare'))
-    return "Vuoi offrire benefit assicurativi ai tuoi dipendenti? Le polizze collettive sono deducibili e fidelizzano il team. Posso mostrarti le opzioni più convenienti."
-  if (path.includes('seconda-opinione'))
-    return "Hai già una polizza e vuoi sapere se ti protegge davvero? Posso spiegarti come funziona la nostra analisi gratuita delle coperture esistenti."
-  if (path.includes('analizza-polizza'))
-    return "Hai caricato una polizza da analizzare? Posso aiutarti a interpretare il risultato o rispondere a domande sulle clausole trovate."
-  if (path.includes('calcolatore'))
-    return 'Hai calcolato il tuo livello di rischio? Posso aiutarti a interpretare il punteggio e suggerirti le coperture più adatte al tuo profilo.'
-  if (path.includes('quiz'))
-    return 'Hai completato il quiz? Se vuoi, posso approfondire i risultati e indicarti la polizza più adatta a te.'
-  if (path.includes('chi-siamo'))
-    return 'Hai domande su FIM Insurance Broker? Sono qui per risponderti su chi siamo, come lavoriamo e cosa ci distingue.'
-  return 'Ciao! Stai esplorando le nostre soluzioni assicurative? Se hai dubbi o vuoi sapere da dove iniziare, sono qui — basta scrivere.'
-}
-
 // Mostrare il CTA WhatsApp dopo questo numero di scambi (messaggi utente)
 const WHATSAPP_ESCALATION_AFTER = 3
 
@@ -149,17 +116,12 @@ export default function FIMAWidget() {
       content: 'Ciao! Sono FIMA, il tuo assistente assicurativo virtuale. Come posso aiutarti oggi?',
     },
   ])
-  const [hasProactiveBadge, setHasProactiveBadge] = useState(false)
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [streamingContent, setStreamingContent] = useState('')
   const [userMessageCount, setUserMessageCount] = useState(0)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const isOpenRef = useRef(isOpen)
-
-  // Mantieni ref aggiornato per i listener che non possono dipendere dallo state
-  useEffect(() => { isOpenRef.current = isOpen }, [isOpen])
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -418,15 +380,12 @@ export default function FIMAWidget() {
 
       {/* Toggle button */}
       <button
-        onClick={() => { setIsOpen(!isOpen); setHasProactiveBadge(false) }}
+        onClick={() => setIsOpen(!isOpen)}
         className="relative w-14 h-14 gradient-primary text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
         aria-label={isOpen ? 'Chiudi chat' : 'Apri chat FIMA'}
         aria-expanded={isOpen}
         aria-controls="fima-chat-window"
       >
-        {hasProactiveBadge && !isOpen && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-bounce-slow" />
-        )}
         {isOpen ? (
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
