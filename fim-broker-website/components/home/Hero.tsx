@@ -65,9 +65,6 @@ export default function Hero() {
                 </svg>
                 WhatsApp
               </a>
-              <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-                📞 Chiama ora
-              </a>
             </div>
 
             {/* Trust badges */}
