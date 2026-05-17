@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 import Image from 'next/image'
 import Hero from '@/components/home/Hero'
 import Stats from '@/components/home/Stats'
@@ -7,6 +8,7 @@ import TrustedBrands from '@/components/home/TrustedBrands'
 import LeadMagnet from '@/components/home/LeadMagnet'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
+import { IconTrasparenza, IconDesign, IconVisione } from '@/components/icons/PilastriIcons'
 
 export const metadata: Metadata = {
   title: {
@@ -86,6 +88,24 @@ const whyFIM = [
     icon: '🤝',
     title: 'Indipendenza totale',
     desc: 'Non rappresentiamo nessuna compagnia. Confrontiamo 30+ offerte con un solo obiettivo: il tuo interesse.',
+  },
+]
+
+const PILASTRI: { icon: ReactNode; title: string; desc: string }[] = [
+  {
+    icon: <IconTrasparenza className="text-accent" size={28} />,
+    title: 'Trasparenza Assoluta',
+    desc: 'Nessun conflitto di interesse, nessun costo nascosto. Ogni clausola spiegata, ogni alternativa mostrata. Vedi esattamente cosa paghi e perché.',
+  },
+  {
+    icon: <IconDesign className="text-accent" size={28} />,
+    title: 'Design su Misura',
+    desc: 'Non esistono soluzioni standard. Analizziamo il tuo profilo di rischio unico e progettiamo la copertura che serve a te — niente di più, niente di meno.',
+  },
+  {
+    icon: <IconVisione className="text-accent" size={28} />,
+    title: 'Visione a Lungo Termine',
+    desc: 'Non pensiamo alla polizza di oggi. Costruiamo un piano di protezione che evolve con te: revisione annuale, adeguamento alle nuove esigenze, strategia continua.',
   },
 ]
 
@@ -187,25 +207,11 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                icon: '🔍',
-                title: 'Trasparenza Assoluta',
-                desc: 'Nessun conflitto di interesse, nessun costo nascosto. Ogni clausola spiegata, ogni alternativa mostrata. Vedi esattamente cosa paghi e perché.',
-              },
-              {
-                icon: '✏️',
-                title: 'Design su Misura',
-                desc: 'Non esistono soluzioni standard. Analizziamo il tuo profilo di rischio unico e progettiamo la copertura che serve a te — niente di più, niente di meno.',
-              },
-              {
-                icon: '🔭',
-                title: 'Visione a Lungo Termine',
-                desc: 'Non pensiamo alla polizza di oggi. Costruiamo un piano di protezione che evolve con te: revisione annuale, adeguamento alle nuove esigenze, strategia continua.',
-              },
-            ].map((pillar) => (
+            {PILASTRI.map((pillar) => (
               <div key={pillar.title} className="text-center p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors">
-                <div className="text-4xl mb-5">{pillar.icon}</div>
+                <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 mx-auto">
+                  {pillar.icon}
+                </div>
                 <h3 className="text-xl font-black text-accent mb-3">{pillar.title}</h3>
                 <p className="text-white/70 leading-relaxed text-sm">{pillar.desc}</p>
               </div>
