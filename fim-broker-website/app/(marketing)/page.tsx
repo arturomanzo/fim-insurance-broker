@@ -482,7 +482,7 @@ export default function HomePage() {
             <Button variant="primary" size="lg" href="/preventivo">
               Richiedi Preventivo
             </Button>
-            <Button variant="outline-white" size="lg" href="tel:+390696883381">
+            <Button variant="outline-white" size="lg" href="tel:+390696883381" external>
               📞 Chiama ora
             </Button>
           </div>
