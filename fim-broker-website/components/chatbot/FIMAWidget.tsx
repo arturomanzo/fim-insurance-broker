@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import ChatBubble from './ChatBubble'
 import { FIMA_CONFIG } from '@/lib/fima-config'
 
@@ -132,13 +132,6 @@ function getProactiveMessage(path: string): string {
   return 'Ciao! Stai esplorando le nostre soluzioni assicurative? Se hai dubbi o vuoi sapere da dove iniziare, sono qui — basta scrivere.'
 }
 
-// Messaggio exit intent — appare quando il cursore lascia la pagina verso l'alto
-const EXIT_INTENT_MESSAGE =
-  'Prima di andare — hai 2 minuti per un preventivo gratuito? Nessun impegno, risposta in 24 ore. Posso aiutarti subito!'
-
-const PROACTIVE_DELAY_MS = 45_000
-const PROACTIVE_SESSION_KEY = 'fima_proactive_shown'
-const EXIT_INTENT_SESSION_KEY = 'fima_exit_intent_shown'
 // Mostrare il CTA WhatsApp dopo questo numero di scambi (messaggi utente)
 const WHATSAPP_ESCALATION_AFTER = 3
 
@@ -185,53 +178,6 @@ export default function FIMAWidget() {
     const path = window.location.pathname
     setPageContext(path)
     setSuggestedQuestions(getSuggestedQuestions(path))
-  }, [])
-
-  // Trigger proattivo: apre dopo PROACTIVE_DELAY_MS se non già mostrato in sessione
-  const triggerProactive = useCallback(() => {
-    if (isOpenRef.current) return
-    const path = window.location.pathname
-    setHasProactiveBadge(true)
-    setMessages((prev) => [
-      ...prev,
-      { role: 'assistant', content: getProactiveMessage(path) },
-    ])
-    setIsOpen(true)
-  }, [])
-
-  useEffect(() => {
-    if (typeof sessionStorage === 'undefined') return
-    if (sessionStorage.getItem(PROACTIVE_SESSION_KEY)) return
-
-    const timer = setTimeout(() => {
-      triggerProactive()
-      sessionStorage.setItem(PROACTIVE_SESSION_KEY, '1')
-    }, PROACTIVE_DELAY_MS)
-
-    return () => clearTimeout(timer)
-  }, [triggerProactive])
-
-  // Exit intent: intercetta il movimento del cursore verso il bordo superiore
-  useEffect(() => {
-    if (typeof sessionStorage === 'undefined') return
-
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY > 10) return // non è uscita verso l'alto
-      if (sessionStorage.getItem(EXIT_INTENT_SESSION_KEY)) return
-      if (isOpenRef.current) return
-
-      sessionStorage.setItem(EXIT_INTENT_SESSION_KEY, '1')
-      sessionStorage.setItem(PROACTIVE_SESSION_KEY, '1') // non mostrare anche il proattivo
-      setHasProactiveBadge(true)
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: EXIT_INTENT_MESSAGE },
-      ])
-      setIsOpen(true)
-    }
-
-    document.addEventListener('mouseleave', handleMouseLeave)
-    return () => document.removeEventListener('mouseleave', handleMouseLeave)
   }, [])
 
   const sendMessage = async (text: string) => {
