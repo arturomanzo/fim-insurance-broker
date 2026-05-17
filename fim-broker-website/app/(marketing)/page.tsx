@@ -9,6 +9,7 @@ import LeadMagnet from '@/components/home/LeadMagnet'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import { IconTrasparenza, IconDesign, IconVisione } from '@/components/icons/PilastriIcons'
+import Button from '@/components/ui/Button'
 
 export const metadata: Metadata = {
   title: {
@@ -478,12 +479,12 @@ export default function HomePage() {
             Un&apos;analisi gratuita dei tuoi rischi, senza impegno. Decodifichiamo la complessità e ti presentiamo la soluzione giusta in 24 ore.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">
+            <Button variant="primary" size="lg" href="/preventivo">
               Richiedi Preventivo
-            </Link>
-            <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
+            </Button>
+            <Button variant="outline-white" size="lg" href="tel:+390696883381">
               📞 Chiama ora
-            </a>
+            </Button>
           </div>
         </div>
       </section>
