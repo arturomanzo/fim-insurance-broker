@@ -104,11 +104,12 @@ export default function Navbar() {
               <span className="hidden lg:inline" aria-hidden="true">Area Cliente</span>
             </Link>
             {/* Contatti rapidi — solo desktop */}
-            <div className="hidden lg:flex items-center gap-3 text-sm">
+            <div className="hidden md:flex items-center gap-3 text-sm">
               <a
                 href="https://wa.me/393473312330?text=Ciao,%20vorrei%20informazioni"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Scrivici su WhatsApp"
                 className="flex items-center gap-1.5 text-gray-500 hover:text-accent transition-colors duration-200"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -117,9 +118,10 @@ export default function Navbar() {
                 </svg>
                 WhatsApp
               </a>
-              <span className="text-gray-300 select-none">|</span>
+              <span className="text-gray-300 select-none" aria-hidden="true">|</span>
               <a
                 href="tel:+390696883381"
+                aria-label="Chiama il numero 06 96883381"
                 className="flex items-center gap-1.5 text-gray-500 hover:text-accent transition-colors duration-200"
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
