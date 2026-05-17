@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { clsx } from 'clsx'
@@ -8,16 +8,21 @@ import FimLogo from '@/components/ui/FimLogo'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/chi-siamo', label: 'Chi Siamo' },
   { href: '/servizi', label: 'Servizi' },
   { href: '/servizi/tutela-legale-aziende', label: 'Tutela Legale', badge: 'Nuovo' },
-  { href: '/soluzioni', label: 'Soluzioni' },
-  { href: '/sinistri', label: 'Sinistri' },
-  { href: '/quiz-polizza', label: 'Quiz Polizza' },
   { href: '/calcolatore-rischi', label: 'Calcolatore' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contatti', label: 'Contatti' },
+  { href: '/chi-siamo', label: 'Chi Siamo' },
 ]
+
+const secondaryLinks = [
+  { href: '/soluzioni', label: 'Soluzioni', desc: 'Per privati e aziende' },
+  { href: '/sinistri', label: 'Sinistri', desc: 'Gestione sinistri' },
+  { href: '/quiz-polizza', label: 'Quiz Polizza', desc: 'Trova la polizza giusta' },
+  { href: '/blog', label: 'Blog', desc: 'Guide e aggiornamenti' },
+  { href: '/contatti', label: 'Contatti', desc: 'Scrivici o chiamaci' },
+]
+
+const allNavLinks = [...navLinks, ...secondaryLinks]
 
 const PRENOTA_HREF = '/prenota-consulenza'
 const AREA_CLIENTE_HREF = '/area-cliente'
@@ -27,11 +32,109 @@ function isNavLinkActive(href: string, pathname: string): boolean {
   if (href === '/') return false
   if (!pathname.startsWith(href + '/')) return false
   // Se esiste un link più specifico che matcha, il parent non è attivo
-  const moreSpecific = navLinks.some(
+  const moreSpecific = allNavLinks.some(
     (l) => l.href !== href && l.href.startsWith(href + '/') &&
       (pathname === l.href || pathname.startsWith(l.href + '/'))
   )
   return !moreSpecific
+}
+
+function NavDropdown({ links }: { links: { href: string; label: string; desc: string }[] }) {
+  const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isAnyActive = links.some(
+    (l) => pathname === l.href || pathname.startsWith(l.href + '/')
+  )
+
+  // Close on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [open])
+
+  // Close on Escape
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Escape') setOpen(false)
+  }
+
+  // Close when focus leaves the container
+  function handleBlur(e: React.FocusEvent) {
+    if (!containerRef.current?.contains(e.relatedTarget as Node)) {
+      setOpen(false)
+    }
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
+    >
+      <button
+        id="altro-menu-button"
+        className={clsx(
+          'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
+          isAnyActive
+            ? 'bg-primary/10 text-primary'
+            : 'text-gray-600 hover:text-primary hover:bg-gray-100'
+        )}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        onClick={() => setOpen((o) => !o)}
+        type="button"
+      >
+        Altro
+        <svg
+          className={clsx('w-3.5 h-3.5 transition-transform duration-200', open && 'rotate-180')}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          role="menu"
+          aria-labelledby="altro-menu-button"
+          className="absolute top-full left-0 w-56 bg-white border border-gray-200 rounded-xl shadow-xl py-2 z-50 mt-1"
+        >
+          {links.map((link) => {
+            const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                role="menuitem"
+                className={clsx(
+                  'flex flex-col px-4 py-3 transition-colors duration-150',
+                  isActive ? 'bg-primary/10' : 'hover:bg-gray-50'
+                )}
+              >
+                <span className={clsx('text-sm font-medium', isActive ? 'text-primary' : 'text-gray-700')}>
+                  {link.label}
+                </span>
+                <span className="text-xs text-gray-400 mt-0.5">{link.desc}</span>
+              </Link>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default function Navbar() {
@@ -89,6 +192,7 @@ export default function Navbar() {
                 </Link>
               )
             })}
+            <NavDropdown links={secondaryLinks} />
           </div>
 
           {/* CTA */}
@@ -155,7 +259,7 @@ export default function Navbar() {
         {/* Mobile menu */}
         {isMenuOpen && (
           <div id="mobile-nav-menu" className="md:hidden border-t border-gray-100 py-4 space-y-1 animate-fade-in">
-            {navLinks.map((link) => {
+            {allNavLinks.map((link) => {
               const isActive = isNavLinkActive(link.href, pathname)
               return (
                 <Link
@@ -169,12 +273,12 @@ export default function Navbar() {
                       : 'text-gray-600 hover:text-primary hover:bg-gray-50'
                   )}
                 >
-                  {link.label}
                   {'badge' in link && link.badge && (
                     <span className="bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
                       {link.badge}
                     </span>
                   )}
+                  {link.label}
                 </Link>
               )
             })}
