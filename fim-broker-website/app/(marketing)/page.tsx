@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import Image from 'next/image'
 import Hero from '@/components/home/Hero'
 import Stats from '@/components/home/Stats'
 import ServicesGrid from '@/components/home/ServicesGrid'
@@ -355,13 +354,15 @@ export default function HomePage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
             <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl">
-              <Image
-                src="/images/visual/rete-protezione-connessa.png"
-                alt="Rete di protezione assicurativa interconnessa — il vantaggio FIM"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/fim-vantaggio.mp4" type="video/mp4" />
+              </video>
             </div>
             <div>
               <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
