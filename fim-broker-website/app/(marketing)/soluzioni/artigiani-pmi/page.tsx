@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
@@ -121,6 +122,7 @@ export default function ArtigianiPmiPage() {
             <span>/</span>
             <span className="text-white/80">Artigiani e PMI</span>
           </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
               🏭 Soluzioni per piccole e medie imprese
@@ -154,6 +156,19 @@ export default function ArtigianiPmiPage() {
                 📞 06 96883381
               </a>
             </div>
+          </div>
+          <div className="hidden lg:flex justify-end">
+            <div className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/visual/solidita-strutturale.png"
+                alt="Solidità strutturale delle coperture assicurative per PMI e artigiani"
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/60 to-transparent" />
+            </div>
+          </div>
           </div>
         </div>
       </section>

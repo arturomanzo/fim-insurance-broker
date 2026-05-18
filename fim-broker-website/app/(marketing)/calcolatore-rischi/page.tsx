@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import dynamic from 'next/dynamic'
 
 const RiskCalculator = dynamic(() => import('@/components/calculator/RiskCalculator'), {
@@ -61,42 +62,42 @@ export default function CalcolatoreRischiPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       {/* Hero */}
-      <section className="gradient-primary py-16 md:py-20">
-        <div className="container-custom text-center">
-          <span className="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            Strumento gratuito
-          </span>
-          <h1 className="text-3xl md:text-5xl font-black text-white mb-4">
-            Calcolatore del Rischio Assicurativo
-          </h1>
-          <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
-            Rispondi a 8 domande e scopri quali polizze ti servono davvero — con una stima del costo. Completamente gratuito, nessun impegno.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 mt-6 text-white/70 text-sm">
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent-light" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              2 minuti
-            </span>
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent-light" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              100% gratuito
-            </span>
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent-light" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              Analisi personalizzata
-            </span>
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent-light" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              Nessun impegno
-            </span>
+      <section className="gradient-primary py-16 md:py-20 overflow-hidden">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+                Strumento gratuito
+              </span>
+              <h1 className="text-3xl md:text-5xl font-black text-white mb-4">
+                Calcolatore del Rischio Assicurativo
+              </h1>
+              <p className="text-white/80 text-lg md:text-xl">
+                Rispondi a 8 domande e scopri quali polizze ti servono davvero — con una stima del costo. Completamente gratuito, nessun impegno.
+              </p>
+              <div className="flex flex-wrap items-center gap-6 mt-6 text-white/70 text-sm">
+                {['2 minuti', '100% gratuito', 'Analisi personalizzata', 'Nessun impegno'].map((label) => (
+                  <span key={label} className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-accent-light" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="hidden lg:flex justify-end">
+              <div className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/visual/pianificazione-strategica.png"
+                  alt="Pianificazione strategica del rischio assicurativo con FIM"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-transparent" />
+              </div>
+            </div>
           </div>
         </div>
       </section>

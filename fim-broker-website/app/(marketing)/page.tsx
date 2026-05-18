@@ -356,8 +356,8 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
             <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl">
               <Image
-                src="/images/brand/strategy-mapping.jpg"
-                alt="Professionista analizza connessioni strategiche — l'intelligenza umana dietro la protezione FIM"
+                src="/images/visual/rete-protezione-connessa.png"
+                alt="Rete di protezione assicurativa interconnessa — il vantaggio FIM"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
