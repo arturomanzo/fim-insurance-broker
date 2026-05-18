@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { services } from '@/lib/services'
 import Card from '@/components/ui/Card'
 
@@ -18,19 +19,33 @@ export default function ServiziPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="gradient-primary py-16 md:py-24 text-white">
+      <section className="gradient-primary py-16 md:py-24 text-white overflow-hidden">
         <div className="container-custom">
-          <div className="max-w-3xl">
-            <span className="inline-block bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full mb-4">
-              I Nostri Servizi
-            </span>
-            <h1 className="text-4xl md:text-5xl font-black mb-6">
-              Soluzioni assicurative <span className="text-accent">per ogni esigenza</span>
-            </h1>
-            <p className="text-xl text-white/80">
-              Da FIM trovi polizze personalizzate per privati e aziende. Confrontiamo le offerte di
-              le principali compagnie assicurative per garantirti il miglior rapporto qualità-prezzo.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-xl">
+              <span className="inline-block bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full mb-4">
+                I Nostri Servizi
+              </span>
+              <h1 className="text-4xl md:text-5xl font-black mb-6">
+                Soluzioni assicurative <span className="text-accent">per ogni esigenza</span>
+              </h1>
+              <p className="text-xl text-white/80">
+                Da FIM trovi polizze personalizzate per privati e aziende. Confrontiamo le offerte
+                delle principali compagnie assicurative per garantirti il miglior rapporto qualità-prezzo.
+              </p>
+            </div>
+            <div className="hidden lg:flex justify-end">
+              <div className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/visual/broker-scioglie-complessita.png"
+                  alt="Broker assicurativo che semplifica la complessità delle polizze per i clienti"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-transparent" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
