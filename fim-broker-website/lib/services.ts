@@ -386,7 +386,7 @@ export const services: Service[] = [
       'La RC Azienda copre i danni causati a terzi, ma lascia scoperti i costi legali dell\'imprenditore e dei suoi amministratori. Con la Tutela Legale Aziende completiamo la protezione: spese di avvocato, perito, CTU e consulenti in procedimenti penali, contenziosi con dipendenti, fornitori e clienti, e azioni di responsabilità contro amministratori e sindaci. Una copertura indispensabile in un\'epoca in cui un procedimento penale per reati colposi o la responsabilità amministrativa ex D.Lgs. 231/2001 possono colpire qualsiasi impresa.',
     icon: '⚖️',
     color: 'indigo',
-    image: '/images/brand/crystal-sculpture.jpg',
+    image: '/images/brand/tutela-legale.jpg',
     features: [
       'Tutela penale per reati colposi (sicurezza sul lavoro, ambientali, fiscali)',
       'Responsabilità amministrativa ex D.Lgs. 231/2001',
