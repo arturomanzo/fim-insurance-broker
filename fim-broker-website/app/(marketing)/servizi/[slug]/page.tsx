@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { services, getServiceBySlug } from '@/lib/services'
 import Card from '@/components/ui/Card'
 import FaqAccordion from '@/components/ui/FaqAccordion'
@@ -96,14 +97,28 @@ export default async function ServizioPage({ params }: Props) {
             <span className="text-white/40">/</span>
             <span className="text-white/80 text-sm">{service.title}</span>
           </div>
-          <div className="flex items-start gap-6">
-            <span className="text-6xl hidden sm:block">{service.icon}</span>
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-black mb-4">
-                {service.title}
-              </h1>
-              <p className="text-xl text-white/80 leading-relaxed">{service.description}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="flex items-start gap-6">
+              <span className="text-6xl hidden sm:block flex-shrink-0">{service.icon}</span>
+              <div>
+                <h1 className="text-4xl md:text-5xl font-black mb-4">
+                  {service.title}
+                </h1>
+                <p className="text-xl text-white/80 leading-relaxed">{service.description}</p>
+              </div>
             </div>
+            {service.image && (
+              <div className="relative hidden lg:block rounded-2xl overflow-hidden aspect-[16/9] shadow-2xl">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
+                  priority
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
