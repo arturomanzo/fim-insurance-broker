@@ -101,8 +101,17 @@ export default function ChiSiamoPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="gradient-primary py-16 md:py-24 text-white">
-        <div className="container-custom">
+      <section className="relative py-16 md:py-24 text-white overflow-hidden">
+        <Image
+          src="/images/brand/cityscape.png"
+          alt="FIM Insurance Broker — Al tuo fianco, ovunque tu vada"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-primary/75" />
+        <div className="container-custom relative z-10">
           <div className="max-w-3xl">
             <span className="inline-block bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full mb-4">
               Chi Siamo
