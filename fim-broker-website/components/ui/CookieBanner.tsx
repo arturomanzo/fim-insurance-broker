@@ -5,6 +5,33 @@ import Link from 'next/link'
 
 type ConsentChoice = 'all' | 'essential' | null
 
+// Estensione type-safe del global window per gtag (Consent Mode v2).
+// Il default consent ("denied") e l'inizializzazione di gtag avvengono
+// nello <script> inline in app/layout.tsx (CONSENT_INIT_SCRIPT).
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+    dataLayer?: unknown[]
+  }
+}
+
+/**
+ * Aggiorna il Consent Mode v2 di Google in base alla scelta dell'utente.
+ * Chiamato dopo che l'utente ha cliccato un pulsante del banner.
+ * GTM e tutti i tag al suo interno (GA4, Google Ads) leggono questo stato
+ * per decidere se collezionare dati pubblicitari/analitici.
+ */
+function updateGtagConsent(choice: ConsentChoice, analyticsGranted: boolean) {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return
+  const allGranted = choice === 'all'
+  window.gtag('consent', 'update', {
+    ad_storage: allGranted ? 'granted' : 'denied',
+    ad_user_data: allGranted ? 'granted' : 'denied',
+    ad_personalization: allGranted ? 'granted' : 'denied',
+    analytics_storage: analyticsGranted ? 'granted' : 'denied',
+  })
+}
+
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
@@ -28,6 +55,7 @@ export default function CookieBanner() {
       localStorage.setItem('fim-cookie-consent', JSON.stringify({
         choice: 'essential', analytics: false, timestamp: new Date().toISOString(),
       }))
+      updateGtagConsent('essential', false)
       setVisible(false)
     }
     document.addEventListener('keydown', handleKeyDown)
@@ -35,11 +63,15 @@ export default function CookieBanner() {
   }, [visible])
 
   const saveConsent = (choice: ConsentChoice) => {
+    const analytics =
+      choice === 'all' ? true : choice === 'essential' ? false : analyticsChecked
     localStorage.setItem('fim-cookie-consent', JSON.stringify({
       choice,
-      analytics: choice === 'all' ? true : (choice === 'essential' ? false : analyticsChecked),
+      analytics,
       timestamp: new Date().toISOString(),
     }))
+    // Propaga la scelta al Consent Mode v2 di Google (GA4 + Google Ads in GTM)
+    updateGtagConsent(choice, analytics)
     setVisible(false)
   }
 

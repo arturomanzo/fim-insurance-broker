@@ -13,16 +13,20 @@ export const metadata: Metadata = {
   },
 }
 
-const glossarySchema = {
-  '@context': 'https://schema.org',
-  '@type': 'DefinedTermSet',
-  name: 'Glossario Assicurativo FIM Insurance Broker',
-  description: 'Definizioni dei principali termini assicurativi per privati e aziende.',
-  url: 'https://www.fimbroker.it/glossario',
-}
+const GLOSSARY_URL = 'https://www.fimbroker.it/glossario'
 
 type Term = { term: string; definition: string; related?: string[] }
 type Letter = { letter: string; terms: Term[] }
+
+/** Genera uno slug ASCII stabile per ancoraggio/identifier dei DefinedTerm */
+function termSlug(term: string): string {
+  return term
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '') // rimuove diacritici (accenti)
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
 
 const glossary: Letter[] = [
   {
@@ -260,6 +264,31 @@ const glossary: Letter[] = [
 const allLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 const presentLetters = new Set(glossary.map((g) => g.letter))
 
+// DefinedTermSet con TUTTI i termini elencati come hasDefinedTerm.
+// Generato a build-time dai dati locali — segnale forte per AI generative
+// che cercano definizioni autorevoli (Perplexity, ChatGPT, Google AI
+// Overviews) e per Google in modalità Featured Snippet su query come
+// "cos'è la franchigia", "differenza tra massimale e franchigia".
+const glossarySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  '@id': `${GLOSSARY_URL}#glossario`,
+  name: 'Glossario Assicurativo FIM Insurance Broker',
+  description: 'Definizioni dei principali termini assicurativi per privati e aziende.',
+  url: GLOSSARY_URL,
+  inLanguage: 'it-IT',
+  hasDefinedTerm: glossary.flatMap((letter) =>
+    letter.terms.map((t) => ({
+      '@type': 'DefinedTerm',
+      '@id': `${GLOSSARY_URL}#${termSlug(t.term)}`,
+      name: t.term,
+      description: t.definition,
+      inDefinedTermSet: GLOSSARY_URL,
+      url: `${GLOSSARY_URL}#${termSlug(t.term)}`,
+    }))
+  ),
+}
+
 export default function GlossarioPage() {
   return (
     <div>
@@ -322,7 +351,11 @@ export default function GlossarioPage() {
                 </div>
                 <div className="space-y-4">
                   {group.terms.map((item) => (
-                    <div key={item.term} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                    <div
+                      key={item.term}
+                      id={termSlug(item.term)}
+                      className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm scroll-mt-28"
+                    >
                       <h2 className="text-lg font-black text-primary mb-2">{item.term}</h2>
                       <p className="text-gray-600 text-sm leading-relaxed mb-3">{item.definition}</p>
                       {item.related && item.related.length > 0 && (

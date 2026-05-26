@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { services, getServiceBySlug } from '@/lib/services'
 import Card from '@/components/ui/Card'
 import FaqAccordion from '@/components/ui/FaqAccordion'
+import CoverageTable from '@/components/ui/CoverageTable'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 interface Props {
@@ -144,6 +145,21 @@ export default async function ServizioPage({ params }: Props) {
                   ))}
                 </div>
               </Card>
+
+              {/* Coverage table — candidato a Featured Snippet tabellare AEO.
+                  Mostrata solo se il servizio definisce `coverage` (vedi lib/services.ts) */}
+              {service.coverage && (
+                <Card>
+                  <h2 className="text-2xl font-black text-primary mb-2">
+                    Cosa copre e cosa non copre
+                  </h2>
+                  <p className="text-gray-600 text-sm mb-6">
+                    Le coperture tipiche di una polizza {service.title.toLowerCase()}.
+                    Le condizioni esatte dipendono dalla compagnia e dal pacchetto scelto.
+                  </p>
+                  <CoverageTable coverage={service.coverage} serviceName={service.title} />
+                </Card>
+              )}
 
               {/* Benefits */}
               <Card>

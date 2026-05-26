@@ -5,9 +5,11 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { ALL_FAQS, buildFaqSchema } from '@/lib/faq'
 
 export const metadata: Metadata = {
-  title: 'Domande frequenti — Tutte le risposte sulle assicurazioni | FIM',
+  // Title corto + template-suffix "| FIM Insurance Broker" applicato dal root layout
+  title: 'FAQ Assicurazioni — Tutte le risposte chiare',
+  // Description: 156 caratteri — entro la soglia di Google.
   description:
-    'Tutte le domande frequenti sulle polizze assicurative: famiglie, professionisti, PMI, condomini, sinistri, catastrofi naturali, welfare aziendale e settori specifici. Risposte chiare dal broker indipendente FIM.',
+    'Domande frequenti sulle polizze: casa, auto, vita, RC professionale, PMI, condomini, sinistri. Risposte chiare e concrete dal broker indipendente FIM.',
   alternates: { canonical: '/faq' },
   openGraph: {
     title: 'Domande frequenti — FIM Insurance Broker',

@@ -2,6 +2,23 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Link from 'next/link'
+import { AUTHORS, buildPersonSchema } from '@/lib/authors'
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
+
+// AboutPage schema con `mainEntity` = elenco Person del team.
+// I 4 membri sono dichiarati con worksFor → org @id, expertise, ruolo.
+// Segnala a Google e ai motori generativi (ChatGPT/Claude/Perplexity)
+// chi è dietro al broker — fondamentale per E-E-A-T su YMYL.
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': `${BASE_URL}/chi-siamo`,
+  url: `${BASE_URL}/chi-siamo`,
+  name: 'Chi Siamo — FIM Insurance Broker',
+  about: { '@id': `${BASE_URL}/#organization` },
+  mainEntity: Object.values(AUTHORS).map((a) => buildPersonSchema(a)),
+}
 
 export const metadata: Metadata = {
   title: 'Chi Siamo',
@@ -14,8 +31,11 @@ export const metadata: Metadata = {
   },
 }
 
+// Slug allineati a `lib/authors.ts` per consentire ancoraggi profondi
+// (es. /chi-siamo#arturo-manzo) usati come `url` nel Person schema.
 const team = [
   {
+    slug: 'arturo-manzo',
     name: 'Arturo Manzo',
     role: 'CEO & Fondatore',
     bio: 'Fondatore di FIM nel 2004, Arturo guida l\'azienda con oltre 20 anni di esperienza nel brokeraggio assicurativo. Specializzato in polizze aziendali complesse e risk management per PMI.',
@@ -23,6 +43,7 @@ const team = [
     photo: '/images/team/arturomanzo.jpg',
   },
   {
+    slug: 'gianluca-ferrante-carrante',
     name: 'Gianluca Ferrante Carrante',
     role: 'Consulente Senior — Privati',
     bio: 'Gianluca è specializzato nella protezione di famiglie e privati. Dalla casa all\'auto, alla salute: costruisce coperture su misura con attenzione ai dettagli e un approccio orientato alla relazione di lungo periodo.',
@@ -30,6 +51,7 @@ const team = [
     photo: '/images/team/gianlucaferrantecarrante.jpg',
   },
   {
+    slug: 'luciano-manzo',
     name: 'Luciano Manzo',
     role: 'Responsabile Sinistri',
     bio: 'Luciano segue i clienti in ogni fase del sinistro: dalla denuncia alla liquidazione. La sua esperienza pluriennale garantisce gestione rapida e risultati concreti nel momento del bisogno.',
@@ -37,6 +59,7 @@ const team = [
     photo: '/images/team/lucianomanzo.jpg',
   },
   {
+    slug: 'sara-conti',
     name: 'Sara Conti',
     role: 'Consulente — Aziende & PMI',
     bio: 'Specializzata in soluzioni assicurative per piccole e medie imprese, Sara aiuta gli imprenditori a proteggere il patrimonio aziendale con polizze cyber, RC e welfare per i dipendenti.',
@@ -100,6 +123,10 @@ const milestones = [
 export default function ChiSiamoPage() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
       {/* Hero */}
       <section className="relative py-16 md:py-24 text-white overflow-hidden">
         <Image
@@ -206,7 +233,9 @@ export default function ChiSiamoPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member) => (
-              <div key={member.name} className="group">
+              // id={member.slug} consente l'ancoraggio profondo dai link
+              // generati nello schema Person (Author URL).
+              <div key={member.slug} id={member.slug} className="group scroll-mt-24">
                 {/* Photo */}
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-5 shadow-md">
                   <Image

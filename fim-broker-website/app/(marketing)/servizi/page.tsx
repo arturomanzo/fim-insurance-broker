@@ -4,6 +4,42 @@ import Image from 'next/image'
 import { services } from '@/lib/services'
 import Card from '@/components/ui/Card'
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
+
+// CollectionPage + ItemList — espone i 9 servizi come lista ordinata.
+// Google usa ItemList sulle index page per generare carousel rich result
+// e per i sitelinks. provider = riferimento all'org globale via @id.
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${BASE_URL}/servizi`,
+  url: `${BASE_URL}/servizi`,
+  name: 'Servizi Assicurativi FIM Insurance Broker',
+  description:
+    'Catalogo completo dei servizi assicurativi: auto, vita, casa, salute, polizze aziendali, viaggio, cauzioni, tutela legale, risk management.',
+  inLanguage: 'it-IT',
+  isPartOf: { '@id': `${BASE_URL}/#website` },
+  about: { '@id': `${BASE_URL}/#organization` },
+  mainEntity: {
+    '@type': 'ItemList',
+    name: 'Servizi Assicurativi',
+    numberOfItems: services.length,
+    itemListElement: services.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${BASE_URL}/servizi/${s.slug}`,
+      item: {
+        '@type': 'Service',
+        '@id': `${BASE_URL}/servizi/${s.slug}`,
+        name: s.title,
+        description: s.shortDescription,
+        url: `${BASE_URL}/servizi/${s.slug}`,
+        provider: { '@id': `${BASE_URL}/#organization` },
+      },
+    })),
+  },
+}
+
 export const metadata: Metadata = {
   title: 'Servizi Assicurativi',
   description: 'Scopri tutti i servizi assicurativi FIM: auto, vita, casa, salute, polizze aziendali e viaggio. Soluzioni personalizzate per privati e imprese.',
@@ -18,6 +54,10 @@ export const metadata: Metadata = {
 export default function ServiziPage() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-24 text-white overflow-hidden">
         <div className="container-custom">
