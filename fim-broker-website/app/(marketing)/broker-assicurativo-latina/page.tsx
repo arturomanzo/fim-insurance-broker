@@ -7,26 +7,32 @@ const CITY = 'Latina'
 const SLUG = 'broker-assicurativo-latina'
 const BASE_URL = 'https://www.fimbroker.it'
 
-const localBusinessSchema = {
+// La landing geo NON ridichiara l'organizzazione (lo schema completo
+// InsuranceAgency è già nel root layout). Qui dichiariamo solo una
+// WebPage che fa riferimento all'org tramite @id e specifica le
+// aree servite per questa pagina — evita lo schema duplicato segnalato
+// nell'audit SEO 2026-05-26.
+const pageSchema = {
   '@context': 'https://schema.org',
-  '@type': ['InsuranceAgency', 'LocalBusiness'],
-  name: 'FIM Insurance Broker',
-  url: BASE_URL,
-  telephone: '+390696883381',
-  email: 'info@fimbroker.it',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Via Roma 41',
-    addressLocality: 'Cisterna di Latina',
-    addressRegion: 'LT',
-    postalCode: '04012',
-    addressCountry: 'IT',
+  '@type': 'WebPage',
+  '@id': `${BASE_URL}/${SLUG}`,
+  url: `${BASE_URL}/${SLUG}`,
+  name: `Broker Assicurativo a ${CITY} — FIM Insurance Broker`,
+  inLanguage: 'it-IT',
+  isPartOf: { '@id': `${BASE_URL}/#website` },
+  about: { '@id': `${BASE_URL}/#organization` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${BASE_URL}/opengraph-image` },
+  // Service "Brokeraggio assicurativo" servito a Latina — segnale geo forte
+  // senza ridichiarare l'organizzazione.
+  mainEntity: {
+    '@type': 'Service',
+    serviceType: 'Brokeraggio assicurativo',
+    provider: { '@id': `${BASE_URL}/#organization` },
+    areaServed: [
+      { '@type': 'City', name: 'Latina' },
+      { '@type': 'AdministrativeArea', name: 'Provincia di Latina' },
+    ],
   },
-  geo: { '@type': 'GeoCoordinates', latitude: 41.5939662, longitude: 12.8234096 },
-  areaServed: [
-    { '@type': 'City', name: 'Latina' },
-    { '@type': 'AdministrativeArea', name: 'Provincia di Latina' },
-  ],
 }
 
 export const metadata: Metadata = {
@@ -57,7 +63,7 @@ const vantaggi = [
 export default function BrokerLatina() {
   return (
     <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
       <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: `Broker a ${CITY}`, href: `/${SLUG}` }]} />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-24 text-white">

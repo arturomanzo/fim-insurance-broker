@@ -3,8 +3,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Badge from '@/components/ui/Badge'
 import Card from '@/components/ui/Card'
+import AuthorBox from '@/components/ui/AuthorBox'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { getAllPosts, getPostBySlug } from '@/lib/blog'
+import { getAuthor, buildPersonSchema } from '@/lib/authors'
 
 const BASE_URL = 'https://www.fimbroker.it'
 
@@ -52,6 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) return { title: 'Articolo non trovato' }
+  const author = getAuthor(post.author)
   const ogImageUrl = `/api/og?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.category)}&sub=${encodeURIComponent(post.excerpt.slice(0, 90))}`
   const publishedTime = parseItalianDate(post.date)
   const modifiedTime = parseItalianDate(post.updatedDate ?? post.date)
@@ -65,7 +68,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime,
       modifiedTime,
-      authors: ['FIM Insurance Broker'],
+      // Persona reale, non più placeholder "FIM Insurance Broker" — meglio per E-E-A-T
+      authors: [author.name],
       tags: [post.category, 'assicurazioni', 'broker assicurativo'],
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
     },
@@ -84,6 +88,9 @@ export default async function BlogPostPage({ params }: Props) {
   const category = post?.category ?? 'Assicurazioni'
   const date = post?.date ?? ''
   const readTime = post?.readTime ?? '5 min'
+  const author = getAuthor(post?.author)
+  const datePublishedIso = parseItalianDate(date)
+  const dateModifiedIso = parseItalianDate(post?.updatedDate ?? date)
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -91,19 +98,21 @@ export default async function BlogPostPage({ params }: Props) {
     headline: title,
     description: post?.excerpt ?? '',
     image: post?.image ? [post.image] : [`${BASE_URL}/opengraph-image`],
-    datePublished: parseItalianDate(date),
-    dateModified: parseItalianDate(post?.updatedDate ?? date),
-    author: {
-      '@type': 'Organization',
-      name: 'FIM Insurance Broker',
-      url: BASE_URL,
-    },
+    datePublished: datePublishedIso,
+    dateModified: dateModifiedIso,
+    // E-E-A-T: autore = Person reale del team (non più Organization). Per
+    // contenuti YMYL come le assicurazioni, Google premia esplicitamente
+    // gli articoli firmati da persone con credenziali verificabili.
+    author: buildPersonSchema(author),
     publisher: {
       '@type': 'Organization',
+      '@id': `${BASE_URL}/#organization`,
       name: 'FIM Insurance Broker',
       logo: { '@type': 'ImageObject', url: `${BASE_URL}/icon.svg` },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/blog/${slug}` },
+    inLanguage: 'it-IT',
+    articleSection: category,
   }
 
   return (
@@ -128,11 +137,17 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="max-w-3xl">
             <Badge variant={categoryColors[category] ?? 'primary'} className="mb-4">{category}</Badge>
             <h1 className="text-3xl md:text-4xl font-black mb-4">{title}</h1>
-            <div className="flex items-center gap-4 text-white/70 text-sm">
-              <span>FIM Insurance Team</span>
-              <span>•</span>
-              <span>{date}</span>
-              <span>•</span>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-white/70 text-sm">
+              <Link
+                href="/chi-siamo"
+                className="font-semibold text-white hover:text-accent transition-colors"
+                rel="author"
+              >
+                {author.name}
+              </Link>
+              <span aria-hidden="true">•</span>
+              <time dateTime={datePublishedIso}>{date}</time>
+              <span aria-hidden="true">•</span>
               <span>{readTime} di lettura</span>
             </div>
           </div>
@@ -212,6 +227,15 @@ export default async function BlogPostPage({ params }: Props) {
                   </div>
                 </div>
               </Card>
+
+              {/* Box autore — segnale E-E-A-T per contenuti YMYL */}
+              <div className="mt-8">
+                <AuthorBox
+                  author={author}
+                  publishedDate={datePublishedIso}
+                  modifiedDate={dateModifiedIso}
+                />
+              </div>
             </div>
 
             {/* Sidebar */}

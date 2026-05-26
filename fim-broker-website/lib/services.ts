@@ -1,3 +1,12 @@
+export interface Coverage {
+  /** Cosa la polizza copre tipicamente. Lista concisa, snippet-friendly. */
+  covered: string[]
+  /** Esclusioni tipiche / cose che la polizza NON copre. */
+  notCovered: string[]
+  /** Nota legale/contestuale opzionale mostrata sotto la tabella */
+  note?: string
+}
+
 export interface Service {
   slug: string
   title: string
@@ -11,6 +20,13 @@ export interface Service {
   faq: Array<{ question: string; answer: string }>
   priceFrom: string
   priceNote: string
+  /**
+   * Tabella comparativa "Cosa copre / Cosa NON copre".
+   * Quando presente, viene renderizzata nella pagina servizio come
+   * elemento AEO-friendly (forte candidato a Featured Snippet tabellare).
+   * Opzionale per backward compatibility.
+   */
+  coverage?: Coverage
 }
 
 export const services: Service[] = [
@@ -65,6 +81,27 @@ export const services: Service[] = [
     ],
     priceFrom: 'da 250€/anno',
     priceNote: 'RC Auto base. Kasko e garanzie accessorie a partire da 80€ in più.',
+    coverage: {
+      covered: [
+        'RC Auto obbligatoria (danni a terzi)',
+        'Kasko collisione e ribaltamento',
+        'Furto e incendio del veicolo',
+        'Atti vandalici e dolosi di terzi',
+        'Eventi atmosferici (grandine, vento)',
+        'Rottura cristalli',
+        'Assistenza stradale 24/7',
+        'Infortuni del conducente',
+      ],
+      notCovered: [
+        'Usura e manutenzione ordinaria',
+        'Multe, contravvenzioni e sanzioni amministrative',
+        'Sinistri con tasso alcolemico oltre il limite',
+        'Danni causati intenzionalmente dall\'assicurato',
+        'Guida senza patente o patente sospesa',
+        'Trasporto di merci pericolose non dichiarato',
+      ],
+      note: 'Coperture indicative di una polizza auto completa. Le garanzie specifiche dipendono dalla compagnia e dal pacchetto scelto. FIM analizza le condizioni di ogni offerta per evitare sorprese al momento del sinistro.',
+    },
   },
   {
     slug: 'assicurazione-vita',
@@ -117,6 +154,25 @@ export const services: Service[] = [
     ],
     priceFrom: 'da 15€/mese',
     priceNote: 'Polizza temporanea caso morte. Piani previdenziali da 50€/mese.',
+    coverage: {
+      covered: [
+        'Capitale al beneficiario in caso di decesso',
+        'Invalidità permanente da malattia o infortunio (su garanzia)',
+        'Rendita Long Term Care in caso di non autosufficienza',
+        'Esonero pagamento premi in caso di invalidità totale',
+        'Capitale rivalutato per polizze miste/previdenziali',
+        'Esenzione fiscale del capitale (artt. 17 e 26-ter D.P.R. 600/73)',
+      ],
+      notCovered: [
+        'Suicidio nei primi 2 anni di polizza',
+        'Decesso da malattie preesistenti non dichiarate',
+        'Atti di guerra e terrorismo (salvo estensione)',
+        'Pratiche sportive estreme non dichiarate (es. paracadutismo, alpinismo)',
+        'Abuso di sostanze stupefacenti o alcool',
+        'Conseguenze di azioni dolose dell\'assicurato',
+      ],
+      note: 'Le esclusioni esatte e i periodi di carenza dipendono dalla compagnia e dal tipo di polizza (TCM, mista, unit-linked, LTC). FIM verifica per ogni cliente le condizioni più rilevanti prima della stipula.',
+    },
   },
   {
     slug: 'assicurazione-casa',
@@ -169,6 +225,27 @@ export const services: Service[] = [
     ],
     priceFrom: 'da 100€/anno',
     priceNote: 'Polizza base incendio e furto. Multirischio completo da 180€/anno.',
+    coverage: {
+      covered: [
+        'Incendio, scoppio ed esplosione',
+        'Furto, rapina ed effrazione in abitazione',
+        'Allagamenti da impianti interni (rotture tubi, lavatrici)',
+        'Eventi atmosferici: grandine, vento forte, neve',
+        'RC capofamiglia (danni a terzi)',
+        'Atti vandalici e dolosi di terzi',
+        'Rottura lastre e cristalli',
+        'Assistenza domiciliare 24/7 (idraulico, fabbro, elettricista)',
+      ],
+      notCovered: [
+        'Alluvioni e terremoti (garanzia catastrofale separata)',
+        'Usura normale e danni progressivi',
+        'Danni dolosi commessi dall\'assicurato',
+        'Immobili disabitati oltre 30 giorni senza preavviso',
+        'Gioielli, contanti e oggetti d\'arte oltre i limiti di polizza',
+        'Danni da animali domestici al proprio immobile',
+      ],
+      note: 'Per immobili in zone a rischio sismico o idrogeologico è fondamentale aggiungere la garanzia catastrofale: dal 2024 è obbligatoria per le imprese (D.L. 213/2023) e fortemente raccomandata per i privati.',
+    },
   },
   {
     slug: 'assicurazione-salute',
@@ -221,6 +298,27 @@ export const services: Service[] = [
     ],
     priceFrom: 'da 25€/mese',
     priceNote: 'Polizza individuale con ricoveri. Piani famiglia da 60€/mese.',
+    coverage: {
+      covered: [
+        'Ricoveri con o senza intervento chirurgico',
+        'Alta diagnostica: TAC, risonanza magnetica, PET',
+        'Visite specialistiche e accertamenti',
+        'Parto e degenza per la maternità',
+        'Cure oncologiche e terapie radianti',
+        'Assistenza sanitaria all\'estero',
+        'Lenti correttive e ausili (su garanzia)',
+        'Rette di degenza in strutture private convenzionate',
+      ],
+      notCovered: [
+        'Cure estetiche e chirurgia non terapeutica',
+        'Malattie pregresse non dichiarate alla stipula',
+        'Fecondazione assistita oltre i limiti del piano',
+        'Cure dentistiche base (richiedono garanzia dental separata)',
+        'Long Term Care e non autosufficienza (polizza separata)',
+        'Cure non riconosciute dal SSN o sperimentali',
+      ],
+      note: 'Periodo di carenza tipico: 30 giorni per malattia, fino a 270 giorni per parto, 180 giorni per intervento chirurgico programmato. FIM verifica carenze e massimali prima della stipula.',
+    },
   },
   {
     slug: 'polizze-aziendali',
@@ -273,6 +371,27 @@ export const services: Service[] = [
     ],
     priceFrom: 'su preventivo',
     priceNote: 'RC impresa da 300€/anno. Pacchetti completi da 800€/anno.',
+    coverage: {
+      covered: [
+        'RC verso terzi e verso prestatori di lavoro (RCT/RCO)',
+        'Danni materiali a beni aziendali (incendio, furto, eventi)',
+        'Business interruption (mancato guadagno da fermo attività)',
+        'Responsabilità prodotti e ritiro dal mercato',
+        'Danni indiretti (perdita di clienti, costi straordinari)',
+        'Cyber risk e data breach (su garanzia dedicata)',
+        'Tutela legale aziendale (su garanzia)',
+        'Trasporti e merci in giacenza',
+      ],
+      notCovered: [
+        'Responsabilità di amministratori e sindaci (polizza D&O separata)',
+        'Inquinamento ambientale (polizza Environmental separata)',
+        'Atti di guerra e terrorismo (estensione opzionale)',
+        'Sanzioni amministrative e penali non trasferibili per legge',
+        'Errori professionali individuali (RC Professionale separata)',
+        'Eventi pregressi alla stipula (no retroattività di default)',
+      ],
+      note: 'Le polizze aziendali si modellano sulla struttura specifica dell\'impresa (settore, fatturato, asset, personale). FIM costruisce il pacchetto su misura analizzando l\'intero profilo di rischio.',
+    },
   },
   {
     slug: 'assicurazione-viaggio',
@@ -325,6 +444,27 @@ export const services: Service[] = [
     ],
     priceFrom: 'da 15€ a viaggio',
     priceNote: 'Singolo viaggio Europa. Long-stay e polizze annuali disponibili.',
+    coverage: {
+      covered: [
+        'Annullamento del viaggio prima della partenza',
+        'Spese mediche e ospedaliere all\'estero',
+        'Rimpatrio sanitario con assistenza medica',
+        'Smarrimento, furto e ritardata consegna del bagaglio',
+        'Ritardi e cancellazioni voli oltre la soglia',
+        'Assistenza medica e amministrativa 24/7',
+        'Anticipo cauzione penale (per incidenti all\'estero)',
+        'Responsabilità civile in viaggio',
+      ],
+      notCovered: [
+        'Viaggi in paesi sconsigliati dal MAE (ministero esteri)',
+        'Sport estremi non dichiarati (paracadutismo, alpinismo > 3000m)',
+        'Epidemie in paesi con allerta sanitaria conclamata',
+        'Danni intenzionali o conseguenti a stato di ebbrezza',
+        'Malattie psichiatriche e patologie pregresse non dichiarate',
+        'Effetti di guerra, atti terroristici o disordini civili',
+      ],
+      note: 'Stipula la polizza viaggio appena prenoti, non a ridosso della partenza: solo così l\'annullamento copre eventi imprevisti che possono verificarsi nelle settimane precedenti.',
+    },
   },
   {
     slug: 'cauzioni-fideiussioni',
@@ -377,6 +517,27 @@ export const services: Service[] = [
     ],
     priceFrom: 'dall\'1% dell\'importo garantito',
     priceNote: 'Premio annuo indicativo. Varia in base a importo, durata e profilo aziendale. Importi fino a 500.000€.',
+    coverage: {
+      covered: [
+        'Cauzioni provvisorie per partecipazione a gare d\'appalto',
+        'Cauzioni definitive per esecuzione di contratti pubblici',
+        'Garanzie per anticipi contrattuali e anticipi IVA',
+        'Garanzie per rimborsi IVA e crediti d\'imposta',
+        'Fideiussioni per locazioni commerciali',
+        'Garanzie doganali (per importazione/esportazione)',
+        'Fideiussioni per concessioni edilizie e oneri urbanistici',
+        'Polizze a copertura di obbligazioni contrattuali',
+      ],
+      notCovered: [
+        'Importi superiori al massimale dello specifico rilascio',
+        'Garanzie del debito principale (è garanzia, non copertura)',
+        'Penali contrattuali che eccedono la quota garantita',
+        'Beneficiari con escutibilità soggettiva non valutabile',
+        'Operazioni in paesi sotto sanzioni internazionali',
+        'Garanzie per soggetti con esposizione bancaria critica',
+      ],
+      note: 'Le cauzioni sono garanzie a prima richiesta: il beneficiario può escutere senza preavviso ed FIM/la compagnia rivalersi sul contraente. Premio e capacità di rilascio dipendono dall\'analisi di bilancio aziendale.',
+    },
   },
   {
     slug: 'tutela-legale-aziende',
@@ -432,6 +593,27 @@ export const services: Service[] = [
     ],
     priceFrom: 'da 400€/anno',
     priceNote: 'PMI con fatturato fino a 2 mln€ e massimale 50.000€. Programmi strutturati su preventivo.',
+    coverage: {
+      covered: [
+        'Spese legali per controversie civili (attive e passive)',
+        'Recupero crediti commerciali',
+        'Controversie con dipendenti, fornitori e clienti',
+        'Onorari di periti e consulenti tecnici di parte',
+        'Spese di mediazione e arbitrato',
+        'Opposizione a multe e sanzioni amministrative (su garanzia)',
+        'Difesa penale del rappresentante legale per fatti d\'impresa',
+        'Tutela in materia di sicurezza sul lavoro (su garanzia)',
+      ],
+      notCovered: [
+        'Contenzioso tributario complesso (estensione opzionale)',
+        'Cause penali per dolo (sono coperte solo le imputazioni colpose)',
+        'Controversie fra soci interni alla società',
+        'Fatti antecedenti la stipula (no retroattività di default)',
+        'Procedure concorsuali e fallimentari',
+        'Multe con sentenza passata in giudicato',
+      ],
+      note: 'La polizza interviene anticipando le spese: il cliente sceglie il proprio legale (o utilizza la rete della compagnia) e la copertura paga gli onorari fino al massimale. Massimali tipici 25.000-100.000€.',
+    },
   },
   {
     slug: 'risk-management',

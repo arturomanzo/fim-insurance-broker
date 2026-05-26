@@ -11,11 +11,14 @@ import { IconTrasparenza, IconDesign, IconVisione } from '@/components/icons/Pil
 import Button from '@/components/ui/Button'
 
 export const metadata: Metadata = {
+  // Title: 58 caratteri — entro la soglia ~60 oltre cui Google tronca in SERP.
   title: {
-    absolute: 'FIM Insurance Broker | Chiarezza in Azione — Architetti della Tua Sicurezza',
+    absolute: 'FIM Insurance Broker · Chiarezza in Azione | Roma e Lazio',
   },
+  // Description: 152 caratteri — entro la soglia ~160 di Google.
+  // USP "indipendente" + numero compagnie + CTA "analisi gratuita".
   description:
-    'Broker assicurativo indipendente a Roma e nel Lazio. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura. 30+ compagnie confrontate per te. Analisi gratuita.',
+    'Broker assicurativo indipendente a Roma e nel Lazio: confrontiamo 30+ compagnie per trovare la polizza migliore per te. Analisi gratuita, senza impegno.',
   openGraph: {
     title: 'FIM Insurance Broker — Chiarezza in Azione',
     description: 'Architetti della tua sicurezza. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.',

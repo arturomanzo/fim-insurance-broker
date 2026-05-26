@@ -16,6 +16,12 @@ export interface BlogPost {
   readTime: string
   image: string
   sections: BlogSection[]
+  /**
+   * Slug autore (vedi `lib/authors.ts`). Opzionale a tipo, ma in pratica
+   * sempre risolto: i consumer usano `getAuthor()` che applica il fallback
+   * al CEO se il campo manca. Critico per E-E-A-T sui contenuti YMYL.
+   */
+  author?: string
 }
 
 export function getAllPosts(): BlogPost[] {
