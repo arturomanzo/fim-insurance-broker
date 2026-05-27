@@ -39,6 +39,10 @@ jobs:
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
         run: node scripts/generate-blog-post.mjs
 
+      - name: Valida blog (slug/immagini uniche, campi obbligatori)
+        working-directory: fim-broker-website
+        run: node scripts/validate-blog.mjs
+
       - name: Verifica modifiche al blog
         id: check_changes
         run: |
