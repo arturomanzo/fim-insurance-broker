@@ -80,6 +80,8 @@ const legalLinks = [
   { href: '/privacy-policy', label: 'Privacy Policy' },
   { href: '/cookie-policy', label: 'Cookie Policy' },
   { href: '/note-legali', label: 'Note Legali' },
+  { href: '/trasparenza', label: 'Trasparenza' },
+  { href: '/reclami', label: 'Reclami' },
 ]
 
 function NewsletterForm() {

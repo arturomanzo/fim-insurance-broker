@@ -66,6 +66,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/privacy-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/cookie-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/note-legali`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE_URL}/trasparenza`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${BASE_URL}/reclami`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${BASE_URL}/analizza-polizza`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
   ]
 
