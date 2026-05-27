@@ -58,10 +58,11 @@ const sectionsAll3 = [
       <>
         <p>
           <strong>Polizza RC professionale.</strong> L&apos;attività di FIM Insurance Broker è coperta da
-          polizza di Responsabilità Civile Professionale conforme ai requisiti minimi previsti
-          dall&apos;art. 112, c. 3 del CAP e dal Reg. IVASS 40/2018, con massimali e franchigie aggiornati
-          ai limiti minimi normativi (€ 1.300.380 per sinistro / € 1.924.560 aggregato annuo per il 2026).
-          Estremi della polizza disponibili su richiesta scritta del cliente.
+          polizza di Responsabilità Civile Professionale conforme ai requisiti previsti dall&apos;art. 112,
+          c. 3 del CAP e dal Reg. IVASS 40/2018, con <strong>massimale unico di € 2.500.000</strong>
+          (sia per singolo sinistro sia in aggregato annuo) — superiore ai minimi normativi richiesti.
+          Estremi identificativi della polizza (compagnia, numero, decorrenza) disponibili su richiesta
+          scritta del cliente.
         </p>
         <p>
           <strong>Separazione patrimoniale.</strong> I premi pagati dal cliente all&apos;intermediario costituiscono
