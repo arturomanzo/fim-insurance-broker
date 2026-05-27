@@ -36,19 +36,49 @@ export interface StoredRow {
   notified_at: string | null
 }
 
+/** Diagnostica strutturata di un errore (cattura `.cause` di TypeError native fetch). */
+function describeError(err: unknown): string {
+  if (err instanceof Error) {
+    const cause = (err as Error & { cause?: unknown }).cause
+    const causeStr =
+      cause instanceof Error
+        ? `${cause.name}: ${cause.message}`
+        : cause
+        ? String(cause)
+        : null
+    return causeStr ? `${err.name}: ${err.message} | cause=${causeStr}` : `${err.name}: ${err.message}`
+  }
+  return String(err)
+}
+
+/** Esegue `op` e, se throw, ritenta una volta dopo 1.5s. Logga `.cause` su fallimento. */
+async function runWithRetry<T>(label: string, op: () => Promise<T>): Promise<T> {
+  try {
+    return await op()
+  } catch (err) {
+    console.warn(`[ivass-watcher] ${label} primo tentativo fallito:`, describeError(err))
+    await new Promise((r) => setTimeout(r, 1500))
+    return await op()
+  }
+}
+
 /** Restituisce gli `id` già presenti in DB tra quelli passati. */
 export async function getKnownIds(ids: string[]): Promise<Set<string>> {
   const supa = getSupabase()
   if (!supa || ids.length === 0) return new Set()
-  const { data, error } = await supa
-    .from('ivass_watcher_state')
-    .select('id')
-    .in('id', ids)
-  if (error) {
-    console.error('[ivass-watcher] getKnownIds error:', error.message)
+  try {
+    const result = await runWithRetry('getKnownIds', async () =>
+      supa.from('ivass_watcher_state').select('id').in('id', ids),
+    )
+    if (result.error) {
+      console.error('[ivass-watcher] getKnownIds error:', result.error.message)
+      return new Set()
+    }
+    return new Set((result.data ?? []).map((r: { id: string }) => r.id))
+  } catch (err) {
+    console.error('[ivass-watcher] getKnownIds threw:', describeError(err))
     return new Set()
   }
-  return new Set((data ?? []).map((r) => r.id as string))
 }
 
 export interface InsertPayload {
@@ -62,7 +92,7 @@ export interface InsertPayload {
 /** Inserisce in batch i nuovi item rilevati. */
 export async function insertRows(rows: InsertPayload[]): Promise<{ inserted: number; error?: string }> {
   const supa = getSupabase()
-  if (!supa) return { inserted: 0, error: 'Supabase non configurato' }
+  if (!supa) return { inserted: 0, error: 'Supabase non configurato (env mancante)' }
   if (rows.length === 0) return { inserted: 0 }
 
   const now = new Date().toISOString()
@@ -84,13 +114,18 @@ export async function insertRows(rows: InsertPayload[]): Promise<{ inserted: num
     notified_at: r.notified ? now : null,
   }))
 
-  const { error, count } = await supa
-    .from('ivass_watcher_state')
-    .insert(payload, { count: 'exact' })
-
-  if (error) {
-    console.error('[ivass-watcher] insertRows error:', error.message)
-    return { inserted: 0, error: error.message }
+  try {
+    const result = await runWithRetry('insertRows', async () =>
+      supa.from('ivass_watcher_state').insert(payload, { count: 'exact' }),
+    )
+    if (result.error) {
+      console.error('[ivass-watcher] insertRows postgrest error:', result.error.message)
+      return { inserted: 0, error: `postgrest: ${result.error.message}` }
+    }
+    return { inserted: result.count ?? rows.length }
+  } catch (err) {
+    const detail = describeError(err)
+    console.error('[ivass-watcher] insertRows threw:', detail)
+    return { inserted: 0, error: detail }
   }
-  return { inserted: count ?? rows.length }
 }
