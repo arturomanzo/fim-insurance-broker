@@ -31,7 +31,8 @@ export interface Source {
   prefilter: RegExp | null
 }
 
-const BROWSER_UA =
+/** UA "realistico" — utile se in futuro si riattiva ANIA via proxy o edge runtime. */
+export const BROWSER_UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 
 /**
@@ -43,6 +44,13 @@ const BROWSER_UA =
 const GAZZETTA_PREFILTER =
   /\b(assicurat|assicuraz|ivass|intermediar|broker|R\.?C\.?\s*auto|solvency|ID(D|2)|priips?|arbitro\s+assicurativ|antiricicl|D\.?Lgs\.?\s*231\/2007|D\.?Lgs\.?\s*209\/2005|D\.?Lgs\.?\s*68\/2018|D\.?Lgs\.?\s*215\/2024|reg\.?\s*\(UE\)\s*2016\/97|reg\.?\s*\(UE\)\s*1286\/2014)\b/i
 
+/**
+ * NB: ANIA è stata temporaneamente disabilitata in produzione. I feed
+ *     `https://www.ania.it/news/feed/` e `/comunicati/feed/` rispondono HTTP 403
+ *     ai datacenter Vercel (probabile blocco Cloudflare per IP-range datacenter).
+ *     Per riattivarle servirà un proxy/edge runtime — per ora IVASS + Gazzetta
+ *     coprono già tutti gli adempimenti normativi rilevanti per un broker Sez. B.
+ */
 export const SOURCES: readonly Source[] = [
   {
     id: 'ivass',
@@ -62,18 +70,18 @@ export const SOURCES: readonly Source[] = [
     url: 'https://www.gazzettaufficiale.it/rss/S2',
     prefilter: GAZZETTA_PREFILTER,
   },
-  {
-    id: 'ania-news',
-    label: 'ANIA — News',
-    url: 'https://www.ania.it/news/feed/',
-    userAgent: BROWSER_UA,
-    prefilter: null,
-  },
-  {
-    id: 'ania-comunicati',
-    label: 'ANIA — Comunicati stampa',
-    url: 'https://www.ania.it/comunicati/feed/',
-    userAgent: BROWSER_UA,
-    prefilter: null,
-  },
+  // {
+  //   id: 'ania-news',
+  //   label: 'ANIA — News',
+  //   url: 'https://www.ania.it/news/feed/',
+  //   userAgent: BROWSER_UA,
+  //   prefilter: null,
+  // },
+  // {
+  //   id: 'ania-comunicati',
+  //   label: 'ANIA — Comunicati stampa',
+  //   url: 'https://www.ania.it/comunicati/feed/',
+  //   userAgent: BROWSER_UA,
+  //   prefilter: null,
+  // },
 ] as const
