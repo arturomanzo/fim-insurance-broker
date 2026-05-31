@@ -5,6 +5,7 @@ import Stats from '@/components/home/Stats'
 import ServicesGrid from '@/components/home/ServicesGrid'
 import TrustedBrands from '@/components/home/TrustedBrands'
 import LeadMagnet from '@/components/home/LeadMagnet'
+import LazyVideo from '@/components/home/LazyVideo'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import { IconTrasparenza, IconDesign, IconVisione } from '@/components/icons/PilastriIcons'
@@ -356,16 +357,11 @@ export default function HomePage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
-            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
+            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl bg-primary/5">
+              <LazyVideo
+                src="/videos/fim-vantaggio.mp4"
                 className="w-full h-full object-cover"
-              >
-                <source src="/videos/fim-vantaggio.mp4" type="video/mp4" />
-              </video>
+              />
             </div>
             <div>
               <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
