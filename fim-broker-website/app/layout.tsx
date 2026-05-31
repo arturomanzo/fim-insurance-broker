@@ -288,15 +288,26 @@ export default function RootLayout({
             prima di qualsiasi tag iniettato da GTM. */}
         <script dangerouslySetInnerHTML={{ __html: CONSENT_INIT_SCRIPT }} />
 
-        {/* Google Tag Manager — caricato il prima possibile nel <head>.
-            Pattern Next.js raccomandato: next/script con afterInteractive.
-            Tag aggiuntivi (GA4 G-F6DB47VZ4Z, Google Ads AW-18034188310,
-            Meta Pixel, LinkedIn, ecc.) vanno configurati DENTRO GTM. */}
+        {/* Google Tag Manager — caricamento DIFFERITO per ridurre il TBT.
+            gtm.js (~280 KB con GA4/Ads/Pixel) non viene iniettato all'avvio:
+            parte al primo gesto dell'utente (scroll/click/tap/keydown/mousemove)
+            oppure dopo 3,5s, qualunque evento avvenga prima — una sola volta.
+            Le conversioni di chi interagisce restano tracciate; si toglie solo
+            il costo dal critical path iniziale.
+            Consent Mode v2 (CONSENT_INIT_SCRIPT sopra) resta sincrono e gira
+            comunque PRIMA di GTM. Tag aggiuntivi (GA4 G-F6DB47VZ4Z, Google Ads
+            AW-18034188310, Meta Pixel, ecc.) sono configurati DENTRO GTM. */}
         <Script id="gtm-init" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];function gtmLoad(){w[l].push(
+{'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+var loaded=false;function trigger(){if(loaded)return;loaded=true;
+['scroll','mousemove','touchstart','keydown','click'].forEach(function(e){
+w.removeEventListener(e,trigger);});gtmLoad();}
+['scroll','mousemove','touchstart','keydown','click'].forEach(function(e){
+w.addEventListener(e,trigger,{once:true,passive:true});});
+w.setTimeout(trigger,3500);
 })(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script>
       </head>
