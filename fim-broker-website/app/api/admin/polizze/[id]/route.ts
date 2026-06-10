@@ -1,9 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
+import { verifyAdminToken, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth'
 import { updatePolicy, deletePolicy } from '@/lib/policyStore'
 
 interface Params { params: Promise<{ id: string }> }
 
+async function checkAuth() {
+  const cookieStore = await cookies()
+  const session = cookieStore.get(ADMIN_SESSION_COOKIE)
+  if (!session?.value) return false
+  return verifyAdminToken(session.value)
+}
+
 export async function PUT(req: NextRequest, { params }: Params) {
+  if (!(await checkAuth())) {
+    return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
+  }
   try {
     const { id } = await params
     const body = await req.json()
@@ -25,6 +37,9 @@ export async function PUT(req: NextRequest, { params }: Params) {
 }
 
 export async function DELETE(_req: NextRequest, { params }: Params) {
+  if (!(await checkAuth())) {
+    return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
+  }
   try {
     const { id } = await params
     const ok = deletePolicy(id)
