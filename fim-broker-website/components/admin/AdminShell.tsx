@@ -43,15 +43,6 @@ const navItems = [
       </svg>
     ),
   },
-  {
-    href: '/admin/polizze/nuova',
-    label: 'Nuova Polizza',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-      </svg>
-    ),
-  },
 ]
 
 interface Props {
@@ -94,7 +85,7 @@ export default function AdminShell({ children, title, backHref }: Props) {
         {/* Nav */}
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
-            const active = pathname === item.href || (item.href !== '/admin/dashboard' && pathname.startsWith(item.href.replace('/nuova', '')))
+            const active = pathname === item.href || (item.href !== '/admin/dashboard' && pathname.startsWith(item.href))
             return (
               <Link
                 key={item.href}
