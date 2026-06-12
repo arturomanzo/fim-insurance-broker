@@ -38,8 +38,8 @@ const steps = [
     title: 'Ricorso all\'Arbitro Assicurativo',
     when: 'Decorsi i 45 giorni senza riscontro o in caso di risposta non soddisfacente da parte dell\'impresa.',
     how: [
-      'Portale ufficiale: arbitroassicurativo.it',
-      'Ricorso gratuito, online, senza obbligo di assistenza legale.',
+      'Portale ufficiale: arbitroassicurativo.org',
+      'Ricorso online, senza obbligo di assistenza legale; contributo di 20 euro, rimborsato in caso di accoglimento.',
       'Termine: entro 12 mesi dalla data del reclamo presentato all\'impresa.',
       'La decisione dell\'Arbitro non è vincolante per il cliente, che resta libero di adire l\'Autorità Giudiziaria.',
     ],

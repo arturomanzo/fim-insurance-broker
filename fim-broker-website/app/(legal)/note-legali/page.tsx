@@ -128,8 +128,9 @@ export default function NoteLegaliPage() {
                   <strong>Ricorso all&apos;Arbitro Assicurativo.</strong> Decorsi i 45 giorni senza riscontro o in
                   caso di risposta ritenuta non soddisfacente, il cliente può presentare ricorso
                   all&apos;Arbitro Assicurativo entro <strong>12 mesi</strong> dalla data del reclamo all&apos;impresa.
-                  Il ricorso si presenta gratuitamente online sul portale{' '}
-                  <a href="https://www.arbitroassicurativo.it" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">arbitroassicurativo.it</a>.
+                  Il ricorso si presenta online (contributo di 20 euro, rimborsato in caso di
+                  accoglimento) sul portale{' '}
+                  <a href="https://www.arbitroassicurativo.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">arbitroassicurativo.org</a>.
                   La decisione dell&apos;Arbitro non è vincolante per il cliente, che resta libero di
                   adire l&apos;Autorità Giudiziaria.
                 </li>
