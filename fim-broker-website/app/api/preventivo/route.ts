@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { saveLead } from '@/lib/leadStore'
+import { SECTORS } from '@/lib/calculatorData'
 
 interface PreventivoRequest {
   tipo: string
   profilo?: string // privato | professionista | pmi | impresa
+  settore?: string // attività professionale o settore di mercato
   nome: string
   cognome: string
   email: string
@@ -48,7 +50,7 @@ const GESTIONALE_SECRET = process.env.WEBSITE_API_SECRET
 
 async function syncLeadToGestionale(data: {
   nome: string; cognome: string; email: string; telefono: string
-  tipo: string; profilo?: string; messaggio?: string
+  tipo: string; profilo?: string; settore?: string; messaggio?: string
 }) {
   if (!GESTIONALE_SECRET) {
     console.warn('[gestionale] WEBSITE_API_SECRET non configurata — sync lead saltata')
@@ -84,6 +86,7 @@ function buildTeamEmailHtml(data: {
   id: string
   tipo: string
   profilo?: string
+  settore?: string
   nome: string
   cognome: string
   email: string
@@ -101,6 +104,7 @@ function buildTeamEmailHtml(data: {
   const email = escapeHtml(data.email)
   const telefono = escapeHtml(data.telefono)
   const messaggio = escapeHtml(data.messaggio)
+  const settore = data.settore ? escapeHtml(data.settore) : ''
   return `
 <!DOCTYPE html>
 <html lang="it">
@@ -122,6 +126,14 @@ function buildTeamEmailHtml(data: {
           </td>
           <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
             <span style="font-size: 15px; font-weight: 700; color: #0f2d6b;">${escapeHtml(data.profilo)}</span>
+          </td>
+        </tr>` : ''}
+        ${settore ? `<tr>
+          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; width: 40%;">
+            <span style="font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">${data.profilo === 'professionista' ? 'Attività professionale' : 'Settore di attività'}</span>
+          </td>
+          <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
+            <span style="font-size: 15px; font-weight: 700; color: #0f2d6b;">${settore}</span>
           </td>
         </tr>` : ''}
         <tr>
@@ -351,6 +363,15 @@ export async function POST(req: NextRequest) {
     }
 
     const profilo = sanitize(body.profilo).slice(0, 50)
+    let settore = sanitize(body.settore).slice(0, 100)
+    // Settore valido solo per profili non-privato e solo se nella lista nota
+    if (settore) {
+      const profiloKey = profilo as keyof typeof SECTORS
+      const allowed = SECTORS[profiloKey]
+      if (!allowed || !allowed.includes(settore)) {
+        settore = '' // ignora valori non riconosciuti invece di rifiutare la richiesta
+      }
+    }
 
     // UTM attribution — sanitizzati e troncati
     const utm = {
@@ -364,7 +385,8 @@ export async function POST(req: NextRequest) {
 
     const preventivoData = {
       id: `FIM-${Date.now()}`,
-      tipo, profilo: profilo || undefined, nome, cognome, email, telefono, messaggio,
+      tipo, profilo: profilo || undefined, settore: settore || undefined,
+      nome, cognome, email, telefono, messaggio,
       timestamp: new Date().toISOString(),
       ...utm,
     }
@@ -374,7 +396,7 @@ export async function POST(req: NextRequest) {
 
     // Sincronizza lead nel gestionale esterno (PRIORITÀ — con await)
     try {
-      await syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined })
+      await syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, settore: settore || undefined, messaggio: messaggio || undefined })
     } catch (syncErr) {
       console.error('[preventivo] Sync gestionale fallita:', syncErr)
     }
@@ -391,7 +413,7 @@ export async function POST(req: NextRequest) {
         resend.emails.send({
           from: FIM_FROM,
           to: [FIM_EMAIL],
-          subject: `[Preventivo] ${tipo} — ${nome} ${cognome}${profilo ? ` (${profilo})` : ''}`,
+          subject: `[Preventivo] ${tipo} — ${nome} ${cognome}${profilo ? ` (${profilo}${settore ? ` · ${settore}` : ''})` : ''}`,
           html: buildTeamEmailHtml({
             ...preventivoData,
             utm_source: utm.utm_source,

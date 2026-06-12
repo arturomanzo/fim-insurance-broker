@@ -10,6 +10,7 @@ import {
   trackPreventivoError,
   trackPreventivoAbandonment,
 } from '@/lib/analytics'
+import { SECTORS } from '@/lib/calculatorData'
 
 interface UtmData {
   utm_source?: string
@@ -80,7 +81,14 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
   const resolved = resolveProfile(initialProfile)
   const [step, setStep] = useState<1 | 2 | 3>(resolved ? 2 : 1)
   const [profile, setProfile] = useState<Profile | null>(resolved)
-  const [copertura, setCopertura] = useState(initialSettore ?? '')
+  // initialSettore arriva dal calcolatore. Per i profili non-privato lo usiamo
+  // come settore di attività; per privato (dove il "settore" del calcolatore è
+  // un'area tipo "Casa e Famiglia") cade in copertura come pre-selezione libera.
+  const initialIsBusinessSector = resolved && resolved !== 'privato' && initialSettore
+    ? SECTORS[resolved].includes(initialSettore)
+    : false
+  const [settore, setSettore] = useState<string>(initialIsBusinessSector ? (initialSettore as string) : '')
+  const [copertura, setCopertura] = useState(initialIsBusinessSector ? '' : (initialSettore ?? ''))
   const [note, setNote] = useState('')
   const [nome, setNome] = useState('')
   const [cognome, setCognome] = useState('')
@@ -144,6 +152,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
         body: JSON.stringify({
           tipo: copertura || 'Preventivo generico',
           profilo: profile,
+          settore: settore || undefined,
           nome, cognome, email, telefono,
           messaggio: note,
           privacy: true,
@@ -176,7 +185,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <a href="tel:+390696883381" className="btn-primary">📞 Chiama subito: 06 96883381</a>
           <Link href="/prenota-consulenza" className="btn-secondary">Prenota una slot</Link>
         </div>
-        <button onClick={() => { setStatus('idle'); setStep(1); setProfile(null); setCopertura(''); setNome(''); setCognome(''); setEmail(''); setTelefono('') }}
+        <button onClick={() => { setStatus('idle'); setStep(1); setProfile(null); setSettore(''); setCopertura(''); setNome(''); setCognome(''); setEmail(''); setTelefono('') }}
           className="mt-6 text-sm text-gray-400 hover:text-gray-600 transition-colors">
           ↺ Invia un&apos;altra richiesta
         </button>
@@ -212,7 +221,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <p className="text-gray-500 text-sm mb-5">Seleziona il profilo che ti descrive meglio.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {PROFILES.map((p) => (
-              <button key={p.id} onClick={() => { setProfile(p.id); setStep(2); trackPreventivoStep1(p.id) }}
+              <button key={p.id} onClick={() => { setProfile(p.id); setSettore(''); setCopertura(''); setStep(2); trackPreventivoStep1(p.id) }}
                 className="group text-left p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition-all duration-200">
                 <div className="text-2xl mb-2">{p.emoji}</div>
                 <div className="font-bold text-primary text-sm mb-0.5 group-hover:text-primary-light">{p.label}</div>
@@ -236,13 +245,35 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <p className="text-gray-500 text-sm mb-5">
             Profilo selezionato: <span className="font-semibold text-primary">{profileLabel}</span>
           </p>
-          <div className="flex flex-wrap gap-2 mb-5">
-            {COPERTURE[profile].map((c) => (
-              <button key={c} onClick={() => setCopertura(c)}
-                className={`px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all ${copertura === c ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-600 hover:border-primary/50 hover:text-primary'}`}>
-                {c}
-              </button>
-            ))}
+
+          {profile !== 'privato' && (
+            <div className="mb-5">
+              <label className="label-field">
+                {profile === 'professionista' ? 'La tua attività professionale *' : 'Settore di attività *'}
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {SECTORS[profile].map((s) => (
+                  <button key={s} type="button"
+                    onClick={() => { setSettore(s); setErrors((p) => ({ ...p, settore: '' })) }}
+                    className={`px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all ${settore === s ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-600 hover:border-primary/50 hover:text-primary'}`}>
+                    {s}
+                  </button>
+                ))}
+              </div>
+              {errors.settore && <p className="text-red-500 text-xs mt-2">{errors.settore}</p>}
+            </div>
+          )}
+
+          <div className="mb-5">
+            <label className="label-field">Tipo di copertura</label>
+            <div className="flex flex-wrap gap-2">
+              {COPERTURE[profile].map((c) => (
+                <button key={c} type="button" onClick={() => setCopertura(c)}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all ${copertura === c ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-600 hover:border-primary/50 hover:text-primary'}`}>
+                  {c}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="mb-5">
             <label className="label-field">Note aggiuntive (facoltativo)</label>
@@ -250,7 +281,15 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
               placeholder="Descrivi brevemente le tue esigenze o situazione attuale..."
               className="input-field resize-none text-sm" maxLength={600} />
           </div>
-          <button onClick={() => { setStep(3); trackPreventivoStep2(profile, copertura || 'non selezionata') }}
+          <button
+            onClick={() => {
+              if (profile !== 'privato' && !settore) {
+                setErrors((p) => ({ ...p, settore: profile === 'professionista' ? 'Seleziona la tua attività' : 'Seleziona il settore' }))
+                return
+              }
+              setStep(3)
+              trackPreventivoStep2(profile, copertura || 'non selezionata')
+            }}
             className="w-full btn-primary py-3.5">
             Continua →
           </button>
