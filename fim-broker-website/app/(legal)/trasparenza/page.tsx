@@ -102,8 +102,9 @@ const sectionsAll3 = [
         <p>
           <strong>Arbitro Assicurativo.</strong> Dal <strong>15 gennaio 2026</strong> è operativo l&apos;Arbitro
           Assicurativo (D.Lgs. 215/2024): in caso di mancata risposta entro 45 giorni o di risposta
-          non soddisfacente, il cliente può presentare ricorso gratuito entro 12 mesi sul portale{' '}
-          <a href="https://www.arbitroassicurativo.it" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">arbitroassicurativo.it</a>.
+          non soddisfacente, il cliente può presentare ricorso entro 12 mesi (contributo di 20 euro,
+          rimborsato in caso di accoglimento) sul portale{' '}
+          <a href="https://www.arbitroassicurativo.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">arbitroassicurativo.org</a>.
         </p>
         <p>
           <strong>Segnalazioni a IVASS</strong> per violazioni della normativa di settore:{' '}
