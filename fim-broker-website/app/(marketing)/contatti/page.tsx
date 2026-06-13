@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ContactForm from '@/components/forms/ContactForm'
 import Card from '@/components/ui/Card'
+import { EMAIL_CHANNELS, EMAIL_RECLAMI } from '@/lib/contatti'
 
 export const metadata: Metadata = {
   title: 'Contatti',
@@ -108,6 +110,45 @@ export default function ContattiPage() {
                 </div>
               </Card>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Canali email dedicati */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="max-w-2xl mb-10">
+            <h2 className="text-3xl font-black text-primary mb-3">Scrivici al canale giusto</h2>
+            <p className="text-gray-600">
+              Per una risposta più rapida, usa l&apos;indirizzo dedicato alla tua esigenza.
+              Se hai un dubbio, scrivi pure a <span className="font-semibold text-primary">info@fimbroker.it</span>: ci pensiamo noi a smistare.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {EMAIL_CHANNELS.map((channel) => (
+              <Card key={channel.email} className="flex items-start gap-4">
+                <span className="text-2xl flex-shrink-0" aria-hidden="true">✉️</span>
+                <div>
+                  <h3 className="font-bold text-primary mb-1">{channel.title}</h3>
+                  <p className="text-gray-600 text-sm mb-2">{channel.desc}</p>
+                  <a
+                    href={`mailto:${channel.email}`}
+                    className="text-accent-dark font-semibold text-sm hover:underline break-all"
+                  >
+                    {channel.email}
+                  </a>
+                  {channel.email === EMAIL_RECLAMI && (
+                    <p className="text-gray-500 text-xs mt-2">
+                      Vedi la{' '}
+                      <Link href="/reclami" className="text-primary hover:underline">
+                        procedura reclami completa
+                      </Link>
+                      .
+                    </p>
+                  )}
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
