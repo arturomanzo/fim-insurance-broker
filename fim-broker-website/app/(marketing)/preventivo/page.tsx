@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import PreventivoForm from '@/components/forms/PreventivoForm'
 import Card from '@/components/ui/Card'
+import { EMAIL_RCA } from '@/lib/contatti'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -141,6 +142,12 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
                 <a href="tel:+390696883381" className="btn-primary w-full text-center block">
                   📞 06 96883381
                 </a>
+                <p className="text-white/80 text-sm mt-4">
+                  Per un preventivo auto (RCA) scrivici a{' '}
+                  <a href={`mailto:${EMAIL_RCA}`} className="text-accent font-semibold hover:underline break-all">
+                    {EMAIL_RCA}
+                  </a>
+                </p>
               </Card>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
+import { EMAIL_RECLAMI, PEC } from '@/lib/contatti'
 
 export const metadata: Metadata = {
   title: 'Reclami e Arbitro Assicurativo',
@@ -8,8 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/reclami' },
 }
 
-const PEC_RECLAMI = 'fiminsurancebrokersas@pec.it'
-const EMAIL_RECLAMI = 'info@fimbroker.it'
+const PEC_RECLAMI = PEC
 
 const steps = [
   {
@@ -19,7 +19,7 @@ const steps = [
     how: [
       'PEC: fiminsurancebrokersas@pec.it',
       'Raccomandata A/R: Ufficio Reclami — FIM Insurance Broker S.a.s., Via Roma 41, 04012 Cisterna di Latina (LT)',
-      'Email ordinaria: info@fimbroker.it (con conferma di ricezione)',
+      'Email ordinaria: reclami@fimbroker.it (con conferma di ricezione)',
     ],
     time: 'Risposta entro 45 giorni dalla ricezione, ai sensi dell\'art. 7 del Reg. IVASS 40/2018.',
   },
