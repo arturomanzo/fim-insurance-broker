@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import PreventivoForm from '@/components/forms/PreventivoForm'
 import Card from '@/components/ui/Card'
+import { EMAIL_RCA } from '@/lib/contatti'
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
 export const metadata: Metadata = {
   title: 'Richiedi Preventivo Gratuito',
@@ -20,6 +23,28 @@ const steps = [
   { n: '3', title: 'Ti contattiamo', desc: 'Entro 24 ore ti presentiamo il preventivo più conveniente.' },
 ]
 
+// HowTo schema — espone il processo "come richiedere un preventivo
+// assicurativo" in 3 step. Sfrutta lo stesso array `steps` mostrato
+// in pagina così la documentazione visuale e quella strutturata
+// restano sempre coerenti.
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  '@id': `${BASE_URL}/preventivo#howto`,
+  name: 'Come richiedere un preventivo assicurativo gratuito',
+  description:
+    'Procedura in 3 step per ottenere un preventivo personalizzato da un broker indipendente. Risposta entro 24 ore, nessun costo, nessun impegno.',
+  totalTime: 'PT24H',
+  estimatedCost: { '@type': 'MonetaryAmount', currency: 'EUR', value: '0' },
+  step: steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.title,
+    text: s.desc,
+    url: `${BASE_URL}/preventivo#step-${s.n}`,
+  })),
+}
+
 interface PageProps {
   searchParams: Promise<{ profilo?: string; tipo?: string; settore?: string }>
 }
@@ -31,6 +56,10 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
 
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
       {/* Hero */}
       <section className="gradient-primary py-16 text-white">
         <div className="container-custom">
@@ -113,6 +142,12 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
                 <a href="tel:+390696883381" className="btn-primary w-full text-center block">
                   📞 06 96883381
                 </a>
+                <p className="text-white/80 text-sm mt-4">
+                  Per un preventivo auto (RCA) scrivici a{' '}
+                  <a href={`mailto:${EMAIL_RCA}`} className="text-accent font-semibold hover:underline break-all">
+                    {EMAIL_RCA}
+                  </a>
+                </p>
               </Card>
             </div>
           </div>

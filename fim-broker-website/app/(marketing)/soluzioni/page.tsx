@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
 export const metadata: Metadata = {
   title: 'Soluzioni per Settore — FIM Insurance Broker',
@@ -91,6 +92,7 @@ const solutions = [
 export default function SoluzioniPage() {
   return (
     <div>
+      <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: 'Soluzioni', href: '/soluzioni' }]} />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-20 text-white">
         <div className="container-custom">

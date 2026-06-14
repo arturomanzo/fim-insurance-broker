@@ -92,9 +92,42 @@ Ogni articolo deve avere questa struttura JSON (identica a quella esistente in `
 - `Viaggio` — assicurazione viaggio
 - `Guide` — articoli educativi, glossario, spiegazioni
 
-**Immagine:**
-- Usa Unsplash con URL nel formato `https://images.unsplash.com/photo-XXX?w=1200&q=80&fit=crop&auto=format`
-- Scegli foto coerenti col topic, evita cliché bancari/corporate
+**Immagine — workflow Pexels API:**
+
+1. Ricava una query in **inglese** (3-5 parole) che descriva il soggetto visivo dell'articolo.
+   Esempi: `"electric scooter city street"`, `"office professional meeting"`, `"house storm flood damage"`, `"cyber security laptop"`.
+
+2. Cerca la API key nell'ambiente:
+   ```bash
+   echo $PEXELS_API_KEY
+   ```
+
+3a. **Se la key è presente**, chiama l'API Pexels:
+   ```bash
+   curl -s "https://api.pexels.com/v1/search?query=QUERY&per_page=5&orientation=landscape&size=large" \
+     -H "Authorization: $PEXELS_API_KEY" | python3 -c "
+   import json, sys
+   data = json.load(sys.stdin)
+   photos = data.get('photos', [])
+   for p in photos:
+       print(p['id'], p['src']['large2x'], p['photographer'])
+   "
+   ```
+   Scegli la foto più pertinente e professionale (evita cliché, preferisci scene reali e italiane/europee).
+   Usa l'URL `src.large2x` nel campo `image` del JSON.
+   Nota a margine: aggiungi un commento nel commit con il photographer credit (es. `Photo by Mario Rossi on Pexels`).
+
+3b. **Se la key NON è presente**, usa il fallback Unsplash:
+   ```
+   https://images.unsplash.com/photo-XXX?w=1200&q=80&fit=crop&auto=format
+   ```
+   e segnala all'utente che impostando `PEXELS_API_KEY` le immagini saranno più accurate.
+
+**Regole qualità immagine:**
+- Preferisci foto con persone reali, ambienti italiani/europei, scene di vita quotidiana
+- Evita: grafica 3D generica, icone, mani che stringono mani su sfondo bianco, stile stock anni '90
+- Per topic cyber/tech: laptop in ambienti reali, non lucchetti digitali fluttuanti
+- Per topic assicurativo/legale: uffici, consulenti, documenti — non pile di monete o bilance della giustizia
 
 ### 6. Inserisci nel sito
 

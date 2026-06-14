@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { services, getServiceBySlug } from '@/lib/services'
 import Card from '@/components/ui/Card'
 import FaqAccordion from '@/components/ui/FaqAccordion'
+import CoverageTable from '@/components/ui/CoverageTable'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import PreventivoAutoDocumenti from '@/components/forms/PreventivoAutoDocumenti'
 
@@ -23,6 +25,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: service.title,
     description: service.shortDescription,
+    alternates: {
+      canonical: `/servizi/${service.slug}`,
+    },
     openGraph: {
       images: [{ url: ogUrl, width: 1200, height: 630 }],
     },
@@ -49,11 +54,33 @@ export default async function ServizioPage({ params }: Props) {
     })),
   }
 
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.title,
+    description: service.shortDescription,
+    provider: {
+      '@type': 'InsuranceAgency',
+      name: 'FIM Insurance Broker',
+      url: 'https://www.fimbroker.it',
+    },
+    areaServed: { '@type': 'Country', name: 'Italy' },
+    offers: {
+      '@type': 'Offer',
+      description: `${service.priceFrom} — ${service.priceNote}`,
+      priceCurrency: 'EUR',
+    },
+  }
+
   return (
     <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <BreadcrumbSchema
         items={[
@@ -72,14 +99,28 @@ export default async function ServizioPage({ params }: Props) {
             <span className="text-white/40">/</span>
             <span className="text-white/80 text-sm">{service.title}</span>
           </div>
-          <div className="flex items-start gap-6">
-            <span className="text-6xl hidden sm:block">{service.icon}</span>
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-black mb-4">
-                {service.title}
-              </h1>
-              <p className="text-xl text-white/80 leading-relaxed">{service.description}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="flex items-start gap-6">
+              <span className="text-6xl hidden sm:block flex-shrink-0">{service.icon}</span>
+              <div>
+                <h1 className="text-4xl md:text-5xl font-black mb-4">
+                  {service.title}
+                </h1>
+                <p className="text-xl text-white/80 leading-relaxed">{service.description}</p>
+              </div>
             </div>
+            {service.image && (
+              <div className="relative hidden lg:block rounded-2xl overflow-hidden aspect-[16/9] shadow-2xl">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
+                  priority
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -105,6 +146,21 @@ export default async function ServizioPage({ params }: Props) {
                   ))}
                 </div>
               </Card>
+
+              {/* Coverage table — candidato a Featured Snippet tabellare AEO.
+                  Mostrata solo se il servizio definisce `coverage` (vedi lib/services.ts) */}
+              {service.coverage && (
+                <Card>
+                  <h2 className="text-2xl font-black text-primary mb-2">
+                    Cosa copre e cosa non copre
+                  </h2>
+                  <p className="text-gray-600 text-sm mb-6">
+                    Le coperture tipiche di una polizza {service.title.toLowerCase()}.
+                    Le condizioni esatte dipendono dalla compagnia e dal pacchetto scelto.
+                  </p>
+                  <CoverageTable coverage={service.coverage} serviceName={service.title} />
+                </Card>
+              )}
 
               {/* Benefits */}
               <Card>

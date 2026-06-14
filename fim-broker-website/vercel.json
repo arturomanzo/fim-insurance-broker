@@ -5,12 +5,22 @@
   "installCommand": "npm ci",
   "redirects": [
     { "source": "/Post", "destination": "/blog", "permanent": true },
-    { "source": "/post", "destination": "/blog", "permanent": true }
+    { "source": "/post", "destination": "/blog", "permanent": true },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "fimbroker.it" }],
+      "destination": "https://www.fimbroker.it/$1",
+      "permanent": true
+    }
   ],
   "crons": [
     {
       "path": "/api/cron/reminder-rinnovi",
       "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/ivass-watcher",
+      "schedule": "30 5 * * *"
     },
     {
       "path": "/api/cron/cleanup-documenti",

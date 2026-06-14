@@ -20,11 +20,11 @@ const soluzioniLinks = [
   { href: '/soluzioni/professionisti', label: 'Per Professionisti' },
   { href: '/soluzioni/artigiani-pmi', label: 'Per Artigiani e PMI' },
   { href: '/soluzioni/catastrofi-naturali', label: 'Catastrofi Naturali' },
-  { href: '/sinistri', label: '🛡️ Gestione Sinistri' },
-  { href: '/quiz-polizza', label: '❓ Quiz: che polizza ti serve?' },
-  { href: '/calcolatore-rischi', label: '📊 Calcolatore del Rischio' },
-  { href: '/osservatorio-prezzi', label: '📈 Osservatorio Prezzi 2025' },
-  { href: '/glossario', label: '📖 Glossario Assicurativo' },
+  { href: '/sinistri', label: 'Gestione Sinistri' },
+  { href: '/quiz-polizza', label: 'Quiz: che polizza ti serve?' },
+  { href: '/calcolatore-rischi', label: 'Calcolatore del Rischio' },
+  { href: '/osservatorio-prezzi', label: 'Osservatorio Prezzi 2025' },
+  { href: '/glossario', label: 'Glossario Assicurativo' },
 ]
 
 const companyLinks = [
@@ -34,7 +34,7 @@ const companyLinks = [
   { href: '/preventivo', label: 'Richiedi Preventivo' },
   { href: '/collabora-con-noi', label: 'Collabora con Noi' },
   { href: '/contatti', label: 'Contatti' },
-  { href: '/area-cliente', label: '🔐 Area Cliente' },
+  { href: '/area-cliente', label: 'Area Cliente' },
 ]
 
 const socialLinks = [
@@ -80,6 +80,8 @@ const legalLinks = [
   { href: '/privacy-policy', label: 'Privacy Policy' },
   { href: '/cookie-policy', label: 'Cookie Policy' },
   { href: '/note-legali', label: 'Note Legali' },
+  { href: '/trasparenza', label: 'Trasparenza' },
+  { href: '/reclami', label: 'Reclami' },
 ]
 
 function NewsletterForm() {
@@ -114,9 +116,9 @@ function NewsletterForm() {
 
   if (status === 'success') {
     return (
-      <div className="p-4 bg-accent/20 border border-accent/30 rounded-lg text-sm text-white">
-        <p className="font-semibold mb-1">Iscrizione confermata!</p>
-        <p className="text-white/70">Riceverai le nostre novità assicurative direttamente nella tua inbox.</p>
+      <div className="p-4 bg-accent border border-accent-dark rounded-lg text-sm" role="status" aria-live="polite">
+        <p className="font-semibold mb-1 text-primary">Iscrizione confermata!</p>
+        <p className="text-primary/80">Riceverai le nostre novità assicurative direttamente nella tua inbox.</p>
       </div>
     )
   }
@@ -176,20 +178,20 @@ export default function Footer() {
               Architetti della tua sicurezza: traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.
             </p>
             <div className="space-y-2 text-sm">
-              <a href="tel:+390696883381" className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <a href="tel:+390696883381" className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors" aria-label="Chiama +39 06 96883381">
+                <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                +39 06 96883381
+                <span aria-hidden="true">+39 06 96883381</span>
               </a>
-              <a href="mailto:info@fimbroker.it" className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <a href="mailto:info@fimbroker.it" className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors" aria-label="Scrivi a info@fimbroker.it">
+                <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                info@fimbroker.it
+                <span aria-hidden="true">info@fimbroker.it</span>
               </a>
               <div className="flex items-start gap-2 text-white/70">
-                <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 mt-0.5 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>

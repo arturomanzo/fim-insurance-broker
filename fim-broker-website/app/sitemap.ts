@@ -1,23 +1,26 @@
 import type { MetadataRoute } from 'next'
 import { services } from '@/lib/services'
+import { getAllPosts } from '@/lib/blog'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
-const blogSlugs = [
-  'legge-34-2026-addio-rc-auto-muletti-mezzi-agricoli',
-  'come-scegliere-polizza-cyber-pmi',
-  'assicurazione-condominio-guida-completa',
-  'differenza-broker-agente-assicurativo',
-  'come-scegliere-polizza-auto',
-  'assicurazione-vita-guida',
-  'cyber-risk-pmi',
-  'novita-rc-auto-2024',
-  'polizza-casa-alluvioni',
-  'previdenza-complementare',
-  'rc-professionale-liberi-professionisti-2025',
-  'polizze-obbligatorie-aziende-italia-2025',
-  'assicurazioni-pmi-guida-completa',
-]
+const ITALIAN_MONTHS: Record<string, string> = {
+  Gennaio: '01', Febbraio: '02', Marzo: '03', Aprile: '04',
+  Maggio: '05', Giugno: '06', Luglio: '07', Agosto: '08',
+  Settembre: '09', Ottobre: '10', Novembre: '11', Dicembre: '12',
+}
+
+function parseBlogDate(dateStr: string): Date {
+  try {
+    const parts = dateStr.trim().split(' ')
+    if (parts.length === 3) {
+      const [day, monthIt, year] = parts
+      const month = ITALIAN_MONTHS[monthIt]
+      if (month) return new Date(`${year}-${month}-${day.padStart(2, '0')}`)
+    }
+  } catch {}
+  return new Date()
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
@@ -28,7 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/servizi`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${BASE_URL}/preventivo`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/prenota-consulenza`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/area-cliente`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE_URL}/contatti`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE_URL}/collabora-con-noi`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
@@ -64,6 +66,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/privacy-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/cookie-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${BASE_URL}/note-legali`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE_URL}/trasparenza`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${BASE_URL}/reclami`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${BASE_URL}/analizza-polizza`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
   ]
 
   const servicePages: MetadataRoute.Sitemap = services.map((s) => ({
@@ -73,9 +78,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  const blogPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-    url: `${BASE_URL}/blog/${slug}`,
-    lastModified: now,
+  const blogPages: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: post.date ? parseBlogDate(post.date) : now,
     changeFrequency: 'monthly',
     priority: 0.6,
   }))

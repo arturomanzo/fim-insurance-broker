@@ -1,19 +1,25 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
+import type { ReactNode } from 'react'
 import Hero from '@/components/home/Hero'
 import Stats from '@/components/home/Stats'
 import ServicesGrid from '@/components/home/ServicesGrid'
 import TrustedBrands from '@/components/home/TrustedBrands'
 import LeadMagnet from '@/components/home/LeadMagnet'
+import LazyVideo from '@/components/home/LazyVideo'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
+import { IconTrasparenza, IconDesign, IconVisione } from '@/components/icons/PilastriIcons'
+import Button from '@/components/ui/Button'
 
 export const metadata: Metadata = {
+  // Title: 58 caratteri — entro la soglia ~60 oltre cui Google tronca in SERP.
   title: {
-    absolute: 'FIM Insurance Broker | Chiarezza in Azione — Architetti della Tua Sicurezza',
+    absolute: 'FIM Insurance Broker · Chiarezza in Azione | Roma e Lazio',
   },
+  // Description: 152 caratteri — entro la soglia ~160 di Google.
+  // USP "indipendente" + numero compagnie + CTA "analisi gratuita".
   description:
-    'Broker assicurativo indipendente a Roma e nel Lazio. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura. 30+ compagnie confrontate per te. Analisi gratuita.',
+    'Broker assicurativo indipendente a Roma e nel Lazio: confrontiamo 30+ compagnie per trovare la polizza migliore per te. Analisi gratuita, senza impegno.',
   openGraph: {
     title: 'FIM Insurance Broker — Chiarezza in Azione',
     description: 'Architetti della tua sicurezza. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.',
@@ -86,6 +92,24 @@ const whyFIM = [
     icon: '🤝',
     title: 'Indipendenza totale',
     desc: 'Non rappresentiamo nessuna compagnia. Confrontiamo 30+ offerte con un solo obiettivo: il tuo interesse.',
+  },
+]
+
+const PILASTRI: { icon: ReactNode; title: string; desc: string }[] = [
+  {
+    icon: <IconTrasparenza className="text-accent" size={28} />,
+    title: 'Trasparenza Assoluta',
+    desc: 'Nessun conflitto di interesse, nessun costo nascosto. Ogni clausola spiegata, ogni alternativa mostrata. Vedi esattamente cosa paghi e perché.',
+  },
+  {
+    icon: <IconDesign className="text-accent" size={28} />,
+    title: 'Design su Misura',
+    desc: 'Non esistono soluzioni standard. Analizziamo il tuo profilo di rischio unico e progettiamo la copertura che serve a te — niente di più, niente di meno.',
+  },
+  {
+    icon: <IconVisione className="text-accent" size={28} />,
+    title: 'Visione a Lungo Termine',
+    desc: 'Non pensiamo alla polizza di oggi. Costruiamo un piano di protezione che evolve con te: revisione annuale, adeguamento alle nuove esigenze, strategia continua.',
   },
 ]
 
@@ -187,25 +211,11 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                icon: '🔍',
-                title: 'Trasparenza Assoluta',
-                desc: 'Nessun conflitto di interesse, nessun costo nascosto. Ogni clausola spiegata, ogni alternativa mostrata. Vedi esattamente cosa paghi e perché.',
-              },
-              {
-                icon: '✏️',
-                title: 'Design su Misura',
-                desc: 'Non esistono soluzioni standard. Analizziamo il tuo profilo di rischio unico e progettiamo la copertura che serve a te — niente di più, niente di meno.',
-              },
-              {
-                icon: '🔭',
-                title: 'Visione a Lungo Termine',
-                desc: 'Non pensiamo alla polizza di oggi. Costruiamo un piano di protezione che evolve con te: revisione annuale, adeguamento alle nuove esigenze, strategia continua.',
-              },
-            ].map((pillar) => (
+            {PILASTRI.map((pillar) => (
               <div key={pillar.title} className="text-center p-8 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors">
-                <div className="text-4xl mb-5">{pillar.icon}</div>
+                <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 mx-auto">
+                  {pillar.icon}
+                </div>
                 <h3 className="text-xl font-black text-accent mb-3">{pillar.title}</h3>
                 <p className="text-white/70 leading-relaxed text-sm">{pillar.desc}</p>
               </div>
@@ -347,13 +357,10 @@ export default function HomePage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
-            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl">
-              <Image
-                src="/images/brand/bridge-fim.jpg"
-                alt="Ponte moderno con logo FIM — il collegamento tra te e la protezione giusta"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-xl bg-primary/5">
+              <LazyVideo
+                src="/videos/fim-vantaggio.mp4"
+                className="w-full h-full object-cover"
               />
             </div>
             <div>
@@ -472,12 +479,12 @@ export default function HomePage() {
             Un&apos;analisi gratuita dei tuoi rischi, senza impegno. Decodifichiamo la complessità e ti presentiamo la soluzione giusta in 24 ore.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">
+            <Button variant="primary" size="lg" href="/preventivo">
               Richiedi Preventivo
-            </Link>
-            <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
+            </Button>
+            <Button variant="outline-white" size="lg" href="tel:+390696883381" external>
               📞 Chiama ora
-            </a>
+            </Button>
           </div>
         </div>
       </section>

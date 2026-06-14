@@ -5,6 +5,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import SinistriAIAssistant from '@/components/forms/SinistriAIAssistant'
 import { sinistriFaq } from '@/lib/faq/sinistri'
+import { EMAIL_SINISTRI } from '@/lib/contatti'
 
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
@@ -96,6 +97,12 @@ export default function SinistriPage() {
                 💬 WhatsApp
               </a>
             </div>
+            <p className="text-white/70 text-sm mt-4">
+              Oppure scrivici a{' '}
+              <a href={`mailto:${EMAIL_SINISTRI}`} className="text-accent font-semibold hover:underline">
+                {EMAIL_SINISTRI}
+              </a>
+            </p>
           </div>
         </div>
       </section>

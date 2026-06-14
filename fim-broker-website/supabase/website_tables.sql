@@ -70,3 +70,43 @@ create policy "deny_all_anon_website_sinistri"
   to anon, authenticated
   using (false)
   with check (false);
+
+-- ============================================================
+-- IVASS Watcher — stato del cron giornaliero di monitoraggio normativo
+-- (vedi /api/cron/ivass-watcher e lib/ivass-watcher/*)
+-- ============================================================
+
+create table if not exists ivass_watcher_state (
+  id                      text primary key,            -- sha256(source||url)
+  source                  text not null,               -- 'ivass' | 'gazzetta-sg' | 'gazzetta-s2' | 'ania-news' | 'ania-comunicati'
+  title                   text not null,
+  url                     text not null,
+  published_at            timestamptz,
+  detected_at             timestamptz not null default now(),
+  triage_relevance        text check (triage_relevance in ('high', 'medium', 'low', 'none')),
+  triage_impacts_site     boolean not null default false,
+  triage_summary          text,
+  triage_affected_pages   text[],
+  triage_deadline         text,
+  triage_normative_refs   text,
+  triage_error            text,                        -- se il triage AI fallisce
+  notified                boolean not null default false,
+  notified_at             timestamptz
+);
+
+create index if not exists ivass_watcher_state_detected_idx
+  on ivass_watcher_state (detected_at desc);
+create index if not exists ivass_watcher_state_source_idx
+  on ivass_watcher_state (source, detected_at desc);
+create index if not exists ivass_watcher_state_relevance_idx
+  on ivass_watcher_state (triage_relevance, detected_at desc)
+  where triage_relevance in ('high', 'medium');
+
+alter table ivass_watcher_state enable row level security;
+
+drop policy if exists "deny_all_anon_ivass_watcher_state" on ivass_watcher_state;
+create policy "deny_all_anon_ivass_watcher_state"
+  on ivass_watcher_state for all
+  to anon, authenticated
+  using (false)
+  with check (false);

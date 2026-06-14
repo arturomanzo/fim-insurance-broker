@@ -37,7 +37,7 @@ const securityHeaders = [
       'interest-cohort=()',   // blocca FLoC
       'browsing-topics=()',   // blocca Topics API
       'display-capture=()',
-      'autoplay=()',
+      'autoplay=(self)',
       'clipboard-write=(self)',
       'fullscreen=(self)',
       'picture-in-picture=()',
@@ -62,7 +62,7 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://maps.gstatic.com https://www.google-analytics.com https://images.unsplash.com https://www.clarity.ms",
       "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://*.sentry.io https://*.ingest.sentry.io https://www.clarity.ms",
-      "frame-src 'self' https://maps.google.com https://www.google.com",
+      "frame-src 'self' https://maps.google.com https://www.google.com https://www.googletagmanager.com",
       "frame-ancestors 'self'",
       "object-src 'none'",
       "base-uri 'self'",

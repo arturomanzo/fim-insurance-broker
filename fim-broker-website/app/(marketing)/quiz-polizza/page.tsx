@@ -3,6 +3,53 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
+
+// HowTo schema — espone il quiz come un processo guidato in 4 step.
+// Indicizzato come "How to" su Google, candidato a Featured Snippet
+// per query del tipo "come capire di che assicurazione ho bisogno".
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  '@id': `${BASE_URL}/quiz-polizza#howto`,
+  name: 'Come capire di che polizza assicurativa hai bisogno',
+  description:
+    'Quiz gratuito in 4 domande per identificare le coperture assicurative giuste per privati, professionisti o aziende. Tempo richiesto: meno di 1 minuto.',
+  totalTime: 'PT1M',
+  estimatedCost: { '@type': 'MonetaryAmount', currency: 'EUR', value: '0' },
+  tool: [{ '@type': 'HowToTool', name: 'Quiz interattivo gratuito FIM' }],
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Indica il tuo profilo',
+      text: 'Seleziona se sei un privato, un libero professionista, un\'azienda o un condominio. Il quiz adatta le domande successive in base al profilo.',
+      url: `${BASE_URL}/quiz-polizza#step-1`,
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Scegli la priorità di protezione',
+      text: 'Indica cosa vuoi proteggere prima: persona e famiglia, patrimonio immobiliare, attività professionale o veicoli. Questo guida la selezione delle coperture.',
+      url: `${BASE_URL}/quiz-polizza#step-2`,
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Identifica la tua preoccupazione principale',
+      text: 'Seleziona il rischio che ti preoccupa di più: infortuni, danni a terzi, sinistri auto, malattie, furti. Il quiz incrocia la priorità con il rischio per selezionare i prodotti pertinenti.',
+      url: `${BASE_URL}/quiz-polizza#step-3`,
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Verifica le coperture esistenti',
+      text: 'Indica se hai già una polizza in essere. In base alle risposte ricevi una shortlist di coperture suggerite e un percorso per ottenere un preventivo personalizzato.',
+      url: `${BASE_URL}/quiz-polizza#step-4`,
+    },
+  ],
+}
+
 const InsuranceQuiz = dynamic(() => import('@/components/ui/InsuranceQuiz'), {
   loading: () => (
     <div className="flex items-center justify-center py-16">
@@ -27,6 +74,10 @@ export const metadata: Metadata = {
 export default function QuizPolizzaPage() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
       <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: 'Quiz Polizza', href: '/quiz-polizza' }]} />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-20">
