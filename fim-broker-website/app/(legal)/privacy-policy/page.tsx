@@ -35,6 +35,7 @@ export default function PrivacyPolicyPage() {
                 <li><strong>Dati forniti dall&apos;utente</strong>: nome, cognome, email, telefono, richiesti per l&apos;erogazione dei servizi di preventivazione e consulenza</li>
                 <li><strong>Dati di comunicazione</strong>: messaggi inviati tramite form di contatto o tramite l&apos;assistente virtuale FIMA (elaborati da Anthropic AI per generare le risposte)</li>
                 <li><strong>Dati di iscrizione alla newsletter</strong>: indirizzo email fornito volontariamente per ricevere comunicazioni commerciali e aggiornamenti assicurativi (solo previo consenso esplicito)</li>
+                <li><strong>Documenti caricati per la preventivazione</strong>: documenti che l&apos;utente sceglie volontariamente di caricare (es. carta d&apos;identità, patente, libretto di circolazione, visura), trattati al solo fine di elaborare il preventivo richiesto. I file sono conservati in archivio cifrato ad accesso riservato e cancellati al termine della preventivazione (base giuridica: esecuzione di misure precontrattuali su richiesta dell&apos;interessato)</li>
               </ul>
               <p>Le finalità del trattamento sono:</p>
               <ul>
@@ -54,6 +55,7 @@ export default function PrivacyPolicyPage() {
               <ul>
                 <li>Dati contrattuali: 10 anni dall&apos;ultima operazione</li>
                 <li>Dati per preventivi non conclusi: 24 mesi</li>
+                <li>Documenti caricati per la preventivazione: cancellati al termine della preventivazione (al massimo 30 giorni dal caricamento)</li>
                 <li>Dati di navigazione: 13 mesi</li>
                 <li>Dati per newsletter: fino alla revoca del consenso</li>
               </ul>

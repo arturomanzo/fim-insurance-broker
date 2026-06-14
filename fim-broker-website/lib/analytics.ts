@@ -83,6 +83,17 @@ export function trackSecondOpinionSubmit(settore: string, utmSource?: string) {
   })
 }
 
+// ── Funnel preventivo auto — documenti ───────────────────────────────────────
+
+/** Documenti per preventivo auto caricati e inviati */
+export function trackPreventivoAutoDocsSubmit(numDocumenti: number, utmSource?: string) {
+  track('generate_lead', {
+    event_category: 'preventivo_auto_documenti',
+    num_documenti: numDocumenti,
+    utm_source: utmSource ?? '(direct)',
+  })
+}
+
 // ── Abbandono funnel ─────────────────────────────────────────────────────────
 
 /**
