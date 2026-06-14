@@ -7,6 +7,7 @@ const API_GET_ALLOWED = new Set([
   '/api/area-cliente/verify',
   '/api/cron/reminder-rinnovi',
   '/api/cron/ivass-watcher',
+  '/api/cron/cleanup-documenti',
   '/api/og',
 ])
 
