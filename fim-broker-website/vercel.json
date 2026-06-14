@@ -15,16 +15,12 @@
   ],
   "crons": [
     {
-      "path": "/api/cron/reminder-rinnovi",
-      "schedule": "0 8 * * *"
-    },
-    {
       "path": "/api/cron/ivass-watcher",
       "schedule": "30 5 * * *"
     },
     {
-      "path": "/api/cron/cleanup-documenti",
-      "schedule": "0 3 * * *"
+      "path": "/api/cron/daily-maintenance",
+      "schedule": "0 8 * * *"
     }
   ]
 }
