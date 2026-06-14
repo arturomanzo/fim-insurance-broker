@@ -17,8 +17,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { SOURCES, type Source } from '@/lib/ivass-watcher/sources'
 import { fetchFeed, type RssItem } from '@/lib/ivass-watcher/rss'
 import { triageItem } from '@/lib/ivass-watcher/triage'
-import { getKnownIds, insertRows, makeId, type InsertPayload } from '@/lib/ivass-watcher/state'
-import { sendDigest, type DigestItem } from '@/lib/ivass-watcher/email'
+import { getKnownIds, insertRows, getRecentRows, makeId, type InsertPayload } from '@/lib/ivass-watcher/state'
+import { sendDigest, sendWeeklyHeartbeat, type DigestItem } from '@/lib/ivass-watcher/email'
 
 const CRON_SECRET = process.env.CRON_SECRET
 
@@ -40,8 +40,10 @@ interface SourceReport {
 }
 
 function passesPrefilter(item: RssItem, source: Source): boolean {
-  if (!source.prefilter) return true
   const haystack = `${item.title} ${item.description}`
+  // Filtro negativo: scarta il rumore ricorrente prima di tutto.
+  if (source.exclude && source.exclude.test(haystack)) return false
+  if (!source.prefilter) return true
   return source.prefilter.test(haystack)
 }
 
@@ -138,6 +140,13 @@ export async function GET(req: NextRequest) {
   // 5. Persist
   const insertResult = await insertRows(inserts)
 
+  // 6. Heartbeat settimanale (lunedì): riepilogo di audit anche se è tutto tranquillo,
+  //    così il watcher non è mai silenzioso. Legge il DB DOPO l'insert odierno.
+  let heartbeat = null
+  if (new Date().getUTCDay() === 1) {
+    heartbeat = await sendWeeklyHeartbeat(await getRecentRows(7))
+  }
+
   const elapsedMs = Date.now() - startedAt
   return NextResponse.json({
     ok: true,
@@ -148,6 +157,7 @@ export async function GET(req: NextRequest) {
     triaged: toTriage.length,
     digestItems: digest.length,
     email: mail,
+    heartbeat,
     db: insertResult,
   })
 }

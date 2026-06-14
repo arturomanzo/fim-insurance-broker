@@ -9,6 +9,7 @@ import { Resend } from 'resend'
 import type { RssItem } from './rss'
 import type { SourceId, Source } from './sources'
 import type { TriageResult } from './triage'
+import type { RecentRow } from './state'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
@@ -172,6 +173,85 @@ export async function sendDigest(items: DigestItem[]): Promise<SendResult> {
 /** Esportato anche per uso in admin/test route — non strettamente necessario. */
 export function getDestinationEmail(): string {
   return TO
+}
+
+// ── Heartbeat settimanale ─────────────────────────────────────────────────────
+
+const REL_TAG: Record<string, { bg: string; label: string }> = {
+  high: { bg: '#dc2626', label: 'URGENTE' },
+  medium: { bg: '#ea580c', label: 'RILEVANTE' },
+  low: { bg: '#64748b', label: 'minore' },
+  none: { bg: '#94a3b8', label: 'non pertinente' },
+}
+
+function heartbeatRow(r: RecentRow): string {
+  const tag = REL_TAG[r.relevance ?? 'none'] ?? REL_TAG.none
+  const day = r.detected_at
+    ? new Date(r.detected_at).toLocaleDateString('it-IT', { day: '2-digit', month: 'short' })
+    : '—'
+  return `
+<tr>
+  <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;font-size:11px;color:#94a3b8;white-space:nowrap;vertical-align:top;">${day}</td>
+  <td style="padding:8px 10px;border-bottom:1px solid #f1f5f9;vertical-align:top;">
+    <span style="display:inline-block;padding:2px 7px;background:${tag.bg};color:white;font-size:9px;font-weight:700;border-radius:3px;letter-spacing:0.5px;">${tag.label}</span>
+    <a href="${esc(r.url)}" style="color:#0f2d6b;font-size:13px;text-decoration:none;margin-left:6px;">${esc(r.title)}</a>
+  </td>
+</tr>`
+}
+
+/**
+ * Digest settimanale "heartbeat": inviato anche quando non c'è nulla di rilevante,
+ * così il watcher non è mai silenzioso e resta un registro di audit. Tipicamente
+ * schedulato il lunedì dal cron.
+ */
+export async function sendWeeklyHeartbeat(rows: RecentRow[]): Promise<SendResult> {
+  const counts = rows.reduce(
+    (acc, r) => { acc[r.relevance ?? 'none'] = (acc[r.relevance ?? 'none'] ?? 0) + 1; return acc },
+    {} as Record<string, number>,
+  )
+  const dateStr = new Date().toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' })
+  const subject = `IVASS Watcher · riepilogo settimanale (${rows.length} voci)`
+
+  const summaryLine =
+    rows.length === 0
+      ? 'Nessuna nuova voce normativa negli ultimi 7 giorni. Il watcher è attivo e in ascolto.'
+      : `${rows.length} voci rilevate negli ultimi 7 giorni — ` +
+        `${counts.high ?? 0} urgenti · ${counts.medium ?? 0} rilevanti · ${counts.low ?? 0} minori · ${counts.none ?? 0} non pertinenti.`
+
+  const table =
+    rows.length > 0
+      ? `<table style="width:100%;border-collapse:collapse;background:white;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">${rows.map(heartbeatRow).join('')}</table>`
+      : ''
+
+  const html = `<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8fafc;margin:0;padding:24px;">
+  <div style="max-width:640px;margin:0 auto;">
+    <div style="background:#0f2d6b;border-radius:12px 12px 0 0;padding:28px 32px;">
+      <p style="margin:0;font-size:11px;color:#00b4c8;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">IVASS Watcher · Riepilogo settimanale</p>
+      <h1 style="margin:6px 0 0;color:white;font-size:20px;font-weight:900;">${esc(summaryLine)}</h1>
+      <p style="margin:6px 0 0;color:rgba(255,255,255,0.7);font-size:13px;">Settimana al ${esc(dateStr)}</p>
+    </div>
+    <div style="background:#f8fafc;padding:24px 16px;border-radius:0 0 12px 12px;border:1px solid #e2e8f0;border-top:none;">
+      ${table}
+      <p style="margin:18px 4px 0;font-size:11px;color:#94a3b8;text-align:center;">
+        Gli alert "URGENTE"/"RILEVANTE" arrivano comunque in tempo reale ogni giorno. Questo è solo il riepilogo di audit.
+      </p>
+    </div>
+  </div>
+</body></html>`
+
+  if (!resend) {
+    console.log(`[ivass-watcher] DRY-RUN heartbeat a ${TO}: "${subject}" (${rows.length} voci)`)
+    return { sent: true, to: TO, dryRun: true }
+  }
+  try {
+    await resend.emails.send({ from: FROM, to: [TO], subject, html })
+    return { sent: true, to: TO }
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err)
+    console.error('[ivass-watcher] sendWeeklyHeartbeat error:', msg)
+    return { sent: false, to: TO, error: msg }
+  }
 }
 
 /** Identificatori espliciti delle fonti (utile per logging). */

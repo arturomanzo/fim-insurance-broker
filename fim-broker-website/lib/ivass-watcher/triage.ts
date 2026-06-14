@@ -61,6 +61,16 @@ REGOLE DI CLASSIFICAZIONE:
   • Trasferimenti di portafoglio tra compagnie
   • Atti non assicurativi finiti nel feed per via di un keyword match (es. "assicurazione" in contesti diversi)
 
+ATTI A TITOLO OPACO (IMPORTANTE — evita i punti ciechi):
+Le voci IVASS hanno spesso titoli generici ("Provvedimento n. 0124143", "Lettera al mercato", "Regolamento n. X") con descrizione RSS assente o inutile. In questi casi NON puoi escludere un impatto su intermediari/broker dal solo titolo.
+- "Lettera al mercato" e "Regolamento IVASS" → tratta come "high" (sono tipicamente vincolanti per gli intermediari) salvo evidenza contraria nella descrizione.
+- "Provvedimento n. …" di IVASS senza descrizione utile → MAI "none": classifica almeno "medium" e scrivi nel summary che il testo va verificato.
+È preferibile un falso allarme archiviabile a un obbligo mancato.
+Restano "low/none" solo gli atti CHIARAMENTE non normativi per un broker: elenchi/registri, statistiche e bollettini, avvisi su singole imprese (anche estere), oscuramento di siti abusivi, procedure di gara interne IVASS.
+
+ELEVA SEMPRE ad almeno "medium" (a "high" se c'è obbligo o scadenza ≤90gg) gli atti che toccano:
+Reg. IVASS 40/2018 o 41/2018, Allegati IDD (3 e 4), procedura reclami, Arbitro Assicurativo, iscrizione/tenuta RUI e requisiti degli intermediari, obblighi antiriciclaggio per intermediari (D.Lgs. 231/2007), distribuzione assicurativa (IDD, D.Lgs. 68/2018).
+
 IMPATTO SUL SITO:
 "impactsSite" = true SOLO se richiede modifica di testi pubblici del sito FIM (note legali, allegati IDD, procedura reclami, privacy, glossario, FAQ, contenuti commerciali).
 
@@ -122,6 +132,34 @@ function validateRelevance(v: unknown): Relevance {
   return v === 'high' || v === 'medium' || v === 'low' || v === 'none' ? v : 'low'
 }
 
+const REL_ORDER: Record<Relevance, number> = { none: 0, low: 1, medium: 2, high: 3 }
+function maxRel(a: Relevance, b: Relevance): Relevance {
+  return REL_ORDER[a] >= REL_ORDER[b] ? a : b
+}
+
+/**
+ * Rete di sicurezza deterministica per atti normativi IVASS a titolo opaco:
+ * impedisce che un atto potenzialmente vincolante (lettera al mercato,
+ * regolamento, provvedimento) venga archiviato come none/low solo perché
+ * titolo e descrizione RSS non bastano a coglierne la portata.
+ * Restituisce la relevance, eventualmente elevata, e se è stata elevata.
+ */
+export function applyNormativeFloor(
+  item: RssItem,
+  source: Source,
+  rel: Relevance,
+): { relevance: Relevance; elevated: boolean } {
+  if (source.id !== 'ivass') return { relevance: rel, elevated: false }
+  const t = item.title
+  let floor: Relevance = rel
+  if (/lettera al mercato/i.test(t) || /\bregolament[oi]\b/i.test(t)) {
+    floor = maxRel(rel, 'high')
+  } else if (/provvediment[oi]\s+n/i.test(t) && rel === 'none') {
+    floor = 'medium'
+  }
+  return { relevance: floor, elevated: REL_ORDER[floor] > REL_ORDER[rel] }
+}
+
 function validatePages(v: unknown): string[] {
   if (!Array.isArray(v)) return []
   return v.filter((s): s is string => typeof s === 'string' && s.startsWith('/')).slice(0, 10)
@@ -148,11 +186,17 @@ export async function triageItem(
       return { ...FALLBACK, error: 'JSON non parsabile' }
     }
     const p = parsed as Record<string, unknown>
+    const modelRel = validateRelevance(p.relevance)
+    const { relevance, elevated } = applyNormativeFloor(item, source, modelRel)
+    const baseSummary = typeof p.summary === 'string' ? p.summary.slice(0, 480) : ''
+    const summary = elevated
+      ? `⚠️ Elevato in via prudenziale (atto normativo a titolo opaco — verificare il testo). ${baseSummary}`.slice(0, 500)
+      : baseSummary
     return {
-      relevance: validateRelevance(p.relevance),
+      relevance,
       impactsSite: Boolean(p.impactsSite),
       affectedPages: validatePages(p.affectedPages),
-      summary: typeof p.summary === 'string' ? p.summary.slice(0, 500) : '',
+      summary,
       deadline: typeof p.deadline === 'string' ? p.deadline.slice(0, 100) : null,
       normativeRefs: typeof p.normativeRefs === 'string' ? p.normativeRefs.slice(0, 300) : null,
     }
