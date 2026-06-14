@@ -29,7 +29,21 @@ export interface Source {
    * Confronto case-insensitive su `${title} ${description}`.
    */
   prefilter: RegExp | null
+  /**
+   * Filtro NEGATIVO: se matcha, l'item viene scartato PRIMA del triage.
+   * Serve a togliere il rumore ricorrente (es. elenchi-registro IVASS pubblicati
+   * ogni settimana) che intasa DB e chiamate AI senza alcun valore normativo.
+   */
+  exclude?: RegExp
 }
+
+/**
+ * Rumore ricorrente del feed IVASS: elenchi-registro ripubblicati a cadenza fissa
+ * (liste siti vigilati, registri imprese r.c. auto/natanti per ramo). Nessun
+ * contenuto normativo → si scartano a monte. Verificato su 44 item reali (giu 2026).
+ */
+const IVASS_NOISE =
+  /lista siti internet|imprese\s+(estere|italiane)\s+r\.?\s?c\.?\s?(auto|natanti)|\bramo\s+1[02]\)/i
 
 /** UA "realistico" — utile se in futuro si riattiva ANIA via proxy o edge runtime. */
 export const BROWSER_UA =
@@ -56,7 +70,8 @@ export const SOURCES: readonly Source[] = [
     id: 'ivass',
     label: 'IVASS — Sito istituzionale',
     url: 'https://www.ivass.it/util/index.rss.html?lingua=it',
-    prefilter: null, // IVASS pubblica poco, teniamo tutto
+    prefilter: null, // IVASS pubblica poco, teniamo tutto…
+    exclude: IVASS_NOISE, // …tranne gli elenchi-registro ricorrenti (rumore)
   },
   {
     id: 'gazzetta-sg',

@@ -81,6 +81,46 @@ export async function getKnownIds(ids: string[]): Promise<Set<string>> {
   }
 }
 
+export interface RecentRow {
+  title: string
+  url: string
+  source: SourceId
+  relevance: Relevance | null
+  detected_at: string
+  summary: string | null
+}
+
+/** Righe rilevate negli ultimi `days` giorni (per il digest settimanale/heartbeat). */
+export async function getRecentRows(days: number): Promise<RecentRow[]> {
+  const supa = getSupabase()
+  if (!supa) return []
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString()
+  try {
+    const result = await runWithRetry('getRecentRows', async () =>
+      supa
+        .from('ivass_watcher_state')
+        .select('title,url,source,triage_relevance,detected_at,triage_summary')
+        .gte('detected_at', since)
+        .order('detected_at', { ascending: false }),
+    )
+    if (result.error) {
+      console.error('[ivass-watcher] getRecentRows error:', result.error.message)
+      return []
+    }
+    return (result.data ?? []).map((r: Record<string, unknown>) => ({
+      title: String(r.title ?? ''),
+      url: String(r.url ?? ''),
+      source: r.source as SourceId,
+      relevance: (r.triage_relevance as Relevance | null) ?? null,
+      detected_at: String(r.detected_at ?? ''),
+      summary: (r.triage_summary as string | null) ?? null,
+    }))
+  } catch (err) {
+    console.error('[ivass-watcher] getRecentRows threw:', describeError(err))
+    return []
+  }
+}
+
 export interface InsertPayload {
   id: string
   source: SourceId
