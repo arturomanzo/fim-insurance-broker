@@ -7,6 +7,7 @@ import Card from '@/components/ui/Card'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import CoverageTable from '@/components/ui/CoverageTable'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import PreventivoAutoDocumenti from '@/components/forms/PreventivoAutoDocumenti'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -175,6 +176,19 @@ export default async function ServizioPage({ params }: Props) {
                   ))}
                 </div>
               </Card>
+
+              {/* Caricamento documenti — solo assicurazione auto */}
+              {service.slug === 'assicurazione-auto' && (
+                <div id="carica-documenti" className="scroll-mt-24">
+                  <Card>
+                    <h2 className="text-2xl font-black text-primary mb-2">Carica i documenti per il preventivo</h2>
+                    <p className="text-gray-500 text-sm mb-6">
+                      Hai già deciso? Caricando subito i documenti acceleri la preventivazione: niente email avanti e indietro.
+                    </p>
+                    <PreventivoAutoDocumenti />
+                  </Card>
+                </div>
+              )}
 
               {/* FAQ */}
               <Card>
