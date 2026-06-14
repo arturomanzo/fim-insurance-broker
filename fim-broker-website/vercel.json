@@ -11,6 +11,10 @@
     {
       "path": "/api/cron/reminder-rinnovi",
       "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/cleanup-documenti",
+      "schedule": "0 3 * * *"
     }
   ]
 }
