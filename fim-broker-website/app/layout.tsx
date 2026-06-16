@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Montserrat, Source_Serif_4 } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
+import CookieBanner from '@/components/ui/CookieBanner'
+import ClarityLoader from '@/components/analytics/ClarityLoader'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -21,7 +23,6 @@ const sourceSerif = Source_Serif_4({
 //   - GA4: G-F6DB47VZ4Z
 //   - Google Ads: AW-18034188310
 const GTM_ID = 'GTM-T4LC5GFD'
-const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID
 
 // Consent Mode v2 (GDPR + ePrivacy) — eseguito PRIMA di GTM con uno
 // <script> inline sincrono. Setta il default su "denied" per gli storage
@@ -348,19 +349,15 @@ w.setTimeout(trigger,3500);
         {/* GA4 (G-F6DB47VZ4Z) e Google Ads (AW-18034188310) sono ora gestiti
             DENTRO Google Tag Manager (GTM-T4LC5GFD) per evitare double-counting.
             Configura i tag corrispondenti nella UI di GTM. */}
-        {/* Microsoft Clarity — heatmaps e session recordings */}
-        {CLARITY_ID && (
-          <Script id="microsoft-clarity" strategy="afterInteractive">
-            {`
-              (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window,document,"clarity","script","${CLARITY_ID}");
-            `}
-          </Script>
-        )}
+        {/* Microsoft Clarity — caricato SOLO previo consenso analitico
+            (vedi components/analytics/ClarityLoader.tsx). */}
         {children}
+        {/* CookieBanner e ClarityLoader montati a livello root, così il
+            banner è raggiungibile da OGNI pagina (anche legali/admin) e il
+            consenso è revocabile ovunque tramite il link "Preferenze cookie"
+            nel footer. */}
+        <ClarityLoader />
+        <CookieBanner />
       </body>
     </html>
   )
