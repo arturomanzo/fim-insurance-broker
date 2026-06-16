@@ -296,8 +296,8 @@ export default function RootLayout({
             Le conversioni di chi interagisce restano tracciate; si toglie solo
             il costo dal critical path iniziale.
             Consent Mode v2 (CONSENT_INIT_SCRIPT sopra) resta sincrono e gira
-            comunque PRIMA di GTM. Tag aggiuntivi (GA4 G-F6DB47VZ4Z, Google Ads
-            AW-18034188310, Meta Pixel, ecc.) sono configurati DENTRO GTM. */}
+            comunque PRIMA di GTM. I tag (GA4 G-F6DB47VZ4Z, Google Ads
+            AW-18034188310) sono configurati DENTRO GTM. */}
         <Script id="gtm-init" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];function gtmLoad(){w[l].push(
 {'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

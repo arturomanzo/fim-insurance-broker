@@ -68,12 +68,11 @@ export default function CookiePolicyPage() {
 
               <h3>Cookie di marketing / profilazione (previo consenso)</h3>
               <p>
-                Utilizzati per misurare le campagne pubblicitarie e mostrare annunci pertinenti.
-                Vengono attivati solo con il tuo consenso.
+                Utilizzati per misurare l&apos;efficacia delle campagne pubblicitarie. Vengono
+                attivati solo con il tuo consenso.
               </p>
               <ul>
-                <li><strong>Google Ads</strong> (conversion tracking / remarketing) — gestito tramite Google Tag Manager.</li>
-                <li><strong>Meta Pixel</strong> (Facebook/Instagram — _fbp e analoghi) — misurazione campagne e remarketing (durata: fino a 3 mesi).</li>
+                <li><strong>Google Ads</strong> — monitoraggio delle conversioni (es. clic su telefono/WhatsApp, invio form), gestito tramite Google Tag Manager.</li>
               </ul>
 
               <h3>Gestione tag</h3>
