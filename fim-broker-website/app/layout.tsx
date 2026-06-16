@@ -290,11 +290,14 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: CONSENT_INIT_SCRIPT }} />
 
         {/* Google Tag Manager — caricamento DIFFERITO per ridurre il TBT.
-            gtm.js (~280 KB con GA4/Ads/Pixel) non viene iniettato all'avvio:
+            gtm.js (~280 KB con GA4/Ads) non viene iniettato all'avvio:
             parte al primo gesto dell'utente (scroll/click/tap/keydown/mousemove)
             oppure dopo 3,5s, qualunque evento avvenga prima — una sola volta.
             Le conversioni di chi interagisce restano tracciate; si toglie solo
             il costo dal critical path iniziale.
+            ECCEZIONE: in modalità anteprima/debug di GTM (Tag Assistant, URL con
+            gtm_debug / gtm_preview / gtm_auth) GTM viene caricato SUBITO, così il
+            debug e la verifica dei tag funzionano senza dover interagire.
             Consent Mode v2 (CONSENT_INIT_SCRIPT sopra) resta sincrono e gira
             comunque PRIMA di GTM. I tag (GA4 G-F6DB47VZ4Z, Google Ads
             AW-18034188310) sono configurati DENTRO GTM. */}
@@ -303,6 +306,7 @@ export default function RootLayout({
 {'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+if(/[?&]gtm_(debug|preview|auth)=/.test(w.location.search)){gtmLoad();return;}
 var loaded=false;function trigger(){if(loaded)return;loaded=true;
 ['scroll','mousemove','touchstart','keydown','click'].forEach(function(e){
 w.removeEventListener(e,trigger);});gtmLoad();}
