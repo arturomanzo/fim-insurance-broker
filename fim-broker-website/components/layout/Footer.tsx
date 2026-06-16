@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import FimLogo from '@/components/ui/FimLogo'
+import { OPEN_COOKIE_PREFERENCES_EVENT } from '@/components/ui/CookieBanner'
 
 const serviceLinks = [
   { href: '/servizi/assicurazione-auto', label: 'Assicurazione Auto' },
@@ -284,12 +285,19 @@ export default function Footer() {
           <p className="text-white/50 text-sm" suppressHydrationWarning>
             &copy; {new Date().getFullYear()} FIM Insurance Broker S.a.s. di Manzo Arturo & C. Tutti i diritti riservati.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             {legalLinks.map((link) => (
               <Link key={link.href} href={link.href} className="text-white/50 hover:text-white/80 text-sm transition-colors">
                 {link.label}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_PREFERENCES_EVENT))}
+              className="text-white/50 hover:text-white/80 text-sm transition-colors"
+            >
+              Preferenze cookie
+            </button>
           </div>
         </div>
       </div>

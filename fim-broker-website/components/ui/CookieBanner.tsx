@@ -32,10 +32,23 @@ function updateGtagConsent(choice: ConsentChoice, analyticsGranted: boolean) {
   })
 }
 
+// Notifica i loader consent-aware (es. Microsoft Clarity) che la scelta
+// dell'utente è cambiata, così possono attivarsi senza ricaricare la pagina.
+function notifyConsentUpdated() {
+  if (typeof window === 'undefined') return
+  window.dispatchEvent(new Event('fim-consent-updated'))
+}
+
+// Evento con cui altri componenti (es. il link "Preferenze cookie" nel
+// footer) chiedono di riaprire il banner per modificare/revocare il consenso.
+export const OPEN_COOKIE_PREFERENCES_EVENT = 'fim-open-cookie-preferences'
+
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
-  const [analyticsChecked, setAnalyticsChecked] = useState(true)
+  // Default: cookie analitici DISATTIVI (i non necessari richiedono opt-in
+  // esplicito, Linee guida Garante 2021).
+  const [analyticsChecked, setAnalyticsChecked] = useState(false)
   const firstButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -47,6 +60,28 @@ export default function CookieBanner() {
     }
   }, [])
 
+  // Riapertura del banner su richiesta (link "Preferenze cookie" nel footer):
+  // consente di modificare o revocare il consenso in qualsiasi momento, con la
+  // stessa facilità con cui è stato prestato (requisito Garante / GDPR).
+  useEffect(() => {
+    const handleOpen = () => {
+      // Pre-popola i toggle con la scelta salvata, se presente
+      try {
+        const raw = localStorage.getItem('fim-cookie-consent')
+        if (raw) {
+          const c = JSON.parse(raw)
+          setAnalyticsChecked(c?.choice === 'all' || c?.analytics === true)
+        }
+      } catch {
+        // ignora JSON corrotto: si riparte dai default
+      }
+      setShowDetails(true)
+      setVisible(true)
+    }
+    window.addEventListener(OPEN_COOKIE_PREFERENCES_EVENT, handleOpen)
+    return () => window.removeEventListener(OPEN_COOKIE_PREFERENCES_EVENT, handleOpen)
+  }, [])
+
   useEffect(() => {
     if (!visible) return
     firstButtonRef.current?.focus()
@@ -56,6 +91,7 @@ export default function CookieBanner() {
         choice: 'essential', analytics: false, timestamp: new Date().toISOString(),
       }))
       updateGtagConsent('essential', false)
+      notifyConsentUpdated()
       setVisible(false)
     }
     document.addEventListener('keydown', handleKeyDown)
@@ -72,6 +108,8 @@ export default function CookieBanner() {
     }))
     // Propaga la scelta al Consent Mode v2 di Google (GA4 + Google Ads in GTM)
     updateGtagConsent(choice, analytics)
+    // Notifica i loader consent-aware (Microsoft Clarity)
+    notifyConsentUpdated()
     setVisible(false)
   }
 
