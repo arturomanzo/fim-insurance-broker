@@ -221,7 +221,7 @@ const jsonLd = {
     'https://www.facebook.com/FimInsuranceBroker/',
     'https://www.instagram.com/fiminsurancebroker/',
     'https://x.com/fimbroker',
-    'https://www.linkedin.com/company/fim-insurance-broker',
+    'https://www.linkedin.com/in/arturo-manzo-7509b63a/',
   ],
   // Aree servite: Paese + città chiave per local SEO
   areaServed: [
