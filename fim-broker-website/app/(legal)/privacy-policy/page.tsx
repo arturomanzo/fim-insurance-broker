@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
                 che visitano il presente sito web e che richiedono i nostri servizi.
               </p>
               <p>
-                Contatto DPO: privacy@fimbroker.it
+                Contatto privacy: privacy@fimbroker.it
               </p>
             </section>
 
