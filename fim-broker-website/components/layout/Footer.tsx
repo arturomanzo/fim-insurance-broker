@@ -66,7 +66,7 @@ const socialLinks = [
     ),
   },
   {
-    href: 'https://www.linkedin.com/in/arturo-manzo-7509b63a/',
+    href: 'https://www.linkedin.com/company/134744009/',
     label: 'LinkedIn',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
