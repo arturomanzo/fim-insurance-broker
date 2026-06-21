@@ -67,7 +67,7 @@ const socialLinks = [
     ),
   },
   {
-    href: 'https://www.linkedin.com/company/fim-insurance-broker/',
+    href: 'https://www.linkedin.com/company/fim-insurance-broker-s-a-s-di-manzo-arturo-c/',
     label: 'LinkedIn',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
