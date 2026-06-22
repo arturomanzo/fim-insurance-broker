@@ -1,6 +1,72 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-rc-prodotti-imprese-manifatturiere-2026",
+      "title": "RC Prodotti 2026: Perché Ogni Impresa Manifatturiera Deve Tutelarsi dai Danni Causati dai Propri Beni",
+      "excerpt": "Se la tua azienda produce, assembla o distribuisce prodotti, sei esposto a rischi di responsabilità civile che possono costarti molto caro. Scopri come funziona la polizza RC Prodotti e perché nel 2026 è più importante che mai.",
+      "category": "Aziendale",
+      "date": "22 Giugno 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Cos'è la Responsabilità Civile da Prodotto e Perché Riguarda la Tua Impresa",
+          "body": "La RC Prodotti è una copertura assicurativa che protegge le imprese dai danni causati a terzi — persone fisiche o altre aziende — da un prodotto difettoso o non conforme immesso sul mercato. In Italia, il quadro normativo di riferimento è il D.Lgs. 206/2005 (Codice del Consumo), che prevede una responsabilità oggettiva del produttore: significa che il danneggiato non deve necessariamente dimostrare la colpa dell'azienda, ma solo il nesso tra il prodotto e il danno subito. Questo rende il rischio concreto e potenzialmente molto oneroso anche per le piccole e medie imprese, non solo per le grandi multinazionali.",
+          "list": [
+            "Produttori di beni di consumo (alimentari, elettronici, tessili, meccanici)",
+            "Assemblatori e subfornitori che integrano componenti in prodotti finiti",
+            "Importatori ed esportatori che immettono merci sul mercato europeo",
+            "Distributori e rivenditori che, in assenza del produttore identificabile, rispondono in prima persona"
+          ]
+        },
+        {
+          "heading": "Cosa Copre (e Cosa Non Copre) una Polizza RC Prodotti",
+          "body": "Una polizza RC Prodotti ben strutturata rimborsa le somme che l'assicurato è tenuto a pagare a terzi a titolo di risarcimento per danni alla persona o alle cose causati da un prodotto difettoso. Rientrano nella copertura anche le spese legali per difendersi in giudizio, voce spesso sottovalutata ma che può raggiungere cifre importanti. È fondamentale tuttavia leggere attentamente le esclusioni: i danni al prodotto stesso, i costi di ritiro dal mercato (product recall), i danni da prodotti consapevolmente immessi difettosi e i danni da amianto o sostanze inquinanti sono generalmente esclusi dalle polizze standard, ma possono essere coperti con apposite estensioni.",
+          "list": [
+            "Danni fisici a persone causati dal prodotto difettoso",
+            "Danni materiali a beni di terzi derivanti dal prodotto",
+            "Spese legali e di perizia per la gestione del sinistro",
+            "Estensione product recall: costi di ritiro dal mercato (da richiedere espressamente)",
+            "Estensione danni da prodotti alimentari e contaminazione"
+          ]
+        },
+        {
+          "heading": "Il Contesto Normativo Europeo nel 2025-2026: La Nuova Direttiva sulla Responsabilità del Prodotto",
+          "body": "Nel 2024 l'Unione Europea ha approvato la revisione della Direttiva sulla Responsabilità del Prodotto (originariamente del 1985), con recepimento previsto negli Stati membri entro dicembre 2026. Le novità sono rilevanti: la nuova direttiva estende la responsabilità ai prodotti digitali e al software integrato nei beni fisici, include i prodotti ricondizionati, e introduce il concetto di 'danno da perdita o corruzione di dati' come danno risarcibile. Per le PMI italiane questo significa che anche chi produce macchinari con componenti smart, dispositivi IoT o apparecchiature con firmware aggiornabile dovrà rivalutare la propria esposizione al rischio e verificare che la polizza in essere copra adeguatamente questi nuovi scenari.",
+          "list": [
+            "Estensione della responsabilità ai prodotti digitali e software embedded",
+            "Inclusione dei prodotti ricondizionati e rigenerati",
+            "Danno da perdita di dati personali come voce risarcibile",
+            "Inversione parziale dell'onere della prova a favore del consumatore"
+          ]
+        },
+        {
+          "heading": "Come Calcolare il Massimale Giusto: Gli Errori Più Comuni delle PMI",
+          "body": "Uno degli errori più frequenti che riscontriamo come broker è la scelta di massimali troppo bassi, motivata dal desiderio di contenere il premio annuale. Un massimale da 500.000 euro può sembrare sufficiente per una piccola impresa, ma un singolo sinistro che coinvolge danni fisici a più persone — si pensi a un componente difettoso in un prodotto di larga diffusione — può rapidamente superare quella soglia. La valutazione corretta del massimale deve tenere conto del volume di produzione, dei mercati di destinazione (il mercato statunitense, ad esempio, espone a rischi legali nettamente superiori), della tipologia di prodotto e del potenziale numero di soggetti coinvolti in caso di difetto seriale. Un broker esperto può aiutarti a costruire un modello di rischio realistico prima di scegliere il massimale.",
+          "list": [
+            "Analisi del fatturato per prodotto e mercato di destinazione",
+            "Valutazione del numero potenziale di unità difettose in circolazione",
+            "Verifica della presenza di distributori esteri che potrebbero rivalersi sull'impresa",
+            "Revisione annuale del massimale in caso di crescita del business"
+          ]
+        },
+        {
+          "heading": "RC Prodotti e Filiera: Chi Risponde Quando il Difetto Non è Tuo",
+          "body": "In una filiera produttiva complessa, il difetto può originarsi da un componente fornito da un terzo, ma il cliente finale agirà quasi sempre contro il soggetto con cui ha avuto il rapporto commerciale diretto — spesso l'assemblatore o il distributore. Per questo motivo è essenziale che ogni anello della catena sia coperto e che i contratti di fornitura prevedano clausole di manleva e obblighi assicurativi a carico dei fornitori. FIM Insurance Broker supporta le imprese non solo nella scelta della polizza più adatta, ma anche nella revisione delle clausole contrattuali con fornitori e clienti, per garantire una tutela a 360 gradi lungo tutta la filiera.",
+          "list": [
+            "Inserire nei contratti di fornitura l'obbligo di RC Prodotti per il fornitore",
+            "Richiedere ai fornitori copia della polizza e attestato di copertura annuale",
+            "Verificare che la propria polizza copra i danni derivanti da componenti di terzi",
+            "Valutare una polizza di filiera (umbrella policy) per gruppi di imprese correlate"
+          ]
+        },
+        {
+          "heading": "Perché Affidarsi a un Broker Specializzato come FIM Insurance",
+          "body": "La RC Prodotti è una polizza altamente personalizzabile e tecnicamente complessa: le clausole di estensione, le franchigie, i sublimiti per singolo prodotto e le condizioni di territorialità variano enormemente da compagnia a compagnia. Affidarsi a un broker indipendente come FIM Insurance Broker, con sede a Cisterna di Latina e operativo su tutto il territorio nazionale, significa avere al proprio fianco un consulente che conosce il mercato assicurativo italiano ed europeo, che non è vincolato a una sola compagnia e che lavora nell'esclusivo interesse del cliente. Se gestisci un'impresa manifatturiera, artigianale o commerciale e non hai ancora verificato la tua esposizione al rischio da prodotto, contattaci oggi per una consulenza gratuita: analizzare il rischio prima che si verifichi un sinistro è sempre la scelta più intelligente — e meno costosa."
+        }
+      ]
+    },
+    {
       "slug": "polizza-sanitaria-famiglia-guida-2026",
       "title": "Polizza Sanitaria per la Famiglia: Come Proteggere Tutto il Nucleo nel 2026",
       "excerpt": "Una sola polizza per coniuge, figli e genitori a carico: ecco come funziona la sanitaria integrativa familiare, cosa copre davvero e cosa è (e non è) detraibile dalle tasse nel 2026.",
