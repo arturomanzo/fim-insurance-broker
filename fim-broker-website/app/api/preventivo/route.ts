@@ -10,6 +10,7 @@ interface PreventivoRequest {
   cognome: string
   email: string
   telefono: string
+  targa?: string // solo per coperture auto
   messaggio?: string
   oggetto?: string
   privacy: boolean
@@ -135,6 +136,7 @@ function buildTeamEmailHtml(data: {
   cognome: string
   email: string
   telefono: string
+  targa?: string
   messaggio: string
   timestamp: string
   utm_source?: string
@@ -147,6 +149,7 @@ function buildTeamEmailHtml(data: {
   const cognome = escapeHtml(data.cognome)
   const email = escapeHtml(data.email)
   const telefono = escapeHtml(data.telefono)
+  const targa = data.targa ? escapeHtml(data.targa) : ''
   const messaggio = escapeHtml(data.messaggio)
 
   const profiloKey = (data.profilo ?? '').toLowerCase()
@@ -196,6 +199,15 @@ function buildTeamEmailHtml(data: {
             <span style="font-size: 14px; font-weight: 700; color: #1e293b;">${profiloLabel}</span>
           </td>
         </tr>
+        ${targa ? `
+        <tr>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <span style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Targa</span>
+          </td>
+          <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
+            <span style="font-size: 15px; font-weight: 800; color: #0B1F3A; letter-spacing: 1px; font-family: ui-monospace, monospace;">${targa}</span>
+          </td>
+        </tr>` : ''}
         <tr>
           <td style="padding: 9px 0; border-bottom: 1px solid #f8fafc;">
             <span style="font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Email</span>
@@ -396,6 +408,7 @@ export async function POST(req: NextRequest) {
     const email = sanitize(body.email)
     const telefono = sanitize(body.telefono)
     const tipo = sanitize(body.tipo)
+    const targa = sanitize(body.targa).slice(0, 15)
     const messaggio = sanitize(body.messaggio)
 
     // Honeypot: se il campo "website" è compilato, è quasi certamente un bot
@@ -427,24 +440,31 @@ export async function POST(req: NextRequest) {
 
     const preventivoData = {
       id: `FIM-${Date.now()}`,
-      tipo, profilo: profilo || undefined, nome, cognome, email, telefono, messaggio,
+      tipo, profilo: profilo || undefined, nome, cognome, email, telefono,
+      targa: targa || undefined, messaggio,
       timestamp: new Date().toISOString(),
       ...utm,
     }
+
+    // La targa non ha una colonna dedicata in CRM/lead store: la accodiamo al
+    // messaggio così resta visibile al broker e all'AI di lead scoring.
+    const messaggioPersistito = targa
+      ? `Targa: ${targa}${messaggio ? `\n\n${messaggio}` : ''}`
+      : messaggio
 
     // Follow-up schedulato a 72 ore
     const followUpAt = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
 
     // Sincronizza lead nel gestionale esterno (PRIORITÀ — con await)
     try {
-      await syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined })
+      await syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggioPersistito || undefined })
     } catch (syncErr) {
       console.error('[preventivo] Sync gestionale fallita:', syncErr)
     }
 
     // Salva lead su Supabase locale del sito (secondario)
     try {
-      await saveLead({ id: preventivoData.id, nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggio || undefined, timestamp: preventivoData.timestamp })
+      await saveLead({ id: preventivoData.id, nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggioPersistito || undefined, timestamp: preventivoData.timestamp })
     } catch { /* non blocca */ }
 
     // Invia email se Resend è configurato
