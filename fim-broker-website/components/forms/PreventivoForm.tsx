@@ -64,6 +64,11 @@ const COPERTURE: Record<Profile, string[]> = {
   impresa: ['Programma Assicurativo Integrato', 'Cyber Insurance Enterprise', 'D&O (Directors & Officers)', 'All Risk Multi-Sede', 'Welfare & Benefits Aziendali', 'Altro'],
 }
 
+// Coperture per cui la targa è un dato utile da raccogliere subito
+function isAutoCopertura(copertura: string): boolean {
+  return /auto|kasko|flotta/i.test(copertura)
+}
+
 function resolveProfile(raw: string | null | undefined): Profile | null {
   if (!raw) return null
   const map: Record<string, Profile> = {
@@ -86,6 +91,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
   const [cognome, setCognome] = useState('')
   const [email, setEmail] = useState('')
   const [telefono, setTelefono] = useState('')
+  const [targa, setTarga] = useState('')
   const [privacy, setPrivacy] = useState(false)
   const [website, setWebsite] = useState('') // honeypot
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -145,6 +151,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           tipo: copertura || 'Preventivo generico',
           profilo: profile,
           nome, cognome, email, telefono,
+          targa: isAutoCopertura(copertura) ? targa.trim() : undefined,
           messaggio: note,
           privacy: true,
           website,
@@ -176,7 +183,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <a href="tel:+390696883381" className="btn-primary">📞 Chiama subito: 06 96883381</a>
           <Link href="/prenota-consulenza" className="btn-secondary">Prenota una slot</Link>
         </div>
-        <button onClick={() => { setStatus('idle'); setStep(1); setProfile(null); setCopertura(''); setNome(''); setCognome(''); setEmail(''); setTelefono('') }}
+        <button onClick={() => { setStatus('idle'); setStep(1); setProfile(null); setCopertura(''); setNome(''); setCognome(''); setEmail(''); setTelefono(''); setTarga('') }}
           className="mt-6 text-sm text-gray-400 hover:text-gray-600 transition-colors">
           ↺ Invia un&apos;altra richiesta
         </button>
@@ -303,6 +310,15 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
                 {errors.telefono && <p className="text-red-500 text-xs mt-1">{errors.telefono}</p>}
               </div>
             </div>
+            {isAutoCopertura(copertura) && (
+              <div>
+                <label className="label-field">Targa del veicolo (facoltativo)</label>
+                <input type="text" value={targa}
+                  onChange={(e) => setTarga(e.target.value.toUpperCase())}
+                  placeholder="AB123CD" className="input-field uppercase" maxLength={15} autoComplete="off" />
+                <p className="text-xs text-gray-400 mt-1">Indicandola ora ci permetti di preparare il preventivo più velocemente.</p>
+              </div>
+            )}
             <div>
               <label className="flex items-start gap-3 cursor-pointer">
                 <input type="checkbox" checked={privacy} onChange={(e) => { setPrivacy(e.target.checked); setErrors((p) => ({ ...p, privacy: '' })) }}
