@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
+import { PREFILL_SESSION_KEY, type PreventivoAutoPrefill } from '@/lib/preventivoDocumenti'
 import {
   trackPreventivoStep1,
   trackPreventivoStep2,
@@ -160,6 +161,17 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
       })
       if (!res.ok) throw new Error()
       trackPreventivoSubmit(profile ?? 'unknown', copertura || 'generico', utm.utm_source)
+      // Per le coperture auto, prepara il pre-riempimento del flusso di upload
+      // documenti (la CTA in schermata di conferma porta lì).
+      if (isAutoCopertura(copertura)) {
+        const prefill: PreventivoAutoPrefill = {
+          nome: `${nome} ${cognome}`.trim(),
+          email,
+          telefono,
+          targa: targa.trim() || undefined,
+        }
+        try { sessionStorage.setItem(PREFILL_SESSION_KEY, JSON.stringify(prefill)) } catch { /* no-op */ }
+      }
       setStatus('success')
     } catch {
       trackPreventivoError()
@@ -179,6 +191,17 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
         <h3 className="text-2xl font-black text-primary mb-2">Richiesta inviata!</h3>
         <p className="text-gray-600 mb-1">Ciao <strong>{nome}</strong>, abbiamo ricevuto la tua richiesta.</p>
         <p className="text-gray-600 mb-6">Ti contatteremo entro <strong>24 ore lavorative</strong> con il preventivo personalizzato.</p>
+        {isAutoCopertura(copertura) && (
+          <div className="max-w-md mx-auto mb-6 p-5 rounded-2xl border-2 border-accent/30 bg-accent/5 text-left">
+            <p className="font-bold text-primary mb-1">🚗 Vuoi accelerare il preventivo auto?</p>
+            <p className="text-sm text-gray-600 mb-4">
+              Carica subito libretto, documento e patente: prepariamo il preventivo senza email avanti e indietro.
+            </p>
+            <Link href="/servizi/assicurazione-auto#carica-documenti" className="btn-primary inline-block">
+              Carica i documenti ora →
+            </Link>
+          </div>
+        )}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a href="tel:+390696883381" className="btn-primary">📞 Chiama subito: 06 96883381</a>
           <Link href="/prenota-consulenza" className="btn-secondary">Prenota una slot</Link>

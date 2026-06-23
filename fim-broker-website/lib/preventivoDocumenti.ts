@@ -8,6 +8,21 @@
 export const DOC_BUCKET = 'documenti-preventivo'
 export const DOC_PATH_PREFIX = 'preventivo-auto'
 
+/**
+ * Ponte wizard /preventivo → upload documenti auto. Quando un cliente completa
+ * il wizard scegliendo Auto, salviamo i suoi dati di contatto in sessionStorage
+ * sotto questa chiave; il componente di upload li pre-compila al mount. Stesso
+ * meccanismo usato per gli UTM (chiave fim_utm).
+ */
+export const PREFILL_SESSION_KEY = 'fim_preventivo_auto_prefill'
+
+export interface PreventivoAutoPrefill {
+  nome?: string
+  email?: string
+  telefono?: string
+  targa?: string
+}
+
 export const MAX_DOC_SIZE = 10 * 1024 * 1024 // 10 MB per file
 export const ALLOWED_DOC_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'] as const
 /** Per l'attributo accept dell'input file */

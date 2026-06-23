@@ -9,8 +9,10 @@ import {
   DOC_SLOTS,
   DOC_ACCEPT,
   MAX_DOC_SIZE,
+  PREFILL_SESSION_KEY,
   fileTypeAllowed,
   type DocSlot,
+  type PreventivoAutoPrefill,
 } from '@/lib/preventivoDocumenti'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
@@ -132,6 +134,23 @@ export default function PreventivoAutoDocumenti() {
     try {
       const raw = sessionStorage.getItem('fim_utm')
       if (raw) setUtmSource(JSON.parse(raw)?.utm_source)
+    } catch { /* no-op */ }
+
+    // Pre-riempimento dai dati del wizard /preventivo (copertura auto).
+    // Consumato una sola volta: lo rimuoviamo per non riproporlo a visite future.
+    try {
+      const raw = sessionStorage.getItem(PREFILL_SESSION_KEY)
+      if (raw) {
+        const p: PreventivoAutoPrefill = JSON.parse(raw)
+        setFormData((prev) => ({
+          ...prev,
+          nome: p.nome ?? prev.nome,
+          email: p.email ?? prev.email,
+          telefono: p.telefono ?? prev.telefono,
+          targa: p.targa ?? prev.targa,
+        }))
+        sessionStorage.removeItem(PREFILL_SESSION_KEY)
+      }
     } catch { /* no-op */ }
   }, [])
 
