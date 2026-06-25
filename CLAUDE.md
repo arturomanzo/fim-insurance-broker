@@ -236,6 +236,21 @@ Usare queste informazioni ogni volta che si risponde a domande sulle compagnie c
 
 ---
 
+## Deploy & verifica (lezioni operative)
+
+> Queste regole nascono da problemi realmente accaduti: deploy Vercel falliti in silenzio per un errore TypeScript, dando per "fatto" un fix mai andato in produzione.
+
+- **Verifica che il build passi PRIMA di considerare deployata una fix.** Un `tsc --noEmit` o un `npm run build` rosso = deploy Vercel fallito in silenzio. Typecheck verde non è opzionale. L'hook globale `typecheck-after-edit` lo segnala già durante le modifiche; al rilascio riverifica sull'intero progetto.
+- **Non dire "fatto" finché il deploy non è verificato.** Dopo il push, conferma su Vercel che l'ultimo deploy è `READY` (non `ERROR`); se la modifica è user-facing, controlla anche la URL pubblica.
+- **Usa la skill `/ship`** per il ciclo completo (typecheck → lint → branch → commit → PR → verifica deploy → log nell'Hub) senza saltare passi.
+
+## Database & asset
+
+- **Prima di ogni insert/update**, conferma lo schema reale (nomi colonne, campi obbligatori, valori enum validi di status) interrogando lo schema — non assumere i nomi. Più volte cron/notifiche sono falliti per colonna sbagliata o status non valido.
+- **Prima di generare grafiche o asset brandizzati**, conferma con l'utente logo ufficiale, palette esatta e pagina/sezione di destinazione. Non indovinare i colori (es. navy+gold a caso): ha già causato rigenerazioni complete.
+
+---
+
 ## Comandi utili
 
 ```bash
