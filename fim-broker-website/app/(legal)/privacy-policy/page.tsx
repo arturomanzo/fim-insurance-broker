@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Privacy Policy</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Marzo 2026</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Giugno 2026</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -47,7 +47,44 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>3. Conservazione dei dati</h2>
+              <h2>3. Trattamenti con sistemi di intelligenza artificiale (IA)</h2>
+              <p>
+                Alcuni strumenti del sito si avvalgono di sistemi di intelligenza artificiale forniti
+                da <strong>Anthropic, Inc.</strong> (modello &ldquo;Claude&rdquo;). In conformità al
+                Regolamento (UE) 2024/1689 (&ldquo;AI Act&rdquo;) ti informiamo che interagisci con un
+                sistema di IA nei seguenti casi:
+              </p>
+              <ul>
+                <li>
+                  <strong>Assistente virtuale FIMA</strong>: i messaggi che scrivi in chat sono inviati
+                  ad Anthropic per generare la risposta. Le risposte sono indicative e non sostituiscono
+                  la consulenza di un broker.
+                </li>
+                <li>
+                  <strong>Agente Sinistri AI</strong>: i dati che inserisci per l&apos;apertura della
+                  pratica (tipo di sinistro, data, descrizione, recapiti) sono elaborati dall&apos;IA per
+                  guidarti e pre-compilare il modulo. La pratica è sempre verificata da un operatore FIM.
+                </li>
+                <li>
+                  <strong>Analizza Polizza</strong>: il documento PDF che carichi viene trasmesso ad
+                  Anthropic per l&apos;analisi e la generazione del report. Il file è elaborato in modo
+                  transitorio e non viene conservato sui nostri server al termine dell&apos;analisi. Il
+                  report ha valore informativo e non costituisce una valutazione di adeguatezza ai sensi
+                  della normativa IVASS.
+                </li>
+              </ul>
+              <p>
+                Questi strumenti hanno carattere informativo e di supporto: <strong>non adottano
+                decisioni automatizzate che producono effetti giuridici</strong> o incidono in modo
+                analogo sulla tua persona ai sensi dell&apos;art. 22 GDPR. Una parte dei contenuti del
+                blog è inoltre redatta con il supporto dell&apos;IA e sottoposta a revisione editoriale
+                umana; tali articoli riportano un avviso dedicato. Per i trasferimenti di dati verso
+                Anthropic (USA) vedi la sezione 6.
+              </p>
+            </section>
+
+            <section>
+              <h2>4. Conservazione dei dati</h2>
               <p>
                 I dati personali sono conservati per il tempo strettamente necessario alle finalità
                 per cui sono stati raccolti:
@@ -62,7 +99,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>4. Diritti degli interessati</h2>
+              <h2>5. Diritti degli interessati</h2>
               <p>Hai diritto di:</p>
               <ul>
                 <li>Accedere ai tuoi dati personali (art. 15 GDPR)</li>
@@ -79,15 +116,17 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>5. Trasferimento dati extra-UE</h2>
+              <h2>6. Trasferimento dati extra-UE</h2>
               <p>
                 Alcuni fornitori di servizi tecnologici utilizzati operano al di fuori dell&apos;Unione Europea:
               </p>
               <ul>
                 <li>
-                  <strong>Anthropic, Inc.</strong> (San Francisco, USA) — elabora i messaggi inviati
-                  tramite l&apos;assistente virtuale FIMA. Il trasferimento avviene sulla base delle
-                  Clausole Contrattuali Standard (SCC) approvate dalla Commissione Europea.
+                  <strong>Anthropic, Inc.</strong> (San Francisco, USA) — elabora, tramite i sistemi di
+                  IA descritti alla sezione 3, i messaggi dell&apos;assistente virtuale FIMA e
+                  dell&apos;Agente Sinistri AI nonché i documenti caricati su &ldquo;Analizza
+                  Polizza&rdquo;. Il trasferimento avviene sulla base delle Clausole Contrattuali
+                  Standard (SCC) approvate dalla Commissione Europea.
                 </li>
                 <li>
                   <strong>Resend, Inc.</strong> (USA) — gestisce l&apos;invio delle email di conferma
@@ -103,7 +142,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>6. Cookie</h2>
+              <h2>7. Cookie</h2>
               <p>
                 Per informazioni sull&apos;uso dei cookie, consulta la nostra{' '}
                 <a href="/cookie-policy" className="text-primary hover:underline">Cookie Policy</a>.
@@ -111,7 +150,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>7. Reclami</h2>
+              <h2>8. Reclami</h2>
               <p>
                 Hai diritto di proporre reclamo all&apos;Autorità Garante per la Protezione
                 dei Dati Personali (www.garanteprivacy.it).

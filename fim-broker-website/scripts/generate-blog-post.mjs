@@ -241,6 +241,9 @@ async function main() {
     readTime: article.readTime || '5 min',
     image: pickImage(article.category, usedImages),
     sections: article.sections,
+    // Trasparenza AI Act (art. 50.4): articolo redatto con supporto IA.
+    // Attiva l'avviso di trasparenza sulla pagina articolo.
+    aiAssisted: true,
   }
 
   // Aggiungi in testa (articolo più recente prima)

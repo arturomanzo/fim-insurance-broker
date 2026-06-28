@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react'
 import ChatBubble from './ChatBubble'
+import AiNotice from '@/components/ui/AiNotice'
+import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import { FIMA_CONFIG } from '@/lib/fima-config'
 
 interface Message {
@@ -254,6 +256,9 @@ export default function FIMAWidget() {
               </svg>
             </button>
           </div>
+
+          {/* Disclosure IA — AI Act art. 50 */}
+          <AiNotice text={AI_DISCLOSURE.chat} variant="bar" className="flex-shrink-0" />
 
           {/* Messages */}
           <div

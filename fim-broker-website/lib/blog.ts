@@ -22,6 +22,12 @@ export interface BlogPost {
    * al CEO se il campo manca. Critico per E-E-A-T sui contenuti YMYL.
    */
   author?: string
+  /**
+   * `true` se l'articolo è stato redatto con il supporto di strumenti di IA
+   * (vedi `scripts/generate-blog-post.mjs`). Attiva l'avviso di trasparenza
+   * richiesto dall'AI Act (art. 50.4) sulla pagina articolo.
+   */
+  aiAssisted?: boolean
 }
 
 export function getAllPosts(): BlogPost[] {

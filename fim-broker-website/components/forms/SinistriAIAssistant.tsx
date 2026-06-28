@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import AiNotice from '@/components/ui/AiNotice'
+import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -429,6 +431,9 @@ export default function SinistriAIAssistant() {
           </span>
         </div>
 
+        {/* Disclosure IA — AI Act art. 50 */}
+        <AiNotice text={AI_DISCLOSURE.sinistri} variant="bar" />
+
         {/* Greeting */}
         <div className="px-6 pt-6 pb-4">
           <div className="flex gap-3">
@@ -489,6 +494,9 @@ export default function SinistriAIAssistant() {
           ← Ricomincia
         </button>
       </div>
+
+      {/* Disclosure IA — AI Act art. 50 */}
+      <AiNotice text={AI_DISCLOSURE.sinistri} variant="bar" className="flex-shrink-0" />
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-5 py-5 space-y-4" style={{ maxHeight: '420px' }}>
