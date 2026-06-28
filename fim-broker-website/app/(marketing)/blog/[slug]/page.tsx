@@ -4,6 +4,8 @@ import Image from 'next/image'
 import Badge from '@/components/ui/Badge'
 import Card from '@/components/ui/Card'
 import AuthorBox from '@/components/ui/AuthorBox'
+import AiNotice from '@/components/ui/AiNotice'
+import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { getAllPosts, getPostBySlug } from '@/lib/blog'
 import { getAuthor, buildPersonSchema } from '@/lib/authors'
@@ -210,6 +212,13 @@ export default async function BlogPostPage({ params }: Props) {
                     </p>
                   )}
                 </div>
+
+                {/* Disclosure IA — AI Act art. 50.4 (solo articoli redatti con supporto IA) */}
+                {post?.aiAssisted && (
+                  <div className="mt-8">
+                    <AiNotice text={AI_DISCLOSURE.blog} variant="box" />
+                  </div>
+                )}
 
                 {/* CTA inline */}
                 <div className="mt-10 p-6 bg-primary/5 border border-primary/10 rounded-xl">

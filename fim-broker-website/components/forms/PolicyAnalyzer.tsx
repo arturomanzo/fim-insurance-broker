@@ -2,6 +2,8 @@
 
 import { useState, useRef, useCallback } from 'react'
 import Button from '@/components/ui/Button'
+import AiNotice from '@/components/ui/AiNotice'
+import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -316,6 +318,9 @@ export default function PolicyAnalyzer() {
             </div>
           </div>
         </div>
+
+        {/* Disclaimer IA — AI Act art. 50 */}
+        <AiNotice text={AI_DISCLOSURE.report} variant="box" />
 
         {/* Coperture incluse */}
         {result.coperture?.length > 0 && (
