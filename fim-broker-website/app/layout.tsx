@@ -4,6 +4,7 @@ import Script from 'next/script'
 import './globals.css'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ClarityLoader from '@/components/analytics/ClarityLoader'
+import MetaPixelLoader from '@/components/analytics/MetaPixelLoader'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -357,6 +358,7 @@ w.setTimeout(trigger,3500);
             consenso è revocabile ovunque tramite il link "Preferenze cookie"
             nel footer. */}
         <ClarityLoader />
+        <MetaPixelLoader />
         <CookieBanner />
       </body>
     </html>
