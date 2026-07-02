@@ -53,15 +53,17 @@ const securityHeaders = [
   // - google-analytics.com + doubleclick.net in connect-src: beaconing GA4
   // - *.sentry.io + *.ingest.sentry.io: error reporting
   // - www.clarity.ms + c.bing.com: Microsoft Clarity heatmaps
+  // - connect.facebook.net (script) + www.facebook.com (img/connect): Meta Pixel,
+  //   caricato via GTM e attivato SOLO dopo il consenso marketing (Consent Mode / ad_storage)
   {
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://connect.facebook.net",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https://maps.gstatic.com https://www.google-analytics.com https://images.unsplash.com https://www.clarity.ms",
-      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://*.sentry.io https://*.ingest.sentry.io https://www.clarity.ms",
+      "img-src 'self' data: blob: https://maps.gstatic.com https://www.google-analytics.com https://images.unsplash.com https://www.clarity.ms https://www.facebook.com",
+      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://*.sentry.io https://*.ingest.sentry.io https://www.clarity.ms https://www.facebook.com",
       "frame-src 'self' https://maps.google.com https://www.google.com https://www.googletagmanager.com",
       "frame-ancestors 'self'",
       "object-src 'none'",
