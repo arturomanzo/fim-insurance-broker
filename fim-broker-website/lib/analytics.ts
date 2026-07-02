@@ -6,11 +6,30 @@
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function gtag(...args: any[]): void
+  interface Window {
+    // Meta Pixel: definito SOLO dopo il consenso marketing (vedi
+    // components/analytics/MetaPixelLoader.tsx).
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fbq?: (...args: any[]) => void
+  }
 }
 
 function track(eventName: string, params: Record<string, string | number | boolean> = {}) {
-  if (typeof gtag === 'undefined') return
-  gtag('event', eventName, params)
+  if (typeof gtag !== 'undefined') gtag('event', eventName, params)
+
+  // Mirror dei lead sul Meta Pixel come Standard Event 'Lead'. `window.fbq`
+  // esiste SOLO dopo il consenso marketing (MetaPixelLoader), quindi si applica
+  // lo stesso gating GDPR: nessuna conversione inviata a Meta senza consenso.
+  // Tutti i form di lead del sito passano da 'generate_lead'.
+  if (
+    eventName === 'generate_lead' &&
+    typeof window !== 'undefined' &&
+    typeof window.fbq === 'function'
+  ) {
+    window.fbq('track', 'Lead', {
+      content_category: String(params.event_category ?? 'lead'),
+    })
+  }
 }
 
 // ── Funnel preventivo ────────────────────────────────────────────────────────
