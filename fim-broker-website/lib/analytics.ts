@@ -14,7 +14,11 @@ declare global {
   }
 }
 
-function track(eventName: string, params: Record<string, string | number | boolean> = {}) {
+function track(
+  eventName: string,
+  params: Record<string, string | number | boolean> = {},
+  options: { eventId?: string } = {},
+) {
   if (typeof gtag !== 'undefined') gtag('event', eventName, params)
 
   // Mirror dei lead sul Meta Pixel come Standard Event 'Lead'. `window.fbq`
@@ -26,9 +30,14 @@ function track(eventName: string, params: Record<string, string | number | boole
     typeof window !== 'undefined' &&
     typeof window.fbq === 'function'
   ) {
-    window.fbq('track', 'Lead', {
-      content_category: String(params.event_category ?? 'lead'),
-    })
+    const customData = { content_category: String(params.event_category ?? 'lead') }
+    // `eventID` condiviso con l'invio server-side (Conversions API, lib/metaCapi.ts):
+    // Meta deduplica browser + server sullo stesso event_name+event_id.
+    if (options.eventId) {
+      window.fbq('track', 'Lead', customData, { eventID: options.eventId })
+    } else {
+      window.fbq('track', 'Lead', customData)
+    }
   }
 }
 
@@ -44,14 +53,27 @@ export function trackPreventivoStep2(profile: string, copertura: string) {
   track('preventivo_step2_coverage', { profile, copertura })
 }
 
-/** Form preventivo inviato con successo */
-export function trackPreventivoSubmit(profile: string, copertura: string, utmSource?: string) {
-  track('generate_lead', {
-    event_category: 'preventivo',
-    profile,
-    copertura,
-    utm_source: utmSource ?? '(direct)',
-  })
+/**
+ * Form preventivo inviato con successo.
+ * `eventId` (opz.): stesso ID passato al route `/api/preventivo` per la
+ * deduplica col Lead server-side (Conversions API).
+ */
+export function trackPreventivoSubmit(
+  profile: string,
+  copertura: string,
+  utmSource?: string,
+  eventId?: string,
+) {
+  track(
+    'generate_lead',
+    {
+      event_category: 'preventivo',
+      profile,
+      copertura,
+      utm_source: utmSource ?? '(direct)',
+    },
+    { eventId },
+  )
 }
 
 /** Form preventivo — errore di invio */

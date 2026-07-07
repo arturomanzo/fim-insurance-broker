@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { hasMarketingConsent, CONSENT_UPDATED_EVENT } from '@/lib/consent'
 
 // Meta Pixel (Facebook/Instagram) — tag PUBBLICITARIO. Come Microsoft Clarity,
 // installa cookie di tracciamento e richiede CONSENSO PREVENTIVO (Linee guida
@@ -30,19 +31,6 @@ type Fbq = ((...args: unknown[]) => void) & {
 type FbqWindow = Window & {
   fbq?: Fbq
   _fbq?: Fbq
-}
-
-function hasMarketingConsent(): boolean {
-  try {
-    const raw = localStorage.getItem('fim-cookie-consent')
-    if (!raw) return false
-    const c = JSON.parse(raw)
-    // Marketing/ad_storage = consenso pieno ("all"). Il solo consenso analitico
-    // NON abilita il Pixel pubblicitario.
-    return c?.choice === 'all'
-  } catch {
-    return false
-  }
 }
 
 function loadPixel(id: string) {
@@ -79,8 +67,8 @@ export default function MetaPixelLoader() {
     const onConsent = () => {
       if (hasMarketingConsent()) loadPixel(META_PIXEL_ID)
     }
-    window.addEventListener('fim-consent-updated', onConsent)
-    return () => window.removeEventListener('fim-consent-updated', onConsent)
+    window.addEventListener(CONSENT_UPDATED_EVENT, onConsent)
+    return () => window.removeEventListener(CONSENT_UPDATED_EVENT, onConsent)
   }, [])
 
   return null

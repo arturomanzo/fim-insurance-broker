@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { saveLead } from '@/lib/leadStore'
+import { sendLeadToMetaCapi } from '@/lib/metaCapi'
 
 interface PreventivoRequest {
   tipo: string
@@ -15,6 +16,10 @@ interface PreventivoRequest {
   oggetto?: string
   privacy: boolean
   website?: string // honeypot — deve essere assente o vuoto
+  // Meta Conversions API (deduplica col Pixel browser)
+  eventId?: string
+  eventSourceUrl?: string
+  marketingConsent?: boolean
   // UTM attribution
   utm_source?: string
   utm_medium?: string
@@ -466,6 +471,34 @@ export async function POST(req: NextRequest) {
     try {
       await saveLead({ id: preventivoData.id, nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggioPersistito || undefined, timestamp: preventivoData.timestamp })
     } catch { /* non blocca */ }
+
+    // Meta Conversions API — invio server-side dell'evento 'Lead' (deduplicato
+    // col Pixel browser via lo stesso eventId). Solo con consenso marketing
+    // pieno prestato lato client (stesso gating GDPR del Pixel). Non blocca il
+    // lead: sendLeadToMetaCapi non lancia mai e salta da sé se manca il token.
+    if (body.marketingConsent === true && body.eventId) {
+      const clientIp =
+        req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+        req.headers.get('x-real-ip') ||
+        undefined
+      try {
+        await sendLeadToMetaCapi({
+          eventId: sanitize(body.eventId).slice(0, 100),
+          eventSourceUrl: body.eventSourceUrl ? sanitize(body.eventSourceUrl).slice(0, 500) : undefined,
+          email,
+          phone: telefono,
+          firstName: nome,
+          lastName: cognome,
+          fbc: req.cookies.get('_fbc')?.value,
+          fbp: req.cookies.get('_fbp')?.value,
+          clientIp,
+          userAgent: req.headers.get('user-agent') || undefined,
+          contentCategory: 'preventivo',
+        })
+      } catch (capiErr) {
+        console.error('[preventivo] Meta CAPI fallita:', capiErr)
+      }
+    }
 
     // Invia email se Resend è configurato
     if (resend) {
