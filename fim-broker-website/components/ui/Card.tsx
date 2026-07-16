@@ -15,10 +15,16 @@ export default function Card({ children, className, hover = false, padding = 'md
     lg: 'p-8',
   }
 
+  // Se la pagina passa un proprio sfondo (es. bg-primary) NON forziamo bg-white:
+  // due utility background-color in conflitto lascerebbero vincere quella generata
+  // dopo nel CSS di Tailwind, non l'ultima nella stringa. Vedi card "Preferisci chiamare?".
+  const hasCustomBg = className ? /(^|\s)bg-/.test(className) : false
+
   return (
     <div
       className={clsx(
-        'bg-white rounded-xl shadow-sm border border-gray-100',
+        !hasCustomBg && 'bg-white',
+        'rounded-xl shadow-sm border border-gray-100',
         paddings[padding],
         hover && 'transition-all duration-300 hover:shadow-lg hover:-translate-y-1',
         className
