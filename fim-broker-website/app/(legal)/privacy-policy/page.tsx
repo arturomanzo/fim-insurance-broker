@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Privacy Policy</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Giugno 2026</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Luglio 2026</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -79,12 +79,43 @@ export default function PrivacyPolicyPage() {
                 analogo sulla tua persona ai sensi dell&apos;art. 22 GDPR. Una parte dei contenuti del
                 blog è inoltre redatta con il supporto dell&apos;IA e sottoposta a revisione editoriale
                 umana; tali articoli riportano un avviso dedicato. Per i trasferimenti di dati verso
-                Anthropic (USA) vedi la sezione 6.
+                Anthropic (USA) vedi la sezione 7.
+              </p>
+              <p>
+                Nel trattare tali dati, <strong>Anthropic opera in qualità di Responsabile del
+                trattamento</strong> ai sensi dell&apos;art. 28 del GDPR, sulla base di apposito
+                accordo di nomina, trattando i dati esclusivamente su istruzione documentata di FIM
+                Insurance Broker e nel rispetto di adeguate misure di sicurezza e riservatezza.
               </p>
             </section>
 
             <section>
-              <h2>4. Conservazione dei dati</h2>
+              <h2>4. Categorie particolari di dati (dati sanitari) e gestione dei sinistri</h2>
+              <p>
+                Nell&apos;ambito della gestione delle pratiche di sinistro, FIM Insurance Broker può
+                trattare dati relativi allo stato di salute dell&apos;assicurato o di terzi (ad es.
+                referti medici, certificati di invalidità, prognosi) qualora necessari alla
+                valutazione e liquidazione del danno, anche laddove tali dati siano forniti tramite
+                i moduli online o l&apos;Agente Sinistri AI.
+              </p>
+              <p>
+                Il trattamento di tali <strong>categorie particolari di dati</strong>, ai sensi
+                dell&apos;art. 9 del GDPR, avviene sulla base del <strong>consenso esplicito</strong>
+                dell&apos;interessato e/o per l&apos;accertamento, l&apos;esercizio o la difesa di un
+                diritto in sede giudiziaria (art. 9, par. 2, lett. a e f, GDPR), nel rispetto del
+                principio di minimizzazione: sono trattati esclusivamente i dati strettamente
+                necessari alla gestione della pratica.
+              </p>
+              <p>
+                Qualora tali dati siano elaborati anche mediante gli strumenti di intelligenza
+                artificiale di cui alla sezione 3, FIM Insurance Broker adotta misure di
+                minimizzazione rafforzate, limitando l&apos;elaborazione automatizzata ai soli
+                estratti e dati essenziali, ove tecnicamente possibile.
+              </p>
+            </section>
+
+            <section>
+              <h2>5. Conservazione dei dati</h2>
               <p>
                 I dati personali sono conservati per il tempo strettamente necessario alle finalità
                 per cui sono stati raccolti:
@@ -99,7 +130,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>5. Diritti degli interessati</h2>
+              <h2>6. Diritti degli interessati</h2>
               <p>Hai diritto di:</p>
               <ul>
                 <li>Accedere ai tuoi dati personali (art. 15 GDPR)</li>
@@ -116,7 +147,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>6. Trasferimento dati extra-UE</h2>
+              <h2>7. Trasferimento dati extra-UE</h2>
               <p>
                 Alcuni fornitori di servizi tecnologici utilizzati operano al di fuori dell&apos;Unione Europea:
               </p>
@@ -142,7 +173,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>7. Cookie</h2>
+              <h2>8. Cookie</h2>
               <p>
                 Per informazioni sull&apos;uso dei cookie, consulta la nostra{' '}
                 <a href="/cookie-policy" className="text-primary hover:underline">Cookie Policy</a>.
@@ -150,7 +181,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2>8. Reclami</h2>
+              <h2>9. Reclami</h2>
               <p>
                 Hai diritto di proporre reclamo all&apos;Autorità Garante per la Protezione
                 dei Dati Personali (www.garanteprivacy.it).
