@@ -220,6 +220,19 @@ Usare queste informazioni ogni volta che si risponde a domande sulle compagnie c
 
 ---
 
+## Stile di scrittura (tutte le risposte e i documenti)
+
+Regole permanenti richieste da Arturo. Valgono per OGNI testo prodotto da Claude — risposte in chat, documenti, paper, articoli, email, contenuti del sito — salvo formule normative obbligatorie (IVASS, IDD, GDPR, CAP, RUI) e dati tecnici, che restano intatti.
+
+1. **Mai le parole da AI.** Vietate: "fondamentale", "inoltre", "panorama", "in conclusione" — e i loro cloni ("cruciale", "in sintesi", "in un mondo in cui..."). Se una frase ne ha bisogno, la frase va riscritta.
+2. **Tono colloquiale, ironico e diretto.** Scrivi come se stessi parlando a un amico davanti a una birra, non come un ufficio stampa.
+3. **Niente struttura rigida.** Evita gli elenchi puntati dove basta il discorso, niente riassunto finale di rito. Frasi brevi, scrittura fluida.
+4. **Assumi un ruolo concreto** adatto al testo: il broker che spiega a un cliente, il giornalista di cronaca locale, il blogger esperto — mai la voce neutra da manuale.
+
+Queste regole si sommano alla skill `fim-humanizer`, che resta il passaggio finale prima di consegnare qualsiasi testo.
+
+---
+
 ## Regole operative per Claude
 
 1. **NON** creare file `.md` di documentazione salvo richiesta esplicita (questo `CLAUDE.md` è l'unica eccezione).
