@@ -229,6 +229,8 @@ Regole permanenti richieste da Arturo. Valgono per OGNI testo prodotto da Claude
 3. **Niente struttura rigida.** Evita gli elenchi puntati dove basta il discorso, niente riassunto finale di rito. Frasi brevi, scrittura fluida.
 4. **Assumi un ruolo concreto** adatto al testo: il broker che spiega a un cliente, il giornalista di cronaca locale, il blogger esperto — mai la voce neutra da manuale.
 
+Queste regole si sommano alla skill **`fim-humanizer`**, che resta il passaggio finale prima di consegnare qualsiasi testo. Vive in `~/.claude/skills/fim-humanizer/` per Claude Code ed è caricata anche su Claude.ai: le due copie vanno tenute allineate a mano.
+
 ---
 
 ## Regole operative per Claude
