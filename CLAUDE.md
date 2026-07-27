@@ -183,7 +183,7 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
 
 - **Target**: famiglie, professionisti, artigiani, PMI, condomini (mercato italiano)
 - **Lingua**: italiano (tutto il sito, tutto il contenuto user-facing, anche i commenti del codice di business)
-- **Tono**: professionale, relazionale, trasparente — NON corporate, NON freddo
+- **Tono**: professionale, relazionale, trasparente — NON corporate, NON freddo (regole complete in "Stile di scrittura")
 - **Claim chiave**: "Broker indipendente: non rappresentiamo compagnie ma solo i tuoi interessi"
 - **Contatti pubblici**:
   - Sede: Via Roma 41, 04012 Cisterna di Latina (LT)
