@@ -1,4 +1,5 @@
 import { createHash } from 'crypto'
+import type { NextRequest } from 'next/server'
 
 /**
  * Meta Conversions API (CAPI) — invio server-side dell'evento Standard 'Lead'.
@@ -127,5 +128,80 @@ export async function sendLeadToMetaCapi(ev: MetaLeadEvent): Promise<void> {
     }
   } catch (err) {
     console.error('[meta-capi] Errore di rete invio Lead:', err)
+  }
+}
+
+/**
+ * "Mario Rossi" → { firstName: 'Mario', lastName: 'Rossi' }.
+ * Serve ai form che raccolgono nome e cognome in un campo solo: Meta vuole
+ * `fn` e `ln` separati per calcolare il match quality.
+ */
+export function splitFullName(full: string | undefined | null): {
+  firstName?: string
+  lastName?: string
+} {
+  const parts = String(full ?? '').trim().split(/\s+/).filter(Boolean)
+  if (parts.length === 0) return {}
+  if (parts.length === 1) return { firstName: parts[0] }
+  return { firstName: parts[0], lastName: parts.slice(1).join(' ') }
+}
+
+export interface RouteLeadEvent {
+  /** Dal body del form (lib/metaLead.ts). Senza event_id non si invia nulla. */
+  eventId?: unknown
+  eventSourceUrl?: unknown
+  /** Consenso marketing letto lato client. Accetta anche 'true' (multipart). */
+  marketingConsent?: unknown
+  email: string
+  phone?: string
+  /** Nome e cognome in un campo solo: viene splittato in fn/ln. */
+  fullName?: string
+  firstName?: string
+  lastName?: string
+  /** Distingue il form di origine in Events Manager (es. 'contatto'). */
+  contentCategory: string
+}
+
+/**
+ * Invio server-side del Lead a partire da una route handler: legge da sé i
+ * cookie `_fbc`/`_fbp`, l'IP e lo user agent dalla request.
+ *
+ * No-op silenzioso quando manca il consenso marketing o l'event_id, così i
+ * route possono chiamarla senza condizioni. Non lancia mai: un errore Meta non
+ * deve far fallire l'invio del lead vero (email, gestionale, DB).
+ */
+export async function sendLeadFromRequest(req: NextRequest, lead: RouteLeadEvent): Promise<void> {
+  // Stesso gate GDPR del Pixel browser (consenso 'all'). Il multipart manda
+  // stringhe, il JSON booleani: accetta entrambi.
+  if (lead.marketingConsent !== true && lead.marketingConsent !== 'true') return
+
+  const eventId = typeof lead.eventId === 'string' ? lead.eventId.trim().slice(0, 100) : ''
+  if (!eventId) return
+
+  const eventSourceUrl =
+    typeof lead.eventSourceUrl === 'string' ? lead.eventSourceUrl.trim().slice(0, 500) : undefined
+
+  const fromFullName = splitFullName(lead.fullName)
+  const clientIp =
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    req.headers.get('x-real-ip') ||
+    undefined
+
+  try {
+    await sendLeadToMetaCapi({
+      eventId,
+      eventSourceUrl,
+      email: lead.email,
+      phone: lead.phone,
+      firstName: lead.firstName ?? fromFullName.firstName,
+      lastName: lead.lastName ?? fromFullName.lastName,
+      fbc: req.cookies.get('_fbc')?.value,
+      fbp: req.cookies.get('_fbp')?.value,
+      clientIp,
+      userAgent: req.headers.get('user-agent') || undefined,
+      contentCategory: lead.contentCategory,
+    })
+  } catch (err) {
+    console.error(`[meta-capi] Invio Lead (${lead.contentCategory}) fallito:`, err)
   }
 }

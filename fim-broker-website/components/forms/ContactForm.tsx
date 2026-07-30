@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Button from '@/components/ui/Button'
 import { trackContactSubmit } from '@/lib/analytics'
+import { metaLeadFields } from '@/lib/metaLead'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -47,14 +48,16 @@ export default function ContactForm() {
     if (!formData.nome || !formData.email || !formData.messaggio || !formData.privacy) return
 
     setStatus('loading')
+    // Stesso event_id per Pixel browser e Conversions API server → Meta deduplica.
+    const meta = metaLeadFields()
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, ...meta }),
       })
       if (!res.ok) throw new Error()
-      trackContactSubmit(utmSource)
+      trackContactSubmit(utmSource, meta.eventId)
       setStatus('success')
     } catch {
       setStatus('error')

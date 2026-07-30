@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
+import { sendLeadFromRequest } from '@/lib/metaCapi'
 
 function validateEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -251,6 +252,19 @@ export async function POST(req: NextRequest) {
       numPolizze: validFiles.length,
       timestamp: new Date().toISOString(),
     }
+
+    // Meta Conversions API — Lead server-side, deduplicato col Pixel browser
+    // sullo stesso eventId. No-op senza consenso marketing. Non lancia mai.
+    // Il form è multipart: i campi Meta arrivano come stringhe.
+    await sendLeadFromRequest(req, {
+      eventId: sanitize(formData.get('eventId')),
+      eventSourceUrl: sanitize(formData.get('eventSourceUrl')),
+      marketingConsent: formData.get('marketingConsent') === 'true',
+      email,
+      phone: telefono,
+      fullName: nome,
+      contentCategory: 'second_opinion',
+    })
 
     if (resend) {
       const attachments = await Promise.all(

@@ -11,15 +11,7 @@ import {
   trackPreventivoError,
   trackPreventivoAbandonment,
 } from '@/lib/analytics'
-import { hasMarketingConsent } from '@/lib/consent'
-
-// event_id univoco per la deduplica Meta (Pixel browser + Conversions API server).
-function newEventId(): string {
-  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-    return crypto.randomUUID()
-  }
-  return `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`
-}
+import { metaLeadFields } from '@/lib/metaLead'
 
 interface UtmData {
   utm_source?: string
@@ -154,7 +146,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
 
     setStatus('loading')
     // Stesso event_id per Pixel browser e Conversions API server → Meta deduplica.
-    const eventId = newEventId()
+    const meta = metaLeadFields()
     try {
       const res = await fetch('/api/preventivo', {
         method: 'POST',
@@ -169,14 +161,12 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           website,
           // Meta CAPI: il server invia il Lead solo se marketingConsent === true
           // (stesso gating GDPR del Pixel browser).
-          eventId,
-          eventSourceUrl: typeof window !== 'undefined' ? window.location.href : undefined,
-          marketingConsent: hasMarketingConsent(),
+          ...meta,
           ...utm,
         }),
       })
       if (!res.ok) throw new Error()
-      trackPreventivoSubmit(profile ?? 'unknown', copertura || 'generico', utm.utm_source, eventId)
+      trackPreventivoSubmit(profile ?? 'unknown', copertura || 'generico', utm.utm_source, meta.eventId)
       // Per le coperture auto, prepara il pre-riempimento del flusso di upload
       // documenti (la CTA in schermata di conferma porta lì).
       if (isAutoCopertura(copertura)) {

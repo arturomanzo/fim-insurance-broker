@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Button from '@/components/ui/Button'
 import { trackSecondOpinionSubmit } from '@/lib/analytics'
+import { metaLeadFields } from '@/lib/metaLead'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -92,6 +93,9 @@ export default function SecondOpinionForm() {
     setStatus('loading')
     setErrorMsg('')
 
+    // Stesso event_id per Pixel browser e Conversions API server → Meta deduplica.
+    const meta = metaLeadFields()
+
     try {
       const payload = new FormData()
       payload.append('nome', formData.nome)
@@ -104,6 +108,9 @@ export default function SecondOpinionForm() {
       payload.append('oscuraPremio', String(formData.oscuraPremio))
       payload.append('privacy', String(formData.privacy))
       payload.append('website', formData.website)
+      payload.append('eventId', meta.eventId)
+      if (meta.eventSourceUrl) payload.append('eventSourceUrl', meta.eventSourceUrl)
+      payload.append('marketingConsent', String(meta.marketingConsent))
       files.forEach((f) => payload.append('polizze', f))
 
       const res = await fetch('/api/second-opinion', { method: 'POST', body: payload })
@@ -111,7 +118,7 @@ export default function SecondOpinionForm() {
 
       if (!res.ok) throw new Error(json.error ?? '')
 
-      trackSecondOpinionSubmit(formData.settore, utmSource)
+      trackSecondOpinionSubmit(formData.settore, utmSource, meta.eventId)
       setStatus('success')
     } catch (err) {
       const msg = err instanceof Error ? err.message : ''

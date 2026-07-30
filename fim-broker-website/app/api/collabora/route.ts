@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { PROFILO_LABELS, ESPERIENZA_LABELS, isValidProfilo } from '@/lib/collabora'
+import { sendLeadFromRequest } from '@/lib/metaCapi'
 
 interface CollaboraRequest {
   nome: string
@@ -15,6 +16,10 @@ interface CollaboraRequest {
   messaggio: string
   privacy: boolean
   website?: string // honeypot
+  // Meta CAPI (vedi lib/metaLead.ts): deduplica col Pixel browser
+  eventId?: string
+  eventSourceUrl?: string
+  marketingConsent?: boolean
 }
 
 function validateEmail(email: string): boolean {
@@ -261,6 +266,18 @@ export async function POST(req: NextRequest) {
       messaggio,
       timestamp: new Date().toISOString(),
     }
+
+    // Meta Conversions API — Lead server-side, deduplicato col Pixel browser
+    // sullo stesso eventId. No-op senza consenso marketing. Non lancia mai.
+    await sendLeadFromRequest(req, {
+      eventId: body.eventId,
+      eventSourceUrl: body.eventSourceUrl,
+      marketingConsent: body.marketingConsent,
+      email,
+      phone: telefono || undefined,
+      fullName: nome,
+      contentCategory: 'collabora',
+    })
 
     if (resend) {
       await Promise.all([
