@@ -22,47 +22,6 @@ Questo file è letto automaticamente da Claude Code all'inizio di ogni sessione 
 
 ---
 
-## Stack tecnico
-
-- **Framework**: Next.js 15.5 (App Router) + React 19 + TypeScript 5
-- **Styling**: Tailwind CSS 3.4 + design system custom (no librerie UI esterne)
-- **DB & Auth**: Supabase (`@supabase/supabase-js`)
-- **Email**: Resend (`resend`)
-- **AI**: Anthropic SDK (chatbot FIMA)
-- **Monitoring**: Sentry (`@sentry/nextjs`)
-- **Analytics**: GA4 + Microsoft Clarity
-- **Rate limiting**: Upstash Redis (`@upstash/ratelimit`)
-- **Utility classi CSS**: `clsx`
-- **Deploy**: Vercel
-
----
-
-## Design system
-
-### Palette (da `tailwind.config.ts`)
-| Token | Hex | Uso |
-|---|---|---|
-| `primary` | `#0f2d6b` | Heading, testo, elementi principali |
-| `primary-light` | `#1a4a9e` | Hover primario |
-| `primary-dark` | `#091d47` | Gradiente scuro |
-| `accent` | `#00b4c8` | CTA, highlight, link attivi |
-| `accent-dark` | `#008fa0` | Hover accent |
-| `accent-light` | `#33c7d8` | Accento chiaro |
-
-### Utility CSS custom (in `app/globals.css`)
-- `.container-custom` — container responsive
-- `.section-padding` — padding verticale coerente per sezioni
-- `.gradient-primary`, `.gradient-accent`, `.text-gradient`
-- `.btn-primary`, `.btn-secondary`, `.btn-outline-white`
-- `.input-field`, `.label-field`
-
-### Componenti UI (`components/ui/`)
-- **`Button`** — varianti `primary | secondary | outline | ghost | outline-white`, size `sm | md | lg`, supporto `loading`
-- **`Card`** — `hover`, `padding: none | sm | md | lg`
-- **`Badge`**, **`FaqAccordion`**, **`CookieBanner`**, **`FimLogo`**, **`WhatsAppButton`**, **`InsuranceQuiz`**
-
----
-
 ## Pattern da seguire (IMPORTANTE)
 
 ### Form client-side
@@ -100,62 +59,6 @@ Riferimento: `app/(marketing)/chi-siamo/page.tsx` e `app/(marketing)/collabora-c
 
 ### Costanti condivise
 Quando un valore è usato in più di un file (form + route + page), estrarre in `lib/<feature>.ts` come `as const` con helper tipizzati. Vedi `lib/collabora.ts` per il pattern: `PROFILI`, `PROFILO_LABELS`, `isValidProfilo()`.
-
----
-
-## Directory chiave
-
-```
-fim-broker-website/
-├── app/
-│   ├── (marketing)/              # Pagine pubbliche
-│   │   ├── page.tsx              # Homepage
-│   │   ├── chi-siamo/
-│   │   ├── contatti/
-│   │   ├── collabora-con-noi/    # Sezione collabora (PR #19)
-│   │   ├── servizi/[slug]/
-│   │   ├── soluzioni/
-│   │   ├── blog/[slug]/
-│   │   ├── preventivo/
-│   │   ├── prenota-consulenza/
-│   │   ├── sinistri/
-│   │   ├── quiz-polizza/
-│   │   ├── calcolatore-rischi/
-│   │   ├── analizza-polizza/
-│   │   ├── glossario/
-│   │   ├── osservatorio-prezzi/
-│   │   ├── risorse/              # Guide, PDF, osservatorio PMI
-│   │   └── area-cliente/
-│   ├── (admin)/                  # Admin panel protetto (clienti, polizze, leads, sinistri)
-│   ├── (legal)/                  # Privacy, cookie, note legali
-│   ├── api/                      # API routes (contact, collabora, preventivo, prenota, chat FIMA, ...)
-│   ├── layout.tsx                # Root layout + metadata globale
-│   ├── sitemap.ts                # Sitemap statica
-│   └── globals.css               # Tailwind + utility custom
-├── components/
-│   ├── layout/                   # Navbar, Footer
-│   ├── home/                     # Sezioni homepage
-│   ├── forms/                    # ContactForm, CollaboraForm, PreventivoForm, ...
-│   ├── ui/                       # Design system (Button, Card, Badge, ...)
-│   ├── admin/                    # Admin-only
-│   ├── chatbot/                  # FIMA AI widget
-│   └── calculator/               # Calcolatore rischio
-├── lib/
-│   ├── analytics.ts              # Tracking GA4 (trackContactSubmit, trackCollaboraSubmit, ...)
-│   ├── rateLimit.ts              # Rate limiting Upstash
-│   ├── supabase.ts               # Client Supabase
-│   ├── anthropic.ts              # Client Anthropic per FIMA
-│   ├── services.ts               # Lista servizi per sitemap/pagine
-│   ├── collabora.ts              # Costanti condivise collabora (PROFILI, ESPERIENZE)
-│   └── ...
-├── public/
-│   ├── images/team/              # Foto team reali (jpg)
-│   ├── images/partners/          # Logo compagnie (svg)
-│   └── icons/
-├── data/                         # JSON statici (blog-posts, policies, leads, sinistri)
-├── supabase/                     # Migrations e config
-└── tailwind.config.ts
-```
 
 ---
 
@@ -261,33 +164,6 @@ Queste regole si sommano alla skill **`fim-humanizer`**, che resta il passaggio 
 
 - **Prima di ogni insert/update**, conferma lo schema reale (nomi colonne, campi obbligatori, valori enum validi di status) interrogando lo schema — non assumere i nomi. Più volte cron/notifiche sono falliti per colonna sbagliata o status non valido.
 - **Prima di generare grafiche o asset brandizzati**, conferma con l'utente logo ufficiale, palette esatta e pagina/sezione di destinazione. Non indovinare i colori (es. navy+gold a caso): ha già causato rigenerazioni complete.
-
----
-
-## Comandi utili
-
-```bash
-cd fim-broker-website
-npm install           # installa dipendenze
-npm run dev           # dev server (http://localhost:3000)
-npm run build         # build produzione
-npm run lint          # ESLint (next lint)
-npx tsc --noEmit      # typecheck (non c'è script dedicato in package.json)
-```
-
----
-
-## Skill custom FIM (in `.claude/skills/`)
-
-Il repo contiene skill custom che Claude Code può invocare automaticamente quando l'utente chiede determinati task. Sono cucite su misura per il business FIM (tono, compliance, stack).
-
-| Skill | Quando si attiva |
-|---|---|
-| **`fim-blog-writer`** | Utente chiede di scrivere articoli blog SEO in italiano seguendo brand voice e struttura JSON del sito |
-| **`fim-policy-analyzer`** | Utente fornisce un PDF di polizza/contratto/denuncia sinistro o chiede analisi/confronto polizze |
-| **`fim-ivass-watcher`** | Utente chiede novità IVASS/ANIA/settore o idee per contenuti blog/newsletter |
-
-Le skill sono documentate in `.claude/skills/<nome>/SKILL.md`. Per aggiungerne di nuove segui lo stesso formato (frontmatter YAML con `name` + `description` che funge da trigger + body markdown con istruzioni).
 
 ---
 
