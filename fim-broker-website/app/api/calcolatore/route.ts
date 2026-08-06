@@ -187,7 +187,9 @@ export async function POST(req: NextRequest) {
     const email = String(body?.email ?? '').trim().toLowerCase().slice(0, 200)
     const profile = String(body?.profile ?? '').trim().slice(0, 50)
     const settore = String(body?.settore ?? '').trim().slice(0, 100)
-    const answers = body?.answers && typeof body.answers === 'object' ? body.answers as Record<string, boolean> : {}
+    // Il client manda anche `answers` (le risposte grezze, id → boolean): non serve,
+    // perché `answersDecoded` porta la stessa informazione già leggibile ed è quella
+    // che finisce nell'email al team.
     const livello = String(body?.livello ?? '').trim().slice(0, 20)
     const punteggio = Number(body?.punteggio ?? 0)
     const prezzoMin = Number(body?.prezzoMin ?? 0)
