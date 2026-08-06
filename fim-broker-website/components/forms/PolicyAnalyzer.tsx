@@ -80,12 +80,6 @@ function scoreBg(score: number) {
   return 'bg-red-50 border-red-200'
 }
 
-const urgencyConfig = {
-  alta: { label: 'Urgente', cls: 'bg-red-100 text-red-700' },
-  media: { label: 'Consigliata', cls: 'bg-yellow-100 text-yellow-700' },
-  bassa: { label: 'Opzionale', cls: 'bg-blue-100 text-blue-700' },
-}
-
 const LOADING_MESSAGES = [
   'Caricamento del documento...',
   'Identifico il tipo di polizza...',
