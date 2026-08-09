@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { hasAnalyticsConsent, CONSENT_UPDATED_EVENT } from '@/lib/consent'
 
 // Microsoft Clarity (heatmap + session recording) installa cookie e registra
 // la sessione: secondo le Linee guida del Garante richiede CONSENSO PREVENTIVO.
@@ -13,17 +14,6 @@ const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID
 
 type ClarityWindow = Window & {
   clarity?: ((...args: unknown[]) => void) & { q?: unknown[] }
-}
-
-function hasAnalyticsConsent(): boolean {
-  try {
-    const raw = localStorage.getItem('fim-cookie-consent')
-    if (!raw) return false
-    const c = JSON.parse(raw)
-    return c?.choice === 'all' || c?.analytics === true
-  } catch {
-    return false
-  }
 }
 
 function loadClarity(id: string) {
@@ -55,8 +45,8 @@ export default function ClarityLoader() {
     const onConsent = () => {
       if (hasAnalyticsConsent()) loadClarity(CLARITY_ID)
     }
-    window.addEventListener('fim-consent-updated', onConsent)
-    return () => window.removeEventListener('fim-consent-updated', onConsent)
+    window.addEventListener(CONSENT_UPDATED_EVENT, onConsent)
+    return () => window.removeEventListener(CONSENT_UPDATED_EVENT, onConsent)
   }, [])
 
   return null

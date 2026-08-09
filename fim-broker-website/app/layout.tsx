@@ -5,6 +5,7 @@ import './globals.css'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ClarityLoader from '@/components/analytics/ClarityLoader'
 import MetaPixelLoader from '@/components/analytics/MetaPixelLoader'
+import { CONSENT_STORAGE_KEY, CONSENT_VERSION } from '@/lib/consent'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -48,19 +49,24 @@ const CONSENT_INIT_SCRIPT = `(function(){
   gtag('set', 'ads_data_redaction', true);
   gtag('set', 'url_passthrough', true);
 
-  // Applica subito l'eventuale consenso pregresso salvato in localStorage
+  // Applica subito l'eventuale consenso pregresso salvato in localStorage.
+  // Le due finalità sono indipendenti: gli storage pubblicitari seguono
+  // 'marketing', mai la scelta complessiva. Un consenso di versione diversa
+  // viene ignorato (resta tutto 'denied') e il banner tornerà a chiedere.
   try {
-    var raw = localStorage.getItem('fim-cookie-consent');
+    var raw = localStorage.getItem('${CONSENT_STORAGE_KEY}');
     if (raw) {
       var c = JSON.parse(raw);
-      var allGranted = c && c.choice === 'all';
-      var analyticsGranted = !!(c && c.analytics);
-      gtag('consent', 'update', {
-        'ad_storage': allGranted ? 'granted' : 'denied',
-        'ad_user_data': allGranted ? 'granted' : 'denied',
-        'ad_personalization': allGranted ? 'granted' : 'denied',
-        'analytics_storage': analyticsGranted ? 'granted' : 'denied'
-      });
+      if (c && c.version === ${CONSENT_VERSION}) {
+        var marketingGranted = c.marketing === true;
+        var analyticsGranted = c.analytics === true;
+        gtag('consent', 'update', {
+          'ad_storage': marketingGranted ? 'granted' : 'denied',
+          'ad_user_data': marketingGranted ? 'granted' : 'denied',
+          'ad_personalization': marketingGranted ? 'granted' : 'denied',
+          'analytics_storage': analyticsGranted ? 'granted' : 'denied'
+        });
+      }
     }
   } catch(e) {}
 })();`

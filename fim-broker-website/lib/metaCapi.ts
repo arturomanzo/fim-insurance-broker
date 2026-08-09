@@ -35,14 +35,24 @@ function hashNormalized(value: string | undefined | null): string | undefined {
 }
 
 /**
- * Telefono → solo cifre con prefisso internazionale (default Italia +39), poi hash.
- * Es. "+39 333 1234567" e "333 1234567" e "06 96883381" convergono a "39...".
+ * Telefono → solo cifre in formato E.164 senza '+' (default Italia 39), poi hash.
+ * Es. "+39 333 1234567", "333 1234567" e "0039 333 1234567" → "393331234567".
+ *
+ * Due trappole italiane da cui dipende il match quality (un numero normalizzato
+ * male produce un hash che non corrisponde a nessun utente su Meta):
+ * - i FISSI tengono lo 0 anche in formato internazionale: "06 96883381" va a
+ *   "390696883381", non a "39696883381";
+ * - "inizia per 39" NON basta a dire che il prefisso paese c'è già, perché i
+ *   cellulari Iliad/Wind iniziano per 391/392/393/397. Discriminante la lunghezza:
+ *   un numero nazionale italiano arriva al massimo a 11 cifre e i cellulari a 10,
+ *   quindi se comincia per 39 ed è lungo almeno 11 il 39 è il prefisso paese.
  */
 function hashPhone(raw: string | undefined | null): string | undefined {
   let digits = String(raw ?? '').replace(/\D/g, '')
+  if (digits.startsWith('00')) digits = digits.slice(2) // prefisso internazionale 00 → E.164
   if (!digits) return undefined
-  digits = digits.replace(/^0+/, '') // rimuove zeri iniziali (es. prefissi fissi)
-  if (!digits.startsWith('39')) digits = `39${digits}` // prefisso Italia se assente
+  const hasCountryCode = digits.startsWith('39') && digits.length >= 11
+  if (!hasCountryCode) digits = `39${digits}` // prefisso Italia se assente
   return sha256(digits)
 }
 

@@ -41,6 +41,12 @@ export default function CookiePolicyPage() {
                 disattivati (gestiamo i tag Google con la tecnologia Google Consent Mode v2, con
                 impostazione predefinita &ldquo;negato&rdquo;).
               </p>
+              <p>
+                Le due finalità sono <strong>indipendenti</strong>: dal pulsante
+                &ldquo;Personalizza&rdquo; del banner puoi accettare i cookie analitici e rifiutare
+                quelli di marketing, o viceversa. Accettare le statistiche non comporta in alcun caso
+                il consenso alla profilazione pubblicitaria.
+              </p>
             </section>
 
             <section>
@@ -74,6 +80,13 @@ export default function CookiePolicyPage() {
               <ul>
                 <li><strong>Google Ads</strong> (conversion tracking / remarketing) — gestito tramite Google Tag Manager.</li>
                 <li><strong>Meta Pixel</strong> (Facebook/Instagram — _fbp e analoghi) — misurazione campagne e remarketing (durata: fino a 3 mesi).</li>
+                <li>
+                  <strong>Meta Conversions API</strong> — invio dal nostro server dei medesimi eventi
+                  di conversione già rilevati dal Pixel, per attribuirli correttamente anche quando il
+                  browser li blocca. I dati di contatto eventualmente indicati in un modulo (email,
+                  telefono, nome) vengono trasmessi a Meta solo in forma cifrata con hash SHA-256, mai
+                  in chiaro. Attivo solo con il consenso di marketing, esattamente come il Pixel.
+                </li>
               </ul>
 
               <h3>Gestione tag</h3>
