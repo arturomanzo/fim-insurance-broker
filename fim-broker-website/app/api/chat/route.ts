@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Configurazione mancante' }, { status: 500 })
   }
   if (!apiKey.startsWith('sk-ant-')) {
-    console.error('FIMA: ANTHROPIC_API_KEY non valida — primi 20 char:', apiKey.slice(0, 20))
+    console.error('FIMA: ANTHROPIC_API_KEY non valida (formato inatteso)')
     return NextResponse.json({ error: 'Configurazione non valida' }, { status: 500 })
   }
 

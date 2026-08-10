@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import { redirect, notFound } from 'next/navigation'
-import Link from 'next/link'
 import { verifyAdminToken, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth'
 import { getClientPolicies } from '@/lib/policyStore'
 import AdminShell from '@/components/admin/AdminShell'
 import MagicLinkButton from '@/components/admin/MagicLinkButton'
-import DeletePolicyButton from '@/components/admin/DeletePolicyButton'
 
 export const metadata: Metadata = { title: 'Dettaglio Cliente' }
 
@@ -36,12 +34,6 @@ export default async function AdminClienteDetailPage({ params }: PageProps) {
         </div>
         <div className="flex gap-3 flex-wrap">
           <MagicLinkButton email={decodedEmail} clientName={clientName} />
-          <Link
-            href={`/admin/polizze/nuova?email=${encodeURIComponent(decodedEmail)}&name=${encodeURIComponent(clientName)}`}
-            className="btn-primary text-sm px-4 py-2"
-          >
-            + Aggiungi polizza
-          </Link>
         </div>
       </div>
 
@@ -71,13 +63,6 @@ export default async function AdminClienteDetailPage({ params }: PageProps) {
                      p.stato === 'in-scadenza' ? `Scade tra ${p.giorniAllaScadenza} giorni` :
                      'Scaduta'}
                   </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Link href={`/admin/polizze/${p.id}/modifica`} className="text-xs font-semibold text-primary hover:underline">
-                    Modifica
-                  </Link>
-                  <span className="text-gray-200">|</span>
-                  <DeletePolicyButton id={p.id} tipo={p.tipo} />
                 </div>
               </div>
               <div className="px-6 py-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">

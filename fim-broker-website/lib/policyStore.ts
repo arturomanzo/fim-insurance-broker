@@ -1,11 +1,12 @@
 /**
- * Admin CRUD store for policies.json
+ * Admin read-only store for policies.json
  *
- * Reads and writes data/policies.json at runtime via fs.
- * Works in development and on self-hosted Node.js servers.
- * On Vercel serverless the filesystem is read-only — writes succeed
- * but don't persist across cold starts. For production persistence,
- * replace readAll/writeAll with a real database (Postgres, KV, etc.).
+ * Reads data/policies.json at runtime via fs (dati demo/seed).
+ * Il pannello admin è di sola lettura: l'anagrafica polizze è di proprietà
+ * del gestionale esterno (CRM). Per mostrare dati reali, sostituire readAll()
+ * con una chiamata all'API di lettura del gestionale
+ * (GET ${GESTIONALE_API_URL}/api/website/...), riusando il pattern Bearer
+ * già presente in app/api/preventivo/route.ts.
  */
 
 import fs from 'fs'
@@ -20,10 +21,6 @@ function readAll(): Policy[] {
   } catch {
     return []
   }
-}
-
-function writeAll(policies: Policy[]): void {
-  fs.writeFileSync(DATA_PATH, JSON.stringify(policies, null, 2) + '\n', 'utf-8')
 }
 
 function computeStatus(dataScadenza: string): { stato: PolicyWithStatus['stato']; giorniAllaScadenza: number } {
@@ -80,10 +77,6 @@ export function getClientPolicies(email: string): PolicyWithStatus[] {
     .sort((a, b) => new Date(a.dataScadenza).getTime() - new Date(b.dataScadenza).getTime())
 }
 
-export function getPolicyByIdAdmin(id: string): Policy | null {
-  return readAll().find((p) => p.id === id) ?? null
-}
-
 export interface DashboardStats {
   totalClients: number
   totalPolicies: number
@@ -116,29 +109,4 @@ export function getDashboardStats(): DashboardStats {
     expiredPolicies: expired,
     totalPremioAnnuo: totalPremio,
   }
-}
-
-// ── Writes ───────────────────────────────────────────────────────────────────
-
-export function createPolicy(policy: Policy): void {
-  const policies = readAll()
-  policies.push(policy)
-  writeAll(policies)
-}
-
-export function updatePolicy(id: string, updates: Partial<Omit<Policy, 'id'>>): boolean {
-  const policies = readAll()
-  const idx = policies.findIndex((p) => p.id === id)
-  if (idx === -1) return false
-  policies[idx] = { ...policies[idx], ...updates }
-  writeAll(policies)
-  return true
-}
-
-export function deletePolicy(id: string): boolean {
-  const policies = readAll()
-  const next = policies.filter((p) => p.id !== id)
-  if (next.length === policies.length) return false
-  writeAll(next)
-  return true
 }

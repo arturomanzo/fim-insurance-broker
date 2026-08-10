@@ -17,17 +17,13 @@ export default async function AdminClientiPage() {
 
   return (
     <AdminShell title="Clienti" backHref="/admin/dashboard">
-      <div className="flex items-center justify-between mb-5">
+      <div className="mb-5">
         <p className="text-sm text-gray-500">{clients.length} clienti registrati</p>
-        <Link href="/admin/polizze/nuova" className="btn-primary text-sm px-4 py-2">
-          + Nuova polizza
-        </Link>
       </div>
 
       {clients.length === 0 ? (
         <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center">
-          <p className="text-gray-400 mb-4">Nessun cliente. Aggiungi la prima polizza.</p>
-          <Link href="/admin/polizze/nuova" className="btn-primary">Aggiungi polizza</Link>
+          <p className="text-gray-400">Nessun cliente registrato.</p>
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">

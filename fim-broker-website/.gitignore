@@ -12,7 +12,9 @@ node_modules/
 /build
 
 # Environment variables
-.env*.local
+.env
+.env.*
+!.env.example
 
 # Runtime data files con potenziale PII
 # (policies.json è importato staticamente e resta in git)
