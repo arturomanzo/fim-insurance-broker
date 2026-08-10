@@ -6,9 +6,11 @@ import { hasMarketingConsent, CONSENT_UPDATED_EVENT } from '@/lib/consent'
 // Meta Pixel (Facebook/Instagram) — tag PUBBLICITARIO. Come Microsoft Clarity,
 // installa cookie di tracciamento e richiede CONSENSO PREVENTIVO (Linee guida
 // del Garante / GDPR). Per questo NON viene caricato nel root layout: parte SOLO
-// quando l'utente ha prestato il consenso MARKETING (choice === 'all') tramite
-// il CookieBanner. Il banner emette l'evento 'fim-consent-updated' alla scelta
-// dell'utente, così il Pixel parte subito dopo il consenso senza ricaricare.
+// col consenso MARKETING, cioè il flag `marketing` di lib/consent.ts letto da
+// `hasMarketingConsent()`. Marketing e analitici sono finalità separate: chi
+// accetta le sole statistiche NON sta accettando la profilazione, quindi qui non
+// si guarda mai `choice`. Il banner emette l'evento 'fim-consent-updated' alla
+// scelta dell'utente, così il Pixel parte subito dopo il consenso senza ricaricare.
 // Finché non c'è consenso marketing, NESSUNA chiamata verso Meta viene fatta
 // (nessun <noscript> fallback, che tracerebbe a prescindere dal consenso).
 //
