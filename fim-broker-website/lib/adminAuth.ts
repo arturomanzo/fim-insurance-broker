@@ -6,12 +6,24 @@
 export const ADMIN_SESSION_COOKIE = 'fim_admin_session'
 export const ADMIN_SESSION_TTL = 4 * 60 * 60 // 4 hours
 
+/**
+ * Il segreto del pannello admin e quello dell'area cliente devono restare
+ * DIVERSI: sono due domini di autenticazione distinti, e una chiave di firma in
+ * comune renderebbe i token di uno spendibili sull'altro. Qui c'era un fallback
+ * su `CLIENT_AUTH_SECRET`, tolto il 10/08/2026 dopo aver verificato che
+ * `ADMIN_AUTH_SECRET` è valorizzato su Vercel in Production e Preview, quindi il
+ * fallback non era mai entrato in gioco. Il guaio non era che servisse: era che
+ * il giorno in cui `ADMIN_AUTH_SECRET` sparisce il login continuerebbe a
+ * funzionare **in silenzio** con la chiave sbagliata, invece di rompersi in modo
+ * visibile. Un guasto che non si vede è peggio di un guasto.
+ */
 function getSecret(): string {
-  const envSecret = process.env.ADMIN_AUTH_SECRET || process.env.CLIENT_AUTH_SECRET
+  const envSecret = process.env.ADMIN_AUTH_SECRET
   if (envSecret) return envSecret
   if (process.env.NODE_ENV === 'production') {
     throw new Error('ADMIN_AUTH_SECRET non configurato in produzione')
   }
+  // In sviluppo `ADMIN_AUTH_SECRET` non è impostato su Vercel: si usa questo.
   return 'fim-admin-dev-secret-DO-NOT-USE-IN-PRODUCTION'
 }
 
