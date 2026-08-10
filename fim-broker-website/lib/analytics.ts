@@ -83,45 +83,74 @@ export function trackPreventivoError() {
 
 // ── Funnel contatto ──────────────────────────────────────────────────────────
 
-/** Form contatto inviato */
-export function trackContactSubmit(utmSource?: string) {
-  track('generate_lead', {
-    event_category: 'contact',
-    utm_source: utmSource ?? '(direct)',
-  })
+/**
+ * Form contatto inviato.
+ * `eventId` (opz.): stesso ID passato a `/api/contact` per la deduplica col
+ * Lead server-side (Conversions API).
+ */
+export function trackContactSubmit(utmSource?: string, eventId?: string) {
+  track(
+    'generate_lead',
+    {
+      event_category: 'contact',
+      utm_source: utmSource ?? '(direct)',
+    },
+    { eventId },
+  )
 }
 
 // ── Funnel prenotazione ──────────────────────────────────────────────────────
 
-/** Form prenotazione consulenza inviato */
-export function trackPrenotazioneSubmit(servizio: string, utmSource?: string) {
-  track('generate_lead', {
-    event_category: 'prenotazione',
-    servizio,
-    utm_source: utmSource ?? '(direct)',
-  })
+/**
+ * Form prenotazione consulenza inviato.
+ * `eventId` (opz.): deduplica col Lead server-side, come sopra.
+ */
+export function trackPrenotazioneSubmit(servizio: string, utmSource?: string, eventId?: string) {
+  track(
+    'generate_lead',
+    {
+      event_category: 'prenotazione',
+      servizio,
+      utm_source: utmSource ?? '(direct)',
+    },
+    { eventId },
+  )
 }
 
 // ── Funnel collabora con noi ─────────────────────────────────────────────────
 
-/** Form candidatura collabora inviato */
-export function trackCollaboraSubmit(profilo: string, utmSource?: string) {
-  track('generate_lead', {
-    event_category: 'collabora',
-    profilo,
-    utm_source: utmSource ?? '(direct)',
-  })
+/**
+ * Form candidatura collabora inviato.
+ * `eventId` (opz.): deduplica col Lead server-side, come sopra.
+ */
+export function trackCollaboraSubmit(profilo: string, utmSource?: string, eventId?: string) {
+  track(
+    'generate_lead',
+    {
+      event_category: 'collabora',
+      profilo,
+      utm_source: utmSource ?? '(direct)',
+    },
+    { eventId },
+  )
 }
 
 // ── Funnel second opinion ────────────────────────────────────────────────────
 
-/** Richiesta Second Opinion inviata */
-export function trackSecondOpinionSubmit(settore: string, utmSource?: string) {
-  track('generate_lead', {
-    event_category: 'second_opinion',
-    settore: settore || '(non specificato)',
-    utm_source: utmSource ?? '(direct)',
-  })
+/**
+ * Richiesta Second Opinion inviata.
+ * `eventId` (opz.): deduplica col Lead server-side, come sopra.
+ */
+export function trackSecondOpinionSubmit(settore: string, utmSource?: string, eventId?: string) {
+  track(
+    'generate_lead',
+    {
+      event_category: 'second_opinion',
+      settore: settore || '(non specificato)',
+      utm_source: utmSource ?? '(direct)',
+    },
+    { eventId },
+  )
 }
 
 // ── Funnel preventivo auto — documenti ───────────────────────────────────────

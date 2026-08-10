@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Button from '@/components/ui/Button'
 import { trackCollaboraSubmit } from '@/lib/analytics'
+import { metaLeadFields } from '@/lib/metaLead'
 import { PROFILI, ESPERIENZE } from '@/lib/collabora'
 
 const UTM_SESSION_KEY = 'fim_utm'
@@ -58,11 +59,13 @@ export default function CollaboraForm() {
 
     setStatus('loading')
     setErrorMsg('')
+    // Stesso event_id per Pixel browser e Conversions API server → Meta deduplica.
+    const meta = metaLeadFields()
     try {
       const res = await fetch('/api/collabora', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, ...meta }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -70,7 +73,7 @@ export default function CollaboraForm() {
         setStatus('error')
         return
       }
-      trackCollaboraSubmit(formData.profilo, utmSource)
+      trackCollaboraSubmit(formData.profilo, utmSource, meta.eventId)
       setStatus('success')
     } catch {
       setErrorMsg('Errore di rete. Riprova.')

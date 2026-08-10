@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
+import { sendLeadFromRequest } from '@/lib/metaCapi'
 
 interface PrenotaRequest {
   nome: string
@@ -12,6 +13,10 @@ interface PrenotaRequest {
   note?: string
   privacy: boolean
   website?: string // honeypot
+  // Meta CAPI (vedi lib/metaLead.ts): deduplica col Pixel browser
+  eventId?: string
+  eventSourceUrl?: string
+  marketingConsent?: boolean
 }
 
 function validateEmail(email: string): boolean {
@@ -236,6 +241,18 @@ export async function POST(req: NextRequest) {
       nome, email, telefono, servizio, data, orario, note,
       timestamp: new Date().toISOString(),
     }
+
+    // Meta Conversions API — Lead server-side, deduplicato col Pixel browser
+    // sullo stesso eventId. No-op senza consenso marketing. Non lancia mai.
+    await sendLeadFromRequest(req, {
+      eventId: body.eventId,
+      eventSourceUrl: body.eventSourceUrl,
+      marketingConsent: body.marketingConsent,
+      email,
+      phone: telefono,
+      fullName: nome,
+      contentCategory: 'prenotazione',
+    })
 
     if (resend) {
       await Promise.all([

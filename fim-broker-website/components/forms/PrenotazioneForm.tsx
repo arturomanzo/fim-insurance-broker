@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Button from '@/components/ui/Button'
 import { trackPrenotazioneSubmit } from '@/lib/analytics'
+import { metaLeadFields } from '@/lib/metaLead'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -87,14 +88,16 @@ export default function PrenotazioneForm() {
     if (!formData.nome || !formData.email || !formData.telefono || !formData.data || !formData.orario || !formData.privacy) return
 
     setStatus('loading')
+    // Stesso event_id per Pixel browser e Conversions API server → Meta deduplica.
+    const meta = metaLeadFields()
     try {
       const res = await fetch('/api/prenota', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, ...meta }),
       })
       if (!res.ok) throw new Error()
-      trackPrenotazioneSubmit(formData.servizio || 'non specificato', utmSource)
+      trackPrenotazioneSubmit(formData.servizio || 'non specificato', utmSource, meta.eventId)
       setStatus('success')
     } catch {
       setStatus('error')
