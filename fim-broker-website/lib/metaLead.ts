@@ -9,8 +9,10 @@ import { hasMarketingConsent } from '@/lib/consent'
  * browser perde (adblock, iOS/Safari ITP, cookie mancanti) e alza il match
  * quality con i dati utente hashati.
  *
- * GDPR: `marketingConsent` replica lato server lo stesso gate del Pixel
- * (`choice === 'all'`). Senza consenso il route non invia nulla a Meta.
+ * GDPR: `marketingConsent` replica lato server lo stesso gate del Pixel, cioè
+ * il flag `marketing` di lib/consent.ts — indipendente da quello analitico, che
+ * da solo non autorizza la profilazione. Senza quel consenso il route non invia
+ * nulla a Meta.
  */
 
 /** event_id univoco per la deduplica Meta (Pixel browser + CAPI server). */

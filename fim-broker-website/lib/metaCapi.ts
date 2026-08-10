@@ -10,7 +10,8 @@ import type { NextRequest } from 'next/server'
  * (adblock, iOS/Safari ITP, cookie mancanti) e migliora il match quality con
  * dati utente hashati (SHA-256).
  *
- * GDPR: da chiamare SOLO con consenso marketing prestato (choice === 'all').
+ * GDPR: da chiamare SOLO con il flag `marketing` di lib/consent.ts prestato. Il
+ * solo consenso analitico non basta: sono finalità separate.
  * L'access token è un SEGRETO → esclusivamente env var lato server (mai client).
  * Se `META_CAPI_TOKEN` non è configurato, l'invio viene saltato in silenzio
  * (stesso pattern di RESEND_API_KEY / WEBSITE_API_SECRET nel route del preventivo).
