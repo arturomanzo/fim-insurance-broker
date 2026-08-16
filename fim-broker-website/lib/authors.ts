@@ -40,13 +40,13 @@ export const AUTHORS = {
     url: `${BASE_URL}/chi-siamo#arturo-manzo`,
     expertise: ['Risk Management', 'Polizze Aziendali', 'D&O', 'Compliance IVASS'],
   },
-  'gianluca-ferrante-carrante': {
-    slug: 'gianluca-ferrante-carrante',
-    name: 'Gianluca Ferrante Carrante',
+  'sabrina-pazzaglini': {
+    slug: 'sabrina-pazzaglini',
+    name: 'Sabrina Pazzaglini',
     role: 'Consulente Senior — Privati',
-    bio: "Consulente senior specializzato nella protezione di famiglie e privati. Si occupa di polizze auto, casa, vita, salute e viaggio, con un approccio orientato alla relazione di lungo periodo.",
-    photo: '/images/team/gianlucaferrantecarrante.jpg',
-    url: `${BASE_URL}/chi-siamo#gianluca-ferrante-carrante`,
+    bio: "Consulente senior specializzata nella protezione di famiglie e privati. Si occupa di polizze auto, casa, vita, salute e viaggio, con un approccio orientato alla relazione di lungo periodo.",
+    photo: '/images/team/sabrinapazzaglini.jpg',
+    url: `${BASE_URL}/chi-siamo#sabrina-pazzaglini`,
     expertise: ['Auto & Casa', 'Vita & Salute', 'Polizze Viaggio'],
   },
   'luciano-manzo': {

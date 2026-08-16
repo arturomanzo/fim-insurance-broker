@@ -43,12 +43,12 @@ const team = [
     photo: '/images/team/arturomanzo.jpg',
   },
   {
-    slug: 'gianluca-ferrante-carrante',
-    name: 'Gianluca Ferrante Carrante',
+    slug: 'sabrina-pazzaglini',
+    name: 'Sabrina Pazzaglini',
     role: 'Consulente Senior — Privati',
-    bio: 'Gianluca è specializzato nella protezione di famiglie e privati. Dalla casa all\'auto, alla salute: costruisce coperture su misura con attenzione ai dettagli e un approccio orientato alla relazione di lungo periodo.',
+    bio: 'Sabrina è specializzata nella protezione di famiglie e privati. Dalla casa all\'auto, alla salute: costruisce coperture su misura con attenzione ai dettagli e un approccio orientato alla relazione di lungo periodo.',
     specializations: ['Auto & Casa', 'Vita & Salute', 'Polizze Viaggio'],
-    photo: '/images/team/gianlucaferrantecarrante.jpg',
+    photo: '/images/team/sabrinapazzaglini.jpg',
   },
   {
     slug: 'luciano-manzo',
