@@ -97,6 +97,10 @@ body {
 
 h1, h2, h3, h4 { font-family: 'Montserrat', system-ui, sans-serif; text-wrap: balance; }
 
+/* 172mm: il titolo più lungo ne chiede 167,3 su una riga sola.
+   Sotto questa soglia i titoli andavano a capo con tagli incoerenti
+   fra una pagina e l'altra. `pretty` invece di `balance`: con due font
+   sulla stessa riga, balance calcolava male e spezzava a metà frase. */
 h2.titolo {
   font-weight: 900;
   font-size: 25pt;
@@ -104,7 +108,8 @@ h2.titolo {
   letter-spacing: -.022em;
   color: var(--navy);
   margin: 5.5mm 0 4mm;
-  max-width: 15cm;
+  max-width: 172mm;
+  text-wrap: pretty;
 }
 h2.titolo em { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-weight: 400; color: var(--verde-dark); }
 
