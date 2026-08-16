@@ -28,7 +28,9 @@ const soluzioniLinks = [
   { href: '/glossario', label: 'Glossario Assicurativo' },
 ]
 
-const companyLinks = [
+// `file: true` per i PDF statici in public/: vanno serviti con un <a>,
+// non con next/link, che tenterebbe una transizione client su una non-route.
+const companyLinks: { href: string; label: string; file?: boolean }[] = [
   { href: '/chi-siamo', label: 'Chi Siamo' },
   { href: '/blog', label: 'Blog & News' },
   { href: '/prenota-consulenza', label: 'Prenota Consulenza' },
@@ -36,6 +38,7 @@ const companyLinks = [
   { href: '/collabora-con-noi', label: 'Collabora con Noi' },
   { href: '/contatti', label: 'Contatti' },
   { href: '/area-cliente', label: 'Area Cliente' },
+  { href: '/docs/brochure-istituzionale-fim.pdf', label: 'Brochure (PDF)', file: true },
 ]
 
 const socialLinks = [
@@ -250,9 +253,19 @@ export default function Footer() {
             <ul className="space-y-2">
               {companyLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
-                    {link.label}
-                  </Link>
+                  {link.file ? (
+                    <a
+                      href={link.href}
+                      download
+                      className="text-white/70 hover:text-white text-sm transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
