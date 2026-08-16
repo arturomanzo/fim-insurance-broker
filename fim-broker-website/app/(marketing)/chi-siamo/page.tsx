@@ -289,6 +289,14 @@ export default function ChiSiamoPage() {
                 </svg>
                 WhatsApp
               </a>
+              {/* Brochure istituzionale: PDF statico in public/docs, nessuna route dedicata */}
+              <a
+                href="/docs/brochure-istituzionale-fim.pdf"
+                download
+                className="btn-secondary px-6 py-3"
+              >
+                📄 Scarica la brochure
+              </a>
             </div>
           </div>
         </div>
