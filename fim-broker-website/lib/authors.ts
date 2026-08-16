@@ -58,13 +58,13 @@ export const AUTHORS = {
     url: `${BASE_URL}/chi-siamo#luciano-manzo`,
     expertise: ['Gestione Sinistri', 'RC Professionale', 'Tutela Legale'],
   },
-  'sara-conti': {
-    slug: 'sara-conti',
-    name: 'Sara Conti',
+  'nazario-manzo': {
+    slug: 'nazario-manzo',
+    name: 'Nazario Manzo',
     role: 'Consulente — Aziende & PMI',
-    bio: "Specializzata in soluzioni assicurative per piccole e medie imprese. Aiuta gli imprenditori a proteggere il patrimonio aziendale con polizze cyber, RC, welfare per dipendenti e coperture di filiera.",
-    photo: '/images/team/sara-conti.jpg',
-    url: `${BASE_URL}/chi-siamo#sara-conti`,
+    bio: "Specializzato in soluzioni assicurative per piccole e medie imprese. Aiuta gli imprenditori a proteggere il patrimonio aziendale con polizze cyber, RC, welfare per dipendenti e coperture di filiera.",
+    photo: '/images/team/nazariomanzo.jpg',
+    url: `${BASE_URL}/chi-siamo#nazario-manzo`,
     expertise: ['Cyber Risk', 'Flotte Aziendali', 'Welfare Aziendale'],
   },
 } as const satisfies Record<string, Author>

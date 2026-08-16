@@ -59,12 +59,12 @@ const team = [
     photo: '/images/team/lucianomanzo.jpg',
   },
   {
-    slug: 'sara-conti',
-    name: 'Sara Conti',
+    slug: 'nazario-manzo',
+    name: 'Nazario Manzo',
     role: 'Consulente — Aziende & PMI',
-    bio: 'Specializzata in soluzioni assicurative per piccole e medie imprese, Sara aiuta gli imprenditori a proteggere il patrimonio aziendale con polizze cyber, RC e welfare per i dipendenti.',
+    bio: 'Specializzato in soluzioni assicurative per piccole e medie imprese, Nazario aiuta gli imprenditori a proteggere il patrimonio aziendale con polizze cyber, RC e welfare per i dipendenti.',
     specializations: ['Polizze Cyber', 'Flotte Aziendali', 'Welfare'],
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&fit=crop&auto=format',
+    photo: '/images/team/nazariomanzo.jpg',
   },
 ]
 
