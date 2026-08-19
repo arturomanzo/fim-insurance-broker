@@ -11,6 +11,7 @@ const API_GET_ALLOWED = new Set([
   '/api/cron/daily-maintenance',
   '/api/cron/allegati-watcher',
   '/api/og',
+  '/api/og/linkedin',
 ])
 
 /**
