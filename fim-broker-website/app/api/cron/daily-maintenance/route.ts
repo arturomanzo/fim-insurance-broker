@@ -5,6 +5,7 @@
  * dispatcher accorpa i job giornalieri "leggeri" in una sola invocazione:
  *   1. cleanup-documenti  → retention GDPR del bucket preventivi (veloce)
  *   2. reminder-rinnovi   → email promemoria scadenza polizze (leggero, dataset mock)
+ *   3. allegati-watcher   → hash dei PDF IVASS sorvegliati (3 download, nessuna AI)
  *
  * Il job pesante `ivass-watcher` (fino a 30 triage Claude in sequenza) resta su
  * un cron separato per non sommare il suo budget tempo a questi.
@@ -17,6 +18,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GET as cleanupDocumenti } from '../cleanup-documenti/route'
 import { GET as reminderRinnovi } from '../reminder-rinnovi/route'
+import { GET as allegatiWatcher } from '../allegati-watcher/route'
 
 const CRON_SECRET = process.env.CRON_SECRET
 
@@ -28,6 +30,7 @@ type Job = { name: string; fn: (req: NextRequest) => Promise<Response> }
 const JOBS: Job[] = [
   { name: 'cleanup-documenti', fn: cleanupDocumenti },
   { name: 'reminder-rinnovi', fn: reminderRinnovi },
+  { name: 'allegati-watcher', fn: allegatiWatcher },
 ]
 
 export async function GET(req: NextRequest) {

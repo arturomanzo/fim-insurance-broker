@@ -9,6 +9,7 @@ const API_GET_ALLOWED = new Set([
   '/api/cron/ivass-watcher',
   '/api/cron/cleanup-documenti',
   '/api/cron/daily-maintenance',
+  '/api/cron/allegati-watcher',
   '/api/og',
 ])
 

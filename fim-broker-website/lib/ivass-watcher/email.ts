@@ -10,6 +10,7 @@ import type { RssItem } from './rss'
 import type { SourceId, Source } from './sources'
 import type { TriageResult } from './triage'
 import type { RecentRow } from './state'
+import type { AllegatoCheck } from './allegati'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
@@ -250,6 +251,111 @@ export async function sendWeeklyHeartbeat(rows: RecentRow[]): Promise<SendResult
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err)
     console.error('[ivass-watcher] sendWeeklyHeartbeat error:', msg)
+    return { sent: false, to: TO, error: msg }
+  }
+}
+
+// ── Alert sugli allegati al Reg. 40/2018 ──────────────────────────────────────
+
+/**
+ * Notifica che un PDF sorvegliato è cambiato, o che l'informativa non viene
+ * riletta da troppo tempo. Non prova a dire *cosa* è cambiato: il PDF IVASS non
+ * è estraibile in modo affidabile senza dipendenze in più, e la cosa utile è
+ * arrivare sulla scrivania di chi deve aprirlo.
+ */
+export async function sendAllegatiAlert(
+  changed: AllegatoCheck[],
+  revisioneScadutaDaMesi: number | null,
+): Promise<SendResult> {
+  if (changed.length === 0 && revisioneScadutaDaMesi === null) {
+    return { sent: false }
+  }
+
+  const dateStr = new Date().toLocaleDateString('it-IT', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  })
+
+  const subject =
+    changed.length > 0
+      ? `[ALLEGATI IVASS] ${changed.length === 1 ? "1 documento modificato" : `${changed.length} documenti modificati`} — ${dateStr}`
+      : `[COMPLIANCE] Informativa precontrattuale da rileggere — ${dateStr}`
+
+  const righe = changed
+    .map(
+      (c) => `
+<tr>
+  <td style="padding:10px;border-bottom:1px solid #f1f5f9;vertical-align:top;">
+    <div style="font-size:14px;font-weight:700;color:#0f2d6b;">${esc(c.label)}</div>
+    <div style="font-size:12px;color:#64748b;margin-top:2px;">
+      Last-Modified: ${esc(c.lastModified ?? 'n/d')} · ${c.contentLength ?? '?'} byte
+    </div>
+    <div style="font-family:monospace;font-size:10px;color:#94a3b8;margin-top:4px;">
+      ${esc((c.previousHash ?? '').slice(0, 12))}… → ${esc((c.hash ?? '').slice(0, 12))}…
+    </div>
+    <a href="${esc(c.url)}" style="display:inline-block;margin-top:8px;font-size:12px;color:#0f2d6b;">Apri il PDF aggiornato</a>
+  </td>
+</tr>`,
+    )
+    .join('')
+
+  const bloccoRevisione =
+    revisioneScadutaDaMesi !== null
+      ? `
+<div style="margin-top:18px;padding:12px 14px;background:#fffbeb;border-left:4px solid #d97706;">
+  <div style="font-size:13px;color:#78350f;">
+    L'informativa su <strong>/trasparenza</strong> non viene riletta da
+    <strong>${revisioneScadutaDaMesi} mesi</strong>. Anche senza novità IVASS vale la pena
+    riaprirla: aggiorna poi <code>ULTIMA_REVISIONE_ISO</code> in <code>lib/compliance.ts</code>,
+    così questo promemoria si azzera.
+  </div>
+</div>`
+      : ''
+
+  const bloccoModifiche =
+    changed.length > 0
+      ? `
+<p style="font-size:14px;color:#334155;">
+  Uno o più documenti da cui deriva l'informativa pubblicata sono cambiati sul sito IVASS.
+  Vanno confrontati con quanto pubblicato su <strong>fimbroker.it/trasparenza</strong>.
+</p>
+<table style="width:100%;border-collapse:collapse;margin-top:12px;">${righe}</table>
+<p style="font-size:12px;color:#64748b;margin-top:14px;">
+  Il provvedimento che ha causato la modifica si trova nell'elenco IVASS dei provvedimenti:
+  <a href="https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2018/n40/index.html">pagina del Reg. 40/2018</a>.
+</p>`
+      : ''
+
+  const html = `<!DOCTYPE html>
+<html><body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <div style="max-width:600px;margin:0 auto;padding:24px;">
+    <div style="background:white;border-radius:10px;padding:22px;border:1px solid #e2e8f0;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:#b45309;text-transform:uppercase;">
+        Sorveglianza allegati · Reg. IVASS 40/2018
+      </div>
+      <h1 style="font-size:19px;color:#0f2d6b;margin:8px 0 14px;">
+        ${changed.length > 0 ? 'Un documento sorvegliato è cambiato' : 'Promemoria di revisione'}
+      </h1>
+      ${bloccoModifiche}
+      ${bloccoRevisione}
+    </div>
+    <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:14px;">
+      Controllo automatico giornaliero — /api/cron/allegati-watcher
+    </p>
+  </div>
+</body></html>`
+
+  if (!resend) {
+    console.log(`[allegati-watcher] DRY-RUN alert a ${TO}: "${subject}"`)
+    return { sent: true, to: TO, dryRun: true }
+  }
+  try {
+    await resend.emails.send({ from: FROM, to: [TO], subject, html })
+    return { sent: true, to: TO }
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err)
+    console.error('[allegati-watcher] sendAllegatiAlert error:', msg)
     return { sent: false, to: TO, error: msg }
   }
 }

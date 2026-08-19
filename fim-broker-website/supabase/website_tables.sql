@@ -110,3 +110,36 @@ create policy "deny_all_anon_ivass_watcher_state"
   to anon, authenticated
   using (false)
   with check (false);
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Sorveglianza degli allegati al Reg. IVASS 40/2018 (cron allegati-watcher).
+-- Una riga per documento: si confronta l'hash del PDF con l'ultimo salvato.
+-- Vedi lib/ivass-watcher/allegati.ts e lib/compliance.ts (ALLEGATI_MONITORATI).
+-- ─────────────────────────────────────────────────────────────────────────────
+create table if not exists ivass_allegati_state (
+  id                 text primary key,        -- 'allegato-3' | 'allegato-4' | 'reg-40-consolidato'
+  label              text not null,
+  url                text not null,
+  content_hash       text,                    -- sha256 del PDF scaricato
+  etag               text,
+  last_modified      text,                    -- header HTTP, non parsato
+  content_length     integer,
+  first_seen_at      timestamptz not null default now(),
+  last_checked_at    timestamptz not null default now(),
+  last_changed_at    timestamptz,
+  consecutive_errors integer not null default 0,
+  check_error        text,
+  notified_at        timestamptz              -- valorizzato solo a email spedita
+);
+
+create index if not exists ivass_allegati_state_changed_idx
+  on ivass_allegati_state (last_changed_at desc);
+
+alter table ivass_allegati_state enable row level security;
+
+drop policy if exists "deny_all_anon_ivass_allegati_state" on ivass_allegati_state;
+create policy "deny_all_anon_ivass_allegati_state"
+  on ivass_allegati_state for all
+  to anon, authenticated
+  using (false)
+  with check (false);
