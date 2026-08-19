@@ -5,7 +5,7 @@ import { EMAIL_RECLAMI, PEC } from '@/lib/contatti'
 
 export const metadata: Metadata = {
   title: 'Reclami e Arbitro Assicurativo',
-  description: 'Procedura reclami FIM Insurance Broker conforme al Reg. IVASS 40/2018 (mod. Provv. 163/2025): reclamo intermediario, reclamo impresa, ricorso all\'Arbitro Assicurativo operativo dal 15 gennaio 2026 (D.Lgs. 215/2024).',
+  description: 'Procedura reclami FIM Insurance Broker conforme al Reg. IVASS 40/2018: reclamo all\'intermediario, reclamo all\'impresa, ricorso all\'Arbitro Assicurativo operativo dal 15 gennaio 2026 (DM MIMIT 215/2024).',
   alternates: { canonical: '/reclami' },
 }
 
@@ -21,7 +21,7 @@ const steps = [
       'Raccomandata A/R: Ufficio Reclami — FIM Insurance Broker S.a.s., Via Roma 41, 04012 Cisterna di Latina (LT)',
       'Email ordinaria: reclami@fimbroker.it (con conferma di ricezione)',
     ],
-    time: 'Risposta entro 45 giorni dalla ricezione, ai sensi dell\'art. 7 del Reg. IVASS 40/2018.',
+    time: 'Risposta entro 45 giorni dalla ricezione, nel termine previsto dalla normativa IVASS in materia di reclami (Reg. ISVAP 24/2008 e successive modifiche).',
   },
   {
     n: 2,
@@ -43,7 +43,7 @@ const steps = [
       'Termine: entro 12 mesi dalla data del reclamo presentato all\'impresa.',
       'La decisione dell\'Arbitro non è vincolante per il cliente, che resta libero di adire l\'Autorità Giudiziaria.',
     ],
-    time: 'Procedura introdotta dal D.Lgs. 215/2024 in attuazione della Direttiva UE 2023/2225 e operativa dal 15 gennaio 2026.',
+    time: 'Procedura istituita presso l\'IVASS ai sensi dell\'art. 187.1 del Codice delle Assicurazioni Private e disciplinata dal Decreto interministeriale MIMIT 6 novembre 2024, n. 215. Operativa dal 15 gennaio 2026.',
   },
 ] as const
 
@@ -75,13 +75,13 @@ export default function ReclamiPage() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Header */}
           <Card padding="lg">
-            <p className="text-accent text-sm font-semibold tracking-wider uppercase mb-2">Trasparenza · Reg. IVASS 40/2018 mod. Provv. 163/2025</p>
+            <p className="text-accent text-sm font-semibold tracking-wider uppercase mb-2">Trasparenza · Reg. IVASS 40/2018 · DM MIMIT 215/2024</p>
             <h1 className="text-3xl md:text-4xl font-black text-primary mb-3">Reclami e Arbitro Assicurativo</h1>
             <p className="text-gray-600 leading-relaxed">
               Se ritieni di aver subito un disservizio da parte di FIM Insurance Broker o di una delle compagnie
               con cui hai sottoscritto una polizza per il nostro tramite, hai diritto a una procedura strutturata,
               gratuita e tempi certi di risposta. Dal 15 gennaio 2026 è operativo l&apos;<strong>Arbitro Assicurativo</strong>,
-              il nuovo organismo di risoluzione alternativa delle controversie istituito dal D.Lgs. 215/2024.
+              l&apos;organismo di risoluzione alternativa delle controversie istituito presso l&apos;IVASS e disciplinato dal DM MIMIT 6 novembre 2024, n. 215.
             </p>
             <p className="text-gray-500 text-sm mt-4">Ultimo aggiornamento: Maggio 2026</p>
           </Card>
