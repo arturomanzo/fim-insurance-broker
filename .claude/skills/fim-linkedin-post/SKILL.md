@@ -98,11 +98,24 @@ Cartella pubblica di proposito: serve URL raggiungibili da fuori il giorno in cu
 si automatizza la pubblicazione via API. Stesso schema del carosello Instagram in
 `public/social/carosello-clima-2026-08/`.
 
-## 5. Avvisa Arturo
+## 5. Avvisa Arturo su Telegram
 
-Notifica con: giorno di pubblicazione, tema, prime due righe del post e percorso
-della cartella. Il testo intero nel messaggio, così può leggerlo dal telefono
-senza aprire il Mac.
+POST al webhook n8n, che gira il messaggio sul suo Telegram:
+
+```bash
+python3 -c "import json;print(json.dumps({'giorno':'...','tema':'...','post':open('post.md').read().split('---',2)[2].strip(),'cartella':'...','branch':'...'},ensure_ascii=False))" > /tmp/bozza.json
+curl -s -X POST https://n8n.srv1762577.hstgr.cloud/webhook/fim-linkedin-bozza \
+  -H "Content-Type: application/json" --data-binary @/tmp/bozza.json
+```
+
+Il JSON si costruisce con `json.dumps` e si manda con `--data-binary @file`:
+composto a mano, accenti e virgolette rompono la chiamata. Risposta attesa
+`{"message":"Workflow was started"}`; un `404 webhook not registered` significa
+che il workflow n8n «FIM — Bozza LinkedIn → Telegram» è da ripubblicare.
+
+Il campo `post` contiene il testo INTEGRALE, così Arturo lo legge e lo copia dal
+telefono senza aprire il Mac. Telegram taglia a 4096 caratteri e il nodo accorcia
+il post a 3.200, quindi non allegare altro al messaggio.
 
 ## Checklist prima di consegnare
 
