@@ -1,21 +1,5 @@
-const companies = [
-  'Generali',
-  'AXA',
-  'Allianz',
-  'UnipolSai',
-  'Zurich',
-  'HDI',
-  'Groupama',
-  'Reale Mutua',
-  'Cattolica',
-  'Roland Italia',
-  'AEC Underwriting',
-  'MetLife',
-  'Bene.it',
-  'Aviva',
-  'Ergo',
-  'SACE',
-]
+import { COMPAGNIE_NOMI } from '@/lib/compagnie'
+
 
 export default function TrustedBrands() {
   return (
@@ -25,7 +9,7 @@ export default function TrustedBrands() {
           Le compagnie che confrontiamo per te
         </p>
         <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
-          {companies.map((name) => (
+          {COMPAGNIE_NOMI.map((name) => (
             <div
               key={name}
               className="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm font-semibold text-gray-600 hover:border-primary/30 hover:text-primary hover:bg-primary/5 transition-colors duration-200"

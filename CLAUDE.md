@@ -105,11 +105,11 @@ Usare queste informazioni ogni volta che si risponde a domande sulle compagnie c
 | **Generali** | Collaborazione tramite agenzia | Ag. di Latina — P.zza della Libertà 9, Latina |
 | **AXA Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Nettuno |
 | **HDI Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Genzano di Roma — https://www.hdiassicurazioni.it/it/trova-agenzia |
-| **Roland Italia** | Mandato diretto | Agenzia n. 1170 — https://www.roland-italia.it/ |
+| **Roland Italia** | Mandato diretto | https://www.roland-italia.it/ |
 | **AEC Underwriting** | Mandato diretto | https://www.aecunderwriting.it/ |
 | **MetLife** | Mandato diretto | https://www.metlife-per-te.it/ |
 | **Bene.it** | Collaborazione tramite agenzia | Agenzia di Velletri — https://www.bene.it/ |
-| **Allianz** | Mandato diretto | https://www.allianz.it/ |
+| **Allianz** | Collaborazione tramite agenzia | Agenzia di Velletri — https://www.allianz.it/ |
 | **UnipolSai** | Partner per prodotto | — |
 | **Zurich** | Partner per prodotto | — |
 | **Groupama** | Partner per prodotto | — |

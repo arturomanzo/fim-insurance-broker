@@ -13,7 +13,7 @@ export default function NoteLegaliPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Note Legali</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Maggio 2026 — recepimento Provv. IVASS n. 163/2025 e D.Lgs. 215/2024 (Arbitro Assicurativo operativo dal 15 gennaio 2026)</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: agosto 2026 — Modulo Unico Precontrattuale (Provv. IVASS n. 147/2024) aggiornato ai Provv. n. 163/2025 (Arbitro Assicurativo) e n. 169/2026 (diritto all&apos;oblio oncologico)</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -57,9 +57,10 @@ export default function NoteLegaliPage() {
                 coperture assicurative su un&apos;ampia analisi del mercato.
               </p>
               <p>
-                L&apos;informativa precontrattuale completa sull&apos;intermediario (<strong>Allegato 3</strong>) e sulla
-                distribuzione (<strong>Allegato 4</strong>) ai sensi del Regolamento IVASS n. 40/2018 come modificato
-                dal Provvedimento n. 163/2025 è disponibile nella sezione{' '}
+                L&apos;informativa precontrattuale completa &mdash; il <strong>Modulo Unico Precontrattuale
+                (MUP)</strong> previsto dall&apos;Allegato 3 al Regolamento IVASS n. 40/2018, che dal
+                Provvedimento n. 147/2024 ha sostituito i precedenti Allegati 3, 4, 4-bis e 4-ter &mdash;
+                è disponibile nella sezione{' '}
                 <Link href="/trasparenza" className="text-primary hover:underline font-medium">Trasparenza</Link>{' '}
                 e viene consegnata al cliente prima della sottoscrizione di ogni contratto.
               </p>
@@ -104,7 +105,8 @@ export default function NoteLegaliPage() {
               <h2>Reclami e Arbitro Assicurativo</h2>
               <p>
                 Ai sensi del Regolamento IVASS n. 40/2018 (come modificato dal Provv. n. 163/2025) e del
-                D.Lgs. 215/2024 che ha istituito l&apos;<strong>Arbitro Assicurativo</strong>, operativo dal{' '}
+                Decreto interministeriale MIMIT 6 novembre 2024, n. 215, che disciplina
+                l&apos;<strong>Arbitro Assicurativo</strong>, operativo dal{' '}
                 <strong>15 gennaio 2026</strong>, il cliente che ritenga di aver subito un disservizio o un
                 comportamento non conforme da parte dell&apos;intermediario o della compagnia ha diritto a una
                 procedura strutturata su tre livelli.
