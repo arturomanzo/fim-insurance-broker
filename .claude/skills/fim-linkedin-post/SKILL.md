@@ -117,6 +117,17 @@ Il campo `post` contiene il testo INTEGRALE, così Arturo lo legge e lo copia da
 telefono senza aprire il Mac. Telegram taglia a 4096 caratteri e il nodo accorcia
 il post a 3.200, quindi non allegare altro al messaggio.
 
+## Quando arriverà l'accesso API (vincolo)
+
+La richiesta Community Management API inviata a LinkedIn il 19 agosto 2026
+dichiara due casi d'uso, Page management e **Page analytics**. Il secondo c'è per
+un errore di compilazione e il form non è più modificabile.
+
+**La routine non deve usare gli endpoint di analytics.** Nemmeno quando
+l'accesso sarà concesso: si pubblica e basta. Le statistiche dei post, se
+servono, si guardano a mano dalla Pagina. Se un giorno si chiede lo Standard
+Tier, nel nuovo form si dichiara **solo Page management**.
+
 ## Checklist prima di consegnare
 
 - [ ] L'aggancio sta nei primi 200 caratteri
