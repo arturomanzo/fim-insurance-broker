@@ -50,11 +50,30 @@ export const PROVVEDIMENTO_VIGENTE = PROVVEDIMENTI_REG_40[PROVVEDIMENTI_REG_40.l
 export const NORMATIVA_LABEL = `Reg. IVASS 40/2018 — Allegato 3 (MUP), agg. Provv. ${PROVVEDIMENTO_VIGENTE.n}`
 
 /**
- * Data dell'ultima revisione umana dell'informativa. Va aggiornata a mano a
- * ogni rilettura, anche quando nulla cambia: serve a distinguere "verificato e
- * ancora valido" da "nessuno lo guarda dal 2024".
+ * Data dell'ultima revisione umana dell'informativa (ISO, così il watcher può
+ * confrontarla). Va aggiornata a mano a ogni rilettura, anche quando nulla
+ * cambia: serve a distinguere "verificato e ancora valido" da "nessuno lo
+ * guarda dal 2024".
  */
-export const ULTIMA_REVISIONE = '19 agosto 2026'
+export const ULTIMA_REVISIONE_ISO = '2026-08-19'
+
+/** La stessa data in forma leggibile, per la pagina pubblica. */
+export const ULTIMA_REVISIONE = new Date(`${ULTIMA_REVISIONE_ISO}T12:00:00Z`).toLocaleDateString(
+  'it-IT',
+  { day: 'numeric', month: 'long', year: 'numeric' },
+)
+
+/**
+ * Oltre questa soglia il watcher segnala che l'informativa non viene riletta da
+ * troppo tempo, anche se IVASS non ha pubblicato nulla di nuovo.
+ */
+export const REVISIONE_MAX_MESI = 6
+
+/** Mesi trascorsi dall'ultima revisione umana. */
+export function mesiDaUltimaRevisione(now: Date = new Date()): number {
+  const ref = new Date(`${ULTIMA_REVISIONE_ISO}T12:00:00Z`)
+  return (now.getTime() - ref.getTime()) / (1000 * 60 * 60 * 24 * 30.44)
+}
 
 /** Iscrizione al RUI. */
 export const RUI_SEZIONE = 'B'
