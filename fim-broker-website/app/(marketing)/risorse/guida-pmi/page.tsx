@@ -142,7 +142,7 @@ export default function GuidaPmiPage() {
               <p className="text-gray-700 leading-relaxed">
                 <strong>Il ruolo del broker assicurativo</strong> — a differenza di un agente che rappresenta una sola compagnia,
                 il broker (come FIM) è un consulente indipendente che lavora nell&apos;interesse del cliente.
-                Confronta le offerte di 30+ compagnie, negozia le condizioni e ti assiste nei sinistri.
+                Confronta le offerte delle compagnie del mercato, negozia le condizioni e ti assiste nei sinistri.
                 Il suo compenso è una provvigione a carico della compagnia — per te la consulenza è gratuita.
               </p>
             </section>
@@ -414,7 +414,7 @@ export default function GuidaPmiPage() {
               <h3 className="text-2xl font-black mb-3">Hai trovato lacune nella tua copertura?</h3>
               <p className="text-white/80 mb-6 leading-relaxed">
                 FIM Insurance Broker offre un&apos;analisi gratuita della tua copertura attuale.
-                In 30 minuti identifichiamo i gap, confrontiamo le offerte di 30+ compagnie e ti proponiamo la soluzione più adatta.
+                In 30 minuti identifichiamo i gap, confrontiamo le offerte delle compagnie e ti proponiamo la soluzione più adatta.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/prenota-consulenza" className="btn-primary px-6 py-3">

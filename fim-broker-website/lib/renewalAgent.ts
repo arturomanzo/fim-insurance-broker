@@ -53,7 +53,7 @@ export async function generateRenewalProposal(
       messages: [
         {
           role: 'user',
-          content: `Sei un consulente assicurativo senior di FIM Insurance Broker — broker indipendente con accesso a oltre 30 compagnie assicurative italiane.
+          content: `Sei un consulente assicurativo senior di FIM Insurance Broker — broker indipendente con accesso a 20 compagnie assicurative italiane.
 
 Devi generare il contenuto testuale di un'email di rinnovo polizza personalizzata. Il cliente deve sentire che stai scrivendo TU, non un sistema automatico.
 
@@ -86,7 +86,7 @@ Rispondi SOLO con un JSON valido (nessun testo fuori dal JSON):
     },
     {
       "titolo": "Titolo opzione ottimizzazione (es. 'Stesso Budget, Di Più')",
-      "descrizione": "Come FIM può analizzare il mercato e trovare condizioni migliori per '${policy.tipo}' allo stesso premio o inferiore — confronto tra 30+ compagnie",
+      "descrizione": "Come FIM può analizzare il mercato e trovare condizioni migliori per '${policy.tipo}' allo stesso premio o inferiore — confronto tra 20 compagnie",
       "vantaggio": "stima risparmio medio o miglioramento copertura ottenibile nel mercato attuale"
     }
   ],

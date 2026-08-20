@@ -102,7 +102,7 @@ export default function ProfessionistiPage() {
               </h1>
               <p className="text-xl text-white/80 leading-relaxed mb-8">
                 Avvocato, commercialista, ingegnere, medico, consulente: un errore professionale può costarti anni di lavoro.
-                FIM trova la polizza più adatta alla tua categoria e al tuo volume d&apos;affari — confrontando 30+ compagnie.
+                FIM trova la polizza più adatta alla tua categoria e al tuo volume d&apos;affari — confrontando le compagnie del mercato.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">
@@ -214,7 +214,7 @@ export default function ProfessionistiPage() {
                   },
                   {
                     icon: '🔍',
-                    title: 'Confrontiamo 30+ compagnie per te',
+                    title: 'Confrontiamo il mercato per te',
                     desc: 'Non rappresentiamo una sola compagnia: confrontiamo AXA, Allianz, Generali, HDI e molte altre per trovare il miglior prezzo con la migliore copertura.',
                   },
                   {

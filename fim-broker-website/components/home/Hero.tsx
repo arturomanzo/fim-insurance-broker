@@ -73,7 +73,7 @@ export default function Hero() {
                 { icon: '✓', label: 'Analisi oggettiva e trasparente' },
                 { icon: '✓', label: 'Guida esperta nella complessità' },
                 { icon: '✓', label: '20+ anni di esperienza' },
-                { icon: '✓', label: '30+ compagnie confrontate' },
+                { icon: '✓', label: '20 compagnie confrontate' },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-2">
                   <span className="text-accent font-bold">{item.icon}</span>

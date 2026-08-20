@@ -33,7 +33,7 @@ export const osservatorioPmiFaq: FaqCategory = {
     {
       question: "Come si calcola il premio di un'assicurazione aziendale?",
       answer:
-        'I fattori principali sono: settore di attività (codice ATECO), fatturato annuo, numero di dipendenti, presenza di impianti/macchinari, storico sinistri, e coperture richieste. Un broker indipendente come FIM può confrontare le offerte di 30+ compagnie per trovare il miglior rapporto qualità-prezzo.',
+        'I fattori principali sono: settore di attività (codice ATECO), fatturato annuo, numero di dipendenti, presenza di impianti/macchinari, storico sinistri, e coperture richieste. Un broker indipendente come FIM può confrontare le offerte di 20 compagnie per trovare il miglior rapporto qualità-prezzo.',
     },
   ],
 }

@@ -215,7 +215,7 @@ export default function FamigliePage() {
                 {[
                   { step: '01', title: 'Mappatura della situazione', desc: 'Analizziamo casa, reddito, composizione del nucleo familiare, esposizioni reali e coperture già attive.' },
                   { step: '02', title: 'Identificazione dei gap', desc: 'Individuiamo cosa non è coperto e cosa lo è doppiamente — liberando budget per ciò che conta.' },
-                  { step: '03', title: 'Selezione mirata', desc: 'Confrontiamo le offerte di 30+ compagnie e proponiamo solo le coperture che fanno la differenza.' },
+                  { step: '03', title: 'Selezione mirata', desc: 'Confrontiamo le offerte delle compagnie partner e proponiamo solo le coperture che fanno la differenza.' },
                   { step: '04', title: 'Revisione annuale', desc: 'La vita cambia: figlio nato, casa acquistata, pensione in arrivo. Le polizze devono evolvere con te.' },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">

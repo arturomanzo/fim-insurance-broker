@@ -200,7 +200,7 @@ export default function ChiSiamoPage() {
                   { icon: '🔍', title: 'Analisi oggettiva', desc: 'Dati concreti, non opinioni. Cerchiamo la verità nei numeri per consigliarti senza conflitti di interesse.' },
                   { icon: '🧭', title: 'Guida nella complessità', desc: 'Prendiamo il timone nei momenti critici: sinistri, contenziosi, rinnovi strategici.' },
                   { icon: '🎯', title: 'Visione strategica', desc: 'L\'assicurazione non è un costo: è un investimento. Ti aiutiamo a pianificare per crescere.' },
-                  { icon: '🤝', title: 'Indipendenza assoluta', desc: 'Non rappresentiamo compagnie. 30+ offerte confrontate con un solo obiettivo: il tuo.' },
+                  { icon: '🤝', title: 'Indipendenza assoluta', desc: 'Non rappresentiamo compagnie. Le offerte di 20 partner confrontate con un solo obiettivo: il tuo.' },
                 ].map((val) => (
                   <Card key={val.title} className="flex items-start gap-4">
                     <span className="text-2xl flex-shrink-0">{val.icon}</span>

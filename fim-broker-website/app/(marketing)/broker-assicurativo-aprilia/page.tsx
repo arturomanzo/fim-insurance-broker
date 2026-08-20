@@ -32,7 +32,7 @@ const pageSchema = {
 
 export const metadata: Metadata = {
   title: `Broker Assicurativo a ${CITY} — FIM Insurance Broker`,
-  description: `Cerchi un broker assicurativo a ${CITY}? FIM Insurance Broker confronta 30+ compagnie per trovare la polizza giusta per te. Preventivo gratuito, consulenza personalizzata.`,
+  description: `Cerchi un broker assicurativo a ${CITY}? FIM Insurance Broker confronta 20 compagnie per trovare la polizza giusta per te. Preventivo gratuito, consulenza personalizzata.`,
   openGraph: {
     images: [{ url: `/api/og?title=Broker+Assicurativo+a+${CITY}&tag=FIM+Insurance+Broker&sub=Confrontiamo+30%2B+compagnie.+Preventivo+gratuito.`, width: 1200, height: 630 }],
   },
@@ -50,7 +50,7 @@ const servizi = [
 
 const vantaggi = [
   { icon: '🎯', title: 'Indipendenza totale', desc: `Non rappresentiamo nessuna compagnia: a ${CITY} lavoriamo solo per il tuo interesse.` },
-  { icon: '📊', title: '30+ compagnie a confronto', desc: 'Generali, AXA, Allianz, UnipolSai, Zurich, Groupama e molte altre.' },
+  { icon: '📊', title: '20 compagnie partner', desc: 'Generali, AXA, Allianz, UnipolSai, Zurich, Groupama e molte altre.' },
   { icon: '🤝', title: 'Consulente dedicato', desc: 'Un professionista che conosce il tuo nome, non un call center.' },
   { icon: '⚡', title: 'Gestione sinistri', desc: 'Ti seguiamo dalla denuncia alla liquidazione con tempi rapidi e assistenza completa.' },
 ]
@@ -72,7 +72,7 @@ export default function BrokerAprilia() {
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
               FIM Insurance Broker è il tuo broker assicurativo indipendente nella provincia di {CITY}.
-              Confrontiamo le offerte di oltre 30 compagnie per trovare la polizza perfetta per te,
+              Confrontiamo le offerte delle compagnie del mercato per trovare la polizza perfetta per te,
               al prezzo più competitivo del mercato.
             </p>
             <div className="flex flex-wrap gap-3">

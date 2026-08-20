@@ -59,7 +59,7 @@ function buildGuideEmailHtml(nome: string, tipo: string): string {
         <p style="margin: 0 0 10px; font-size: 14px; color: #0369a1; font-weight: 600;">💡 Un consiglio gratuito da FIM</p>
         <p style="margin: 0; font-size: 13px; color: #475569; line-height: 1.6;">
           Dopo aver letto la guida, contattaci per una consulenza gratuita personalizzata.
-          Analizziamo i rischi specifici della tua attività e confrontiamo 30+ compagnie per trovare la copertura migliore al prezzo più competitivo.
+          Analizziamo i rischi specifici della tua attività e confrontiamo le compagnie del mercato per trovare la copertura migliore al prezzo più competitivo.
         </p>
       </div>
       <div style="display: flex; gap: 12px; justify-content: center;">
