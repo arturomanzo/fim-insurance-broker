@@ -88,6 +88,11 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
 - **Lingua**: italiano (tutto il sito, tutto il contenuto user-facing, anche i commenti del codice di business)
 - **Tono**: professionale, relazionale, trasparente — NON corporate, NON freddo (regole complete in "Stile di scrittura")
 - **Claim chiave**: "Broker indipendente: non rappresentiamo compagnie ma solo i tuoi interessi"
+- **Storia e date** — usare queste, mai altre:
+  - **1993** — a Cisterna di Latina inizia l'attività assicurativa di famiglia (il padre di Arturo)
+  - **2004** — Arturo Manzo entra nell'attività
+  - **2012** — nasce FIM Insurance Broker S.a.s. di Manzo Arturo & C.
+  - Come si raccontano: l'anzianità dell'**azienda** è un mestiere di famiglia **dal 1993**; l'esperienza personale di **Arturo** parte dal **2004**; i **dati societari** (`foundingDate`, atti, iscrizione RUI) usano il **2012**. Il "2004 come anno di fondazione" era un errore che stava in 8 punti del sito, compresa la timeline di chi-siamo e il JSON-LD: corretto il 20/08/2026.
 - **Contatti pubblici**:
   - Sede: Via Roma 41, 04012 Cisterna di Latina (LT)
   - Tel: +39 06 96883381
@@ -95,7 +100,7 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
   - PEC: `fiminsurancebrokersas@pec.it`
 - **Compliance**: IVASS (RUI Sez. B n. B000405449), GDPR (Reg. UE 2016/679), IDD (D.Lgs 68/2018)
 - **Compagnie partner**: 20 (elenco mandati completo sotto — la tabella ne dettaglia 16)
-  - ⚠️ Il sito pubblico dichiara ancora "30+ compagnie" in 34 punti su 19 file: claim da allineare.
+  - Il claim "30+" è stato eliminato da sito, brochure e presentazioni il 20/08/2026 (PR #111 e #112). Se ricompare: cercarlo **per concetto e non per stringa** — è sopravvissuto a cinque giri perché in alcuni punti numero ed etichetta stanno su campi separati (`value: '30+'` + `label: 'Compagnie partner'`) e altrove la formula era "più di 30" o "20-30+".
 
 ### Mandati e collaborazioni con compagnie — SEMPRE aggiornati
 
