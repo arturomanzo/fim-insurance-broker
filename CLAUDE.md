@@ -94,7 +94,8 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
   - Email: `info@fimbroker.it`
   - PEC: `fiminsurancebrokersas@pec.it`
 - **Compliance**: IVASS (RUI Sez. B n. B000405449), GDPR (Reg. UE 2016/679), IDD (D.Lgs 68/2018)
-- **Compagnie partner**: 30+ (elenco mandati completo sotto)
+- **Compagnie partner**: 20 (elenco mandati completo sotto — la tabella ne dettaglia 16)
+  - ⚠️ Il sito pubblico dichiara ancora "30+ compagnie" in 34 punti su 19 file: claim da allineare.
 
 ### Mandati e collaborazioni con compagnie — SEMPRE aggiornati
 
