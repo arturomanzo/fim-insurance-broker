@@ -34,7 +34,7 @@ export const AUTHORS = {
     slug: 'arturo-manzo',
     name: 'Arturo Manzo',
     role: 'CEO & Fondatore',
-    bio: "Fondatore di FIM Insurance Broker nel 2004, oltre 20 anni di esperienza nel brokeraggio assicurativo italiano. Specializzato in polizze aziendali complesse, risk management per PMI e advisory normativo.",
+    bio: "Nel brokeraggio assicurativo italiano dal 2004, fondatore di FIM Insurance Broker S.a.s. nel 2012. Specializzato in polizze aziendali complesse, risk management per PMI e advisory normativo.",
     photo: '/images/team/arturomanzo.jpg',
     rui: 'B000405449',
     url: `${BASE_URL}/chi-siamo#arturo-manzo`,

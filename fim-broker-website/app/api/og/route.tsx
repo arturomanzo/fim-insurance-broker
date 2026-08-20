@@ -105,7 +105,7 @@ export async function GET(req: NextRequest) {
 
         {/* Bottom badge row */}
         <div style={{ display: 'flex', gap: '24px', marginTop: 'auto', paddingTop: '40px' }}>
-          {['Broker Indipendente', '30+ Compagnie Partner', 'Preventivo Gratuito'].map((badge) => (
+          {['Broker Indipendente', '20 Compagnie Partner', 'Preventivo Gratuito'].map((badge) => (
             <div
               key={badge}
               style={{

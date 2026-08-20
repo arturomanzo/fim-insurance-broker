@@ -137,7 +137,7 @@ export default function BrokerLatina() {
                 con un approccio indipendente e trasparente.
               </p>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Con oltre 20 anni di attività e 1.200+ polizze gestite, conosciamo il mercato
+                Con un mestiere di famiglia dal 1993 e 1.200+ polizze gestite, conosciamo il mercato
                 assicurativo italiano come pochi altri. Il nostro obiettivo è semplice:
                 la migliore copertura al miglior prezzo.
               </p>
