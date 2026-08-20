@@ -22,7 +22,7 @@ const aboutPageSchema = {
 
 export const metadata: Metadata = {
   title: 'Chi Siamo',
-  description: 'FIM Insurance Broker: 20 anni di esperienza al servizio di privati e aziende. Broker indipendente iscritto RUI IVASS, partner delle principali compagnie assicurative.',
+  description: 'FIM Insurance Broker: un mestiere di famiglia dal 1993, al servizio di privati e aziende. Broker indipendente iscritto RUI IVASS, partner delle principali compagnie assicurative.',
   openGraph: {
     images: [{ url: '/api/og?title=Chi+Siamo&tag=FIM+Insurance+Broker&sub=20+anni+di+esperienza.+Broker+indipendente+iscritto+RUI+IVASS.', width: 1200, height: 630 }],
   },
@@ -38,7 +38,7 @@ const team = [
     slug: 'arturo-manzo',
     name: 'Arturo Manzo',
     role: 'CEO & Fondatore',
-    bio: 'Fondatore di FIM nel 2004, Arturo guida l\'azienda con oltre 20 anni di esperienza nel brokeraggio assicurativo. Specializzato in polizze aziendali complesse e risk management per PMI.',
+    bio: 'Nel mestiere dal 2004 e fondatore della S.a.s. nel 2012, Arturo guida l\'azienda con oltre vent\'anni di esperienza nel brokeraggio assicurativo. Specializzato in polizze aziendali complesse e risk management per PMI.',
     specializations: ['Polizze Aziendali', 'Risk Management', 'D&O'],
     photo: '/images/team/arturomanzo.jpg',
   },
@@ -111,9 +111,10 @@ const certifications = [
 ]
 
 const milestones = [
-  { year: '2004', event: 'Fondazione di FIM Insurance Broker a Cisterna di Latina' },
+  { year: '1993', event: 'Inizia a Cisterna di Latina l\'attivit\u00e0 assicurativa di famiglia' },
+  { year: '2004', event: 'Arturo Manzo entra nell\'attivit\u00e0' },
   { year: '2008', event: 'Ampliamento del team e apertura a nuovi segmenti di mercato' },
-  { year: '2012', event: 'Superata quota 1.000 clienti attivi' },
+  { year: '2012', event: 'Nasce FIM Insurance Broker S.a.s. di Manzo Arturo & C.' },
   { year: '2016', event: 'Lancio del portale online per preventivi digitali' },
   { year: '2019', event: 'Espansione delle partnership con le principali compagnie assicurative' },
   { year: '2023', event: 'Integrazione assistente AI FIMA per supporto clienti' },
@@ -187,7 +188,7 @@ export default function ChiSiamoPage() {
                 {[
                   { value: '20+', label: 'Anni di attività' },
                   { value: '1.200+', label: 'Polizze attive' },
-                  { value: '30+', label: 'Compagnie partner' },
+                  { value: '20', label: 'Compagnie partner' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center p-4 bg-gray-50 rounded-xl">
                     <div className="text-2xl font-black text-primary">{stat.value}</div>

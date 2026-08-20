@@ -43,7 +43,7 @@ const vantaggi = [
   {
     icon: '📈',
     title: 'Portafoglio consolidato',
-    desc: 'Oltre 20 anni di attività e 1.200+ polizze attive ti danno una base solida su cui costruire il tuo lavoro.',
+    desc: 'Un mestiere di famiglia dal 1993 e 1.200+ polizze attive ti danno una base solida su cui costruire il tuo lavoro.',
   },
 ]
 
@@ -134,7 +134,7 @@ const offriamo = [
   { icon: '🛠️', text: 'CRM e strumenti digitali professionali' },
   { icon: '🎓', text: 'Formazione IVASS e aggiornamento obbligatorio' },
   { icon: '📣', text: 'Supporto marketing e lead generation' },
-  { icon: '🏆', text: 'Brand riconosciuto con 20+ anni di attività' },
+  { icon: '🏆', text: 'Brand riconosciuto sul territorio dal 1993' },
 ]
 
 export default function CollaboraConNoiPage() {
@@ -151,7 +151,7 @@ export default function CollaboraConNoiPage() {
               Entra a far parte del <span className="text-accent">mondo FIM</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
-              Siamo un broker indipendente con oltre 20 anni di esperienza, 20 compagnie partner
+              Siamo un broker indipendente, un mestiere di famiglia dal 1993, 20 compagnie partner
               e un team che mette le persone al centro. Se cerchi un contesto professionale serio,
               dinamico e orientato alla crescita, parliamone.
             </p>

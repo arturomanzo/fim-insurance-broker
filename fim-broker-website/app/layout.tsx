@@ -162,8 +162,8 @@ const jsonLd = {
   logo: `${BASE_URL}/icon.svg`,
   image: `${BASE_URL}/opengraph-image`,
   description:
-    'Broker assicurativo indipendente con oltre 20 anni di esperienza. Soluzioni assicurative personalizzate per privati e aziende.',
-  foundingDate: '2004',
+    'Broker assicurativo indipendente: un mestiere di famiglia dal 1993. Soluzioni assicurative personalizzate per privati e aziende.',
+  foundingDate: '2012',
   priceRange: '€€',
   // Identificativi pubblici (compliance IVASS / Camera di Commercio)
   identifier: [
@@ -246,7 +246,7 @@ const jsonLd = {
     name: 'Arturo Manzo',
     jobTitle: 'CEO & Insurance Broker',
     description:
-      'Fondatore di FIM Insurance Broker, oltre 20 anni di esperienza nel brokeraggio assicurativo italiano. Specializzato in polizze aziendali complesse e risk management per PMI.',
+      'Fondatore di FIM Insurance Broker S.a.s., nel brokeraggio assicurativo italiano dal 2004. Specializzato in polizze aziendali complesse e risk management per PMI.',
     url: `${BASE_URL}/chi-siamo`,
     worksFor: { '@id': `${BASE_URL}/#organization` },
   },
