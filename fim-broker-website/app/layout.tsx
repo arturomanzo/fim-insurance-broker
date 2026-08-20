@@ -105,7 +105,7 @@ export const metadata: Metadata = {
   },
   // 154 caratteri — entro la soglia SERP di ~160
   description:
-    'Broker assicurativo indipendente: polizze auto, vita, casa, salute e aziendali su misura. 30+ compagnie confrontate per te. Preventivo gratuito.',
+    'Broker assicurativo indipendente: polizze auto, vita, casa, salute e aziendali su misura. 20 compagnie confrontate per te. Preventivo gratuito.',
   metadataBase: new URL(BASE_URL),
   alternates: {
     canonical: BASE_URL,

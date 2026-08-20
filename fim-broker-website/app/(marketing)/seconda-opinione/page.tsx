@@ -63,7 +63,7 @@ const TRUST_POINTS = [
   { label: 'Gratuito', desc: 'Nessun costo, nessun impegno di acquisto' },
   { label: 'Indipendente', desc: 'Non rappresentiamo compagnie, solo i tuoi interessi' },
   { label: '48 ore', desc: 'Risposta garantita entro 2 giorni lavorativi' },
-  { label: '30+ compagnie', desc: 'Confronto su tutto il mercato italiano' },
+  { label: '20 compagnie', desc: 'Confronto su tutto il mercato italiano' },
 ]
 
 export default function SecondaOpinionePage() {

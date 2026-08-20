@@ -50,7 +50,7 @@ const TRUST_POINTS = [
   { label: 'Gratuito', desc: 'Nessun costo, nessun impegno' },
   { label: 'Sicuro', desc: 'Il PDF non viene salvato' },
   { label: 'Veloce', desc: 'Report pronto in 30 secondi' },
-  { label: 'Esperto', desc: '30+ compagnie confrontate' },
+  { label: 'Esperto', desc: 'Tutto il mercato a confronto' },
 ]
 
 const FAQS = [
@@ -206,7 +206,7 @@ export default function AnalizzaPolizzaPage() {
         <div className="container-custom max-w-xl">
           <h2 className="text-2xl font-bold mb-3">Preferisci parlare con un esperto?</h2>
           <p className="opacity-80 mb-6">
-            I nostri consulenti analizzano la tua situazione gratuitamente e trovano la soluzione migliore tra 30+ compagnie.
+            I nostri consulenti analizzano la tua situazione gratuitamente e trovano la soluzione migliore tra le compagnie del mercato.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="/prenota-consulenza" className="btn-primary">

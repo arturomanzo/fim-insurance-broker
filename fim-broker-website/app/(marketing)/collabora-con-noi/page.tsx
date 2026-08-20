@@ -22,7 +22,7 @@ const vantaggi = [
   },
   {
     icon: '🏢',
-    title: '30+ compagnie partner',
+    title: '20 compagnie partner',
     desc: 'Accesso diretto alle principali compagnie del mercato: Generali, AXA, Allianz, UnipolSai, Zurich e molte altre.',
   },
   {
@@ -151,7 +151,7 @@ export default function CollaboraConNoiPage() {
               Entra a far parte del <span className="text-accent">mondo FIM</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
-              Siamo un broker indipendente con oltre 20 anni di esperienza, 30+ compagnie partner
+              Siamo un broker indipendente con oltre 20 anni di esperienza, 20 compagnie partner
               e un team che mette le persone al centro. Se cerchi un contesto professionale serio,
               dinamico e orientato alla crescita, parliamone.
             </p>

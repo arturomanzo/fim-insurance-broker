@@ -136,7 +136,7 @@ export default function ArtigianiPmiPage() {
             <p className="text-xl text-white/80 leading-relaxed mb-8">
               Un incendio, un incidente sul lavoro, una contestazione di un cliente:
               senza la giusta copertura, la tua PMI rischia di non riaprire il giorno dopo.
-              FIM costruisce il pacchetto assicurativo su misura per la tua attività, confrontando 30+ compagnie.
+              FIM costruisce il pacchetto assicurativo su misura per la tua attività, confrontando le compagnie del mercato.
             </p>
             {/* Pain point box */}
             <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
@@ -301,7 +301,7 @@ export default function ArtigianiPmiPage() {
               <div className="space-y-4">
                 {[
                   { step: '01', title: 'Analisi dei rischi', desc: 'Capiamo la tua attività: settore, dipendenti, attrezzature, clienti. Identifichiamo le esposizioni reali.' },
-                  { step: '02', title: 'Confronto offerte', desc: 'Chiediamo preventivi a 30+ compagnie partner. Selezioniamo le migliori per copertura e prezzo.' },
+                  { step: '02', title: 'Confronto offerte', desc: 'Chiediamo preventivi alle compagnie partner. Selezioniamo le migliori per copertura e prezzo.' },
                   { step: '03', title: 'Proposta chiara', desc: 'Ti presentiamo un confronto leggibile: cosa copre, cosa non copre, quanto costa, differenze tra opzioni.' },
                   { step: '04', title: 'Supporto continuo', desc: 'Rinnoviamo e adattiamo le polizze al crescere della tua attività. Ti affianchiamo nei sinistri.' },
                 ].map((item) => (

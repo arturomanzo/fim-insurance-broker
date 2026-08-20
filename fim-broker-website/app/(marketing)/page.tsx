@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   // Description: 152 caratteri — entro la soglia ~160 di Google.
   // USP "indipendente" + numero compagnie + CTA "analisi gratuita".
   description:
-    'Broker assicurativo indipendente a Roma e nel Lazio: confrontiamo 30+ compagnie per trovare la polizza migliore per te. Analisi gratuita, senza impegno.',
+    'Broker assicurativo indipendente a Roma e nel Lazio: confrontiamo 20 compagnie per trovare la polizza migliore per te. Analisi gratuita, senza impegno.',
   openGraph: {
     title: 'FIM Insurance Broker — Chiarezza in Azione',
     description: 'Architetti della tua sicurezza. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.',
@@ -91,7 +91,7 @@ const whyFIM = [
   {
     icon: '🤝',
     title: 'Indipendenza totale',
-    desc: 'Non rappresentiamo nessuna compagnia. Confrontiamo 30+ offerte con un solo obiettivo: il tuo interesse.',
+    desc: 'Non rappresentiamo nessuna compagnia. Confrontiamo il mercato con un solo obiettivo: il tuo interesse.',
   },
 ]
 

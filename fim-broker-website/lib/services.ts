@@ -628,7 +628,7 @@ export const services: Service[] = [
       'Risk assessment: mappatura completa dei rischi aziendali',
       'Analisi di impatto (BIA — Business Impact Analysis)',
       'Progettazione del programma assicurativo ottimale',
-      'Selezione e piazzamento presso 30+ compagnie partner',
+      'Selezione e piazzamento presso 20 compagnie partner',
       'Revisione annuale del portafoglio e adeguamento coperture',
       'Claims management: gestione sinistri dalla denuncia alla liquidazione',
       'Business Continuity Planning (BCP)',
@@ -648,7 +648,7 @@ export const services: Service[] = [
       },
       {
         question: 'Come funziona il percorso di Risk Management con FIM?',
-        answer: 'Il percorso si articola in 4 fasi: 1) Mappatura dei rischi — sopralluogo, intervista con la direzione, analisi bilancio e contratti; 2) Analisi di impatto — ogni rischio viene classificato per probabilità e gravità, con una matrice dei rischi visuale; 3) Programma assicurativo — progettiamo le coperture, chiediamo preventivi a 30+ compagnie, ti presentiamo un confronto trasparente; 4) Monitoraggio — ogni anno rivediamo il programma, adeguiamo le coperture all\'evoluzione dell\'azienda e gestiamo i sinistri.',
+        answer: 'Il percorso si articola in 4 fasi: 1) Mappatura dei rischi — sopralluogo, intervista con la direzione, analisi bilancio e contratti; 2) Analisi di impatto — ogni rischio viene classificato per probabilità e gravità, con una matrice dei rischi visuale; 3) Programma assicurativo — progettiamo le coperture, chiediamo preventivi alle 20 compagnie partner, ti presentiamo un confronto trasparente; 4) Monitoraggio — ogni anno rivediamo il programma, adeguiamo le coperture all\'evoluzione dell\'azienda e gestiamo i sinistri.',
       },
       {
         question: 'Il Risk Assessment iniziale è gratuito?',
@@ -656,7 +656,7 @@ export const services: Service[] = [
       },
       {
         question: 'In cosa si differenzia il Risk Management di FIM rispetto a un agente assicurativo?',
-        answer: 'Un agente rappresenta una o poche compagnie e propone i prodotti del suo mandato. FIM è un broker indipendente iscritto al RUI (Sez. B n. B000405449): non rappresentiamo nessuna compagnia, ma solo i tuoi interessi. Questo significa che analizziamo i rischi in modo oggettivo, confrontiamo le offerte di 30+ compagnie e scegliamo la soluzione migliore per te — non per la compagnia. Inoltre, gestiamo i sinistri dalla tua parte, negoziando con la compagnia per ottenere la liquidazione più rapida e completa.',
+        answer: 'Un agente rappresenta una o poche compagnie e propone i prodotti del suo mandato. FIM è un broker indipendente iscritto al RUI (Sez. B n. B000405449): non rappresentiamo nessuna compagnia, ma solo i tuoi interessi. Questo significa che analizziamo i rischi in modo oggettivo, confrontiamo le offerte di 20 compagnie e scegliamo la soluzione migliore per te — non per la compagnia. Inoltre, gestiamo i sinistri dalla tua parte, negoziando con la compagnia per ottenere la liquidazione più rapida e completa.',
       },
       {
         question: 'Il Risk Management è utile anche per una piccola impresa?',
