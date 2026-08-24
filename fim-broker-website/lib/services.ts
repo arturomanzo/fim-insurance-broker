@@ -244,7 +244,7 @@ export const services: Service[] = [
         'Gioielli, contanti e oggetti d\'arte oltre i limiti di polizza',
         'Danni da animali domestici al proprio immobile',
       ],
-      note: 'Per immobili in zone a rischio sismico o idrogeologico è fondamentale aggiungere la garanzia catastrofale: dal 2024 è obbligatoria per le imprese (D.L. 213/2023) e fortemente raccomandata per i privati.',
+      note: 'Per immobili in zone a rischio sismico o idrogeologico la garanzia catastrofale va aggiunta: dal 2025 è obbligatoria per le imprese (L. 213/2023) e fortemente raccomandata per i privati.',
     },
   },
   {

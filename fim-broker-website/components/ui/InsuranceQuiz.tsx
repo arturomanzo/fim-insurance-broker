@@ -101,7 +101,7 @@ function getResult(answers: Answers): Result {
 
   // Business-specific
   if (isPMI) {
-    polizze.push({ name: 'Polizza Catastrofale (obbligatoria dal 2025)', urgency: 'alta', reason: 'Dal 1° aprile 2025 obbligatoria per tutte le imprese italiane (D.L. 18/2023).' })
+    polizze.push({ name: 'Polizza Catastrofale (obbligatoria dal 2025)', urgency: 'alta', reason: 'Dal 1° aprile 2025 obbligatoria per tutte le imprese italiane.' })
     polizze.push({ name: 'Cyber Risk', urgency: 'media', reason: 'Protegge da attacchi informatici, data breach e interruzione dell\'attività digitale.' })
   }
 

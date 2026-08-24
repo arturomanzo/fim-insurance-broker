@@ -18,7 +18,7 @@ export const osservatorioPmiFaq: FaqCategory = {
     {
       question: 'La polizza catastrofale è obbligatoria per le imprese nel 2025?',
       answer:
-        "Sì. Il D.L. 18/2023 convertito con L. 17/2024 ha introdotto l'obbligo di assicurazione contro le calamità naturali (alluvioni, terremoti, frane, inondazioni) per tutte le imprese con sede legale in Italia a partire dal 1° aprile 2025. Le imprese non in regola rischiano sanzioni e l'esclusione da contributi pubblici.",
+        "Sì. La normativa in vigore ha introdotto l'obbligo di assicurazione contro le calamità naturali (alluvioni, terremoti, frane, inondazioni) per tutte le imprese con sede legale in Italia a partire dal 1° aprile 2025. Le imprese non in regola rischiano sanzioni e l'esclusione da contributi pubblici.",
     },
     {
       question: 'Cosa include la RC Impresa e quanto costa?',
