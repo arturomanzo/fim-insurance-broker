@@ -1,3 +1,11 @@
+/**
+ * Init di Sentry lato browser.
+ *
+ * Si chiamava `sentry.client.config.ts`. Con Turbopack quel nome non viene
+ * piu' letto, e il monitoraggio del browser si sarebbe spento in silenzio al
+ * primo build che passa a Turbopack — lo stesso genere di guasto muto che
+ * l'audit ha gia' trovato due volte su questo sito.
+ */
 import * as Sentry from '@sentry/nextjs'
 
 Sentry.init({
@@ -20,3 +28,7 @@ Sentry.init({
     }),
   ],
 })
+
+// Segnala a Sentry le transizioni di rotta, per legare gli errori alla
+// navigazione che li ha preceduti.
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart
