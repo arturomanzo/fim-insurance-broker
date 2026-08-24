@@ -5,6 +5,7 @@ import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
 import { professionistiFaq } from '@/lib/faq/professionisti'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Assicurazione per Professionisti — RC Professionale Obbligatoria',
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
     'RC Professionale per avvocati, commercialisti, ingegneri, consulenti e medici. Obbligatoria per legge, personalizzata per la tua categoria. Preventivo gratuito in 24 ore.',
   alternates: { canonical: '/soluzioni/professionisti' },
   openGraph: {
+    ...OG_BASE,
+    url: '/soluzioni/professionisti',
     images: [{ url: '/api/og?title=Professionisti&tag=Soluzioni&sub=RC+Professionale+obbligatoria%2C+tutela+legale%2C+cyber+risk.+Personalizzata+per+la+tua+categoria.', width: 1200, height: 630 }],
   },
   twitter: {

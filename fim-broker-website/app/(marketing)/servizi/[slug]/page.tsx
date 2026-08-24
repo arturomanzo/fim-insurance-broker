@@ -8,6 +8,7 @@ import FaqAccordion from '@/components/ui/FaqAccordion'
 import CoverageTable from '@/components/ui/CoverageTable'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import PreventivoAutoDocumenti from '@/components/forms/PreventivoAutoDocumenti'
+import { OG_BASE } from '@/lib/seo'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -29,6 +30,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/servizi/${service.slug}`,
     },
     openGraph: {
+      ...OG_BASE,
+      url: `/servizi/${service.slug}`,
       images: [{ url: ogUrl, width: 1200, height: 630 }],
     },
     twitter: {

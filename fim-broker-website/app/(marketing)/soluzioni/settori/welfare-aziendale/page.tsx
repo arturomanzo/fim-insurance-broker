@@ -5,6 +5,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import { welfareAziendaleFaq } from '@/lib/faq/welfare-aziendale'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import WelfareCalculator from '@/components/calculator/WelfareCalculator'
+import { OG_BASE } from '@/lib/seo'
 
 const SETTORE_QS = '?profilo=pmi&settore=Welfare+Aziendale'
 
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
     'Polizze collettive salute, vita e infortuni per i tuoi dipendenti: 100% deducibili IRES + IRAP, esenti da contributi INPS, fidelizzano il personale. Calcola il risparmio fiscale e richiedi un piano su misura.',
   alternates: { canonical: '/soluzioni/settori/welfare-aziendale' },
   openGraph: {
+    ...OG_BASE,
+    url: '/soluzioni/settori/welfare-aziendale',
     images: [{ url: '/api/og?title=Welfare+Aziendale&tag=Soluzioni+per+settore&sub=Polizze+collettive+deducibili%2C+fidelizzano+i+dipendenti%2C+abbattono+le+tasse.', width: 1200, height: 630 }],
   },
   twitter: {

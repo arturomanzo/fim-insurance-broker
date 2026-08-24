@@ -62,7 +62,7 @@ const PROFILES = [
 const COPERTURE: Record<Profile, string[]> = {
   privato: ['Assicurazione Auto', 'Assicurazione Casa', 'Assicurazione Vita', 'Assicurazione Salute', 'Assicurazione Viaggio', 'Più coperture / Altro'],
   professionista: ['RC Professionale', 'Polizza Cyber & Privacy', 'Tutela Legale', 'Previdenza Complementare', 'Assicurazione Vita', 'Più coperture / Altro'],
-  pmi: ['RC Impresa / Prodotti', 'All Risk Aziendale', 'Flotta Aziendale', 'Cyber Risk Insurance', 'Welfare & Salute Dipendenti', 'Polizza Catastrofale 2025', 'Più coperture / Altro'],
+  pmi: ['RC Impresa / Prodotti', 'All Risk Aziendale', 'Flotta Aziendale', 'Cyber Risk Insurance', 'Welfare & Salute Dipendenti', 'Polizza Catastrofale', 'Più coperture / Altro'],
   impresa: ['Programma Assicurativo Integrato', 'Cyber Insurance Enterprise', 'D&O (Directors & Officers)', 'All Risk Multi-Sede', 'Welfare & Benefits Aziendali', 'Altro'],
 }
 

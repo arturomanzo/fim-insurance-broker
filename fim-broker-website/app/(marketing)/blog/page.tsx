@@ -4,12 +4,15 @@ import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import { getAllPosts } from '@/lib/blog'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Blog & News Assicurative',
   description: 'Rimani aggiornato con guide, news e consigli dal mondo delle assicurazioni. FIM Insurance Broker.',
   alternates: { canonical: '/blog' },
   openGraph: {
+    ...OG_BASE,
+    url: '/blog',
     images: [{ url: '/api/og?title=Blog+%26+News&tag=FIM+Insurance+Broker&sub=Guide%2C+news+e+consigli+dal+mondo+delle+assicurazioni.', width: 1200, height: 630 }],
   },
   twitter: {

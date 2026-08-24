@@ -3,6 +3,7 @@ import Link from 'next/link'
 import FaqSection from '@/components/ui/FaqSection'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { ALL_FAQS, buildFaqSchema } from '@/lib/faq'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   // Title corto + template-suffix "| FIM Insurance Broker" applicato dal root layout
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
     'Domande frequenti sulle polizze: casa, auto, vita, RC professionale, PMI, condomini, sinistri. Risposte chiare e concrete dal broker indipendente FIM.',
   alternates: { canonical: '/faq' },
   openGraph: {
+    ...OG_BASE,
+    url: '/faq',
     title: 'Domande frequenti — FIM Insurance Broker',
     description:
       'Tutte le risposte sulle polizze assicurative italiane: famiglie, PMI, professionisti, condomini, sinistri.',

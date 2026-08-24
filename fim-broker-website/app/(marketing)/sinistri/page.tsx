@@ -6,12 +6,15 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import SinistriAIAssistant from '@/components/forms/SinistriAIAssistant'
 import { sinistriFaq } from '@/lib/faq/sinistri'
 import { EMAIL_SINISTRI } from '@/lib/contatti'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
   description: 'FIM Insurance Broker ti affianca in ogni fase del sinistro: dalla denuncia alla liquidazione. Scopri come gestiamo i sinistri per te in modo rapido ed efficace.',
   alternates: { canonical: '/sinistri' },
   openGraph: {
+    ...OG_BASE,
+    url: '/sinistri',
     title: 'Gestione Sinistri — FIM Insurance Broker',
     description: 'Non sei solo davanti al sinistro. FIM ti affianca dalla denuncia alla liquidazione.',
     images: [{ url: '/api/og?title=Gestione+Sinistri&tag=FIM+Insurance+Broker&sub=Ti+affianchiamo+dalla+denuncia+alla+liquidazione.', width: 1200, height: 630 }],

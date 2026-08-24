@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import PolicyAnalyzer from '@/components/forms/PolicyAnalyzer'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Analizza la tua Polizza Gratis | FIM Insurance Broker',
@@ -7,6 +8,8 @@ export const metadata: Metadata = {
     'Carica il PDF della tua polizza e scopri in 30 secondi cosa ti manca, dove paghi troppo e come migliorare la tua copertura. Gratis, senza impegno.',
   alternates: { canonical: '/analizza-polizza' },
   openGraph: {
+    ...OG_BASE,
+    url: '/analizza-polizza',
     title: 'Analizza la tua Polizza Gratis — Report AI in 30 secondi',
     description:
       'Scopri le lacune della tua polizza, dove paghi troppo e come risparmiare. Analisi gratuita con intelligenza artificiale.',

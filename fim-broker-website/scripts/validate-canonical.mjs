@@ -53,7 +53,7 @@ const routeOf = (file) =>
     .replace(/\/page\.tsx$/, '')
     .replace(/\/\([a-z-]+\)/g, '') || '/'
 
-console.log('\n🔍 Validazione canonical\n')
+console.log('\n🔍 Validazione canonical e Open Graph\n')
 
 // 1. Il root layout non deve dichiarare un canonical: verrebbe ereditato.
 const layout = readFileSync(resolve(appDir, 'layout.tsx'), 'utf-8')
@@ -66,6 +66,7 @@ if (/alternates:\s*\{[^}]*canonical/s.test(layout)) {
 // 2 e 3. Ogni pagina indicizzabile dichiara il canonical della sua rotta.
 let checked = 0
 let pagesOk = true
+let ogOk = true
 for (const file of walk(appDir).sort()) {
   const src = readFileSync(file, 'utf-8')
   const route = routeOf(file)
@@ -90,8 +91,23 @@ for (const file of walk(appDir).sort()) {
     fail(`${rel} — canonical "${declared}" non corrisponde alla rotta "${route}"`)
     pagesOk = false
   }
+
+  // In Next un `openGraph` di pagina SOSTITUISCE quello del root layout: chi
+  // lo dichiara per cambiare l'immagine perde type/locale/site_name/url se non
+  // rimette OG_BASE. Le pagine che non lo dichiarano affatto ereditano tutto.
+  if (/openGraph:\s*\{/.test(src)) {
+    if (!/\.\.\.OG_BASE/.test(src)) {
+      fail(`${rel} — dichiara openGraph senza \`...OG_BASE\`: perde og:type, og:locale e og:site_name`)
+      ogOk = false
+    }
+    if (!/openGraph:[\s\S]{0,400}?url:/.test(src)) {
+      fail(`${rel} — dichiara openGraph senza \`url\`: og:url sparisce`)
+      ogOk = false
+    }
+  }
 }
 if (pagesOk) console.log(`  ✅ ${checked} pagine indicizzabili: canonical presente e coerente con la rotta`)
+if (ogOk) console.log('  ✅ Open Graph: ogni pagina che dichiara openGraph rimette OG_BASE e url')
 
 console.log(`\n${'─'.repeat(50)}`)
 if (errors === 0) {

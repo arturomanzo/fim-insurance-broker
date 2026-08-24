@@ -12,6 +12,7 @@ const API_GET_ALLOWED = new Set([
   '/api/cron/allegati-watcher',
   '/api/og',
   '/api/og/linkedin',
+  '/api/health',
 ])
 
 /**

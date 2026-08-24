@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
 import { manifatturieroFaq } from '@/lib/faq/manifatturiero'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 const SETTORE_QS = '?profilo=pmi&settore=Manifatturiero'
 
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
     'Polizze per industria manifatturiera e PMI produttive: All Risk Property su capannone e macchinari, Business Interruption, RC Prodotto (anche export USA/UK), Cyber OT/IT e trasporti merci. Preventivo in 24 ore.',
   alternates: { canonical: '/soluzioni/settori/manifatturiero' },
   openGraph: {
+    ...OG_BASE,
+    url: '/soluzioni/settori/manifatturiero',
     images: [{ url: '/api/og?title=Manifatturiero&tag=Soluzioni+per+settore&sub=Property%2C+Business+Interruption%2C+Cyber%2C+Prodotto.', width: 1200, height: 630 }],
   },
   twitter: {

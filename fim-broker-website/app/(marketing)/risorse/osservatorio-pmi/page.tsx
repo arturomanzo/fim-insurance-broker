@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import FaqSection from '@/components/ui/FaqSection'
 import { osservatorioPmiFaq } from '@/lib/faq/osservatorio-pmi'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Osservatorio PMI Assicurazioni 2025 | Costi e Benchmark per Settore',
@@ -17,6 +18,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/risorse/osservatorio-pmi' },
   openGraph: {
+    ...OG_BASE,
+    url: '/risorse/osservatorio-pmi',
     title: 'Osservatorio PMI Assicurazioni 2025',
     description: 'Benchmark esclusivi sui costi assicurativi per le PMI italiane: dati per settore, dimensione aziendale e tipologia di copertura.',
     type: 'article',

@@ -10,6 +10,7 @@ import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import { IconTrasparenza, IconDesign, IconVisione } from '@/components/icons/PilastriIcons'
 import Button from '@/components/ui/Button'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   // Title: 58 caratteri — entro la soglia ~60 oltre cui Google tronca in SERP.
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
     'Broker assicurativo indipendente a Roma e nel Lazio: confrontiamo 20 compagnie per trovare la polizza migliore per te. Analisi gratuita, senza impegno.',
   alternates: { canonical: '/' },
   openGraph: {
+    ...OG_BASE,
+    url: '/',
     title: 'FIM Insurance Broker — Chiarezza in Azione',
     description: 'Architetti della tua sicurezza. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.',
     images: [

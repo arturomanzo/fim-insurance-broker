@@ -1,17 +1,20 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Guida Completa alle Assicurazioni per PMI 2025 — FIM Insurance Broker',
+  title: 'Guida Completa alle Assicurazioni per PMI — FIM Insurance Broker',
   description:
     'Guida pratica per artigiani, PMI e professionisti italiani: polizze obbligatorie, massimali, prezzi indicativi, gestione sinistri e checklist dei rischi.',
   alternates: { canonical: '/risorse/guida-pmi' },
   openGraph: {
+    ...OG_BASE,
+    url: '/risorse/guida-pmi',
     type: 'article',
-    images: [{ url: '/api/og?title=Guida+PMI+2025&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+prezzi+e+checklist+dei+rischi+per+artigiani+e+PMI.', width: 1200, height: 630 }],
+    images: [{ url: '/api/og?title=Guida+PMI&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+prezzi+e+checklist+dei+rischi+per+artigiani+e+PMI.', width: 1200, height: 630 }],
   },
   twitter: {
-    images: ['/api/og?title=Guida+PMI+2025&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+prezzi+e+checklist+dei+rischi+per+artigiani+e+PMI.'],
+    images: ['/api/og?title=Guida+PMI&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+prezzi+e+checklist+dei+rischi+per+artigiani+e+PMI.'],
   },
 }
 
@@ -62,21 +65,20 @@ export default function GuidaPmiPage() {
           <div className="flex items-center gap-2 text-white/60 text-sm mb-4">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <span className="text-white/80">Guida PMI 2025</span>
+            <span className="text-white/80">Guida PMI</span>
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-accent">
-              📋 Guida gratuita — Aggiornata 2025
+              📋 Guida gratuita
             </div>
             <h1 className="text-4xl md:text-5xl font-black mb-5 leading-tight">
-              Guida Completa alle<br />Assicurazioni per PMI 2025
+              Guida Completa alle<br />Assicurazioni per PMI
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-6">
               Tutto quello che artigiani, commercianti, PMI e professionisti devono sapere
               sulle assicurazioni — spiegato in modo chiaro, senza gergo tecnico.
             </p>
             <div className="flex flex-wrap gap-4 text-white/70 text-sm">
-              <span>✓ Aggiornata al 2025</span>
               <span>✓ Prezzi indicativi inclusi</span>
               <span>✓ Normativa italiana</span>
               <span>✓ Checklist scaricabile</span>
@@ -189,7 +191,7 @@ export default function GuidaPmiPage() {
                     <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                       <h3 className={`font-bold text-lg m-0 ${item.urgent ? 'text-red-800' : 'text-primary'}`}>{item.name}</h3>
                       {item.urgent && (
-                        <span className="text-xs font-bold bg-red-500 text-white px-2.5 py-1 rounded-full">NOVITÀ 2025</span>
+                        <span className="text-xs font-bold bg-red-500 text-white px-2.5 py-1 rounded-full">OBBLIGO DAL 2025</span>
                       )}
                     </div>
                     <p className="text-xs text-gray-500 mb-2">Riferimento normativo: <code className="bg-gray-100 px-1.5 py-0.5 rounded">{item.law}</code></p>

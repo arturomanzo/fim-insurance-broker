@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import { OG_BASE } from '@/lib/seo'
 
 const RiskCalculator = dynamic(() => import('@/components/calculator/RiskCalculator'), {
   loading: () => (
@@ -50,6 +51,8 @@ export const metadata: Metadata = {
   description: 'Scopri in 2 minuti il tuo profilo di rischio assicurativo. Analisi gratuita personalizzata per privati, professionisti, PMI e imprese. Coperture raccomandate e preventivo immediato.',
   alternates: { canonical: '/calcolatore-rischi' },
   openGraph: {
+    ...OG_BASE,
+    url: '/calcolatore-rischi',
     title: 'Calcolatore Rischio Assicurativo Gratuito — FIM Insurance Broker',
     description: 'Analisi del rischio personalizzata in 2 minuti. Scopri quali coperture ti servono davvero.',
   },

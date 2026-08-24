@@ -61,7 +61,7 @@ export default function LeadMagnet() {
             </div>
             <h2 className="text-3xl md:text-4xl font-black mb-5 leading-tight">
               Guida Completa alle<br />
-              Assicurazioni per PMI 2025
+              Assicurazioni per PMI
             </h2>
             <p className="text-white/80 text-lg leading-relaxed mb-8">
               Tutto quello che un imprenditore, artigiano o professionista deve sapere sulle assicurazioni —

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Glossario Assicurativo — Tutti i Termini Spiegati in Modo Semplice',
@@ -8,6 +9,8 @@ export const metadata: Metadata = {
     'Scopri il significato di franchigia, massimale, rivalsa, coassicurazione e altri termini assicurativi. Glossario gratuito curato dai broker FIM.',
   alternates: { canonical: '/glossario' },
   openGraph: {
+    ...OG_BASE,
+    url: '/glossario',
     title: 'Glossario Assicurativo — FIM Insurance Broker',
     description: 'Tutti i termini assicurativi spiegati in modo chiaro. Franchigia, massimale, rivalsa e molto altro.',
     images: [{ url: '/api/og?title=Glossario+Assicurativo&tag=FIM+Insurance+Broker&sub=Tutti+i+termini+spiegati+in+modo+semplice', width: 1200, height: 630 }],

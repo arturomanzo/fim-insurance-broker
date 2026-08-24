@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
 import { medicoFaq } from '@/lib/faq/medico'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 const SETTORE_QS = '?profilo=professionista&settore=RC+Professionale+Medico'
 
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
     'Polizze per medici, odontoiatri, strutture sanitarie e professionisti del settore salute. RC professionale Legge Gelli-Bianco, Colpa Grave SSN, tutela legale e cyber sanitario GDPR. Preventivo in 24 ore.',
   alternates: { canonical: '/soluzioni/settori/medico' },
   openGraph: {
+    ...OG_BASE,
+    url: '/soluzioni/settori/medico',
     images: [{ url: '/api/og?title=Settore+Medico&tag=Soluzioni+per+settore&sub=RC+Sanitaria%2C+Colpa+Grave%2C+Cyber+Studio.', width: 1200, height: 630 }],
   },
   twitter: {

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import PreventivoForm from '@/components/forms/PreventivoForm'
 import Card from '@/components/ui/Card'
 import { EMAIL_RCA } from '@/lib/contatti'
+import { OG_BASE } from '@/lib/seo'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
   description: 'Richiedi il tuo preventivo assicurativo gratuito e personalizzato. Risponderemo entro 24 ore con la soluzione migliore per te.',
   alternates: { canonical: '/preventivo' },
   openGraph: {
+    ...OG_BASE,
+    url: '/preventivo',
     images: [{ url: '/api/og?title=Preventivo+Gratuito&tag=FIM+Insurance+Broker&sub=Preventivo+personalizzato+in+24+ore.+Senza+impegno.', width: 1200, height: 630 }],
   },
   twitter: {

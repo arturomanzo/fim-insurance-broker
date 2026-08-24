@@ -2,16 +2,25 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { reportData } from '@/lib/osservatorio-data'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
+
+// L'anno nel titolo viene dal dato, non da una stringa scritta a mano: il
+// report è fermo al Q1 2025 e un titolo che dicesse "2026" spaccerebbe dati
+// vecchi di 17 mesi per correnti. Quando il cron trimestrale aggiorna
+// `osservatorio-data.ts`, titolo e og seguono da soli.
+const YEAR = reportData.quarter.split(' ').pop()
 
 export const metadata: Metadata = {
-  title: 'Osservatorio Prezzi Assicurativi 2025 — Trend e Analisi del Mercato Italiano',
+  title: `Osservatorio Prezzi Assicurativi ${YEAR} — Trend e Analisi del Mercato Italiano`,
   description:
     'Dati aggiornati sui prezzi delle polizze assicurative in Italia: RC Auto, casa, vita, salute e aziendali. Report trimestrale con trend, variazioni e previsioni. Curato dai broker FIM.',
   alternates: { canonical: '/osservatorio-prezzi' },
   openGraph: {
-    title: 'Osservatorio Prezzi Assicurativi 2025 — FIM Insurance Broker',
+    ...OG_BASE,
+    url: '/osservatorio-prezzi',
+    title: `Osservatorio Prezzi Assicurativi ${YEAR} — FIM Insurance Broker`,
     description: 'Trend aggiornati sui premi assicurativi italiani. RC Auto, casa, vita, salute, aziendali.',
-    images: [{ url: '/api/og?title=Osservatorio+Prezzi+2025&tag=FIM+Insurance+Broker&sub=Trend+e+analisi+del+mercato+assicurativo+italiano', width: 1200, height: 630 }],
+    images: [{ url: `/api/og?title=Osservatorio+Prezzi+${YEAR}&tag=FIM+Insurance+Broker&sub=Trend+e+analisi+del+mercato+assicurativo+italiano`, width: 1200, height: 630 }],
   },
 }
 

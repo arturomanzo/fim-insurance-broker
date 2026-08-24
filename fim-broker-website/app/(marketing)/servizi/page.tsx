@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { services } from '@/lib/services'
 import Card from '@/components/ui/Card'
+import { OG_BASE } from '@/lib/seo'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -45,6 +46,8 @@ export const metadata: Metadata = {
   description: 'Scopri tutti i servizi assicurativi FIM: auto, vita, casa, salute, polizze aziendali e viaggio. Soluzioni personalizzate per privati e imprese.',
   alternates: { canonical: '/servizi' },
   openGraph: {
+    ...OG_BASE,
+    url: '/servizi',
     images: [{ url: '/api/og?title=Servizi+Assicurativi&tag=FIM+Insurance+Broker&sub=Auto%2C+vita%2C+casa%2C+salute%2C+polizze+aziendali+e+viaggio.+Soluzioni+personalizzate.', width: 1200, height: 630 }],
   },
   twitter: {
