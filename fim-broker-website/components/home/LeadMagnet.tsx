@@ -78,7 +78,7 @@ export default function LeadMagnet() {
                 'La checklist dei rischi per PMI italiane',
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
-                  <span className="w-5 h-5 bg-accent rounded-full flex items-center justify-center text-white text-xs font-black flex-shrink-0">
+                  <span className="w-5 h-5 bg-accent-cta rounded-full flex items-center justify-center text-white text-xs font-black flex-shrink-0">
                     ✓
                   </span>
                   <span className="text-white/90 text-sm">{item}</span>

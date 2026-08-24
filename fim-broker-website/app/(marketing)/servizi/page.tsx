@@ -81,7 +81,7 @@ export default function ServiziPage() {
             <div className="hidden lg:flex justify-end">
               <div className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/visual/broker-scioglie-complessita.png"
+                  src="/images/visual/broker-scioglie-complessita.jpg"
                   alt="Broker assicurativo che semplifica la complessità delle polizze per i clienti"
                   fill
                   className="object-cover"

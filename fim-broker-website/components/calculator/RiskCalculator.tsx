@@ -312,7 +312,7 @@ export default function RiskCalculator() {
               return (
                 <div key={label} className="flex items-center gap-1 flex-1">
                   <div className={`flex items-center gap-1.5 ${i < 3 ? 'flex-1' : ''}`}>
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all ${done ? 'bg-accent text-white' : active ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500'}`}>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all ${done ? 'bg-accent-cta text-white' : active ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500'}`}>
                       {done ? (
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />

@@ -184,7 +184,7 @@ export default function MedicoPage() {
                 </div>
                 <h3 className="font-bold text-primary mb-2">
                   {cov.title}
-                  {cov.highlighted && <span className="ml-2 text-xs bg-accent text-white px-2 py-0.5 rounded-full align-middle">Obbligatoria</span>}
+                  {cov.highlighted && <span className="ml-2 text-xs bg-accent-cta text-white px-2 py-0.5 rounded-full align-middle">Obbligatoria</span>}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed flex-1">{cov.desc}</p>
               </Card>

@@ -11,7 +11,7 @@ const base =
 
 const variants = {
   primary:
-    'bg-accent text-white hover:bg-accent-dark focus:ring-accent shadow-sm hover:shadow-md',
+    'bg-accent-cta text-white hover:bg-accent-cta-hover focus:ring-accent shadow-sm hover:shadow-md',
   secondary:
     'bg-primary text-white hover:bg-primary-light focus:ring-primary shadow-sm hover:shadow-md',
   outline:

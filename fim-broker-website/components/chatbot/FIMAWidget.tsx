@@ -317,7 +317,7 @@ export default function FIMAWidget() {
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao, vorrei parlare con un consulente FIM Insurance Broker.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-semibold text-white transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-semibold text-primary transition-colors"
                 style={{ backgroundColor: '#25D366' }}
               >
                 <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -346,7 +346,7 @@ export default function FIMAWidget() {
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao, vorrei continuare la conversazione con un consulente FIM Insurance Broker.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-semibold text-white transition-colors"
+                  className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-semibold text-primary transition-colors"
                   style={{ backgroundColor: '#25D366' }}
                 >
                   <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">

@@ -55,7 +55,7 @@ export default function LaSciaRecensionePage() {
           <div className="space-y-3">
             {steps.map((step) => (
               <div key={step.n} className="flex items-start gap-3">
-                <div className="w-7 h-7 bg-accent text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">
+                <div className="w-7 h-7 bg-accent-cta text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">
                   {step.n}
                 </div>
                 <p className="text-gray-700 text-sm pt-0.5">{step.text}</p>

@@ -20,10 +20,19 @@ const config: Config = {
           900: '#060f1d',
         },
         accent: {
+          // Verde del marchio FIM. Resta questo ovunque faccia da colore:
+          // bordi, icone, sfondi decorativi, testo grande. È lo stesso della
+          // brochure in tipografia e non va cambiato per ragioni tecniche.
           DEFAULT: '#2FA36B',
           dark: '#258755',
           light: '#4aba83',
           gradient: '#38c77e',
+          // Varianti per le SUPERFICI CLICCABILI con testo bianco piccolo.
+          // Bianco su #2FA36B dà 3,20 e non passa il WCAG AA, che chiede 4,5
+          // sotto i 18,66px in grassetto (audit 13/08/2026). Queste due sì:
+          // 5,30 a riposo e 7,95 sull'hover. Stessa tinta, solo più scure.
+          cta: '#237A4E',
+          'cta-hover': '#1B5C3B',
         },
         gold: {
           DEFAULT: '#C8A96A',

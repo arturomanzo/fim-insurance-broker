@@ -90,7 +90,7 @@ export default function PrenotaConsulenzaPage() {
               {/* Consulting image */}
               <div className="relative rounded-2xl overflow-hidden aspect-video">
                 <Image
-                  src="/images/visual/bussola-orientamento.png"
+                  src="/images/visual/bussola-orientamento.jpg"
                   alt="Consulente FIM come guida e orientamento nel mercato assicurativo"
                   fill
                   className="object-cover"

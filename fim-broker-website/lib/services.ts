@@ -401,7 +401,7 @@ export const services: Service[] = [
       'Parti senza preoccupazioni con le polizze viaggio FIM. Dalla gita in Europa al viaggio intercontinentale, copriamo spese mediche, annullamento, ritardi e perdita bagagli.',
     icon: '✈️',
     color: 'orange',
-    image: '/images/brand/viaggio-bussola.png',
+    image: '/images/brand/viaggio-bussola.jpg',
     features: [
       'Spese mediche allestero',
       'Rimpatrio durgenza',

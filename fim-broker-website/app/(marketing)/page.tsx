@@ -277,7 +277,7 @@ export default function HomePage() {
                     <div className="w-20 h-20 rounded-2xl gradient-primary flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
                       <span className="text-3xl" aria-hidden="true">{item.icon}</span>
                     </div>
-                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-accent text-white text-xs font-black flex items-center justify-center shadow">
+                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-accent-cta text-white text-xs font-black flex items-center justify-center shadow">
                       {item.step}
                     </span>
                   </div>
