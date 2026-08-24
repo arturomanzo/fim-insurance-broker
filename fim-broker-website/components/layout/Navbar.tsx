@@ -185,7 +185,7 @@ export default function Navbar() {
                 >
                   {link.label}
                   {'badge' in link && link.badge && (
-                    <span className="bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                    <span className="bg-accent-cta text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
                       {link.badge}
                     </span>
                   )}
@@ -291,7 +291,7 @@ export default function Navbar() {
                   )}
                 >
                   {'badge' in link && link.badge && (
-                    <span className="bg-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                    <span className="bg-accent-cta text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
                       {link.badge}
                     </span>
                   )}

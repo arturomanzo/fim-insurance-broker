@@ -164,7 +164,7 @@ export default function ArtigianiPmiPage() {
           <div className="hidden lg:flex justify-end">
             <div className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/visual/solidita-strutturale.png"
+                src="/images/visual/solidita-strutturale.jpg"
                 alt="Solidità strutturale delle coperture assicurative per PMI e artigiani"
                 fill
                 className="object-cover"

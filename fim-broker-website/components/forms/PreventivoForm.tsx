@@ -226,7 +226,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
       <div className="flex items-center gap-2 mb-8">
         {([1, 2, 3] as const).map((s, i) => (
           <div key={s} className="flex items-center gap-2 flex-1">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all ${step === s ? 'bg-primary text-white' : step > s ? 'bg-accent text-white' : 'bg-gray-200 text-gray-500'}`}>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all ${step === s ? 'bg-primary text-white' : step > s ? 'bg-accent-cta text-white' : 'bg-gray-200 text-gray-500'}`}>
               {step > s ? (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />

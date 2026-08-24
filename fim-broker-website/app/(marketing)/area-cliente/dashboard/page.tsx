@@ -245,7 +245,7 @@ export default async function DashboardPage() {
             <a href="tel:+390696883381" className="bg-white text-primary font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-white/90 transition-colors">
               📞 Chiama
             </a>
-            <Link href="/prenota-consulenza" className="bg-accent text-white font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-accent/90 transition-colors">
+            <Link href="/prenota-consulenza" className="bg-accent-cta text-white font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-accent/90 transition-colors">
               Prenota
             </Link>
           </div>
