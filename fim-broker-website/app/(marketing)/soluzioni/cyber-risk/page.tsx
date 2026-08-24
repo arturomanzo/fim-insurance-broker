@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Assicurazione Cyber Risk — Protezione PMI e Professionisti da Attacchi Informatici',
   description:
     'Polizza cyber risk per PMI, professionisti e studi: ransomware, data breach GDPR, fermo operativo. Copertura DUAL Cyber Smart Plus con retroattività illimitata. Preventivo gratuito FIM.',
+  alternates: { canonical: '/soluzioni/cyber-risk' },
   openGraph: {
     images: [{ url: '/api/og?title=Cyber+Risk&tag=Soluzioni&sub=Ransomware%2C+data+breach%2C+NIS2%3A+protezione+completa+per+PMI+e+professionisti.', width: 1200, height: 630 }],
   },

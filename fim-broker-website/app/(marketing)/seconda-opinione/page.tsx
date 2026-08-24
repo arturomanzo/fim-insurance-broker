@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Second Opinion Assicurativa Gratuita per PMI | FIM Insurance Broker',
   description:
     'Inviaci le tue polizze attuali. Faremo una Gap Analysis gratuita per mostrarti i rischi scoperti che la tua compagnia non ti ha mai detto. Risposta in 48 ore.',
+  alternates: { canonical: '/seconda-opinione' },
   openGraph: {
     title: 'Second Opinion Assicurativa — Gap Analysis Gratuita per PMI',
     description:

@@ -41,6 +41,9 @@ jobs:
       - name: Type check
         run: npx tsc --noEmit
 
+      - name: Canonical
+        run: npm run validate-canonical
+
       - name: Build
         run: npm run build
         env:

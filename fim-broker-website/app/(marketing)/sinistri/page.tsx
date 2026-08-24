@@ -10,6 +10,7 @@ import { EMAIL_SINISTRI } from '@/lib/contatti'
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
   description: 'FIM Insurance Broker ti affianca in ogni fase del sinistro: dalla denuncia alla liquidazione. Scopri come gestiamo i sinistri per te in modo rapido ed efficace.',
+  alternates: { canonical: '/sinistri' },
   openGraph: {
     title: 'Gestione Sinistri — FIM Insurance Broker',
     description: 'Non sei solo davanti al sinistro. FIM ti affianca dalla denuncia alla liquidazione.',

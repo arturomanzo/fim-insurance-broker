@@ -6,6 +6,7 @@ import CollaboraForm from '@/components/forms/CollaboraForm'
 export const metadata: Metadata = {
   title: 'Collabora con Noi',
   description: 'Entra a far parte del team FIM Insurance Broker. Cerchiamo subagenti, broker, segnalatori e giovani talenti da inserire in un contesto professionale e dinamico.',
+  alternates: { canonical: '/collabora-con-noi' },
   openGraph: {
     images: [{ url: '/api/og?title=Collabora+con+Noi&tag=FIM+Insurance+Broker&sub=Unisciti+al+nostro+team+di+professionisti+indipendenti.', width: 1200, height: 630 }],
   },

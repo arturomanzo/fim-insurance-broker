@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [{ url: `/api/og?title=Broker+Assicurativo+a+${CITY}&tag=FIM+Insurance+Broker&sub=Confrontiamo+30%2B+compagnie.+Preventivo+gratuito.`, width: 1200, height: 630 }],
   },
-  alternates: { canonical: `https://www.fimbroker.it/${SLUG}` },
+  alternates: { canonical: `/${SLUG}` },
 }
 
 const servizi = [

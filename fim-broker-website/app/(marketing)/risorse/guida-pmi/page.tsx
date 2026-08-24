@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Guida Completa alle Assicurazioni per PMI 2025 — FIM Insurance Broker',
   description:
     'Guida pratica per artigiani, PMI e professionisti italiani: polizze obbligatorie, massimali, prezzi indicativi, gestione sinistri e checklist dei rischi.',
+  alternates: { canonical: '/risorse/guida-pmi' },
   openGraph: {
     type: 'article',
     images: [{ url: '/api/og?title=Guida+PMI+2025&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+prezzi+e+checklist+dei+rischi+per+artigiani+e+PMI.', width: 1200, height: 630 }],

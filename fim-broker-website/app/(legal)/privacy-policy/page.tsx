@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'Informativa sul trattamento dei dati personali di FIM Insurance Broker S.a.s. di Manzo Arturo & C. ai sensi del GDPR.',
+  alternates: { canonical: '/privacy-policy' },
 }
 
 export default function PrivacyPolicyPage() {
