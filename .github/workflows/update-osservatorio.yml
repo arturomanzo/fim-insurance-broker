@@ -1,9 +1,27 @@
 name: Aggiorna Osservatorio Prezzi (AI)
 
 on:
-  # Ogni inizio trimestre alle 8:00 (1 gennaio, 1 aprile, 1 luglio, 1 ottobre)
-  schedule:
-    - cron: '0 8 1 1,4,7,10 *'
+  # SCHEDULE DISINNESCATO IL 24/08/2026 — non rimetterlo senza leggere qui.
+  #
+  # Questo job non aggiorna niente: `scripts/update-osservatorio.ts` non
+  # recupera dati da nessuna fonte, i sei premi medi sono costanti scritte nel
+  # sorgente e sono identici a quelli gia' pubblicati. Facendolo girare
+  # cambierebbe solo l'etichetta del trimestre e farebbe riscrivere all'IA i
+  # commenti attorno agli stessi identici numeri: una PR che sembra un
+  # aggiornamento e non lo e'.
+  #
+  # Era programmato per il 1 gennaio/aprile/luglio/ottobre alle 8:00 e non e'
+  # mai partito (il file stava fuori dalla .github/workflows della root fino al
+  # 10/08/2026), quindi il primo scatto vero sarebbe stato il 1 ottobre 2026.
+  #
+  # Per riattivarlo servono numeri veri — dai preventivi del gestionale o da
+  # una fonte pubblica — e va aggiornata anche la `methodology` in
+  # `lib/osservatorio-data.ts`, che e' quella che dichiara al cliente da dove
+  # vengono i dati.
+  #
+  # schedule:
+  #   - cron: '0 8 1 1,4,7,10 *'
+
   # Esecuzione manuale dal tab Actions
   workflow_dispatch:
     inputs:
@@ -52,15 +70,17 @@ jobs:
           body: |
             ## Aggiornamento automatico Osservatorio Prezzi
 
-            Questo PR è generato automaticamente ogni trimestre dall'azione GitHub.
+            Generato dall'azione GitHub `update-osservatorio.yml`, eseguita a mano.
 
-            Il report è stato aggiornato con:
-            - Nuovi premi medi per categoria
-            - Variazioni rispetto al trimestre precedente
-            - Analisi AI dei trend di mercato
-            - Dati regionali RC Auto aggiornati
+            ⚠️ **Da controllare prima di mergiare.** Lo script non recupera dati da
+            nessuna fonte: i premi medi sono costanti scritte in
+            `scripts/update-osservatorio.ts`. Se non sono stati sostituiti con
+            numeri veri, questo PR cambia solo l'etichetta del trimestre e i
+            commenti generati dall'IA, lasciando i premi identici a prima.
 
-            **Fonte dati:** IVASS, ANIA, dati FIM proprietari
+            Cambiando i dati va aggiornata anche la `methodology` in
+            `lib/osservatorio-data.ts`: è quella che dichiara al cliente da dove
+            vengono i numeri.
           branch: osservatorio/aggiornamento-trimestrale
           delete-branch: true
           labels: |

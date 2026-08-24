@@ -1,5 +1,12 @@
-// Dati dell'Osservatorio Prezzi — aggiornati trimestralmente via GitHub Actions
-// Script: fim-broker-website/scripts/update-osservatorio.ts
+// Dati dell'Osservatorio Prezzi.
+//
+// ATTENZIONE, prima di toccare questi numeri: NON sono statistiche misurate.
+// Sono valori di orientamento compilati da FIM su profili standard. Lo script
+// `scripts/update-osservatorio.ts` non li ricava da nessuna fonte — li ha
+// scritti dentro di sé — e il testo della pagina lo dice apertamente al
+// lettore dal 24/08/2026. Se un giorno arriveranno numeri veri (dai preventivi
+// del gestionale, o da una fonte pubblica), va aggiornata *anche* la
+// `methodology` qui sotto: è lei che dichiara al cliente da dove vengono.
 
 export const reportData = {
   lastUpdated: '2025-04-01',
@@ -84,5 +91,5 @@ export const reportData = {
     { region: 'Toscana', rcAuto: 445, trend: 'down' as const, note: 'Beneficia della riduzione sinistri nelle città medie' },
   ],
   methodology:
-    'I dati sono elaborati da FIM Insurance Broker su base trimestrale analizzando i preventivi erogati, le tariffe delle principali compagnie partner e i dati pubblici IVASS e ANIA. I premi medi sono indicativi e si riferiscono a profili standard. Il premio effettivo dipende da caratteristiche individuali del cliente.',
+    'Questi non sono dati statistici. Sono valori di orientamento compilati da FIM Insurance Broker su profili standard, insieme ai commenti che li accompagnano: servono a dare un ordine di grandezza a chi non sa da dove partire, non a fotografare il mercato. Non derivano da elaborazioni di statistiche ufficiali IVASS o ANIA. Le percentuali indicano una direzione attesa, non una variazione misurata. Si riferiscono al periodo indicato in cima alla pagina e non vengono aggiornati da allora. Il premio che pagherai dipende dalle tue caratteristiche e lo puoi sapere solo con un preventivo: quello è gratuito e non impegna a niente.',
 }

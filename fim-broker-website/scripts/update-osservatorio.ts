@@ -74,8 +74,21 @@ async function main() {
 
   console.log(`📅 Trimestre: ${quarter}`)
 
-  // Simula variazioni di mercato (in produzione: recupera da API IVASS/ANIA o feed dati)
-  // I valori reali andrebbero integrati con un feed dati esterno
+  // ⚠️ QUESTI NUMERI SONO INVENTATI, non recuperati da nessuna fonte.
+  //
+  // Erano nati come segnaposto e sono finiti in produzione: sono gli stessi
+  // sei valori pubblicati su /osservatorio-prezzi. Finche' restano qui, far
+  // girare questo script NON aggiorna i premi — cambia solo l'etichetta del
+  // trimestre e i commenti che l'IA scrive attorno a essi.
+  //
+  // Per questo lo `schedule` del workflow e' disinnescato (24/08/2026) e la
+  // pagina dichiara apertamente al lettore che sono valori di orientamento
+  // FIM e non statistiche.
+  //
+  // Quando arrivano numeri veri — dai preventivi del gestionale, o da una
+  // fonte pubblica — vanno cambiati qui E nella `methodology` di
+  // `lib/osservatorio-data.ts`, che e' quella che dichiara la provenienza al
+  // cliente. Poi si puo' riattivare lo schedule.
   const updates = [
     { name: 'RC Auto', avgPremium: 487, change: -2.1, trend: 'down' as const },
     { name: 'Polizza Casa', avgPremium: 218, change: 3.8, trend: 'up' as const },

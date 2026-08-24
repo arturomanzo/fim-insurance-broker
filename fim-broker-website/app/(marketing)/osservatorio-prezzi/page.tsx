@@ -13,13 +13,13 @@ const YEAR = reportData.quarter.split(' ').pop()
 export const metadata: Metadata = {
   title: `Osservatorio Prezzi Assicurativi ${YEAR} — Trend e Analisi del Mercato Italiano`,
   description:
-    'Dati aggiornati sui prezzi delle polizze assicurative in Italia: RC Auto, casa, vita, salute e aziendali. Report trimestrale con trend, variazioni e previsioni. Curato dai broker FIM.',
+    'Ordini di grandezza dei premi assicurativi in Italia — RC Auto, casa, vita, salute e aziendali — per capire da dove partire. Valori di orientamento compilati dai broker FIM, non statistiche ufficiali.',
   alternates: { canonical: '/osservatorio-prezzi' },
   openGraph: {
     ...OG_BASE,
     url: '/osservatorio-prezzi',
     title: `Osservatorio Prezzi Assicurativi ${YEAR} — FIM Insurance Broker`,
-    description: 'Trend aggiornati sui premi assicurativi italiani. RC Auto, casa, vita, salute, aziendali.',
+    description: 'Ordini di grandezza dei premi assicurativi italiani: RC Auto, casa, vita, salute, aziendali. Valori di orientamento FIM.',
     images: [{ url: `/api/og?title=Osservatorio+Prezzi+${YEAR}&tag=FIM+Insurance+Broker&sub=Trend+e+analisi+del+mercato+assicurativo+italiano`, width: 1200, height: 630 }],
   },
 }
@@ -76,8 +76,7 @@ export default function OsservatorioPrezziPage() {
               🗓️ Aggiornato al{' '}
               {new Date(lastUpdated).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
             </span>
-            <span>🔄 Aggiornamento trimestrale</span>
-            <span>📋 Fonte: IVASS, ANIA, dati FIM</span>
+            <span>📋 Valori di orientamento FIM — non statistiche ufficiali</span>
           </div>
         </div>
       </section>
@@ -87,7 +86,7 @@ export default function OsservatorioPrezziPage() {
         <div className="container-custom">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">Premi medi per categoria</h2>
-            <p className="text-gray-500 text-sm">Variazione rispetto al trimestre precedente</p>
+            <p className="text-gray-500 text-sm">Direzione attesa dei premi, non una variazione misurata</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat) => {
@@ -175,16 +174,13 @@ export default function OsservatorioPrezziPage() {
         <div className="container-custom max-w-3xl">
           <div className="bg-white rounded-2xl border border-gray-100 p-6">
             <h3 className="font-bold text-primary mb-2 flex items-center gap-2">
-              <span>📋</span> Metodologia e fonti
+              <span>📋</span> Da dove vengono questi numeri
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed">{methodology}</p>
-            <div className="flex flex-wrap gap-3 mt-4">
-              {['IVASS', 'ANIA', 'Dati FIM proprietari', 'Eurostat'].map((src) => (
-                <span key={src} className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
-                  {src}
-                </span>
-              ))}
-            </div>
+            <p className="text-gray-600 text-sm leading-relaxed mt-3">
+              Per un numero che vale per te e non per un profilo medio, il preventivo è
+              gratuito: <Link href="/preventivo" className="text-accent font-semibold underline">richiedilo qui</Link>.
+            </p>
           </div>
         </div>
       </section>
