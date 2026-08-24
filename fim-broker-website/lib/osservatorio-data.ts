@@ -12,7 +12,7 @@ export const reportData = {
   lastUpdated: '2025-04-01',
   quarter: 'Q1 2025',
   summary:
-    'Il mercato assicurativo italiano mostra una stabilizzazione dopo i rialzi del 2024. La RC Auto registra la prima flessione in tre anni, mentre le polizze catastrofali crescono per effetto dell\'obbligo di legge per le imprese. Il comparto salute mantiene la crescita sostenuta da una domanda privata in aumento.',
+    'Dopo anni di rialzi il mercato assicurativo italiano dà segni di raffreddamento sulla RC Auto, mentre crescono le coperture spinte da un obbligo di legge — la catastrofale per le imprese — e da una domanda privata in aumento sulla salute.',
   categories: [
     {
       name: 'RC Auto',
@@ -21,7 +21,7 @@ export const reportData = {
       change: -2.1,
       trend: 'down' as const,
       insight:
-        'Prima flessione dal 2022. I sinistri si stabilizzano e alcune compagnie tornano a competere sui prezzi. Chi non ha cambiato polizza da oltre 2 anni ha margini di risparmio del 15-25%.',
+        'Dopo anni di rialzi il mercato dà segni di raffreddamento: i sinistri si stabilizzano e qualche compagnia torna a competere sul prezzo. Chi non rivede la polizza da qualche anno spesso paga condizioni superate, perché il mercato si muove e il contratto no: quanto si recupera si vede solo confrontando la propria posizione.',
       priceRange: { min: 250, max: 950 },
       factors: ['Frequenza sinistri in calo', 'Rientro competitività', 'Tecnologie ADAS riducono incidenti'],
     },
@@ -32,7 +32,7 @@ export const reportData = {
       change: 3.8,
       trend: 'up' as const,
       insight:
-        'L\'aumento riflette la crescente sinistrosità da eventi atmosferici (+40% nel 2024). Le compagnie rialzano i premi sulle estensioni alluvione/grandine, mentre le polizze base rimangono stabili.',
+        'L\'aumento riflette la crescente sinistrosità da eventi atmosferici. Le compagnie rialzano i premi sulle estensioni alluvione e grandine, mentre le polizze base rimangono stabili.',
       priceRange: { min: 100, max: 450 },
       factors: ['Aumento eventi atmosferici', 'Inflazione costi riparazione', 'Domanda assicurazione catastrofale'],
     },
@@ -54,10 +54,10 @@ export const reportData = {
       change: 1.1,
       trend: 'stable' as const,
       insight:
-        'Sostanzialmente stabile. La domanda di polizze temporanee caso morte cresce tra i millennials con mutuo. Le unit-linked risentono della volatilità finanziaria. La previdenza complementare beneficia degli incentivi fiscali 2025.',
+        'Sostanzialmente stabile. La domanda di polizze temporanee caso morte cresce tra chi ha un mutuo da coprire. Le unit-linked risentono della volatilità finanziaria. La previdenza complementare resta sostenuta dalla deducibilità dei versamenti.',
       priceRange: { min: 15, max: 150 },
       priceUnit: '€/mese',
-      factors: ['Tassi di interesse in discesa', 'Cultura previdenziale in crescita', 'Incentivi fiscali confermati'],
+      factors: ['Tassi di interesse in discesa', 'Cultura previdenziale in crescita', 'Deducibilità dei versamenti'],
     },
     {
       name: 'RC Professionale',
@@ -66,7 +66,7 @@ export const reportData = {
       change: 8.4,
       trend: 'up' as const,
       insight:
-        'Forte rialzo guidato dall\'aumento dei contenziosi professionali. I settori più colpiti: medici (+12%), ingegneri (+9%), consulenti finanziari (+11%). L\'obbligo di legge amplia la platea di chi deve assicurarsi.',
+        'Rialzo guidato dall\'aumento dei contenziosi professionali. I rincari si concentrano sulle professioni sanitarie e tecniche, dove il singolo sinistro può valere molto e i tempi del contenzioso si allungano. L\'obbligo di legge amplia la platea di chi deve assicurarsi.',
       priceRange: { min: 300, max: 3000 },
       factors: ['Aumento contenziosi legali', 'Nuove categorie obbligate', 'Sinistri più complessi e costosi'],
     },
@@ -77,18 +77,24 @@ export const reportData = {
       change: 14.2,
       trend: 'up' as const,
       insight:
-        'Crescita significativa trainata dall\'obbligo catastrofale per le imprese (D.L. 18/2023) e dalla domanda di cyber risk. Le PMI che non erano ancora assicurate entrano ora nel mercato. Previsione: stabilizzazione nel Q3 2025.',
+        'Crescita trainata dall\'obbligo di copertura catastrofale per le imprese e dalla domanda di cyber risk. Le PMI che non erano ancora assicurate entrano ora nel mercato.',
       priceRange: { min: 800, max: 15000 },
       factors: ['Obbligo polizza catastrofale', 'Crescita cyber risk', 'Nuovi assicurati PMI'],
     },
   ],
+  // Fasce, non valori puntuali. Prima erano sei premi all'euro con una freccia
+  // di tendenza accanto: il pezzo della pagina che sembrava piu' un dato di
+  // tutti gli altri, e nessuno lo aveva misurato. Le note dicevano perche' un
+  // premio saliva o scendeva — inclusa una sulle frodi in Sicilia — cioe'
+  // affermazioni su un territorio senza niente dietro. Ora la fascia dice
+  // l'ordine di grandezza e la nota descrive la posizione, non il movimento.
   regionData: [
-    { region: 'Lazio', rcAuto: 534, trend: 'stable' as const, note: 'Roma mantiene i premi più alti del centro Italia' },
-    { region: 'Lombardia', rcAuto: 498, trend: 'down' as const, note: 'Milano in calo per nuove compagnie digitali' },
-    { region: 'Campania', rcAuto: 712, trend: 'up' as const, note: 'Sinistrosità elevata mantiene premi alti' },
-    { region: 'Veneto', rcAuto: 421, trend: 'stable' as const, note: 'Tra le province meno costose del Nord-Est' },
-    { region: 'Sicilia', rcAuto: 688, trend: 'up' as const, note: 'Frodi in aumento incidono sui premi' },
-    { region: 'Toscana', rcAuto: 445, trend: 'down' as const, note: 'Beneficia della riduzione sinistri nelle città medie' },
+    { region: 'Lazio', rcAutoMin: 500, rcAutoMax: 570, note: 'Sopra la media nazionale, trainata da Roma' },
+    { region: 'Lombardia', rcAutoMin: 460, rcAutoMax: 530, note: 'Tra le grandi regioni con la concorrenza più vivace' },
+    { region: 'Campania', rcAutoMin: 660, rcAutoMax: 760, note: 'Tra le regioni con i premi RC Auto più alti d\'Italia' },
+    { region: 'Veneto', rcAutoMin: 390, rcAutoMax: 450, note: 'Tra le meno costose del Nord-Est' },
+    { region: 'Sicilia', rcAutoMin: 640, rcAutoMax: 730, note: 'Tra le regioni con i premi RC Auto più alti d\'Italia' },
+    { region: 'Toscana', rcAutoMin: 410, rcAutoMax: 480, note: 'Tra le meno costose del centro Italia' },
   ],
   methodology:
     'Questi non sono dati statistici. Sono valori di orientamento compilati da FIM Insurance Broker su profili standard, insieme ai commenti che li accompagnano: servono a dare un ordine di grandezza a chi non sa da dove partire, non a fotografare il mercato. Non derivano da elaborazioni di statistiche ufficiali IVASS o ANIA. Le percentuali indicano una direzione attesa, non una variazione misurata. Si riferiscono al periodo indicato in cima alla pagina e non vengono aggiornati da allora. Il premio che pagherai dipende dalle tue caratteristiche e lo puoi sapere solo con un preventivo: quello è gratuito e non impegna a niente.',

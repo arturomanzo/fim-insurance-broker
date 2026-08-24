@@ -64,7 +64,7 @@ const sizeData = [
 ]
 
 const trends2025 = [
-  { icon: '⚠️', title: 'Polizza catastrofale obbligatoria', desc: 'Dal 1° aprile 2025 tutte le imprese devono assicurarsi contro calamità naturali per legge (L. 17/2024). Chi non si adegua rischia esclusione dai fondi pubblici.' },
+  { icon: '⚠️', title: 'Polizza catastrofale obbligatoria', desc: 'Dal 1° aprile 2025 tutte le imprese devono assicurarsi contro calamità naturali per legge. Chi non si adegua rischia esclusione dai fondi pubblici.' },
   { icon: '🔐', title: 'Cyber risk in aumento del +34%', desc: 'Gli attacchi alle PMI italiane sono cresciuti del 34% nel 2024. NIS2 obbliga le aziende in supply chain a rafforzare la sicurezza informatica o perdere contratti.' },
   { icon: '📈', title: 'Premi RC in rialzo del +12% medio', desc: 'L\'inflazione dei materiali e l\'aumento del contenzioso legale hanno spinto i premi RC impresa verso l\'alto. Confrontare offerte di più compagnie è più importante che mai.' },
   { icon: '👥', title: 'Welfare aziendale detraibile', desc: 'I piani di welfare con polizze sanitarie integrative per i dipendenti beneficiano di vantaggi fiscali significativi: deducibilità fino al 5‰ del fatturato per il datore.' },

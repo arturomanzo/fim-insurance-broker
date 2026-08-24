@@ -139,24 +139,23 @@ export default function OsservatorioPrezziPage() {
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">RC Auto per regione</h2>
             <p className="text-gray-500 text-sm">
-              Premio medio annuo per profilo standard (30 anni, berlina, città media)
+              Ordine di grandezza del premio annuo per un profilo standard (30 anni, berlina, città media)
             </p>
           </div>
           <div className="space-y-3">
             {regionData.map((r) => {
-              const maxVal = Math.max(...regionData.map((x) => x.rcAuto))
-              const pct = (r.rcAuto / maxVal) * 100
-              const t = trendIcon[r.trend]
+              // La barra è proporzionale al centro della fascia. Niente freccia
+              // di tendenza per regione: dire se un premio sale o scende è una
+              // misurazione, e qui non ce n'è una.
+              const maxVal = Math.max(...regionData.map((x) => x.rcAutoMax))
+              const pct = ((r.rcAutoMin + r.rcAutoMax) / 2 / maxVal) * 100
               return (
                 <div key={r.region} className="bg-gray-50 rounded-xl p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <span className="font-bold text-primary w-24">{r.region}</span>
-                      <span className={`text-xs font-semibold ${t.color}`}>
-                        {t.icon} {t.label}
-                      </span>
-                    </div>
-                    <span className="font-black text-primary">{r.rcAuto}€/anno</span>
+                  <div className="flex items-center justify-between gap-3 mb-2">
+                    <span className="font-bold text-primary">{r.region}</span>
+                    <span className="font-black text-primary tabular-nums">
+                      {r.rcAutoMin}–{r.rcAutoMax} €/anno
+                    </span>
                   </div>
                   <div className="h-2 bg-gray-200 rounded-full overflow-hidden mb-1">
                     <div className="h-full gradient-primary rounded-full" style={{ width: `${pct}%` }} />

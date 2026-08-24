@@ -59,7 +59,7 @@ const coverages = [
   {
     icon: '🌊',
     title: 'Catastrofi Naturali',
-    desc: 'Obbligatoria per le imprese dal 2025 (L. 17/2024), raccomandata per i condomini. Copre danni da terremoto, alluvione, frana e grandine ai beni comuni. Spesso esclusa dalle polizze standard.',
+    desc: 'Obbligatoria per le imprese dal 2025, raccomandata per i condomini. Copre danni da terremoto, alluvione, frana e grandine ai beni comuni. Spesso esclusa dalle polizze standard.',
     price: 'da 80€/anno',
     tag: 'Obbligo dal 2025',
   },
