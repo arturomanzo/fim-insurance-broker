@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Link from 'next/link'
 import { AUTHORS, buildPersonSchema } from '@/lib/authors'
+import { OG_BASE } from '@/lib/seo'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
   description: 'FIM Insurance Broker: un mestiere di famiglia dal 1993, al servizio di privati e aziende. Broker indipendente iscritto RUI IVASS, partner delle principali compagnie assicurative.',
   alternates: { canonical: '/chi-siamo' },
   openGraph: {
+    ...OG_BASE,
+    url: '/chi-siamo',
     images: [{ url: '/api/og?title=Chi+Siamo&tag=FIM+Insurance+Broker&sub=20+anni+di+esperienza.+Broker+indipendente+iscritto+RUI+IVASS.', width: 1200, height: 630 }],
   },
   twitter: {

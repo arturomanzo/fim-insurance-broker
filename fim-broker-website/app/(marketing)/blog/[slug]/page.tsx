@@ -9,6 +9,7 @@ import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { getAllPosts, getPostBySlug } from '@/lib/blog'
 import { getAuthor, buildPersonSchema } from '@/lib/authors'
+import { OG_BASE } from '@/lib/seo'
 
 const BASE_URL = 'https://www.fimbroker.it'
 
@@ -67,6 +68,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/blog/${slug}`,
     },
     openGraph: {
+      ...OG_BASE,
+      url: `/blog/${slug}`,
       type: 'article',
       publishedTime,
       modifiedTime,

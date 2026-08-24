@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 const CITY = 'Cisterna di Latina'
 const SLUG = 'broker-assicurativo-cisterna-di-latina'
@@ -34,6 +35,8 @@ export const metadata: Metadata = {
   title: `Broker Assicurativo a ${CITY} — FIM Insurance Broker`,
   description: `Cerchi un broker assicurativo a ${CITY}? FIM Insurance Broker confronta 20 compagnie per trovare la polizza giusta per te. Preventivo gratuito, consulenza personalizzata.`,
   openGraph: {
+    ...OG_BASE,
+    url: '/broker-assicurativo-cisterna-di-latina',
     images: [{ url: `/api/og?title=Broker+Assicurativo+a+${CITY}&tag=FIM+Insurance+Broker&sub=Confrontiamo+30%2B+compagnie.+Preventivo+gratuito.`, width: 1200, height: 630 }],
   },
   alternates: { canonical: `/${SLUG}` },

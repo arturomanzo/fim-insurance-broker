@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
 import { ediliziaFaq } from '@/lib/faq/edilizia'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 const SETTORE_QS = '?profilo=pmi&settore=Edilizia'
 
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
     'Polizze per imprese edili, costruzioni e installatori: CAR (Contractors All Risk), fideiussioni cauzionali, infortuni operai integrativa INAIL, RC subappaltatori e decennale postuma. Preventivo in 24 ore.',
   alternates: { canonical: '/soluzioni/settori/edilizia' },
   openGraph: {
+    ...OG_BASE,
+    url: '/soluzioni/settori/edilizia',
     images: [{ url: '/api/og?title=Edilizia&tag=Soluzioni+per+settore&sub=CAR%2C+fideiussioni%2C+infortuni+operai%2C+RC+subappaltatori.', width: 1200, height: 630 }],
   },
   twitter: {

@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
 import { cyberRiskFaq } from '@/lib/faq/cyber-risk'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Cyber Risk — Protezione PMI e Professionisti da Attacchi Informatici',
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
     'Polizza cyber risk per PMI, professionisti e studi: ransomware, data breach GDPR, fermo operativo. Copertura DUAL Cyber Smart Plus con retroattività illimitata. Preventivo gratuito FIM.',
   alternates: { canonical: '/soluzioni/cyber-risk' },
   openGraph: {
+    ...OG_BASE,
+    url: '/soluzioni/cyber-risk',
     images: [{ url: '/api/og?title=Cyber+Risk&tag=Soluzioni&sub=Ransomware%2C+data+breach%2C+NIS2%3A+protezione+completa+per+PMI+e+professionisti.', width: 1200, height: 630 }],
   },
   twitter: {

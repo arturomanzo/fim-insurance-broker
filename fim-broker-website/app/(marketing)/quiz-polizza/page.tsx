@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -66,6 +67,8 @@ export const metadata: Metadata = {
   description: 'Rispondi a 4 domande e scopri quali coperture assicurative ti servono davvero. Quiz gratuito e personalizzato per privati, professionisti e aziende.',
   alternates: { canonical: '/quiz-polizza' },
   openGraph: {
+    ...OG_BASE,
+    url: '/quiz-polizza',
     title: 'Di che polizza hai bisogno? — FIM Insurance Broker',
     description: '4 domande per scoprire le coperture giuste per te. Gratis, senza impegno.',
     images: [{ url: '/api/og?title=Di+che+polizza+hai+bisogno%3F&tag=FIM+Insurance+Broker&sub=Quiz+gratuito+in+4+domande', width: 1200, height: 630 }],

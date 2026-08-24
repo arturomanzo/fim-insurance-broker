@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Soluzioni per Settore — FIM Insurance Broker',
@@ -8,6 +9,8 @@ export const metadata: Metadata = {
     'Soluzioni assicurative per famiglie, professionisti, artigiani, PMI, condomini e rischi catastrofali. FIM Insurance Broker: consulenza su misura per ogni categoria.',
   alternates: { canonical: '/soluzioni' },
   openGraph: {
+    ...OG_BASE,
+    url: '/soluzioni',
     images: [{ url: '/api/og?title=Soluzioni+per+Settore&tag=FIM+Insurance+Broker&sub=Famiglie%2C+professionisti%2C+PMI%2C+condomini%2C+catastrofi+naturali.', width: 1200, height: 630 }],
   },
   twitter: {

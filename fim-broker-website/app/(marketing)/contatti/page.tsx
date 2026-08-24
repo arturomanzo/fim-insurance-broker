@@ -3,12 +3,15 @@ import Link from 'next/link'
 import ContactForm from '@/components/forms/ContactForm'
 import Card from '@/components/ui/Card'
 import { EMAIL_CHANNELS, EMAIL_RECLAMI } from '@/lib/contatti'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Contatti',
   description: 'Contatta FIM Insurance Broker. Siamo disponibili per consulenze telefoniche, via email o di persona nel nostro ufficio di Cisterna di Latina.',
   alternates: { canonical: '/contatti' },
   openGraph: {
+    ...OG_BASE,
+    url: '/contatti',
     images: [{ url: '/api/og?title=Contatti&tag=FIM+Insurance+Broker&sub=Siamo+a+Cisterna+di+Latina.+Chiamaci%2C+scrivici+o+vieni+a+trovarci.', width: 1200, height: 630 }],
   },
   twitter: {

@@ -5,6 +5,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import { condominiFaq } from '@/lib/faq/condomini'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Condominio — Globale Fabbricato e RC Amministratore | FIM',
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
     'Polizze condominiali complete: globale fabbricato, RC amministratore (L. 220/2012), ascensori, tutela legale e D&O. FIM Insurance Broker gestisce condomini a Roma e nel Lazio.',
   alternates: { canonical: '/soluzioni/condomini' },
   openGraph: {
+    ...OG_BASE,
+    url: '/soluzioni/condomini',
     images: [{ url: '/api/og?title=Condomini&tag=Soluzioni&sub=Globale+fabbricato%2C+RC+Amministratore+(obbligatoria+L.+220%2F2012)%2C+tutela+legale.', width: 1200, height: 630 }],
   },
   twitter: { images: ['/api/og?title=Condomini&tag=Soluzioni&sub=Globale+fabbricato%2C+RC+Amministratore+(obbligatoria+L.+220%2F2012)%2C+tutela+legale.'] },

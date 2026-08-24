@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import SecondOpinionForm from '@/components/forms/SecondOpinionForm'
 import Card from '@/components/ui/Card'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Second Opinion Assicurativa Gratuita per PMI | FIM Insurance Broker',
@@ -8,6 +9,8 @@ export const metadata: Metadata = {
     'Inviaci le tue polizze attuali. Faremo una Gap Analysis gratuita per mostrarti i rischi scoperti che la tua compagnia non ti ha mai detto. Risposta in 48 ore.',
   alternates: { canonical: '/seconda-opinione' },
   openGraph: {
+    ...OG_BASE,
+    url: '/seconda-opinione',
     title: 'Second Opinion Assicurativa — Gap Analysis Gratuita per PMI',
     description:
       'Scopri i buchi nelle tue coperture assicurative attuali. Analisi gratuita da consulenti indipendenti. Risposta in 48 ore.',

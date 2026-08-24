@@ -2,12 +2,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import CollaboraForm from '@/components/forms/CollaboraForm'
+import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Collabora con Noi',
   description: 'Entra a far parte del team FIM Insurance Broker. Cerchiamo subagenti, broker, segnalatori e giovani talenti da inserire in un contesto professionale e dinamico.',
   alternates: { canonical: '/collabora-con-noi' },
   openGraph: {
+    ...OG_BASE,
+    url: '/collabora-con-noi',
     images: [{ url: '/api/og?title=Collabora+con+Noi&tag=FIM+Insurance+Broker&sub=Unisciti+al+nostro+team+di+professionisti+indipendenti.', width: 1200, height: 630 }],
   },
   twitter: {
