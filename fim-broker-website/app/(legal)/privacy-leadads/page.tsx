@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Privacy Lead Meta',
   description:
     'Informativa sul trattamento dei dati raccolti tramite i moduli di contatto pubblicati da FIM Insurance Broker su Facebook e Instagram, ai sensi degli articoli 13 e 14 del GDPR.',
+  alternates: { canonical: '/privacy-leadads' },
 }
 
 export default function PrivacyLeadAdsPage() {

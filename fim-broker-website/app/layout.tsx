@@ -107,9 +107,12 @@ export const metadata: Metadata = {
   description:
     'Broker assicurativo indipendente: polizze auto, vita, casa, salute e aziendali su misura. 20 compagnie confrontate per te. Preventivo gratuito.',
   metadataBase: new URL(BASE_URL),
-  alternates: {
-    canonical: BASE_URL,
-  },
+  // Nessun `alternates.canonical` qui: il canonical del root layout viene
+  // ereditato da ogni pagina che non ne dichiara uno proprio, e le fa
+  // dichiarare duplicati della homepage (26 pagine, audit 13/08/2026).
+  // Ogni pagina indicizzabile dichiara il suo; chi se lo scorda non ottiene
+  // un canonical sbagliato ma nessun canonical, e Google si autoreferenzia.
+  // Guardia: `npm run validate-canonical`.
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "validate-blog": "node scripts/validate-blog.mjs"
+    "validate-blog": "node scripts/validate-blog.mjs",
+    "validate-canonical": "node scripts/validate-canonical.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.36.3",

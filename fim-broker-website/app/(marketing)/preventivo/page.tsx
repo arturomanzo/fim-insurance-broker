@@ -9,6 +9,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 export const metadata: Metadata = {
   title: 'Richiedi Preventivo Gratuito',
   description: 'Richiedi il tuo preventivo assicurativo gratuito e personalizzato. Risponderemo entro 24 ore con la soluzione migliore per te.',
+  alternates: { canonical: '/preventivo' },
   openGraph: {
     images: [{ url: '/api/og?title=Preventivo+Gratuito&tag=FIM+Insurance+Broker&sub=Preventivo+personalizzato+in+24+ore.+Senza+impegno.', width: 1200, height: 630 }],
   },

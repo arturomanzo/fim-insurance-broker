@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Analizza la tua Polizza Gratis | FIM Insurance Broker',
   description:
     'Carica il PDF della tua polizza e scopri in 30 secondi cosa ti manca, dove paghi troppo e come migliorare la tua copertura. Gratis, senza impegno.',
+  alternates: { canonical: '/analizza-polizza' },
   openGraph: {
     title: 'Analizza la tua Polizza Gratis — Report AI in 30 secondi',
     description:
