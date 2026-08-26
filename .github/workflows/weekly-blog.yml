@@ -39,8 +39,14 @@ jobs:
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
         run: node scripts/generate-blog-post.mjs
 
-      - name: Valida blog (slug/immagini uniche, campi obbligatori)
+      # Ultimo cancello prima del commit: se esce in errore il job fallisce e
+      # l'articolo non viene pubblicato. Il dettaglio degli avvisi è acceso perché
+      # qui nessuno rilegge: l'arretrato delle norme da verificare deve restare
+      # sotto gli occhi a ogni giro.
+      - name: Valida blog (norme citate, impegni presi, campi, slug e immagini)
         working-directory: fim-broker-website
+        env:
+          BLOG_AVVISI_DETTAGLIO: '1'
         run: node scripts/validate-blog.mjs
 
       - name: Verifica modifiche al blog

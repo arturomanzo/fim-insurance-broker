@@ -1,0 +1,367 @@
+{
+  "_commento": [
+    "Registro delle norme che il blog può citare. Lo usa scripts/validate-blog.mjs (blocca le citazioni sconosciute)",
+    "e scripts/generate-blog-post.mjs (il modello può citare SOLO le norme in stato «verificata»).",
+    "«verificata» = testo letto sulla fonte primaria, con URL e data. «da-verificare» = arretrato ereditato,",
+    "presente in articoli già pubblicati e non ancora confermato. Non promuovere una norma senza averla letta:",
+    "il registro serve a dire il vero, non a far passare il controllo.",
+    "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
+    "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
+  ],
+  "aggiornato": "2026-08-26",
+  "norme": [
+    {
+      "id": "L-289-2002",
+      "citazione": "Legge 289/2002",
+      "chiavi": [
+        "289/2002"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 51: dal 1° luglio 2003 sono soggetti all'obbligo assicurativo gli sportivi dilettanti tesserati come atleti, dirigenti e tecnici presso FSN, DSA ed enti di promozione sportiva. L'obbligo copre gli infortuni avvenuti in occasione e a causa dello svolgimento delle attività sportive dai quali sia derivata la morte o un'inabilità permanente. Non copre l'infortunio che guarisce senza postumi.",
+      "fonte": "Testo dell'art. 51 L. 289/2002",
+      "verificata_il": "2026-08-26"
+    },
+    {
+      "id": "DLGS-36-2021",
+      "citazione": "D.Lgs. 36/2021",
+      "chiavi": [
+        "36/2021"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 29 comma 4: «Gli enti dilettantistici che si avvalgono di volontari devono assicurarli per la responsabilità civile verso i terzi», con rinvio all'art. 18 comma 2 del D.Lgs. 117/2017 per le modalità. NON è la norma che impone l'assicurazione dei tesserati: quella è l'art. 51 della L. 289/2002 e viene dal 2002.",
+      "fonte": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaArticolo?art.versione=1&art.idGruppo=8&art.flagTipoArticolo=0&art.codiceRedazionale=21G00043&art.idArticolo=29&art.idSottoArticolo=1&art.idSottoArticolo1=10&art.dataPubblicazioneGazzetta=2021-03-18&art.progressivo=0",
+      "verificata_il": "2026-08-26"
+    },
+    {
+      "id": "DLGS-117-2017",
+      "citazione": "D.Lgs. 117/2017",
+      "chiavi": [
+        "117/2017"
+      ],
+      "stato": "verificata",
+      "oggetto": "Codice del Terzo settore, art. 18: gli enti che si avvalgono di volontari devono assicurarli contro gli infortuni, le malattie connesse all'attività e per la responsabilità civile verso terzi. Il comma 2 riguarda i meccanismi assicurativi semplificati (polizze anche numeriche), ed è il comma richiamato dall'art. 29 c. 4 del D.Lgs. 36/2021.",
+      "fonte": "Normattiva, D.Lgs. 117/2017 art. 18",
+      "verificata_il": "2026-08-26"
+    },
+    {
+      "id": "CC-2051",
+      "citazione": "articolo 2051 del Codice Civile",
+      "chiavi": [
+        "cc-2051"
+      ],
+      "stato": "verificata",
+      "oggetto": "Danno cagionato da cosa in custodia: «Ciascuno è responsabile del danno cagionato dalle cose che ha in custodia, salvo che provi il caso fortuito».",
+      "fonte": "https://www.brocardi.it/codice-civile/libro-quarto/titolo-ix/art2051.html",
+      "verificata_il": "2026-08-26"
+    },
+    {
+      "id": "CC-2053",
+      "citazione": "articolo 2053 del Codice Civile",
+      "chiavi": [
+        "cc-2053"
+      ],
+      "stato": "verificata",
+      "oggetto": "Rovina di edificio: «Il proprietario di un edificio o di altra costruzione è responsabile dei danni cagionati dalla loro rovina, salvo che provi che questa non è dovuta a difetto di manutenzione o a vizio di costruzione».",
+      "fonte": "https://www.brocardi.it/codice-civile/libro-quarto/titolo-ix/art2053.html",
+      "verificata_il": "2026-08-26"
+    },
+    {
+      "id": "CC-38",
+      "citazione": "articolo 38 del Codice Civile",
+      "chiavi": [
+        "cc-38"
+      ],
+      "stato": "verificata",
+      "oggetto": "Obbligazioni delle associazioni non riconosciute: i terzi possono far valere i loro diritti sul fondo comune, e «delle obbligazioni stesse rispondono anche personalmente e solidalmente le persone che hanno agito in nome e per conto dell'associazione».",
+      "fonte": "https://www.brocardi.it/codice-civile/libro-primo/titolo-ii/capo-iii/art38.html",
+      "verificata_il": "2026-08-26"
+    },
+    {
+      "id": "CC-2052",
+      "citazione": "articolo 2052 del Codice Civile",
+      "chiavi": [
+        "cc-2052"
+      ],
+      "stato": "verificata",
+      "oggetto": "Danno cagionato da animali: «Il proprietario di un animale o chi se ne serve per il tempo in cui lo ha in uso, è responsabile dei danni cagionati dall'animale, sia che fosse sotto la sua custodia, sia che fosse smarrito o fuggito, salvo che provi il caso fortuito».",
+      "fonte": "https://www.brocardi.it/codice-civile/libro-quarto/titolo-ix/art2052.html",
+      "verificata_il": "2026-08-26"
+    },
+    {
+      "id": "34-2026",
+      "citazione": "34/2026",
+      "chiavi": [
+        "34/2026"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 6 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "231-2001",
+      "citazione": "231/2001",
+      "chiavi": [
+        "231/2001"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 3 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "81-2008",
+      "citazione": "81/2008",
+      "chiavi": [
+        "81/2008"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "24-2017",
+      "citazione": "24/2017",
+      "chiavi": [
+        "24/2017"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "157-1992",
+      "citazione": "157/1992",
+      "chiavi": [
+        "157/1992"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "209-2005",
+      "citazione": "209/2005",
+      "chiavi": [
+        "209/2005"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "177-2024",
+      "citazione": "177/2024",
+      "chiavi": [
+        "177/2024"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "81-2017",
+      "citazione": "81/2017",
+      "chiavi": [
+        "81/2017"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "184-2023",
+      "citazione": "184/2023",
+      "chiavi": [
+        "184/2023"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "138-2024",
+      "citazione": "138/2024",
+      "chiavi": [
+        "138/2024"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "171-2005",
+      "citazione": "171/2005",
+      "chiavi": [
+        "171/2005"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "229-2021",
+      "citazione": "229/2021",
+      "chiavi": [
+        "229/2021"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "206-2005",
+      "citazione": "206/2005",
+      "chiavi": [
+        "206/2005"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "198-2007",
+      "citazione": "198/2007",
+      "chiavi": [
+        "198/2007"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "14-2019",
+      "citazione": "14/2019",
+      "chiavi": [
+        "14/2019"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "285-1992",
+      "citazione": "285/1992",
+      "chiavi": [
+        "285/1992"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "213-2023",
+      "citazione": "213/2023",
+      "chiavi": [
+        "213/2023"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "2021-2118",
+      "citazione": "2021/2118",
+      "chiavi": [
+        "2021/2118"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "247-2012",
+      "citazione": "247/2012",
+      "chiavi": [
+        "247/2012"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "137-2012",
+      "citazione": "137/2012",
+      "chiavi": [
+        "137/2012"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "139-2005",
+      "citazione": "139/2005",
+      "chiavi": [
+        "139/2005"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "39-1989",
+      "citazione": "39/1989",
+      "chiavi": [
+        "39/1989"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "155-2024",
+      "citazione": "155/2024",
+      "chiavi": [
+        "155/2024"
+      ],
+      "stato": "da-verificare",
+      "oggetto": "",
+      "fonte": "",
+      "verificata_il": "",
+      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    }
+  ]
+}
