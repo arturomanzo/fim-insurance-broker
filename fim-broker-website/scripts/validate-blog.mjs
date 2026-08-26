@@ -2,12 +2,17 @@
 /**
  * Validatore blog-posts.json
  * Eseguire con: npm run validate-blog
- * Controlla: slug duplicati, immagini duplicate, campi obbligatori mancanti.
+ * Controlla: slug duplicati, immagini duplicate, campi obbligatori mancanti,
+ * citazioni normative fuori registro e frasi che prendono un impegno.
+ *
+ * Gira nella Action del lunedì fra la generazione e il commit: se esce in errore,
+ * il job fallisce e l'articolo non viene pubblicato.
  */
 
 import { readFileSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { caricaRegistro, controllaPost } from './lib/blog-guardrails.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const dataPath = resolve(__dirname, '../data/blog-posts.json')
@@ -71,6 +76,34 @@ posts.forEach(post => {
   }
 })
 if (fieldOk) console.log('  ✅ Tutti i campi obbligatori presenti e categorie valide')
+
+// 4. Citazioni normative e frasi che prendono un impegno
+console.log('\n── Norme citate e impegni presi:')
+const registro = caricaRegistro()
+const avvisi = []
+posts.forEach(post => {
+  const esito = controllaPost(post, registro)
+  esito.errori.forEach(fail)
+  avvisi.push(...esito.avvisi)
+})
+if (errors === 0) {
+  const verificate = registro.norme.filter(n => n.stato === 'verificata').length
+  const daVerificare = registro.norme.length - verificate
+  console.log(`  ✅ Nessuna norma fuori registro (${verificate} verificate, ${daVerificare} da verificare)`)
+}
+if (avvisi.length) {
+  console.log(`\n── ⚠️  ${avvisi.length} avvisi sugli articoli già pubblicati (non bloccano):`)
+  const perTipo = new Map()
+  avvisi.forEach(a => {
+    const tipo = a.includes('da verificare') ? 'norme da verificare sulla fonte primaria'
+      : a.includes('parola vietata') ? 'parole vietate dal CLAUDE.md'
+      : 'frasi che prendono un impegno'
+    perTipo.set(tipo, (perTipo.get(tipo) ?? 0) + 1)
+  })
+  perTipo.forEach((n, tipo) => console.log(`  ⚠️  ${n} — ${tipo}`))
+  if (process.env.BLOG_AVVISI_DETTAGLIO) avvisi.forEach(a => console.log(`     · ${a}`))
+  else console.log('     (BLOG_AVVISI_DETTAGLIO=1 per l\'elenco completo)')
+}
 
 // Risultato
 console.log(`\n${'─'.repeat(50)}`)

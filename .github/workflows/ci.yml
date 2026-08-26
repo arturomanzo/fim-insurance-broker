@@ -44,6 +44,9 @@ jobs:
       - name: Canonical
         run: npm run validate-canonical
 
+      - name: Blog (norme citate, campi, slug e immagini uniche)
+        run: npm run validate-blog
+
       - name: Build
         run: npm run build
         env:

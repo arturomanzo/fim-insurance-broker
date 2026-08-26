@@ -12,6 +12,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
+import { caricaRegistro, controllaPost, normeVerificate } from './lib/blog-guardrails.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DATA_FILE = path.resolve(__dirname, '../data/blog-posts.json')
@@ -128,15 +129,25 @@ async function searchWebNews(braveApiKey, topic) {
   }
 }
 
-async function generateArticle(client, existingSlugs, webContext) {
+async function generateArticle(client, existingSlugs, webContext, registro, correzioni = []) {
   const today = formatDate(new Date())
   const existingTopics = existingSlugs.join(', ')
+
+  const elencoNorme = normeVerificate(registro)
+    .map(n => `- ${n.citazione} — ${n.oggetto}`)
+    .join('\n')
+
+  const sezioneCorrezioni = correzioni.length
+    ? `\n\nIL TENTATIVO PRECEDENTE È STATO RIFIUTATO. Errori da non ripetere:\n${correzioni.map(e => `- ${e}`).join('\n')}\nRiscrivi l'articolo da capo tenendone conto.`
+    : ''
 
   const webSection = webContext
     ? `\n\nContesto da ricerca web (notizie recenti):\n${webContext}\n\nUsa queste informazioni per rendere l'articolo attuale e preciso.`
     : ''
 
-  const systemPrompt = `Sei un esperto di assicurazioni italiane che scrive articoli per il blog di FIM Insurance Broker, un broker assicurativo con sede a Cisterna di Latina. Scrivi in italiano, tono professionale ma accessibile, orientato a privati e piccole imprese italiane.`
+  const systemPrompt = `Sei il broker che scrive sul blog di FIM Insurance Broker, agenzia con sede a Cisterna di Latina, iscritta al RUI Sez. B n. B000405449. Scrivi in italiano a privati e piccole imprese italiane: tono professionale ma diretto, come spieghi a un cliente seduto davanti a te.
+
+Quello che pubblichi va online da solo, su un sito firmato con un numero RUI, senza che nessuno lo rilegga prima. Scrivi di conseguenza: meglio una frase in meno che una frase che non puoi dimostrare.`
 
   const userPrompt = `Data di oggi: ${today}
 Articoli già presenti sul blog (slug): ${existingTopics}
@@ -152,6 +163,25 @@ Genera UN NUOVO articolo blog su un argomento assicurativo DIVERSO da quelli gi�
 - Assicurazione per droni e nuove tecnologie
 - Welfare aziendale e polizze dipendenti
 - Riforma pensionistica e previdenza complementare
+
+PALETTI NON NEGOZIABILI. Un articolo che ne viola uno viene scartato da un controllo automatico e non esce.
+
+1. NORME. Puoi citare estremi di legge SOLO se sono in questo elenco, che è stato letto sulla fonte primaria:
+${elencoNorme}
+
+   Se ti serve una norma che non è in elenco, NON inventarla e NON tirare a indovinare l'anno o il numero: descrivi l'obbligo senza attribuirlo, per esempio «la legge impone a...» invece di «il D.Lgs. X/AAAA impone a...». Attribuire un obbligo alla norma sbagliata è l'errore più grave che puoi fare qui, e ne abbiamo già corretto uno: il D.Lgs. 36/2021 non impone l'assicurazione dei tesserati sportivi, quella viene dall'art. 51 della L. 289/2002 ed è del 2002.
+   Quando citi una norma dell'elenco, attieniti a quello che dice la sua descrizione. Non estenderne la portata.
+
+2. PAROLE VIETATE, sempre: «fondamentale», «inoltre», «panorama», «in conclusione», «cruciale», «in sintesi», «è importante notare», «al fine di». Se una frase ne ha bisogno, riscrivi la frase.
+
+3. NIENTE PROMESSE. Non scrivere che una polizza fa risparmiare, né di quanto; non scrivere «senza sorprese», «sempre coperto», «nessun rischio». Un cliente può pretendere quello che gli hai promesso per iscritto. Se vuoi parlare di prezzo, di' da cosa dipende, non quanto costa.
+
+4. NIENTE COMPAGNIE in chiave comparativa, nessun nome. FIM lavora con 20 fra mandati diretti e collaborazioni: non scrivere mai «oltre 30 compagnie» o simili.
+
+5. NIENTE CIFRE INVENTATE. Un premio in euro, una percentuale, un numero di sinistri: o viene dal contesto di ricerca web qui sopra e allora citi la fonte nel testo, o non lo scrivi.
+
+6. SCRITTURA. Frasi brevi, discorso fluido, niente elenchi puntati dove basta una frase, niente riassunto finale di rito. Assumi un ruolo concreto: il broker che spiega, non la voce neutra da manuale.
+${sezioneCorrezioni}
 
 Rispondi SOLO con un oggetto JSON valido (nessun testo prima o dopo), con questa struttura esatta:
 {
@@ -222,9 +252,35 @@ async function main() {
   // Inizializza client Anthropic
   const client = new Anthropic({ apiKey })
 
-  // Genera articolo
-  console.log('✍️  Generazione articolo con Claude AI...')
-  const article = await generateArticle(client, existingSlugs, webContext)
+  // Genera articolo, e non accettarlo finché non passa i paletti.
+  // Il controllo severo è la stessa cosa che gira in validate-blog.mjs: farlo qui
+  // serve a dare al modello una seconda occasione con gli errori sotto gli occhi,
+  // invece di far fallire la Action per una parola vietata e restare senza articolo.
+  const registro = caricaRegistro()
+  console.log(`📋 Registro norme: ${normeVerificate(registro).length} citabili`)
+
+  const MAX_TENTATIVI = 2
+  let article = null
+  let correzioni = []
+  for (let tentativo = 1; tentativo <= MAX_TENTATIVI; tentativo++) {
+    console.log(`✍️  Generazione articolo con Claude AI (tentativo ${tentativo}/${MAX_TENTATIVI})...`)
+    const candidato = await generateArticle(client, existingSlugs, webContext, registro, correzioni)
+    const { errori } = controllaPost(candidato, registro, { severo: true })
+    if (errori.length === 0) {
+      article = candidato
+      console.log('✅ Paletti superati')
+      break
+    }
+    console.warn(`⚠️  Articolo rifiutato, ${errori.length} violazione/i:`)
+    errori.forEach(e => console.warn(`   · ${e}`))
+    correzioni = errori
+  }
+
+  if (!article) {
+    console.error('❌ Nessun articolo ha superato i paletti dopo ' + MAX_TENTATIVI + ' tentativi.')
+    console.error('   Non pubblico niente: meglio una settimana senza articolo che un articolo che afferma il falso.')
+    process.exit(1)
+  }
 
   // Assicura slug unico
   let slug = slugify(article.slug || article.title)
