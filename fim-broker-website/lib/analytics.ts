@@ -50,6 +50,7 @@ const LEAD_VALUES: Record<string, number> = {
   second_opinion: 35,
   prenotazione: 30,
   contact: 20,
+  scuole: 40,
   collabora: 0,
 }
 
@@ -69,6 +70,7 @@ const COMMERCIAL_LEAD_TYPES = new Set([
   'second_opinion',
   'prenotazione',
   'contact',
+  'scuole',
 ])
 
 function leadValue(leadType: string): number {
@@ -247,6 +249,35 @@ export function trackSecondOpinionSubmit(settore: string, utmSource?: string, ev
     },
     { eventId },
   )
+}
+
+// ── Funnel scuole (Dipartimento Scuole) ──────────────────────────────────────
+
+/**
+ * Richiesta di check-up da un istituto scolastico inviata.
+ * `eventId` (opz.): deduplica col Lead server-side, come sopra.
+ */
+export function trackScuoleSubmit(ruolo: string, utmSource?: string, eventId?: string) {
+  track(
+    'generate_lead',
+    {
+      event_category: 'scuole',
+      ruolo: ruolo || '(non specificato)',
+      utm_source: utmSource ?? '(direct)',
+    },
+    { eventId },
+  )
+}
+
+/**
+ * Checklist "Dieci domande" completata sulla pagina scuole.
+ * `puntiAperti` = risposte "no" + "non so": sopra la soglia scatta l'invito al check-up.
+ */
+export function trackScuoleChecklist(puntiAperti: number) {
+  track('scuole_checklist_complete', {
+    event_category: 'scuole',
+    punti_aperti: puntiAperti,
+  })
 }
 
 // ── Funnel preventivo auto — documenti ───────────────────────────────────────

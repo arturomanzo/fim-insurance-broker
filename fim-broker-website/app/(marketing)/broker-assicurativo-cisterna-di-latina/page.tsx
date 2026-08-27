@@ -117,6 +117,23 @@ export default function BrokerCisterna() {
         </div>
       </section>
 
+      {/* Dipartimento Scuole */}
+      <section className="py-10 bg-primary/5 border-y border-primary/10">
+        <div className="container-custom flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold text-accent uppercase tracking-widest mb-1">Dipartimento Scuole</p>
+            <h2 className="text-xl md:text-2xl font-black text-primary mb-1">Istituti scolastici di {CITY} e provincia</h2>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Check-up gratuito delle polizze in essere, capitolato tecnico e confronto delle offerte.
+              Il broker della scuola, senza oneri per l&apos;istituto.
+            </p>
+          </div>
+          <Link href="/soluzioni/scuole" className="btn-secondary whitespace-nowrap">
+            Scopri il servizio per le scuole
+          </Link>
+        </div>
+      </section>
+
       {/* Perché scegliere FIM */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">

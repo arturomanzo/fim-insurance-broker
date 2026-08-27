@@ -84,7 +84,8 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
 
 ## Contesto business
 
-- **Target**: famiglie, professionisti, artigiani, PMI, condomini (mercato italiano)
+- **Target**: famiglie, professionisti, artigiani, PMI, condomini, istituti scolastici (mercato italiano)
+  - **Dipartimento Scuole** (`/soluzioni/scuole`, dal 27/08/2026): il form scrive a `dipartimentoscuole@fimbroker.it` (costanti in `lib/scuole.ts`). Sulla pagina scuole niente premi, niente massimali, niente elenco compagnie, mai "la scuola risparmierà": FIM è l'analista della scuola, l'affidamento è un atto dell'istituto.
 - **Lingua**: italiano (tutto il sito, tutto il contenuto user-facing, anche i commenti del codice di business)
 - **Tono**: professionale, relazionale, trasparente — NON corporate, NON freddo (regole complete in "Stile di scrittura")
 - **Claim chiave**: "Broker indipendente: non rappresentiamo compagnie ma solo i tuoi interessi"
