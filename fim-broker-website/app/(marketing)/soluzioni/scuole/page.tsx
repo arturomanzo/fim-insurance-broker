@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
@@ -170,6 +171,7 @@ export default function ScuolePage() {
             <span>/</span>
             <span className="text-white/80">Istituti Scolastici</span>
           </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
               Dipartimento Scuole — per Dirigenti Scolastici e Direttori S.G.A.
@@ -201,6 +203,19 @@ export default function ScuolePage() {
                 Scarica le dieci domande (PDF)
               </a>
             </div>
+          </div>
+          <div className="relative hidden lg:block">
+            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-2xl">
+              <Image
+                src="/images/brand/scuole-hero.jpg"
+                alt="Dipartimento Scuole FIM Insurance Broker — la protezione dell'istituto scolastico"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 0vw, 50vw"
+                priority
+              />
+            </div>
+          </div>
           </div>
         </div>
       </section>
