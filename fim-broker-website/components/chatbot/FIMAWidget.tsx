@@ -20,6 +20,12 @@ const DEFAULT_QUESTIONS = [
 
 // Domande contestuali in base alla pagina visitata
 function getSuggestedQuestions(path: string): string[] {
+  if (path.includes('scuol') || path.includes('scolastic')) return [
+    "Cosa non copre l'INAIL per gli alunni?",
+    "Quanto costa alla scuola avere un broker?",
+    "Serve una gara per nominare il broker?",
+    "Come chiedo il check-up delle polizze della scuola?",
+  ]
   if (path.includes('professionisti')) return [
     "Cos'è la RC Professionale?",
     "Ho bisogno di RC professionale?",
