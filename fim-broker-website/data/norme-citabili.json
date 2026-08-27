@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-08-26",
+  "aggiornato": "2026-08-27",
   "norme": [
     {
       "id": "L-289-2002",
@@ -86,6 +86,83 @@
       "oggetto": "Danno cagionato da animali: «Il proprietario di un animale o chi se ne serve per il tempo in cui lo ha in uso, è responsabile dei danni cagionati dall'animale, sia che fosse sotto la sua custodia, sia che fosse smarrito o fuggito, salvo che provi il caso fortuito».",
       "fonte": "https://www.brocardi.it/codice-civile/libro-quarto/titolo-ix/art2052.html",
       "verificata_il": "2026-08-26"
+    },
+    {
+      "id": "DPR-1124-1965",
+      "citazione": "D.P.R. 1124/1965",
+      "chiavi": [
+        "1124/1965"
+      ],
+      "stato": "verificata",
+      "oggetto": "Testo unico infortuni. Art. 4 n. 5: fra le persone assicurate «gli insegnanti e gli alunni delle scuole o istituti di istruzione di qualsiasi ordine e grado, anche privati, che attendano ad esperienze tecnico-scientifiche od esercitazioni pratiche, o che svolgano esercitazioni di lavoro». Era il perimetro storico della tutela INAIL scolastica, prima dell'estensione del 2023. Art. 112: le prestazioni si prescrivono in tre anni.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1965-06-30;1124~art4",
+      "verificata_il": "2026-08-27"
+    },
+    {
+      "id": "DL-48-2023",
+      "citazione": "D.L. 48/2023",
+      "chiavi": [
+        "48/2023"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 18 (conv. L. 85/2023): estende la tutela INAIL alle attività di insegnamento-apprendimento del sistema nazionale di istruzione e formazione. Comma 2 lett. f): alunni e studenti assicurati «limitatamente agli eventi verificatisi all'interno dei luoghi di svolgimento delle attività didattiche o laboratoriali, e loro pertinenze, o comunque avvenuti nell'ambito delle attività inserite nel Piano triennale dell'offerta formativa». Nato per il solo 2023/2024; il comma 4-bis lo estende al 2024/2025 e, dopo il D.L. 90/2025, «a decorrere dall'anno scolastico e dall'anno accademico 2025/2026».",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2023-05-04;48~art18",
+      "verificata_il": "2026-08-27"
+    },
+    {
+      "id": "DL-90-2025",
+      "citazione": "D.L. 90/2025",
+      "chiavi": [
+        "90/2025"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 2-ter (conv. L. 109/2025): modifica il comma 4-bis dell'art. 18 D.L. 48/2023 e rende strutturale la tutela INAIL di studenti e personale «a decorrere dall'anno scolastico e accademico 2025/2026», con stanziamenti da 5,01 milioni nel 2025 fino a 13,03 milioni annui dal 2034.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-06-24;90~art2ter",
+      "verificata_il": "2026-08-27"
+    },
+    {
+      "id": "L-109-2025",
+      "citazione": "L. 109/2025",
+      "chiavi": [
+        "109/2025"
+      ],
+      "stato": "verificata",
+      "oggetto": "Legge 30 luglio 2025 n. 109, di conversione del D.L. 90/2025 (G.U. 1° agosto 2025 n. 177). È la legge che ha inserito l'art. 2-ter sulla tutela INAIL strutturale per studenti e personale scolastico.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-06-24;90~art2ter (intestazione del testo coordinato) e https://www.lavoro.gov.it/notizie/pagine/strutturale-la-tutela-assicurativa-studenti-e-personale-scolastico",
+      "verificata_il": "2026-08-27"
+    },
+    {
+      "id": "DLGS-38-2000",
+      "citazione": "D.Lgs. 38/2000",
+      "chiavi": [
+        "38/2000"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 13 (danno biologico): le menomazioni «di grado pari o superiore al 6 per cento ed inferiore al 16 per cento» sono indennizzate in capitale; dal 16 per cento in rendita. Sotto il 6 per cento non c'è indennizzo del danno biologico.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2000-02-23;38~art13",
+      "verificata_il": "2026-08-27"
+    },
+    {
+      "id": "DL-159-2025",
+      "citazione": "D.L. 159/2025",
+      "chiavi": [
+        "159/2025"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 7 (conv. L. 198/2025): norma di interpretazione autentica dell'art. 18 D.L. 48/2023: la tutela INAIL «si applica anche ad eventuali infortuni occorsi nel tragitto dall'abitazione o altro domicilio dove si trovi lo studente al luogo dove si svolgono i percorsi di formazione scuola-lavoro» (ex PCTO), e viceversa. Retroattiva al 2023/2024 (circolare INAIL 1/2026).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-10-31;159~art7",
+      "verificata_il": "2026-08-27"
+    },
+    {
+      "id": "CC-2048",
+      "citazione": "art. 2048 c.c.",
+      "chiavi": [
+        "cc-2048"
+      ],
+      "stato": "verificata",
+      "oggetto": "Responsabilità dei precettori: comma 2 «I precettori e coloro che insegnano un mestiere o un'arte sono responsabili del danno cagionato dal fatto illecito dei loro allievi e apprendisti nel tempo in cui sono sotto la loro vigilanza»; comma 3 «sono liberate dalla responsabilità soltanto se provano di non aver potuto impedire il fatto». È la culpa in vigilando. Per il danno che l'alunno cagiona a sé stesso vale invece la responsabilità contrattuale (Cass. Sez. Un. 9346/2002, regime probatorio dell'art. 1218 c.c.).",
+      "fonte": "https://www.brocardi.it/codice-civile/libro-quarto/titolo-ix/art2048.html",
+      "verificata_il": "2026-08-27"
     },
     {
       "id": "34-2026",
