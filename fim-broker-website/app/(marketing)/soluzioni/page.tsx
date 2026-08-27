@@ -6,7 +6,7 @@ import { OG_BASE } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Soluzioni per Settore — FIM Insurance Broker',
   description:
-    'Soluzioni assicurative per famiglie, professionisti, artigiani, PMI, condomini e rischi catastrofali. FIM Insurance Broker: consulenza su misura per ogni categoria.',
+    'Soluzioni assicurative per famiglie, professionisti, artigiani, PMI, condomini, istituti scolastici e rischi catastrofali. FIM Insurance Broker: consulenza su misura per ogni categoria.',
   alternates: { canonical: '/soluzioni' },
   openGraph: {
     ...OG_BASE,
@@ -18,7 +18,22 @@ export const metadata: Metadata = {
   },
 }
 
-const solutions = [
+interface Solution {
+  href: string
+  icon: string
+  tag: string
+  tagColor: string
+  title: string
+  subtitle: string
+  desc: string
+  highlights: string[]
+  cta: string
+  price: string
+  /** Etichetta a sinistra del prezzo; default "Polizze disponibili". */
+  priceLabel?: string
+}
+
+const solutions: Solution[] = [
   {
     href: '/soluzioni/famiglie',
     icon: '🏠',
@@ -66,6 +81,19 @@ const solutions = [
     highlights: ['Globale Fabbricato', 'RC Amministratore', 'RC Ascensori', 'Tutela Legale'],
     cta: 'Scopri le soluzioni per condomini',
     price: 'da 400€/anno',
+  },
+  {
+    href: '/soluzioni/scuole',
+    icon: '🏫',
+    tag: 'Dipartimento Scuole — istituti statali e paritari',
+    tagColor: 'bg-amber-100 text-amber-800',
+    title: 'Istituti Scolastici',
+    subtitle: 'Dirigenti Scolastici, Direttori S.G.A., scuole paritarie',
+    desc: 'Ogni istituto ha già delle polizze; quasi nessuno le ha mai lette tutte insieme. FIM legge le coperture in essere, scrive il capitolato e mette le offerte su una griglia comparabile. È il broker della scuola: la scelta resta all\'istituto.',
+    highlights: ['Check-up gratuito', 'Capitolato tecnico', 'Confronto delle offerte', 'RC patrimoniale DS e DSGA'],
+    cta: 'Scopri il Dipartimento Scuole',
+    price: 'Nessun costo per l\'istituto',
+    priceLabel: 'Brokeraggio',
   },
   {
     href: '/soluzioni/catastrofi-naturali',
@@ -145,7 +173,7 @@ export default function SoluzioniPage() {
                 {/* Bottom section */}
                 <div className="px-8 pb-8 border-t border-gray-50 pt-5">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs text-gray-500">Polizze disponibili</span>
+                    <span className="text-xs text-gray-500">{sol.priceLabel ?? 'Polizze disponibili'}</span>
                     <span className="text-sm font-bold text-accent">{sol.price}</span>
                   </div>
                   <Link

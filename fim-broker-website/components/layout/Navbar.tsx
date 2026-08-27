@@ -15,7 +15,8 @@ const navLinks = [
 ]
 
 const secondaryLinks = [
-  { href: '/soluzioni', label: 'Soluzioni', desc: 'Per privati e aziende' },
+  { href: '/soluzioni', label: 'Soluzioni', desc: 'Per privati, aziende e scuole' },
+  { href: '/soluzioni/scuole', label: 'Scuole', desc: 'Dipartimento Scuole — DS e DSGA' },
   { href: '/sinistri', label: 'Sinistri', desc: 'Gestione sinistri' },
   { href: '/quiz-polizza', label: 'Quiz Polizza', desc: 'Trova la polizza giusta' },
   { href: '/blog', label: 'Blog', desc: 'Guide e aggiornamenti' },

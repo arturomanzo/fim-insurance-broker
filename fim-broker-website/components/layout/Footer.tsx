@@ -20,6 +20,7 @@ const serviceLinks = [
 const soluzioniLinks = [
   { href: '/soluzioni/professionisti', label: 'Per Professionisti' },
   { href: '/soluzioni/artigiani-pmi', label: 'Per Artigiani e PMI' },
+  { href: '/soluzioni/scuole', label: 'Per Istituti Scolastici' },
   { href: '/soluzioni/catastrofi-naturali', label: 'Catastrofi Naturali' },
   { href: '/sinistri', label: 'Gestione Sinistri' },
   { href: '/quiz-polizza', label: 'Quiz: che polizza ti serve?' },

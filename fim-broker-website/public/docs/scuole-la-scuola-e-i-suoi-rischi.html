@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La scuola e i suoi rischi — Guida per Dirigenti Scolastici e D.S.G.A. | FIM Insurance Broker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #0B1F3A;
+      --primary-dark: #060f1d;
+      --accent: #2FA36B;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --paper: #f8fafc;
+    }
+    html { font-size: 10pt; }
+    body {
+      font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+      background: #e8ecf4;
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── Toolbar (solo schermo) ─────────────────── */
+    #toolbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--primary-dark); color: #fff;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 10px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    #toolbar .brand { font-weight: 700; font-size: 0.9rem; opacity: 0.9; }
+    #toolbar .actions { display: flex; align-items: center; gap: 12px; }
+    #toolbar .hint { font-size: 0.75rem; opacity: 0.6; }
+    #toolbar button {
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      padding: 8px 18px; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: inherit;
+    }
+    #toolbar button:hover { background: #26855a; }
+
+    /* ── Pagine A4 ──────────────────────────────── */
+    .pages { padding: 70px 24px 32px; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .page {
+      width: 210mm; height: 297mm; background: #fff; position: relative; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12); display: flex; flex-direction: column;
+    }
+    .page-body { padding: 16mm 16mm 22mm; flex: 1; }
+    .page-footer {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 5mm 16mm; font-size: 7pt; color: var(--muted);
+      display: flex; justify-content: space-between; border-top: 1px solid var(--line);
+    }
+
+    /* ── Tipografia ─────────────────────────────── */
+    .eyebrow {
+      font-size: 7.5pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-size: 16pt; font-weight: 800; color: var(--primary); line-height: 1.25;
+      padding-bottom: 8px; border-bottom: 2px solid var(--accent); margin-bottom: 14px;
+    }
+    h3 { font-size: 11pt; font-weight: 700; color: var(--primary); margin: 16px 0 6px; }
+    h3.tight { margin-top: 12px; }
+    p { margin-bottom: 10px; text-align: justify; hyphens: auto; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Copertina ──────────────────────────────── */
+    .cover-top { background: #fff; padding: 12mm 16mm 8mm; display: flex; align-items: center; justify-content: space-between; }
+    .cover-top img { width: 52mm; height: auto; display: block; }
+    .cover-top .dept { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--primary); }
+    .cover-hero { background: var(--primary); color: #fff; padding: 26mm 16mm 22mm; }
+    .cover-hero .eyebrow { color: #6fd3a0; }
+    .cover-hero h1 { font-size: 34pt; font-weight: 800; line-height: 1.1; margin: 6mm 0 7mm; }
+    .cover-hero .sub { font-size: 11.5pt; color: rgba(255,255,255,0.85); line-height: 1.5; }
+    .cover-band { height: 4mm; background: var(--accent); }
+    .cover-body { padding: 12mm 16mm; flex: 1; display: flex; flex-direction: column; }
+    .cover-body .lead { font-size: 11pt; line-height: 1.65; }
+    .cover-sign { margin-top: auto; border-top: 1px solid var(--line); padding-top: 8px; font-size: 8pt; color: var(--muted); line-height: 1.6; }
+    .cover-sign strong { color: var(--primary); font-size: 8.5pt; }
+
+    /* ── Riquadri ───────────────────────────────── */
+    .card { background: var(--paper); border-left: 3px solid var(--accent); padding: 10px 14px; margin: 12px 0; }
+    .card h4 { font-size: 10pt; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .card p { font-size: 9.3pt; }
+    .card.dark { background: var(--primary); color: #fff; }
+    .card.dark h4 { color: #fff; }
+    .card.dark p { color: rgba(255,255,255,0.88); }
+
+    /* ── Tabelle a due colonne ──────────────────── */
+    table.grid { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 9pt; }
+    table.grid th { background: var(--primary); color: #fff; text-align: left; padding: 8px 12px; font-size: 8.5pt; font-weight: 700; }
+    table.grid td { padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; }
+    table.grid td:first-child { font-weight: 700; color: var(--primary); width: 36%; }
+    table.grid tr:nth-child(even) td { background: var(--paper); }
+
+    /* ── Passaggi numerati ──────────────────────── */
+    .step { display: flex; gap: 12px; margin-bottom: 12px; }
+    .step .num { width: 11mm; flex-shrink: 0; font-size: 20pt; font-weight: 800; color: var(--accent); line-height: 1; padding-top: 2px; }
+    .step h4 { font-size: 10.5pt; font-weight: 700; color: var(--primary); margin-bottom: 3px; }
+    .step p { font-size: 9.3pt; }
+
+    /* ── Contatti e informativa ─────────────────── */
+    .contact { background: var(--primary); color: #fff; padding: 14px 18px; margin-top: 14px; }
+    .contact h4 { color: #6fd3a0; font-size: 12pt; font-weight: 700; margin-bottom: 8px; }
+    .contact p { font-size: 9.3pt; color: rgba(255,255,255,0.9); margin-bottom: 2px; text-align: left; }
+    .contact p.small { font-size: 8pt; color: rgba(255,255,255,0.6); margin-top: 6px; }
+    .legal { background: var(--paper); border: 1px solid var(--line); padding: 10px 12px; margin-top: 12px; font-size: 6.9pt; line-height: 1.45; color: var(--muted); text-align: justify; }
+    .legal strong { color: var(--ink); }
+    .copyright { text-align: center; font-size: 6.9pt; color: var(--muted); margin-top: 10px; line-height: 1.45; }
+
+    @media print {
+      @page { size: A4; margin: 0; }
+      #toolbar { display: none !important; }
+      body { background: #fff; }
+      .pages { padding: 0; gap: 0; }
+      .page { box-shadow: none; page-break-after: always; break-after: page; }
+      .page:last-child { page-break-after: auto; break-after: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="toolbar">
+  <span class="brand">FIM Insurance Broker — Dipartimento Scuole — La scuola e i suoi rischi</span>
+  <div class="actions">
+    <span class="hint">File → Stampa → Salva come PDF</span>
+    <button onclick="window.print()">Scarica PDF</button>
+  </div>
+</div>
+
+<div class="pages">
+
+  <!-- ══ 1 — Copertina ══ -->
+  <div class="page">
+    <div class="cover-top">
+      <img src="../logo.svg" alt="FIM Insurance Broker" />
+      <span class="dept">Dipartimento Scuole</span>
+    </div>
+    <div class="cover-hero">
+      <div class="eyebrow">Guida per Dirigenti Scolastici e Direttori S.G.A.</div>
+      <h1>La scuola<br />e i suoi rischi</h1>
+      <p class="sub">Dalla mappa dei rischi alle coperture giuste.</p>
+    </div>
+    <div class="cover-band"></div>
+    <div class="cover-body">
+      <p class="lead">Ogni istituto ha già delle polizze. Quasi nessuno le ha mai lette tutte insieme. Questo documento spiega quali rischi corre davvero una scuola, che cosa le coperture in essere proteggono, che cosa lasciano scoperto e come si mette ordine — senza alcun costo a carico dell'istituto.</p>
+      <div class="cover-sign">
+        <strong>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s.</strong><br />
+        Un mestiere di famiglia dal 1993 — Iscrizione RUI Sez. B n. B000405449<br />
+        Via Roma 41, 04012 Cisterna di Latina (LT) — Tel. +39 06 96883381 — dipartimentoscuole@fimbroker.it — fimbroker.it
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 2 — Il punto di partenza ══ -->
+  <div class="page">
+    <div class="page-body">
+      <div class="eyebrow">Il punto di partenza</div>
+      <h2>Perché serve guardare le polizze tutte insieme</h2>
+      <p>Nella maggior parte delle scuole le coperture si sono stratificate negli anni. La polizza integrativa alunni viene rinnovata a ogni anno scolastico, la responsabilità patrimoniale del Dirigente arriva da un canale diverso, la tutela legale è dentro un pacchetto che nessuno rilegge dal giorno in cui è stato sottoscritto. Ogni singolo contratto, preso da solo, sembra in ordine.</p>
+      <p>I problemi nascono nello spazio fra un contratto e l'altro. Sono tre e si ripetono ovunque: scoperture, cioè rischi che nessuna polizza copre e che nessuno ha notato; doppioni, cioè garanzie pagate due volte in contratti diversi; e clausole critiche, franchigie, scoperti e limiti di indennizzo che si scoprono solo quando arriva il sinistro.</p>
+      <div class="card">
+        <h4>Il caso più frequente che troviamo</h4>
+        <p>La polizza copre gli alunni durante le lezioni e le uscite didattiche, ma non li segue nei percorsi per le competenze trasversali e l'orientamento presso aziende terze. Nessuno se ne accorge finché uno studente non si fa male in azienda.</p>
+      </div>
+      <p>Il metodo di lavoro parte sempre dallo stesso punto: leggere ciò che c'è, metterlo a confronto con i rischi reali dell'istituto, e solo dopo parlare di mercato. È il principio delle richieste ed esigenze del contraente previsto dalla Direttiva (UE) 2016/97 sulla distribuzione assicurativa, che per un broker non è un adempimento formale ma il modo in cui si lavora.</p>
+    </div>
+    <div class="page-footer"><span>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. — RUI Sez. B N. B000405449 — Soggetta a vigilanza IVASS</span><span>2 / 8</span></div>
+  </div>
+
+  <!-- ══ 3 — Sezione 1: mappa dei rischi ══ -->
+  <div class="page">
+    <div class="page-body">
+      <div class="eyebrow">Sezione 1</div>
+      <h2>La mappa dei rischi di un istituto scolastico</h2>
+      <p>Una scuola non è un ufficio. È un luogo dove ogni giorno centinaia di minori si muovono, usano attrezzature, praticano attività sportiva, escono sul territorio e talvolta lavorano in azienda. Accanto a loro c'è personale docente e ATA, e sopra di loro una catena di responsabilità che arriva fino al patrimonio personale di chi dirige.</p>
+      <table class="grid">
+        <tr><th>Area di rischio</th><th>Che cosa può accadere</th></tr>
+        <tr><td>Infortuni degli alunni</td><td>Cadute in palestra e nei cortili, incidenti nei laboratori tecnici e scientifici, infortuni durante il gruppo sportivo, tragitto casa-scuola nelle attività organizzate.</td></tr>
+        <tr><td>Responsabilità civile verso terzi</td><td>Danni causati da un alunno a un compagno o a cose altrui, danni a terzi durante uscite e manifestazioni, danni causati dal personale nell'esercizio delle funzioni.</td></tr>
+        <tr><td>Uscite, viaggi e PCTO</td><td>Infortuni fuori sede, in Italia e all'estero; spese sanitarie e rimpatrio; annullamento del viaggio; eventi presso aziende ospitanti durante i percorsi per le competenze trasversali.</td></tr>
+        <tr><td>Responsabilità del Dirigente e del D.S.G.A.</td><td>Azione di responsabilità amministrativo-contabile davanti alla Corte dei conti per danno erariale, con esposizione del patrimonio personale.</td></tr>
+        <tr><td>Sicurezza sul lavoro</td><td>Il Dirigente Scolastico è datore di lavoro ai sensi del D.Lgs. 81/2008 e risponde degli obblighi previsti dall'art. 18. Gli alunni sono equiparati a lavoratori quando usano laboratori e attrezzature.</td></tr>
+        <tr><td>Patrimonio e dotazioni</td><td>Furto e danneggiamento di dotazioni informatiche, strumenti di laboratorio, attrezzature sportive e beni affidati alla custodia dell'istituto.</td></tr>
+        <tr><td>Dati e sistemi</td><td>Violazione dei dati trattati dal registro elettronico e dai sistemi di segreteria, con obblighi di notifica ai sensi degli artt. 33 e 34 del Regolamento (UE) 2016/679 e possibili richieste risarcitorie delle famiglie.</td></tr>
+        <tr><td>Personale e volontari</td><td>Infortuni del personale docente e ATA, e posizione di genitori, esperti esterni e volontari che collaborano alle attività dell'istituto.</td></tr>
+      </table>
+      <div class="card">
+        <h4>Un chiarimento che fa risparmiare discussioni</h4>
+        <p>L'edificio scolastico appartiene all'ente locale — Comune per infanzia, primaria e secondaria di primo grado, Provincia o Città metropolitana per la secondaria di secondo grado. L'istituto non deve assicurare il fabbricato, ma è responsabile del contenuto e delle dotazioni affidate. Confondere i due piani porta a pagare per un rischio che non è proprio, e a lasciare scoperto quello che lo è.</p>
+      </div>
+    </div>
+    <div class="page-footer"><span>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. — RUI Sez. B N. B000405449 — Soggetta a vigilanza IVASS</span><span>3 / 8</span></div>
+  </div>
+
+  <!-- ══ 4 — Sezione 2: la norma ══ -->
+  <div class="page">
+    <div class="page-body">
+      <div class="eyebrow">Sezione 2</div>
+      <h2>Che cosa dice la norma sulla responsabilità della scuola</h2>
+      <h3 class="tight">Quando l'alunno danneggia un altro</h3>
+      <p>Si applica l'art. 2048 del codice civile: i precettori rispondono del danno cagionato dal fatto illecito degli allievi nel tempo in cui sono sotto la loro vigilanza. È la cosiddetta culpa in vigilando, e la liberazione dalla responsabilità richiede la prova di non aver potuto impedire il fatto. Non basta dimostrare di essere stati presenti.</p>
+      <h3>Quando l'alunno si fa male da solo</h3>
+      <p>Il quadro cambia. Le Sezioni Unite della Corte di Cassazione, con la sentenza n. 9346 del 2002, hanno inquadrato l'ipotesi del danno che l'allievo procura a sé stesso nella responsabilità contrattuale che nasce dal rapporto instaurato con l'iscrizione. La conseguenza pratica pesa: l'onere della prova si sposta sull'istituto, che deve dimostrare che l'evento è dipeso da causa a sé non imputabile.</p>
+      <h3>La copertura INAIL non basta</h3>
+      <p>L'assicurazione INAIL gestita per conto dello Stato interviene per il personale e per gli alunni in specifiche attività, ma opera entro categorie e prestazioni delimitate. Restano fuori voci rilevanti, prima fra tutte la responsabilità civile verso terzi. È il motivo per cui le scuole sottoscrivono una polizza integrativa, spesso finanziata dal contributo volontario delle famiglie.</p>
+      <h3>La responsabilità che tocca le persone, non l'istituto</h3>
+      <p>Dirigente Scolastico e Direttore S.G.A. rispondono in proprio, davanti alla Corte dei conti, del danno erariale causato nell'esercizio delle funzioni. La copertura di responsabilità civile patrimoniale non è un accessorio: è ciò che separa un errore amministrativo dal patrimonio personale di chi lo ha commesso. Nella nostra esperienza è la garanzia più spesso assente o sottodimensionata.</p>
+      <div class="card">
+        <h4>Il quadro contabile di riferimento</h4>
+        <p>La gestione amministrativo-contabile delle istituzioni scolastiche è disciplinata dal Decreto Interministeriale n. 129 del 2018, che regola anche le modalità di acquisizione di beni e servizi. Gli affidamenti seguono il Codice dei contratti pubblici, D.Lgs. n. 36 del 2023.</p>
+      </div>
+    </div>
+    <div class="page-footer"><span>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. — RUI Sez. B N. B000405449 — Soggetta a vigilanza IVASS</span><span>4 / 8</span></div>
+  </div>
+
+  <!-- ══ 5 — Sezione 3: otto scoperture ══ -->
+  <div class="page">
+    <div class="page-body">
+      <div class="eyebrow">Sezione 3</div>
+      <h2>Le otto scoperture che troviamo più spesso</h2>
+      <p>Quello che segue non è un elenco teorico. Sono i punti che emergono con maggiore frequenza quando leggiamo le polizze già in essere di un istituto.</p>
+      <table class="grid">
+        <tr><th>Punto critico</th><th>Perché conta</th></tr>
+        <tr><td>PCTO e stage presso terzi</td><td>Gli studenti operano in azienda, spesso con attrezzature non scolastiche. Molte polizze non estendono la copertura fuori dai locali dell'istituto.</td></tr>
+        <tr><td>RC patrimoniale di Dirigente e D.S.G.A.</td><td>Frequentemente assente, oppure presente con massimali che non reggono il valore di una contestazione erariale.</td></tr>
+        <tr><td>Massimali della culpa in vigilando</td><td>Adeguati vent'anni fa, non oggi. Un danno grave a un minore supera con facilità i massimali storici.</td></tr>
+        <tr><td>Viaggi d'istruzione all'estero</td><td>Spese sanitarie, rimpatrio e annullamento richiedono garanzie specifiche che la polizza base non contiene.</td></tr>
+        <tr><td>Alunni con disabilità e assistenza</td><td>Attività di assistenza specialistica e personale educativo esterno restano talvolta fuori dal perimetro degli assicurati.</td></tr>
+        <tr><td>Dotazioni informatiche</td><td>Notebook, tablet e strumenti di laboratorio acquistati con fondi dedicati, spesso non censiti nella polizza danni.</td></tr>
+        <tr><td>Tutela legale</td><td>Presente ma con limiti di spesa che non coprono un procedimento reale, e talvolta senza libera scelta del legale.</td></tr>
+        <tr><td>Violazione dei dati</td><td>Rischio nuovo e quasi mai coperto, in un contesto che tratta quotidianamente dati di minori e categorie particolari.</td></tr>
+      </table>
+      <div class="card dark">
+        <h4>Come lo verifichiamo</h4>
+        <p>Chiediamo le polizze in corso e le leggiamo per intero, condizioni generali comprese. Consegniamo un documento che mette in colonna ciò che è coperto, ciò che non lo è e ciò che è coperto due volte. Da lì si decide. Fino a quel momento non c'è nulla da firmare e nulla da pagare.</p>
+      </div>
+    </div>
+    <div class="page-footer"><span>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. — RUI Sez. B N. B000405449 — Soggetta a vigilanza IVASS</span><span>5 / 8</span></div>
+  </div>
+
+  <!-- ══ 6 — Sezione 4: come lavoriamo ══ -->
+  <div class="page">
+    <div class="page-body">
+      <div class="eyebrow">Sezione 4</div>
+      <h2>Come lavoriamo</h2>
+      <div class="step"><div class="num">1</div><div><h4>Raggi X delle polizze in essere</h4><p>Leggiamo tutti i contratti attivi e ne ricostruiamo il perimetro effettivo: garanzie, esclusioni, franchigie, scoperti, limiti di indennizzo. Il risultato è una fotografia scritta, non un parere a voce.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h4>Analisi dei rischi dell'istituto</h4><p>Ordini di scuola, laboratori, palestre, attività sportive, viaggi, PCTO, dotazioni, organico. Su questa base costruiamo il profilo di rischio e la valutazione delle richieste ed esigenze prevista dalla normativa sulla distribuzione assicurativa.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h4>Capitolato e confronto di mercato</h4><p>Redigiamo il capitolato tecnico, interpelliamo le compagnie e mettiamo le offerte su una griglia comparabile: garanzie, massimali, franchigie, premio. L'istituto vede lo stesso prospetto che vediamo noi e sceglie con dati alla mano.</p></div></div>
+      <div class="step"><div class="num">4</div><div><h4>Assistenza continuativa e sinistri</h4><p>Restiamo accanto alla segreteria per tutta la durata del contratto: apertura e gestione dei sinistri, rapporti con la compagnia, controllo delle scadenze, adeguamento delle coperture quando cambiano attività o normativa.</p></div></div>
+      <h3>Che cosa consegniamo</h3>
+      <p>Un documento di analisi delle coperture in essere con le criticità evidenziate, il capitolato tecnico, il prospetto comparativo delle offerte di mercato e, dopo l'affidamento, un referente unico raggiungibile per telefono e un riepilogo delle scadenze aggiornato.</p>
+    </div>
+    <div class="page-footer"><span>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. — RUI Sez. B N. B000405449 — Soggetta a vigilanza IVASS</span><span>6 / 8</span></div>
+  </div>
+
+  <!-- ══ 7 — Sezione 5: quanto costa ══ -->
+  <div class="page">
+    <div class="page-body">
+      <div class="eyebrow">Sezione 5</div>
+      <h2>Quanto costa alla scuola</h2>
+      <p>Nulla. Il broker assicurativo è remunerato dalle imprese di assicurazione attraverso le provvigioni già comprese nei premi dei contratti collocati. L'istituto non sostiene alcun onere aggiuntivo per l'analisi, per la redazione del capitolato, per l'assistenza o per la gestione dei sinistri.</p>
+      <p>Lo diciamo apertamente perché è un'informazione che il contraente ha diritto di avere, e perché è anche la ragione per cui possiamo iniziare a lavorare prima che sia stata presa qualunque decisione: se dall'analisi emerge che le coperture in essere vanno bene così, ve lo diciamo e non è successo nulla.</p>
+      <h3>Come si attiva l'incarico</h3>
+      <p>Il conferimento dell'incarico di brokeraggio segue le regole ordinarie degli acquisti delle istituzioni scolastiche. Trattandosi di servizio di importo contenuto, e in molti casi senza esborso diretto per l'istituto, si procede di norma con affidamento diretto ai sensi dell'art. 50 del D.Lgs. n. 36 del 2023, previa decisione a contrarre motivata del Dirigente Scolastico e nel rispetto del Decreto Interministeriale n. 129 del 2018.</p>
+      <table class="grid">
+        <tr><th>Passaggio</th><th>A chi tocca</th></tr>
+        <tr><td>Analisi preliminare delle polizze</td><td>FIM, senza impegno e senza costi</td></tr>
+        <tr><td>Decisione a contrarre e affidamento</td><td>Dirigente Scolastico, con il supporto documentale di FIM</td></tr>
+        <tr><td>Durata dell'incarico</td><td>Di norma triennale, con facoltà di recesso</td></tr>
+        <tr><td>Scelta della compagnia</td><td>Sempre e solo dell'istituto</td></tr>
+      </table>
+      <div class="card">
+        <h4>Un limite che rispettiamo</h4>
+        <p>Chi redige gli atti di una procedura per conto della stazione appaltante non vi partecipa e non ne trae beneficio diretto. Lavoriamo tenendo separate le due cose e mettendo per iscritto le dichiarazioni necessarie: è la condizione perché l'affidamento regga a un controllo.</p>
+      </div>
+    </div>
+    <div class="page-footer"><span>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. — RUI Sez. B N. B000405449 — Soggetta a vigilanza IVASS</span><span>7 / 8</span></div>
+  </div>
+
+  <!-- ══ 8 — Chi siamo ══ -->
+  <div class="page">
+    <div class="page-body">
+      <div class="eyebrow">Chi siamo</div>
+      <h2>FIM Insurance Broker</h2>
+      <p>Siamo un broker assicurativo con oltre trent'anni di attività, iscritto al Registro Unico degli Intermediari nella Sezione B, quella dei broker. Seguiamo aziende, professionisti, famiglie e istituzioni scolastiche.</p>
+      <p>La differenza fra un broker e un agente sta da che parte del tavolo si siede. L'agente rappresenta la compagnia. Il broker rappresenta il cliente e cerca sul mercato la soluzione che gli serve. Noi non abbiamo mandati da difendere: abbiamo un istituto da tutelare.</p>
+      <p>Usiamo strumenti digitali e intelligenza artificiale per essere rapidi nell'analisi e nel confronto delle offerte. La relazione, però, resta personale: chi vi risponde al telefono conosce la vostra pratica.</p>
+      <h3>Il Dipartimento Scuole</h3>
+      <p>Alle istituzioni scolastiche dedichiamo un Dipartimento con un referente e un indirizzo propri. L'analisi dei rischi dell'istituto, la lettura delle polizze in essere e il confronto di mercato sono svolti da FIM in quanto intermediario iscritto al Registro Unico degli Intermediari: un solo interlocutore, dalla prima lettura dei contratti alla gestione dei sinistri. Il referente del Dipartimento si raggiunge a dipartimentoscuole@fimbroker.it.</p>
+
+      <div class="contact">
+        <h4>Parliamone</h4>
+        <p><strong>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s.</strong></p>
+        <p>Via Roma 41 — 04012 Cisterna di Latina (LT)</p>
+        <p>Telefono +39 06 96883381 — dipartimentoscuole@fimbroker.it — fimbroker.it</p>
+        <p>PEC per gli atti formali: fiminsurancebrokersas@pec.it</p>
+        <p class="small">Iscrizione RUI Sezione B n. B000405449 — P.IVA 02637640596</p>
+      </div>
+
+      <div class="legal">
+        <strong>Informazioni ai sensi della normativa vigente.</strong> FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. è iscritta al Registro Unico degli Intermediari assicurativi e riassicurativi, Sezione B, al n. B000405449, ed è soggetta alla vigilanza dell'IVASS. L'attività è svolta nel rispetto del D.Lgs. 209/2005, della Direttiva (UE) 2016/97 e del Regolamento IVASS n. 40/2018. Il compenso dell'intermediario è costituito dalle provvigioni corrisposte dalle imprese di assicurazione e comprese nei premi. Il presente documento ha finalità informativa, non costituisce proposta contrattuale né sollecitazione all'acquisto e non sostituisce la documentazione precontrattuale e contrattuale, alla quale si rinvia per il dettaglio di garanzie, esclusioni, franchigie e limiti di indennizzo. Nessun risultato economico è garantito: FIM propone, l'istituzione scolastica decide. I dati personali sono trattati nel rispetto del Regolamento (UE) 2016/679 e del D.Lgs. 196/2003 come modificato dal D.Lgs. 101/2018. Reclami: FIM Insurance Broker, Via Roma 41, 04012 Cisterna di Latina (LT); in caso di esito insoddisfacente è possibile rivolgersi all'IVASS, Via del Quirinale 21, 00187 Roma.
+      </div>
+
+      <p class="copyright">© 2026 FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. — Tutti i diritti riservati.<br />Documento di proprietà di FIM Insurance Broker. Ne è vietata la riproduzione, anche parziale, la modifica e la diffusione a terzi senza autorizzazione scritta.</p>
+    </div>
+    <div class="page-footer"><span>FIM Insurance Broker di Manzo Arturo &amp; C. S.a.s. — RUI Sez. B N. B000405449 — Soggetta a vigilanza IVASS</span><span>8 / 8</span></div>
+  </div>
+
+</div>
+</body>
+</html>
