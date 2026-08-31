@@ -42,7 +42,12 @@ function isValidIp(ip: string): boolean {
   return IPV4_RE.test(ip) || IPV6_RE.test(ip)
 }
 
-function getIp(request: Request): string {
+/**
+ * IP del chiamante, dal primo valore di `x-forwarded-for`.
+ * Esportata perché serve anche fuori dal rate limiter: il consenso alla
+ * newsletter va registrato con la provenienza (art. 7 GDPR).
+ */
+export function getIp(request: Request): string {
   const forwarded = (request.headers as Headers).get('x-forwarded-for')
   if (forwarded) {
     const candidate = forwarded.split(',')[0].trim()
