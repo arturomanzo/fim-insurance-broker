@@ -143,3 +143,48 @@ create policy "deny_all_anon_ivass_allegati_state"
   to anon, authenticated
   using (false)
   with check (false);
+
+-- ============================================================
+-- Newsletter — iscritti dal form nel footer del sito
+--
+-- Questa tabella è la FONTE DI VERITÀ dell'iscrizione, non Resend.
+-- Motivo: fino al 31/08/2026 la route rispondeva "ok" anche quando Resend non
+-- era configurato, e gli indirizzi finivano nel nulla. Adesso l'iscrizione
+-- esiste se e solo se c'è una riga qui; l'eventuale contatto su Resend è una
+-- copia best-effort.
+--
+-- `consenso_at`, `consenso_ip` e `consenso_user_agent` servono a dimostrare il
+-- consenso richiesto dall'art. 7 GDPR: senza data e provenienza, un consenso
+-- raccolto non è documentato.
+-- ============================================================
+
+create table if not exists website_newsletter (
+  id                   text primary key,
+  email                text not null unique,
+  consenso             boolean not null default true,
+  consenso_at          timestamptz not null default now(),
+  consenso_ip          text,
+  consenso_user_agent  text,
+  origine              text,                      -- pagina da cui è partita l'iscrizione
+  resend_contact_id    text,                      -- valorizzato solo se l'audience Resend è configurata
+  stato                text not null default 'attivo'
+                         check (stato in ('attivo', 'disiscritto')),
+  disiscritto_at       timestamptz,
+  timestamp            timestamptz not null default now()
+);
+
+create index if not exists website_newsletter_timestamp_idx
+  on website_newsletter (timestamp desc);
+
+-- Per l'invio: gli attivi, in ordine di iscrizione
+create index if not exists website_newsletter_stato_idx
+  on website_newsletter (stato, timestamp desc);
+
+alter table website_newsletter enable row level security;
+
+drop policy if exists "deny_all_anon_website_newsletter" on website_newsletter;
+create policy "deny_all_anon_website_newsletter"
+  on website_newsletter for all
+  to anon, authenticated
+  using (false)
+  with check (false);

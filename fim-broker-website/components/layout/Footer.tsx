@@ -92,6 +92,8 @@ const legalLinks = [
 function NewsletterForm() {
   const [email, setEmail] = useState('')
   const [consent, setConsent] = useState(false)
+  // Honeypot: invisibile a chi legge, compilato dai bot che riempiono ogni campo.
+  const [website, setWebsite] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -104,7 +106,15 @@ function NewsletterForm() {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        // `consenso` va al server perché è la base giuridica dell'invio e
+        // va registrata con data e provenienza (art. 7 GDPR): tenerlo solo
+        // nello stato del componente non lascia nessuna prova.
+        body: JSON.stringify({
+          email,
+          consenso: consent,
+          website,
+          origine: typeof window !== 'undefined' ? window.location.pathname : undefined,
+        }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -122,8 +132,8 @@ function NewsletterForm() {
   if (status === 'success') {
     return (
       <div className="p-4 bg-accent border border-accent-dark rounded-lg text-sm" role="status" aria-live="polite">
-        <p className="font-semibold mb-1 text-primary">Iscrizione confermata!</p>
-        <p className="text-primary/80">Riceverai le nostre novità assicurative direttamente nella tua inbox.</p>
+        <p className="font-semibold mb-1 text-primary">Iscrizione registrata.</p>
+        <p className="text-primary/80">Ti abbiamo scritto una email di conferma. Se non la vedi, guarda nello spam.</p>
       </div>
     )
   }
@@ -138,6 +148,16 @@ function NewsletterForm() {
         required
         disabled={status === 'loading'}
         className="w-full px-4 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-60"
+      />
+      <input
+        type="text"
+        name="website"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
       />
       <label className="flex items-start gap-2 cursor-pointer">
         <input
@@ -276,7 +296,7 @@ export default function Footer() {
           <div>
             <h3 className="text-accent font-semibold text-sm uppercase tracking-wider mb-4">Newsletter</h3>
             <p className="text-white/70 text-sm mb-4">
-              Rimani aggiornato sulle ultime novità assicurative e offerte esclusive.
+              Ti scriviamo quando cambia una norma o scade qualcosa che ti riguarda. Non a calendario.
             </p>
             <NewsletterForm />
 
