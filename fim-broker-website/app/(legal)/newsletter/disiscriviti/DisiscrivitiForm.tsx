@@ -36,8 +36,11 @@ export default function DisiscrivitiForm({ token }: { token: string }) {
     setStato('loading')
     setErrore('')
     try {
-      const res = await fetch(`/api/newsletter/disiscriviti?t=${encodeURIComponent(token)}`, {
+      // Il middleware pretende un Content-Type esplicito sulle POST verso /api/*.
+      const res = await fetch('/api/newsletter/disiscriviti', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ t: token }),
       })
       const data = await res.json()
       if (!res.ok) {

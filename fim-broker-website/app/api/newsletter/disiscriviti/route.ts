@@ -13,6 +13,21 @@ import { NextResponse } from 'next/server'
 import { rateLimit } from '@/lib/rateLimit'
 import { disiscrivi, verificaTokenDisiscrizione } from '@/lib/newsletterStore'
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
+
+/**
+ * I client di posta che non implementano il one-click aprono l'URL di
+ * `List-Unsubscribe` in GET. Qui non si disiscrive nessuno: si rimanda alla
+ * pagina, che chiede conferma.
+ */
+export async function GET(req: Request) {
+  const token = new URL(req.url).searchParams.get('t') ?? ''
+  return NextResponse.redirect(
+    `${BASE_URL}/newsletter/disiscriviti?t=${encodeURIComponent(token)}`,
+    302,
+  )
+}
+
 export async function POST(req: Request) {
   const { ok, retryAfter } = await rateLimit(req, { limit: 10, windowMs: 60 * 60_000 })
   if (!ok) {
@@ -25,7 +40,7 @@ export async function POST(req: Request) {
   // Il token può arrivare in query (one-click dei client di posta) o nel body.
   const url = new URL(req.url)
   let token = url.searchParams.get('t') ?? ''
-  if (!token) {
+  if (!token && (req.headers.get('content-type') ?? '').includes('application/json')) {
     const body = await req.json().catch(() => null)
     token = typeof body?.t === 'string' ? body.t : ''
   }

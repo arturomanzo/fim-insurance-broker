@@ -13,7 +13,18 @@ const API_GET_ALLOWED = new Set([
   '/api/og',
   '/api/og/linkedin',
   '/api/health',
+  // Il link "Cancella iscrizione" nelle email: alcuni client lo aprono in GET
+  // invece di fare il POST one-click. Il GET non disiscrive, rimanda alla
+  // pagina di conferma — vedi app/api/newsletter/disiscriviti/route.ts.
+  '/api/newsletter/disiscriviti',
 ])
+
+/**
+ * Percorsi che accettano anche `application/x-www-form-urlencoded` in POST.
+ * Serve al one-click di RFC 8058: i client di posta spediscono
+ * `List-Unsubscribe=One-Click` in form-encoded, non in JSON.
+ */
+const API_POST_FORM_ALLOWED = new Set(['/api/newsletter/disiscriviti'])
 
 /**
  * Security middleware
@@ -90,7 +101,8 @@ export function middleware(request: NextRequest) {
   // ── Content-Type enforcement for POST ─────────────────────────────────────
   if (method === 'POST') {
     const ct = request.headers.get('content-type') ?? ''
-    if (!ct.includes('application/json')) {
+    const formOk = API_POST_FORM_ALLOWED.has(pathname) && ct.includes('application/x-www-form-urlencoded')
+    if (!ct.includes('application/json') && !formOk) {
       return NextResponse.json({ error: 'Content-Type non supportato' }, { status: 415 })
     }
   }
