@@ -7,32 +7,11 @@ import AuthorBox from '@/components/ui/AuthorBox'
 import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
-import { getAllPosts, getPostBySlug } from '@/lib/blog'
+import { getAllPosts, getPostBySlug, parseItalianDate } from '@/lib/blog'
 import { getAuthor, buildPersonSchema } from '@/lib/authors'
 import { OG_BASE } from '@/lib/seo'
 
 const BASE_URL = 'https://www.fimbroker.it'
-
-const ITALIAN_MONTHS: Record<string, string> = {
-  Gennaio: '01', Febbraio: '02', Marzo: '03', Aprile: '04',
-  Maggio: '05', Giugno: '06', Luglio: '07', Agosto: '08',
-  Settembre: '09', Ottobre: '10', Novembre: '11', Dicembre: '12',
-}
-
-function parseItalianDate(dateStr: string): string {
-  if (!dateStr) return new Date().toISOString()
-  try {
-    const parts = dateStr.trim().split(' ')
-    if (parts.length === 3) {
-      const [day, monthIt, year] = parts
-      const month = ITALIAN_MONTHS[monthIt]
-      if (month) return new Date(`${year}-${month}-${day.padStart(2, '0')}`).toISOString()
-    }
-    const d = new Date(dateStr)
-    if (!isNaN(d.getTime())) return d.toISOString()
-  } catch {}
-  return new Date().toISOString()
-}
 
 interface Props {
   params: Promise<{ slug: string }>

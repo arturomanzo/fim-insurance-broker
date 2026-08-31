@@ -188,3 +188,44 @@ create policy "deny_all_anon_website_newsletter"
   to anon, authenticated
   using (false)
   with check (false);
+
+-- ============================================================
+-- Newsletter — invii mensili
+--
+-- Una riga per periodo ('YYYY-MM'), con `unique` sul periodo: è il vincolo che
+-- impedisce il doppio invio. La riga si crea PRIMA di spedire, non dopo — se la
+-- funzione muore a metà, il mese risulta già preso e il giorno dopo non riparte.
+-- Si perde un invio, non se ne spediscono due: su una lista di email è il verso
+-- giusto in cui sbagliare.
+--
+-- `html` conserva il corpo esatto approvato, con il segnaposto
+-- {{UNSUBSCRIBE_URL}} sostituito per destinatario: quello che Arturo approva è
+-- quello che parte, anche se nel frattempo il blog cambia.
+-- ============================================================
+
+create table if not exists website_newsletter_invii (
+  id            text primary key,
+  periodo       text not null unique,          -- 'YYYY-MM'
+  stato         text not null default 'bozza'
+                  check (stato in ('bozza', 'inviato', 'annullato')),
+  articoli      text[] not null default '{}',  -- slug degli articoli inclusi
+  oggetto       text not null,
+  html          text not null,
+  destinatari   integer,
+  inviati       integer,
+  falliti       integer,
+  creato_at     timestamptz not null default now(),
+  inviato_at    timestamptz
+);
+
+create index if not exists website_newsletter_invii_creato_idx
+  on website_newsletter_invii (creato_at desc);
+
+alter table website_newsletter_invii enable row level security;
+
+drop policy if exists "deny_all_anon_website_newsletter_invii" on website_newsletter_invii;
+create policy "deny_all_anon_website_newsletter_invii"
+  on website_newsletter_invii for all
+  to anon, authenticated
+  using (false)
+  with check (false);
