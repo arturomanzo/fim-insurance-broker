@@ -1,6 +1,48 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-key-man-piccole-imprese-2026",
+      "title": "Key Man Insurance: cosa succede alla tua impresa se perdi la persona che la regge",
+      "excerpt": "Quando una piccola impresa dipende da una o due persone chiave, la loro inabilità o morte può bloccare tutto. Ecco come funziona la polizza key man e perché vale la pena valutarla.",
+      "category": "Aziendale",
+      "date": "31 Agosto 2026",
+      "readTime": "6 min",
+      "image": "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Il problema che molti titolari ignorano finché non si presenta",
+          "body": "Immagina una società con cinque dipendenti e un titolare che gestisce i clienti principali, firma i contratti e tiene i rapporti con le banche. Se quell'uomo si ammala gravemente domani, chi paga gli stipendi del mese dopo? Chi tratta con i fornitori? Chi rassicura i clienti? La piccola impresa italiana è spesso costruita attorno a una o due persone la cui assenza, anche temporanea, può mandare in crisi l'intera struttura. Non è una questione di pessimismo: è il rischio operativo più sottovalutato tra le PMI."
+        },
+        {
+          "heading": "Cos'è una polizza key man e come funziona",
+          "body": "La key man insurance è una polizza vita o infortuni stipulata dall'impresa sulla testa di una persona considerata indispensabile per il business: il titolare, un socio tecnico, il responsabile commerciale con il portafoglio clienti più importante. Il beneficiario non è la famiglia della persona assicurata, ma l'azienda stessa. In caso di morte o inabilità permanente grave del key man, la liquidazione arriva direttamente alla società e serve a coprire il buco operativo: riorganizzare i processi, assumere una figura sostitutiva, rimborsare debiti che la banca aveva concesso proprio in funzione di quella persona, o semplicemente tenere in vita il flusso di cassa mentre si trova una soluzione. La struttura può essere una polizza vita temporanea caso morte, una polizza infortuni con capitale per invalidità permanente, o una combinazione delle due: dipende da quale rischio pesa di più su quella specifica impresa."
+        },
+        {
+          "heading": "Chi è il key man nella tua azienda (e non è sempre chi credi)",
+          "body": "La risposta automatica è il titolare. Spesso è quella giusta, ma non sempre. In un'azienda manifatturiera il key man può essere il responsabile di produzione che conosce a memoria processi che nessun altro sa replicare. In uno studio professionale associato può essere il socio anziano con le relazioni costruite in vent'anni. In una piccola impresa di distribuzione può essere il commerciale che porta il sessanta per cento del fatturato. Quando vengo in consulenza, la prima domanda che faccio non è «quanto volete assicurare» ma «se questa persona domani non c'è più, cosa si blocca e in quanto tempo?». La risposta orienta sia la scelta della garanzia sia il capitale da assicurare."
+        },
+        {
+          "heading": "Il capitale assicurato: da cosa dipende e come si ragiona",
+          "body": "Non esiste una formula universale, ma ci sono criteri che uso concretamente. Il primo è il costo di sostituzione: quanto costerebbe trovare, assumere e formare una figura equivalente, e per quanti mesi l'azienda girerebbe a regime ridotto? Il secondo è l'esposizione debitoria legata a quella persona: se ha firmato fideiussioni personali o se la banca ha concesso linee di credito in funzione della sua presenza operativa, quel valore va considerato. Il terzo è la quota di fatturato a rischio: se il key man gestisce direttamente clienti che rappresentano una parte rilevante del giro d'ordini, il capitale deve almeno coprire il tempo necessario a non perderli tutti. Nessuno di questi numeri è inventato: vengono dal bilancio e dalla struttura commerciale reale dell'azienda."
+        },
+        {
+          "heading": "Cosa non copre e dove si nascondono le esclusioni",
+          "body": "Una polizza key man non è un salvagente universale. Le esclusioni più comuni riguardano le malattie preesistenti non dichiarate in fase di sottoscrizione, i periodi di carenza per alcune patologie, e le cause di invalidità che non raggiungono la soglia contrattuale di inabilità permanente. Su quest'ultimo punto bisogna fare attenzione: alcune polizze liquidano solo dall'invalidità totale e permanente al 100%, il che nella pratica è rarissimo. È molto più utile una polizza che preveda una scala di liquidazione proporzionale alla percentuale di invalidità, a partire da una soglia ragionevole. Un'altra cosa che vedo spesso trascurata è la clausola di decadenza per mancato aggiornamento del beneficiario: se l'assetto societario cambia e la polizza resta intestata alla vecchia struttura, in caso di sinistro si apre un problema serio. Queste sono le cose che si chiariscono prima, non dopo.",
+          "list": [
+            "Malattie preesistenti non dichiarate: esclusione quasi sempre presente",
+            "Invalidità parziale sotto soglia contrattuale: verifica come è costruita la scala di liquidazione",
+            "Beneficiario non aggiornato dopo cambio societario: rischio concreto nelle PMI che crescono o si ristrutturano",
+            "Periodi di carenza per malattia: in alcune polizze la copertura scatta dopo 90 o 180 giorni dalla stipula"
+          ]
+        },
+        {
+          "heading": "Come affrontare il tema in azienda senza creare allarmismo",
+          "body": "Uno dei motivi per cui questa polizza si sottoscrive poco non è il costo, ma il fatto che nessuno vuole sedersi a parlare dello scenario in cui il titolare muore o non può più lavorare. Capisco la resistenza, ma nella mia esperienza chi lo fa affronta il tema in modo pragmatico, come un qualunque altro rischio d'impresa. Se vuoi valutare se la tua struttura ha una dipendenza critica da una o più persone e capire se esiste uno strumento assicurativo adatto, contattami: analizziamo insieme la situazione senza impegno, e se non c'è nulla di utile da fare te lo dico."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "assicurazione-scolastica-integrativa-cosa-non-copre-inail",
       "title": "Assicurazione scolastica integrativa: che cosa non copre l'INAIL e perché la scuola ne ha ancora bisogno",
       "excerpt": "Dal 2025/2026 la tutela INAIL per alunni e personale è diventata strutturale, e in molte segreterie è nata la stessa domanda: la polizza integrativa serve ancora? Serve. Ecco che cosa resta fuori, con le norme lette una per una.",
