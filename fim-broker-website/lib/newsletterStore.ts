@@ -13,6 +13,7 @@
  */
 
 import { getSupabase } from './supabase'
+import { firma, verifica } from './tokenFirmato'
 
 const TABLE = 'website_newsletter'
 
@@ -27,60 +28,17 @@ export interface DatiIscrizione {
 
 // ── Token di disiscrizione ────────────────────────────────────────────────────
 
-function getSecret(): string {
-  const envSecret = process.env.CLIENT_AUTH_SECRET
-  if (envSecret) return envSecret
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error('CLIENT_AUTH_SECRET non configurato in produzione')
-  }
-  return 'fim-dev-secret-DO-NOT-USE-IN-PRODUCTION'
-}
+const SCOPE = 'newsletter'
 
-function b64urlEncode(str: string): string {
-  return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
-}
-
-function b64urlDecode(str: string): string {
-  const padded = str.replace(/-/g, '+').replace(/_/g, '/')
-  return atob(padded + '==='.slice(0, (4 - (str.length % 4)) % 4))
-}
-
-async function getKey(): Promise<CryptoKey> {
-  return crypto.subtle.importKey(
-    'raw',
-    new TextEncoder().encode(getSecret()),
-    { name: 'HMAC', hash: 'SHA-256' },
-    false,
-    ['sign', 'verify'],
-  )
-}
-
-/** Token permanente legato all'indirizzo. `scope` impedisce di riusarlo altrove. */
+/** Token permanente legato all'indirizzo. Non scade di proposito. */
 export async function generaTokenDisiscrizione(email: string): Promise<string> {
-  const payload = b64urlEncode(JSON.stringify({ email: email.trim().toLowerCase(), scope: 'newsletter' }))
-  const key = await getKey()
-  const sigBuf = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload))
-  const sig = b64urlEncode(String.fromCharCode(...new Uint8Array(sigBuf)))
-  return `${payload}.${sig}`
+  return firma(SCOPE, { email: email.trim().toLowerCase() })
 }
 
 /** Email contenuta nel token, oppure null se la firma non torna. */
 export async function verificaTokenDisiscrizione(token: string): Promise<string | null> {
-  if (!token) return null
-  const parts = token.split('.')
-  if (parts.length !== 2) return null
-  const [payload, sig] = parts
-  try {
-    const key = await getKey()
-    const sigBytes = Uint8Array.from(b64urlDecode(sig), (c) => c.charCodeAt(0))
-    const valid = await crypto.subtle.verify('HMAC', key, sigBytes, new TextEncoder().encode(payload))
-    if (!valid) return null
-    const { email, scope } = JSON.parse(b64urlDecode(payload)) as { email?: string; scope?: string }
-    if (scope !== 'newsletter' || !email) return null
-    return email
-  } catch {
-    return null
-  }
+  const body = await verifica<{ email?: string }>(SCOPE, token)
+  return typeof body?.email === 'string' && body.email ? body.email : null
 }
 
 // ── Scrittura ─────────────────────────────────────────────────────────────────
@@ -165,4 +123,21 @@ export async function salvaContattoResend(email: string, contactId: string): Pro
     .from(TABLE)
     .update({ resend_contact_id: contactId })
     .eq('email', email.trim().toLowerCase())
+}
+
+// ── Lettura ───────────────────────────────────────────────────────────────────
+
+/** Email degli iscritti attivi, dal più vecchio. Solo per l'invio. */
+export async function getIscrittiAttivi(): Promise<string[]> {
+  const sb = getSupabase()
+  if (!sb) throw new Error('Supabase non configurato: impossibile leggere gli iscritti')
+
+  const { data, error } = await sb
+    .from(TABLE)
+    .select('email')
+    .eq('stato', 'attivo')
+    .order('timestamp', { ascending: true })
+
+  if (error) throw new Error(`Supabase select iscritti: ${error.message}`)
+  return (data ?? []).map((r) => r.email as string)
 }

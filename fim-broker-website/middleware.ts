@@ -10,6 +10,7 @@ const API_GET_ALLOWED = new Set([
   '/api/cron/cleanup-documenti',
   '/api/cron/daily-maintenance',
   '/api/cron/allegati-watcher',
+  '/api/cron/newsletter',
   '/api/og',
   '/api/og/linkedin',
   '/api/health',
