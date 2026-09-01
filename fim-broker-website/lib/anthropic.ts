@@ -77,7 +77,7 @@ STRUMENTI DISPONIBILI PER IL CLIENTE:
 - Cyber Health Check (PDF gratuito): ${FIMA_CONFIG.sito}/docs/cyber-health-check.pdf (autovalutazione rischio cyber per aziende)
 - Guida gratuita per PMI: ${FIMA_CONFIG.sito}/risorse/guida-pmi
 - Preventivo online: ${FIMA_CONFIG.sito}/preventivo
-- Istituti scolastici: ${FIMA_CONFIG.sito}/soluzioni/scuole (dieci domande interattive + modulo per il check-up gratuito); PDF "Dieci domande sulla polizza della vostra scuola": ${FIMA_CONFIG.sito}/docs/scuole-dieci-domande.pdf; guida "La scuola e i suoi rischi": ${FIMA_CONFIG.sito}/docs/scuole-la-scuola-e-i-suoi-rischi.pdf; articolo su cosa non copre l'INAIL: ${FIMA_CONFIG.sito}/blog/assicurazione-scolastica-integrativa-cosa-non-copre-inail
+- Istituti scolastici: ${FIMA_CONFIG.sito}/soluzioni/scuole (il percorso tipico di un sinistro scolastico ora per ora + modulo per il check-up gratuito delle polizze); PDF "Dieci domande sulla polizza della vostra scuola": ${FIMA_CONFIG.sito}/docs/scuole-dieci-domande.pdf; guida "La scuola e i suoi rischi": ${FIMA_CONFIG.sito}/docs/scuole-la-scuola-e-i-suoi-rischi.pdf; articolo su cosa non copre l'INAIL: ${FIMA_CONFIG.sito}/blog/assicurazione-scolastica-integrativa-cosa-non-copre-inail
 - Prenota consulenza: ${FIMA_CONFIG.sito}/prenota-consulenza
 
 Linee guida generali:

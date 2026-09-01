@@ -1,5 +1,5 @@
 /**
- * Dipartimento Scuole — costanti condivise fra pagina, checklist, form e route.
+ * Dipartimento Scuole — costanti condivise fra pagina, form e route.
  *
  * Il progetto scuole ha una casella propria: tutto ciò che arriva dal sito
  * per gli istituti scolastici va lì, non su info@. La casella è su Aruba,
@@ -56,23 +56,3 @@ export function isValidTipoIstituto(value: string): value is TipoIstitutoValue {
   return TIPI_ISTITUTO.some((t) => t.value === value)
 }
 
-/**
- * Le dieci domande del check-up. Stesso testo del PDF "Dieci domande sulla
- * polizza della vostra scuola" (Dipartimento Scuole, agosto 2026): se cambia
- * uno, va cambiato anche l'altro.
- */
-export const DIECI_DOMANDE: readonly string[] = [
-  "La copertura segue gli studenti nei percorsi per le competenze trasversali e l'orientamento (PCTO), quando si trovano presso aziende terze?",
-  'La responsabilità civile patrimoniale del Dirigente Scolastico e del D.S.G.A. è compresa, oppure va acquistata a parte?',
-  "Qual è il massimale della garanzia di responsabilità civile verso terzi, e in che anno è stato fissato l'ultima volta?",
-  "I viaggi d'istruzione all'estero sono coperti per spese sanitarie, rimpatrio e annullamento del viaggio?",
-  'Gli assistenti specialistici, gli educatori esterni e i volontari che collaborano alle attività rientrano fra gli assicurati?',
-  'Le dotazioni informatiche e gli strumenti di laboratorio acquistati negli ultimi anni sono censiti nella polizza danni?',
-  'La tutela legale ha un limite di spesa sufficiente a coprire un procedimento reale, e lascia libera la scelta del legale?',
-  'Esiste una copertura per la violazione dei dati trattati dal registro elettronico e dalla segreteria?',
-  'Quali franchigie e scoperti si applicano ai sinistri più frequenti, cioè gli infortuni in palestra e nei cortili?',
-  "Ci sono garanzie presenti in due contratti diversi, per le quali l'istituto paga due volte?",
-] as const
-
-/** "Se ne restano tre senza risposta, vale la pena parlarne." */
-export const CHECKLIST_SOGLIA = 3

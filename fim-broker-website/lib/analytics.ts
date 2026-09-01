@@ -269,17 +269,6 @@ export function trackScuoleSubmit(ruolo: string, utmSource?: string, eventId?: s
   )
 }
 
-/**
- * Checklist "Dieci domande" completata sulla pagina scuole.
- * `puntiAperti` = risposte "no" + "non so": sopra la soglia scatta l'invito al check-up.
- */
-export function trackScuoleChecklist(puntiAperti: number) {
-  track('scuole_checklist_complete', {
-    event_category: 'scuole',
-    punti_aperti: puntiAperti,
-  })
-}
-
 // ── Funnel preventivo auto — documenti ───────────────────────────────────────
 
 /** Documenti per preventivo auto caricati e inviati */
