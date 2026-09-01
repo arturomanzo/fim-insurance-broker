@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
-import ScuoleChecklist from '@/components/ui/ScuoleChecklist'
 import ScuoleForm from '@/components/forms/ScuoleForm'
 import { scuoleFaq } from '@/lib/faq/scuole'
 import { SCUOLE_DOCS, SCUOLE_EMAIL, SCUOLE_PEC } from '@/lib/scuole'
@@ -81,15 +80,43 @@ const rischi = [
   { area: 'Personale e volontari', cosa: 'Infortuni del personale docente e ATA; posizione di genitori, esperti esterni e volontari che collaborano alle attività dell\'istituto.' },
 ]
 
-const scoperture = [
-  { punto: 'PCTO e stage presso terzi', perche: 'Gli studenti operano in azienda, spesso con attrezzature non scolastiche. Molte polizze non estendono la copertura fuori dai locali dell\'istituto.' },
-  { punto: 'RC patrimoniale di Dirigente e D.S.G.A.', perche: 'Spesso assente, oppure presente con massimali che non reggono il valore di una contestazione erariale.' },
-  { punto: 'Massimali della culpa in vigilando', perche: 'Adeguati vent\'anni fa, non oggi. Un danno grave a un minore supera con facilità i massimali storici.' },
-  { punto: 'Viaggi d\'istruzione all\'estero', perche: 'Spese sanitarie, rimpatrio e annullamento richiedono garanzie specifiche che la polizza base non contiene.' },
-  { punto: 'Alunni con disabilità e assistenza', perche: 'Attività di assistenza specialistica e personale educativo esterno restano talvolta fuori dal perimetro degli assicurati.' },
-  { punto: 'Dotazioni informatiche', perche: 'Notebook, tablet e strumenti di laboratorio acquistati con fondi dedicati, spesso non censiti nella polizza danni.' },
-  { punto: 'Tutela legale', perche: 'Presente, ma con limiti di spesa che non coprono un procedimento reale, e talvolta senza libera scelta del legale.' },
-  { punto: 'Violazione dei dati', perche: 'Rischio recente e quasi mai coperto, in un contesto che tratta ogni giorno dati di minori e categorie particolari.' },
+const sinistro = [
+  {
+    tempo: 'Ora zero',
+    titolo: 'L\'infortunio',
+    testo:
+      'Un alunno cade male durante l\'ora di educazione fisica. Il docente soccorre e avvisa la famiglia, la segreteria annota l\'accaduto e raccoglie la relazione di chi era presente. La polizza non è ancora entrata in scena, ma quella relazione peserà su tutto il resto.',
+  },
+  {
+    tempo: 'Entro due giorni',
+    titolo: 'La denuncia all\'INAIL',
+    testo:
+      'Arriva il certificato medico. Se la prognosi supera i tre giorni, la segreteria trasmette la denuncia all\'INAIL entro due giorni. La tutela INAIL però non copre tutto: restano fuori le spese sanitarie private e le invalidità sotto la soglia di indennizzo. Quel vuoto lo colma — o non lo colma — la polizza integrativa.',
+  },
+  {
+    tempo: 'Nei termini di polizza',
+    titolo: 'La denuncia alla compagnia',
+    testo:
+      'Ogni contratto fissa il suo termine per denunciare il sinistro: tre giorni in alcuni, quindici o trenta in altri. Chi lo scopre in ritardo consegna alla compagnia il primo argomento per discutere l\'indennizzo. È una data da conoscere prima che serva.',
+  },
+  {
+    tempo: 'Le settimane dopo',
+    titolo: 'Le spese della famiglia',
+    testo:
+      'Visite specialistiche, accertamenti, fisioterapia. Il rimborso lo governano due parole scritte in polizza: franchigia e scoperto. Sono loro a stabilire quanto arriva davvero alla famiglia e quanto resta a suo carico — e la differenza, la famiglia, la chiederà alla scuola.',
+  },
+  {
+    tempo: 'Anche mesi dopo',
+    titolo: 'La richiesta di risarcimento',
+    testo:
+      'La famiglia può contestare all\'istituto la vigilanza sull\'alunno: è la culpa in vigilando dell\'art. 2048 del codice civile, con una presunzione di responsabilità che tocca alla scuola superare. Qui rispondono la garanzia RC e la tutela legale — se il massimale regge la richiesta e se le spese di difesa sono coperte davvero.',
+  },
+  {
+    tempo: 'Fino alla chiusura',
+    titolo: 'Chi segue la pratica',
+    testo:
+      'Senza un broker, la segreteria rincorre compagnia, perito e famiglia fra una scadenza e l\'altra. Con l\'incarico a FIM l\'istituto ha un solo interlocutore, che segue la pratica fino alla chiusura e riferisce per iscritto.',
+  },
 ]
 
 const passaggi = [
@@ -247,30 +274,8 @@ export default function ScuolePage() {
         </div>
       </section>
 
-      {/* Dieci domande */}
-      <section className="section-padding bg-gray-50" id="dieci-domande">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center mb-10">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Autotest
-            </span>
-            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-              Dieci domande sulla polizza della vostra scuola
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              Se sapete rispondere a tutte, siete a posto. Se ne restano tre senza risposta, vale la pena parlarne.
-              Non è un questionario commerciale: sono le domande a cui, dopo trent&apos;anni di contratti letti,
-              sappiamo che quasi nessuna scuola sa rispondere per intero. Nessuna risposta lascia il vostro browser.
-            </p>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <ScuoleChecklist />
-          </div>
-        </div>
-      </section>
-
       {/* Mappa dei rischi */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
             <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
@@ -305,42 +310,41 @@ export default function ScuolePage() {
         </div>
       </section>
 
-      {/* Otto scoperture */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <div className="text-center mb-10">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Quello che troviamo leggendo le polizze
+      {/* Anatomia di un sinistro */}
+      <section className="section-padding bg-primary text-white relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-white/5 rounded-full" />
+          <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-white/5 rounded-full" />
+        </div>
+        <div className="container-custom relative">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-3">
+              Anatomia di un sinistro
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-              Le otto scoperture più frequenti
+            <h2 className="text-3xl md:text-4xl font-black mb-4">
+              Una caduta in palestra, ora per ora
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Non è un elenco teorico. Sono i punti che emergono più spesso quando leggiamo le polizze già in essere di un istituto.
+            <p className="text-white/75 max-w-2xl mx-auto">
+              Il modo più onesto di giudicare una polizza è guardarla lavorare. Questo è il percorso tipico di un
+              infortunio a scuola, con i punti esatti in cui il contratto — non la buona volontà — decide come va a finire.
             </p>
           </div>
-          <div className="max-w-4xl mx-auto overflow-x-auto">
-            <table className="w-full bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden text-left">
-              <thead className="bg-primary text-white">
-                <tr>
-                  <th scope="col" className="px-5 py-3 text-sm font-bold w-1/3">Punto critico</th>
-                  <th scope="col" className="px-5 py-3 text-sm font-bold">Perché conta</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {scoperture.map((s) => (
-                  <tr key={s.punto} className="align-top">
-                    <th scope="row" className="px-5 py-4 font-bold text-primary text-sm">{s.punto}</th>
-                    <td className="px-5 py-4 text-gray-600 text-sm leading-relaxed">{s.perche}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="text-center text-sm text-gray-500 mt-6 max-w-2xl mx-auto">
-            Come lo verifichiamo: chiediamo le polizze in corso e le leggiamo per intero. Consegniamo un documento che
-            mette in colonna ciò che è coperto, ciò che non lo è e ciò che è coperto due volte. Fino a quel momento non
-            c&apos;è nulla da firmare e nulla da pagare.
+          <ol className="max-w-3xl mx-auto">
+            {sinistro.map((s) => (
+              <li key={s.titolo} className="relative pl-8 pb-10 last:pb-0 ml-2 border-l border-white/20 last:border-transparent">
+                <span aria-hidden className="absolute -left-[9px] top-1 w-[17px] h-[17px] rounded-full bg-accent ring-4 ring-primary" />
+                <p className="text-xs font-black uppercase tracking-widest text-accent mb-1">{s.tempo}</p>
+                <h3 className="text-lg font-bold mb-2">{s.titolo}</h3>
+                <p className="text-white/75 text-sm leading-relaxed">{s.testo}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="text-center text-sm text-white/60 mt-12 max-w-2xl mx-auto">
+            Ognuno di questi passaggi sta già scritto nelle condizioni di polizza che l&apos;istituto ha firmato.{' '}
+            <Link href="#check-up" className="text-white underline underline-offset-2 hover:text-accent transition-colors">
+              Il check-up gratuito
+            </Link>{' '}
+            serve a sapere come andrebbe a finire prima che succeda.
           </p>
         </div>
       </section>
