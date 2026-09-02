@@ -34,27 +34,45 @@ declare global {
 const ADS_LEAD_EVENT = 'fim_lead'
 
 /**
- * Valore economico stimato di un lead, in euro, per tipo di form.
+ * Valore economico atteso di un lead, in euro, per tipo di form.
  *
  * Serve a due cose: dare a Google Ads un segnale su cui ottimizzare davvero
  * (invece di contare tutte le conversioni uguali) e permettere di leggere il
  * ritorno, non solo il costo per contatto.
  *
- * ⚠️ NUMERI DA TARARE con i dati reali FIM. La formula è:
- * provvigione media del primo anno × tasso di chiusura di quel canale.
- * Quelli qui sotto sono un punto di partenza prudente, non una misurazione.
+ * TARATI sul portafoglio il 02/09/2026. Formula:
+ *   premio annuo medio del ramo × 15% di provvigione × 10% di chiusura
+ *
+ * Le tre grandezze vengono da dati reali, non da stime:
+ * - premio annuo medio, 1.095 polizze attive: 727,99 € complessivo,
+ *   751,24 € sull'RC Auto, 729,28 € sulla media RC Professionale /
+ *   RC Azienda / Multirischio Impresa;
+ * - provvigione media 15% (dichiarata da Arturo: le colonne `provvigione` e
+ *   `perc_provvigione` del gestionale sono vuote, quindi il dato non è
+ *   ricavabile dal database);
+ * - chiusura 9%, misurata su `lead_web`: 2 clienti su 22 lead di acquisizione
+ *   arrivati dal sito fra il 09/04 e il 02/09/2026. Arrotondata a 10%.
+ *
+ * I valori escono quasi tutti uguali, e la cosa è informativa: da FIM il tipo
+ * di prodotto sposta poco, perché i premi stanno tutti nella fascia 400-1.000 €
+ * e il tasso di chiusura non cambia per ramo. La leva non è il valore della
+ * conversione, è il costo del clic.
+ *
+ * ⚠️ `scuole` resta l'unico stimato — FIM non ha ancora polizze di istituti in
+ * portafoglio, quindi il premio è preso dal Multirischio Impresa (1.055 €).
  */
 const LEAD_VALUES: Record<string, number> = {
-  preventivo: 45,
-  preventivo_auto_documenti: 45,
-  second_opinion: 35,
-  prenotazione: 30,
-  contact: 20,
-  scuole: 40,
+  preventivo: 11,
+  preventivo_auto_documenti: 11,
+  second_opinion: 11,
+  prenotazione: 11,
+  // Intento più debole degli altri form: chiede informazioni, non un preventivo.
+  contact: 6,
+  scuole: 16,
   collabora: 0,
 }
 
-const DEFAULT_LEAD_VALUE = 20
+const DEFAULT_LEAD_VALUE = 6
 
 /**
  * Tipi di lead che contano come CONVERSIONE COMMERCIALE per Google Ads.
