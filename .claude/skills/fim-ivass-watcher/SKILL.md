@@ -46,7 +46,9 @@ Chiedi all'utente il periodo di riferimento se non specificato:
 
 ### 2. Scansiona le fonti
 
-Usa `WebSearch` e `WebFetch` per:
+Parti dalla tabella Supabase `ivass_watcher_state`: il cron `/api/cron/ivass-watcher` gira ogni giorno alle 05:30 e ha già classificato le voci di IVASS, ANIA e Gazzetta (high/medium/low/none) con summary, scadenza e riferimenti normativi. Il report si costruisce da lì.
+
+Solo per il periodo che la tabella non copre, usa `WebSearch` e `WebFetch` per:
 - Cercare su Google con query tipo `site:ivass.it "provvedimento" after:YYYY-MM-DD`
 - Fetchare le pagine news delle fonti principali
 - Estrarre titoli, date, link, abstract
@@ -137,17 +139,6 @@ Dopo aver consegnato il report, chiedi all'utente:
 
 **Non** procedere senza conferma esplicita.
 
-## Automazione via cron (opzionale)
-
-Se l'utente chiede di far girare questa skill **automaticamente ogni settimana**:
-
-1. Ricordagli che esiste già l'infrastruttura Vercel Cron nel progetto (vedi `vercel.json` e `app/api/cron/`)
-2. Proponi di creare un endpoint `/api/cron/ivass-watcher` che:
-   - Esegue la stessa logica di questa skill
-   - Invia il report via email a `info@fimbroker.it` tramite Resend (già integrato)
-   - Frequenza consigliata: ogni lunedì alle 8:00 (`0 8 * * 1`)
-3. **Non** implementare senza approvazione esplicita — il cron Vercel gratuito ha limiti (2/giorno su hobby plan) e questo è un cambiamento architetturale.
-
 ## Output compliance
 
 Il report prodotto deve:
@@ -156,12 +147,3 @@ Il report prodotto deve:
 - ✅ Usare condizionale per previsioni ("potrebbe", "è probabile")
 - ✅ Non inventare date, importi o riferimenti normativi
 - ✅ Se una fonte è ambigua, marcare con [DA VERIFICARE]
-
-## Esempi di trigger
-
-- "Controlla le novità IVASS di questa settimana"
-- "Cosa c'è di nuovo in ambito normativo?"
-- "Dammi idee per articoli blog"
-- "Quali trend vedi nel settore assicurativo?"
-- "Fai un giro delle news di settore"
-- "Aggiornamenti sulla polizza catastrofale"

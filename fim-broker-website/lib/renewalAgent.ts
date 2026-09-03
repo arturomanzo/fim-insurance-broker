@@ -6,10 +6,11 @@
  * 2. Generare 3 opzioni di rinnovo personalizzate sul tipo di copertura
  * 3. Scrivere il testo dell'email come un consulente reale (non un template)
  *
- * Usa claude-haiku per efficienza cost/latency in contesti batch.
+ * Modello: AI_MODELS.draft (batch, costo basso).
  * Fallback al template standard se l'AI non risponde.
  */
 import Anthropic from '@anthropic-ai/sdk'
+import { AI_MODELS } from './ai-models'
 import type { Policy } from '@/lib/policyData'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
@@ -42,20 +43,50 @@ function esc(s: unknown): string {
 
 // ── AI proposal generation ────────────────────────────────────────────────────
 
+// La forma la garantisce l'API: il prompt descrive solo cosa scrivere dentro.
+const PROPOSTA_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['intro', 'urgencyReason', 'options', 'closingNote'],
+  properties: {
+    intro: { type: 'string' },
+    urgencyReason: { type: 'string' },
+    options: {
+      type: 'array',
+      minItems: 3,
+      maxItems: 3,
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['titolo', 'descrizione', 'vantaggio'],
+        properties: {
+          titolo: { type: 'string' },
+          descrizione: { type: 'string' },
+          vantaggio: { type: 'string' },
+        },
+      },
+    },
+    closingNote: { type: 'string' },
+  },
+} as const
+
 export async function generateRenewalProposal(
   policy: Policy,
   daysLeft: number,
 ): Promise<RenewalProposal | null> {
   try {
     const message = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 1024,
+      model: AI_MODELS.draft,
+      // Il tetto stretto tagliava il JSON in silenzio. Niente `effort`: Haiku 4.5
+      // lo rifiuta con un 400.
+      max_tokens: 4096,
+      output_config: { format: { type: 'json_schema', schema: PROPOSTA_SCHEMA } },
       messages: [
         {
           role: 'user',
           content: `Sei un consulente assicurativo senior di FIM Insurance Broker — broker indipendente con accesso a 20 compagnie assicurative italiane.
 
-Devi generare il contenuto testuale di un'email di rinnovo polizza personalizzata. Il cliente deve sentire che stai scrivendo TU, non un sistema automatico.
+Devi generare il contenuto testuale di un'email di rinnovo polizza personalizzata, scritta come la scriverebbe un consulente che conosce il cliente.
 
 DATI POLIZZA IN SCADENZA:
 - Nome cliente: ${policy.clientName}
@@ -66,41 +97,30 @@ ${policy.massimale ? `- Massimale: ${policy.massimale}` : ''}
 ${policy.note ? `- Note: ${policy.note}` : ''}
 - Giorni alla scadenza: ${daysLeft}
 
-Genera 3 opzioni di rinnovo SPECIFICHE per il tipo "${policy.tipo}". Le opzioni devono essere concrete e diverse tra loro — non generiche.
+Genera 3 opzioni di rinnovo specifiche per il tipo "${policy.tipo}", concrete e diverse fra loro.
 
-Rispondi SOLO con un JSON valido (nessun testo fuori dal JSON):
+Cosa scrivere in ogni campo:
+- "intro": due o tre frasi di apertura. Il nome del cliente, la polizza, e un'osservazione pertinente alla copertura (l'auto porta il discorso sulla strada, la casa sul patrimonio). Apri come apriresti una mail a una persona che conosci, non con una formula di circolare.
+- "urgencyReason": una frase su cosa rischia davvero se la polizza scade senza rinnovo, legata al tipo "${policy.tipo}" (per l'auto guidare scoperti è un reato; per la casa un sinistro resta a carico suo). Diretto.
+- "options[0]": il rinnovo in continuità con ${policy.compagnia} — nessuna interruzione, nessuna burocrazia, storico del cliente preservato. Nel "vantaggio" quello che si ottiene restando (niente carenze, massimale storico confermato).
+- "options[1]": un'estensione di copertura sensata per "${policy.tipo}" — cosa si aggiunge rispetto a oggi (kasko sull'auto, furto e alluvione sulla casa, LTC sulla vita).
+- "options[2]": l'analisi di mercato che FIM può fare su "${policy.tipo}", confrontando le compagnie con cui lavora.
+- "closingNote": una o due frasi che invitano a sentirsi per telefono o via email, col nome del cliente. Firma "Il tuo consulente FIM".
 
-{
-  "intro": "2-3 frasi di apertura personali. Menziona il nome del cliente, la polizza specifica, e un osservazione pertinente al tipo di copertura o alla situazione (es. se è auto, parla di sicurezza stradale; se è casa, parla di protezione del patrimonio). NON iniziare con 'Gentile'.",
-  "urgencyReason": "1 frase specifica su cosa rischia concretamente se la polizza scade senza rinnovo — legata al tipo '${policy.tipo}' (es. per auto: guida senza copertura è reato; per casa: in caso di sinistro resterà senza indennizzo). Sii diretto.",
-  "options": [
-    {
-      "titolo": "Rinnovo con continuità",
-      "descrizione": "Descrizione concreta: rinnova con ${policy.compagnia} senza interruzione di copertura, zero burocrazia, storico cliente preservato",
-      "vantaggio": "vantaggio specifico per '${policy.tipo}' che si ottiene mantenendo la continuità (es. no carenze, massimale storico confermato, ecc.)"
-    },
-    {
-      "titolo": "Titolo opzione miglioramento (es. 'Copertura Completa' o 'Protezione Plus')",
-      "descrizione": "Descrizione di un'estensione di copertura sensata per '${policy.tipo}' — cosa aggiungere rispetto all'attuale (es. per RCA: aggiungere kasko; per casa: aggiungere furto e alluvione; per vita: integrare LTC)",
-      "vantaggio": "beneficio concreto e cifra indicativa se possibile"
-    },
-    {
-      "titolo": "Titolo opzione ottimizzazione (es. 'Stesso Budget, Di Più')",
-      "descrizione": "Come FIM può analizzare il mercato e trovare condizioni migliori per '${policy.tipo}' allo stesso premio o inferiore — confronto tra 20 compagnie",
-      "vantaggio": "stima risparmio medio o miglioramento copertura ottenibile nel mercato attuale"
-    }
-  ],
-  "closingNote": "1-2 frasi calde che invitano al contatto diretto (telefono o email). Personalizza sul nome del cliente. Firma come 'Il tuo consulente FIM'."
-}`,
+Non scrivere cifre di risparmio, percentuali o premi: quello che si ottiene lo si dice a voce, dopo aver guardato il mercato. Un numero in un'email è una promessa che nessuno ha ancora verificato.`,
         },
       ],
     })
 
-    const content = message.content[0]
-    if (content.type !== 'text') return null
+    if (message.stop_reason === 'refusal' || message.stop_reason === 'max_tokens') {
+      console.error('[renewalAgent] risposta inutilizzabile:', message.stop_reason)
+      return null
+    }
 
-    const jsonStr = content.text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim()
-    const parsed = JSON.parse(jsonStr) as RenewalProposal
+    const content = message.content.find((b) => b.type === 'text')
+    if (!content || content.type !== 'text') return null
+
+    const parsed = JSON.parse(content.text) as RenewalProposal
 
     // Basic validation
     if (!parsed.intro || !Array.isArray(parsed.options) || parsed.options.length === 0) return null

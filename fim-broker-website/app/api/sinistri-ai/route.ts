@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { anthropic } from '@/lib/anthropic'
+import { AI_MODELS, FALLBACK_BETA } from '@/lib/ai-models'
 import { rateLimit } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
@@ -101,17 +102,19 @@ Regole FORM_DATA:
 - Dopo il blocco non aggiungere altro testo
 
 ## STILE E TONO
-- Professionale, caldo, rassicurante: "Ci pensiamo noi", "Non sei solo", "Siamo al tuo fianco"
-- Rispondi SEMPRE in italiano
+- Chi ti scrive ha appena avuto un danno: professionale, caldo, senza frasi fatte. Rassicura con quello che FIM farà, non con gli slogan.
+- Rispondi in italiano
 - Usa emoji con parsimonia (✅ per checklist, ⚠️ per avvertenze urgenti)
-- Risposte concise (max 4 paragrafi), eccetto per le checklist
+- Risposte da chat: un passo alla volta. La checklist è l'unica cosa lunga che serve.
 - Non inventare numeri o garanzie che non puoi dare
 
 ## ESCALATION URGENTE
-Se il cliente usa parole come "urgente", "emergenza", "non so cosa fare", "è grave", aggiungi sempre:
+Se il cliente è in difficoltà o ha bisogno di aiuto adesso, aggiungi:
 "Per assistenza immediata: 📞 **06 96883381** (lun-ven 9-18) o 💬 **WhatsApp** https://wa.me/393473312330"
 
-FIM Insurance Broker — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it`
+FIM Insurance Broker — Via Roma 41, 04012 Cisterna di Latina — info@fimbroker.it
+
+Latency-sensitive; begin your visible answer immediately.`
 
 export async function POST(req: NextRequest) {
   const { ok, retryAfter } = await rateLimit(req, { limit: 30, windowMs: 60_000 })
@@ -148,10 +151,20 @@ export async function POST(req: NextRequest) {
     const stream = new ReadableStream({
       async start(controller) {
         try {
-          const anthropicStream = anthropic.messages.stream({
-            model: 'claude-sonnet-4-6',
-            max_tokens: 1024,
-            system: CLAIMS_SYSTEM_PROMPT,
+          const anthropicStream = anthropic.beta.messages.stream({
+            model: AI_MODELS.chat,
+            // Il tetto copre anche il thinking, acceso di default su Opus 5.
+            max_tokens: 8192,
+            system: [
+              {
+                type: 'text',
+                text: CLAIMS_SYSTEM_PROMPT,
+                cache_control: { type: 'ephemeral' },
+              },
+            ],
+            output_config: { effort: 'medium' },
+            betas: [FALLBACK_BETA],
+            fallbacks: 'default',
             messages: sanitizedMessages,
           })
 
@@ -163,6 +176,19 @@ export async function POST(req: NextRequest) {
               const data = JSON.stringify({ delta: chunk.delta.text })
               controller.enqueue(encoder.encode(`data: ${data}\n\n`))
             }
+          }
+
+          // Un rifiuto è un turno riuscito senza testo: senza questo la chat tace.
+          const finale = await anthropicStream.finalMessage()
+          console.info(
+            `[sinistri-ai] stop=${finale.stop_reason} in=${finale.usage.input_tokens} out=${finale.usage.output_tokens} cache_read=${finale.usage.cache_read_input_tokens ?? 0}`,
+          )
+          if (finale.stop_reason === 'refusal') {
+            const data = JSON.stringify({
+              delta:
+                'Su questa richiesta non riesco a risponderti. Per aprire il sinistro chiamaci allo 06 96883381 o scrivi su WhatsApp: https://wa.me/393473312330',
+            })
+            controller.enqueue(encoder.encode(`data: ${data}\n\n`))
           }
 
           controller.enqueue(encoder.encode('data: [DONE]\n\n'))

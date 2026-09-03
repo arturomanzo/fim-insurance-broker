@@ -12,6 +12,7 @@
  */
 
 import Anthropic from '@anthropic-ai/sdk'
+import { AI_MODELS } from './ai-models'
 import type { Lead } from './leadStore'
 
 export interface LeadScore {
@@ -114,23 +115,45 @@ function computeBaseScore(lead: Lead): number {
 
 // ── 2. Raffinamento AI con Claude ──────────────────────────────────────────────
 
-const AI_SYSTEM = `Sei un esperto analista di lead per un broker assicurativo italiano (FIM Insurance Broker).
-Il tuo compito è analizzare i dati di un lead e produrre:
-1. Un bonus di punteggio (0–10) che si aggiunge al punteggio base calcolato dai dati strutturati
-2. Una spiegazione sintetica in italiano (max 2 righe) per il team commerciale
+const AI_SYSTEM = `Leggi la richiesta di un potenziale cliente di FIM Insurance Broker (broker assicurativo, Cisterna di Latina) e di' al team commerciale cosa c'è dentro: se dichiara un'urgenza (una scadenza, un "mi serve subito"), se parla di budget o di importi, quanto è specifica la richiesta, se cita sinistri passati o esigenze particolari.
+Il punteggio lo calcola il sistema: tu descrivi quello che vedi. La "reason" è una riga in italiano per chi alzerà il telefono.`
 
-Criteri per assegnare il bonus:
-- Urgenza esplicita nel messaggio (es. "ho bisogno subito", "scade la polizza") → +8/10
-- Budget o importi menzionati → +6/8
-- Richiesta specifica e dettagliata → +5/7
-- Menzione di sinistri passati, esigenze particolari → +4/6
-- Messaggio generico o vuoto → +0/2
+// Il modello giudica, l'aritmetica sta in codice: un modello che somma punti
+// sbaglia in modo invisibile, e la rubrica nel prompt non era verificabile.
+const LEAD_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['urgenza', 'budget', 'dettaglio', 'esigenzeParticolari', 'reason'],
+  properties: {
+    urgenza: { type: 'boolean', description: 'Il messaggio dichiara una scadenza o una fretta esplicita.' },
+    budget: { type: 'boolean', description: 'Il messaggio nomina un budget, un premio o un importo.' },
+    dettaglio: {
+      type: 'string',
+      enum: ['alto', 'medio', 'basso', 'vuoto'],
+      description: 'Quanto la richiesta è specifica su cosa vuole assicurare.',
+    },
+    esigenzeParticolari: {
+      type: 'boolean',
+      description: 'Cita sinistri passati, coperture insolite o vincoli suoi.',
+    },
+    reason: { type: 'string', description: 'Una riga per il team commerciale, in italiano.' },
+  },
+} as const
 
-Rispondi SOLO con JSON valido, nessun testo fuori dal JSON:
-{
-  "bonus": <numero 0-10>,
-  "reason": "<spiegazione breve in italiano per il team>"
-}`
+function bonusDa(j: {
+  urgenza: boolean
+  budget: boolean
+  dettaglio: string
+  esigenzeParticolari: boolean
+}): number {
+  let b = 0
+  if (j.urgenza) b += 4
+  if (j.budget) b += 3
+  if (j.dettaglio === 'alto') b += 2
+  else if (j.dettaglio === 'medio') b += 1
+  if (j.esigenzeParticolari) b += 1
+  return Math.min(10, b)
+}
 
 async function aiRefine(lead: Lead, baseScore: number): Promise<{ bonus: number; reason: string }> {
   const apiKey = process.env.ANTHROPIC_API_KEY
@@ -153,18 +176,36 @@ Punteggio base calcolato: ${baseScore}/90
 
   try {
     const msg = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 256,
+      model: AI_MODELS.draft,
+      // Haiku 4.5 non pensa, ma il tetto stretto tagliava il JSON senza dirlo.
+      // Niente `effort` qui: Haiku 4.5 lo rifiuta con un 400.
+      max_tokens: 4096,
+      output_config: { format: { type: 'json_schema', schema: LEAD_SCHEMA } },
       system: AI_SYSTEM,
       messages: [{ role: 'user', content: leadSummary }],
     })
 
-    const text = msg.content[0].type === 'text' ? msg.content[0].text.trim() : ''
-    const parsed = JSON.parse(text) as { bonus: number; reason: string }
+    if (msg.stop_reason === 'refusal' || msg.stop_reason === 'max_tokens') {
+      console.error('[leadScoring] risposta inutilizzabile:', msg.stop_reason)
+      return { bonus: 0, reason: buildFallbackReason(lead, baseScore) }
+    }
+
+    const block = msg.content.find((b) => b.type === 'text')
+    if (!block || block.type !== 'text') {
+      return { bonus: 0, reason: buildFallbackReason(lead, baseScore) }
+    }
+
+    const parsed = JSON.parse(block.text) as {
+      urgenza: boolean
+      budget: boolean
+      dettaglio: string
+      esigenzeParticolari: boolean
+      reason: string
+    }
 
     return {
-      bonus: Math.max(0, Math.min(10, Math.round(parsed.bonus))),
-      reason: parsed.reason ?? buildFallbackReason(lead, baseScore),
+      bonus: bonusDa(parsed),
+      reason: parsed.reason || buildFallbackReason(lead, baseScore),
     }
   } catch (err) {
     console.error('[leadScoring] AI refine error:', err)

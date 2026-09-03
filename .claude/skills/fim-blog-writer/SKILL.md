@@ -42,7 +42,7 @@ Ogni articolo deve avere questa struttura JSON (identica a quella esistente in `
   "slug": "kebab-case-seo-friendly",
   "title": "Titolo con Keyword Principale",
   "excerpt": "1-2 frasi che riassumono il valore dell'articolo per il lettore. Max 180 caratteri.",
-  "category": "Auto | Vita | Casa | Salute | Aziendale | Professionisti | Viaggio | Guide",
+  "category": "una delle chiavi di CATEGORY_IMAGES in scripts/generate-blog-post.mjs",
   "date": "DD Mese YYYY",
   "readTime": "X min",
   "image": "https://images.unsplash.com/photo-XXX?w=1200&q=80&fit=crop&auto=format",
@@ -57,7 +57,7 @@ Ogni articolo deve avere questa struttura JSON (identica a quella esistente in `
 ```
 
 **Regole strutturali:**
-- 5 sezioni (4 contenuto + 1 CTA finale a FIM)
+- Almeno 4 sezioni, l'ultima è la CTA verso FIM (stesso vincolo dello script settimanale)
 - Prime 4 sezioni: `heading` + `body` (+ `list` opzionale con 3-7 bullet)
 - Ultima sezione: **sempre** una call-to-action verso FIM senza `list`, con telefono/email/link
 - Lunghezza totale: 800-1500 parole
@@ -67,8 +67,8 @@ Ogni articolo deve avere questa struttura JSON (identica a quella esistente in `
 ### 4. Scrivi contenuto di qualità
 
 **Fai:**
-- Usa dati concreti e fonti verificabili (IVASS, ANIA, Gazzetta Ufficiale, stampa di settore)
-- Cita normative specifiche con riferimento (es. "D.Lgs 68/2018", "Legge di Bilancio 2024")
+- Usa dati concreti e fonti verificabili (IVASS, ANIA, Gazzetta Ufficiale, stampa di settore), citando la fonte nel testo
+- Estremi di legge **solo** se sono nel registro `normeVerificate` di `scripts/lib/blog-guardrails.mjs`. Una norma che non c'è si descrive senza attribuirla («la legge impone a...»): attribuire un obbligo alla norma sbagliata è l'errore più grave qui, ed è già successo. Per aggiungerne una al registro va letta sulla fonte primaria.
 - Includi esempi concreti e casi pratici rilevanti per il target italiano
 - Usa prima persona plurale ("crediamo", "confrontiamo", "il nostro team")
 - Linka internamente ad altre pagine del sito (`/soluzioni/X`, `/servizi/Y`, `/preventivo`, `/prenota-consulenza`)
@@ -133,7 +133,7 @@ Ogni articolo deve avere questa struttura JSON (identica a quella esistente in `
 
 1. Aggiungi il nuovo oggetto **all'inizio** dell'array `posts` in `fim-broker-website/data/blog-posts.json` (così appare come più recente)
 2. Aggiungi lo `slug` all'inizio dell'array `blogSlugs` in `fim-broker-website/app/sitemap.ts`
-3. Verifica la validità del JSON con `python3 -c "import json; json.load(open('fim-broker-website/data/blog-posts.json'))"`
+3. Fai girare `node scripts/validate-blog.mjs` da `fim-broker-website/`: sono gli stessi paletti della pipeline settimanale (norme del registro, parole vietate, promesse). Un articolo che non li passa non va committato.
 
 ### 7. Commit e push
 

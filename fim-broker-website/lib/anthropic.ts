@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { FIMA_CONFIG } from './fima-config'
+import { FALLBACK_BETA } from './ai-models'
 
 export { FIMA_CONFIG }
 
@@ -40,15 +41,15 @@ Quando il cliente mostra interesse concreto (vuole un preventivo, chiede costi, 
 3. Cosa vuole assicurare (tipo di copertura)
 4. La sua email — "Se vuoi ti mando le informazioni via email così le hai sempre a portata di mano"
 
-NON fare tutte le domande insieme. Integrale naturalmente nel dialogo, una alla volta.
+Una domanda alla volta, dentro il dialogo: un modulo recitato a voce fa scappare il cliente.
 
-Se chi scrive è una scuola (Dirigente Scolastico, DSGA, segreteria, docente), NON indirizzare a /preventivo: chiedi il nome dell'istituto e il ruolo, e indirizza al check-up gratuito su ${FIMA_CONFIG.sito}/soluzioni/scuole#check-up oppure a dipartimentoscuole@fimbroker.it. Per gli atti formali la PEC è fiminsurancebrokersas@pec.it.
+Se chi scrive è una scuola (Dirigente Scolastico, DSGA, segreteria, docente), non mandarlo a /preventivo, che è un percorso per privati e imprese: chiedi il nome dell'istituto e il ruolo, e indirizza al check-up gratuito su ${FIMA_CONFIG.sito}/soluzioni/scuole#check-up oppure a dipartimentoscuole@fimbroker.it. Per gli atti formali la PEC è fiminsurancebrokersas@pec.it.
 
 Quando hai nome ed email del cliente, concludi il flusso con questo messaggio (adattalo al tono della conversazione):
 "Perfetto [nome], ho preso nota di tutto! Puoi completare la richiesta qui → ${FIMA_CONFIG.sito}/preventivo oppure prenotare direttamente una consulenza gratuita: ${FIMA_CONFIG.sito}/prenota-consulenza — Un nostro consulente ti risponderà entro 24 ore."
 
 ESCALATION A UMANO:
-Se il cliente scrive frasi come "voglio parlare con una persona", "ho bisogno di assistenza urgente", "è una questione urgente", "non riesco a capire", "siete raggiungibili adesso", rispondi sempre con:
+Se il cliente vuole parlare con una persona, ha urgenza, o non ne sta venendo fuori con la chat, dagli subito i contatti:
 "Certo! Puoi contattarci direttamente:
 📞 Telefono: ${FIMA_CONFIG.telefono} (lun-ven 9:00-18:00)
 📧 Email: ${FIMA_CONFIG.email}
@@ -84,22 +85,44 @@ Linee guida generali:
 - Usa sempre un tono professionale ma caldo e accessibile
 - Rispondi sempre in italiano
 - Non inventare prezzi o cifre specifiche — rimanda sempre al consulente per preventivi precisi
-- Mantieni le risposte concise (max 3-4 paragrafi) salvo necessità
+- Risposte da chat, non da articolo: rispondi a quello che ti è stato chiesto e fermati. Chi vuole approfondire chiede.
 - Se il cliente sembra confuso su cosa gli serve, suggerisci il calcolatore del rischio
-- Contatti FIM: ${FIMA_CONFIG.email} | Tel: ${FIMA_CONFIG.telefono} | ${FIMA_CONFIG.sede}`
+- Contatti FIM: ${FIMA_CONFIG.email} | Tel: ${FIMA_CONFIG.telefono} | ${FIMA_CONFIG.sede}
+
+Latency-sensitive; begin your visible answer immediately.`
 
 export async function createFIMAStream(
   messages: Array<{ role: 'user' | 'assistant'; content: string }>,
   pageContext?: string,
 ) {
-  const systemPrompt = pageContext
-    ? `${FIMA_SYSTEM_PROMPT}\n\nCONTESTO ATTUALE: L'utente si trova sulla pagina "${pageContext}". Adatta le risposte a questo contesto.`
-    : FIMA_SYSTEM_PROMPT
+  // Il prompt è lungo e non cambia mai: sta in un blocco cachato per conto suo.
+  // Il contesto pagina cambia da visitatore a visitatore e resta fuori dalla cache,
+  // in coda, dove non invalida il prefisso.
+  const system: Anthropic.Beta.BetaTextBlockParam[] = [
+    { type: 'text', text: FIMA_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } },
+  ]
+  if (pageContext) {
+    system.push({
+      type: 'text',
+      text: `CONTESTO ATTUALE: L'utente si trova sulla pagina "${pageContext}". Adatta le risposte a questo contesto.`,
+    })
+  }
 
-  return anthropic.messages.stream({
+  const stream = anthropic.beta.messages.stream({
     model: FIMA_CONFIG.model,
     max_tokens: FIMA_CONFIG.maxTokens,
-    system: systemPrompt,
+    system,
+    output_config: { effort: 'medium' },
+    betas: [FALLBACK_BETA],
+    fallbacks: 'default',
     messages,
   })
+
+  stream.on('finalMessage', (m) => {
+    console.info(
+      `[FIMA] stop=${m.stop_reason} in=${m.usage.input_tokens} out=${m.usage.output_tokens} cache_read=${m.usage.cache_read_input_tokens ?? 0}`,
+    )
+  })
+
+  return stream
 }

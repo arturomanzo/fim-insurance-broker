@@ -112,7 +112,8 @@ function pickImage(category, usedBases) {
 
 async function searchWebNews(braveApiKey, topic) {
   try {
-    const query = encodeURIComponent(`${topic} assicurazioni italia 2025 2026`)
+    const anno = new Date().getFullYear()
+    const query = encodeURIComponent(`${topic} assicurazioni italia ${anno - 1} ${anno}`)
     const res = await fetch(`https://api.search.brave.com/res/v1/web/search?q=${query}&count=5&country=it&search_lang=it`, {
       headers: {
         'Accept': 'application/json',
@@ -127,6 +128,40 @@ async function searchWebNews(braveApiKey, topic) {
   } catch {
     return null
   }
+}
+
+// La forma dell'articolo la garantisce l'API. Le categorie sono quelle per cui
+// esiste un'immagine in CATEGORY_IMAGES: una fuori elenco lascerebbe il pezzo
+// senza copertina.
+const ARTICOLO_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['slug', 'title', 'excerpt', 'category', 'readTime', 'sections'],
+  properties: {
+    slug: { type: 'string', description: 'Minuscolo, parole separate da trattini.' },
+    title: { type: 'string' },
+    excerpt: { type: 'string', description: 'Una o due frasi.' },
+    category: { type: 'string', enum: Object.keys(CATEGORY_IMAGES) },
+    readTime: { type: 'string', description: 'Nella forma "X min".' },
+    sections: {
+      type: 'array',
+      minItems: 4,
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['heading', 'body', 'list'],
+        properties: {
+          heading: { type: 'string' },
+          body: { type: 'string' },
+          list: {
+            type: ['array', 'null'],
+            items: { type: 'string' },
+            description: 'null quando un elenco non aggiunge niente.',
+          },
+        },
+      },
+    },
+  },
 }
 
 async function generateArticle(client, existingSlugs, webContext, registro, correzioni = []) {
@@ -154,9 +189,9 @@ Articoli già presenti sul blog (slug): ${existingTopics}
 
 ${webSection}
 
-Genera UN NUOVO articolo blog su un argomento assicurativo DIVERSO da quelli già esistenti, rilevante per il mercato italiano nel 2025-2026. Scegli tra questi temi (o proponi un altro pertinente):
+Genera un nuovo articolo su un argomento assicurativo diverso da quelli già esistenti, rilevante per il mercato italiano di oggi. Scegli tra questi temi (o proponi un altro pertinente):
 - Assicurazione per veicoli elettrici
-- Polizza sanitaria integrativa 2025
+- Polizza sanitaria integrativa
 - Assicurazione per lavoratori in smart working
 - RC professionale per freelance
 - Polizza catastrofale obbligatoria per imprese
@@ -164,7 +199,7 @@ Genera UN NUOVO articolo blog su un argomento assicurativo DIVERSO da quelli gi�
 - Welfare aziendale e polizze dipendenti
 - Riforma pensionistica e previdenza complementare
 
-PALETTI NON NEGOZIABILI. Un articolo che ne viola uno viene scartato da un controllo automatico e non esce.
+Sei paletti, tutti vincolanti.
 
 1. NORME. Puoi citare estremi di legge SOLO se sono in questo elenco, che è stato letto sulla fonte primaria:
 ${elencoNorme}
@@ -183,39 +218,32 @@ ${elencoNorme}
 6. SCRITTURA. Frasi brevi, discorso fluido, niente elenchi puntati dove basta una frase, niente riassunto finale di rito. Assumi un ruolo concreto: il broker che spiega, non la voce neutra da manuale.
 ${sezioneCorrezioni}
 
-Rispondi SOLO con un oggetto JSON valido (nessun testo prima o dopo), con questa struttura esatta:
-{
-  "slug": "slug-url-friendly",
-  "title": "Titolo dell'articolo",
-  "excerpt": "Breve descrizione di 1-2 frasi",
-  "category": "Auto|Vita|Casa|Salute|Aziendale|Viaggio",
-  "readTime": "X min",
-  "sections": [
-    {
-      "heading": "Titolo sezione",
-      "body": "Testo della sezione (2-4 frasi)",
-      "list": ["elemento 1", "elemento 2", "elemento 3"]
-    }
-  ]
-}
+Almeno quattro sezioni, ognuna di due-quattro frasi; "list" solo dove un elenco aggiunge qualcosa, altrimenti null. Il testo è utile e porta a una consulenza con FIM.`
 
-L'articolo deve avere almeno 4 sezioni. Il campo "list" è opzionale (includilo solo dove aggiunge valore). Il testo deve essere informativo, utile e orientato all'azione (spingere verso una consulenza con FIM).`
-
-  const response = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 3000,
+  const response = await client.beta.messages.create({
+    model: 'claude-opus-5',
+    // Il tetto copre anche il thinking, acceso di default su Opus 5.
+    max_tokens: 16000,
+    output_config: { effort: 'medium', format: { type: 'json_schema', schema: ARTICOLO_SCHEMA } },
+    betas: ['server-side-fallback-2026-07-01'],
+    fallbacks: 'default',
     messages: [{ role: 'user', content: userPrompt }],
     system: systemPrompt,
   })
 
-  const content = response.content[0]
-  if (content.type !== 'text') throw new Error('Risposta AI non testuale')
+  if (response.stop_reason === 'refusal') {
+    throw new Error(`Articolo rifiutato dal modello (${response.stop_details?.category ?? 'n.d.'})`)
+  }
+  if (response.stop_reason === 'max_tokens') throw new Error('Articolo tagliato dal tetto di token')
 
-  // Estrai JSON dalla risposta
-  const jsonMatch = content.text.match(/\{[\s\S]*\}/)
-  if (!jsonMatch) throw new Error('Nessun JSON trovato nella risposta')
+  // Il primo blocco puo' essere il thinking: il testo si cerca per tipo.
+  const content = response.content.find((b) => b.type === 'text')
+  if (!content) throw new Error('Risposta AI vuota')
+  console.log(`   token: in=${response.usage.input_tokens} out=${response.usage.output_tokens}`)
 
-  const article = JSON.parse(jsonMatch[0])
+  const article = JSON.parse(content.text)
+  // Lo schema impone la chiave `list`; a valle il campo e' opzionale.
+  for (const sez of article.sections) if (sez.list === null) delete sez.list
 
   // Validazione campi obbligatori
   if (!article.slug || !article.title || !article.category || !article.sections?.length) {

@@ -78,6 +78,18 @@ export async function POST(req: NextRequest) {
             }
           }
 
+          // Un rifiuto dei classificatori arriva come turno riuscito senza testo:
+          // senza questo il visitatore vedrebbe la chat restare in silenzio.
+          const finale = await anthropicStream.finalMessage()
+          if (finale.stop_reason === 'refusal') {
+            console.error('FIMA: richiesta rifiutata', finale.stop_details?.category)
+            const data = JSON.stringify({
+              delta:
+                'Su questa richiesta non riesco a risponderti. Riprova a scrivermela in altro modo, oppure chiamaci allo 06 96883381.',
+            })
+            controller.enqueue(encoder.encode(`data: ${data}\n\n`))
+          }
+
           controller.enqueue(encoder.encode('data: [DONE]\n\n'))
           controller.close()
         } catch (error) {

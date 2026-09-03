@@ -8,8 +8,22 @@
 import Anthropic from '@anthropic-ai/sdk'
 import * as fs from 'fs'
 import * as path from 'path'
+import { AI_MODELS } from '../lib/ai-models'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+
+/**
+ * Il primo blocco della risposta può essere il thinking: il testo si cerca per
+ * tipo, non per posizione, o su un modello che pensa si legge `undefined`.
+ */
+function testoDi(message: Anthropic.Message): string {
+  if (message.stop_reason === 'refusal') {
+    throw new Error(`Richiesta rifiutata dal modello (${message.stop_details?.category ?? 'n.d.'})`)
+  }
+  const blocco = message.content.find((b) => b.type === 'text')
+  if (!blocco || blocco.type !== 'text') throw new Error('Risposta senza testo')
+  return blocco.text.trim()
+}
 
 function getCurrentQuarter(): string {
   if (process.env.QUARTER_OVERRIDE) return process.env.QUARTER_OVERRIDE
@@ -24,8 +38,10 @@ function getLastUpdated(): string {
 
 async function generateInsights(category: string, change: number, trend: string): Promise<string> {
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 200,
+    model: AI_MODELS.analysis,
+    // Il tetto copre anche il thinking, acceso di default su Opus 5.
+    max_tokens: 4096,
+    output_config: { effort: 'low' },
     messages: [
       {
         role: 'user',
@@ -42,15 +58,16 @@ Risposta solo il paragrafo, senza titoli o markdown.`,
     ],
   })
 
-  return (message.content[0] as { type: string; text: string }).text.trim()
+  return testoDi(message)
 }
 
 async function generateSummary(quarter: string, categoryChanges: { name: string; change: number }[]): Promise<string> {
   const changesText = categoryChanges.map((c) => `${c.name}: ${c.change > 0 ? '+' : ''}${c.change}%`).join(', ')
 
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 300,
+    model: AI_MODELS.analysis,
+    max_tokens: 4096,
+    output_config: { effort: 'low' },
     messages: [
       {
         role: 'user',
@@ -63,7 +80,7 @@ Solo il testo del sommario.`,
     ],
   })
 
-  return (message.content[0] as { type: string; text: string }).text.trim()
+  return testoDi(message)
 }
 
 async function main() {

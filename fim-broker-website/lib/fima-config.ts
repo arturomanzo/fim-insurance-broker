@@ -1,6 +1,9 @@
+import { AI_MODELS } from './ai-models'
+
 export const FIMA_CONFIG = {
-  model: 'claude-sonnet-4-6',
-  maxTokens: 2048,
+  model: AI_MODELS.chat,
+  // Il tetto copre anche il thinking, che su Opus 5 è acceso di default.
+  maxTokens: 8192,
   maxMessages: 20,
   rui: 'Sez. B n. B000405449',
   email: 'info@fimbroker.it',
