@@ -3,9 +3,10 @@
  * normativo o comunicato rispetto al business di FIM Insurance Broker
  * (broker Sez. B RUI n. B000405449).
  *
- * Output strutturato JSON. Modello: Haiku 4.5 (veloce + low-cost: ~$0.001/call).
+ * Output strutturato via `output_config.format`. Modello: AI_MODELS.draft.
  */
 import { anthropic } from '@/lib/anthropic'
+import { AI_MODELS } from '@/lib/ai-models'
 import type { RssItem } from './rss'
 import type { Source } from './sources'
 
@@ -61,20 +62,19 @@ REGOLE DI CLASSIFICAZIONE:
   • Trasferimenti di portafoglio tra compagnie
   • Atti non assicurativi finiti nel feed per via di un keyword match (es. "assicurazione" in contesti diversi)
 
-ATTI A TITOLO OPACO (IMPORTANTE — evita i punti ciechi):
-Le voci IVASS hanno spesso titoli generici ("Provvedimento n. 0124143", "Lettera al mercato", "Regolamento n. X") con descrizione RSS assente o inutile. In questi casi NON puoi escludere un impatto su intermediari/broker dal solo titolo.
-- "Lettera al mercato" e "Regolamento IVASS" → tratta come "high" (sono tipicamente vincolanti per gli intermediari) salvo evidenza contraria nella descrizione.
-- "Provvedimento n. …" di IVASS senza descrizione utile → MAI "none": classifica almeno "medium" e scrivi nel summary che il testo va verificato.
+Atti a titolo opaco. Le voci IVASS hanno spesso titoli generici ("Provvedimento n. 0124143", "Lettera al mercato", "Regolamento n. X") con descrizione RSS assente o inutile: dal solo titolo non puoi escludere un impatto su intermediari e broker.
+- "Lettera al mercato" e "Regolamento IVASS" valgono "high" salvo evidenza contraria nella descrizione: sono di norma vincolanti per gli intermediari.
+- "Provvedimento n. …" di IVASS senza descrizione utile vale almeno "medium", e nel summary scrivi che il testo va verificato.
 È preferibile un falso allarme archiviabile a un obbligo mancato.
-Restano "low/none" solo gli atti CHIARAMENTE non normativi per un broker: elenchi/registri, statistiche e bollettini, avvisi su singole imprese (anche estere), oscuramento di siti abusivi, procedure di gara interne IVASS.
+Restano "low/none" solo gli atti chiaramente non normativi per un broker: elenchi e registri, statistiche e bollettini, avvisi su singole imprese (anche estere), oscuramento di siti abusivi, procedure di gara interne IVASS.
 
-ELEVA SEMPRE ad almeno "medium" (a "high" se c'è obbligo o scadenza ≤90gg) gli atti che toccano:
+Vale almeno "medium" (o "high" se c'è un obbligo o una scadenza entro 90 giorni) tutto ciò che tocca:
 Reg. IVASS 40/2018 o 41/2018, Allegati IDD (3 e 4), procedura reclami, Arbitro Assicurativo, iscrizione/tenuta RUI e requisiti degli intermediari, obblighi antiriciclaggio per intermediari (D.Lgs. 231/2007), distribuzione assicurativa (IDD, D.Lgs. 68/2018).
 
 IMPATTO SUL SITO:
-"impactsSite" = true SOLO se richiede modifica di testi pubblici del sito FIM (note legali, allegati IDD, procedura reclami, privacy, glossario, FAQ, contenuti commerciali).
+"impactsSite" è true solo se richiede di modificare testi pubblici del sito FIM (note legali, allegati IDD, procedura reclami, privacy, glossario, FAQ, contenuti commerciali).
 
-Pagine candidate (usa SOLO questi slug se rilevanti):
+Pagine candidate:
 - "/note-legali"
 - "/trasparenza" (Allegato 3 e 4 IDD)
 - "/reclami"
@@ -84,26 +84,34 @@ Pagine candidate (usa SOLO questi slug se rilevanti):
 - "/faq"
 - "/sinistri"
 - "/servizi/*" (specificare quale)
-- "/soluzioni/*" (specificare quale)
+- "/soluzioni/*" (specificare quale)`
 
-Rispondi SEMPRE e SOLO con un singolo blocco JSON valido, senza testo prima o dopo.`
+// La forma la garantisce l'API. Il tetto di 350 caratteri sul summary resta qui
+// perché è un vincolo del riquadro del report, non una preferenza di stile.
+const TRIAGE_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['relevance', 'impactsSite', 'affectedPages', 'summary', 'deadline', 'normativeRefs'],
+  properties: {
+    relevance: { type: 'string', enum: ['high', 'medium', 'low', 'none'] },
+    impactsSite: { type: 'boolean' },
+    affectedPages: {
+      type: 'array',
+      items: { type: 'string' },
+      description: 'Slug che iniziano con "/", presi dalle pagine candidate.',
+    },
+    summary: { type: 'string', description: 'Al massimo 350 caratteri: entra in un riquadro del report.' },
+    deadline: { type: ['string', 'null'], description: 'YYYY-MM-DD, oppure testo libero se la data non è secca.' },
+    normativeRefs: { type: ['string', 'null'] },
+  },
+} as const
 
 function buildUserPrompt(item: RssItem, source: Source): string {
   return `FONTE: ${source.label}
 TITOLO: ${item.title}
 URL: ${item.link}
 DATA PUBBLICAZIONE: ${item.pubDate ? item.pubDate.toISOString().slice(0, 10) : 'sconosciuta'}
-DESCRIZIONE: ${item.description.slice(0, 1500)}
-
-Classifica questo item e rispondi con JSON nella forma:
-{
-  "relevance": "high" | "medium" | "low" | "none",
-  "impactsSite": boolean,
-  "affectedPages": ["/slug", ...],
-  "summary": "string (max 350 caratteri)",
-  "deadline": "YYYY-MM-DD" | "string libera" | null,
-  "normativeRefs": "string" | null
-}`
+DESCRIZIONE: ${item.description.slice(0, 1500)}`
 }
 
 const FALLBACK: TriageResult = {
@@ -113,19 +121,6 @@ const FALLBACK: TriageResult = {
   summary: 'Triage AI fallito — voce conservata per revisione manuale.',
   deadline: null,
   normativeRefs: null,
-}
-
-function parseJsonBlock(text: string): unknown | null {
-  // Estrae il primo blocco JSON dal testo (rimuove eventuali ```json fences)
-  const cleaned = text.trim().replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '')
-  const start = cleaned.indexOf('{')
-  const end = cleaned.lastIndexOf('}')
-  if (start < 0 || end <= start) return null
-  try {
-    return JSON.parse(cleaned.slice(start, end + 1))
-  } catch {
-    return null
-  }
 }
 
 function validateRelevance(v: unknown): Relevance {
@@ -171,21 +166,27 @@ export async function triageItem(
 ): Promise<TriageResult & { error?: string }> {
   try {
     const res = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 600,
+      model: AI_MODELS.draft,
+      // Il tetto stretto tagliava il JSON in silenzio. Niente `effort`: Haiku 4.5
+      // lo rifiuta con un 400.
+      max_tokens: 4096,
+      output_config: { format: { type: 'json_schema', schema: TRIAGE_SCHEMA } },
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: buildUserPrompt(item, source) }],
     })
 
-    const text = res.content
-      .flatMap((b) => (b.type === 'text' ? [b.text] : []))
-      .join('\n')
-
-    const parsed = parseJsonBlock(text)
-    if (!parsed || typeof parsed !== 'object') {
-      return { ...FALLBACK, error: 'JSON non parsabile' }
+    if (res.stop_reason === 'refusal') {
+      return { ...FALLBACK, error: `rifiutata: ${res.stop_details?.category ?? 'n.d.'}` }
     }
-    const p = parsed as Record<string, unknown>
+    if (res.stop_reason === 'max_tokens') {
+      return { ...FALLBACK, error: 'risposta tagliata dal tetto di token' }
+    }
+
+    const block = res.content.find((b) => b.type === 'text')
+    if (!block || block.type !== 'text') {
+      return { ...FALLBACK, error: 'Risposta vuota' }
+    }
+    const p = JSON.parse(block.text) as Record<string, unknown>
     const modelRel = validateRelevance(p.relevance)
     const { relevance, elevated } = applyNormativeFloor(item, source, modelRel)
     const baseSummary = typeof p.summary === 'string' ? p.summary.slice(0, 480) : ''

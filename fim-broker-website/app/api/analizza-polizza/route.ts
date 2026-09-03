@@ -1,15 +1,118 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
-import type { DocumentBlockParam } from '@anthropic-ai/sdk/resources/messages/messages'
+import type { BetaRequestDocumentBlock } from '@anthropic-ai/sdk/resources/beta/messages/messages'
+import { AI_MODELS, FALLBACK_BETA } from '@/lib/ai-models'
 import { rateLimit } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
-export const maxDuration = 60
+// Opus 5 con il thinking acceso impiega ~60s su un PDF di poche pagine: col
+// tetto a 60 un contratto vero scadeva a metà analisi.
+export const maxDuration = 300
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 // 3MB raw PDF → ~4MB base64 → safe under Vercel's 4.5MB body limit
 const MAX_BASE64_LENGTH = 4_200_000
+
+// La forma della risposta la garantisce l'API, non il prompt: niente "solo JSON"
+// e niente regex di recupero. Le description sono il contratto dei campi.
+const ANALISI_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: [
+    'compagnia',
+    'tipoPolizza',
+    'numPolizza',
+    'scadenza',
+    'premio',
+    'coperture',
+    'esclusioni',
+    'lacune',
+    'costiEccessivi',
+    'raccomandazioni',
+    'valutazioneGlobale',
+  ],
+  properties: {
+    compagnia: { type: 'string', description: "Nome della compagnia, o 'Non rilevato'." },
+    tipoPolizza: { type: 'string', description: 'RCA, Casa, Vita, RC Professionale, Salute, Multiramo…' },
+    numPolizza: { type: ['string', 'null'] },
+    scadenza: { type: ['string', 'null'], description: 'Formato gg/mm/aaaa.' },
+    premio: { type: ['string', 'null'], description: 'Premio annuo con il simbolo dell euro.' },
+    coperture: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['nome', 'massimale', 'inclusa'],
+        properties: {
+          nome: { type: 'string' },
+          massimale: { type: 'string' },
+          inclusa: { type: 'boolean' },
+        },
+      },
+    },
+    esclusioni: { type: 'array', items: { type: 'string' } },
+    lacune: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['titolo', 'descrizione', 'urgenza'],
+        properties: {
+          titolo: { type: 'string', description: 'Massimo otto parole.' },
+          descrizione: {
+            type: 'string',
+            description: 'Il rischio non coperto e la conseguenza concreta per il cliente.',
+          },
+          urgenza: { type: 'string', enum: ['alta', 'media', 'bassa'] },
+        },
+      },
+    },
+    costiEccessivi: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['voce', 'suggerimento', 'risparmioStimato'],
+        properties: {
+          voce: { type: 'string', description: 'Cosa si può ottimizzare, massimo otto parole.' },
+          suggerimento: { type: 'string' },
+          risparmioStimato: {
+            type: 'string',
+            description:
+              'Da cosa dipende il prezzo di questa voce e cosa lo farebbe scendere. Mai una cifra o una percentuale: un risparmio scritto è una promessa che nessuno ha verificato.',
+          },
+        },
+      },
+    },
+    raccomandazioni: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['titolo', 'descrizione', 'priorita'],
+        properties: {
+          titolo: { type: 'string', description: 'Massimo otto parole.' },
+          descrizione: { type: 'string' },
+          priorita: { type: 'string', enum: ['alta', 'media', 'bassa'] },
+        },
+      },
+    },
+    valutazioneGlobale: {
+      type: 'object',
+      additionalProperties: false,
+      required: ['punteggio', 'giudizio', 'sintesi'],
+      properties: {
+        // Niente `minimum`/`maximum`: su un intero l'API li rifiuta con un 400
+        // ("For 'integer' type, properties maximum, minimum are not supported").
+        // Il campo si limita in codice, dove il vincolo è comunque più solido.
+        punteggio: { type: 'integer', description: 'Da 1 (pessima copertura) a 10 (ottima).' },
+        giudizio: { type: 'string', description: "Titolo breve, es. 'Copertura buona con qualche lacuna'." },
+        sintesi: { type: 'string', description: 'Due o tre frasi sull analisi complessiva.' },
+      },
+    },
+  },
+} as const
 
 export async function POST(request: NextRequest) {
   const { ok, retryAfter } = await rateLimit(request, { limit: 3, windowMs: 60_000 })
@@ -48,9 +151,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const message = await client.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 2048,
+    const message = await client.beta.messages.create({
+      model: AI_MODELS.analysis,
+      // Il tetto copre anche il thinking, acceso di default su Opus 5.
+      max_tokens: 8192,
+      output_config: {
+        // `low` qui: il grosso del lavoro è leggere il documento, non ragionarci
+        // sopra, e chi ha caricato il PDF sta guardando una rotella girare.
+        effort: 'low',
+        format: { type: 'json_schema', schema: ANALISI_SCHEMA },
+      },
+      betas: [FALLBACK_BETA],
+      fallbacks: 'default',
       messages: [
         {
           role: 'user',
@@ -62,74 +174,46 @@ export async function POST(request: NextRequest) {
                 media_type: 'application/pdf',
                 data: b64,
               },
-            } satisfies DocumentBlockParam,
+            } satisfies BetaRequestDocumentBlock,
             {
               type: 'text',
-              text: `Sei un esperto analista assicurativo italiano con 20 anni di esperienza nel mercato italiano. Analizza questa polizza assicurativa e fornisci un'analisi dettagliata e onesta.
-
-Restituisci ESCLUSIVAMENTE un oggetto JSON valido (senza markdown, senza testo aggiuntivo, solo il JSON puro) con questa struttura:
-
-{
-  "compagnia": "nome compagnia assicurativa (o 'Non rilevato')",
-  "tipoPolizza": "tipo di polizza (es. RCA, Casa, Vita, RC Professionale, Salute, Multiramo, ecc.)",
-  "numPolizza": "numero polizza se presente (o null)",
-  "scadenza": "data scadenza in formato dd/mm/yyyy (o null)",
-  "premio": "premio annuo con simbolo euro (o null)",
-  "coperture": [
-    { "nome": "nome copertura", "massimale": "importo o descrizione massimale", "inclusa": true }
-  ],
-  "esclusioni": ["esclusione 1", "esclusione 2"],
-  "lacune": [
-    {
-      "titolo": "titolo lacuna breve (max 8 parole)",
-      "descrizione": "spiegazione chiara del rischio non coperto e delle conseguenze concrete per il cliente",
-      "urgenza": "alta|media|bassa"
-    }
-  ],
-  "costiEccessivi": [
-    {
-      "voce": "cosa potresti ottimizzare (max 8 parole)",
-      "suggerimento": "come ridurre il costo o migliorare il rapporto qualità/prezzo",
-      "risparmioStimato": "stima risparmio annuo (es. ~€100-200/anno)"
-    }
-  ],
-  "raccomandazioni": [
-    {
-      "titolo": "titolo raccomandazione (max 8 parole)",
-      "descrizione": "spiegazione dettagliata e beneficio concreto per il cliente",
-      "priorita": "alta|media|bassa"
-    }
-  ],
-  "valutazioneGlobale": {
-    "punteggio": 7,
-    "giudizio": "titolo breve del giudizio (es. 'Copertura buona con qualche lacuna')",
-    "sintesi": "2-3 frasi di sintesi sull'analisi complessiva della polizza"
-  }
-}
+              text: `Sei un analista assicurativo italiano. Analizza questa polizza per il cliente che l'ha caricata: onesto, concreto, niente giri di parole.
 
 Note:
-- Se alcuni dati non sono presenti nel documento, usa null per valori singoli o [] per array
-- Per le lacune, considera le coperture standard del mercato assicurativo italiano
-- Per i costi eccessivi, confronta con i premi medi di mercato in Italia
+- Se un dato non è nel documento, usa null per i valori singoli e [] per gli elenchi
+- Per le lacune, il metro sono le coperture standard del mercato italiano
 - Il punteggio va da 1 (pessima copertura) a 10 (copertura ottima)
-- Sii specifico e concreto, non generico`,
+- Non scrivere cifre di risparmio: di' da cosa dipende il prezzo, non quanto si risparmierebbe`,
             },
           ],
         },
       ],
     })
 
-    const content = message.content[0]
-    if (content.type !== 'text') throw new Error('Risposta non valida')
+    if (message.stop_reason === 'refusal') {
+      console.error('analizza-polizza: rifiutata', message.stop_details?.category)
+      return NextResponse.json(
+        { error: "Non riesco ad analizzare questo documento. Chiamaci al +39 06 96883381." },
+        { status: 422 },
+      )
+    }
 
-    let analysisData: unknown
-    try {
-      const jsonStr = content.text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim()
-      analysisData = JSON.parse(jsonStr)
-    } catch {
-      const match = content.text.match(/\{[\s\S]*\}/)
-      if (!match) throw new Error('JSON non trovato nella risposta')
-      analysisData = JSON.parse(match[0])
+    // Il primo blocco può essere il thinking: si cerca il testo per tipo.
+    const content = message.content.find((b) => b.type === 'text')
+    if (!content || content.type !== 'text') throw new Error('Risposta non valida')
+    if (message.stop_reason === 'max_tokens') throw new Error('Risposta tagliata dal tetto di token')
+
+    console.info(
+      `[analizza-polizza] in=${message.usage.input_tokens} out=${message.usage.output_tokens}`,
+    )
+
+    const analysisData = JSON.parse(content.text) as {
+      valutazioneGlobale: { punteggio: number }
+    }
+    // Il punteggio finisce in una barra da 1 a 10: fuori scala la romperebbe.
+    const p = analysisData.valutazioneGlobale?.punteggio
+    if (typeof p === 'number') {
+      analysisData.valutazioneGlobale.punteggio = Math.max(1, Math.min(10, Math.round(p)))
     }
 
     return NextResponse.json({ success: true, analysis: analysisData, nome: nomeSafe })

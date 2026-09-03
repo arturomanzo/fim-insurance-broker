@@ -8,9 +8,8 @@ description: Scrive l'Articolo LinkedIn del lunedì per la pagina aziendale FIM 
 Riempie la sezione **Articoli** della pagina aziendale
 `linkedin.com/company/fim-insurance-broker-s-a-s-di-manzo-arturo-c`.
 
-Un'uscita a settimana, il **lunedì**, con un **argomento originale**: dal
-01/09/2026 l'Articolo non deriva più dal pezzo del blog — ha un argomento suo,
-che sul sito non c'è. Arturo lo legge e lo pubblica lui.
+Un'uscita a settimana, il **lunedì**, con un **argomento originale** che sul
+sito non c'è. Arturo lo legge e lo pubblica lui.
 
 Non è la stessa cosa del post breve del martedì e del giovedì — quella è
 [`fim-linkedin-post`](../fim-linkedin-post/SKILL.md). Qui si scrive lungo, e
@@ -18,12 +17,8 @@ quello che si scrive resta nella libreria della Pagina anche fra due anni.
 
 ## La regola che tiene in piedi tutto: l'argomento non sta sul blog
 
-Fino ad agosto 2026 l'Articolo era la riscrittura del pezzo del blog con un
-angolo diverso, e il vincolo era non farsi indicizzare al posto del sito. Ora il
-vincolo si risolve alla radice: l'argomento è originale, il testo esiste solo su
-LinkedIn e Google non ha due copie fra cui scegliere.
-
-Il corollario però resta. Se l'articolo LinkedIn copre lo stesso argomento di
+L'argomento è originale, il testo esiste solo su LinkedIn, e Google non ha due
+copie fra cui scegliere. Se l'articolo LinkedIn copre lo stesso argomento di
 una guida del blog — anche con parole tutte diverse — i due pezzi si contendono
 la stessa ricerca, e fra linkedin.com e fimbroker.it vince LinkedIn, che ha
 un'autorità di dominio più alta. Quindi la divisione è netta:
