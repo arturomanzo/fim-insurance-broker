@@ -101,7 +101,10 @@ const ANALISI_SCHEMA = {
       additionalProperties: false,
       required: ['punteggio', 'giudizio', 'sintesi'],
       properties: {
-        punteggio: { type: 'integer', minimum: 1, maximum: 10 },
+        // Niente `minimum`/`maximum`: su un intero l'API li rifiuta con un 400
+        // ("For 'integer' type, properties maximum, minimum are not supported").
+        // Il campo si limita in codice, dove il vincolo è comunque più solido.
+        punteggio: { type: 'integer', description: 'Da 1 (pessima copertura) a 10 (ottima).' },
         giudizio: { type: 'string', description: "Titolo breve, es. 'Copertura buona con qualche lacuna'." },
         sintesi: { type: 'string', description: 'Due o tre frasi sull analisi complessiva.' },
       },
@@ -200,7 +203,14 @@ Note:
       `[analizza-polizza] in=${message.usage.input_tokens} out=${message.usage.output_tokens}`,
     )
 
-    const analysisData: unknown = JSON.parse(content.text)
+    const analysisData = JSON.parse(content.text) as {
+      valutazioneGlobale: { punteggio: number }
+    }
+    // Il punteggio finisce in una barra da 1 a 10: fuori scala la romperebbe.
+    const p = analysisData.valutazioneGlobale?.punteggio
+    if (typeof p === 'number') {
+      analysisData.valutazioneGlobale.punteggio = Math.max(1, Math.min(10, Math.round(p)))
+    }
 
     return NextResponse.json({ success: true, analysis: analysisData, nome: nomeSafe })
   } catch (error) {

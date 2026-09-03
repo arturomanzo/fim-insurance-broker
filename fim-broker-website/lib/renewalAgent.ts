@@ -53,8 +53,9 @@ const PROPOSTA_SCHEMA = {
     urgencyReason: { type: 'string' },
     options: {
       type: 'array',
-      minItems: 3,
-      maxItems: 3,
+      // Il numero di elementi sta nella descrizione e nel controllo a valle:
+      // l'API rifiuta i vincoli numerici dentro lo schema.
+      description: 'Esattamente tre opzioni di rinnovo.',
       items: {
         type: 'object',
         additionalProperties: false,
@@ -123,7 +124,8 @@ Non scrivere cifre di risparmio, percentuali o premi: quello che si ottiene lo s
     const parsed = JSON.parse(content.text) as RenewalProposal
 
     // Basic validation
-    if (!parsed.intro || !Array.isArray(parsed.options) || parsed.options.length === 0) return null
+    if (!parsed.intro || !Array.isArray(parsed.options) || parsed.options.length < 3) return null
+    parsed.options = parsed.options.slice(0, 3)
 
     return parsed
   } catch (err) {

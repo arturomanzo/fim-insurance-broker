@@ -145,7 +145,9 @@ const ARTICOLO_SCHEMA = {
     readTime: { type: 'string', description: 'Nella forma "X min".' },
     sections: {
       type: 'array',
-      minItems: 4,
+      // Il numero minimo sta nella descrizione e nel controllo a valle:
+      // l'API rifiuta i vincoli numerici dentro lo schema.
+      description: 'Almeno quattro sezioni; l ultima e la CTA verso FIM.',
       items: {
         type: 'object',
         additionalProperties: false,
@@ -248,6 +250,9 @@ Almeno quattro sezioni, ognuna di due-quattro frasi; "list" solo dove un elenco 
   // Validazione campi obbligatori
   if (!article.slug || !article.title || !article.category || !article.sections?.length) {
     throw new Error('Articolo generato incompleto')
+  }
+  if (article.sections.length < 4) {
+    throw new Error(`Articolo con sole ${article.sections.length} sezioni: ne servono almeno 4`)
   }
 
   return article
