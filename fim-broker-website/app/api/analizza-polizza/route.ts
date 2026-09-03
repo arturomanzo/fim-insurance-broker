@@ -5,7 +5,9 @@ import { AI_MODELS, FALLBACK_BETA } from '@/lib/ai-models'
 import { rateLimit } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
-export const maxDuration = 60
+// Opus 5 con il thinking acceso impiega ~60s su un PDF di poche pagine: col
+// tetto a 60 un contratto vero scadeva a metà analisi.
+export const maxDuration = 300
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -154,7 +156,9 @@ export async function POST(request: NextRequest) {
       // Il tetto copre anche il thinking, acceso di default su Opus 5.
       max_tokens: 8192,
       output_config: {
-        effort: 'medium',
+        // `low` qui: il grosso del lavoro è leggere il documento, non ragionarci
+        // sopra, e chi ha caricato il PDF sta guardando una rotella girare.
+        effort: 'low',
         format: { type: 'json_schema', schema: ANALISI_SCHEMA },
       },
       betas: [FALLBACK_BETA],
