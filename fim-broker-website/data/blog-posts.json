@@ -1,6 +1,58 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-volontari-associazioni-terzo-settore-2026",
+      "title": "Volontari, associazioni e ASD: quali assicurazioni sono obbligatorie e quali servono davvero",
+      "excerpt": "Chi si avvale di volontari ha un obbligo assicurativo preciso, e chi tessera atleti dilettanti ne ha un altro, di natura diversa. Vediamo cosa dice la norma e dove restano i buchi che il consiglio direttivo paga di persona.",
+      "category": "Aziendale",
+      "date": "7 Settembre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Due obblighi diversi, spesso confusi tra loro",
+          "body": "Nelle associazioni ci si dimentica che gli obblighi assicurativi non sono uno solo. Il Codice del Terzo settore, all'art. 18 del D.Lgs. 117/2017, stabilisce che gli enti che si avvalgono di volontari devono assicurarli contro gli infortuni, contro le malattie connesse all'attività svolta e per la responsabilità civile verso terzi. È un obbligo che guarda alla persona del volontario e a quello che il volontario può combinare mentre opera per l'ente."
+        },
+        {
+          "heading": "Le associazioni e società sportive dilettantistiche",
+          "body": "Per il mondo sportivo il quadro è doppio. L'art. 29 comma 4 del D.Lgs. 36/2021 dice che gli enti dilettantistici che si avvalgono di volontari devono assicurarli per la responsabilità civile verso i terzi, rinviando all'art. 18 comma 2 del D.Lgs. 117/2017 per le modalità, cioè i meccanismi semplificati che consentono anche polizze numeriche. L'assicurazione dei tesserati, invece, non nasce lì: viene dall'art. 51 della Legge 289/2002, in vigore dal 1° luglio 2003, che riguarda gli sportivi dilettanti tesserati come atleti, dirigenti e tecnici presso Federazioni, discipline associate ed enti di promozione sportiva."
+        },
+        {
+          "heading": "Cosa copre l'obbligo sui tesserati e cosa no",
+          "body": "Qui va letta bene la lettera della norma, perché la differenza la scoprono i genitori quando arriva il rifiuto. L'obbligo dell'art. 51 riguarda gli infortuni avvenuti in occasione e a causa dello svolgimento dell'attività sportiva dai quali sia derivata la morte o un'inabilità permanente. L'infortunio che guarisce senza postumi non rientra: la distorsione che si risolve in sei settimane, con fisioterapia e visite pagate di tasca propria, sta fuori dal perimetro obbligatorio.",
+          "list": [
+            "Copertura di base: morte e invalidità permanente da infortunio sportivo",
+            "Fuori dal minimo di legge: rimborso spese mediche, diarie da ricovero o gessatura, infortuni che guariscono senza postumi",
+            "Da valutare a parte: la responsabilità civile dell'associazione verso i tesserati stessi e verso i terzi"
+          ]
+        },
+        {
+          "heading": "Il rischio personale di chi firma per l'associazione",
+          "body": "Nelle associazioni non riconosciute, che sono la maggior parte, l'art. 38 del Codice Civile prevede che i terzi possano far valere i loro diritti sul fondo comune e che delle stesse obbligazioni rispondano anche personalmente e solidalmente le persone che hanno agito in nome e per conto dell'associazione. Tradotto: il presidente e chi ha firmato non si nascondono dietro la sigla dell'ente. Se un terzo subisce un danno durante un'attività e la richiesta supera quello che l'associazione ha in cassa, il problema diventa patrimoniale e personale."
+        },
+        {
+          "heading": "Dove nascono i contenziosi che vediamo",
+          "body": "Il danno raramente arriva dall'evento clamoroso. Arriva dalla sede: la palestra data in uso, il gazebo della sagra, l'attrezzo lasciato in mezzo al passaggio. In questi casi conta l'articolo 2051 del Codice Civile, per cui ciascuno è responsabile del danno cagionato dalle cose che ha in custodia, salvo che provi il caso fortuito. Se poi l'ente ha in gestione un immobile, si aggiunge l'articolo 2053, che mette in capo al proprietario di un edificio i danni da rovina, salvo prova che non sia dovuta a difetto di manutenzione o vizio di costruzione."
+        },
+        {
+          "heading": "Le domande da porsi prima di rinnovare la polizza",
+          "body": "Il documento che molte associazioni hanno in cartella è la copertura federale automatica del tesseramento, e viene dato per completo. Vale la pena leggere i massimali, le franchigie e soprattutto chi è l'assicurato: spesso non copre i volontari non tesserati, i collaboratori occasionali, i danni alla struttura ospitante o le richieste rivolte al consiglio direttivo.",
+          "list": [
+            "Chi rientra nella definizione di assicurato: tesserati, volontari, accompagnatori, genitori che danno una mano",
+            "Se la responsabilità civile verso terzi è presente e con quale massimale per sinistro e per persona",
+            "Quali attività sono elencate in polizza: allenamenti, trasferte, eventi aperti al pubblico, somministrazione durante le feste",
+            "Se sono previsti rimborsi spese mediche e diarie, che il minimo di legge non richiede",
+            "Se esiste una tutela per gli amministratori dell'ente"
+          ]
+        },
+        {
+          "heading": "Parliamone con i vostri documenti in mano",
+          "body": "Non esiste una polizza standard per un'associazione: cambia tutto in base allo statuto, alle attività effettive e a quante persone si muovono in nome dell'ente. FIM Insurance Broker, con sede a Cisterna di Latina e iscrizione al RUI Sez. B n. B000405449, lavora come intermediario indipendente e legge i contratti insieme a chi li ha firmati. Portate lo statuto, il certificato di copertura federale e l'elenco delle attività dell'anno: da lì si capisce cosa manca e cosa si può sistemare."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "assicurazione-key-man-piccole-imprese-2026",
       "title": "Key Man Insurance: cosa succede alla tua impresa se perdi la persona che la regge",
       "excerpt": "Quando una piccola impresa dipende da una o due persone chiave, la loro inabilità o morte può bloccare tutto. Ecco come funziona la polizza key man e perché vale la pena valutarla.",
