@@ -12,6 +12,7 @@ interface FormState {
   nome: string
   email: string
   privacy: boolean
+  marketing: boolean
   website: string // honeypot
 }
 
@@ -223,6 +224,7 @@ export default function RiskCalculator() {
     nome: '',
     email: '',
     privacy: false,
+    marketing: false,
     website: '',
   })
   const [result, setResult] = useState<RiskResult | null>(null)
@@ -281,6 +283,7 @@ export default function RiskCalculator() {
           coperture: res.coperture,
           prezzoMin: res.prezzoMin,
           prezzoMax: res.prezzoMax,
+          marketing: form.marketing,
           website: form.website,
         }),
       })
@@ -477,6 +480,21 @@ export default function RiskCalculator() {
                 <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Policy</Link>. Riceverò via email il riepilogo dell&apos;analisi.
               </label>
             </div>
+            {/* Consenso commerciale: separato, facoltativo, spento di default.
+                Quello sopra copre il trattamento dei dati e il riepilogo
+                dell'analisi — non le comunicazioni promozionali future. */}
+            <div className="flex items-start gap-3">
+              <input
+                id="calc-marketing"
+                type="checkbox"
+                checked={form.marketing}
+                onChange={(e) => setForm((p) => ({ ...p, marketing: e.target.checked }))}
+                className="mt-1 w-4 h-4 rounded border-gray-300 text-primary accent-primary cursor-pointer"
+              />
+              <label htmlFor="calc-marketing" className="text-sm text-gray-600 cursor-pointer">
+                Facoltativo: voglio ricevere guide e aggiornamenti assicurativi da FIM. Posso disiscrivermi quando voglio.
+              </label>
+            </div>
             {error && <p className="text-red-600 text-sm bg-red-50 rounded-lg px-4 py-3">{error}</p>}
             <button type="submit" disabled={isSubmitting} className="w-full btn-primary py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed">
               {isSubmitting ? (
@@ -585,7 +603,7 @@ export default function RiskCalculator() {
           {/* Restart */}
           <div className="text-center mt-6">
             <button
-              onClick={() => { setStep(1); setForm({ profile: null, settore: null, answers: {}, nome: '', email: '', privacy: false, website: '' }); setResult(null) }}
+              onClick={() => { setStep(1); setForm({ profile: null, settore: null, answers: {}, nome: '', email: '', privacy: false, marketing: false, website: '' }); setResult(null) }}
               className="text-sm text-gray-500 hover:text-primary transition-colors"
             >
               ↺ Ricomincia l&apos;analisi
