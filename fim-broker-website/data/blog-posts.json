@@ -1,6 +1,49 @@
 {
   "posts": [
     {
+      "slug": "polizze-fideiussorie-cauzioni-imprese-2026",
+      "title": "Polizze fideiussorie e cauzioni: come funzionano davvero per una PMI",
+      "excerpt": "La cauzione assicurativa non è una polizza che ti risarcisce: è una garanzia che il tuo assicuratore presta a un terzo per conto tuo. Capire questa differenza evita brutte sorprese quando la garanzia viene escussa.",
+      "category": "Aziendale",
+      "date": "14 Settembre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Non è una polizza che protegge te",
+          "body": "Quando sottoscrivi una cauzione assicurativa, la compagnia non assicura un tuo rischio: si impegna verso un soggetto terzo — la stazione appaltante, il committente privato, l'Agenzia delle Entrate, un ente pubblico — a pagare una somma se tu non rispetti l'obbligazione garantita. Tu sei il contraente, ma il beneficiario è qualcun altro. È la ragione per cui, se la garanzia viene escussa e la compagnia paga, poi si rivale su di te per l'intero importo versato, con le spese. Chi arriva in agenzia convinto di aver comprato una protezione parte già con l'idea sbagliata."
+        },
+        {
+          "heading": "Quando un'impresa se la ritrova richiesta",
+          "body": "Le cauzioni compaiono ogni volta che una controparte vuole una garanzia sul fatto che tu faccia quello che hai promesso. Nei lavori pubblici sono la prassi, ma le richiedono anche committenti privati, locatori di capannoni al posto del deposito cauzionale in contanti, enti che erogano contributi e anticipi.",
+          "list": [
+            "Garanzia provvisoria a corredo dell'offerta in gara",
+            "Garanzia definitiva a copertura del corretto adempimento del contratto",
+            "Garanzia sull'anticipazione del prezzo e sulle rate di saldo",
+            "Cauzione a favore del locatore, in alternativa al deposito in denaro",
+            "Garanzie verso enti per contributi, rimborsi IVA, concessioni e smaltimento rifiuti"
+          ]
+        },
+        {
+          "heading": "Le due clausole che cambiano tutto",
+          "body": "La prima è la rinuncia alla preventiva escussione del debitore: significa che il beneficiario può chiedere i soldi direttamente alla compagnia, senza aver prima tentato con te. La seconda è il pagamento a prima richiesta, spesso entro un numero di giorni fissato dal testo, senza che la compagnia possa opporre le eccezioni che tu avresti verso il committente. Sono clausole normali in questo mercato, ma vanno lette prima di firmare, perché determinano quanto velocemente ti ritrovi un'azione di regresso addosso. Il testo della garanzia, di solito, lo impone il beneficiario: il margine di trattativa sta nelle condizioni con la compagnia, non nella lettera dell'impegno."
+        },
+        {
+          "heading": "L'istruttoria conta più del prezzo",
+          "body": "Prima di rilasciare una cauzione la compagnia valuta la tua impresa come farebbe una banca: bilanci degli ultimi esercizi, situazione finanziaria aggiornata, esposizione già in essere, centrale rischi, natura e durata dell'opera da garantire. Da questa valutazione dipendono l'affidamento complessivo che ti viene concesso, il tasso applicato e le eventuali controgaranzie richieste, come fideiussioni personali dei soci. Un vantaggio pratico rispetto al canale bancario è che la cauzione assicurativa di norma non intacca i fidi di cassa, ma resta un impegno che pesa sulla tua capacità di garanzia futura. Chi presenta una documentazione ordinata e completa ottiene risposte più rapide, e nelle gare la rapidità spesso è il punto."
+        },
+        {
+          "heading": "Gli errori che vediamo più spesso",
+          "body": "Il primo è chiedere la cauzione all'ultimo giorno utile, quando l'istruttoria non si comprime. Il secondo è dimenticare lo svincolo: molte garanzie restano formalmente attive dopo il collaudo o la fine del contratto, continuano a occupare affidamento e a generare costi, finché non arriva la liberatoria del beneficiario. Il terzo è accettare un testo diverso da quello che l'ente richiede, con il rischio che la garanzia venga respinta e tu resti fuori dalla gara."
+        },
+        {
+          "heading": "Parliamone prima della prossima gara",
+          "body": "FIM Insurance Broker, con sede a Cisterna di Latina e iscrizione al RUI Sez. B n. B000405449, lavora sulle cauzioni delle piccole e medie imprese del territorio: analizziamo il testo che il beneficiario pretende, costruiamo un plafond adeguato al tuo volume di lavori e ti seguiamo fino allo svincolo. Se hai una gara in vista o una garanzia in scadenza, portaci il capitolato e gli ultimi bilanci: da lì si capisce in poco tempo cosa è ottenibile e a quali condizioni."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "assicurazione-volontari-associazioni-terzo-settore-2026",
       "title": "Volontari, associazioni e ASD: quali assicurazioni sono obbligatorie e quali servono davvero",
       "excerpt": "Chi si avvale di volontari ha un obbligo assicurativo preciso, e chi tessera atleti dilettanti ne ha un altro, di natura diversa. Vediamo cosa dice la norma e dove restano i buchi che il consiglio direttivo paga di persona.",
