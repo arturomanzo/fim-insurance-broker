@@ -1,6 +1,50 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-rc-vettore-merci-trasportate-2026",
+      "title": "RC vettore e merci trasportate: cosa copre davvero la polizza di chi trasporta per conto terzi",
+      "excerpt": "Chi trasporta merci per conto di altri risponde di perdita, avaria e ritardo, ma con limiti di legge che quasi nessun committente accetta senza garanzie. Vediamo come si costruisce la copertura e dove restano i buchi.",
+      "category": "Aziendale",
+      "date": "21 Settembre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1493238792000-8113da705763?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Due rischi diversi che spesso vengono confusi",
+          "body": "La polizza RC vettore tutela l'azienda di trasporto per i danni alla merce che le è stata affidata: perdita totale o parziale, avaria, in alcuni casi ritardo nella consegna. La polizza merci trasportate, invece, tutela il proprietario del carico a prescindere da chi abbia sbagliato. Sono due contratti distinti e con due assicurati diversi. Chi compra il primo pensando di aver protetto il valore del proprio magazzino in viaggio si accorge dell'errore al primo sinistro."
+        },
+        {
+          "heading": "La responsabilità del vettore non è illimitata, e questo crea il problema",
+          "body": "Per il trasporto di merci per conto terzi la legge prevede limiti di risarcimento parametrati al peso del carico, sia sulle tratte nazionali sia su quelle internazionali su strada. Il risultato pratico è che una merce leggera e di alto valore, come elettronica o cosmetica, può valere molto più di quanto il vettore sia tenuto per legge a rimborsare. Molti committenti lo sanno e chiedono contrattualmente al trasportatore di rinunciare a quei limiti o di garantire il valore pieno. È lì che la polizza standard smette di bastare: se l'azienda si assume per contratto un obbligo più ampio di quello di legge, la copertura deve essere estesa di conseguenza, altrimenti la differenza resta a carico dell'impresa."
+        },
+        {
+          "heading": "Le esclusioni che vediamo più spesso nei contratti già in essere",
+          "body": "Quando riesaminiamo una RC vettore esistente, i punti critici sono quasi sempre gli stessi. Vale la pena verificarli prima di firmare un capitolato con un cliente importante.",
+          "list": [
+            "Merci particolari: valori, tabacchi, farmaci, alcolici, elettronica, spesso escluse o coperte solo con esplicita pattuizione",
+            "Furto del veicolo carico con sosta non custodita, o con soste notturne fuori da aree recintate e videosorvegliate",
+            "Subvezione: il trasporto affidato a terzi non sempre rientra in garanzia, ed è un caso frequentissimo nei picchi di lavoro",
+            "Trasporto a temperatura controllata: guasto dell'impianto frigo e rottura della catena del freddo richiedono garanzia dedicata",
+            "Ritardo nella consegna e danni indiretti al committente",
+            "Operazioni di carico e scarico, quando sono eseguite dal personale del vettore"
+          ]
+        },
+        {
+          "heading": "Cosa serve per quotare in modo serio",
+          "body": "Il premio dipende da fattori misurabili, non da una tariffa a listino: fatturato del trasporto, tipologia di merci, aree geografiche percorse, numero e portata dei veicoli, presenza di magazzino e deposito, valore medio e massimo per singolo carico, storico dei sinistri degli ultimi anni. Contano anche le procedure interne: come vengono gestite le soste, se i mezzi hanno antifurto satellitare, come sono formalizzate le riserve alla consegna. Un'azienda che documenta i propri protocolli ottiene una valutazione del rischio più precisa. Conta poi il testo dei contratti con i committenti, perché è lì che si misura quanta responsabilità l'impresa si è già assunta."
+        },
+        {
+          "heading": "Il magazzino e la giacenza sono un capitolo a parte",
+          "body": "Chi movimenta merce spesso la tiene anche in deposito, per ore o per settimane. La responsabilità del depositario segue regole proprie e non viaggia insieme a quella del vettore: se la merce brucia o viene rubata mentre è a terra, la RC vettore può non intervenire. Se l'attività comprende logistica, cross-docking o stoccaggio conto terzi, la garanzia va estesa alla giacenza con massimali e condizioni di sicurezza dei locali definiti nero su bianco."
+        },
+        {
+          "heading": "Parliamone prima del prossimo capitolato",
+          "body": "In FIM Insurance Broker analizziamo i contratti di trasporto che l'azienda ha già firmato, li confrontiamo con le garanzie in corso e mettiamo per iscritto dove la responsabilità assunta supera la copertura. Siamo a Cisterna di Latina, iscritti al RUI Sez. B n. B000405449, e lavoriamo come broker: il mandato è del cliente, non della compagnia. Se gestite trasporti per conto terzi o logistica, portateci polizza e condizioni contrattuali del committente e ne ricaviamo un quadro chiaro."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "polizze-fideiussorie-cauzioni-imprese-2026",
       "title": "Polizze fideiussorie e cauzioni: come funzionano davvero per una PMI",
       "excerpt": "La cauzione assicurativa non è una polizza che ti risarcisce: è una garanzia che il tuo assicuratore presta a un terzo per conto tuo. Capire questa differenza evita brutte sorprese quando la garanzia viene escussa.",
