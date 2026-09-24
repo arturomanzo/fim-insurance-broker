@@ -19,7 +19,7 @@ const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fi
  * storia per non salvare due volte la stessa conversazione: la chat non ha
  * memoria lato server e il widget rimanda solo il testo.
  */
-export const FRASE_SALVATAGGIO = 'Ho passato i tuoi recapiti a FIM'
+export const FRASE_SALVATAGGIO = 'Ho passato i recapiti a FIM'
 
 export const SALVA_CONTATTO_TOOL: Anthropic.Beta.BetaTool = {
   name: 'salva_contatto',
