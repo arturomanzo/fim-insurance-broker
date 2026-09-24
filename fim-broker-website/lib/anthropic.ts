@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { FIMA_CONFIG } from './fima-config'
 import { FALLBACK_BETA } from './ai-models'
+import { FRASE_SALVATAGGIO, SALVA_CONTATTO_TOOL } from './fimaContatto'
 
 export { FIMA_CONFIG }
 
@@ -44,7 +45,11 @@ Una domanda alla volta, dentro il dialogo: un modulo recitato a voce fa scappare
 
 Se chi scrive è una scuola (Dirigente Scolastico, DSGA, segreteria, docente), non mandarlo a /preventivo, che è un percorso per privati e imprese: chiedi il nome dell'istituto e il ruolo, e indirizza al check-up gratuito su ${FIMA_CONFIG.sito}/soluzioni/scuole#check-up oppure a dipartimentoscuole@fimbroker.it. Per gli atti formali la PEC è fiminsurancebrokersas@pec.it.
 
-Questa chat non salva niente e non manda email: quello che il cliente scrive qui a FIM non arriva. Non chiedere l'email e non dire che hai preso nota. Quando il bisogno è chiaro, manda il cliente dove i dati arrivano davvero: il preventivo (${FIMA_CONFIG.sito}/preventivo) o la consulenza gratuita (${FIMA_CONFIG.sito}/prenota-consulenza), dicendogli cosa scrivere lì in base a quello che vi siete detti.
+RICONTATTO:
+Se il cliente vuole essere ricontattato, puoi passare i suoi recapiti a FIM con lo strumento salva_contatto. Servono il nome, un recapito (telefono o email) e cosa gli serve: chiedi solo quello che manca, una cosa alla volta.
+Prima di salvare chiedi il consenso con il link all'informativa, per esempio: "Posso passare questi dati a FIM perché un consulente ti ricontatti? Li trattiamo come spiega l'informativa: ${FIMA_CONFIG.sito}/privacy-policy". Salva solo dopo un sì detto dal cliente, e passa allo strumento le sue parole esatte.
+Finché lo strumento non risponde ok, i dati a FIM non sono arrivati: non dirlo. Quando risponde ok, comincia con "${FRASE_SALVATAGGIO}" e di' che un consulente ricontatterà il cliente, con il tu o il Lei che state usando e senza promettere tempi. Se risponde con un errore, segui il motivo; se non si risolve, manda al preventivo (${FIMA_CONFIG.sito}/preventivo) o alla consulenza gratuita (${FIMA_CONFIG.sito}/prenota-consulenza).
+Se il cliente preferisce fare da sé, mandalo direttamente al preventivo o alla consulenza, dicendogli cosa scrivere lì in base a quello che vi siete detti.
 
 ESCALATION A UMANO:
 Se il cliente vuole parlare con una persona, ha urgenza, o non ne sta venendo fuori con la chat, dagli subito i contatti:
@@ -90,7 +95,7 @@ Linee guida generali:
 Latency-sensitive; begin your visible answer immediately.`
 
 export async function createFIMAStream(
-  messages: Array<{ role: 'user' | 'assistant'; content: string }>,
+  messages: Anthropic.Beta.BetaMessageParam[],
   pageContext?: string,
 ) {
   // Il prompt è lungo e non cambia mai: sta in un blocco cachato per conto suo.
@@ -113,6 +118,7 @@ export async function createFIMAStream(
     output_config: { effort: 'medium' },
     betas: [FALLBACK_BETA],
     fallbacks: 'default',
+    tools: [SALVA_CONTATTO_TOOL],
     messages,
   })
 
