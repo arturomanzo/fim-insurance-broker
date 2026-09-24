@@ -59,7 +59,9 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <strong>Assistente virtuale FIMA</strong>: i messaggi che scrivi in chat sono inviati
                   ad Anthropic per generare la risposta. Le risposte sono indicative e non sostituiscono
-                  la consulenza di un broker.
+                  la consulenza di un broker. Se chiedi di essere ricontattato e dai il consenso in chat,
+                  nome, recapiti e un riepilogo della richiesta sono salvati nel nostro archivio contatti
+                  e trattati come quelli dei moduli di contatto del sito.
                 </li>
                 <li>
                   <strong>Agente Sinistri AI</strong>: i dati che inserisci per l&apos;apertura della
