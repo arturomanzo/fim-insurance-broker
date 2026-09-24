@@ -88,7 +88,7 @@ function escapeHtml(s: string): string {
  * deve comparire davvero in un messaggio del visitatore, e prima di quel
  * messaggio FIMA deve aver mostrato il link all'informativa.
  */
-export async function salvaContatto(
+async function salva(
   raw: unknown,
   ctx: { messaggi: Anthropic.Beta.BetaMessageParam[]; pagina?: string },
 ): Promise<Esito> {
@@ -96,8 +96,12 @@ export async function salvaContatto(
   const s = (v: unknown, max: number) => String(v ?? '').trim().slice(0, max)
   const nome = s(i.nome, 100)
   const cognome = s(i.cognome, 100)
-  const telefono = s(i.telefono, 30)
-  const email = s(i.email, 200).toLowerCase()
+  // Il modello a volte scrive «non fornito» invece della stringa vuota: un
+  // telefono senza cifre o un'email senza @ valgono come non dati.
+  const telGrezzo = s(i.telefono, 30)
+  const telefono = /\d/.test(telGrezzo) ? telGrezzo : ''
+  const mailGrezza = s(i.email, 200).toLowerCase()
+  const email = mailGrezza.includes('@') ? mailGrezza : ''
   const tipo = s(i.tipo, 100)
   const riepilogo = s(i.riepilogo, 1500)
   const frase = s(i.frase_consenso, 300)
@@ -189,4 +193,15 @@ export async function salvaContatto(
 
   console.info(`[FIMA] contatto salvato: ${nome} — ${tipo}`)
   return { ok: true }
+}
+
+/** Come `salva`, ma lascia nei log il motivo di ogni rifiuto (senza dati
+ *  personali): senza, un salvataggio mancato non si distingue da uno mai tentato. */
+export async function salvaContatto(
+  raw: unknown,
+  ctx: { messaggi: Anthropic.Beta.BetaMessageParam[]; pagina?: string },
+): Promise<Esito> {
+  const esito = await salva(raw, ctx)
+  if (!esito.ok) console.info(`[FIMA] salva_contatto rifiutato: ${esito.motivo}`)
+  return esito
 }
