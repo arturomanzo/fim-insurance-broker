@@ -1,6 +1,47 @@
 {
   "posts": [
     {
+      "slug": "polizza-vita-a-garanzia-del-mutuo-2026",
+      "title": "Polizza vita a garanzia del mutuo: quella imposta dalla banca e quella che serve davvero",
+      "excerpt": "Quando accendi un mutuo la banca ti propone una copertura vita abbinata. Non sei obbligato ad acquistarla da lei, e spesso non è la copertura più adatta alla tua famiglia. Ecco come ragionarci.",
+      "category": "Vita",
+      "date": "28 Settembre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Cosa è obbligatorio e cosa no",
+          "body": "Per erogare un mutuo ipotecario la banca richiede la polizza incendio e scoppio sull'immobile: quella è una garanzia legata al bene posto a ipoteca e non si discute. La copertura vita, invece, non è imposta dalla legge. Viene proposta insieme al finanziamento, a volte con una certa insistenza, ma la normativa consente al cliente di presentare una polizza equivalente reperita altrove, senza che questo cambi le condizioni del mutuo. Il punto non è rifiutarla per principio: è capire se quella specifica polizza ti serve e a quali condizioni."
+        },
+        {
+          "heading": "Perché una copertura vita su un mutuo ha senso comunque",
+          "body": "Se sei l'unico reddito di casa e mancano vent'anni di rate, la domanda da porsi è concreta: cosa succede a chi resta se tu vieni a mancare. Gli eredi ereditano l'immobile insieme al debito residuo, e senza il tuo stipendio la rata diventa un problema nel giro di pochi mesi. Una temporanea caso morte serve esattamente a questo: alla morte dell'assicurato la compagnia liquida un capitale che consente di estinguere il debito. È una delle poche coperture dove il beneficio si vede tutto in una volta, nel momento peggiore."
+        },
+        {
+          "heading": "Capitale costante o capitale decrescente",
+          "body": "Le polizze abbinate al mutuo sono quasi sempre a capitale decrescente: il capitale assicurato scende seguendo il piano di ammortamento, perché segue il debito residuo. Costa meno di una temporanea a capitale costante, ma alla fine del piano non lascia nulla in mano alla famiglia oltre all'estinzione del debito. Una temporanea a capitale costante mantiene invece la somma piena per tutta la durata: se il mutuo è ormai quasi estinto, la differenza resta ai beneficiari. Quale delle due abbia senso dipende da quanti altri patrimoni ci sono e da quante persone dipendono economicamente da te.",
+          "list": [
+            "Decrescente: capitale allineato al debito residuo, premio più basso, nessun residuo per gli eredi",
+            "Costante: capitale fisso per tutta la durata, premio più alto, la parte eccedente il debito resta alla famiglia",
+            "Beneficiario: se è la banca, il capitale va a estinzione; se sono gli eredi, decidono loro cosa farne"
+          ]
+        },
+        {
+          "heading": "La clausola che vale più di tutte: chi è il beneficiario",
+          "body": "Nelle polizze vendute allo sportello il beneficiario è spesso la banca stessa, in qualità di creditore vincolatario. Il capitale va direttamente a estinguere il debito e la famiglia non vede un euro di liquidità. Con una polizza indipendente puoi designare come beneficiari il coniuge o i figli, lasciando a loro la scelta se estinguere il mutuo o tenere la liquidità per vivere. Sono due scenari molto diversi e nessuno te li spiega mentre firmi venti fogli di contratto di finanziamento."
+        },
+        {
+          "heading": "Cosa guardare nel contratto prima di firmare",
+          "body": "Il questionario sanitario va compilato con attenzione: una dichiarazione inesatta sullo stato di salute può costare la contestazione della garanzia al momento del sinistro, ed è il motivo più frequente per cui una liquidazione si blocca. Verifica poi le esclusioni, i limiti di età alla scadenza e il periodo di carenza iniziale, che in molti contratti riduce o annulla la prestazione nei primi mesi se la morte non è dovuta a infortunio. Controlla anche se la copertura include invalidità permanente totale: per un lavoratore autonomo può pesare quanto il caso morte. Sul premio, incide l'età all'ingresso, la durata, il capitale, lo stato di salute e le abitudini come il fumo."
+        },
+        {
+          "heading": "Parliamone prima di firmare il mutuo",
+          "body": "Il momento giusto per confrontare le alternative è prima del rogito, non dopo, quando hai già sottoscritto la polizza allo sportello e devi gestire un recesso. Noi di FIM Insurance Broker, da Cisterna di Latina, leggiamo il piano di ammortamento insieme a te e ragioniamo su quale forma di copertura regge davvero la tua situazione familiare. Come broker iscritti al RUI Sez. B n. B000405449 lavoriamo per il cliente, non per la banca: se la proposta che hai in mano è già buona, te lo diciamo. Scrivici o passa in ufficio con il piano del mutuo."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "assicurazione-rc-vettore-merci-trasportate-2026",
       "title": "RC vettore e merci trasportate: cosa copre davvero la polizza di chi trasporta per conto terzi",
       "excerpt": "Chi trasporta merci per conto di altri risponde di perdita, avaria e ritardo, ma con limiti di legge che quasi nessun committente accetta senza garanzie. Vediamo come si costruisce la copertura e dove restano i buchi.",
