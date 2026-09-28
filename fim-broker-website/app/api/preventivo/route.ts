@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { inviaLead } from '@/lib/codaLead'
 import { rateLimit } from '@/lib/rateLimit'
 import { saveLead } from '@/lib/leadStore'
 import { sendLeadFromRequest } from '@/lib/metaCapi'
@@ -48,40 +49,6 @@ function escapeHtml(str: string): string {
 
 // Inizializza Resend solo se la chiave è presente
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
-
-const GESTIONALE_URL = process.env.GESTIONALE_API_URL || 'https://fim-gestionale-next.vercel.app'
-const GESTIONALE_SECRET = process.env.WEBSITE_API_SECRET
-
-async function syncLeadToGestionale(data: {
-  nome: string; cognome: string; email: string; telefono: string
-  tipo: string; profilo?: string; messaggio?: string
-}) {
-  if (!GESTIONALE_SECRET) {
-    console.warn('[gestionale] WEBSITE_API_SECRET non configurata — sync lead saltata')
-    return
-  }
-  const url = `${GESTIONALE_URL}/api/website/lead`
-  console.log(`[gestionale] Invio lead a ${url} — ${data.nome} ${data.cognome}`)
-  try {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${GESTIONALE_SECRET}`,
-      },
-      body: JSON.stringify(data),
-    })
-    if (!res.ok) {
-      const text = await res.text().catch(() => '')
-      console.error(`[gestionale] Sync lead fallita: HTTP ${res.status} — ${text}`)
-    } else {
-      const result = await res.json().catch(() => ({}))
-      console.log(`[gestionale] Lead sincronizzata OK:`, result)
-    }
-  } catch (err) {
-    console.error('[gestionale] Sync lead — errore di rete:', err)
-  }
-}
 
 const FIM_EMAIL = process.env.FIM_EMAIL || 'info@fimbroker.it'
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
@@ -460,12 +427,14 @@ export async function POST(req: NextRequest) {
     // Follow-up schedulato a 72 ore
     const followUpAt = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
 
-    // Sincronizza lead nel gestionale esterno (PRIORITÀ — con await)
-    try {
-      await syncLeadToGestionale({ nome, cognome, email, telefono, tipo, profilo: profilo || undefined, messaggio: messaggioPersistito || undefined })
-    } catch (syncErr) {
-      console.error('[preventivo] Sync gestionale fallita:', syncErr)
-    }
+    // Sincronizza lead nel gestionale (PRIORITÀ — con await). Se non risponde
+    // la lead va in coda e ci entra dopo; l'id del form evita i doppioni.
+    await inviaLead({
+      lead_id: preventivoData.id,
+      nome, cognome, email, telefono, tipo,
+      profilo: profilo || undefined,
+      messaggio: messaggioPersistito || undefined,
+    }, 'modulo preventivo')
 
     // Salva lead su Supabase locale del sito (secondario)
     try {

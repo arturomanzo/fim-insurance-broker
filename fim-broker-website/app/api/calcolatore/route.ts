@@ -1,53 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
+import { inviaLead } from '@/lib/codaLead'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const FIM_EMAIL = process.env.FIM_EMAIL || 'info@fimbroker.it'
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
-
-const GESTIONALE_URL = process.env.GESTIONALE_API_URL || 'https://fim-gestionale-next.vercel.app'
-const GESTIONALE_SECRET = process.env.WEBSITE_API_SECRET
-
-/**
- * Manda la lead al gestionale, come fanno gli altri form del sito.
- *
- * Finché non c'era, il calcolatore era l'unico form che non lasciava traccia
- * da nessuna parte: mail al team e via. Chi non apriva quella mail non sapeva
- * che la lead esisteva, e le tre arrivate da maggio non sono mai entrate in
- * lavorazione.
- *
- * Non blocca la risposta all'utente: se il gestionale è giù, l'analisi la
- * vede lo stesso.
- */
-async function syncLeadToGestionale(data: {
-  nome: string; cognome: string; email: string
-  tipo: string; profilo?: string; messaggio?: string
-  lead_id?: string; referrer?: string
-}) {
-  if (!GESTIONALE_SECRET) {
-    console.warn('[gestionale] WEBSITE_API_SECRET non configurata — sync lead saltata')
-    return
-  }
-  try {
-    const res = await fetch(`${GESTIONALE_URL}/api/website/lead`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${GESTIONALE_SECRET}`,
-      },
-      body: JSON.stringify(data),
-    })
-    if (!res.ok) {
-      const text = await res.text().catch(() => '')
-      console.error(`[gestionale] Sync lead calcolatore fallita: HTTP ${res.status} — ${text}`)
-    } else {
-      console.log('[gestionale] Lead calcolatore sincronizzata:', await res.json().catch(() => ({})))
-    }
-  } catch (err) {
-    console.error('[gestionale] Sync lead calcolatore — errore di rete:', err)
-  }
-}
 
 function escapeHtml(str: string): string {
   return str
@@ -365,9 +323,9 @@ export async function POST(req: NextRequest) {
       '\nIl calcolatore non chiede il telefono: si ricontatta via mail.',
     ].filter(Boolean).join('\n')
 
-    // Prima l'archivio, poi le mail. Se il gestionale è giù la funzione non
-    // lancia e si va avanti lo stesso: l'utente vede l'analisi comunque.
-    await syncLeadToGestionale({
+    // Prima l'archivio, poi le mail. Se il gestionale è giù la lead va in coda
+    // (lib/codaLead.ts) e si va avanti lo stesso: l'utente vede l'analisi comunque.
+    await inviaLead({
       nome: primoNome,
       cognome,
       email,
@@ -376,7 +334,7 @@ export async function POST(req: NextRequest) {
       messaggio: riepilogo,
       lead_id: `CALC-${Date.now()}`,
       referrer: 'calcolatore-rischi',
-    })
+    }, 'calcolatore')
 
     // L'indirizzo entra nell'audience Resend solo con il consenso marketing,
     // che è una casella a parte e facoltativa. La casella obbligatoria copre
