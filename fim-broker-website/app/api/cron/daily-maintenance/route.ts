@@ -6,6 +6,8 @@
  *   1. cleanup-documenti  → retention GDPR del bucket preventivi (veloce)
  *   2. reminder-rinnovi   → email promemoria scadenza polizze (leggero, dataset mock)
  *   3. allegati-watcher   → hash dei PDF IVASS sorvegliati (3 download, nessuna AI)
+ *   0. coda-lead         → rimanda al gestionale le lead rimaste in coda (di norma
+ *                           ci pensa n8n ogni dieci minuti: questo è il paracadute)
  *   4. newsletter         → il primo del mese prepara la bozza e manda
  *                           l'anteprima ad Arturo; gli altri 30 giorni esce
  *                           subito. Non spedisce mai agli iscritti da sé.
@@ -23,6 +25,7 @@ import { GET as cleanupDocumenti } from '../cleanup-documenti/route'
 import { GET as reminderRinnovi } from '../reminder-rinnovi/route'
 import { GET as allegatiWatcher } from '../allegati-watcher/route'
 import { GET as newsletter } from '../newsletter/route'
+import { GET as codaLead } from '../coda-lead/route'
 
 const CRON_SECRET = process.env.CRON_SECRET
 
@@ -32,6 +35,7 @@ export const maxDuration = 60
 type Job = { name: string; fn: (req: NextRequest) => Promise<Response> }
 
 const JOBS: Job[] = [
+  { name: 'coda-lead', fn: codaLead },
   { name: 'cleanup-documenti', fn: cleanupDocumenti },
   { name: 'reminder-rinnovi', fn: reminderRinnovi },
   { name: 'allegati-watcher', fn: allegatiWatcher },

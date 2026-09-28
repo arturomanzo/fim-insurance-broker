@@ -1,5 +1,6 @@
 import type Anthropic from '@anthropic-ai/sdk'
 import { Resend } from 'resend'
+import { inviaLead } from '@/lib/codaLead'
 
 // Il salvataggio dei recapiti lasciati in chat a FIMA.
 //
@@ -8,8 +9,6 @@ import { Resend } from 'resend'
 // modulo /preventivo: `/api/website/lead` del gestionale (pagina /lead, lead
 // scoring, alert) più una mail a info@, perché qualcuno se ne accorga subito.
 
-const GESTIONALE_URL = process.env.GESTIONALE_API_URL || 'https://fim-gestionale-next.vercel.app'
-const GESTIONALE_SECRET = process.env.WEBSITE_API_SECRET
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const FIM_EMAIL = process.env.FIM_EMAIL || 'info@fimbroker.it'
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
@@ -139,11 +138,6 @@ async function salva(
     return { ok: false, motivo: "Prima del consenso va mostrato il link all'informativa privacy. Mostralo e richiedi il consenso." }
   }
 
-  if (!GESTIONALE_SECRET) {
-    console.error('[FIMA] WEBSITE_API_SECRET non configurata: contatto non salvato')
-    return { ok: false, motivo: 'Il salvataggio non è disponibile adesso.' }
-  }
-
   const quando = new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome' })
   const messaggio = [
     riepilogo,
@@ -152,31 +146,15 @@ async function salva(
     `Consenso privacy dato in chat dopo il link all'informativa, con le parole: «${frase}».`,
   ].join('\n')
 
-  try {
-    const res = await fetch(`${GESTIONALE_URL}/api/website/lead`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${GESTIONALE_SECRET}` },
-      body: JSON.stringify({
-        nome,
-        cognome,
-        email,
-        telefono,
-        tipo,
-        messaggio,
-        lead_id: `CHAT-${Date.now()}`,
-        referrer: 'chat-fima',
-      }),
-    })
-    if (!res.ok) {
-      console.error(`[FIMA] salvataggio contatto fallito: HTTP ${res.status} — ${await res.text().catch(() => '')}`)
-      return { ok: false, motivo: 'Il salvataggio non è riuscito.' }
-    }
-  } catch (err) {
-    console.error('[FIMA] salvataggio contatto — errore di rete:', err)
-    return { ok: false, motivo: 'Il salvataggio non è riuscito.' }
-  }
+  // In coda vuol dire al sicuro: entra nel gestionale appena risponde
+  // (lib/codaLead.ts). Solo `persa` va detta al visitatore.
+  const esito = await inviaLead(
+    { nome, cognome, email, telefono, tipo, messaggio, lead_id: `CHAT-${Date.now()}`, referrer: 'chat-fima' },
+    'chat FIMA',
+  )
+  if (esito === 'persa') return { ok: false, motivo: 'Il salvataggio non è riuscito.' }
 
-  // La mail al team è in più: se non parte, la lead è comunque in archivio.
+  // La mail al team è in più: se non parte, la lead è comunque in archivio o in coda.
   if (resend) {
     await resend.emails
       .send({
@@ -186,7 +164,7 @@ async function salva(
         html: `<p><strong>${escapeHtml([nome, cognome].filter(Boolean).join(' '))}</strong> — ${escapeHtml(tipo)}</p>
 <p>Telefono: ${escapeHtml(telefono || '—')}<br>Email: ${escapeHtml(email || '—')}</p>
 <p style="white-space:pre-wrap">${escapeHtml(messaggio)}</p>
-<p>La trovi anche nella pagina /lead del gestionale.</p>`,
+<p>${esito === 'salvata' ? 'La trovi anche nella pagina /lead del gestionale.' : 'Il gestionale adesso non risponde: la lead è in coda e ci entra da sola appena torna su.'}</p>`,
       })
       .catch((err) => console.error('[FIMA] mail al team non partita:', err))
   }
