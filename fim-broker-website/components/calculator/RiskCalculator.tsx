@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 
 type Profile = 'privato' | 'professionista' | 'pmi' | 'impresa'
 
@@ -285,6 +286,8 @@ export default function RiskCalculator() {
           prezzoMax: res.prezzoMax,
           marketing: form.marketing,
           website: form.website,
+          // Per il gestionale: gclid/fbclid ci sono solo col consenso marketing.
+          campagna: campagnaPerInvio(),
         }),
       })
     } catch {

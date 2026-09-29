@@ -31,6 +31,7 @@ Riferimento: `components/forms/ContactForm.tsx` e `components/forms/CollaboraFor
 - `useState` per `formData` + `status: 'idle' | 'loading' | 'success' | 'error'`
 - Campo honeypot `website` nascosto visivamente (anti-bot)
 - Lettura UTM da `sessionStorage` key `fim_utm` in `useEffect`
+- Se il modulo crea un lead nel gestionale: allega `campagna: campagnaPerInvio()` (`lib/campagnaBrowser.ts`) al POST, e la route passa `pulisciCampagna(body.campagna)` a `inviaLead` (`lib/campagna.ts`). gclid/fbclid ci sono solo col consenso marketing. Test: `npm test`
 - Submit → `fetch('/api/...')` → success: chiama `track*Submit()` da `lib/analytics.ts` + stato `success`
 - Schermata di conferma inline quando `status === 'success'` (no redirect)
 - Errori: `errorMsg` state + fallback generico `"Errore nell'invio. Riprova o contattaci al +39 06 96883381."`

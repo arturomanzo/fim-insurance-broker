@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import type Anthropic from '@anthropic-ai/sdk'
 import { createFIMAStream } from '@/lib/anthropic'
 import { salvaContatto } from '@/lib/fimaContatto'
+import { pulisciCampagna } from '@/lib/campagna'
 import { rateLimit } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
@@ -32,6 +33,8 @@ export async function POST(req: NextRequest) {
     }
     const body = await req.json()
     const { messages, pageContext } = body
+    // Da quale campagna arriva chi scrive: finisce nella lead se FIMA salva il contatto.
+    const campagna = pulisciCampagna(body?.campagna)
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json({ error: 'Messaggi non validi' }, { status: 400 })
@@ -117,7 +120,7 @@ export async function POST(req: NextRequest) {
             for (const c of chiamate) {
               const esito =
                 c.name === 'salva_contatto'
-                  ? await salvaContatto(c.input, { messaggi: sanitizedMessages, pagina: sanitizedPageContext })
+                  ? await salvaContatto(c.input, { messaggi: sanitizedMessages, pagina: sanitizedPageContext, campagna })
                   : { ok: false as const, motivo: 'Strumento sconosciuto.' }
               esiti.push({
                 type: 'tool_result',

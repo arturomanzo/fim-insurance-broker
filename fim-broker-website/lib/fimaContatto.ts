@@ -1,6 +1,7 @@
 import type Anthropic from '@anthropic-ai/sdk'
 import { Resend } from 'resend'
 import { inviaLead } from '@/lib/codaLead'
+import type { Campagna } from '@/lib/campagna'
 
 // Il salvataggio dei recapiti lasciati in chat a FIMA.
 //
@@ -89,7 +90,7 @@ function escapeHtml(s: string): string {
  */
 async function salva(
   raw: unknown,
-  ctx: { messaggi: Anthropic.Beta.BetaMessageParam[]; pagina?: string },
+  ctx: { messaggi: Anthropic.Beta.BetaMessageParam[]; pagina?: string; campagna?: Campagna },
 ): Promise<Esito> {
   const i = (raw ?? {}) as Partial<Input>
   const s = (v: unknown, max: number) => String(v ?? '').trim().slice(0, max)
@@ -149,7 +150,7 @@ async function salva(
   // In coda vuol dire al sicuro: entra nel gestionale appena risponde
   // (lib/codaLead.ts). Solo `persa` va detta al visitatore.
   const esito = await inviaLead(
-    { nome, cognome, email, telefono, tipo, messaggio, lead_id: `CHAT-${Date.now()}`, referrer: 'chat-fima' },
+    { nome, cognome, email, telefono, tipo, messaggio, lead_id: `CHAT-${Date.now()}`, referrer: 'chat-fima', campagna: ctx.campagna },
     'chat FIMA',
   )
   if (esito === 'persa') return { ok: false, motivo: 'Il salvataggio non è riuscito.' }
@@ -177,7 +178,7 @@ async function salva(
  *  personali): senza, un salvataggio mancato non si distingue da uno mai tentato. */
 export async function salvaContatto(
   raw: unknown,
-  ctx: { messaggi: Anthropic.Beta.BetaMessageParam[]; pagina?: string },
+  ctx: { messaggi: Anthropic.Beta.BetaMessageParam[]; pagina?: string; campagna?: Campagna },
 ): Promise<Esito> {
   const esito = await salva(raw, ctx)
   if (!esito.ok) console.info(`[FIMA] salva_contatto rifiutato: ${esito.motivo}`)

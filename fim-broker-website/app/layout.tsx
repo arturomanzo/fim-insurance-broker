@@ -5,6 +5,7 @@ import './globals.css'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ClarityLoader from '@/components/analytics/ClarityLoader'
 import MetaPixelLoader from '@/components/analytics/MetaPixelLoader'
+import AttribuzioneCampagna from '@/components/analytics/AttribuzioneCampagna'
 import { CONSENT_STORAGE_KEY, CONSENT_VERSION } from '@/lib/consent'
 
 const montserrat = Montserrat({
@@ -368,6 +369,9 @@ w.setTimeout(trigger,3500);
             nel footer. */}
         <ClarityLoader />
         <MetaPixelLoader />
+        {/* Da quale campagna arriva il visitatore: lo allegano i moduli che
+            creano un lead (lib/campagnaBrowser.ts). */}
+        <AttribuzioneCampagna />
         <CookieBanner />
       </body>
     </html>

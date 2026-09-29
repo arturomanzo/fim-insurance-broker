@@ -13,7 +13,7 @@ export default function CookiePolicyPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Cookie Policy</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Giugno 2026</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Settembre 2026</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -60,6 +60,7 @@ export default function CookiePolicyPage() {
               </p>
               <ul>
                 <li><strong>fim-cookie-consent</strong> (local storage): memorizza le tue preferenze sui cookie (durata: persistente fino a revoca/cancellazione)</li>
+                <li><strong>fim_campagna</strong> (session storage): ricorda da dove sei arrivato sul sito (parametri utm della campagna, sito di provenienza, prima pagina vista e ora di arrivo), così sappiamo quale annuncio ha portato la richiesta che invii con un modulo. Non contiene dati personali e si cancella quando chiudi la scheda.</li>
                 <li>Cookie di sessione e di sicurezza necessari alla navigazione e all&apos;area riservata</li>
               </ul>
 
@@ -80,6 +81,13 @@ export default function CookiePolicyPage() {
               </p>
               <ul>
                 <li><strong>Google Ads</strong> (conversion tracking / remarketing) — gestito tramite Google Tag Manager.</li>
+                <li>
+                  <strong>Identificativi di clic (gclid, fbclid)</strong> — se arrivi da un annuncio
+                  Google o Meta, l&apos;identificativo del clic viene conservato nella voce
+                  <em> fim_campagna</em> (session storage, fino alla chiusura della scheda) e allegato
+                  alla richiesta che invii con un modulo, per sapere quale annuncio l&apos;ha generata.
+                  Solo con il consenso di marketing: senza, non viene salvato né inviato.
+                </li>
                 <li><strong>Meta Pixel</strong> (Facebook/Instagram — _fbp e analoghi) — misurazione campagne e remarketing (durata: fino a 3 mesi).</li>
                 <li>
                   <strong>Meta Conversions API</strong> — invio dal nostro server dei medesimi eventi
