@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { inviaLead } from '@/lib/codaLead'
+import { pulisciCampagna } from '@/lib/campagna'
 import { rateLimit } from '@/lib/rateLimit'
 import { saveLead } from '@/lib/leadStore'
 import { sendLeadFromRequest } from '@/lib/metaCapi'
@@ -28,6 +29,8 @@ interface PreventivoRequest {
   utm_content?: string
   utm_term?: string
   referrer?: string
+  // Attribuzione per il gestionale (lib/campagnaBrowser.ts)
+  campagna?: unknown
 }
 
 function validateEmail(email: string): boolean {
@@ -434,6 +437,7 @@ export async function POST(req: NextRequest) {
       nome, cognome, email, telefono, tipo,
       profilo: profilo || undefined,
       messaggio: messaggioPersistito || undefined,
+      campagna: pulisciCampagna(body.campagna),
     }, 'modulo preventivo')
 
     // Salva lead su Supabase locale del sito (secondario)

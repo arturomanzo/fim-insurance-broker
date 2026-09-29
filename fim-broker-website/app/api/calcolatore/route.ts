@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { inviaLead } from '@/lib/codaLead'
+import { pulisciCampagna } from '@/lib/campagna'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const FIM_EMAIL = process.env.FIM_EMAIL || 'info@fimbroker.it'
@@ -334,6 +335,7 @@ export async function POST(req: NextRequest) {
       messaggio: riepilogo,
       lead_id: `CALC-${Date.now()}`,
       referrer: 'calcolatore-rischi',
+      campagna: pulisciCampagna(body?.campagna),
     }, 'calcolatore')
 
     // L'indirizzo entra nell'audience Resend solo con il consenso marketing,

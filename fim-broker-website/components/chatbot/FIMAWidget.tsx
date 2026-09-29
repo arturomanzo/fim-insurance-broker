@@ -5,6 +5,7 @@ import ChatBubble from './ChatBubble'
 import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import { FIMA_CONFIG } from '@/lib/fima-config'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -164,7 +165,8 @@ export default function FIMAWidget() {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMessage], pageContext }),
+        // `campagna` serve solo se FIMA salva il contatto (lib/fimaContatto.ts).
+        body: JSON.stringify({ messages: [...messages, userMessage], pageContext, campagna: campagnaPerInvio() }),
       })
 
       if (!response.ok) throw new Error('Errore nella risposta')

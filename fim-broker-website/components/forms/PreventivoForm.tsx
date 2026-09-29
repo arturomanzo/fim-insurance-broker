@@ -12,6 +12,7 @@ import {
   trackPreventivoAbandonment,
 } from '@/lib/analytics'
 import { metaLeadFields } from '@/lib/metaLead'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 
 interface UtmData {
   utm_source?: string
@@ -163,6 +164,8 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           // (stesso gating GDPR del Pixel browser).
           ...meta,
           ...utm,
+          // Per il gestionale: gclid/fbclid ci sono solo col consenso marketing.
+          campagna: campagnaPerInvio(),
         }),
       })
       if (!res.ok) throw new Error()

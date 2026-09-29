@@ -1,5 +1,6 @@
 import { Redis } from '@upstash/redis'
 import { Resend } from 'resend'
+import type { Campagna } from '@/lib/campagna'
 
 // La consegna delle lead al gestionale, con una coda quando non risponde.
 //
@@ -37,6 +38,9 @@ export type LeadGestionale = {
   profilo?: string
   messaggio?: string
   referrer?: string
+  /** Da quale campagna arriva (lib/campagna.ts). Resta nella voce di coda,
+   *  quindi anche una lead rimandata dal cron la porta al gestionale. */
+  campagna?: Campagna
 }
 
 /** `salvata` nel gestionale, `in-coda` su Redis, `persa` se nessuna delle due. */
