@@ -10,7 +10,7 @@ import { OG_BASE } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Assicurazione Condominio — Globale Fabbricato e RC Amministratore | FIM',
   description:
-    'Polizze condominiali complete: globale fabbricato, RC amministratore (L. 220/2012), ascensori, tutela legale e D&O. FIM Insurance Broker gestisce condomini a Roma e nel Lazio.',
+    'Polizze condominiali complete: globale fabbricato, RC amministratore (L. 220/2012), ascensori, tutela legale e D&O. Consulenza per amministratori in tutta Italia.',
   alternates: { canonical: '/soluzioni/condomini' },
   openGraph: {
     ...OG_BASE,

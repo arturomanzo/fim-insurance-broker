@@ -101,7 +101,7 @@ export const viewport = {
 export const metadata: Metadata = {
   title: {
     // 56 caratteri — entro la soglia SERP
-    default: 'FIM Insurance Broker | Polizze su misura, Roma e Lazio',
+    default: 'FIM Insurance Broker | Polizze su misura in tutta Italia',
     template: '%s | FIM Insurance Broker',
   },
   // 154 caratteri — entro la soglia SERP di ~160
