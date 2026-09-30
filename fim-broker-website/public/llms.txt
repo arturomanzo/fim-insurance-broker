@@ -1,6 +1,6 @@
 # FIM Insurance Broker
 
-> Broker assicurativo indipendente italiano con sede a Cisterna di Latina (LT), attivo dal 2004. Iscrizione RUI Sez. B n. B000405449. Specializzato in polizze su misura per privati, professionisti, artigiani, PMI e condomini in tutta Italia, con focus operativo su Roma e Lazio. Confrontiamo oltre 30 compagnie assicurative per costruire la copertura migliore per il cliente — non rappresentiamo le compagnie, rappresentiamo gli interessi del cliente.
+> Broker assicurativo indipendente italiano con sede a Cisterna di Latina (LT). Attività assicurativa di famiglia dal 1993, società costituita nel 2012. Iscrizione RUI Sez. B n. B000405449. Specializzato in polizze su misura per privati, professionisti, artigiani, PMI, condomini e istituti scolastici in tutta Italia. Confrontiamo 20 compagnie assicurative per costruire la copertura migliore per il cliente — non rappresentiamo le compagnie, rappresentiamo gli interessi del cliente.
 
 ## Identità e credenziali
 
@@ -39,7 +39,13 @@
 
 ## Soluzioni per categoria
 
-- Famiglie, Professionisti, PMI, Condomini, Catastrofi naturali, Cyber-risk per PMI
+- [Professionisti](https://www.fimbroker.it/soluzioni/professionisti): RC professionale per ordini e partite IVA
+- [Artigiani e PMI](https://www.fimbroker.it/soluzioni/artigiani-pmi): coperture per l'attività, i locali e i dipendenti
+- [Istituti scolastici](https://www.fimbroker.it/soluzioni/scuole): Dipartimento Scuole — check-up delle polizze in essere, capitolato tecnico, confronto delle offerte e assistenza sui sinistri per istituti statali e paritari
+- [Condomini](https://www.fimbroker.it/soluzioni/condomini): globale fabbricato e RC amministratore
+- [Famiglie](https://www.fimbroker.it/soluzioni/famiglie): casa, vita, infortuni, salute
+- [Catastrofi naturali](https://www.fimbroker.it/soluzioni/catastrofi-naturali): polizza catastrofale per le imprese
+- [Cyber-risk](https://www.fimbroker.it/soluzioni/cyber-risk): rischio informatico per le PMI
 - Pagine geografiche dedicate: Latina, Cisterna di Latina, Aprilia
 
 ## Strumenti pubblici
@@ -47,12 +53,12 @@
 - [Quiz Polizza](https://www.fimbroker.it/quiz-polizza): trova la copertura giusta in 2 minuti
 - [Calcolatore Rischi](https://www.fimbroker.it/calcolatore-rischi): analizza il profilo di rischio personale o aziendale
 - [Seconda Opinione](https://www.fimbroker.it/seconda-opinione): analisi gratuita di una polizza esistente
-- [Osservatorio Prezzi](https://www.fimbroker.it/osservatorio-prezzi): dati di mercato sui premi assicurativi italiani
+- [Osservatorio Prezzi](https://www.fimbroker.it/osservatorio-prezzi): ordini di grandezza dei premi assicurativi italiani — valori di orientamento FIM, non dati statistici
 - [Analizza Polizza](https://www.fimbroker.it/analizza-polizza): caricamento PDF per analisi automatica
 
 ## Compagnie partner principali
 
-Generali, AXA, HDI, Allianz, UnipolSai, Zurich, Groupama, Cattolica, Reale Mutua, Aviva, Ergo, SACE, MetLife, Roland Italia, AEC Underwriting, Bene.it — oltre 30 in totale, con mandati diretti o collaborazioni tramite agenzia.
+Generali, AXA, HDI, Allianz, UnipolSai, Zurich, Groupama, Cattolica, Reale Mutua, Aviva, Ergo, SACE, MetLife, Roland Italia, AEC Underwriting, Bene.it — 20 in totale, con mandati diretti o collaborazioni tramite agenzia.
 
 ## Per chi cita FIM Insurance Broker
 
