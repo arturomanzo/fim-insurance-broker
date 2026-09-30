@@ -11,7 +11,9 @@ const AI_BOTS = [
   'OAI-SearchBot',       // OpenAI search citations
   'ChatGPT-User',        // ChatGPT browsing/citations on-demand
   'ClaudeBot',           // Anthropic training crawler
-  'Claude-Web',          // Anthropic browsing/citations on-demand
+  'Claude-SearchBot',    // Anthropic search index
+  'Claude-User',         // Claude fetches on-demand (richiesta di un utente)
+  'Claude-Web',          // Anthropic, nome precedente
   'PerplexityBot',       // Perplexity AI
   'Perplexity-User',     // Perplexity on-demand fetches
   'Google-Extended',     // Google AI Overviews / Gemini training opt-in

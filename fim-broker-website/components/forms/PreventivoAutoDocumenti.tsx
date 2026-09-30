@@ -339,7 +339,7 @@ export default function PreventivoAutoDocumenti() {
         <span>
           Acconsento al trattamento dei documenti caricati (inclusi documenti d&apos;identità) ai soli fini
           della preventivazione assicurativa, secondo la{' '}
-          <a href="/privacy" className="text-primary underline hover:text-accent" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. *
+          <a href="/privacy-policy" className="text-primary underline hover:text-accent" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. *
         </span>
       </label>
 
