@@ -13,14 +13,14 @@ import Button from '@/components/ui/Button'
 import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  // Title: 58 caratteri — entro la soglia ~60 oltre cui Google tronca in SERP.
+  // Title: 60 caratteri — entro la soglia ~60 oltre cui Google tronca in SERP.
   title: {
-    absolute: 'FIM Insurance Broker · Chiarezza in Azione | Roma e Lazio',
+    absolute: 'FIM Insurance Broker · Chiarezza in Azione | In tutta Italia',
   },
-  // Description: 152 caratteri — entro la soglia ~160 di Google.
+  // Description: 149 caratteri — entro la soglia ~160 di Google.
   // USP "indipendente" + numero compagnie + CTA "analisi gratuita".
   description:
-    'Broker assicurativo indipendente a Roma e nel Lazio: confrontiamo 20 compagnie per trovare la polizza migliore per te. Analisi gratuita, senza impegno.',
+    'Broker assicurativo indipendente, in tutta Italia: confrontiamo 20 compagnie per trovare la polizza migliore per te. Analisi gratuita, senza impegno.',
   alternates: { canonical: '/' },
   openGraph: {
     ...OG_BASE,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description: 'Architetti della tua sicurezza. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.',
     images: [
       {
-        url: '/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20Roma%20e%20Lazio.',
+        url: '/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20In%20tutta%20Italia.',
         width: 1200,
         height: 630,
         alt: 'FIM Insurance Broker — Soluzioni Assicurative Personalizzate',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    images: ['/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20Roma%20e%20Lazio.'],
+    images: ['/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20In%20tutta%20Italia.'],
   },
 }
 
