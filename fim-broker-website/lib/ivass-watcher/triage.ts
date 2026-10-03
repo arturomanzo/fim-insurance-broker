@@ -9,8 +9,14 @@ import { anthropic } from '@/lib/anthropic'
 import { AI_MODELS } from '@/lib/ai-models'
 import type { RssItem } from './rss'
 import type { Source } from './sources'
+import {
+  applyNormativeFloor,
+  filtraScadenza,
+  PREFISSO_ELEVAZIONE,
+  type Relevance,
+} from './regole'
 
-export type Relevance = 'high' | 'medium' | 'low' | 'none'
+export type { Relevance }
 
 export interface TriageResult {
   /**
@@ -26,7 +32,10 @@ export interface TriageResult {
   affectedPages: string[]
   /** 1-3 frasi che spiegano cos'è cambiato e perché conta per FIM. */
   summary: string
-  /** Eventuale deadline ("YYYY-MM-DD" o testo libero tipo "entro 6 mesi dalla pubblicazione"). */
+  /**
+   * Deadline scritta nel titolo o nella descrizione ("YYYY-MM-DD" o testo libero
+   * tipo "entro 6 mesi dalla pubblicazione"). `null` se il feed non la riporta.
+   */
   deadline: string | null
   /** Riferimenti normativi citati (es. "Reg. IVASS 40/2018 art. 7-bis"). */
   normativeRefs: string | null
@@ -68,8 +77,14 @@ Atti a titolo opaco. Le voci IVASS hanno spesso titoli generici ("Provvedimento 
 È preferibile un falso allarme archiviabile a un obbligo mancato.
 Restano "low/none" solo gli atti chiaramente non normativi per un broker: elenchi e registri, statistiche e bollettini, avvisi su singole imprese (anche estere), oscuramento di siti abusivi, procedure di gara interne IVASS.
 
+Contributo di vigilanza. Ogni atto sul contributo di vigilanza a carico degli iscritti al RUI (o "delle imprese e degli intermediari") vale "high": FIM lo paga ogni anno, con termini stretti e la cancellazione dal registro se non paga. Gli atti sul contributo a carico delle sole imprese, o dei soli intermediari con sede in altri Stati SEE, valgono "none".
+
 Vale almeno "medium" (o "high" se c'è un obbligo o una scadenza entro 90 giorni) tutto ciò che tocca:
 Reg. IVASS 40/2018 o 41/2018, Allegati IDD (3 e 4), procedura reclami, Arbitro Assicurativo, iscrizione/tenuta RUI e requisiti degli intermediari, obblighi antiriciclaggio per intermediari (D.Lgs. 231/2007), distribuzione assicurativa (IDD, D.Lgs. 68/2018).
+
+SCADENZA:
+Compila "deadline" solo se una data o un termine è scritto nel titolo o nella descrizione che ricevi. Non dedurlo dagli anni precedenti, dalla fine dell'anno o da quello che "di solito" prevede la norma: se il testo non lo dice, "deadline" è null. Una scadenza sbagliata fa più danni di una scadenza assente, perché chi legge il report si fida.
+La data nel titolo ("Provvedimento n. 173 del 1 ottobre 2026") è la data dell'atto, non una scadenza.
 
 IMPATTO SUL SITO:
 "impactsSite" è true solo se richiede di modificare testi pubblici del sito FIM (note legali, allegati IDD, procedura reclami, privacy, glossario, FAQ, contenuti commerciali).
@@ -101,7 +116,10 @@ const TRIAGE_SCHEMA = {
       description: 'Slug che iniziano con "/", presi dalle pagine candidate.',
     },
     summary: { type: 'string', description: 'Al massimo 350 caratteri: entra in un riquadro del report.' },
-    deadline: { type: ['string', 'null'], description: 'YYYY-MM-DD, oppure testo libero se la data non è secca.' },
+    deadline: {
+      type: ['string', 'null'],
+      description: 'Solo se scritta nel titolo o nella descrizione: YYYY-MM-DD, oppure testo libero se la data non è secca. Altrimenti null.',
+    },
     normativeRefs: { type: ['string', 'null'] },
   },
 } as const
@@ -125,34 +143,6 @@ const FALLBACK: TriageResult = {
 
 function validateRelevance(v: unknown): Relevance {
   return v === 'high' || v === 'medium' || v === 'low' || v === 'none' ? v : 'low'
-}
-
-const REL_ORDER: Record<Relevance, number> = { none: 0, low: 1, medium: 2, high: 3 }
-function maxRel(a: Relevance, b: Relevance): Relevance {
-  return REL_ORDER[a] >= REL_ORDER[b] ? a : b
-}
-
-/**
- * Rete di sicurezza deterministica per atti normativi IVASS a titolo opaco:
- * impedisce che un atto potenzialmente vincolante (lettera al mercato,
- * regolamento, provvedimento) venga archiviato come none/low solo perché
- * titolo e descrizione RSS non bastano a coglierne la portata.
- * Restituisce la relevance, eventualmente elevata, e se è stata elevata.
- */
-export function applyNormativeFloor(
-  item: RssItem,
-  source: Source,
-  rel: Relevance,
-): { relevance: Relevance; elevated: boolean } {
-  if (source.id !== 'ivass') return { relevance: rel, elevated: false }
-  const t = item.title
-  let floor: Relevance = rel
-  if (/lettera al mercato/i.test(t) || /\bregolament[oi]\b/i.test(t)) {
-    floor = maxRel(rel, 'high')
-  } else if (/provvediment[oi]\s+n/i.test(t) && rel === 'none') {
-    floor = 'medium'
-  }
-  return { relevance: floor, elevated: REL_ORDER[floor] > REL_ORDER[rel] }
 }
 
 function validatePages(v: unknown): string[] {
@@ -188,17 +178,17 @@ export async function triageItem(
     }
     const p = JSON.parse(block.text) as Record<string, unknown>
     const modelRel = validateRelevance(p.relevance)
-    const { relevance, elevated } = applyNormativeFloor(item, source, modelRel)
+    const { relevance, elevazione } = applyNormativeFloor(item, source, modelRel)
     const baseSummary = typeof p.summary === 'string' ? p.summary.slice(0, 480) : ''
-    const summary = elevated
-      ? `⚠️ Elevato in via prudenziale (atto normativo a titolo opaco — verificare il testo). ${baseSummary}`.slice(0, 500)
+    const summary = elevazione
+      ? `${PREFISSO_ELEVAZIONE[elevazione]} ${baseSummary}`.slice(0, 600)
       : baseSummary
     return {
       relevance,
       impactsSite: Boolean(p.impactsSite),
       affectedPages: validatePages(p.affectedPages),
       summary,
-      deadline: typeof p.deadline === 'string' ? p.deadline.slice(0, 100) : null,
+      deadline: filtraScadenza(item, p.deadline),
       normativeRefs: typeof p.normativeRefs === 'string' ? p.normativeRefs.slice(0, 300) : null,
     }
   } catch (err) {
