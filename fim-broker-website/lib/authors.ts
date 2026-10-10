@@ -61,7 +61,7 @@ export const AUTHORS = {
   'nazario-manzo': {
     slug: 'nazario-manzo',
     name: 'Nazario Manzo',
-    role: 'Consulente — Aziende & PMI',
+    role: 'Consulente Senior — Aziende & PMI',
     bio: "Specializzato in soluzioni assicurative per piccole e medie imprese. Aiuta gli imprenditori a proteggere il patrimonio aziendale con polizze cyber, RC, welfare per dipendenti e coperture di filiera.",
     photo: '/images/team/nazariomanzo.jpg',
     url: `${BASE_URL}/chi-siamo#nazario-manzo`,
