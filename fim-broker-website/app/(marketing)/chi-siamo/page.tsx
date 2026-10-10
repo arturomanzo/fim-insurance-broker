@@ -28,10 +28,10 @@ export const metadata: Metadata = {
   openGraph: {
     ...OG_BASE,
     url: '/chi-siamo',
-    images: [{ url: '/api/og?title=Chi+Siamo&tag=FIM+Insurance+Broker&sub=20+anni+di+esperienza.+Broker+indipendente+iscritto+RUI+IVASS.', width: 1200, height: 630 }],
+    images: [{ url: '/api/og?title=Chi+Siamo&tag=FIM+Insurance+Broker&sub=Un+mestiere+di+famiglia+dal+1993.+Broker+indipendente+iscritto+RUI+IVASS.', width: 1200, height: 630 }],
   },
   twitter: {
-    images: ['/api/og?title=Chi+Siamo&tag=FIM+Insurance+Broker&sub=20+anni+di+esperienza.+Broker+indipendente+iscritto+RUI+IVASS.'],
+    images: ['/api/og?title=Chi+Siamo&tag=FIM+Insurance+Broker&sub=Un+mestiere+di+famiglia+dal+1993.+Broker+indipendente+iscritto+RUI+IVASS.'],
   },
 }
 
@@ -188,10 +188,9 @@ export default function ChiSiamoPage() {
                 Il <strong className="text-primary">Navigatore</strong> prende il timone quando le cose si fanno complesse: sinistri, contenziosi, scadenze critiche.
                 Insieme, siamo il partner che ogni imprenditore e ogni famiglia merita.
               </p>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 {[
-                  { value: '20+', label: 'Anni di attività' },
-                  { value: '1.200+', label: 'Polizze attive' },
+                  { value: '30+', label: 'Anni di mestiere' },
                   { value: '20', label: 'Compagnie partner' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center p-4 bg-gray-50 rounded-xl">

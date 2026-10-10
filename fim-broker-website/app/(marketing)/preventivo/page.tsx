@@ -127,7 +127,7 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
                 <h3 className="font-bold text-primary mb-4">Perché FIM?</h3>
                 <div className="space-y-3">
                   {[
-                    '✓ Confronto tra 50+ compagnie',
+                    '✓ Confronto tra 20 compagnie',
                     '✓ Consulenza gratuita e senza impegno',
                     '✓ Risposta in 24 ore lavorative',
                     '✓ Assistenza post-vendita inclusa',
