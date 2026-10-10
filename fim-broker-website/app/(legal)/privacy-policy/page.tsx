@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
               <h2>3. Trattamenti con sistemi di intelligenza artificiale (IA)</h2>
               <p>
                 Alcuni strumenti del sito si avvalgono di sistemi di intelligenza artificiale forniti
-                da <strong>Anthropic, Inc.</strong> (modello &ldquo;Claude&rdquo;). In conformità al
+                da <strong>Anthropic</strong> (modello &ldquo;Claude&rdquo;). In conformità al
                 Regolamento (UE) 2024/1689 (&ldquo;AI Act&rdquo;) ti informiamo che interagisci con un
                 sistema di IA nei seguenti casi:
               </p>
@@ -166,11 +166,13 @@ export default function PrivacyPolicyPage() {
               </p>
               <ul>
                 <li>
-                  <strong>Anthropic, Inc.</strong> (San Francisco, USA) — elabora, tramite i sistemi di
-                  IA descritti alla sezione 3, i messaggi dell&apos;assistente virtuale FIMA e
-                  dell&apos;Agente Sinistri AI nonché i documenti caricati su &ldquo;Analizza
-                  Polizza&rdquo;. Il trasferimento avviene sulla base delle Clausole Contrattuali
-                  Standard (SCC) approvate dalla Commissione Europea.
+                  <strong>Anthropic Ireland, Limited</strong> (Dublino, Irlanda) — elabora, tramite i
+                  sistemi di IA descritti alla sezione 3, i messaggi dell&apos;assistente virtuale FIMA
+                  e dell&apos;Agente Sinistri AI, i documenti caricati su &ldquo;Analizza
+                  Polizza&rdquo; e, nella gestione interna, i documenti di polizza e le bozze delle
+                  comunicazioni. I dati possono essere elaborati negli Stati Uniti da Anthropic, PBC;
+                  il trasferimento avviene sulla base delle Clausole Contrattuali Standard (SCC)
+                  approvate dalla Commissione Europea.
                 </li>
                 <li>
                   <strong>OpenAI Ireland Ltd</strong> (Dublino, Irlanda) — trascrive i messaggi vocali
