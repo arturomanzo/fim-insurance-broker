@@ -65,7 +65,7 @@ const team = [
   {
     slug: 'nazario-manzo',
     name: 'Nazario Manzo',
-    role: 'Consulente — Aziende & PMI',
+    role: 'Consulente Senior — Aziende & PMI',
     bio: 'Specializzato in soluzioni assicurative per piccole e medie imprese, Nazario aiuta gli imprenditori a proteggere il patrimonio aziendale con polizze cyber, RC e welfare per i dipendenti.',
     specializations: ['Polizze Cyber', 'Flotte Aziendali', 'Welfare'],
     photo: '/images/team/nazariomanzo.jpg',
