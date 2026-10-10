@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Privacy Policy</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Luglio 2026</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Ottobre 2026</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -77,15 +77,25 @@ export default function PrivacyPolicyPage() {
                 </li>
               </ul>
               <p>
+                Usiamo sistemi di IA anche nella gestione interna delle pratiche, sempre sotto il
+                controllo di un operatore FIM. <strong>Claude</strong> di Anthropic legge i documenti
+                di polizza e prepara le bozze delle comunicazioni, che un operatore verifica prima
+                dell&apos;invio. I servizi di <strong>OpenAI</strong> trascrivono i messaggi vocali
+                con cui il personale FIM consulta il proprio assistente interno e ne leggono a voce
+                le risposte: questi messaggi possono contenere i dati della tua pratica, come nome,
+                numero di polizza e scadenze. Nessuno di questi strumenti decide al posto
+                dell&apos;operatore.
+              </p>
+              <p>
                 Questi strumenti hanno carattere informativo e di supporto: <strong>non adottano
                 decisioni automatizzate che producono effetti giuridici</strong> o incidono in modo
                 analogo sulla tua persona ai sensi dell&apos;art. 22 GDPR. Una parte dei contenuti del
                 blog è inoltre redatta con il supporto dell&apos;IA e sottoposta a revisione editoriale
                 umana; tali articoli riportano un avviso dedicato. Per i trasferimenti di dati verso
-                Anthropic (USA) vedi la sezione 7.
+                Anthropic e OpenAI (USA) vedi la sezione 7.
               </p>
               <p>
-                Nel trattare tali dati, <strong>Anthropic opera in qualità di Responsabile del
+                Nel trattare tali dati, <strong>Anthropic e OpenAI operano in qualità di Responsabili del
                 trattamento</strong> ai sensi dell&apos;art. 28 del GDPR, sulla base di apposito
                 accordo di nomina, trattando i dati esclusivamente su istruzione documentata di FIM
                 Insurance Broker e nel rispetto di adeguate misure di sicurezza e riservatezza.
@@ -161,6 +171,12 @@ export default function PrivacyPolicyPage() {
                   dell&apos;Agente Sinistri AI nonché i documenti caricati su &ldquo;Analizza
                   Polizza&rdquo;. Il trasferimento avviene sulla base delle Clausole Contrattuali
                   Standard (SCC) approvate dalla Commissione Europea.
+                </li>
+                <li>
+                  <strong>OpenAI</strong> (San Francisco, USA) — trascrive i messaggi vocali che il
+                  personale FIM invia al proprio assistente interno e ne converte le risposte in
+                  audio, come descritto alla sezione 3. Il trasferimento avviene sulla base delle
+                  Clausole Contrattuali Standard (SCC) approvate dalla Commissione Europea.
                 </li>
                 <li>
                   <strong>Resend, Inc.</strong> (USA) — gestisce l&apos;invio delle email di conferma
