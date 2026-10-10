@@ -95,7 +95,7 @@ function getSuggestedQuestions(path: string): string[] {
   ]
   if (path.includes('calcolatore')) return [
     "Come interpreto il mio punteggio di rischio?",
-    "Quali coperture mi consiglia?",
+    "Come si sceglie la copertura giusta?",
     "Posso avere un preventivo personalizzato?",
     "Cosa significa 'rischio elevato'?",
   ]
