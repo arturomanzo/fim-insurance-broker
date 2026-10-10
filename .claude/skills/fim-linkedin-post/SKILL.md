@@ -86,6 +86,15 @@ credibile (capannone, cantiere, negozio, porto, studio professionale). Mai stock
 americano, mai gente in giacca che stringe mani, mai grafica con testo dentro —
 il testo lo sbaglia sempre. Poi converti: `sips -s format jpeg <file>.png --out <file>.jpg`.
 
+**Etichetta obbligatoria (AI Act, art. 50, dal 2 agosto 2026).** Un'immagine
+fotografica generata con IA va dichiarata a chi la guarda. Nel `post.md` l'ultima
+riga del testo da incollare è `Immagine generata con intelligenza artificiale.`,
+e lo stesso testo va nel campo "testo alternativo" quando si carica l'immagine su
+LinkedIn. Mai persone riconoscibili, mai luoghi o fatti reali fatti passare per
+foto vere (un'alluvione di cronaca, la sede di una compagnia): lì l'immagine
+diventa un falso, etichetta o no. La card brandizzata del martedì è una grafica,
+non una foto, e non serve etichettarla.
+
 ## 4. Salva la bozza
 
 `fim-broker-website/public/social/linkedin/YYYY-MM-DD/` con dentro:
@@ -135,5 +144,6 @@ Tier, nel nuovo form si dichiara **solo Page management**.
 - [ ] Numeri e date verificati sulla fonte primaria, fonte citata nel post
 - [ ] Firma RUI se il post è promozionale
 - [ ] Immagine 1200x627, leggibile anche in miniatura
+- [ ] Se l'immagine è generata con Higgsfield: riga "Immagine generata con intelligenza artificiale." in fondo al post e nel testo alternativo
 - [ ] Tema diverso dalle ultime tre settimane
 - [ ] Bozza salvata nella cartella della data giusta
