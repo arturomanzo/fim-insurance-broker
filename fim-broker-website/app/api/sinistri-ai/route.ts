@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { anthropic } from '@/lib/anthropic'
 import { AI_MODELS, FALLBACK_BETA } from '@/lib/ai-models'
 import { rateLimit } from '@/lib/rateLimit'
+import { haConsensoSanitario } from '@/lib/consensoSanitario'
 
 export const runtime = 'nodejs'
 
@@ -52,6 +53,7 @@ Se il cliente ha già selezionato il tipo, procedi direttamente alla FASE 2. Alt
 ✅ Documentazione medica completa (pronto soccorso, referti, cartelle cliniche)
 ✅ Certificato di inabilità temporanea, se applicabile
 ✅ Ricevute di tutte le spese mediche e farmaceutiche
+⚠️ I documenti medici non vanno scritti né incollati in questa chat: li raccoglie direttamente il consulente FIM
 ✅ Denuncia INAIL, se infortunio sul lavoro
 ✅ Descrizione dettagliata delle circostanze dell'evento
 ✅ Numero polizza infortuni o RC
@@ -68,6 +70,7 @@ Dopo la checklist, fai queste domande gradualmente:
 3. Ci sono terze parti coinvolte? (per auto/RC)
 4. Ha già sporto denuncia? (per furto/incendio)
 5. Conosce il numero di polizza o la compagnia assicuratrice?
+6. Ci sono persone ferite? (per auto, infortuni e RC: basta sì o no)
 
 ### FASE 4 — Timeline e aspettative
 Comunica sempre tempi stimati per quel tipo di sinistro:
@@ -97,9 +100,13 @@ Quando sei pronto, alla fine del tuo messaggio aggiungi ESATTAMENTE questo blocc
 Regole FORM_DATA:
 - Includi solo i valori che conosci con certezza (lascia "" per i campi sconosciuti)
 - data_evento deve essere formato YYYY-MM-DD
-- descrizione: riassunto strutturato e professionale dell'evento (cosa/quando/dove/come/terzi coinvolti), max 500 caratteri
+- descrizione: riassunto strutturato e professionale dell'evento (cosa/quando/dove/come/terzi coinvolti), max 500 caratteri. Niente dati sulla salute: se ci sono feriti scrivi solo "persone ferite: sì"
 - Emetti questo blocco UNA sola volta
 - Dopo il blocco non aggiungere altro testo
+
+## DATI SULLA SALUTE
+Dei feriti ti serve solo sapere se ci sono: chiedi sì o no e fermati lì. Non chiedere lesioni, diagnosi, cure, prognosi, referti o giorni di inabilità: li raccoglie il consulente FIM con i documenti, fuori da questa chat.
+Se il cliente li scrive da sé, non ripeterli, non riassumerli e non metterli nel FORM_DATA. Digli con garbo che quei dettagli è meglio darli al consulente, che lo ricontatterà, e vai avanti.
 
 ## STILE E TONO
 - Chi ti scrive ha appena avuto un danno: professionale, caldo, senza frasi fatte. Rassicura con quello che FIM farà, non con gli slogan.
@@ -128,6 +135,13 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { messages } = body
+
+    if (!haConsensoSanitario(body.consensoSanitario)) {
+      return NextResponse.json(
+        { error: "Per usare l'assistente serve il consenso al trattamento dei dati sulla salute." },
+        { status: 400 },
+      )
+    }
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json({ error: 'Messaggi non validi' }, { status: 400 })

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
+import { CONSENSO_SANITARIO_TESTO } from '@/lib/consensoSanitario'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -101,6 +102,9 @@ export default function SinistriAIAssistant() {
   const [submitError, setSubmitError] = useState('')
   const [praticaId, setPraticaId] = useState('')
   const [aiSummary, setAiSummary] = useState('')
+  // Consenso art. 9: senza, la chat non parte (il server lo ricontrolla).
+  const [consensoSanitario, setConsensoSanitario] = useState(false)
+  const [consensoIl, setConsensoIl] = useState('')
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -129,6 +133,7 @@ export default function SinistriAIAssistant() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           messages: updatedMessages.map(m => ({ role: m.role, content: m.raw ?? m.content })),
+          consensoSanitario,
         }),
       })
 
@@ -194,7 +199,7 @@ export default function SinistriAIAssistant() {
       setIsStreaming(false)
       inputRef.current?.focus()
     }
-  }, [messages, isStreaming])
+  }, [messages, isStreaming, consensoSanitario])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -231,7 +236,13 @@ export default function SinistriAIAssistant() {
       const res = await fetch('/api/sinistri', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, website: '', ai_summary: aiSummary }),
+        body: JSON.stringify({
+          ...form,
+          website: '',
+          ai_summary: aiSummary,
+          consenso_sanitario: consensoSanitario,
+          consenso_sanitario_il: consensoIl,
+        }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -446,13 +457,31 @@ export default function SinistriAIAssistant() {
           </div>
         </div>
 
+        {/* Consenso dati sulla salute (art. 9 GDPR): senza, i tipi di sinistro restano spenti */}
+        <label className="mx-6 mb-4 flex items-start gap-3 cursor-pointer bg-gray-50 border border-gray-100 rounded-xl px-4 py-3">
+          <input
+            type="checkbox"
+            checked={consensoSanitario}
+            onChange={e => {
+              setConsensoSanitario(e.target.checked)
+              setConsensoIl(e.target.checked ? new Date().toISOString() : '')
+            }}
+            className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+          />
+          <span className="text-xs text-gray-600 leading-relaxed">
+            {CONSENSO_SANITARIO_TESTO}{' '}
+            <a href="/privacy-policy" className="text-primary underline">Informativa privacy</a>
+          </span>
+        </label>
+
         {/* Claim type grid */}
         <div className="px-6 pb-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
           {CLAIM_TYPES.map(({ id, icon, label }) => (
             <button
               key={id}
               onClick={() => selectClaimType(id)}
-              className="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 hover:bg-primary/5 transition-all text-center group"
+              disabled={!consensoSanitario}
+              className="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 hover:bg-primary/5 transition-all text-center group disabled:opacity-40 disabled:pointer-events-none"
             >
               <span className="text-2xl">{icon}</span>
               <span className="text-xs font-semibold text-gray-700 group-hover:text-primary transition-colors leading-tight">{label}</span>
@@ -467,7 +496,8 @@ export default function SinistriAIAssistant() {
               setPhase('chat')
               setTimeout(() => sendMessage('Vorrei aprire una pratica sinistro'), 50)
             }}
-            className="text-xs text-gray-400 hover:text-primary underline transition-colors"
+            disabled={!consensoSanitario}
+            className="text-xs text-gray-400 hover:text-primary underline transition-colors disabled:opacity-40 disabled:pointer-events-none"
           >
             Preferisci descrivere liberamente il tuo sinistro?
           </button>

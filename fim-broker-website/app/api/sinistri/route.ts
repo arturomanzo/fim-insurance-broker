@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { saveSinistro } from '@/lib/sinistriStore'
+import { haConsensoSanitario } from '@/lib/consensoSanitario'
 
 interface SinistriRequest {
   nome: string
@@ -16,6 +17,8 @@ interface SinistriRequest {
   privacy: boolean
   website?: string // honeypot
   ai_summary?: string // summary from AI assistant conversation
+  consenso_sanitario?: boolean // dato prima della chat con l'Agente Sinistri AI
+  consenso_sanitario_il?: string // quando, ISO
 }
 
 function validateEmail(email: string): boolean {
@@ -91,6 +94,11 @@ export async function POST(req: NextRequest) {
     const compagnia = sanitize(body.compagnia).slice(0, 100)
     const descrizione = sanitize(body.descrizione)
     const aiSummary = body.ai_summary ? sanitize(body.ai_summary).slice(0, 3000) : ''
+    // La prova del consenso art. 9 resta nella mail a FIM: è l'unico archivio
+    // che oggi conserva il resto della pratica così come è arrivata.
+    const consensoSanitario = haConsensoSanitario(body.consenso_sanitario)
+      ? `Sì, dato prima della chat${body.consenso_sanitario_il ? ` il ${sanitize(body.consenso_sanitario_il).slice(0, 40)}` : ''}`
+      : ''
 
     if (!nome || !cognome || !email || !telefono || !tipoSinistro || !dataEvento || !descrizione) {
       return NextResponse.json({ error: 'Campi obbligatori mancanti' }, { status: 400 })
@@ -156,6 +164,8 @@ export async function POST(req: NextRequest) {
             <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;">${escapeHtml(numeroPolizza)}</td></tr>` : ''}
         ${compagnia ? `<tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:12px;color:#94a3b8;font-weight:600;text-transform:uppercase;">Compagnia</td>
             <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;">${escapeHtml(compagnia)}</td></tr>` : ''}
+        ${consensoSanitario ? `<tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:12px;color:#94a3b8;font-weight:600;text-transform:uppercase;">Consenso dati salute</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;">${escapeHtml(consensoSanitario)}</td></tr>` : ''}
       </table>
       <div style="margin-top:16px;padding:16px;background:#fef2f2;border-radius:8px;border-left:4px solid #dc2626;">
         <p style="margin:0 0 8px;font-size:12px;color:#991b1b;font-weight:600;text-transform:uppercase;">Descrizione evento</p>
