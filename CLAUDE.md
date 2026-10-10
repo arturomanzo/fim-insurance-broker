@@ -153,6 +153,7 @@ Queste regole si sommano alla skill **`fim-humanizer`**, che resta il passaggio 
 2. **NON** committare su `main` direttamente — sempre su un branch dedicato.
 3. **NON** aprire PR senza richiesta esplicita dell'utente.
 4. **NON** usare `--no-verify`, `--force`, `git reset --hard` e simili senza permesso esplicito.
+   - **Unica eccezione, concessa da Arturo:** `git push --force-with-lease` sul branch di lavoro designato quando il branch remoto contiene **solo storia gia' mergiata in `main`** — tipicamente il commit-doppione che una squash-merge si lascia dietro. Prima di spingere, verificarlo: `git log origin/main..origin/<branch>` elenca i commit sospetti e `git diff origin/<branch> origin/main -- <file toccati>` deve risultare vuoto. Se il branch porta commit con contenuto che `main` non ha, si torna a chiedere.
 5. **SEMPRE** seguire i pattern esistenti (vedi sezione "Pattern da seguire") invece di inventare soluzioni nuove.
 6. **SEMPRE** riutilizzare `Button`, `Card`, `Badge` da `components/ui/` invece di hardcodare markup.
 7. **SEMPRE** estrarre in `lib/` le costanti condivise tra 2+ file.
