@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     ...OG_BASE,
     url: '/broker-assicurativo-aprilia',
-    images: [{ url: `/api/og?title=Broker+Assicurativo+a+${CITY}&tag=FIM+Insurance+Broker&sub=Confrontiamo+30%2B+compagnie.+Preventivo+gratuito.`, width: 1200, height: 630 }],
+    images: [{ url: `/api/og?title=Broker+Assicurativo+a+${CITY}&tag=FIM+Insurance+Broker&sub=Confrontiamo+20+compagnie.+Preventivo+gratuito.`, width: 1200, height: 630 }],
   },
   alternates: { canonical: `/${SLUG}` },
 }
@@ -152,7 +152,7 @@ export default function BrokerAprilia() {
                 con un approccio indipendente e trasparente.
               </p>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Con un mestiere di famiglia dal 1993 e 1.200+ polizze gestite, conosciamo il mercato
+                Con un mestiere di famiglia dal 1993, conosciamo il mercato
                 assicurativo italiano come pochi altri. Il nostro obiettivo è semplice:
                 la migliore copertura al miglior prezzo.
               </p>

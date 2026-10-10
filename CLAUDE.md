@@ -103,6 +103,9 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
 - **Compliance**: IVASS (RUI Sez. B n. B000405449), GDPR (Reg. UE 2016/679), IDD (D.Lgs 68/2018)
 - **Compagnie partner**: 20 (elenco mandati completo sotto — la tabella ne dettaglia 16)
   - Il numero non è mai "30+", "più di 30" o "20-30+". Quando lo cerchi, cerca **per concetto e non per stringa**: numero ed etichetta possono stare su campi separati (`value: '30+'` + `label: 'Compagnie partner'`).
+- **Numeri promozionali**: si pubblica solo ciò che regge se qualcuno lo contesta — è materiale IVASS.
+  - **Tasso di rinnovo** ("98% di clienti che rinnovano") e **numero di polizze attive** ("1.200+"): tolti dal sito, non erano documentati da nessuna parte. Non rimetterli senza una cifra ricavata dal gestionale, con metodo e data scritti.
+  - **Rating Google**: il badge visibile in home dice 4.9/5. Nel JSON-LD l'`aggregateRating` esce solo se sono valorizzate `NEXT_PUBLIC_REVIEW_RATING` e `NEXT_PUBLIC_REVIEW_COUNT` (`app/layout.tsx`): lasciarlo cosi', senza env non si pubblica nessun rating inventato.
 
 ### Mandati e collaborazioni con compagnie — SEMPRE aggiornati
 

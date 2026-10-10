@@ -1,15 +1,14 @@
 const stats = [
-  { value: '20+', label: 'Anni di esperienza', description: 'Sul mercato assicurativo italiano' },
+  { value: '30+', label: 'Anni di mestiere', description: 'Di famiglia, dal 1993' },
   { value: '4.9/5', label: 'Rating Google Reviews', description: '★★★★★ clienti soddisfatti' },
   { value: '20', label: 'Compagnie partner', description: 'Confrontiamo le migliori per te' },
-  { value: '98%', label: 'Clienti che ci rinnovano', description: 'Ogni anno' },
 ]
 
 export default function Stats() {
   return (
     <section className="py-12 gradient-logo">
       <div className="container-custom">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl md:text-4xl font-black text-white mb-1">{stat.value}</div>

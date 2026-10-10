@@ -47,7 +47,7 @@ const vantaggi = [
   {
     icon: '📈',
     title: 'Portafoglio consolidato',
-    desc: 'Un mestiere di famiglia dal 1993 e 1.200+ polizze attive ti danno una base solida su cui costruire il tuo lavoro.',
+    desc: 'Un mestiere di famiglia dal 1993 ti dà una base solida su cui costruire il tuo lavoro.',
   },
 ]
 
