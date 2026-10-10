@@ -173,9 +173,10 @@ export default function PrivacyPolicyPage() {
                   Standard (SCC) approvate dalla Commissione Europea.
                 </li>
                 <li>
-                  <strong>OpenAI</strong> (San Francisco, USA) — trascrive i messaggi vocali che il
-                  personale FIM invia al proprio assistente interno e ne converte le risposte in
-                  audio, come descritto alla sezione 3. Il trasferimento avviene sulla base delle
+                  <strong>OpenAI Ireland Ltd</strong> (Dublino, Irlanda) — trascrive i messaggi vocali
+                  che il personale FIM invia al proprio assistente interno e ne converte le risposte
+                  in audio, come descritto alla sezione 3. I dati possono essere elaborati negli Stati
+                  Uniti da società del gruppo OpenAI; il trasferimento avviene sulla base delle
                   Clausole Contrattuali Standard (SCC) approvate dalla Commissione Europea.
                 </li>
                 <li>
