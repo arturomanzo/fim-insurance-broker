@@ -1,6 +1,48 @@
 {
   "posts": [
     {
+      "slug": "polizza-infortuni-individuale-capofamiglia-2026",
+      "title": "Polizza infortuni individuale e del capofamiglia: cosa copre davvero e dove si inceppa",
+      "excerpt": "La maggior parte degli infortuni capita fuori dal lavoro, dove l'INAIL non arriva. Vediamo come funziona una polizza infortuni individuale, quali garanzie contano e quali clausole leggere prima di firmare.",
+      "category": "Salute",
+      "date": "12 Ottobre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Il buco di copertura che quasi nessuno guarda",
+          "body": "Chi è dipendente pensa di essere tutelato perché c'è l'INAIL. Ma la tutela dell'INAIL riguarda l'infortunio sul lavoro e quello in itinere: la scala di casa, la partita di calcetto, la caduta dalla bici la domenica restano fuori. Un libero professionista o un artigiano senza copertura obbligatoria parte ancora più scoperto, perché a fermarsi non è solo il corpo ma anche il fatturato. La polizza infortuni individuale nasce per questo spazio vuoto, e vale la pena capirla prima di averne bisogno."
+        },
+        {
+          "heading": "Le tre garanzie che fanno il contratto",
+          "body": "Un contratto infortuni serio si regge su tre voci, e il resto è contorno. Il capitale caso morte, l'indennizzo per invalidità permanente e la diaria per inabilità temporanea o per ricovero. Il peso che dai a ciascuna dipende da chi sei: un genitore con mutuo e figli piccoli guarda il caso morte, un artigiano di cinquant'anni guarda l'invalidità permanente, chi ha una partita IVA senza sostituti guarda la diaria.",
+          "list": [
+            "Caso morte: capitale liquidato ai beneficiari designati in polizza",
+            "Invalidità permanente: percentuale determinata su una tabella allegata al contratto",
+            "Inabilità temporanea: somma giornaliera per i giorni di stop dall'attività",
+            "Rimborso spese mediche da infortunio e diaria da ricovero o da gesso"
+          ]
+        },
+        {
+          "heading": "La franchigia sull'invalidità permanente: qui si decide tutto",
+          "body": "È il punto dove due polizze apparentemente simili si comportano in modo opposto. Quasi tutti i contratti prevedono una franchigia: sotto una certa percentuale di invalidità non si liquida nulla, sopra si liquida in misura piena o solo per la parte eccedente. Chi ha presente il mondo INAIL ritrova una logica a soglie anche lì: l'art. 13 del D.Lgs. 38/2000 indennizza il danno biologico dal 6% in su, in capitale fino a sotto il 16% e in rendita dal 16%, mentre sotto il 6% non c'è indennizzo. Nel contratto privato, però, la soglia e il meccanismo di calcolo li scrive la compagnia: vanno letti nelle condizioni, non dati per scontati."
+        },
+        {
+          "heading": "Le esclusioni da leggere prima, non dopo",
+          "body": "Le contestazioni nascono quasi sempre su due fronti: cosa è considerato infortunio e quali attività sono escluse. Sport praticati a livello agonistico, uso di mezzi a due ruote di grossa cilindrata, volo da diporto, immersioni oltre una certa profondità sono spesso fuori salvo patto contrario. Conta anche la definizione di infortunio: eventi come l'infarto, l'ernia o il colpo di sole rientrano solo se il contratto li richiama espressamente. E poi la dichiarazione sullo stato di salute e sulla professione al momento della stipula: un'attività dichiarata in modo impreciso può diventare un problema proprio quando serve."
+        },
+        {
+          "heading": "La formula capofamiglia e quando ha senso",
+          "body": "La versione familiare estende le garanzie al coniuge o convivente e ai figli, di solito con un capitale per ciascuno e una gestione unica di scadenze e premio. Ha senso quando in casa ci sono più persone con esposizioni diverse: chi lavora, chi studia, chi fa sport. Il premio dipende dai capitali scelti, dall'età degli assicurati, dalla professione svolta e dalle garanzie attivate, non da una tariffa unica. Verifica sempre se la copertura vale ventiquattr'ore su ventiquattro o solo nel tempo libero: cambia completamente il perimetro."
+        },
+        {
+          "heading": "Parliamone con i numeri della tua situazione",
+          "body": "Noi di FIM Insurance Broker, a Cisterna di Latina, iscritti al RUI sez. B n. B000405449, lavoriamo partendo da quello che hai già: coperture aziendali, INAIL, eventuali infortuni inclusi in altre polizze. Da lì si capisce quanto capitale serve davvero e quali garanzie stai pagando due volte. Portaci i contratti in essere, anche vecchi: leggere le condizioni insieme è il modo più rapido per vedere dove sei scoperto. Fissa un appuntamento e ne discutiamo senza impegno."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "polizza-long-term-care-non-autosufficienza-2026",
       "title": "Polizza Long Term Care: cosa copre davvero il rischio di non autosufficienza",
       "excerpt": "La non autosufficienza non è una malattia improvvisa: è una condizione che dura anni e che pesa sul reddito di tutta la famiglia. Ecco come funziona una polizza Long Term Care e quali punti leggere prima di firmare.",
