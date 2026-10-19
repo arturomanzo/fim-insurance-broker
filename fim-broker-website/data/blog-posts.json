@@ -1,6 +1,53 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-inquilino-rischio-locativo-ricorso-terzi-2026",
+      "title": "Assicurazione per chi vive in affitto: rischio locativo e ricorso terzi vicini",
+      "excerpt": "Chi abita in una casa in affitto risponde dei danni all'immobile e può essere chiamato a rispondere anche verso i vicini. Ecco come funzionano rischio locativo e ricorso terzi, e cosa serve davvero a un inquilino.",
+      "category": "Casa",
+      "date": "19 Ottobre 2026",
+      "readTime": "6 min",
+      "image": "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Il punto che quasi nessun inquilino conosce",
+          "body": "Quando firmi un contratto di locazione ricevi un immobile in consegna e sei tenuto a restituirlo nello stato in cui lo hai ricevuto, salvo il normale deterioramento d'uso. La legge pone a carico del conduttore i danni e la perdita della cosa locata avvenuti durante la locazione, a meno che riesca a dimostrare che non dipendono da causa a lui imputabile. Tradotto: se parte un incendio dalla tua cucina e l'appartamento va distrutto, la richiesta arriva a te, non al proprietario. E arriva per il valore di ricostruzione, non per il deposito cauzionale che hai versato."
+        },
+        {
+          "heading": "Rischio locativo: cosa copre, in concreto",
+          "body": "La garanzia rischio locativo interviene quando sei tu, come inquilino, a dover risarcire al proprietario i danni materiali all'immobile e alle sue parti. I contratti la legano tipicamente a incendio, scoppio, esplosione e fenomeni assimilati, non a qualunque danno. Il parametro da controllare è il massimale: deve essere coerente con il valore di ricostruzione dell'appartamento, non con il canone che paghi. Un massimale fissato a caso in fase di preventivo è il motivo più frequente per cui, a sinistro avvenuto, l'inquilino si ritrova a mettere mano al proprio patrimonio.",
+          "list": [
+            "Il massimale va rapportato al valore a nuovo dell'immobile, superficie e zona alla mano",
+            "Verifica se la garanzia opera anche per i danni alle parti comuni del condominio",
+            "Controlla se il tuo contratto di locazione ti impone già una polizza e con quali limiti"
+          ]
+        },
+        {
+          "heading": "Ricorso terzi: il danno che esce dalle tue mura",
+          "body": "Il rischio locativo guarda verso il proprietario. Il ricorso terzi guarda verso i vicini. Se il fumo, l'acqua o il fuoco partiti da casa tua danneggiano l'appartamento di sotto o il negozio accanto, quelle persone agiscono contro di te. L'articolo 2051 del Codice Civile stabilisce che ciascuno è responsabile del danno cagionato dalle cose che ha in custodia, salvo che provi il caso fortuito: la lavatrice, l'impianto, la caldaia che usi tutti i giorni sono cose in tua custodia. Senza una garanzia ricorso terzi, la somma la anticipi tu e poi discuti con chi di dovere."
+        },
+        {
+          "heading": "La responsabilità civile della vita privata non è un di più",
+          "body": "Molti inquilini pensano che basti una polizza sull'appartamento. In realtà la parte che si attiva più spesso è la responsabilità civile del capofamiglia: il vaso caduto dal balcone, il bambino che danneggia qualcosa, il cane che morde in cortile. Sono eventi di piccola o media entità ma con una frequenza concreta, e si abbinano bene alle garanzie sull'immobile in un'unica polizza. Vale la pena leggere con attenzione chi rientra nel nucleo assicurato, perché le definizioni cambiano da contratto a contratto."
+        },
+        {
+          "heading": "Dove si perdono le coperture: le esclusioni da leggere prima",
+          "body": "Le contestazioni nascono quasi sempre su tre fronti. Il primo è lo stato degli impianti: se l'impianto elettrico o la caldaia non erano a norma o non avevano la manutenzione prevista, la compagnia può opporre l'esclusione. Il secondo sono i danni da acqua da infiltrazioni lente, che molte formule trattano diversamente dalla rottura improvvisa di tubazione. Il terzo è la destinazione dell'immobile: se usi l'appartamento per un'attività, per affitti brevi o lo sub-loci, la polizza stipulata come abitazione privata può non rispondere. Sono cose da dichiarare in fase di stipula, non da scoprire dopo.",
+          "list": [
+            "Impianti non a norma o senza manutenzione documentata",
+            "Infiltrazioni e umidità progressive, trattate a parte rispetto ai danni accidentali",
+            "Uso dell'immobile diverso da quello dichiarato in polizza",
+            "Dolo o colpa grave, con perimetri che variano da contratto a contratto"
+          ]
+        },
+        {
+          "heading": "Parliamone prima di firmare il contratto di locazione",
+          "body": "Il momento giusto per impostare la copertura è quando leggi il contratto di affitto, perché spesso è lì che il proprietario inserisce l'obbligo di assicurarsi e indica garanzie e massimali. FIM Insurance Broker, con sede a Cisterna di Latina e iscrizione al RUI Sez. B n. B000405449, lavora come intermediario indipendente: leggiamo insieme il tuo contratto, dimensioniamo il massimale sull'immobile reale e confrontiamo le soluzioni disponibili sul mercato. Portaci il contratto di locazione e la planimetria, bastano per fare un lavoro serio."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "polizza-infortuni-individuale-capofamiglia-2026",
       "title": "Polizza infortuni individuale e del capofamiglia: cosa copre davvero e dove si inceppa",
       "excerpt": "La maggior parte degli infortuni capita fuori dal lavoro, dove l'INAIL non arriva. Vediamo come funziona una polizza infortuni individuale, quali garanzie contano e quali clausole leggere prima di firmare.",
