@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Card from '@/components/ui/Card'
 import Link from 'next/link'
 import { AUTHORS, buildPersonSchema } from '@/lib/authors'
+import { COMPAGNIE_NOMI } from '@/lib/compagnie'
 import { OG_BASE } from '@/lib/seo'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
@@ -70,21 +71,6 @@ const team = [
     specializations: ['Polizze Cyber', 'Flotte Aziendali', 'Welfare'],
     photo: '/images/team/nazariomanzo.jpg',
   },
-]
-
-const partners = [
-  { name: 'Generali', logo: '/images/partners/generali.svg' },
-  { name: 'AXA', logo: '/images/partners/axa.svg' },
-  { name: 'Allianz', logo: '/images/partners/allianz.svg' },
-  { name: 'UnipolSai', logo: '/images/partners/unipolsai.svg' },
-  { name: 'Zurich', logo: '/images/partners/zurich.svg' },
-  { name: 'Groupama', logo: '/images/partners/groupama.svg' },
-  { name: 'HDI', logo: '/images/partners/hdi.svg' },
-  { name: 'Cattolica', logo: '/images/partners/cattolica.svg' },
-  { name: 'Roland Italia', logo: '/images/partners/roland-italia.svg' },
-  { name: 'AEC Underwriting', logo: '/images/partners/aec-underwriting.svg' },
-  { name: 'MetLife', logo: '/images/partners/metlife.svg' },
-  { name: 'Bene.it', logo: '/images/partners/bene.svg' },
 ]
 
 const certifications = [
@@ -394,12 +380,12 @@ export default function ChiSiamoPage() {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {partners.map((partner) => (
+            {COMPAGNIE_NOMI.map((name) => (
               <div
-                key={partner.name}
+                key={name}
                 className="bg-white rounded-2xl px-6 py-8 flex items-center justify-center border border-gray-100 hover:shadow-md hover:border-primary/20 transition-all duration-200"
               >
-                <span className="text-lg font-black text-primary/70 tracking-tight">{partner.name}</span>
+                <span className="text-lg font-black text-primary/70 tracking-tight">{name}</span>
               </div>
             ))}
           </div>

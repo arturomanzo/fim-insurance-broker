@@ -27,23 +27,23 @@ export interface Compagnia {
   note?: string
 }
 
+// Rivisto il 24/10/2026 sulle polizze in corso nel gestionale e sui rapporti
+// confermati da Arturo. Prima e AEC sono intermediari: la nota nomina le imprese
+// che stanno dietro, perché il MUP chiede la denominazione delle imprese.
+// Usciti perché senza polizze: Zurich, Groupama, Cattolica, Reale Mutua, Aviva, Ergo, SACE.
 export const COMPAGNIE: readonly Compagnia[] = [
+  { name: 'Allianz', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Velletri' },
+  { name: 'Bene Assicurazioni', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Velletri' },
+  { name: 'HDI', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Genzano di Roma' },
   { name: 'Generali', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Latina' },
   { name: 'AXA', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Nettuno' },
-  { name: 'HDI', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Genzano di Roma' },
-  { name: 'Bene.it', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Velletri' },
-  { name: 'Allianz', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Velletri' },
+  { name: 'Prima Assicurazioni', rapporto: 'mandato-diretto', note: 'imprese Great Lakes Insurance SE e Triglav' },
+  { name: 'Allianz Direct', rapporto: 'mandato-diretto' },
+  { name: 'DUAL Italia', rapporto: 'mandato-diretto', note: 'impresa Arch Insurance' },
   { name: 'Roland Italia', rapporto: 'mandato-diretto' },
-  { name: 'AEC Underwriting', rapporto: 'mandato-diretto' },
+  { name: 'AEC Underwriting', rapporto: 'mandato-diretto', note: "imprese Accelerant e Lloyd's" },
   { name: 'MetLife', rapporto: 'mandato-diretto' },
-  { name: 'UnipolSai', rapporto: 'partner-prodotto' },
-  { name: 'Zurich', rapporto: 'partner-prodotto' },
-  { name: 'Groupama', rapporto: 'partner-prodotto' },
-  { name: 'Cattolica', rapporto: 'partner-prodotto' },
-  { name: 'Reale Mutua', rapporto: 'partner-prodotto' },
-  { name: 'Aviva', rapporto: 'partner-prodotto' },
-  { name: 'Ergo', rapporto: 'partner-prodotto' },
-  { name: 'SACE', rapporto: 'partner-prodotto' },
+  { name: 'Unipol', rapporto: 'partner-prodotto' },
 ] as const
 
 /** Solo i nomi, per le vetrine marketing (es. TrustedBrands in home). */

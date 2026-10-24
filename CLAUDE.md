@@ -101,7 +101,7 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
   - Email: `info@fimbroker.it`
   - PEC: `fiminsurancebrokersas@pec.it`
 - **Compliance**: IVASS (RUI Sez. B n. B000405449), GDPR (Reg. UE 2016/679), IDD (D.Lgs 68/2018)
-- **Compagnie partner**: 20 (elenco mandati completo sotto — la tabella ne dettaglia 16)
+- **Compagnie partner**: 20. Regge: al 24/10/2026 il gestionale ha polizze in corso con più di 20 imprese. La tabella sotto elenca i 12 rapporti, e dietro Prima, AEC e DUAL ci sono più imprese
   - Il numero non è mai "30+", "più di 30" o "20-30+". Quando lo cerchi, cerca **per concetto e non per stringa**: numero ed etichetta possono stare su campi separati (`value: '30+'` + `label: 'Compagnie partner'`).
 - **Numeri promozionali**: si pubblica solo ciò che regge se qualcuno lo contesta — è materiale IVASS.
   - **Tasso di rinnovo** ("98% di clienti che rinnovano") e **numero di polizze attive** ("1.200+"): tolti dal sito, non erano documentati da nessuna parte. Non rimetterli senza una cifra ricavata dal gestionale, con metodo e data scritti.
@@ -113,22 +113,20 @@ Usare queste informazioni ogni volta che si risponde a domande sulle compagnie c
 
 | Compagnia | Tipo rapporto | Dettagli operativi |
 |---|---|---|
+| **Allianz** | Collaborazione tramite agenzia | Agenzia di Velletri — https://www.allianz.it/ |
+| **Bene Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Velletri — https://www.bene.it/ |
+| **HDI Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Genzano di Roma — https://www.hdiassicurazioni.it/it/trova-agenzia |
 | **Generali** | Collaborazione tramite agenzia | Ag. di Latina — P.zza della Libertà 9, Latina |
 | **AXA Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Nettuno |
-| **HDI Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Genzano di Roma — https://www.hdiassicurazioni.it/it/trova-agenzia |
+| **Prima Assicurazioni** | Mandato diretto | Imprese: Great Lakes Insurance SE e Triglav |
+| **Allianz Direct** | Mandato diretto | Era Genial+ |
+| **DUAL Italia** | Mandato diretto | Impresa: Arch Insurance |
 | **Roland Italia** | Mandato diretto | https://www.roland-italia.it/ |
-| **AEC Underwriting** | Mandato diretto | https://www.aecunderwriting.it/ |
+| **AEC Underwriting** | Mandato diretto | https://www.aecunderwriting.it/ — imprese: Accelerant e Lloyd's |
 | **MetLife** | Mandato diretto | https://www.metlife-per-te.it/ |
-| **Bene.it** | Collaborazione tramite agenzia | Agenzia di Velletri — https://www.bene.it/ |
-| **Allianz** | Collaborazione tramite agenzia | Agenzia di Velletri — https://www.allianz.it/ |
-| **UnipolSai** | Partner per prodotto | — |
-| **Zurich** | Partner per prodotto | — |
-| **Groupama** | Partner per prodotto | — |
-| **Cattolica** | Partner per prodotto | — |
-| **Reale Mutua** | Partner per prodotto | — |
-| **Aviva** | Partner per prodotto | — |
-| **Ergo** | Partner per prodotto | — |
-| **SACE** | Partner per prodotto | — |
+| **Unipol** | Partner per prodotto | Unipol Assicurazioni, l'ex UnipolSai |
+
+Elenco rivisto il 24/10/2026 sulle polizze in corso nel gestionale. Zurich, Groupama, Cattolica, Reale Mutua, Aviva, Ergo e SACE sono usciti perché senza polizze: non citarli come partner. La fonte unica nel codice è `lib/compagnie.ts`, che alimenta anche la Sezione IV del MUP su /trasparenza.
 
 > ⚠️ **Dalbogg non è più operativa** — non citarla mai in contenuti, preventivi o comunicazioni.
 

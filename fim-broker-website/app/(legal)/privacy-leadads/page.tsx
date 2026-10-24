@@ -100,9 +100,9 @@ export default function PrivacyLeadAdsPage() {
                 </li>
                 <li>
                   <strong>Compagnie assicurative partner di FIM</strong>, limitatamente ai dati necessari
-                  per la formulazione di preventivi richiesti dall&apos;interessato — tra cui Generali, AXA,
-                  HDI, Roland Italia, AEC Underwriting, MetLife, Bene, Allianz, UnipolSai, Zurich,
-                  Groupama, Cattolica, Reale Mutua, Aviva, Ergo, SACE
+                  per la formulazione di preventivi richiesti dall&apos;interessato — tra cui Allianz, Bene
+                  Assicurazioni, HDI, Generali, AXA, Prima Assicurazioni, Allianz Direct, DUAL Italia,
+                  Roland Italia, AEC Underwriting, MetLife, Unipol
                 </li>
                 <li>
                   <strong>Fornitori IT</strong> (servizi di hosting, CRM, posta elettronica) designati

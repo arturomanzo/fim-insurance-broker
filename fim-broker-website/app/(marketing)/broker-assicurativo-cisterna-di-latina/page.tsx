@@ -53,7 +53,7 @@ const servizi = [
 
 const vantaggi = [
   { icon: '🎯', title: 'Indipendenza totale', desc: `Non rappresentiamo nessuna compagnia: a ${CITY} lavoriamo solo per il tuo interesse.` },
-  { icon: '📊', title: '20 compagnie partner', desc: 'Generali, AXA, Allianz, UnipolSai, Zurich, Groupama e molte altre.' },
+  { icon: '📊', title: '20 compagnie partner', desc: 'Allianz, Generali, AXA, HDI, Unipol, Prima e molte altre.' },
   { icon: '🤝', title: 'Consulente dedicato', desc: 'Un professionista che conosce il tuo nome, non un call center.' },
   { icon: '⚡', title: 'Gestione sinistri', desc: 'Ti seguiamo dalla denuncia alla liquidazione con tempi rapidi e assistenza completa.' },
 ]

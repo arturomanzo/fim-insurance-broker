@@ -27,7 +27,7 @@ const vantaggi = [
   {
     icon: '🏢',
     title: '20 compagnie partner',
-    desc: 'Accesso diretto alle principali compagnie del mercato: Generali, AXA, Allianz, UnipolSai, Zurich e molte altre.',
+    desc: 'Accesso diretto alle principali compagnie del mercato: Allianz, Generali, AXA, HDI, Unipol, Prima e molte altre.',
   },
   {
     icon: '📚',
