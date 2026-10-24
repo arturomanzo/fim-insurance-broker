@@ -101,7 +101,7 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
   - Email: `info@fimbroker.it`
   - PEC: `fiminsurancebrokersas@pec.it`
 - **Compliance**: IVASS (RUI Sez. B n. B000405449), GDPR (Reg. UE 2016/679), IDD (D.Lgs 68/2018)
-- **Compagnie partner**: 20. Regge: al 24/10/2026 il gestionale ha polizze in corso con più di 20 imprese. La tabella sotto elenca i 12 rapporti, e dietro Prima, AEC e DUAL ci sono più imprese
+- **Compagnie partner**: 20. Regge: al 24/10/2026 il gestionale ha polizze in corso con più di 20 imprese. La tabella sotto elenca i 13 rapporti, e dietro Prima, AEC e DUAL ci sono più imprese
   - Il numero non è mai "30+", "più di 30" o "20-30+". Quando lo cerchi, cerca **per concetto e non per stringa**: numero ed etichetta possono stare su campi separati (`value: '30+'` + `label: 'Compagnie partner'`).
 - **Numeri promozionali**: si pubblica solo ciò che regge se qualcuno lo contesta — è materiale IVASS.
   - **Tasso di rinnovo** ("98% di clienti che rinnovano") e **numero di polizze attive** ("1.200+"): tolti dal sito, non erano documentati da nessuna parte. Non rimetterli senza una cifra ricavata dal gestionale, con metodo e data scritti.
@@ -118,6 +118,7 @@ Usare queste informazioni ogni volta che si risponde a domande sulle compagnie c
 | **HDI Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Genzano di Roma — https://www.hdiassicurazioni.it/it/trova-agenzia |
 | **Generali** | Collaborazione tramite agenzia | Ag. di Latina — P.zza della Libertà 9, Latina |
 | **AXA Assicurazioni** | Collaborazione tramite agenzia | Agenzia di Nettuno |
+| **WAKAM** | Collaborazione tramite agenzia | Tramite Simplo |
 | **Prima Assicurazioni** | Mandato diretto | Imprese: Great Lakes Insurance SE e Triglav |
 | **Allianz Direct** | Mandato diretto | Era Genial+ |
 | **DUAL Italia** | Mandato diretto | Impresa: Arch Insurance |

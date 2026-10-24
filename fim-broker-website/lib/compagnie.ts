@@ -37,6 +37,7 @@ export const COMPAGNIE: readonly Compagnia[] = [
   { name: 'HDI', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Genzano di Roma' },
   { name: 'Generali', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Latina' },
   { name: 'AXA', rapporto: 'collaborazione-agenzia', note: 'Agenzia di Nettuno' },
+  { name: 'WAKAM', rapporto: 'collaborazione-agenzia', note: 'tramite Simplo' },
   { name: 'Prima Assicurazioni', rapporto: 'mandato-diretto', note: 'imprese Great Lakes Insurance SE e Triglav' },
   { name: 'Allianz Direct', rapporto: 'mandato-diretto' },
   { name: 'DUAL Italia', rapporto: 'mandato-diretto', note: 'impresa Arch Insurance' },
