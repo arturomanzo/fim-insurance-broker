@@ -196,11 +196,11 @@ export default function ReclamiPage() {
           <Card padding="lg">
             <h2 className="text-2xl font-bold text-primary mb-4">Riferimenti normativi</h2>
             <ul className="space-y-2 text-sm text-gray-700">
-              <li>D.Lgs. 7 settembre 2005, n. 209 — Codice delle Assicurazioni Private (artt. 183, 187, 187-bis).</li>
+              <li>D.Lgs. 7 settembre 2005, n. 209 — Codice delle Assicurazioni Private (artt. 183, 187, 187.1).</li>
               <li>D.Lgs. 21 maggio 2018, n. 68 — Recepimento Direttiva (UE) 2016/97 (IDD).</li>
               <li>Regolamento IVASS n. 40 del 2 agosto 2018 — Disciplina dei requisiti e delle modalità di svolgimento dell&apos;attività di distribuzione assicurativa e riassicurativa, come modificato dal <strong>Provvedimento IVASS n. 163 del 2025</strong>.</li>
               <li>Regolamento IVASS n. 41 del 2 agosto 2018 — Disciplina degli obblighi di informazione e regole di comportamento, come modificato dal <strong>Provvedimento IVASS n. 163 del 2025</strong>.</li>
-              <li>D.Lgs. 12 dicembre 2024, n. 215 — Istituzione e disciplina dell&apos;<strong>Arbitro Assicurativo</strong> (operativo dal 15 gennaio 2026).</li>
+              <li>Decreto interministeriale MIMIT 6 novembre 2024, n. 215 — Disciplina dell&apos;<strong>Arbitro Assicurativo</strong> (operativo dal 15 gennaio 2026).</li>
               <li>D.Lgs. 4 marzo 2010, n. 28 — Mediazione obbligatoria in materia civile e commerciale (compresi i contratti assicurativi).</li>
               <li>Reg. (UE) 2016/679 — GDPR.</li>
             </ul>
