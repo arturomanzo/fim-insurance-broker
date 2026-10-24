@@ -18,7 +18,7 @@ export const manifatturieroFaq: FaqCategory = {
     {
       question: 'Vendo i miei prodotti negli Stati Uniti: la mia RC prodotto è valida?',
       answer:
-        "La maggior parte delle polizze RC Prodotto italiane esclude espressamente USA, Canada e talvolta UK perché in questi paesi vige un sistema di responsabilità (strict liability, punitive damages, class action) che genera richieste danni di ordini di grandezza superiori a quelli italiani ed europei. Per esportare in sicurezza serve un'estensione territoriale specifica con limiti dedicati e a volte una polizza separata. FIM lavora con compagnie internazionali (AIG, Zurich, Allianz Global Corporate) specializzate nella copertura export USA/UK.",
+        "La maggior parte delle polizze RC Prodotto italiane esclude espressamente USA, Canada e talvolta UK perché in questi paesi vige un sistema di responsabilità (strict liability, punitive damages, class action) che genera richieste danni di ordini di grandezza superiori a quelli italiani ed europei. Per esportare in sicurezza serve un'estensione territoriale specifica con limiti dedicati e a volte una polizza separata. FIM cerca queste coperture sul mercato, presso compagnie internazionali specializzate nell'export verso USA e UK.",
     },
     {
       question: "L'obbligo catastrofi naturali del 2025 si applica anche alle PMI?",
