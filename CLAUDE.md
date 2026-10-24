@@ -129,6 +129,8 @@ Usare queste informazioni ogni volta che si risponde a domande sulle compagnie c
 Elenco rivisto il 24/10/2026 sulle polizze in corso nel gestionale. Zurich, Groupama, Cattolica, Reale Mutua, Aviva, Ergo e SACE sono usciti perché senza polizze: non citarli come partner. La fonte unica nel codice è `lib/compagnie.ts`, che alimenta anche la Sezione IV del MUP su /trasparenza.
 
 > ⚠️ **Dalbogg non è più operativa** — non citarla mai in contenuti, preventivi o comunicazioni.
+>
+> ⚠️ **WAKAM è stata bloccata da IVASS** — resta fuori dall'elenco anche se nel gestionale ha ancora polizze in corso.
 
 ---
 

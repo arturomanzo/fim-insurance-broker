@@ -10,6 +10,8 @@
  *
  * Fonte di verità unica: aggiornare QUI, non nelle singole pagine.
  * ⚠️ Dalbogg non è più operativa: non va reinserita.
+ * ⚠️ WAKAM è stata bloccata da IVASS: fuori dall'elenco anche se nel gestionale
+ *    ha ancora polizze in corso (decisione di Arturo, 24/10/2026).
  */
 
 export type TipoRapporto = 'mandato-diretto' | 'collaborazione-agenzia' | 'partner-prodotto'
