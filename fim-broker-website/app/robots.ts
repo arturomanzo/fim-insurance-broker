@@ -30,7 +30,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/'],
+        disallow: ['/api/', '/_next/', '/questionario/'],
       },
 
       // Crawler AI espliciti: stesse regole del generico, ma dichiarazione
@@ -38,7 +38,7 @@ export default function robots(): MetadataRoute.Robots {
       ...AI_BOTS.map((userAgent) => ({
         userAgent,
         allow: '/',
-        disallow: ['/api/', '/_next/'],
+        disallow: ['/api/', '/_next/', '/questionario/'],
       })),
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
