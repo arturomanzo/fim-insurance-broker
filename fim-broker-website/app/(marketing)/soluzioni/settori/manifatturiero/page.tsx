@@ -196,53 +196,53 @@ export default function ManifatturieroPage() {
         </div>
       </section>
 
-      {/* Case study */}
+      {/* Esempio: scenario illustrativo, non il caso di un cliente */}
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Caso reale
+              Esempio
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
-              Incendio capannone: l&apos;azienda riparte grazie alla Business Interruption
+              Incendio nel capannone: perché conta la Business Interruption
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 prose prose-lg max-w-none">
+              <div className="lg:col-span-2 space-y-4">
                 <p className="text-gray-700 leading-relaxed">
-                  Una PMI manifatturiera del Lazio (lavorazioni meccaniche di precisione, 28 dipendenti, 6,5M€ di fatturato)
-                  subisce nel 2024 un incendio originato da un guasto elettrico. Capannone parzialmente compromesso,
-                  3 centri di lavoro CNC distrutti, fermo produzione stimato in <strong className="text-primary">4 mesi</strong>.
+                  Prendiamo un&apos;officina di lavorazioni meccaniche di precisione nel Lazio, una trentina di dipendenti. Un guasto elettrico innesca un incendio: capannone in parte compromesso, alcuni centri di lavoro CNC distrutti, produzione ferma per mesi.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Senza Business Interruption, l&apos;azienda avrebbe ricevuto solo l&apos;indennizzo per la ricostruzione fisica,
-                  mentre nel frattempo avrebbe dovuto comunque pagare stipendi, finanziamenti e affitto, perdendo i clienti.
+                  Con la sola polizza incendio l&apos;azienda viene indennizzata per muri e macchinari. Intanto stipendi, rate dei finanziamenti e affitto continuano a correre, e i clienti cercano altri fornitori.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Grazie al programma All Risk + BI 18 mesi attivato da FIM:
+                  La Business Interruption serve a coprire proprio quei mesi. Ecco cosa controlliamo:
                 </p>
-                <ul className="text-gray-700 leading-relaxed">
-                  <li>perizia tecnica e acconto del 30% in 30 giorni;</li>
-                  <li>indennizzo macchinari a valore a nuovo (~1,2M€);</li>
-                  <li>BI: indennizzo del margine di contribuzione e dei costi fissi per 4 mesi (~480k€);</li>
-                  <li>azienda ripartita senza ricorrere a indebitamento o licenziamenti.</li>
+                <ul className="list-disc pl-5 space-y-1 text-gray-700 leading-relaxed">
+                  <li>come vengono stimati i macchinari: valore a nuovo o valore commerciale;</li>
+                  <li>il periodo di indennizzo, che deve reggere i tempi reali per ricomprare e rimettere in linea le macchine;</li>
+                  <li>cosa indennizza la BI: margine di contribuzione, costi fissi o entrambi;</li>
+                  <li>la franchigia temporale, cioè i giorni di fermo che restano a carico tuo.</li>
                 </ul>
               </div>
               <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white">
                 <p className="text-white/70 text-xs uppercase tracking-widest font-bold mb-3">
-                  Indennizzo totale
+                  Il punto
                 </p>
-                <p className="text-5xl font-black text-accent mb-2">~1,7M€</p>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  tra danni materiali e BI: l&apos;azienda ha conservato margini e occupazione.
+                <p className="text-lg font-bold text-white leading-snug">
+                  Un centro di lavoro CNC non si ricompra in una settimana. Se il periodo di indennizzo è più corto dei tempi di consegna, l&apos;ultimo pezzo del fermo lo paghi tu.
                 </p>
                 <div className="border-t border-white/10 my-5"></div>
                 <p className="text-white/70 text-xs uppercase tracking-widest font-bold mb-3">
-                  Posti di lavoro salvati
+                  Cosa facciamo noi
                 </p>
-                <p className="text-3xl font-black text-accent mb-1">28/28</p>
-                <p className="text-white/70 text-xs">nessun licenziamento durante il fermo.</p>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Confrontiamo il periodo di indennizzo con i tempi reali del tuo settore e le somme assicurate con i numeri del tuo bilancio.
+                </p>
               </div>
             </div>
+            <p className="text-xs text-gray-400 mt-6">
+              Scenario costruito a titolo di esempio: non racconta il caso di un cliente FIM.
+            </p>
           </div>
         </div>
       </section>

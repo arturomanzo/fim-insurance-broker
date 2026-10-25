@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 const painPoints = [
   { icon: '⚠️', title: 'Cantiere bloccato', desc: 'Furto materiali, danni atmosferici, incendio: ogni giorno di fermo cantiere costa migliaia di euro in penali e ritardi sul SAL.' },
-  { icon: '📋', title: 'Fideiussioni richieste', desc: 'Senza polizza fideiussoria cauzionale o di buona esecuzione non puoi partecipare a gare, firmare appalti o ottenere anticipi.' },
+  { icon: '📋', title: 'Fideiussioni richieste', desc: 'Se il bando chiede la garanzia provvisoria o il contratto la definitiva, senza fideiussione non entri in gara, non firmi e non incassi l\'anticipazione.' },
   { icon: '👷', title: 'Infortuni operai', desc: 'L\'INAIL copre solo una parte. Una lesione grave a un operaio può portare a richieste di danni che azzerano i margini.' },
   { icon: '🏗️', title: 'Responsabilità decennale', desc: 'Per 10 anni dopo la consegna sei responsabile dei vizi gravi dell\'opera. Una perizia su un edificio nuovo può chiederti centinaia di migliaia di euro.' },
 ]
@@ -41,15 +41,15 @@ const coverages = [
   {
     icon: '📜',
     title: 'Fideiussioni Cauzionali',
-    desc: 'Cauzione provvisoria, definitiva, anticipo contrattuale, buona esecuzione. Rilascio rapido per gare pubbliche e private secondo D.Lgs. 36/2023 (Nuovo Codice Appalti).',
-    price: 'da 0,8% del valore',
+    desc: 'Garanzia provvisoria e definitiva, anticipazione, buona esecuzione: per le gare pubbliche secondo il D.Lgs. 36/2023 (Codice dei contratti pubblici) e per i contratti privati. Premio e tempi li decide la compagnia dopo aver valutato l\'impresa.',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '👷',
     title: 'Infortuni Operai (Integrativa INAIL)',
-    desc: 'Copre il gap della rendita INAIL: capitali per invalidità permanente calcolati sulla retribuzione reale, indennità giornaliera dal primo giorno, rimborso spese mediche.',
-    price: 'da 200€/operaio',
+    desc: 'Copre il gap della rendita INAIL: capitali per invalidità permanente calcolati sulla retribuzione reale, diaria per inabilità temporanea, rimborso spese mediche.',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
@@ -61,16 +61,16 @@ const coverages = [
   },
   {
     icon: '🏛️',
-    title: 'Decennale Postuma D.M. 154/2016',
-    desc: 'Obbligatoria per immobili residenziali venduti al consumatore finale. Garantisce per 10 anni rovina, gravi difetti costruttivi e mancata stabilità dell\'edificio.',
+    title: 'Decennale Postuma D.M. 154/2022',
+    desc: 'Obbligatoria per il costruttore che vende a una persona fisica un immobile da costruire (art. 4 D.Lgs. 122/2005). Copre per 10 anni i danni all\'immobile da rovina totale o parziale e da gravi difetti costruttivi.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '🌍',
     title: 'RC Inquinamento Cantiere',
-    desc: 'Sversamenti accidentali, contaminazione del suolo, danni ambientali. Copre i costi di bonifica e le sanzioni del D.Lgs. 152/2006 (Testo Unico Ambientale).',
-    price: 'da 600€/anno',
+    desc: 'Sversamenti accidentali, contaminazione del suolo, danni ambientali. Copre i danni a terzi e i costi di bonifica che il D.Lgs. 152/2006 (Testo Unico Ambientale) mette a carico di chi inquina.',
+    price: 'su preventivo',
     highlighted: false,
   },
 ]
@@ -115,7 +115,7 @@ export default function EdiliziaPage() {
             <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
               <p className="text-white/90 text-sm">
                 <strong className="text-accent">Sapevi che</strong> — l&apos;art. 1669 del Codice Civile ti rende responsabile per 10 anni dei gravi vizi dell&apos;opera.
-                Senza polizza decennale postuma, una perizia tecnica può svuotare il patrimonio dell&apos;impresa e dei soci.
+                Senza polizza decennale postuma, una perizia tecnica può svuotare il patrimonio dell&apos;impresa.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -191,58 +191,58 @@ export default function EdiliziaPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo dipende da valore opera, durata, tipologia di lavori e altri parametri tecnici. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
+            Il premio lo calcola la compagnia su valore dell&apos;opera, durata, tipologia di lavori e altri parametri tecnici: per questo qui non trovi prezzi. FIM Insurance Broker è un intermediario assicurativo indipendente iscritto al RUI Sez. B n. B000405449, soggetto alla vigilanza IVASS.
           </p>
         </div>
       </section>
 
-      {/* Case study */}
+      {/* Esempio: scenario illustrativo, non il caso di un cliente */}
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Caso reale
+              Esempio
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
-              Furto in cantiere: 80.000€ di danni, zero impatto sull&apos;impresa
+              Furto in cantiere nel weekend: cosa decide quanto paga la CAR
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 prose prose-lg max-w-none">
+              <div className="lg:col-span-2 space-y-4">
                 <p className="text-gray-700 leading-relaxed">
-                  Un&apos;impresa edile cliente FIM con sede in provincia di Latina aveva un cantiere residenziale aperto.
-                  Una notte di febbraio, durante un week-end lungo, sono stati rubati ponteggi, una piattaforma elevatrice
-                  e materiali in opera per circa <strong className="text-primary">80.000€</strong>.
+                  Prendiamo un cantiere residenziale in provincia di Latina. Durante un weekend lungo spariscono ponteggi, una piattaforma elevatrice e materiali già in opera. Chi lavora in edilizia sa che non è un&apos;ipotesi di scuola.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Senza CAR, l&apos;impresa avrebbe dovuto rifornire tutto a proprie spese, con inevitabile ritardo sul SAL e
-                  penali contrattuali col committente.
+                  Senza CAR il conto lo paga l&apos;impresa: ricompra tutto di tasca propria, perde giorni sul SAL e rischia le penali con il committente.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Grazie alla polizza CAR (Contractors All Risk) attiva sul cantiere:
+                  Con la CAR il furto rientra nella garanzia, ma quanto torna indietro lo decidono le condizioni scritte in polizza. Prima di firmare controlliamo:
                 </p>
-                <ul className="text-gray-700 leading-relaxed">
-                  <li>denuncia di sinistro inviata da FIM entro 24 ore;</li>
-                  <li>perito incaricato dalla compagnia in 48 ore;</li>
-                  <li>liquidazione completa dei danni in 21 giorni;</li>
-                  <li>cantiere ripartito senza penali, margini protetti.</li>
+                <ul className="list-disc pl-5 space-y-1 text-gray-700 leading-relaxed">
+                  <li>se il furto è coperto anche di notte e nei festivi, e con quali obblighi di recinzione o custodia;</li>
+                  <li>se ponteggi e mezzi sono assicurati come attrezzature, con una somma loro, o restano fuori;</li>
+                  <li>quanto pesano franchigia e scoperto sul singolo sinistro;</li>
+                  <li>cosa serve per la denuncia, a partire da quella alle autorità.</li>
                 </ul>
               </div>
               <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white">
                 <p className="text-white/70 text-xs uppercase tracking-widest font-bold mb-3">
-                  Il numero chiave
+                  Il punto
                 </p>
-                <p className="text-5xl font-black text-accent mb-2">100%</p>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  dei danni indennizzati al netto della franchigia contrattuale (2.500€).
+                <p className="text-lg font-bold text-white leading-snug">
+                  Due CAR con premi simili possono pagare cifre molto diverse sullo stesso furto. La differenza sta nelle condizioni, non nel nome della polizza.
                 </p>
                 <div className="border-t border-white/10 my-5"></div>
                 <p className="text-white/70 text-xs uppercase tracking-widest font-bold mb-3">
-                  Tempo medio gestione
+                  Cosa facciamo noi
                 </p>
-                <p className="text-3xl font-black text-accent mb-1">21 giorni</p>
-                <p className="text-white/70 text-xs">dalla denuncia alla liquidazione.</p>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Leggiamo capitolato e condizioni prima che il cantiere apra. Se il sinistro arriva, prepariamo la denuncia con te e la seguiamo con la compagnia.
+                </p>
               </div>
             </div>
+            <p className="text-xs text-gray-400 mt-6">
+              Scenario costruito a titolo di esempio: non racconta il caso di un cliente FIM.
+            </p>
           </div>
         </div>
       </section>

@@ -5,30 +5,30 @@ export const ediliziaFaq: FaqCategory = {
   title: 'Polizze per l\'Edilizia',
   cta: {
     text: 'Hai un cantiere in partenza o una gara da preparare?',
-    description: 'Quotazione rapida CAR, postuma decennale e fideiussioni. Tempi 48-72h.',
-    primary: { label: 'Richiedi quotazione', href: '/preventivo?profilo=edilizia' },
+    description: 'CAR, postuma decennale e fideiussioni: partiamo dal capitolato e ti diciamo cosa serve davvero.',
+    primary: { label: 'Richiedi quotazione', href: '/preventivo?profilo=pmi&settore=Edilizia' },
     secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {
       question: 'La polizza CAR è obbligatoria per legge?',
       answer:
-        "La CAR (Contractors All Risk) non è obbligatoria per legge in senso stretto, ma è quasi sempre richiesta dai capitolati di gara — sia in appalti pubblici (in base al D.Lgs. 36/2023) che privati. Per opere finanziate o vendute al consumatore finale è inoltre prassi consolidata richiederla. Senza CAR, l'impresa risponde con il proprio patrimonio dei danni in cantiere.",
+        "Nei lavori pubblici sì. L'art. 117, comma 10, del D.Lgs. 36/2023 obbliga l'esecutore a consegnare alla stazione appaltante, almeno dieci giorni prima della consegna dei lavori, una polizza che copra i danni a opere e impianti durante l'esecuzione e la responsabilità civile verso terzi. Nei lavori privati non c'è un obbligo di legge, ma la chiedono quasi sempre il committente o la banca che finanzia l'opera. Senza CAR, i danni in cantiere li paga l'impresa.",
     },
     {
       question: 'Quanto costa una polizza CAR per un cantiere medio?',
       answer:
-        "Il premio dipende dal valore dell'opera, dalla durata dei lavori, dalla tipologia (nuova costruzione, ristrutturazione, demolizione) e dalla presenza di rischi particolari (cantieri in centri storici, vicino a opere preesistenti, scavi profondi). Indicativamente, per un cantiere residenziale di media complessità, il premio CAR oscilla tra lo 0,3% e l'1% del valore dell'opera. Confrontiamo offerte di compagnie specializzate (Generali, AXA, HDI, ITAS) per ottimizzare il rapporto copertura/prezzo.",
+        "Il premio lo calcola la compagnia sul singolo cantiere: valore dell'opera, durata dei lavori, tipologia (nuova costruzione, ristrutturazione, demolizione) e rischi particolari come centri storici, opere preesistenti vicine o scavi profondi. Una percentuale valida per tutti non esiste. Confrontiamo le offerte delle compagnie con cui lavoriamo e ti diamo il premio sul tuo cantiere, insieme alle condizioni che lo giustificano.",
     },
     {
       question: 'Posso ottenere una fideiussione anche se la mia banca dice di no?',
       answer:
-        'Sì. FIM lavora con compagnie e intermediari fideiussori specializzati che valutano le pratiche con criteri diversi rispetto agli istituti bancari. Spesso accettano imprese edili di piccole e medie dimensioni che faticano a ottenere fidi bancari, basandosi su bilanci, casellario imprese e regolarità contributiva. Tempi di rilascio: tipicamente 48-72 ore per cauzioni standard.',
+        "A volte sì. La fideiussione assicurativa la rilascia una compagnia autorizzata al ramo cauzioni, che valuta l'impresa con criteri suoi: bilanci, regolarità contributiva, lavori già eseguiti. Può accettare un'impresa che la banca ha respinto, ma non è automatico, e i tempi dipendono dall'istruttoria. Noi prepariamo la pratica con i documenti che la compagnia chiederà e controlliamo che il testo della garanzia sia quello richiesto dal bando.",
     },
     {
       question: 'La decennale postuma copre anche le ristrutturazioni?',
       answer:
-        "La decennale postuma del D.M. 154/2016 è obbligatoria per gli immobili di nuova costruzione venduti al consumatore. Per le ristrutturazioni rilevanti esistono polizze postume specifiche (2, 5 o 10 anni) che coprono vizi e difetti dell'opera secondo l'art. 1669 del Codice Civile. Per interventi del Superbonus 110%, alcune coperture postume sono richieste anche dal protocollo di asseverazione.",
+        "L'obbligo della decennale postuma (art. 4 del D.Lgs. 122/2005, con lo schema tipo del D.M. 20 luglio 2022 n. 154) riguarda il costruttore che vende a una persona fisica un immobile da costruire. Le ristrutturazioni restano fuori da quell'obbligo. Per i lavori importanti esistono però polizze postume volontarie, di durata variabile, che coprono i vizi e i difetti dell'opera di cui l'impresa risponde secondo l'art. 1669 del Codice Civile.",
     },
   ],
 }
