@@ -40,7 +40,7 @@ const coverages = [
   {
     icon: '🛡️',
     title: 'Tutela Legale',
-    desc: 'Copre le spese legali per difenderti da contestazioni ingiuste dei clienti. Fondamentale per professionisti esposti a contenziosi.',
+    desc: 'Copre le spese legali per difenderti da contestazioni ingiuste dei clienti. Serve soprattutto a chi è esposto a contenziosi.',
     price: 'su preventivo',
   },
   {

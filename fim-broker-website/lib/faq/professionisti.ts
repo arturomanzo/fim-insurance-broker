@@ -26,7 +26,7 @@ export const professionistiFaq: FaqCategory = {
     {
       question: 'Come si calcola il premio della RC professionale?',
       answer:
-        'Il premio della RC professionale dipende da 5 fattori: categoria professionale, volume d\'affari/fatturato annuo, massimale richiesto (in genere 500.000€-3M€), storico sinistri, ed eventuali attività specifiche ad alto rischio. Per un libero professionista la fascia base parte da circa 300-600€ l\'anno, ma può salire molto per studi medici, ingegneri strutturisti o RC con massimali alti.\n\nApprofondimento. FIM confronta le offerte delle principali compagnie del mercato per trovare il miglior rapporto qualità/prezzo. La stessa categoria professionale può avere preventivi anche del 50% di differenza tra una compagnia e l\'altra, soprattutto in base al modo in cui le compagnie modellano il rischio della specifica attività e dell\'eventuale storico.',
+        'Il premio della RC professionale dipende da 5 fattori: categoria professionale, volume d\'affari/fatturato annuo, massimale richiesto (in genere 500.000€-3M€), storico sinistri, ed eventuali attività specifiche ad alto rischio. Il premio lo calcola la compagnia sul singolo professionista, e sale parecchio per studi medici, ingegneri strutturisti o massimali alti.\n\nApprofondimento. FIM confronta le offerte delle principali compagnie del mercato. Per la stessa categoria professionale i preventivi possono essere molto diversi da una compagnia all\'altra, perché ognuna pesa a modo suo il rischio della singola attività e lo storico sinistri.',
     },
     {
       question: 'Posso stipulare una sola polizza per tutto lo studio?',
@@ -36,7 +36,7 @@ export const professionistiFaq: FaqCategory = {
     {
       question: 'La polizza copre anche errori commessi in passato?',
       answer:
-        'Dipende dalla clausola della polizza. La RC professionale può essere "claims made" (copre le richieste di risarcimento ricevute durante la validità, indipendentemente da quando è stato commesso l\'errore) oppure "loss occurrence" (copre solo i danni avvenuti durante la validità). La scelta influisce in modo significativo sulla continuità della protezione.\n\nApprofondimento. Le "claims made" sono oggi la formula prevalente nel mercato italiano. È fondamentale verificare due elementi: la retroattività (quanti anni indietro copre per fatti passati) e la postuma (per quanto tempo copre dopo la scadenza, importante in caso di cessazione attività o pensionamento). Senza una postuma adeguata, contestazioni che arrivano dopo la chiusura dello studio restano scoperte.',
+        'Dipende dalla clausola della polizza. La RC professionale può essere "claims made" (copre le richieste di risarcimento ricevute durante la validità, indipendentemente da quando è stato commesso l\'errore) oppure "loss occurrence" (copre solo i danni avvenuti durante la validità). La scelta influisce in modo significativo sulla continuità della protezione.\n\nApprofondimento. Le "claims made" sono oggi la formula prevalente nel mercato italiano. Vanno verificati due elementi: la retroattività (quanti anni indietro copre per fatti passati) e la postuma (per quanto tempo copre dopo la scadenza, importante in caso di cessazione attività o pensionamento). Senza una postuma adeguata, contestazioni che arrivano dopo la chiusura dello studio restano scoperte.',
     },
   ],
 }

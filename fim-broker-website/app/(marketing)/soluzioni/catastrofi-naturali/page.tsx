@@ -229,7 +229,7 @@ export default function CatastrofiNaturaliPage() {
               {
                 icon: '💸',
                 title: 'Il danno medio è elevato',
-                desc: "Un'alluvione in casa causa danni medi tra 30.000€ e 80.000€. Un terremoto può distruggere il 100% del valore dell'immobile. La polizza costa poche centinaia di euro.",
+                desc: "Un'alluvione può rendere inagibile una casa per mesi, un terremoto può distruggerla del tutto. Rifarla costa molto più di qualunque premio.",
               },
               {
                 icon: '🏛️',

@@ -123,7 +123,7 @@ const glossary: Letter[] = [
     terms: [
       {
         term: 'Esclusioni',
-        definition: 'Rischi o eventi espressamente non coperti dalla polizza, elencati nelle condizioni generali. Esempi comuni: guerre, atti dolosi dell\'assicurato, guida senza patente, danni da usura normale. Leggere attentamente le esclusioni è fondamentale prima di stipulare.',
+        definition: 'Rischi o eventi espressamente non coperti dalla polizza, elencati nelle condizioni generali. Esempi comuni: guerre, atti dolosi dell\'assicurato, guida senza patente, danni da usura normale. Le esclusioni vanno lette prima di firmare, non dopo il sinistro.',
         related: ['Condizioni di Polizza', 'Rischio'],
       },
     ],
@@ -218,7 +218,7 @@ const glossary: Letter[] = [
       },
       {
         term: 'Rischio',
-        definition: 'Possibilità che si verifichi un evento futuro e incerto che comporti un danno economico. È il concetto fondamentale su cui si basa l\'assicurazione: trasferire il rischio dall\'assicurato alla compagnia in cambio del pagamento di un premio.',
+        definition: 'Possibilità che si verifichi un evento futuro e incerto che comporti un danno economico. È il concetto su cui si regge l\'assicurazione: trasferire il rischio dall\'assicurato alla compagnia in cambio del pagamento di un premio.',
         related: ['Sinistro', 'Premio'],
       },
       {

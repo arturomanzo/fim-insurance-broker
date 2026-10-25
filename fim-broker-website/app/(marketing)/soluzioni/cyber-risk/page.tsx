@@ -65,7 +65,7 @@ const coverages = [
   {
     icon: '⚡',
     title: 'Retroattività illimitata',
-    desc: 'Copertura estesa anche a violazioni avvenute prima della stipula ma scoperte durante la validità della polizza. Fondamentale: gli attacchi restano silenti in media 207 giorni.',
+    desc: 'Copertura estesa anche a violazioni avvenute prima della stipula ma scoperte durante la validità della polizza. Conta, perché un attacco può restare nascosto per mesi prima di essere scoperto.',
     included: true,
   },
 ]

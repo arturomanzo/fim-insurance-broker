@@ -293,7 +293,7 @@ export const services: Service[] = [
       },
       {
         question: "Cosa succede se mi ammalo prima di stipulare la polizza (malattia preesistente)?",
-        answer: 'Le malattie preesistenti alla stipula sono generalmente escluse dalla copertura, o richiedono una dichiarazione nel questionario sanitario. Alcune compagnie le escludono definitivamente, altre le includono dopo un periodo di carenza (solitamente 1-2 anni). È fondamentale compilare il questionario con accuratezza per evitare problemi in caso di sinistro.',
+        answer: 'Le malattie preesistenti alla stipula sono generalmente escluse dalla copertura, o richiedono una dichiarazione nel questionario sanitario. Alcune compagnie le escludono definitivamente, altre le includono dopo un periodo di carenza (solitamente 1-2 anni). Il questionario sanitario va compilato con cura per evitare problemi in caso di sinistro.',
       },
       {
         question: 'Come funziona il rimborso delle spese mediche?',
@@ -431,7 +431,7 @@ export const services: Service[] = [
       },
       {
         question: 'La polizza viaggio copre anche la cancellazione per malattia?',
-        answer: 'Sì, se hai scelto la garanzia "Annullamento viaggio". Copre il rimborso delle spese non rimborsabili (voli, hotel, tour) se sei costretto ad annullare per malattia, infortunio, lutto o altre cause previste. È fondamentale per viaggi di valore superiore a 1.000€.',
+        answer: 'Sì, se hai scelto la garanzia "Annullamento viaggio". Copre il rimborso delle spese non rimborsabili (voli, hotel, tour) se sei costretto ad annullare per malattia, infortunio, lutto o altre cause previste. Conviene soprattutto quando il viaggio costa molto.',
       },
       {
         question: 'La mia carta di credito include già una copertura viaggio?',
@@ -595,7 +595,7 @@ export const services: Service[] = [
       },
       {
         question: 'La polizza copre le controversie con i dipendenti?',
-        answer: 'Sì. La Tutela Legale del datore di lavoro copre le spese per contenziosi in materia di rapporto di lavoro: impugnazione licenziamenti, richieste di differenze retributive, demansionamento, mobbing, trasferimenti contestati, ricorsi contro INPS/INAIL, verifiche ispettive. È una copertura fondamentale per PMI con oltre 5 dipendenti, dove il rischio di vertenze è statisticamente alto e un singolo procedimento davanti al Giudice del Lavoro può costare 8.000-15.000€ di sole spese legali.',
+        answer: 'Sì. La Tutela Legale del datore di lavoro copre le spese per contenziosi in materia di rapporto di lavoro: impugnazione licenziamenti, richieste di differenze retributive, demansionamento, mobbing, trasferimenti contestati, ricorsi contro INPS/INAIL, verifiche ispettive. È una copertura da valutare per PMI con oltre 5 dipendenti, dove il rischio di vertenze è statisticamente alto e un singolo procedimento davanti al Giudice del Lavoro può costare 8.000-15.000€ di sole spese legali.',
       },
       {
         question: 'Posso scegliere liberamente il mio avvocato di fiducia?',

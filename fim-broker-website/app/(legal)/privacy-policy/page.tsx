@@ -90,7 +90,7 @@ export default function PrivacyPolicyPage() {
                 Questi strumenti hanno carattere informativo e di supporto: <strong>non adottano
                 decisioni automatizzate che producono effetti giuridici</strong> o incidono in modo
                 analogo sulla tua persona ai sensi dell&apos;art. 22 GDPR. Una parte dei contenuti del
-                blog è inoltre redatta con il supporto dell&apos;IA e sottoposta a revisione editoriale
+                blog è redatta anche con il supporto dell&apos;IA e sottoposta a revisione editoriale
                 umana; tali articoli riportano un avviso dedicato. Per i trasferimenti di dati verso
                 Anthropic e OpenAI (USA) vedi la sezione 7.
               </p>

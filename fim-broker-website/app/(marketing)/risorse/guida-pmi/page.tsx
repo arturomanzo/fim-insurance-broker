@@ -276,7 +276,7 @@ export default function GuidaPmiPage() {
                 <h2 className="text-2xl font-black text-primary m-0">Come scegliere i massimali giusti</h2>
               </div>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Il massimale è l&apos;importo massimo che la compagnia pagherà in caso di sinistro. Sceglierlo correttamente è fondamentale:
+                Il massimale è l&apos;importo massimo che la compagnia pagherà in caso di sinistro. Sceglierlo bene conta più di quanto sembri:
                 un massimale troppo basso lascia scoperti i rischi maggiori; uno troppo alto aumenta inutilmente il premio.
               </p>
               <div className="not-prose bg-amber-50 border border-amber-200 rounded-xl p-5 mb-5">
