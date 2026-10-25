@@ -251,6 +251,13 @@ export function trackCollaboraSubmit(profilo: string, utmSource?: string, eventI
   )
 }
 
+// ── Questionario richieste ed esigenze ───────────────────────────────────────
+// Il cliente è già un contatto nostro: niente 'generate_lead', così il
+// questionario non conta come conversione su Google Ads né su Meta.
+export function trackQuestionarioSubmit(ramo: string) {
+  track('questionario_esigenze', { event_category: 'questionario', ramo })
+}
+
 // ── Funnel second opinion ────────────────────────────────────────────────────
 
 /**

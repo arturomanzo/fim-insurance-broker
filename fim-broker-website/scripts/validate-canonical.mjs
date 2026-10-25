@@ -25,7 +25,7 @@ let errors = 0
 const fail = (msg) => { console.error(`  ❌ ${msg}`); errors++ }
 
 // Rotte private: sono noindex, un canonical le contraddirebbe.
-const PRIVATE_PREFIXES = ['/admin', '/area-cliente']
+const PRIVATE_PREFIXES = ['/admin', '/area-cliente', '/questionario']
 
 function walk(dir) {
   const out = []
