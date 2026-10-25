@@ -30,7 +30,7 @@ export const scuoleFaq: FaqCategory = {
     {
       question: 'Serve una gara per nominare un broker?',
       answer:
-        "Nella scuola statale l'incarico segue il Codice dei contratti pubblici (D.Lgs. 36/2023): per un servizio senza esborso diretto si procede di norma con affidamento diretto ai sensi dell'art. 50, comma 1, lettera b), con decisione a contrarre motivata del Dirigente Scolastico e nel rispetto del D.I. 129/2018: determina, CIG, principio di rotazione. Nelle scuole paritarie il Codice non si applica e basta un atto interno. In entrambi i casi l'atto è dell'istituto: FIM prepara il supporto documentale, non firma al posto della scuola.",
+        "Nella scuola statale l'incarico segue il Codice dei contratti pubblici (D.Lgs. 36/2023): per un servizio senza esborso diretto si procede di norma con affidamento diretto ai sensi dell'art. 50, comma 1, lettera b), con decisione a contrarre motivata del Dirigente Scolastico e nel rispetto del D.I. 129/2018: determina, CIG, principio di rotazione. Nelle scuole paritarie il Codice non si applica e basta un atto interno. In entrambi i casi gli atti sono dell'istituto: il broker porta i propri documenti (iscrizione al RUI, polizza di responsabilità professionale, dichiarazioni), non scrive la determina con cui viene scelto.",
     },
     {
       question: 'Chi sceglie la compagnia?',

@@ -449,6 +449,13 @@ export default function ScuolePage() {
                   Capitolato e moduli di gara non sono scaricabili: vengono scritti sull&apos;istituto dopo il conferimento
                   dell&apos;incarico, perché un capitolato generico è la prima cosa che una commissione contesta.
                 </p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Come si affida il servizio di brokeraggio in una scuola statale:{' '}
+                  <Link href="/soluzioni/scuole/affidamento-diretto-brokeraggio" className="text-primary font-semibold underline">
+                    la guida, passo per passo
+                  </Link>
+                  .
+                </p>
               </div>
             </div>
             <div>
