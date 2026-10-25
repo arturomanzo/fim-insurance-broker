@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import { linkWhatsApp } from '@/lib/whatsappSito'
 import ChatBubble from './ChatBubble'
 import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
@@ -111,11 +113,11 @@ function getSuggestedQuestions(path: string): string[] {
 // Mostrare il CTA WhatsApp dopo questo numero di scambi (messaggi utente)
 const WHATSAPP_ESCALATION_AFTER = 3
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '393801234567'
 
 const MAX_MESSAGES_WARNING = FIMA_CONFIG.maxMessages
 
 export default function FIMAWidget() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [pageContext, setPageContext] = useState('')
   const [suggestedQuestions, setSuggestedQuestions] = useState(DEFAULT_QUESTIONS)
@@ -322,7 +324,7 @@ export default function FIMAWidget() {
           {showWhatsAppCta && (
             <div className="px-4 pb-3 flex-shrink-0 animate-fade-in">
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao, vorrei parlare con un consulente FIM Insurance Broker.')}`}
+                href={linkWhatsApp('Ciao, vorrei parlare con un consulente FIM Insurance Broker.', pathname)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-semibold text-primary transition-colors"
@@ -351,7 +353,7 @@ export default function FIMAWidget() {
               <div className="text-center py-2">
                 <p className="text-xs text-gray-500 mb-2">Hai raggiunto il limite di questa conversazione.</p>
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao, vorrei continuare la conversazione con un consulente FIM Insurance Broker.')}`}
+                  href={linkWhatsApp('Ciao, vorrei continuare la conversazione con un consulente FIM Insurance Broker.', pathname)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-semibold text-primary transition-colors"
