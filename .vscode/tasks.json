@@ -1,0 +1,44 @@
+{
+  "version": "2.0.0",
+  "options": { "cwd": "${workspaceFolder}/fim-broker-website" },
+  "tasks": [
+    {
+      "label": "Typecheck",
+      "type": "shell",
+      "command": "npx tsc --noEmit",
+      "problemMatcher": "$tsc",
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "Lint",
+      "type": "shell",
+      "command": "npm run lint",
+      "problemMatcher": "$eslint-stylish"
+    },
+    {
+      "label": "Test",
+      "type": "shell",
+      "command": "npm test",
+      "group": { "kind": "test", "isDefault": true }
+    },
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Verifica completa",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Typecheck", "Lint", "Test"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev server",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}
