@@ -5,7 +5,8 @@ import { hasAdminTokenFormat, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth'
 // GET is allowed only for these specific API paths
 const API_GET_ALLOWED = new Set([
   '/api/area-cliente/verify',
-  '/api/cron/reminder-rinnovi',
+  // Il pulsante "Scarica" dell'Area Cliente: un link, quindi GET.
+  '/api/area-cliente/documento',
   '/api/cron/ivass-watcher',
   '/api/cron/cleanup-documenti',
   '/api/cron/daily-maintenance',

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { generateToken, MAGIC_LINK_TTL_SECONDS } from '@/lib/clientAuth'
-import { isEmailRegistered } from '@/lib/policyData'
+import { caricaPortafoglio } from '@/lib/areaCliente'
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fimbroker.it>'
@@ -10,6 +10,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
 function validateEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
 }
 
 function buildMagicLinkEmail(nome: string, magicLink: string): string {
@@ -21,10 +25,10 @@ function buildMagicLinkEmail(nome: string, magicLink: string): string {
       <p style="color:rgba(255,255,255,0.7);margin:8px 0 0;font-size:14px;">FIM Insurance Broker</p>
     </div>
     <div style="padding:36px 32px;text-align:center;">
-      <p style="font-size:15px;color:#1e293b;margin:0 0 8px;">Ciao${nome ? ` <strong>${nome}</strong>` : ''},</p>
+      <p style="font-size:15px;color:#1e293b;margin:0 0 8px;">Ciao${nome ? ` <strong>${escapeHtml(nome)}</strong>` : ''},</p>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 28px;">
         Clicca il pulsante qui sotto per accedere in modo sicuro alla tua area personale.<br>
-        Il link è valido per <strong>1 ora</strong> e può essere usato una sola volta.
+        Il link è valido per <strong>1 ora</strong>. Non inoltrarlo: chi lo apre entra al posto tuo.
       </p>
       <a href="${magicLink}"
          style="display:inline-block;background:#0B1F3A;color:white;padding:16px 40px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;letter-spacing:0.3px;">
@@ -64,9 +68,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Indirizzo email non valido.' }, { status: 400 })
     }
 
-    // Always respond with success to avoid email enumeration
-    // but only actually send the email if registered
-    if (isEmailRegistered(email)) {
+    // Stessa risposta per tutti, così il modulo non dice chi è cliente e chi no.
+    // Il link parte solo se il gestionale ha polizze visibili per questa email.
+    // Se il gestionale non risponde non lo sappiamo, e lo diciamo a tutti allo
+    // stesso modo invece di mandare link a indirizzi qualsiasi.
+    const esito = await caricaPortafoglio(email)
+    if (!esito.ok) {
+      return NextResponse.json(
+        { error: 'In questo momento non riusciamo a verificare l\'accesso. Riprova tra qualche minuto o chiamaci al +39 06 96883381.' },
+        { status: 503 },
+      )
+    }
+    if (esito.portafoglio.polizze.length > 0) {
       const token = await generateToken(email, MAGIC_LINK_TTL_SECONDS)
       const redirectPath = next && next.startsWith('/area-cliente') ? next : '/area-cliente/dashboard'
       const magicLink = `${BASE_URL}/api/area-cliente/verify?token=${encodeURIComponent(token)}&next=${encodeURIComponent(redirectPath)}`
@@ -76,7 +89,7 @@ export async function POST(req: NextRequest) {
           from: FIM_FROM,
           to: [email],
           subject: 'Il tuo link di accesso — Area Cliente FIM',
-          html: buildMagicLinkEmail('', magicLink),
+          html: buildMagicLinkEmail(esito.portafoglio.nome ?? '', magicLink),
         })
       } else if (process.env.NODE_ENV !== 'production') {
         console.log('[DEV] Magic link (email non inviata — imposta RESEND_API_KEY):', magicLink)

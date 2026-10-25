@@ -79,7 +79,7 @@ Esiste un **CRM/gestionale separato** deployato su `fim-gestionale-next.vercel.a
 - **Webhook events**: `polizza.creata|rinnovata|scadenza`, `cliente.creato`, `sinistro.aperto|chiuso`, `pagamento.ricevuto|scaduto`
 - Firma webhook: header `X-Signature: sha256=...`
 
-**Uso consigliato:** per popolare l'Area Cliente del sito con dati reali (polizze, scadenze, sinistri) invece di mock/JSON statico.
+**Area Cliente:** dal 25/10/2026 legge le polizze vere dal gestionale (`lib/areaCliente.ts` → `POST /api/website/area-cliente` e `/documento`, Bearer `WEBSITE_API_SECRET`, solo lato server). Cosa esce lo decide il gestionale (`src/lib/area-cliente/portafoglio.ts`): polizze attive e sospese, niente subagenti, niente importi. I promemoria di rinnovo li manda solo il gestionale: il sito non ha più un suo cron di rinnovi.
 
 ---
 
