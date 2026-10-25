@@ -3,16 +3,17 @@ import Link from 'next/link'
 import FaqSection from '@/components/ui/FaqSection'
 import { osservatorioPmiFaq } from '@/lib/faq/osservatorio-pmi'
 import { OG_BASE } from '@/lib/seo'
+import { SCADENZE_CATASTROFALE, CHI_E_ESCLUSO, CONSEGUENZA_CATASTROFALE } from '@/lib/catastrofale'
 
 export const metadata: Metadata = {
-  title: 'Osservatorio PMI Assicurazioni 2025 | Costi e Benchmark per Settore',
+  title: 'Osservatorio PMI Assicurazioni | Quanto costa assicurare un\'impresa',
   description:
-    'Dati aggiornati 2025 sui costi delle assicurazioni per PMI italiane: benchmark per settore, analisi dei rischi, confronto spesa media. Report esclusivo FIM Insurance Broker.',
+    'Ordini di grandezza dei premi assicurativi per PMI italiane, per settore e dimensione: RC, all risk, cyber, catastrofale. Valori di orientamento FIM, non statistiche ufficiali.',
   keywords: [
     'costo assicurazione pmi',
     'benchmark assicurazioni aziendali',
     'rc impresa costo medio',
-    'assicurazioni artigiani prezzi 2025',
+    'assicurazioni artigiani prezzi',
     'polizza aziendale quanto costa',
     'osservatorio assicurazioni pmi italia',
   ],
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
   openGraph: {
     ...OG_BASE,
     url: '/risorse/osservatorio-pmi',
-    title: 'Osservatorio PMI Assicurazioni 2025',
-    description: 'Benchmark esclusivi sui costi assicurativi per le PMI italiane: dati per settore, dimensione aziendale e tipologia di copertura.',
+    title: 'Osservatorio PMI Assicurazioni',
+    description: 'Ordini di grandezza dei premi assicurativi per le PMI italiane, per settore e dimensione. Valori di orientamento FIM.',
     type: 'article',
   },
 }
@@ -29,15 +30,15 @@ export const metadata: Metadata = {
 const jsonLdArticle = {
   '@context': 'https://schema.org',
   '@type': 'Report',
-  name: 'Osservatorio PMI Assicurazioni 2025',
-  description: 'Analisi dei costi e benchmark assicurativi per le PMI italiane per settore e dimensione',
+  name: 'Osservatorio PMI Assicurazioni',
+  description: 'Ordini di grandezza dei premi assicurativi per le PMI italiane per settore e dimensione. Valori di orientamento, non statistiche ufficiali.',
   publisher: {
     '@type': 'Organization',
     name: 'FIM Insurance Broker',
     url: 'https://www.fimbroker.it',
   },
   datePublished: '2025-01-15',
-  dateModified: '2025-03-01',
+  dateModified: '2026-10-25',
   inLanguage: 'it',
   about: {
     '@type': 'Thing',
@@ -63,11 +64,15 @@ const sizeData = [
   { size: 'Grande (50–249 dip.)', spend: '€18.000–60.000+', note: 'Programma integrato' },
 ]
 
-const trends2025 = [
-  { icon: '⚠️', title: 'Polizza catastrofale obbligatoria', desc: 'Dal 1° aprile 2025 tutte le imprese devono assicurarsi contro calamità naturali per legge. Chi non si adegua rischia esclusione dai fondi pubblici.' },
-  { icon: '🔐', title: 'Cyber risk in aumento del +34%', desc: 'Gli attacchi alle PMI italiane sono cresciuti del 34% nel 2024. NIS2 obbliga le aziende in supply chain a rafforzare la sicurezza informatica o perdere contratti.' },
-  { icon: '📈', title: 'Premi RC in rialzo del +12% medio', desc: 'L\'inflazione dei materiali e l\'aumento del contenzioso legale hanno spinto i premi RC impresa verso l\'alto. Confrontare offerte di più compagnie è più importante che mai.' },
-  { icon: '👥', title: 'Welfare aziendale detraibile', desc: 'I piani di welfare con polizze sanitarie integrative per i dipendenti beneficiano di vantaggi fiscali significativi: deducibilità fino al 5‰ del fatturato per il datore.' },
+// Solo cose che reggono se qualcuno le contesta. Fino al 25/10/2026 qui c'erano
+// "+34% di attacchi", "+12% dei premi RC" e una deducibilità "fino al 5‰ del
+// fatturato" (che riguarda le spese per il personale, non il fatturato): numeri
+// senza fonte o sbagliati, tolti.
+const tendenze = [
+  { icon: '⚠️', title: 'Polizza catastrofale obbligatoria', desc: `L'obbligo è scattato ${SCADENZE_CATASTROFALE}. Restano fuori ${CHI_E_ESCLUSO}. Per chi non è in regola ${CONSEGUENZA_CATASTROFALE}.` },
+  { icon: '🔐', title: 'Cyber e catena di fornitura', desc: 'Il D.Lgs. 138/2024, che recepisce la direttiva NIS2, chiede alle imprese che ricadono nella norma di curare anche la sicurezza dei fornitori. Per chi lavora con loro, misure informatiche e a volte una polizza cyber entrano fra le richieste.' },
+  { icon: '📈', title: 'RC impresa da confrontare', desc: 'Per lo stesso rischio le tariffe RC cambiano parecchio da una compagnia all\'altra. Prima del rinnovo conviene confrontarle e rileggere massimali e franchigie.' },
+  { icon: '👥', title: 'Welfare aziendale', desc: 'Le polizze sanitarie e infortuni per i dipendenti dentro un piano di welfare hanno un trattamento fiscale agevolato. Il quanto dipende dal piano: va valutato insieme al commercialista.' },
 ]
 
 function RiskBadge({ level }: { level: string }) {
@@ -98,42 +103,19 @@ export default function OsservatorioPmiPage() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-4">
               <span className="inline-block bg-white/10 border border-white/20 text-sm px-3 py-1 rounded-full">
-                📊 Dati aggiornati 2025
-              </span>
-              <span className="inline-block bg-accent/20 border border-accent/30 text-sm px-3 py-1 rounded-full">
-                Report Esclusivo FIM
+                📋 Valori di orientamento FIM — non statistiche ufficiali
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-black mb-4">
               Osservatorio PMI<br />
-              <span className="text-accent">Assicurazioni 2025</span>
+              <span className="text-accent">Quanto costa assicurare un&apos;impresa</span>
             </h1>
             <p className="text-xl text-white/80 mb-6">
-              Benchmark sui costi assicurativi per le imprese italiane: dati reali per settore, dimensione aziendale e tipologia di copertura.
+              Ordini di grandezza dei premi per settore e dimensione, per capire da dove partire. Il numero vero per la tua impresa lo dà solo un preventivo.
             </p>
             <p className="text-white/60 text-sm">
-              Elaborato su un campione di oltre 800 imprese clienti FIM · Aggiornato a marzo 2025
+              Valori compilati dai broker FIM su profili standard · Testo aggiornato il 25/10/2026
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* KPI Strip */}
-      <section className="bg-white border-b border-gray-100 py-8">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { value: '€4.200', label: 'Spesa media PMI/anno', sub: 'Con 5–20 dipendenti' },
-              { value: '+34%', label: 'Aumento cyber-attacchi', sub: 'vs 2023, fonte CLUSIT' },
-              { value: '01/04/25', label: 'Obbligo catastrofale', sub: 'Per tutte le imprese' },
-              { value: '+12%', label: 'Aumento premi RC', sub: 'Media di mercato 2024' },
-            ].map((kpi) => (
-              <div key={kpi.value}>
-                <div className="text-3xl font-black text-primary">{kpi.value}</div>
-                <div className="font-semibold text-gray-800 text-sm mt-1">{kpi.label}</div>
-                <div className="text-gray-400 text-xs">{kpi.sub}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -149,7 +131,7 @@ export default function OsservatorioPmiPage() {
                 Costi assicurativi per settore
               </h2>
               <p className="text-gray-600 mb-6">
-                Premio annuo indicativo per una PMI con 5–20 dipendenti e fatturato tra €300K–€2M. I valori includono le coperture più comuni per ogni settore.
+                Ordine di grandezza del premio annuo per una PMI con 5–20 dipendenti e fatturato tra €300K e €2M, con le coperture più comuni per ogni settore.
               </p>
               <div className="overflow-x-auto rounded-2xl shadow-sm">
                 <table className="w-full bg-white text-sm">
@@ -180,7 +162,7 @@ export default function OsservatorioPmiPage() {
                 </table>
               </div>
               <p className="text-gray-400 text-xs mt-3">
-                * Stime basate su campione clienti FIM. I premi effettivi dipendono da sinistrosità storica, massimali scelti e condizioni di polizza. Richiedi un preventivo personalizzato per dati precisi.
+                * Valori di orientamento FIM su profili standard, non misurati su un campione di contratti. I premi effettivi dipendono da sinistrosità, massimali, franchigie e condizioni delle compagnie: il numero preciso lo dà un preventivo.
               </p>
             </div>
 
@@ -190,7 +172,7 @@ export default function OsservatorioPmiPage() {
                 Spesa per dimensione aziendale
               </h2>
               <p className="text-gray-600 mb-6">
-                La spesa assicurativa cresce con le dimensioni, ma il rapporto costo/protezione può migliorare sensibilmente con la giusta struttura del pacchetto.
+                La spesa cresce con le dimensioni. Conta però anche come è costruito il pacchetto: doppioni e scoperture si trovano in imprese di ogni taglia.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {sizeData.map((item) => (
@@ -203,52 +185,20 @@ export default function OsservatorioPmiPage() {
               </div>
             </div>
 
-            {/* Trend 2025 */}
+            {/* Cosa sta cambiando */}
             <div>
               <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">
-                Tendenze e novità 2025
+                Cosa sta cambiando
               </h2>
               <p className="text-gray-600 mb-6">
-                Quattro fattori che stanno cambiando il mercato assicurativo per le PMI italiane nel 2025.
+                Quattro fattori che pesano oggi sulle scelte assicurative delle PMI italiane.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {trends2025.map((trend) => (
+                {tendenze.map((trend) => (
                   <div key={trend.title} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                     <div className="text-3xl mb-3">{trend.icon}</div>
                     <h3 className="font-bold text-primary mb-2">{trend.title}</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">{trend.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Coverage breakdown chart (CSS-only bar chart) */}
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">
-                Distribuzione della spesa assicurativa
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Come si distribuisce mediamente il budget assicurativo di una PMI italiana (media dei settori).
-              </p>
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
-                {[
-                  { label: 'RC Impresa / Prodotti', pct: 38, color: 'bg-primary' },
-                  { label: 'All Risk Aziendale (property)', pct: 28, color: 'bg-accent' },
-                  { label: 'Cyber Risk Insurance', pct: 17, color: 'bg-blue-400' },
-                  { label: 'Polizza Catastrofale', pct: 9, color: 'bg-orange-400' },
-                  { label: 'Altre coperture (tutela legale, welfare…)', pct: 8, color: 'bg-gray-300' },
-                ].map((item) => (
-                  <div key={item.label}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-sm font-medium text-gray-700">{item.label}</span>
-                      <span className="text-sm font-bold text-gray-900">{item.pct}%</span>
-                    </div>
-                    <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
-                      <div
-                        className={`h-full ${item.color} rounded-full`}
-                        style={{ width: `${item.pct}%` }}
-                      />
-                    </div>
                   </div>
                 ))}
               </div>
@@ -281,8 +231,11 @@ export default function OsservatorioPmiPage() {
             {/* Methodology note */}
             <div className="bg-gray-100 rounded-2xl p-6 text-sm text-gray-600">
               <h3 className="font-bold text-gray-800 mb-2">Nota metodologica</h3>
+              <p className="leading-relaxed mb-2">
+                Questi non sono dati statistici. Le fasce di premio sono valori di orientamento che i broker FIM usano su profili standard di impresa: non vengono da un campione di contratti misurato né da statistiche IVASS o ANIA, e non costituiscono un&apos;offerta commerciale.
+              </p>
               <p className="leading-relaxed">
-                I dati presentati in questa pagina sono elaborati da FIM Insurance Broker su un campione anonimizzato di oltre 800 contratti stipulati tra 2023 e 2024 per clienti PMI con sede in Italia. I range di premio sono indicativi e non costituiscono offerta commerciale. I premi effettivi dipendono da fattori individuali (sinistrosità, massimali, franchige) e dalle condizioni aggiornate delle compagnie assicurative. Fonte esterna citata: rapporto CLUSIT 2024 per i dati sul cyber risk.
+                I premi veri dipendono da sinistrosità, massimali, franchigie, ubicazione dei beni e condizioni aggiornate delle compagnie. Per un numero che valga per la tua impresa serve un preventivo, oppure il check-up gratuito delle polizze che hai già.
               </p>
             </div>
 
@@ -296,9 +249,9 @@ export default function OsservatorioPmiPage() {
           <h2 className="text-xl font-black text-primary mb-6">Risorse correlate</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { href: '/risorse/guida-pmi', label: '📋 Guida PMI 2025', desc: 'La guida completa alle assicurazioni aziendali obbligatorie e consigliate.' },
+              { href: '/risorse/guida-pmi', label: '📋 Guida PMI', desc: 'La guida completa alle assicurazioni aziendali obbligatorie e consigliate.' },
               { href: '/calcolatore-rischi', label: '📊 Calcolatore del Rischio', desc: 'Valuta il profilo di rischio della tua impresa in 2 minuti.' },
-              { href: '/blog/polizze-obbligatorie-aziende-italia-2025', label: '📰 Polizze Obbligatorie 2025', desc: 'Tutte le assicurazioni obbligatorie per le imprese italiane nel 2025.' },
+              { href: '/blog/polizze-obbligatorie-aziende-italia-2025', label: '📰 Polizze obbligatorie per le imprese', desc: 'Le assicurazioni che la legge impone alle imprese italiane.' },
             ].map((res) => (
               <Link
                 key={res.href}

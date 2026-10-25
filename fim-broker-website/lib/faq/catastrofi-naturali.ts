@@ -1,4 +1,5 @@
 import type { FaqCategory } from '.'
+import { OBBLIGO_CATASTROFALE } from '@/lib/catastrofale'
 
 export const catastrofiNaturaliFaq: FaqCategory = {
   slug: 'catastrofi-naturali',
@@ -18,7 +19,7 @@ export const catastrofiNaturaliFaq: FaqCategory = {
     {
       question: 'Dal 2025 le aziende devono obbligatoriamente assicurarsi per le catastrofi naturali?',
       answer:
-        'Sì. La Legge di Bilancio 2024 (L. 213/2023, art. 1 comma 101-111) ha introdotto l\'obbligo per tutte le imprese con sede in Italia, iscritte al Registro delle Imprese, di stipulare entro il 31 marzo 2025 una polizza che copra terremoto, alluvione, frana, inondazione ed esondazione sui propri immobili, terreni, impianti e macchinari iscritti in bilancio. Le aziende senza copertura rischiano sanzioni e potrebbero essere escluse da aiuti pubblici post-catastrofe. Contattaci subito se non sei ancora in regola.',
+        `${OBBLIGO_CATASTROFALE} Se non sei sicuro di essere in regola, guardiamo insieme le tue polizze.`,
     },
     {
       question: "Cosa si intende esattamente per 'catastrofe naturale' assicurabile?",

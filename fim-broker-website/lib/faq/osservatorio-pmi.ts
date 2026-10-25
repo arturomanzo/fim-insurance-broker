@@ -1,4 +1,5 @@
 import type { FaqCategory } from '.'
+import { OBBLIGO_CATASTROFALE } from '@/lib/catastrofale'
 
 export const osservatorioPmiFaq: FaqCategory = {
   slug: 'osservatorio-pmi',
@@ -13,22 +14,21 @@ export const osservatorioPmiFaq: FaqCategory = {
     {
       question: 'Quanto costa in media un pacchetto assicurativo per una PMI?',
       answer:
-        'Il costo medio annuo per una PMI con 5–20 dipendenti varia tra €2.800 e €12.000 a seconda del settore e delle coperture scelte. Le imprese manifatturiere e costruzioni pagano di più (rischio fisico elevato), mentre il terziario tende a spendere meno per i rischi materiali ma di più per RC e cyber.',
+        'Come ordine di grandezza, per una PMI con 5–20 dipendenti il pacchetto va da circa €2.000 a €15.000 l\'anno a seconda del settore e delle coperture. Manifattura e costruzioni pagano di più per il rischio fisico, il terziario spende meno sui beni e di più su RC e cyber. Sono valori di orientamento FIM, non una media misurata: il numero vero lo dà un preventivo.',
     },
     {
-      question: 'La polizza catastrofale è obbligatoria per le imprese nel 2025?',
-      answer:
-        "Sì. La normativa in vigore ha introdotto l'obbligo di assicurazione contro le calamità naturali (alluvioni, terremoti, frane, inondazioni) per tutte le imprese con sede legale in Italia a partire dal 1° aprile 2025. Le imprese non in regola rischiano sanzioni e l'esclusione da contributi pubblici.",
+      question: 'La polizza catastrofale è obbligatoria per le imprese?',
+      answer: OBBLIGO_CATASTROFALE,
     },
     {
       question: 'Cosa include la RC Impresa e quanto costa?',
       answer:
-        "La RC Impresa copre i danni causati a terzi nell'esercizio dell'attività. Il costo dipende dal fatturato, numero di dipendenti e settore: per una PMI con fatturato fino a €500K si parte da €600–1.200/anno per la sola RC. Molte imprese la integrano con polizze All-Risk per una copertura completa.",
+        "La RC Impresa copre i danni causati a terzi nell'esercizio dell'attività. Il costo dipende da fatturato, numero di dipendenti e settore: come ordine di grandezza, per una PMI con fatturato fino a €500K la sola RC parte da €600–1.200 l'anno. Molte imprese la affiancano a una polizza All Risk sui beni.",
     },
     {
       question: 'Il Cyber Risk Insurance è necessario per le PMI?',
       answer:
-        "Con l'entrata in vigore del Regolamento NIS2 (ottobre 2024), migliaia di PMI italiane rientrano nell'ambito di applicazione. Anche senza obbligo diretto, il costo medio di un attacco ransomware per una PMI italiana è di €85.000 tra fermo operativo, recupero dati e danni reputazionali. Una polizza cyber entry-level parte da €800–1.500/anno.",
+        "Il D.Lgs. 138/2024, che recepisce la direttiva NIS2, si applica a una parte delle imprese italiane e chiede loro di curare anche la sicurezza dei fornitori: chi lavora per loro se lo vede chiedere a cascata. Anche senza obblighi, un attacco informatico costa fermo operativo, recupero dei dati e danni di reputazione. Come ordine di grandezza, una polizza cyber di base parte da €800–1.500 l'anno.",
     },
     {
       question: "Come si calcola il premio di un'assicurazione aziendale?",

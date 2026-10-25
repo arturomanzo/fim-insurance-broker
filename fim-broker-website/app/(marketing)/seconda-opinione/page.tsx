@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SCADENZE_CATASTROFALE } from '@/lib/catastrofale'
 import SecondOpinionForm from '@/components/forms/SecondOpinionForm'
 import Card from '@/components/ui/Card'
 import { OG_BASE } from '@/lib/seo'
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 const GAP_EXAMPLES = [
   {
     titolo: 'Danni catastrofali non coperti',
-    desc: 'Dal 31 marzo 2025 le imprese devono avere la polizza catastrofale obbligatoria. Molte PMI non lo sanno ancora.',
+    desc: `La polizza catastrofale è obbligatoria, ${SCADENZE_CATASTROFALE}. Molte PMI non lo sanno ancora.`,
     badge: 'Obbligo di legge',
     badgeColor: 'bg-red-100 text-red-700',
   },

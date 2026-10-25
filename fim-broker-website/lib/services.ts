@@ -1,3 +1,5 @@
+import { OBBLIGO_CATASTROFALE } from '@/lib/catastrofale'
+
 export interface Coverage {
   /** Cosa la polizza copre tipicamente. Lista concisa, snippet-friendly. */
   covered: string[]
@@ -362,7 +364,7 @@ export const services: Service[] = [
       },
       {
         question: "Dal 2025 le aziende sono obbligate ad assicurarsi contro le catastrofi naturali?",
-        answer: "Sì. La Legge di Bilancio 2024 (L. 213/2023) ha introdotto l'obbligo per tutte le imprese italiane di stipulare una polizza catastrofi naturali su immobili, terreni, impianti e macchinari iscritti in bilancio entro il 31 marzo 2025. FIM ha già assistito decine di aziende nell'adeguamento: contattaci subito se non sei in regola.",
+        answer: `${OBBLIGO_CATASTROFALE} Se non sei sicuro di essere in regola, guardiamo insieme le tue polizze.`,
       },
       {
         question: "Come funziona il risk management per le PMI?",
