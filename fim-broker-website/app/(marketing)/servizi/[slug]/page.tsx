@@ -222,11 +222,11 @@ export default async function ServizioPage({ params }: Props) {
                 <h3 className="text-xl font-black mb-3">Preventivo gratuito</h3>
                 {/* Price indicator */}
                 <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-5">
-                  <p className="text-white/60 text-xs uppercase tracking-wider font-semibold mb-1">Costo indicativo</p>
+                  <p className="text-white/60 text-xs uppercase tracking-wider font-semibold mb-1">Premio</p>
                   <p className="text-accent text-2xl font-black">{service.priceFrom}</p>
                   <p className="text-white/60 text-xs mt-1 leading-snug">{service.priceNote}</p>
                   <p className="text-white/40 text-xs mt-2 leading-snug">
-                    Prezzo puramente orientativo. Non costituisce offerta contrattuale ai sensi del D.Lgs. 209/2005. Premio effettivo determinato dalla compagnia in base al profilo del cliente. FIM opera come intermediario iscritto al RUI IVASS.
+                    FIM Insurance Broker è un intermediario assicurativo indipendente iscritto al RUI Sez. B n. B000405449, soggetto alla vigilanza IVASS.
                   </p>
                 </div>
                 <p className="text-white/80 text-sm mb-5">

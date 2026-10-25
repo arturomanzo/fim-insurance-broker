@@ -6,6 +6,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import { professionistiFaq } from '@/lib/faq/professionisti'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
 
 export const metadata: Metadata = {
@@ -34,19 +35,19 @@ const coverages = [
     icon: '⚖️',
     title: 'RC Professionale',
     desc: 'Copre i danni patrimoniali causati ai tuoi clienti per errori, omissioni o negligenze commesse nell\'esercizio della professione. Obbligatoria per la maggior parte delle categorie.',
-    price: 'da 200€/anno',
+    price: 'su preventivo',
   },
   {
     icon: '🛡️',
     title: 'Tutela Legale',
     desc: 'Copre le spese legali per difenderti da contestazioni ingiuste dei clienti. Fondamentale per professionisti esposti a contenziosi.',
-    price: 'da 80€/anno',
+    price: 'su preventivo',
   },
   {
     icon: '🔒',
     title: 'Cyber Risk e Data Breach',
     desc: 'Se gestisci dati sensibili (commercialisti, medici, avvocati), un data breach comporta sanzioni GDPR e danni reputazionali. La cyber risk copre sia i costi legali che quelli di ripristino.',
-    price: 'da 150€/anno',
+    price: 'su preventivo',
   },
   {
     icon: '👔',
@@ -58,7 +59,7 @@ const coverages = [
     icon: '🏥',
     title: 'Infortuni Professionali',
     desc: 'Copre infortuni avvenuti nell\'esercizio della professione: da una caduta in studio a un incidente in sopralluogo. Complementare all\'INAIL per autonomi.',
-    price: 'da 100€/anno',
+    price: 'su preventivo',
   },
   {
     icon: '💼',
@@ -203,7 +204,7 @@ export default function ProfessionistiPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono puramente orientativi per professionisti con fatturato fino a 150.000€/anno e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base a categoria professionale, massimale scelto e storico sinistri. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
+            {notaPremio('categoria professionale, fatturato, massimale scelto e storico sinistri')}
           </p>
         </div>
       </section>
@@ -263,7 +264,7 @@ export default function ProfessionistiPage() {
                   {
                     icon: '🔍',
                     title: 'Confrontiamo il mercato per te',
-                    desc: 'Non rappresentiamo una sola compagnia: confrontiamo AXA, Allianz, Generali, HDI e molte altre per trovare il miglior prezzo con la migliore copertura.',
+                    desc: 'Non rappresentiamo una sola compagnia: confrontiamo AXA, Allianz, Generali, HDI e molte altre e mettiamo a confronto coperture e premi.',
                   },
                   {
                     icon: '⚡',

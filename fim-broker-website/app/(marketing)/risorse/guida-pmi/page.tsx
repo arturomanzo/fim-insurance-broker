@@ -6,16 +6,16 @@ import { OG_BASE } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Guida Completa alle Assicurazioni per PMI',
   description:
-    'Guida pratica per artigiani, PMI e professionisti italiani: polizze obbligatorie, massimali, prezzi indicativi, gestione sinistri e checklist dei rischi.',
+    'Guida pratica per artigiani, PMI e professionisti italiani: polizze obbligatorie, massimali, cosa fa variare il premio, gestione sinistri e checklist dei rischi.',
   alternates: { canonical: '/risorse/guida-pmi' },
   openGraph: {
     ...OG_BASE,
     url: '/risorse/guida-pmi',
     type: 'article',
-    images: [{ url: '/api/og?title=Guida+PMI&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+prezzi+e+checklist+dei+rischi+per+artigiani+e+PMI.', width: 1200, height: 630 }],
+    images: [{ url: '/api/og?title=Guida+PMI&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+premi+e+checklist+dei+rischi+per+artigiani+e+PMI.', width: 1200, height: 630 }],
   },
   twitter: {
-    images: ['/api/og?title=Guida+PMI&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+prezzi+e+checklist+dei+rischi+per+artigiani+e+PMI.'],
+    images: ['/api/og?title=Guida+PMI&tag=Risorse&sub=Polizze+obbligatorie%2C+massimali%2C+premi+e+checklist+dei+rischi+per+artigiani+e+PMI.'],
   },
 }
 
@@ -48,7 +48,7 @@ const sections = [
   {
     id: 'prezzi',
     number: '06',
-    title: 'Prezzi indicativi per le polizze principali',
+    title: 'Cosa fa variare il premio delle polizze principali',
   },
   {
     id: 'checklist',
@@ -139,7 +139,7 @@ export default function GuidaPmiPage() {
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 not-prose mb-4">
                 <p className="text-blue-800 text-sm font-semibold mb-2">💡 Il concetto chiave</p>
                 <p className="text-blue-700 text-sm leading-relaxed">
-                  Un incendio nel capannone può costarti 500.000€. Una polizza all-risk può costare 1.500€/anno.
+                  Un incendio nel capannone può costare centinaia di migliaia di euro. La polizza all-risk costa una frazione di quella cifra.
                   La logica è semplice: paghi una piccola certezza per evitare una grande incertezza.
                 </p>
               </div>
@@ -342,43 +342,41 @@ export default function GuidaPmiPage() {
             <section id="prezzi" className="mb-12 scroll-mt-24">
               <div className="flex items-center gap-3 mb-5">
                 <span className="w-10 h-10 rounded-xl bg-primary text-white font-black text-sm flex items-center justify-center flex-shrink-0">06</span>
-                <h2 className="text-2xl font-black text-primary m-0">Prezzi indicativi 2025</h2>
+                <h2 className="text-2xl font-black text-primary m-0">Cosa fa variare il premio</h2>
               </div>
               <p className="text-gray-700 leading-relaxed mb-5">
-                I prezzi variano in base al settore di attività, al fatturato, ai valori assicurati e allo storico sinistri.
-                I seguenti sono riferimenti orientativi per PMI con 1-10 dipendenti e fatturato fino a 1M€.
+                Il premio lo calcola la compagnia sui dati della singola impresa, per questo qui non trovi una tabella di prezzi.
+                Trovi le voci che pesano di più, polizza per polizza: sono le informazioni da tenere pronte quando chiedi un preventivo.
               </p>
               <div className="not-prose overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
                   <thead>
                     <tr className="bg-primary text-white">
                       <th className="text-left p-3 rounded-tl-lg font-semibold">Polizza</th>
-                      <th className="text-left p-3 font-semibold">Da</th>
-                      <th className="text-left p-3 rounded-tr-lg font-semibold">Fino a</th>
+                      <th className="text-left p-3 rounded-tr-lg font-semibold">Cosa pesa sul premio</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      { name: 'RC Impresa (1M€ massimale)', from: '300€/anno', to: '1.500€/anno' },
-                      { name: 'All-risk sede + macchinari (500K€)', from: '600€/anno', to: '2.500€/anno' },
-                      { name: 'RC Professionale (500K€)', from: '200€/anno', to: '1.200€/anno' },
-                      { name: 'Infortuni dipendenti (per addetto)', from: '150€/anno', to: '400€/anno' },
-                      { name: 'Flotta aziendale (per veicolo)', from: '400€/anno', to: '1.200€/anno' },
-                      { name: 'Cyber Risk (250K€)', from: '400€/anno', to: '2.000€/anno' },
-                      { name: 'Merci in transito', from: '200€/anno', to: '800€/anno' },
-                      { name: 'Catastrofi naturali (estensione casa)', from: '80€/anno', to: '300€/anno' },
+                      { name: 'RC Impresa', fattori: 'settore, fatturato, massimale, sinistri passati' },
+                      { name: 'All-risk sede e macchinari', fattori: 'valori assicurati, tipo di edificio, protezioni antincendio e antifurto' },
+                      { name: 'RC Professionale', fattori: 'categoria professionale, fatturato, massimale, retroattività' },
+                      { name: 'Infortuni dipendenti', fattori: 'mansioni, numero di addetti, somme assicurate' },
+                      { name: 'Flotta aziendale', fattori: 'numero e tipo di veicoli, uso, sinistri passati' },
+                      { name: 'Cyber Risk', fattori: 'fatturato, settore, dati trattati, misure di sicurezza' },
+                      { name: 'Merci in transito', fattori: 'valore delle merci, tragitti, mezzi usati' },
+                      { name: 'Catastrofi naturali', fattori: 'zona, valori assicurati, franchigia scelta' },
                     ].map((row, i) => (
                       <tr key={row.name} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                         <td className="p-3 border-b border-gray-100 text-gray-700 font-medium">{row.name}</td>
-                        <td className="p-3 border-b border-gray-100 text-accent font-bold">{row.from}</td>
-                        <td className="p-3 border-b border-gray-100 text-gray-500">{row.to}</td>
+                        <td className="p-3 border-b border-gray-100 text-gray-600">{row.fattori}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
               <p className="text-xs text-gray-400 mt-3 not-prose">
-                * Prezzi orientativi 2025. Il premio definitivo dipende da settore di attività, valori assicurati, massimali e storico sinistri. Richiedi un preventivo personalizzato per i tuoi dati reali.
+                Il numero che conta è il preventivo sui tuoi dati reali, con le offerte di più compagnie a confronto.
               </p>
             </section>
 

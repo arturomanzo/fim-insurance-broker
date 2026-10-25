@@ -6,6 +6,7 @@ import { famiglieFaq } from '@/lib/faq/famiglie'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 
 export const metadata: Metadata = {
   title: 'Assicurazioni per Famiglie e Privati — Casa, Vita, Salute',
@@ -25,56 +26,56 @@ const coverages = [
     icon: '🏠',
     title: 'Casa e Abitazione',
     desc: 'Copre l\'abitazione da incendio, furto, allagamento, danni da eventi atmosferici e guasti agli impianti. Include la RC capofamiglia: i danni causati a terzi da te, dai tuoi familiari o dai tuoi animali domestici.',
-    price: 'da 150€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '❤️',
     title: 'Assicurazione Vita (TCM)',
     desc: 'La polizza temporanea caso morte garantisce un capitale ai tuoi familiari se dovesse succederti qualcosa. Essenziale se hai un mutuo, figli a carico o un coniuge non autonomo economicamente.',
-    price: 'da 100€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '🏥',
     title: 'Salute Integrativa',
     desc: 'Copre le spese mediche non rimborsate dal SSN: visite specialistiche, esami diagnostici, interventi chirurgici in cliniche private e degenza ospedaliera. Riduce i tempi di attesa e sceglie il medico.',
-    price: 'da 250€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '🦺',
     title: 'Infortuni Privati',
     desc: 'Ti protegge 24 ore su 24, anche fuori dal lavoro e nello sport amatoriale: invalidità permanente, diaria da ricovero e rimborso spese mediche per infortuni avvenuti nel tempo libero.',
-    price: 'da 80€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '⚖️',
     title: 'Tutela Legale',
     desc: 'Copre le spese legali per controversie in ambito stradale, condominiale, lavorativo e dei consumatori. Avere un avvocato dalla propria parte senza costi aggiuntivi cambia la prospettiva in molte dispute.',
-    price: 'da 60€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '👴',
     title: 'Long Term Care (LTC)',
     desc: 'Eroga una rendita mensile se dovessi diventare non autosufficiente per malattia, infortunio o demenza senile. Tutela il patrimonio familiare dai costi elevatissimi dell\'assistenza continuativa.',
-    price: 'da 200€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '✈️',
     title: 'Viaggi e Vacanze',
     desc: 'Copre spese mediche all\'estero, rimpatrio, bagaglio smarrito, cancellazione del viaggio e assistenza H24. Indispensabile per chi viaggia fuori dall\'UE o pratica sport in montagna.',
-    price: 'da 30€/viaggio',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '🐾',
     title: 'Animali Domestici',
     desc: 'RC per danni causati dal tuo cane o gatto a terzi, più copertura per spese veterinarie in caso di malattia o infortunio. Per molte razze la RC è raccomandata anche contrattualmente da condomini e affittacamere.',
-    price: 'da 50€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
 ]
@@ -195,7 +196,7 @@ export default function FamigliePage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono orientativi. Il premio effettivo dipende dall&apos;età, dai valori assicurati e dal profilo di rischio.
+            {notaPremio('età, valori assicurati e profilo di rischio')}
           </p>
         </div>
       </section>
@@ -235,34 +236,30 @@ export default function FamigliePage() {
               </div>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-              <h3 className="text-xl font-black text-primary mb-2">Pacchetto famiglia consigliato</h3>
+              <h3 className="text-xl font-black text-primary mb-2">Il pacchetto da cui partiamo</h3>
               <p className="text-gray-500 text-sm mb-6">Per una famiglia di 3-4 persone, proprietaria di casa con mutuo</p>
               <div className="space-y-3 mb-6">
                 {[
-                  { name: 'Polizza casa (incendio + furto + RC)', price: '250€/anno' },
-                  { name: 'Vita TCM (capitale mutuo residuo)', price: '150€/anno' },
-                  { name: 'Infortuni privati (entrambi i coniugi)', price: '160€/anno' },
-                  { name: 'Tutela legale familiare', price: '70€/anno' },
+                  { name: 'Polizza casa (incendio + furto + RC)', fattore: 'valore della casa e zona' },
+                  { name: 'Vita TCM (capitale mutuo residuo)', fattore: 'età, capitale e durata' },
+                  { name: 'Infortuni privati (entrambi i coniugi)', fattore: 'professione e somme assicurate' },
+                  { name: 'Tutela legale familiare', fattore: 'massimale e ambiti coperti' },
                 ].map((item) => (
                   <div key={item.name} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-2 text-sm">
                       <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold">✓</span>
                       <span className="text-gray-700">{item.name}</span>
                     </div>
-                    <span className="text-sm font-bold text-primary">{item.price}</span>
+                    <span className="text-xs text-gray-500 text-right">{item.fattore}</span>
                   </div>
                 ))}
               </div>
               <div className="bg-primary/5 rounded-xl p-4 mb-6">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-primary">Totale indicativo</span>
-                  <span className="text-2xl font-black text-primary">da 630€/anno</span>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">ca. 52€/mese per proteggere l&apos;intera famiglia</p>
+                <p className="text-sm text-primary leading-relaxed">
+                  Quanto costa lo calcoliamo sui vostri dati, con le offerte di più compagnie a confronto.
+                  Partiamo dalle polizze che avete già: spesso una parte di queste coperture c&apos;è, magari doppia.
+                </p>
               </div>
-              <p className="text-xs text-gray-400 mb-4">
-                * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al profilo del cliente, alla storia assicurativa, ai massimali scelti e alle condizioni di polizza. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
-              </p>
               <Link href="/preventivo" className="btn-primary w-full text-center block">
                 Richiedi il tuo preventivo
               </Link>

@@ -5,6 +5,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import { medicoFaq } from '@/lib/faq/medico'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 
 const SETTORE_QS = '?profilo=professionista&settore=RC+Professionale+Medico'
 
@@ -35,42 +36,42 @@ const coverages = [
     icon: '⚕️',
     title: 'RC Professionale Sanitaria',
     desc: 'Copertura obbligatoria ex L. 24/2017 (Gelli-Bianco) per attività libero-professionale, intramoenia ed extramoenia. Massimali fino a 5M€, retroattività e ultrattività configurabili.',
-    price: 'da 600€/anno',
+    price: 'su preventivo',
     highlighted: true,
   },
   {
     icon: '🛡️',
     title: 'Colpa Grave Dipendenti SSN',
     desc: 'Per medici dipendenti del SSN o di strutture private convenzionate: copre la rivalsa dell\'azienda sanitaria per colpa grave (fino a 3 retribuzioni annue).',
-    price: 'da 200€/anno',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '⚖️',
     title: 'Tutela Legale Medica',
     desc: 'Spese di avvocato, perito di parte e consulente medico-legale per procedimenti penali (lesioni colpose, omicidio colposo) e disciplinari (Ordine dei Medici).',
-    price: 'da 250€/anno',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '🔒',
     title: 'Cyber Sanitario & GDPR',
     desc: 'Ransomware sulle cartelle cliniche, furto dati pazienti, sanzioni Garante Privacy. Copre costi di ripristino, notifica obbligatoria, spese legali e indennizzi.',
-    price: 'da 400€/anno',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '🏢',
     title: 'Studio Professionale & Strumenti',
     desc: 'Incendio, furto e all-risk su locali e apparecchiature mediche (ecografi, riuniti odontoiatrici, autoclavi). Copertura anche per perdita di profitto da fermo studio.',
-    price: 'da 350€/anno',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '🩹',
     title: 'Infortuni Professionali',
     desc: 'Punture accidentali, contaminazione biologica, incidenti durante guardia o reperibilità. Diaria da inabilità e capitali per invalidità permanente.',
-    price: 'da 180€/anno',
+    price: 'su preventivo',
     highlighted: false,
   },
 ]
@@ -191,7 +192,7 @@ export default function MedicoPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo dipende da specialità, volume prestazioni, massimale, sinistrosità pregressa. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
+            {notaPremio('specialità, volume di prestazioni, massimale e sinistri pregressi')}
           </p>
         </div>
       </section>

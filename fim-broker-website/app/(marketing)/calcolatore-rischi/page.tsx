@@ -123,7 +123,7 @@ export default function CalcolatoreRischiPage() {
             {[
               { icon: '🔍', title: 'Analisi indipendente', desc: 'Non siamo legati a nessuna compagnia. Le nostre raccomandazioni sono basate solo sulle tue esigenze reali.' },
               { icon: '📋', title: 'Il mercato a confronto', desc: 'I nostri consulenti analizzano le offerte delle principali compagnie italiane per trovare la soluzione migliore.' },
-              { icon: '🛡️', title: 'Iscritti al RUI', desc: 'FIM Insurance Broker opera sotto la supervisione IVASS (Reg. RUI n. B000405449). La tua tutela è garantita.' },
+              { icon: '🛡️', title: 'Iscritti al RUI', desc: 'FIM Insurance Broker è iscritta al RUI Sez. B n. B000405449 ed è soggetta alla vigilanza IVASS: l&apos;iscrizione si verifica sul registro pubblico.' },
             ].map((item) => (
               <div key={item.title} className="p-6">
                 <div className="text-4xl mb-3">{item.icon}</div>

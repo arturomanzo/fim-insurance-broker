@@ -28,7 +28,7 @@ export const medicoFaq: FaqCategory = {
     {
       question: 'Sono uno studio dentistico con 3 dipendenti: cosa mi serve davvero?',
       answer:
-        'Per uno studio odontoiatrico tipo il pacchetto consigliato è: RC professionale del titolare (e degli altri odontoiatri/igienisti), RC del datore di lavoro per i dipendenti, polizza incendio/furto su locali e riuniti (riuniti, OPT, scanner intraorali sono spesso il bene di valore principale), cyber sanitario per gestione cartelle e fatturazione elettronica, infortuni integrativa per i dipendenti. Il pacchetto base completo per uno studio standard si colloca tipicamente tra 1.500€ e 3.000€/anno.',
+        'Per uno studio odontoiatrico tipo il pacchetto consigliato è: RC professionale del titolare (e degli altri odontoiatri/igienisti), RC del datore di lavoro per i dipendenti, polizza incendio/furto su locali e riuniti (riuniti, OPT, scanner intraorali sono spesso il bene di valore principale), cyber sanitario per gestione cartelle e fatturazione elettronica, infortuni integrativa per i dipendenti. Il premio dipende da specialità, numero di professionisti, valore delle attrezzature e massimali: lo calcoliamo sul vostro studio.',
     },
   ],
 }

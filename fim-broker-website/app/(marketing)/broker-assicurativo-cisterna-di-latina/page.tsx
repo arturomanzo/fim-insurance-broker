@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 }
 
 const servizi = [
-  { icon: '🚗', title: 'RC Auto e Moto', desc: `Polizze auto e moto al miglior prezzo per residenti a ${CITY} e provincia.` },
+  { icon: '🚗', title: 'RC Auto e Moto', desc: `Polizze auto e moto con le offerte di più compagnie a confronto, per chi abita a ${CITY} e provincia.` },
   { icon: '🏠', title: 'Assicurazione Casa', desc: 'Protezione completa per il tuo immobile: incendio, furto, calamità naturali.' },
   { icon: '❤️', title: 'Polizze Vita e Salute', desc: 'Coperture vita, infortuni e spese mediche per te e la tua famiglia.' },
   { icon: '🏢', title: 'Polizze Aziendali', desc: `RC professionale, cyber risk, D&O e welfare per aziende della provincia di ${CITY}.` },
@@ -154,7 +154,7 @@ export default function BrokerCisterna() {
               <p className="text-gray-700 leading-relaxed mb-6">
                 Con un mestiere di famiglia dal 1993, conosciamo il mercato
                 assicurativo italiano come pochi altri. Il nostro obiettivo è semplice:
-                la migliore copertura al miglior prezzo.
+                la copertura giusta, al premio giusto per quella copertura.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/chi-siamo" className="text-primary font-semibold hover:underline">
@@ -215,7 +215,7 @@ export default function BrokerCisterna() {
           </h2>
           <p className="text-white/80 mb-8 max-w-2xl mx-auto">
             Compila il modulo online o chiamaci. Entro 24 ore riceverai un preventivo personalizzato
-            con le migliori offerte del mercato.
+            con le offerte di più compagnie a confronto.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">

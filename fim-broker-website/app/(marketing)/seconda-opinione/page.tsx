@@ -67,7 +67,7 @@ const HOW_IT_WORKS = [
 const TRUST_POINTS = [
   { label: 'Gratuito', desc: 'Nessun costo, nessun impegno di acquisto' },
   { label: 'Indipendente', desc: 'Non rappresentiamo compagnie, solo i tuoi interessi' },
-  { label: '48 ore', desc: 'Risposta garantita entro 2 giorni lavorativi' },
+  { label: '48 ore', desc: 'Risposta entro 2 giorni lavorativi' },
   { label: '20 compagnie', desc: 'Confronto su tutto il mercato italiano' },
 ]
 

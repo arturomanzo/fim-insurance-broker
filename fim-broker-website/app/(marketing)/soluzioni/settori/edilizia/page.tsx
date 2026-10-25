@@ -5,6 +5,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import { ediliziaFaq } from '@/lib/faq/edilizia'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 
 const SETTORE_QS = '?profilo=pmi&settore=Edilizia'
 
@@ -191,7 +192,7 @@ export default function EdiliziaPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            Il premio lo calcola la compagnia su valore dell&apos;opera, durata, tipologia di lavori e altri parametri tecnici: per questo qui non trovi prezzi. FIM Insurance Broker è un intermediario assicurativo indipendente iscritto al RUI Sez. B n. B000405449, soggetto alla vigilanza IVASS.
+            {notaPremio('valore dell\'opera, durata, tipologia di lavori e altri parametri tecnici')}
           </p>
         </div>
       </section>

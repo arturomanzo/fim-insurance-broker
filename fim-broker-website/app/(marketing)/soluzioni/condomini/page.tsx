@@ -6,6 +6,7 @@ import { condominiFaq } from '@/lib/faq/condomini'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Condominio — Globale Fabbricato e RC Amministratore',
@@ -25,21 +26,21 @@ const coverages = [
     icon: '🏢',
     title: 'Globale Fabbricato',
     desc: 'La polizza fondamentale per ogni condominio: copre la struttura da incendio, scoppio, fulmine, esplosione, danni elettrici, RC verso terzi (persone che si fanno male nelle parti comuni) e danni da acqua. Obbligatoria nei regolamenti della maggior parte dei condomini.',
-    price: 'da 400€/anno',
+    price: 'su preventivo',
     tag: 'Base',
   },
   {
     icon: '👔',
     title: 'RC Amministratore',
     desc: 'Obbligatoria per legge dal 2013 (L. 220/2012): copre i danni patrimoniali causati ai condomini dall\'amministratore per errori, omissioni o negligenze nella gestione. Include difesa legale, anche per azioni infondate.',
-    price: 'da 150€/anno',
+    price: 'su preventivo',
     tag: 'Obbligatoria',
   },
   {
     icon: '🛗',
     title: 'Ascensori e Impianti',
     desc: 'RC specifica per danni causati dall\'ascensore a persone o cose, richiesta dalla normativa sugli impianti di sollevamento. Copre anche guasti meccanici, responsabilità verso passeggeri bloccati e spese di soccorso.',
-    price: 'da 200€/anno',
+    price: 'su preventivo',
     tag: 'Raccomandata',
   },
   {
@@ -53,14 +54,14 @@ const coverages = [
     icon: '⚖️',
     title: 'Tutela Legale Condominiale',
     desc: 'Copre le spese legali del condominio per controversie con appaltatori, fornitori di servizi, condomini morosi e terzi. Consente di agire giudizialmente senza pesare sul fondo condominiale.',
-    price: 'da 100€/anno',
+    price: 'su preventivo',
     tag: null,
   },
   {
     icon: '🌊',
     title: 'Catastrofi Naturali',
     desc: 'Obbligatoria per le imprese dal 2025, raccomandata per i condomini. Copre danni da terremoto, alluvione, frana e grandine ai beni comuni. Spesso esclusa dalle polizze standard.',
-    price: 'da 80€/anno',
+    price: 'su preventivo',
     tag: 'Obbligo dal 2025',
   },
 ]
@@ -196,7 +197,7 @@ export default function CondominiPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono puramente orientativi per condomini medio-piccoli (10-20 unità) e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al numero di unità, ai valori a rischio e alla zona geografica. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
+            {notaPremio('numero di unità, valori a rischio e zona')}
           </p>
         </div>
       </section>
@@ -237,29 +238,27 @@ export default function CondominiPage() {
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
               <h3 className="text-xl font-black text-primary mb-2">Pacchetto base condominiale</h3>
-              <p className="text-gray-500 text-sm mb-6">Stimato per un condominio residenziale di 15 unità, costruzione anni &apos;80, valore ricostruzione 1,5M€</p>
+              <p className="text-gray-500 text-sm mb-6">Per un condominio residenziale di 15 unità costruito negli anni &apos;80</p>
               <div className="space-y-3 mb-6">
                 {[
-                  { name: 'Globale fabbricato (incendio + RC)', price: '900€/anno' },
-                  { name: 'RC Amministratore', price: '200€/anno' },
-                  { name: 'RC Ascensore', price: '250€/anno' },
-                  { name: 'Tutela legale condominiale', price: '120€/anno' },
+                  { name: 'Globale fabbricato (incendio + RC)', fattore: 'valore di ricostruzione e stato dell\'edificio' },
+                  { name: 'RC Amministratore', fattore: 'massimale' },
+                  { name: 'RC Ascensore', fattore: 'numero di impianti' },
+                  { name: 'Tutela legale condominiale', fattore: 'massimale e vertenze coperte' },
                 ].map((item) => (
                   <div key={item.name} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-2 text-sm">
                       <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold">✓</span>
                       <span className="text-gray-700">{item.name}</span>
                     </div>
-                    <span className="text-sm font-bold text-primary">{item.price}</span>
+                    <span className="text-xs text-gray-500 text-right">{item.fattore}</span>
                   </div>
                 ))}
               </div>
               <div className="bg-primary/5 rounded-xl p-4 mb-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-primary">Totale indicativo</span>
-                  <span className="text-2xl font-black text-primary">da 1.470€/anno</span>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">ca. 98€/anno per unità abitativa</p>
+                <p className="text-sm text-primary leading-relaxed">
+                  Quanto costa lo calcoliamo sui dati del vostro edificio, con le offerte di più compagnie a confronto.
+                </p>
               </div>
               <p className="text-xs text-gray-400 mb-4">Ripartizione millesimale: ogni condomino paga in proporzione alla propria quota</p>
               <Link href="/preventivo" className="btn-primary w-full text-center block">

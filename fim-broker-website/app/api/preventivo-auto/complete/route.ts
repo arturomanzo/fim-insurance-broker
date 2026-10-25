@@ -108,7 +108,7 @@ function buildClientConfirmHtml(nome: string): string {
     </div>
     <div style="padding:28px 32px;color:#475569;font-size:15px;line-height:1.6;">
       <p style="margin:0 0 16px;">Ciao ${escapeHtml(nome)},</p>
-      <p style="margin:0 0 16px;">abbiamo ricevuto i documenti per il preventivo auto. Il nostro team li sta esaminando e ti ricontatterà entro 24 ore lavorative con la soluzione più conveniente.</p>
+      <p style="margin:0 0 16px;">abbiamo ricevuto i documenti per il preventivo auto. Il nostro team li sta esaminando e ti ricontatterà entro 24 ore lavorative con le offerte a confronto.</p>
       <p style="margin:0 0 16px;">I tuoi documenti sono conservati in modo sicuro e protetto, usati solo per la preventivazione e cancellati al termine.</p>
       <p style="margin:0;">Per qualsiasi cosa: <a href="tel:+390696883381" style="color:#0f2d6b;">06 96883381</a> · <a href="mailto:rca@fimbroker.it" style="color:#0f2d6b;">rca@fimbroker.it</a></p>
     </div>

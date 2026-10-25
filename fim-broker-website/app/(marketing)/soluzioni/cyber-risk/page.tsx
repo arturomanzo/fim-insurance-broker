@@ -5,6 +5,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import { cyberRiskFaq } from '@/lib/faq/cyber-risk'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Cyber Risk — Protezione PMI e Professionisti da Attacchi Informatici',
@@ -99,7 +100,6 @@ const dualDifferentiators = [
   { label: 'Doppio binario', value: 'Assistenza + risarcimento' },
   { label: 'Franchigia minima', value: 'da €250' },
   { label: 'Business interruption', value: 'fino a 30 giorni' },
-  { label: 'Sconto franchigia alta', value: 'fino al 33%' },
 ]
 
 const scenarios = [
@@ -229,11 +229,11 @@ export default function CyberRiskPage() {
               Cosa copre la polizza
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-              Copertura completa, senza sorprese
+              Le garanzie, una per una
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               DUAL Cyber Smart Plus è il prodotto che FIM ha selezionato per la protezione cyber di PMI e professionisti.
-              Mandato diretto con DUAL — otteniamo condizioni migliori rispetto al mercato standard.
+              Abbiamo un mandato diretto con DUAL: trattiamo con loro senza passaggi intermedi.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -264,8 +264,8 @@ export default function CyberRiskPage() {
                   <p className="text-white/70 text-sm">Mandato diretto FIM Insurance Broker</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-accent font-black text-xl">da 800€/anno</p>
-                  <p className="text-white/60 text-xs">indicativo per PMI fino a 2M€</p>
+                  <p className="text-accent font-black text-xl">Su preventivo</p>
+                  <p className="text-white/60 text-xs">calcolato sul profilo dell&apos;azienda</p>
                 </div>
               </div>
               <div className="divide-y divide-primary/10">
@@ -278,7 +278,7 @@ export default function CyberRiskPage() {
               </div>
               <div className="px-6 py-4 bg-accent/5 border-t border-primary/10">
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  * I premi indicati sono puramente orientativi. Il premio effettivo è determinato da DUAL in base a fatturato, settore, dati trattati e misure di sicurezza in atto. Non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005. FIM Insurance Broker opera come intermediario iscritto RUI IVASS Sez. B n. B000405449.
+                  {notaPremio('fatturato, settore, dati trattati e misure di sicurezza in atto')}
                 </p>
               </div>
             </div>
