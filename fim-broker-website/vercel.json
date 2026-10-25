@@ -9,6 +9,9 @@
     { "source": "/Privacy", "destination": "/privacy-policy", "permanent": true },
     { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
     { "source": "/consulenzeass", "destination": "/servizi", "permanent": true },
+    { "source": "/gestionerischio", "destination": "/servizi", "permanent": true },
+    { "source": "/Gestionerischio", "destination": "/servizi", "permanent": true },
+    { "source": "/moduli/Termini.rtf", "destination": "/note-legali", "permanent": true },
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "fimbroker.it" }],

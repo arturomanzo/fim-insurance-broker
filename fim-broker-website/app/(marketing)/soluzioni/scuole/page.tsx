@@ -15,7 +15,7 @@ const OG_IMAGE =
   '/api/og?title=Dipartimento+Scuole&tag=Istituti+scolastici&sub=Check-up+gratuito+delle+polizze%2C+capitolato+e+confronto+delle+offerte.+Il+broker+della+scuola.'
 
 export const metadata: Metadata = {
-  title: 'Assicurazione Scuola e Broker per Istituti Scolastici — Dipartimento Scuole | FIM',
+  title: 'Assicurazione Scuola e Broker per Istituti Scolastici — Dipartimento Scuole',
   description:
     'Check-up gratuito delle polizze in essere, capitolato tecnico, confronto delle offerte e assistenza sui sinistri per istituti statali e paritari. FIM è il broker della scuola: nessun onere per l\'istituto.',
   alternates: { canonical: `/${SLUG}` },

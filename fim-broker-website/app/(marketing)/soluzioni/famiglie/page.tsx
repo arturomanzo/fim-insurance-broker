@@ -8,7 +8,7 @@ import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Assicurazioni per Famiglie e Privati — Casa, Vita, Salute | FIM',
+  title: 'Assicurazioni per Famiglie e Privati — Casa, Vita, Salute',
   description:
     'Polizze assicurative per famiglie e privati: casa, vita, infortuni, salute integrativa, tutela legale e viaggi. FIM Insurance Broker: consulenza gratuita in tutta Italia.',
   alternates: { canonical: '/soluzioni/famiglie' },

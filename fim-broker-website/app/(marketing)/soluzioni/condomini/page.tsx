@@ -8,7 +8,7 @@ import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Assicurazione Condominio — Globale Fabbricato e RC Amministratore | FIM',
+  title: 'Assicurazione Condominio — Globale Fabbricato e RC Amministratore',
   description:
     'Polizze condominiali complete: globale fabbricato, RC amministratore (L. 220/2012), ascensori, tutela legale e D&O. Consulenza per amministratori in tutta Italia.',
   alternates: { canonical: '/soluzioni/condomini' },

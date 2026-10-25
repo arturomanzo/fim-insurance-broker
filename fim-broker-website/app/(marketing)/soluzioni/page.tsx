@@ -4,7 +4,7 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Soluzioni per Settore — FIM Insurance Broker',
+  title: 'Soluzioni per Settore',
   description:
     'Soluzioni assicurative per famiglie, professionisti, artigiani, PMI, condomini, istituti scolastici e rischi catastrofali. FIM Insurance Broker: consulenza su misura per ogni categoria.',
   alternates: { canonical: '/soluzioni' },

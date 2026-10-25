@@ -15,7 +15,7 @@ import {
 import StatoPolizza from '@/components/area-cliente/StatoPolizza'
 
 export const metadata: Metadata = {
-  title: 'Dettaglio Polizza | Area Cliente FIM',
+  title: 'Dettaglio Polizza | Area Cliente',
   robots: { index: false },
 }
 

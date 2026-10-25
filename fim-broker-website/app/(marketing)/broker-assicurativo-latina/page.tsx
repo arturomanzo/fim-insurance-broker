@@ -37,7 +37,7 @@ const pageSchema = {
 }
 
 export const metadata: Metadata = {
-  title: `Broker Assicurativo a ${CITY} — FIM Insurance Broker`,
+  title: `Broker Assicurativo a ${CITY}`,
   description: `Cerchi un broker assicurativo a ${CITY}? FIM Insurance Broker confronta 20 compagnie per trovare la polizza giusta per te. Preventivo gratuito, consulenza personalizzata.`,
   openGraph: {
     ...OG_BASE,

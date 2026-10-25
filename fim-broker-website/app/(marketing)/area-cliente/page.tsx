@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import MagicLinkForm from '@/components/area-cliente/MagicLinkForm'
 
 export const metadata: Metadata = {
-  title: 'Area Cliente | FIM Insurance Broker',
+  title: 'Area Cliente',
   description: 'Accedi alla tua area personale per visualizzare le tue polizze, le date di scadenza e i documenti assicurativi.',
   robots: { index: false },
 }
