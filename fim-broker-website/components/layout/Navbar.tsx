@@ -164,8 +164,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0" aria-label="FIM Insurance Broker — Home">
-            <FimLogo variant="full" theme="color" height={40} className="hidden sm:block" />
-            <FimLogo variant="icon" theme="color" height={36} className="sm:hidden" />
+            <FimLogo variant="full" theme="color" height={44} className="h-10 w-auto md:h-11" />
           </Link>
 
           {/* Desktop Nav */}
