@@ -7,6 +7,7 @@ import SinistriAIAssistant from '@/components/forms/SinistriAIAssistant'
 import { sinistriFaq } from '@/lib/faq/sinistri'
 import { EMAIL_SINISTRI } from '@/lib/contatti'
 import { OG_BASE } from '@/lib/seo'
+import { linkWhatsApp } from '@/lib/whatsappSito'
 
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
@@ -93,7 +94,7 @@ export default function SinistriPage() {
                 📞 Chiama ora: 06 96883381
               </a>
               <a
-                href={`https://wa.me/393473312330?text=${encodeURIComponent('Ciao, ho un sinistro e ho bisogno di assistenza.')}`}
+                href={linkWhatsApp('Ciao, ho un sinistro e ho bisogno di assistenza.', '/sinistri')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline-white px-8 py-4"

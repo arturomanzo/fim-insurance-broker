@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { clsx } from 'clsx'
 import FimLogo from '@/components/ui/FimLogo'
+import { linkWhatsApp } from '@/lib/whatsappSito'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -210,7 +211,7 @@ export default function Navbar() {
             {/* Contatti rapidi — solo desktop */}
             <div className="hidden md:flex items-center gap-3 text-sm">
               <a
-                href="https://wa.me/393473312330?text=Ciao,%20vorrei%20informazioni"
+                href={linkWhatsApp('Ciao, vorrei informazioni', pathname)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Scrivici su WhatsApp"

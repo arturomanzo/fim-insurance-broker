@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { AUTHORS, buildPersonSchema } from '@/lib/authors'
 import { COMPAGNIE_NOMI } from '@/lib/compagnie'
 import { OG_BASE } from '@/lib/seo'
+import { linkWhatsApp } from '@/lib/whatsappSito'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -269,7 +270,7 @@ export default function ChiSiamoPage() {
                 Prenota consulenza
               </Link>
               <a
-                href="https://wa.me/393473312330?text=Ciao,%20vorrei%20parlare%20con%20un%20consulente"
+                href={linkWhatsApp('Ciao, vorrei parlare con un consulente', '/chi-siamo')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20c05c] text-primary font-semibold px-6 py-3 rounded-lg transition-colors"

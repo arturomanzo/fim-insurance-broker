@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { linkWhatsApp } from '@/lib/whatsappSito'
 
 export default function Hero() {
   return (
@@ -55,7 +56,7 @@ export default function Hero() {
                 </svg>
               </Link>
               <a
-                href="https://wa.me/393473312330?text=Ciao,%20vorrei%20un%20preventivo%20assicurativo"
+                href={linkWhatsApp('Ciao, vorrei un preventivo assicurativo', '/')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20c05c] text-primary font-semibold text-lg px-8 py-4 rounded-lg transition-colors duration-200"
