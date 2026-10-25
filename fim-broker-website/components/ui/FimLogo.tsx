@@ -1,5 +1,5 @@
 /**
- * FimLogo — logo ufficiale FIM Insurance Broker in SVG (tracciati in lib/logo.ts).
+ * FimLogo — logo ufficiale FIM Insurance Broker in SVG (tracciati in lib/logo.ts, dal file ufficiale).
  * Scudo a contorno blu con F stilizzata e tetto verde, wordmark FIM + INSURANCE BROKER.
  *
  * Props:
@@ -46,10 +46,10 @@ export default function FimLogo({
       aria-label="FIM Insurance Broker"
       role="img"
     >
-      <path d={LOGO_PATH_SHIELD} fill={navy} />
-      <path d={LOGO_PATH_ROOF} fill={green} />
-      {variant === 'full' && <path d={LOGO_PATH_FIM} fill={navy} />}
-      {variant === 'full' && <path d={LOGO_PATH_SUB} fill={green} />}
+      <path d={LOGO_PATH_SHIELD} fill={navy} fillRule="evenodd" />
+      <path d={LOGO_PATH_ROOF} fill={green} fillRule="evenodd" />
+      {variant === 'full' && <path d={LOGO_PATH_FIM} fill={navy} fillRule="evenodd" />}
+      {variant === 'full' && <path d={LOGO_PATH_SUB} fill={green} fillRule="evenodd" />}
     </svg>
   )
 }
