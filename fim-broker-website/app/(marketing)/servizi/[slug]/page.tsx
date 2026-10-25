@@ -198,6 +198,21 @@ export default async function ServizioPage({ params }: Props) {
                 <h2 className="text-2xl font-black text-primary mb-6">Domande frequenti</h2>
                 <FaqAccordion items={service.faq} />
               </Card>
+
+              {/* Approfondimenti */}
+              {service.approfondimenti && service.approfondimenti.length > 0 && (
+                <Card>
+                  <h2 className="text-2xl font-black text-primary mb-6">Approfondimenti</h2>
+                  <div className="space-y-4">
+                    {service.approfondimenti.map((a) => (
+                      <Link key={a.href} href={a.href} className="block group">
+                        <span className="block font-bold text-primary group-hover:underline">{a.titolo}</span>
+                        <span className="block text-sm text-gray-600 mt-1">{a.descrizione}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </Card>
+              )}
             </div>
 
             {/* Sidebar */}
