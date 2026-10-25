@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { SCADENZE_CATASTROFALE } from '@/lib/catastrofale'
 import Link from 'next/link'
 
 type Option = { value: string; label: string; icon: string }
@@ -101,7 +102,7 @@ function getResult(answers: Answers): Result {
 
   // Business-specific
   if (isPMI) {
-    polizze.push({ name: 'Polizza Catastrofale (obbligatoria dal 2025)', urgency: 'alta', reason: 'Dal 1° aprile 2025 obbligatoria per tutte le imprese italiane.' })
+    polizze.push({ name: 'Polizza Catastrofale (obbligatoria dal 2025)', urgency: 'alta', reason: `Obbligatoria per le imprese, escluse le agricole: ${SCADENZE_CATASTROFALE}.` })
     polizze.push({ name: 'Cyber Risk', urgency: 'media', reason: 'Protegge da attacchi informatici, data breach e interruzione dell\'attività digitale.' })
   }
 

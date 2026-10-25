@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { OBBLIGO_CATASTROFALE } from '@/lib/catastrofale'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { OG_BASE } from '@/lib/seo'
@@ -41,7 +42,7 @@ const faqJsonLd = {
     {
       '@type': 'Question',
       name: 'La polizza catastrofale è obbligatoria per le imprese?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Sì, dal 1° aprile 2025 tutte le imprese con sede legale in Italia sono obbligate ad assicurarsi contro calamità naturali (alluvioni, terremoti, frane) per legge. Le imprese non in regola rischiano esclusione da contributi pubblici.' },
+      acceptedAnswer: { '@type': 'Answer', text: OBBLIGO_CATASTROFALE },
     },
   ],
 }

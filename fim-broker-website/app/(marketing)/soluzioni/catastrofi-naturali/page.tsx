@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NORMA_CATASTROFALE, SCADENZE_CATASTROFALE, CHI_E_ESCLUSO, CONSEGUENZA_CATASTROFALE } from '@/lib/catastrofale'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
@@ -135,8 +136,8 @@ export default function CatastrofiNaturaliPage() {
             <div className="flex items-start sm:items-center gap-3">
               <span className="text-2xl flex-shrink-0">⚠️</span>
               <div>
-                <p className="font-bold text-red-800">Imprenditori: obbligo di legge entro il 31 marzo 2025</p>
-                <p className="text-red-700 text-sm">La L. 213/2023 obbliga tutte le imprese italiane ad assicurarsi per catastrofi naturali. Chi non è in regola rischia di essere escluso dagli aiuti pubblici post-catastrofe.</p>
+                <p className="font-bold text-red-800">Imprenditori: l&apos;obbligo di legge è in vigore per tutte le imprese</p>
+                <p className="text-red-700 text-sm">La {NORMA_CATASTROFALE} è scattata {SCADENZE_CATASTROFALE}. Restano fuori {CHI_E_ESCLUSO}. Per chi non è in regola {CONSEGUENZA_CATASTROFALE}.</p>
               </div>
             </div>
             <Link href="/preventivo" className="flex-shrink-0 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors text-sm whitespace-nowrap">

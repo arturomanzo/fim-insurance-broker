@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SCADENZE_CATASTROFALE, CONSEGUENZA_CATASTROFALE } from '@/lib/catastrofale'
 import Link from 'next/link'
 import { OG_BASE } from '@/lib/seo'
 
@@ -182,8 +183,8 @@ export default function GuidaPmiPage() {
                   {
                     name: 'Assicurazione Catastrofi Naturali per Imprese',
                     law: 'L. 213/2023, art. 1 co. 101-111',
-                    who: 'Tutte le imprese con immobili/macchinari iscritti a bilancio',
-                    desc: 'Dal 2025 obbligo di stipulare una polizza catastrofale (terremoto, alluvione, frana) entro il 31 marzo 2025. Le imprese non in regola rischiano di essere escluse dagli aiuti pubblici post-catastrofe.',
+                    who: 'Tutte le imprese con immobili/macchinari iscritti a bilancio, escluse le agricole',
+                    desc: `Obbligo scattato a scaglioni, ${SCADENZE_CATASTROFALE}: oggi vale per tutte. Per chi non è in regola ${CONSEGUENZA_CATASTROFALE}.`,
                     urgent: true,
                   },
                 ].map((item) => (
