@@ -28,7 +28,7 @@ const coverages = [
   {
     icon: '🏭',
     title: 'RC Impresa',
-    desc: 'Responsabilità civile per danni causati a terzi durante l\'attività: un cliente che si fa male nel tuo negozio, un prodotto difettoso che causa danni. Protezione fondamentale per qualsiasi attività.',
+    desc: 'Responsabilità civile per danni causati a terzi durante l\'attività: un cliente che si fa male nel tuo negozio, un prodotto difettoso che causa danni. È la prima polizza da avere, qualunque sia l\'attività.',
     price: 'su preventivo',
     mandatory: false,
   },

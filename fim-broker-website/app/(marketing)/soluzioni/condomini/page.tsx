@@ -25,7 +25,7 @@ const coverages = [
   {
     icon: '🏢',
     title: 'Globale Fabbricato',
-    desc: 'La polizza fondamentale per ogni condominio: copre la struttura da incendio, scoppio, fulmine, esplosione, danni elettrici, RC verso terzi (persone che si fanno male nelle parti comuni) e danni da acqua. Obbligatoria nei regolamenti della maggior parte dei condomini.',
+    desc: 'La polizza di base di ogni condominio: copre la struttura da incendio, scoppio, fulmine, esplosione, danni elettrici, RC verso terzi (persone che si fanno male nelle parti comuni) e danni da acqua. Obbligatoria nei regolamenti della maggior parte dei condomini.',
     price: 'su preventivo',
     tag: 'Base',
   },
@@ -46,7 +46,7 @@ const coverages = [
   {
     icon: '💧',
     title: 'Danni da Acqua Estesi',
-    desc: 'Estensione della globale fabbricato per i danni da infiltrazione, rottura tubature e allagamenti: spesso inclusa, ma con franchigie e massimali variabili. Fondamentale per palazzi con impianti datati.',
+    desc: 'Estensione della globale fabbricato per i danni da infiltrazione, rottura tubature e allagamenti: spesso inclusa, ma con franchigie e massimali variabili. Da guardare con attenzione nei palazzi con impianti datati.',
     price: 'inclusa o in add.',
     tag: null,
   },
