@@ -29,6 +29,8 @@ export interface Service {
    * Opzionale per backward compatibility.
    */
   coverage?: Coverage
+  /** Articoli e guide collegati, mostrati dopo le domande frequenti. */
+  approfondimenti?: Array<{ titolo: string; href: string; descrizione: string }>
 }
 
 export const services: Service[] = [
@@ -469,77 +471,88 @@ export const services: Service[] = [
     },
   },
   {
+    // Pagina principale delle cauzioni (P6 del piano SEO, 25/10/2026). Niente
+    // tempi di emissione, importi massimi o percentuali di premio: decide la
+    // compagnia sul singolo rilascio e FIM non ha dati per documentarli.
     slug: 'cauzioni-fideiussioni',
     title: 'Cauzioni e Fideiussioni',
-    shortDescription: 'Fideiussioni assicurative per appalti, locazioni, doganali, fiscali e molto altro. Emissione in 24-48 ore.',
+    shortDescription: 'Cauzioni e fideiussioni assicurative per gare d\'appalto, contratti pubblici e privati, dogane, fisco e locazioni. Dalla richiesta allo svincolo.',
     description:
-      'Le cauzioni e fideiussioni assicurative sostituiscono le garanzie bancarie tradizionali, liberando liquidità e linee di credito per la tua impresa. Come broker indipendente confrontiamo le offerte delle compagnie specializzate per ottenere la cauzione giusta al costo più competitivo, con tempi di emissione rapidi — generalmente entro 24-48 ore lavorative.',
+      'Una gara d\'appalto chiede una garanzia provvisoria per partecipare e una definitiva per firmare il contratto. Fisco e dogana la chiedono per rateizzazioni, rimborsi IVA e dazi, il locatore al posto del deposito in contanti. La fideiussione assicurativa fa lo stesso lavoro di quella bancaria senza toccare il fido in banca. Noi prepariamo la pratica con i documenti che la compagnia chiederà, controlliamo che il testo della garanzia sia quello richiesto dal bando e seguiamo le riduzioni e lo svincolo fino alla fine. Premio e capacità di rilascio li decide la compagnia sul bilancio dell\'impresa: possiamo presentarla al meglio, non promettere l\'esito.',
     icon: '🔐',
     color: 'amber',
     image: '/images/brand/cauzioni-seal.jpg',
     features: [
-      'Cauzioni per appalti pubblici (provvisorie e definitive)',
-      'Cauzioni per appalti privati',
+      'Garanzia provvisoria per la partecipazione alle gare',
+      'Garanzia definitiva per l\'esecuzione dei contratti pubblici',
+      'Garanzia sull\'anticipazione del prezzo',
+      'Cauzioni per appalti privati e subappalti',
       'Cauzioni doganali (IVA, dazi, accise)',
-      'Cauzioni fiscali (rateizzazioni Agenzia delle Entrate)',
+      'Cauzioni fiscali (rateizzazioni, rimborsi IVA)',
       'Fideiussioni per locazioni commerciali e abitative',
-      'Cauzioni edilizie (oneri urbanistici, scomputo)',
-      'Cauzioni giudiziarie',
-      'Cauzioni per rimborso IVA',
+      'Cauzioni edilizie (oneri urbanistici, opere a scomputo)',
     ],
     benefits: [
-      'Emissione in 24-48 ore lavorative',
-      'Importi fino a 500.000€',
-      'Nessun blocco di liquidità (a differenza della fideiussione bancaria)',
-      'Nessun impatto sulle linee di credito bancarie',
-      'Confronto tra compagnie specializzate',
-      'Assistenza completa nella documentazione',
+      'Non consuma le linee di credito bancarie dell\'impresa',
+      'Il testo della garanzia controllato sul bando prima dell\'emissione: è il primo motivo di esclusione evitabile',
+      'La pratica arriva alla compagnia completa, con i documenti che chiede',
+      'Le riduzioni dell\'importo previste dal bando, quando ne avete diritto',
+      'Scadenze, riduzioni progressive e svincoli seguiti per tutta la durata del contratto',
+      'Un referente unico, dalla gara al collaudo',
     ],
     faq: [
       {
         question: 'Qual è la differenza tra fideiussione bancaria e fideiussione assicurativa?',
-        answer: 'La fideiussione bancaria viene emessa dalla banca e blocca una quota del tuo plafond creditizio: in pratica, riduce la capacità della tua azienda di ottenere altri finanziamenti. La fideiussione assicurativa viene emessa da una compagnia assicurativa e non incide sulle tue linee di credito. L\'effetto giuridico è identico — il beneficiario è garantito allo stesso modo — ma quella assicurativa ti lascia libero di usare il credito bancario per il tuo business.',
+        answer: 'Per il beneficiario nessuna: è garantito allo stesso modo. Per l\'impresa sì. La fideiussione bancaria la emette la banca e occupa una parte del fido, quindi riduce il credito disponibile per il resto dell\'attività. Quella assicurativa la emette una compagnia autorizzata al ramo cauzioni e non incide sulle linee bancarie.',
       },
       {
-        question: 'Quanto tempo serve per ottenere una fideiussione assicurativa?',
-        answer: 'Con FIM Insurance Broker i tempi di emissione sono generalmente di 24-48 ore lavorative dalla ricezione della documentazione completa. Per importi standard e aziende con bilancio regolare, spesso riusciamo a ottenere la polizza fideiussoria entro la giornata. Per casi complessi (importi elevati, aziende in fase di startup) i tempi possono allungarsi fino a 5-7 giorni lavorativi.',
+        question: 'Quanto tempo serve per ottenere una cauzione?',
+        answer: 'Dipende dalla compagnia, dall\'importo e dal bilancio dell\'impresa. Con documenti completi e bilanci in ordine l\'istruttoria è breve; per importi alti, imprese appena costituite o bilanci in perdita si allunga. Per una gara conviene muoversi appena esce il bando, non a ridosso della scadenza delle offerte.',
       },
       {
-        question: 'Quanto costa una fideiussione assicurativa?',
-        answer: 'Il premio varia in base all\'importo garantito, alla durata, alla tipologia di cauzione e al profilo di rischio dell\'azienda. Indicativamente, per una cauzione di importo medio, il premio annuo oscilla tra l\'1% e il 3% dell\'importo garantito. Ad esempio, per una cauzione di 100.000€ il premio annuo può andare da 1.000 a 3.000€. Come broker confrontiamo più compagnie per trovare la tariffa più competitiva per il tuo caso specifico.',
+        question: 'Quanto costa una cauzione assicurativa?',
+        answer: 'Il premio lo fissa la compagnia in base a importo garantito, durata, tipo di garanzia e solidità dell\'impresa. Una tariffa valida per tutti non esiste: vi diamo il premio sul vostro caso prima di procedere, insieme alle condizioni della garanzia.',
       },
       {
-        question: 'Quali documenti servono per richiedere una fideiussione?',
-        answer: 'Generalmente servono: visura camerale aggiornata, ultimi 2-3 bilanci approvati (o dichiarazioni dei redditi per le ditte individuali), copia del contratto o del bando che richiede la garanzia, e un documento di identità del legale rappresentante. Per alcune tipologie (cauzioni doganali, fiscali) possono essere richiesti documenti aggiuntivi specifici. Il nostro team ti guida nella raccolta della documentazione.',
+        question: 'Quali documenti servono?',
+        answer: 'Di solito visura camerale aggiornata, ultimi bilanci approvati (o dichiarazioni dei redditi per le ditte individuali), copia del bando o del contratto che chiede la garanzia e documento del legale rappresentante. Per cauzioni doganali e fiscali la compagnia può chiedere documenti specifici. Vi diciamo prima cosa serve, così la pratica parte completa.',
       },
       {
-        question: 'La fideiussione assicurativa è accettata dalla Pubblica Amministrazione?',
-        answer: 'Sì, assolutamente. Il Codice degli Appalti (D.Lgs. 36/2023) prevede espressamente che le garanzie fideiussorie possano essere rilasciate da imprese di assicurazione autorizzate. La fideiussione assicurativa ha lo stesso valore legale di quella bancaria per gare d\'appalto, concessioni e contratti pubblici.',
+        question: 'La Pubblica Amministrazione accetta la fideiussione assicurativa?',
+        answer: 'Sì. Il Codice dei contratti pubblici (D.Lgs. 36/2023) ammette le garanzie fideiussorie rilasciate da imprese di assicurazione autorizzate. Quello che va controllato ogni volta è il testo: clausole, durata e importo devono essere quelli chiesti dal bando.',
+      },
+      {
+        question: 'Quando si libera la cauzione?',
+        answer: 'La provvisoria si chiude con l\'aggiudicazione: per chi vince al momento della firma del contratto, per gli altri concorrenti con la comunicazione dell\'esito. La definitiva si riduce man mano che l\'esecuzione avanza e si libera del tutto con il collaudo o la verifica di conformità. Lo svincolo va chiesto e documentato: finché la compagnia non lo riceve, la garanzia resta aperta.',
       },
     ],
-    priceFrom: 'dall\'1% dell\'importo garantito',
-    priceNote: 'Premio annuo indicativo. Varia in base a importo, durata e profilo aziendale. Importi fino a 500.000€.',
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia sul singolo rilascio, in base a importo, durata, tipo di garanzia e bilancio dell\'impresa.',
     coverage: {
       covered: [
-        'Cauzioni provvisorie per partecipazione a gare d\'appalto',
-        'Cauzioni definitive per esecuzione di contratti pubblici',
-        'Garanzie per anticipi contrattuali e anticipi IVA',
+        'Garanzie provvisorie per la partecipazione alle gare',
+        'Garanzie definitive per l\'esecuzione di contratti pubblici',
+        'Garanzie sull\'anticipazione del prezzo',
         'Garanzie per rimborsi IVA e crediti d\'imposta',
         'Fideiussioni per locazioni commerciali',
-        'Garanzie doganali (per importazione/esportazione)',
-        'Fideiussioni per concessioni edilizie e oneri urbanistici',
-        'Polizze a copertura di obbligazioni contrattuali',
+        'Garanzie doganali per importazione ed esportazione',
+        'Fideiussioni per oneri urbanistici e opere a scomputo',
       ],
       notCovered: [
-        'Importi superiori al massimale dello specifico rilascio',
-        'Garanzie del debito principale (è garanzia, non copertura)',
-        'Penali contrattuali che eccedono la quota garantita',
-        'Beneficiari con escutibilità soggettiva non valutabile',
-        'Operazioni in paesi sotto sanzioni internazionali',
-        'Garanzie per soggetti con esposizione bancaria critica',
+        'Importi oltre la somma garantita dal singolo rilascio',
+        'Il debito dell\'impresa: la cauzione garantisce il beneficiario, non protegge il contraente',
+        'Penali o danni che eccedono la quota garantita',
+        'Operazioni in paesi soggetti a sanzioni internazionali',
       ],
-      note: 'Le cauzioni sono garanzie a prima richiesta: il beneficiario può escutere senza preavviso ed FIM/la compagnia rivalersi sul contraente. Premio e capacità di rilascio dipendono dall\'analisi di bilancio aziendale.',
+      note: 'La cauzione è una garanzia, non una polizza che vi risarcisce. Il beneficiario può escuterla alle condizioni scritte nel testo, spesso a prima richiesta, e la compagnia che ha pagato si rivale sull\'impresa per l\'intero importo.',
     },
+    approfondimenti: [
+      {
+        titolo: 'Polizze fideiussorie e cauzioni: come funzionano davvero per una PMI',
+        href: '/blog/polizze-fideiussorie-cauzioni-imprese-2026',
+        descrizione: 'Perché la cauzione non è una polizza che protegge voi, le clausole che cambiano tutto e cosa succede quando viene escussa.',
+      },
+    ],
   },
   {
     slug: 'tutela-legale-aziende',
