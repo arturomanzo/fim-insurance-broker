@@ -1,0 +1,45 @@
+{
+  // Il progetto vero vive in fim-broker-website/: ESLint e TypeScript devono saperlo
+  "eslint.workingDirectories": ["./fim-broker-website"],
+  "typescript.tsdk": "fim-broker-website/node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Niente Prettier nel progetto: formattazione manuale, ESLint sistema al salvataggio
+  "editor.formatOnSave": false,
+  "editor.tabSize": 2,
+  "[typescript]": { "editor.defaultFormatter": "vscode.typescript-language-features" },
+  "[typescriptreact]": { "editor.defaultFormatter": "vscode.typescript-language-features" },
+  "[json][jsonc]": { "editor.defaultFormatter": "vscode.json-language-features" },
+
+  // Tailwind: autocompletamento classi anche dentro clsx() e nelle stringhe
+  "tailwindCSS.experimental.configFile": "fim-broker-website/tailwind.config.ts",
+  "editor.quickSuggestions": { "strings": "on" },
+  "files.associations": {
+    "*.css": "tailwindcss",
+    ".env*": "dotenv"
+  },
+
+  // Il terminale si apre già nel progetto
+  "terminal.integrated.cwd": "${workspaceFolder}/fim-broker-website",
+  "npm.packageManager": "npm",
+
+  // Explorer più pulito: file generati nascosti, file collegati raggruppati
+  "files.exclude": {
+    "**/.next": true,
+    "**/*.tsbuildinfo": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, .npmrc",
+    "tsconfig.json": "tsconfig.*.json, next-env.d.ts",
+    "next.config.ts": "postcss.config.mjs, tailwind.config.ts, vercel.json, .eslintrc.json",
+    "instrumentation.ts": "instrumentation-client.ts, sentry.*.config.ts",
+    "*.ts": "${capture}.test.ts",
+    ".env.example": ".env, .env.*"
+  }
+}
