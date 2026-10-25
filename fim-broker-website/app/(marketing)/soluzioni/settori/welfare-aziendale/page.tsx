@@ -217,56 +217,52 @@ export default function WelfareAziendalePage() {
         </div>
       </section>
 
-      {/* Case study */}
+      {/* Esempio: scenario illustrativo, non il caso di un cliente */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Caso reale
+              Esempio
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
-              PMI servizi IT con 22 dipendenti: turnover dimezzato, 2.400€/anno di risparmio fiscale
+              Piano welfare in una software house: come si costruisce
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 prose prose-lg max-w-none">
+              <div className="lg:col-span-2 space-y-4">
                 <p className="text-gray-700 leading-relaxed">
-                  Una software house cliente FIM, 22 dipendenti, fatturato ~3M€, vedeva 4-5 dimissioni l&apos;anno
-                  con difficoltà a sostituire profili tecnici (developer e project manager). Costo turnover stimato:
-                  <strong className="text-primary"> ~120.000€/anno</strong>.
+                  Prendiamo una software house con una ventina di dipendenti che ogni anno perde qualche sviluppatore e fatica a sostituirlo. Lo stipendio da solo non basta più a trattenere le persone.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Nel 2024 abbiamo strutturato un piano welfare attorno a tre pilastri:
+                  Un piano welfare si costruisce di solito su più voci, scelte in base a chi lavora in azienda:
                 </p>
-                <ul className="text-gray-700 leading-relaxed">
-                  <li>polizza salute collettiva con network nazionale (premio: 400€/dipendente);</li>
-                  <li>infortuni 24h/24 anche extra-professionali (premio: 80€/dipendente);</li>
-                  <li>previdenza complementare con contributo aziendale dell&apos;1,5% della RAL.</li>
+                <ul className="list-disc pl-5 space-y-1 text-gray-700 leading-relaxed">
+                  <li>polizza salute collettiva con un network di strutture convenzionate;</li>
+                  <li>infortuni 24 ore su 24, anche fuori dal lavoro;</li>
+                  <li>previdenza complementare con un contributo dell&apos;azienda.</li>
                 </ul>
                 <p className="text-gray-700 leading-relaxed">
-                  Costo lordo annuo: ~10.560€ per le polizze. Risparmio fiscale IRES + IRAP: ~2.940€.
-                  Costo netto azienda: ~7.620€. Per dare lo stesso valore netto in stipendio ne sarebbero servite ~19.500€.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Risultato a 12 mesi: <strong>2 dimissioni invece di 5</strong>, due assunzioni accelerate citando
-                  esplicitamente il piano welfare in fase di trattativa, NPS interno passato da 32 a 58.
+                  Il vantaggio fiscale c&apos;è, ma dipende da come è scritto il piano: regolamento aziendale o accordo, generalità o categorie di dipendenti. Va verificato con il commercialista prima di partire.
                 </p>
               </div>
               <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white">
                 <p className="text-white/70 text-xs uppercase tracking-widest font-bold mb-3">
-                  Risparmio fiscale annuo
+                  Il punto
                 </p>
-                <p className="text-5xl font-black text-accent mb-2">~2.940€</p>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  IRES + IRAP sulla deducibilità del piano welfare.
+                <p className="text-lg font-bold text-white leading-snug">
+                  Una polizza salute che i dipendenti non usano è solo un costo. Prima di scegliere guardiamo età, famiglie ed esigenze delle persone.
                 </p>
                 <div className="border-t border-white/10 my-5"></div>
                 <p className="text-white/70 text-xs uppercase tracking-widest font-bold mb-3">
-                  Risparmio vs. aumento stipendio
+                  Cosa facciamo noi
                 </p>
-                <p className="text-3xl font-black text-accent mb-1">~11.880€</p>
-                <p className="text-white/70 text-xs">a parità di valore percepito dai dipendenti.</p>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Mettiamo a confronto le coperture sul mercato e ti diciamo cosa verificare sul piano fiscale con il tuo commercialista.
+                </p>
               </div>
             </div>
+            <p className="text-xs text-gray-400 mt-6">
+              Scenario costruito a titolo di esempio: non racconta il caso di un cliente FIM.
+            </p>
           </div>
         </div>
       </section>

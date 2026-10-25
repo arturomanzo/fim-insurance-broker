@@ -196,52 +196,53 @@ export default function MedicoPage() {
         </div>
       </section>
 
-      {/* Case study */}
+      {/* Esempio: scenario illustrativo, non il caso di un cliente */}
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Caso reale
+              Esempio
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
-              Denuncia per malpractice: 4 anni di procedimento, paziente assistito sin dal primo giorno
+              Una richiesta danni dopo un intervento: cosa decide se la polizza ti difende
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 prose prose-lg max-w-none">
+              <div className="lg:col-span-2 space-y-4">
                 <p className="text-gray-700 leading-relaxed">
-                  Un chirurgo ortopedico cliente FIM riceve una richiesta danni dal paziente operato 18 mesi prima per
-                  una protesi d&apos;anca, con esiti funzionali ritenuti insoddisfacenti. Richiesta iniziale: <strong className="text-primary">450.000€</strong>.
+                  Prendiamo un chirurgo ortopedico. Diciotto mesi dopo una protesi d&apos;anca il paziente lamenta esiti insoddisfacenti e chiede un risarcimento importante. Tra mediazione, consulenze tecniche e causa, il procedimento può durare anni.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Senza polizza RC sanitaria adeguata, il medico avrebbe dovuto pagare di tasca propria avvocati,
-                  consulenti medico-legali, perito di parte e — in caso di soccombenza — l&apos;intero risarcimento.
+                  Senza una RC professionale adeguata il medico paga di tasca propria avvocato, consulente medico-legale e, se perde, il risarcimento.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Grazie alla RC professionale FIM con massimale 3M€ e tutela legale inclusa:
+                  Con la polizza giusta questi costi passano alla compagnia, nei limiti del contratto. Ecco cosa controlliamo:
                 </p>
-                <ul className="text-gray-700 leading-relaxed">
-                  <li>denuncia di sinistro alla compagnia in 48 ore;</li>
-                  <li>nominato consulente medico-legale di parte specializzato in ortopedia;</li>
-                  <li>CTU disposta dal Tribunale, sostenuta dalla compagnia;</li>
-                  <li>transazione a 4 anni dalla denuncia per importo &lt;10% della richiesta originale.</li>
+                <ul className="list-disc pl-5 space-y-1 text-gray-700 leading-relaxed">
+                  <li>la retroattività, perché la richiesta arriva spesso anni dopo l&apos;intervento;</li>
+                  <li>il massimale, confrontato con le richieste tipiche della tua specialità;</li>
+                  <li>le spese di difesa: se sono comprese, con quale limite e se puoi scegliere il tuo legale;</li>
+                  <li>la copertura per le richieste che arrivano dopo la pensione o un cambio di struttura.</li>
                 </ul>
               </div>
               <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 text-white">
                 <p className="text-white/70 text-xs uppercase tracking-widest font-bold mb-3">
-                  Risparmio per il medico
+                  Il punto
                 </p>
-                <p className="text-5xl font-black text-accent mb-2">~400k€</p>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  tra spese legali, perizie e differenza richiesta vs. transazione.
+                <p className="text-lg font-bold text-white leading-snug">
+                  Il massimale da solo dice poco. Su una richiesta che arriva tardi contano da quando la polizza ti copre e chi paga la difesa.
                 </p>
                 <div className="border-t border-white/10 my-5"></div>
                 <p className="text-white/70 text-xs uppercase tracking-widest font-bold mb-3">
-                  Out-of-pocket
+                  Cosa facciamo noi
                 </p>
-                <p className="text-3xl font-black text-accent mb-1">0€</p>
-                <p className="text-white/70 text-xs">tutti i costi a carico della compagnia.</p>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Mettiamo in fila retroattività, massimale e spese legali della polizza che hai già, prima che arrivi la lettera dell&apos;avvocato.
+                </p>
               </div>
             </div>
+            <p className="text-xs text-gray-400 mt-6">
+              Scenario costruito a titolo di esempio: non racconta il caso di un cliente FIM.
+            </p>
           </div>
         </div>
       </section>
