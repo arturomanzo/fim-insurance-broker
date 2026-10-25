@@ -6,7 +6,7 @@ import PrenotazioneForm from '@/components/forms/PrenotazioneForm'
 import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Prenota una Consulenza Gratuita | FIM Insurance Broker',
+  title: 'Prenota una Consulenza Gratuita',
   description:
     'Prenota un appuntamento con un consulente FIM. Consulenza assicurativa gratuita e senza impegno, in ufficio o in videochiamata. Risposta entro poche ore.',
   alternates: { canonical: '/prenota-consulenza' },

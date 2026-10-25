@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Lascia una Recensione | FIM Insurance Broker',
+  title: 'Lascia una Recensione',
   description: 'La tua opinione ci aiuta a migliorare e ad aiutare altri clienti a trovare la soluzione assicurativa giusta. Lascia una recensione su Google.',
   robots: { index: false }, // non vogliamo che questa pagina appaia in SERP
 }

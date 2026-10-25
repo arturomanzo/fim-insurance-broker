@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Guida Completa alle Assicurazioni per PMI — FIM Insurance Broker',
+  title: 'Guida Completa alle Assicurazioni per PMI',
   description:
     'Guida pratica per artigiani, PMI e professionisti italiani: polizze obbligatorie, massimali, prezzi indicativi, gestione sinistri e checklist dei rischi.',
   alternates: { canonical: '/risorse/guida-pmi' },

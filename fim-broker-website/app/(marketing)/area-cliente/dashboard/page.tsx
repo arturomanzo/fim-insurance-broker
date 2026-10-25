@@ -17,7 +17,7 @@ import LogoutButton from '@/components/area-cliente/LogoutButton'
 import StatoPolizza from '@/components/area-cliente/StatoPolizza'
 
 export const metadata: Metadata = {
-  title: 'Le mie Polizze | Area Cliente FIM',
+  title: 'Le mie Polizze | Area Cliente',
   robots: { index: false },
 }
 

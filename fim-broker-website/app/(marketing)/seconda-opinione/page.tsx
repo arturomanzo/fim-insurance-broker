@@ -4,9 +4,9 @@ import Card from '@/components/ui/Card'
 import { OG_BASE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Second Opinion Assicurativa Gratuita per PMI | FIM Insurance Broker',
+  title: 'Check-up gratuito delle polizze aziendali | Second Opinion per PMI',
   description:
-    'Inviaci le tue polizze attuali. Faremo una Gap Analysis gratuita per mostrarti i rischi scoperti che la tua compagnia non ti ha mai detto. Risposta in 48 ore.',
+    'Check-up gratuito delle polizze aziendali: inviaci i contratti attuali e ti mostriamo scoperture, doppioni e clausole critiche. Risposta in 48 ore.',
   alternates: { canonical: '/seconda-opinione' },
   openGraph: {
     ...OG_BASE,
@@ -84,8 +84,8 @@ export default function SecondaOpinionePage() {
             <span className="text-accent">ti coprano davvero?</span>
           </h1>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-4">
-            Inviaci i tuoi contratti attuali. Faremo una <strong>Gap Analysis gratuita</strong> per
-            mostrarti i rischi latenti che la tua compagnia non ti ha mai detto.
+            Il check-up gratuito delle polizze aziendali: inviaci i contratti attuali e con la
+            nostra <strong>Gap Analysis</strong> ti mostriamo scoperture, doppioni e clausole critiche.
           </p>
           <p className="text-white/60 text-sm mb-8">
             Solo 1 PMI su 5 è coperta in caso di alluvione o terremoto — anche dopo l&apos;obbligo del 2025.{' '}
