@@ -75,7 +75,7 @@ export default function ServiziPage() {
               </h1>
               <p className="text-xl text-white/80">
                 Da FIM trovi polizze personalizzate per privati e aziende. Confrontiamo le offerte
-                delle principali compagnie assicurative per garantirti il miglior rapporto qualità-prezzo.
+                delle principali compagnie assicurative per trovare l&apos;equilibrio giusto tra copertura e prezzo.
               </p>
             </div>
             <div className="hidden lg:flex justify-end">

@@ -268,7 +268,7 @@ export default function PreventivoAutoDocumenti() {
         <h3 className="text-2xl font-black text-primary mb-2">Documenti inviati!</h3>
         <p className="text-gray-600 max-w-md mx-auto">
           Abbiamo ricevuto i tuoi documenti in modo sicuro. Ti ricontattiamo entro 24 ore lavorative
-          con il preventivo auto più conveniente. Trovi la conferma nella tua email.
+          con le offerte a confronto. Trovi la conferma nella tua email.
         </p>
       </div>
     )

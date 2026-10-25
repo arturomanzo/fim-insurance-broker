@@ -190,7 +190,7 @@ export default function OsservatorioPrezziPage() {
           <h2 className="text-2xl md:text-3xl font-black text-white mb-3">Stai pagando il giusto?</h2>
           <p className="text-white/80 mb-6 max-w-lg mx-auto text-sm">
             Confronta il tuo premio attuale con i dati dell&apos;Osservatorio. I nostri broker analizzano la tua polizza
-            gratuitamente e, se puoi risparmiare, ti dicono quanto e come.
+            gratuitamente e ti dicono se ci sono voci da rivedere.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/preventivo" className="btn-primary bg-accent hover:bg-accent-dark text-primary font-bold px-6 py-4">

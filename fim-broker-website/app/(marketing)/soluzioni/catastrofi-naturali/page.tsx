@@ -6,6 +6,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import { catastrofiNaturaliFaq } from '@/lib/faq/catastrofi-naturali'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Catastrofi Naturali — Alluvioni, Terremoti, Grandinate',
@@ -36,7 +37,7 @@ const products = [
     icon: '🏠',
     title: 'Estensione Catastrofi su Polizza Casa',
     desc: 'Aggiungi la copertura catastrofi naturali alla tua polizza casa esistente o stipula una nuova polizza multirischio che includa alluvione, terremoto e grandine.',
-    price: 'da 80€/anno',
+    price: 'su preventivo',
     audience: 'Privati e famiglie',
   },
   {
@@ -58,7 +59,7 @@ const products = [
     icon: '🚗',
     title: 'Grandine sul Veicolo',
     desc: 'Molte polizze RC auto non coprono la grandine. Verifica la tua copertura attuale e aggiungi la protezione eventi atmosferici al tuo veicolo.',
-    price: 'da 30€/anno',
+    price: 'su preventivo',
     audience: 'Privati e flotte',
   },
 ]
@@ -207,7 +208,7 @@ export default function CatastrofiNaturaliPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base alla zona geografica, al tipo di immobile, ai valori assicurati e al rischio specifico. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
+            {notaPremio('zona, tipo di immobile, valori assicurati e rischio specifico')}
           </p>
         </div>
       </section>

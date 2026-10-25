@@ -7,6 +7,7 @@ import { artigianiPmiFaq } from '@/lib/faq/artigiani-pmi'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Artigiani e PMI — Proteggi la tua Attività',
@@ -28,42 +29,42 @@ const coverages = [
     icon: '🏭',
     title: 'RC Impresa',
     desc: 'Responsabilità civile per danni causati a terzi durante l\'attività: un cliente che si fa male nel tuo negozio, un prodotto difettoso che causa danni. Protezione fondamentale per qualsiasi attività.',
-    price: 'da 300€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '🔥',
     title: 'All-Risk Capannone e Macchinari',
     desc: 'Copre struttura, attrezzature e stock da incendio, furto, allagamento ed eventi atmosferici. Per un artigiano o una PMI, fermare la produzione può significare perdere contratti e clienti.',
-    price: 'da 500€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '👷',
     title: 'Infortuni Dipendenti (Integrativa INAIL)',
     desc: 'L\'INAIL copre solo una parte degli infortuni sul lavoro. La polizza integrativa copre il gap: invalidità permanente, diaria da ricovero e rimborso spese mediche non riconosciute dall\'INAIL.',
-    price: 'da 200€/dipendente',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '🚚',
     title: 'Merci in Transito',
     desc: 'Copre le merci durante il trasporto, sia che usi mezzi propri che corrieri terzi. Un danno alle merci in consegna può significare perdere il cliente e pagare il risarcimento.',
-    price: 'da 200€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
     icon: '🚗',
     title: 'Flotta Aziendale',
     desc: 'Gestione centralizzata di tutti i veicoli aziendali (auto, furgoni, camion) con condizioni vantaggiose rispetto a polizze individuali e unico interlocutore per tutti i sinistri.',
-    price: 'da 600€/veicolo',
+    price: 'su preventivo',
     mandatory: true,
   },
   {
     icon: '💻',
     title: 'Cyber Risk',
     desc: 'Un ransomware blocca i tuoi sistemi gestionali. Dati clienti rubati. Sanzioni GDPR. La cyber risk copre i costi di ripristino, le spese legali e i danni reputazionali. Ora essenziale anche per le PMI.',
-    price: 'da 400€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
   {
@@ -84,7 +85,7 @@ const coverages = [
     icon: '⚖️',
     title: 'Tutela Legale Aziende',
     desc: 'Copre le spese di avvocato, perito e CTU in caso di procedimenti penali (D.Lgs. 231/2001), controversie con dipendenti, fornitori o clienti, e azioni di responsabilità contro amministratori. Completa la RC proteggendo anche l\'imprenditore.',
-    price: 'da 400€/anno',
+    price: 'su preventivo',
     mandatory: false,
   },
 ]
@@ -233,7 +234,7 @@ export default function ArtigianiPmiPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al settore di attività, fatturato e valori assicurati. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
+            {notaPremio('settore di attività, fatturato e valori assicurati')}
           </p>
 
           {/* Tutela Legale spotlight */}
@@ -323,29 +324,28 @@ export default function ArtigianiPmiPage() {
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
               <h3 className="text-xl font-black text-primary mb-2">Pacchetto base consigliato per PMI</h3>
-              <p className="text-gray-500 text-sm mb-6">Stimato per attività con 1-5 dipendenti e fatturato fino a 500.000€</p>
+              <p className="text-gray-500 text-sm mb-6">Per un&apos;attività con 1-5 dipendenti</p>
               <div className="space-y-3 mb-6">
                 {[
-                  { name: 'RC Impresa', price: '400€/anno' },
-                  { name: 'All-risk sede e attrezzature', price: '600€/anno' },
-                  { name: 'Infortuni dipendenti (x2)', price: '400€/anno' },
-                  { name: 'Interruzione di esercizio', price: 'inclusa' },
+                  { name: 'RC Impresa', fattore: 'settore, fatturato e massimale' },
+                  { name: 'All-risk sede e attrezzature', fattore: 'valori assicurati e protezioni' },
+                  { name: 'Infortuni dipendenti (x2)', fattore: 'mansioni e somme assicurate' },
+                  { name: 'Interruzione di esercizio', fattore: 'periodo di indennizzo e margine' },
                 ].map((item) => (
                   <div key={item.name} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-2 text-sm">
                       <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold">✓</span>
                       <span className="text-gray-700">{item.name}</span>
                     </div>
-                    <span className="text-sm font-bold text-primary">{item.price}</span>
+                    <span className="text-xs text-gray-500 text-right">{item.fattore}</span>
                   </div>
                 ))}
               </div>
               <div className="bg-primary/5 rounded-xl p-4 mb-6">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-primary">Totale indicativo</span>
-                  <span className="text-2xl font-black text-primary">da 1.400€/anno</span>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">ca. 117€/mese per proteggere completamente la tua attività</p>
+                <p className="text-sm text-primary leading-relaxed">
+                  Quanto costa lo calcoliamo sui tuoi numeri, con le offerte di più compagnie a confronto.
+                  Partiamo dalle polizze che hai già: spesso una parte di queste coperture c&apos;è, magari doppia.
+                </p>
               </div>
               <Link href="/preventivo" className="btn-primary w-full text-center block">
                 Richiedi il tuo preventivo

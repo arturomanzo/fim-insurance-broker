@@ -5,6 +5,7 @@ import FaqSection from '@/components/ui/FaqSection'
 import { manifatturieroFaq } from '@/lib/faq/manifatturiero'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { notaPremio } from '@/lib/prezzi'
 
 const SETTORE_QS = '?profilo=pmi&settore=Manifatturiero'
 
@@ -35,7 +36,7 @@ const coverages = [
     icon: '🏭',
     title: 'All Risk Property',
     desc: 'Copertura "all-risk" su capannone, magazzini, scorte, macchinari di produzione e impianti tecnologici. Indennizza tutti i danni salvo le esclusioni espresse.',
-    price: 'da 1.500€/anno',
+    price: 'su preventivo',
     highlighted: true,
   },
   {
@@ -49,28 +50,28 @@ const coverages = [
     icon: '📦',
     title: 'RC Prodotto (con export)',
     desc: 'Risponde dei danni causati a terzi dai prodotti immessi sul mercato, anche dopo la vendita. Estensioni specifiche per export USA, Canada e UK con relativi standard.',
-    price: 'da 800€/anno',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '🛡️',
     title: 'Cyber Risk OT/IT',
     desc: 'Ransomware, business email compromise, blocco linee di produzione, esfiltrazione progetti. Copre ripristino, riscatto (dove consentito), spese legali e BI cyber.',
-    price: 'da 1.000€/anno',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '🚚',
     title: 'Trasporti Merci',
     desc: 'Merci in arrivo (acquisti) e in partenza (vendite), trasporto su gomma, mare, ferrovia o aereo. Copertura "magazzino-magazzino" con clausole Institute Cargo.',
-    price: 'da 0,15% del valore',
+    price: 'su preventivo',
     highlighted: false,
   },
   {
     icon: '🌪️',
     title: 'Catastrofi Naturali (Obbligo 2025)',
     desc: 'Alluvione, terremoto, frana e smottamento su immobili e impianti. Obbligo di legge per le imprese ex L. 213/2023, con sanzioni per mancata adesione.',
-    price: 'da 800€/anno',
+    price: 'su preventivo',
     highlighted: false,
   },
 ]
@@ -191,7 +192,7 @@ export default function ManifatturieroPage() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo dipende da fatturato, valori assicurati, mercati di vendita e profilo di rischio. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
+            {notaPremio('fatturato, valori assicurati, mercati di vendita e profilo di rischio')}
           </p>
         </div>
       </section>

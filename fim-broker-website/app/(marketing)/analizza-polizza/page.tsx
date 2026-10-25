@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     url: '/analizza-polizza',
     title: 'Analizza la tua Polizza Gratis — Report AI in 30 secondi',
     description:
-      'Scopri le lacune della tua polizza, dove paghi troppo e come risparmiare. Analisi gratuita con intelligenza artificiale.',
+      'Scopri le lacune della tua polizza e le voci che pesano di più sul premio. Analisi gratuita con intelligenza artificiale.',
     images: [{ url: '/api/og?title=Analizza+la+tua+Polizza+Gratis', width: 1200, height: 630 }],
   },
 }
@@ -41,7 +41,7 @@ const HOW_IT_WORKS = [
   {
     step: '3',
     title: 'Ricevi il report',
-    desc: 'Un report dettagliato con punteggio, lacune critiche, dove risparmi e raccomandazioni personalizzate.',
+    desc: 'Un report dettagliato con punteggio, lacune critiche, voci da rivedere e raccomandazioni personalizzate.',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -159,7 +159,7 @@ export default function AnalizzaPolizzaPage() {
             {[
               { icon: '🔍', title: 'Coperture trovate', desc: 'Elenco completo di tutte le garanzie con massimali e franchigie' },
               { icon: '⚠️', title: 'Lacune critiche', desc: 'Rischi che non sei coperto e le conseguenze concrete in caso di sinistro' },
-              { icon: '💶', title: 'Dove risparmi', desc: 'Voci dove paghi più del necessario con stima del risparmio annuo' },
+              { icon: '💶', title: 'Dove guardare', desc: 'Le voci che pesano sul premio e cosa le farebbe scendere' },
               { icon: '📋', title: 'Esclusioni nascoste', desc: 'Le clausole limitanti che spesso vengono tralasciate' },
               { icon: '⭐', title: 'Punteggio polizza', desc: 'Un voto da 1 a 10 che sintetizza la qualità della tua copertura' },
               { icon: '→', title: 'Raccomandazioni', desc: 'Azioni concrete e prioritarie per migliorare la tua protezione' },

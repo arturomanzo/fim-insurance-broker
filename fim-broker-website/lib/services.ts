@@ -37,7 +37,7 @@ export const services: Service[] = [
   {
     slug: 'assicurazione-auto',
     title: 'Assicurazione Auto',
-    shortDescription: 'RC Auto, Kasko, Furto e Incendio. Copertura completa per il tuo veicolo ai migliori prezzi.',
+    shortDescription: 'RC Auto, Kasko, Furto e Incendio. Le offerte di più compagnie a confronto sul tuo veicolo.',
     description:
       'Proteggi il tuo veicolo con le soluzioni assicurative più complete del mercato. Da FIM trovi polizze personalizzate per ogni esigenza, dalla semplice RC obbligatoria fino alla Kasko totale.',
     icon: '🚗',
@@ -53,8 +53,8 @@ export const services: Service[] = [
     ],
     benefits: [
       'Confronto tra le migliori compagnie',
-      'Risparmio fino al 30%',
-      'Liquidazione sinistri rapida',
+      'Attestato di rischio controllato prima del rinnovo',
+      'Assistenza nella gestione dei sinistri',
       'Consulente dedicato',
     ],
     faq: [
@@ -72,7 +72,7 @@ export const services: Service[] = [
       },
       {
         question: 'Come funziona la classe di merito bonus/malus?',
-        answer: 'La classe di merito va dalla 1 (la migliore) alla 18 (la peggiore). Ogni anno senza sinistri sali di una classe e paghi meno. Ogni sinistro con colpa retrocedi di 2 classi. FIM analizza la tua attestazione di rischio per trovare la compagnia più conveniente per il tuo profilo.',
+        answer: 'La classe di merito va dalla 1 (la migliore) alla 18 (la peggiore). Ogni anno senza sinistri migliori di una classe. Ogni sinistro con colpa retrocedi di 2 classi. FIM legge il tuo attestato di rischio e confronta le compagnie sul tuo profilo.',
       },
       {
         question: 'La mia polizza auto copre anche la grandine e gli eventi atmosferici?',
@@ -83,8 +83,8 @@ export const services: Service[] = [
         answer: 'Compila e firma il Modulo CID (Constatazione Amichevole) con l\'altro conducente. Scatta foto ai danni e alla posizione dei veicoli. Entro 3 giorni denuncia il sinistro alla compagnia. Se ci sono feriti, chiama immediatamente il 118 e le forze dell\'ordine. Il nostro team sinistri ti affianca in ogni fase.',
       },
     ],
-    priceFrom: 'da 250€/anno',
-    priceNote: 'RC Auto base. Kasko e garanzie accessorie a partire da 80€ in più.',
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia su classe di merito, veicolo, residenza, età del conducente e garanzie scelte.',
     coverage: {
       covered: [
         'RC Auto obbligatoria (danni a terzi)',
@@ -127,7 +127,7 @@ export const services: Service[] = [
     benefits: [
       'Pianificazione fiscale vantaggiosa',
       'Deducibilità dei premi',
-      'Rendimento garantito',
+      'Prodotti tradizionali o unit-linked, secondo il tuo profilo',
       'Flessibilità nei versamenti',
     ],
     faq: [
@@ -156,8 +156,8 @@ export const services: Service[] = [
         answer: 'Puoi indicare chiunque: coniuge, figli, partner, terzi. I beneficiari non devono necessariamente essere gli eredi legali. Puoi cambiarli in qualsiasi momento, salvo che il beneficiario abbia già accettato per iscritto la designazione. Ti consigliamo di indicare anche un beneficiario secondario.',
       },
     ],
-    priceFrom: 'da 15€/mese',
-    priceNote: 'Polizza temporanea caso morte. Piani previdenziali da 50€/mese.',
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia su età, capitale assicurato, durata e stato di salute.',
     coverage: {
       covered: [
         'Capitale al beneficiario in caso di decesso',
@@ -212,7 +212,7 @@ export const services: Service[] = [
       },
       {
         question: 'Sono in affitto: devo comunque assicurare la casa?',
-        answer: 'Il proprietario assicura il fabbricato. Come inquilino dovresti avere almeno la RC del conduttore (copre i danni che causi all\'immobile, es. incendio) e la copertura del contenuto (mobili, elettrodomestici, oggetti di valore). Alcune compagnie offrono polizze dedicate agli affittuari da 50-80€/anno.',
+        answer: 'Il proprietario assicura il fabbricato. Come inquilino dovresti avere almeno la RC del conduttore (copre i danni che causi all\'immobile, es. incendio) e la copertura del contenuto (mobili, elettrodomestici, oggetti di valore). Alcune compagnie offrono polizze pensate apposta per chi è in affitto.',
       },
       {
         question: 'La polizza casa copre l\'alluvione e il terremoto?',
@@ -227,8 +227,8 @@ export const services: Service[] = [
         answer: 'Sì, anche seconde case, case vacanza, B&B e immobili affittati possono essere assicurati. Le tariffe variano in base all\'uso (abitazione principale vs secondaria) e alla presenza continua. Gli immobili in affitto possono avere coperture specifiche per il rischio inquilino.',
       },
     ],
-    priceFrom: 'da 100€/anno',
-    priceNote: 'Polizza base incendio e furto. Multirischio completo da 180€/anno.',
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia su valore dell\'immobile, zona, tipo di costruzione e garanzie scelte.',
     coverage: {
       covered: [
         'Incendio, scoppio ed esplosione',
@@ -256,7 +256,7 @@ export const services: Service[] = [
     title: 'Assicurazione Salute',
     shortDescription: 'Polizze sanitarie individuali e collettive per accedere alle migliori cure mediche.',
     description:
-      'La salute è il bene più prezioso. Le nostre polizze sanitarie ti garantiscono accesso alle migliori strutture private, rimborso spese mediche e indennità per infortuni.',
+      'La salute è il bene più prezioso. Con una polizza sanitaria accedi alle strutture private convenzionate, hai il rimborso delle spese mediche e un\'indennità in caso di infortunio, nei limiti del contratto.',
     icon: '🏥',
     color: 'teal',
     image: '/images/brand/salute-dna.jpg',
@@ -300,8 +300,8 @@ export const services: Service[] = [
         answer: 'Ci sono due modalità: rimborso diretto (vai dal medico/clinica convenzionata, la compagnia paga direttamente) oppure rimborso a piè di lista (paghi tu e poi presenti le ricevute alla compagnia). Alcune polizze prevedono una franchigia (quota a tuo carico) e un limite percentuale di rimborso (es. 80% delle spese).',
       },
     ],
-    priceFrom: 'da 25€/mese',
-    priceNote: 'Polizza individuale con ricoveri. Piani famiglia da 60€/mese.',
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia su età, persone assicurate, massimali e tipo di piano.',
     coverage: {
       covered: [
         'Ricoveri con o senza intervento chirurgico',
@@ -373,8 +373,8 @@ export const services: Service[] = [
         answer: "Il risk management aziendale parte da un'analisi dei rischi specifici dell'attività (operativi, legali, finanziari, reputazionali), poi si costruisce un programma assicurativo che copra i rischi più critici nel modo più efficiente. FIM offre consulenza di risk assessment gratuita per le aziende clienti, con revisione annuale del programma.",
       },
     ],
-    priceFrom: 'su preventivo',
-    priceNote: 'RC impresa da 300€/anno. Pacchetti completi da 800€/anno.',
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia su settore, fatturato, valori assicurati e massimali.',
     coverage: {
       covered: [
         'RC verso terzi e verso prestatori di lavoro (RCT/RCO)',
@@ -446,8 +446,8 @@ export const services: Service[] = [
         answer: 'In caso di ricovero grave o decesso all\'estero, la compagnia organizza e paga il rimpatrio sanitario (ambulanza aerea attrezzata) o il trasferimento della salma. Questo servizio può costare 10.000-50.000€ se non assicurato. È attivabile H24 chiamando la centrale operativa della compagnia, disponibile in più lingue.',
       },
     ],
-    priceFrom: 'da 15€ a viaggio',
-    priceNote: 'Singolo viaggio Europa. Long-stay e polizze annuali disponibili.',
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia su destinazione, durata, età e garanzie scelte. Ci sono anche polizze annuali per chi viaggia spesso.',
     coverage: {
       covered: [
         'Annullamento del viaggio prima della partenza',
@@ -603,11 +603,11 @@ export const services: Service[] = [
       },
       {
         question: 'Quanto costa la Tutela Legale per una PMI?',
-        answer: 'Il premio dipende dal fatturato, dal settore di attività, dal numero di dipendenti e dal massimale scelto. Indicativamente, per una PMI con fatturato fino a 2 milioni di euro il premio annuo va da 400€ a 1.200€ per massimali di 50.000-100.000€ per sinistro. Per aziende più strutturate con massimali da 250.000€ in su, i premi oscillano tra 1.500€ e 4.000€/anno. Come broker indipendenti confrontiamo 5+ compagnie specializzate (Roland, Das, Arag, Coface, Itas) per trovare la soluzione più efficiente.',
+        answer: 'Il premio lo calcola la compagnia su fatturato, settore di attività, numero di dipendenti e massimale scelto, e cresce con gli ambiti di tutela inclusi. Come broker indipendenti confrontiamo le offerte delle compagnie specializzate in tutela legale, a partire da Roland, con cui abbiamo un mandato diretto.',
       },
     ],
-    priceFrom: 'da 400€/anno',
-    priceNote: 'PMI con fatturato fino a 2 mln€ e massimale 50.000€. Programmi strutturati su preventivo.',
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia su fatturato, settore, massimale e ambiti di tutela.',
     coverage: {
       covered: [
         'Spese legali per controversie civili (attive e passive)',
@@ -650,8 +650,8 @@ export const services: Service[] = [
       'Compliance assicurativa (catastrofi naturali, D.Lgs. 231, GDPR)',
     ],
     benefits: [
-      'Visione completa dei rischi: nessun punto cieco nel programma assicurativo',
-      'Ottimizzazione dei premi: coperture mirate riducono la spesa fino al 25%',
+      'Visione d\'insieme dei rischi, polizza per polizza',
+      'Premi rivisti: via doppioni e coperture che non servono',
       'Un unico interlocutore per tutte le polizze e tutti i sinistri',
       'Report annuale di risk review con raccomandazioni concrete',
       'Consulenza gratuita: la prima analisi non costa nulla',
@@ -671,7 +671,7 @@ export const services: Service[] = [
       },
       {
         question: 'In cosa si differenzia il Risk Management di FIM rispetto a un agente assicurativo?',
-        answer: 'Un agente rappresenta una o poche compagnie e propone i prodotti del suo mandato. FIM è un broker indipendente iscritto al RUI (Sez. B n. B000405449): non rappresentiamo nessuna compagnia, ma solo i tuoi interessi. Questo significa che analizziamo i rischi in modo oggettivo, confrontiamo le offerte di 20 compagnie e scegliamo la soluzione migliore per te — non per la compagnia. Inoltre, gestiamo i sinistri dalla tua parte, negoziando con la compagnia per ottenere la liquidazione più rapida e completa.',
+        answer: 'Un agente rappresenta una o poche compagnie e propone i prodotti del suo mandato. FIM è un broker indipendente iscritto al RUI (Sez. B n. B000405449): non rappresentiamo nessuna compagnia, ma solo i tuoi interessi. Questo significa che analizziamo i rischi in modo oggettivo, confrontiamo le offerte di 20 compagnie e scegliamo la soluzione migliore per te — non per la compagnia. E in caso di sinistro stiamo dalla tua parte: seguiamo la pratica e trattiamo con la compagnia.',
       },
       {
         question: 'Il Risk Management è utile anche per una piccola impresa?',

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const steps = [
   { n: '1', title: 'Compila il modulo', desc: 'Inserisci le tue informazioni e le tue esigenze assicurative.' },
   { n: '2', title: 'Riceviamo la richiesta', desc: 'Il nostro team analizza la tua richiesta e confronta le offerte.' },
-  { n: '3', title: 'Ti contattiamo', desc: 'Entro 24 ore ti presentiamo il preventivo più conveniente.' },
+  { n: '3', title: 'Ti contattiamo', desc: 'Entro 24 ore ti presentiamo le offerte a confronto, con la nostra raccomandazione.' },
 ]
 
 // HowTo schema — espone il processo "come richiedere un preventivo

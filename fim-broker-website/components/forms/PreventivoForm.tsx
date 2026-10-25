@@ -371,7 +371,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
             <Button type="submit" loading={status === 'loading'} size="lg" className="w-full">
               {status === 'loading' ? 'Invio in corso...' : 'Richiedi Preventivo Gratuito'}
             </Button>
-            <p className="text-center text-xs text-gray-400">Risposta garantita entro 24 ore lavorative · Nessun impegno</p>
+            <p className="text-center text-xs text-gray-400">Risposta entro 24 ore lavorative · Nessun impegno</p>
           </div>
         </form>
       )}

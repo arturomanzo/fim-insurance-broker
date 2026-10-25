@@ -111,7 +111,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-black text-primary mb-3">Privati</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Proteggi te e la tua famiglia con le polizze più adatte alle tue esigenze, al miglior prezzo di mercato.
+                Proteggi te e la tua famiglia con le polizze più adatte alle tue esigenze, scelte confrontando più compagnie.
               </p>
               <ul className="space-y-2 mb-8">
                 {[

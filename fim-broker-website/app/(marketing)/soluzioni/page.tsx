@@ -44,7 +44,7 @@ const solutions: Solution[] = [
     desc: 'Casa, vita, salute, infortuni: le polizze giuste per ogni fase della vita. FIM analizza le coperture già in essere, identifica i gap e seleziona solo ciò che serve davvero.',
     highlights: ['Polizza Casa', 'Vita TCM', 'Salute Integrativa', 'Tutela Legale'],
     cta: 'Scopri le soluzioni per famiglie',
-    price: 'da 150€/anno',
+    price: 'su preventivo',
   },
   {
     href: '/soluzioni/professionisti',
@@ -56,7 +56,7 @@ const solutions: Solution[] = [
     desc: 'La RC professionale è obbligatoria per molte categorie. Un errore professionale non coperto può costarti anni di lavoro. FIM trova la polizza giusta per la tua categoria e il tuo volume d\'affari.',
     highlights: ['RC Professionale', 'Tutela Legale', 'Cyber Risk', 'D&O per STP'],
     cta: 'Scopri le soluzioni per professionisti',
-    price: 'da 200€/anno',
+    price: 'su preventivo',
   },
   {
     href: '/soluzioni/artigiani-pmi',
@@ -68,7 +68,7 @@ const solutions: Solution[] = [
     desc: 'Proteggi capannone, macchinari, dipendenti e clienti con un pacchetto assicurativo su misura per la tua attività. Nessuna copertura inutile, nessun gap pericoloso.',
     highlights: ['RC Impresa', 'All-risk capannone', 'Infortuni dipendenti', 'Flotta aziendale'],
     cta: 'Scopri le soluzioni per PMI',
-    price: 'da 300€/anno',
+    price: 'su preventivo',
   },
   {
     href: '/soluzioni/condomini',
@@ -80,7 +80,7 @@ const solutions: Solution[] = [
     desc: 'Globale fabbricato, RC ascensori, RC Amministratore (obbligatoria L. 220/2012) e tutela legale condominiale. FIM segue sinistri e rinnovi per conto del condominio.',
     highlights: ['Globale Fabbricato', 'RC Amministratore', 'RC Ascensori', 'Tutela Legale'],
     cta: 'Scopri le soluzioni per condomini',
-    price: 'da 400€/anno',
+    price: 'su preventivo',
   },
   {
     href: '/soluzioni/scuole',
@@ -105,7 +105,7 @@ const solutions: Solution[] = [
     desc: 'Alluvioni, terremoti, grandinate: le polizze standard spesso non coprono questi rischi. Dal 2025 le imprese italiane hanno l\'obbligo di legge di assicurarsi contro i rischi catastrofali.',
     highlights: ['Alluvione ed esondazione', 'Terremoto e sisma', 'Grandine', 'Frana e smottamento'],
     cta: 'Scopri le coperture catastrofali',
-    price: 'da 80€/anno',
+    price: 'su preventivo',
   },
   {
     href: '/soluzioni/cyber-risk',
@@ -117,7 +117,7 @@ const solutions: Solution[] = [
     desc: 'Ransomware, data breach, sanzioni GDPR: il 68% delle PMI italiane ha subìto almeno un attacco negli ultimi 2 anni. Polizza DUAL Cyber Smart Plus con retroattività illimitata e copertura mondo intero.',
     highlights: ['Ransomware e malware', 'Data breach GDPR', 'Business interruption', 'Retroattività illimitata'],
     cta: 'Scopri la copertura cyber',
-    price: 'da 800€/anno',
+    price: 'su preventivo',
   },
 ]
 
@@ -173,7 +173,7 @@ export default function SoluzioniPage() {
                 {/* Bottom section */}
                 <div className="px-8 pb-8 border-t border-gray-50 pt-5">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs text-gray-500">{sol.priceLabel ?? 'Polizze disponibili'}</span>
+                    <span className="text-xs text-gray-500">{sol.priceLabel ?? 'Premio'}</span>
                     <span className="text-sm font-bold text-accent">{sol.price}</span>
                   </div>
                   <Link

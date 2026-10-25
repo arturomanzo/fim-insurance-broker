@@ -23,7 +23,7 @@ export const artigianiPmiFaq: FaqCategory = {
     {
       question: 'Cosa copre esattamente la RC impresa e quanto costa?',
       answer:
-        "La RC impresa copre i danni causati a terzi (clienti, fornitori, passanti) connessi allo svolgimento dell'attività: un cliente scivolato nel tuo negozio, un prodotto venduto che si rivela difettoso, danni causati da tuoi dipendenti durante il lavoro. Il costo dipende dal settore di attività, dal fatturato e dal massimale scelto. Per una piccola attività commerciale o artigianale si parte da circa 300€/anno.",
+        "La RC impresa copre i danni causati a terzi (clienti, fornitori, passanti) connessi allo svolgimento dell'attività: un cliente scivolato nel tuo negozio, un prodotto venduto che si rivela difettoso, danni causati da tuoi dipendenti durante il lavoro. Il premio lo calcola la compagnia su settore di attività, fatturato e massimale scelto: te lo diamo sul tuo caso, con le offerte di più compagnie a confronto.",
     },
     {
       question: 'Come funziona la polizza all-risk capannone?',
@@ -33,7 +33,7 @@ export const artigianiPmiFaq: FaqCategory = {
     {
       question: 'Sono un piccolo artigiano con un solo dipendente: ho bisogno di tutto questo?',
       answer:
-        'Non necessariamente tutto insieme. La priorità dipende dalla tua attività. Per un artigiano con un dipendente, il minimo consigliato è: RC impresa (per i danni a terzi) + infortuni integrativa per il dipendente + polizza incendio sul locale e le attrezzature. Insieme, per molte categorie, si parte da circa 800-1.000€/anno. Ti aiutiamo a capire cosa è davvero indispensabile per la tua situazione specifica.',
+        'Non necessariamente tutto insieme. La priorità dipende dalla tua attività. Per un artigiano con un dipendente, il minimo consigliato è: RC impresa (per i danni a terzi) + infortuni integrativa per il dipendente + polizza incendio sul locale e le attrezzature. Ti aiutiamo a capire cosa è davvero indispensabile per la tua situazione specifica.',
     },
   ],
 }
