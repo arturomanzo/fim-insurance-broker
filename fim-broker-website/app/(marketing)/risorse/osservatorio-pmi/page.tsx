@@ -6,15 +6,15 @@ import { OG_BASE } from '@/lib/seo'
 import { SCADENZE_CATASTROFALE, CHI_E_ESCLUSO, CONSEGUENZA_CATASTROFALE } from '@/lib/catastrofale'
 
 export const metadata: Metadata = {
-  title: 'Osservatorio PMI Assicurazioni | Quanto costa assicurare un\'impresa',
+  title: 'Osservatorio PMI Assicurazioni | Cosa pesa sul premio di un\'impresa',
   description:
-    'Ordini di grandezza dei premi assicurativi per PMI italiane, per settore e dimensione: RC, all risk, cyber, catastrofale. Valori di orientamento FIM, non statistiche ufficiali.',
+    'Le coperture che contano per le PMI italiane, settore per settore, e le voci che fanno salire o scendere il premio: RC, all risk, cyber, catastrofale.',
   keywords: [
-    'costo assicurazione pmi',
-    'benchmark assicurazioni aziendali',
-    'rc impresa costo medio',
-    'assicurazioni artigiani prezzi',
-    'polizza aziendale quanto costa',
+    'assicurazioni pmi per settore',
+    'premio assicurazione impresa',
+    'rc impresa cosa copre',
+    'assicurazioni artigiani',
+    'polizza aziendale preventivo',
     'osservatorio assicurazioni pmi italia',
   ],
   alternates: { canonical: '/risorse/osservatorio-pmi' },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     ...OG_BASE,
     url: '/risorse/osservatorio-pmi',
     title: 'Osservatorio PMI Assicurazioni',
-    description: 'Ordini di grandezza dei premi assicurativi per le PMI italiane, per settore e dimensione. Valori di orientamento FIM.',
+    description: 'Le coperture che contano per le PMI italiane, settore per settore, e cosa pesa sul premio.',
     type: 'article',
   },
 }
@@ -31,14 +31,14 @@ const jsonLdArticle = {
   '@context': 'https://schema.org',
   '@type': 'Report',
   name: 'Osservatorio PMI Assicurazioni',
-  description: 'Ordini di grandezza dei premi assicurativi per le PMI italiane per settore e dimensione. Valori di orientamento, non statistiche ufficiali.',
+  description: 'Le coperture che contano per le PMI italiane, settore per settore, e le voci che pesano sul premio.',
   publisher: {
     '@type': 'Organization',
     name: 'FIM Insurance Broker',
     url: 'https://www.fimbroker.it',
   },
   datePublished: '2025-01-15',
-  dateModified: '2026-10-25',
+  dateModified: '2026-10-26',
   inLanguage: 'it',
   about: {
     '@type': 'Thing',
@@ -46,22 +46,25 @@ const jsonLdArticle = {
   },
 }
 
+// Niente fasce di premio (decisione di Arturo, 26/10/2026): erano valori di
+// orientamento, non misurati, e un numero pubblicato si legge come un'offerta.
+// Restano le coperture che contano e le voci che muovono il premio.
 const sectorData = [
-  { sector: 'Edilizia & Costruzioni', rc: '€1.800–4.500', allRisk: '€2.500–7.000', cyber: '€800–1.500', catastrofale: '€400–900', total: '€5.500–14.000', risk: 'alto' },
-  { sector: 'Manifatturiero / Industria', rc: '€1.500–3.500', allRisk: '€3.000–9.000', cyber: '€900–1.800', catastrofale: '€500–1.200', total: '€6.000–15.500', risk: 'alto' },
-  { sector: 'Ristorazione & Hotellerie', rc: '€900–2.000', allRisk: '€1.200–3.500', cyber: '€600–1.200', catastrofale: '€300–700', total: '€3.000–7.400', risk: 'medio' },
-  { sector: 'Commercio al Dettaglio', rc: '€700–1.800', allRisk: '€800–2.500', cyber: '€600–1.200', catastrofale: '€250–600', total: '€2.350–6.100', risk: 'medio' },
-  { sector: 'IT & Servizi Digitali', rc: '€1.200–3.000', allRisk: '€400–1.000', cyber: '€1.200–3.500', catastrofale: '€150–400', total: '€2.950–7.900', risk: 'medio-alto' },
-  { sector: 'Studi Professionali', rc: '€800–2.500', allRisk: '€300–800', cyber: '€900–2.000', catastrofale: '€100–300', total: '€2.100–5.600', risk: 'medio' },
-  { sector: 'Trasporti & Logistica', rc: '€2.000–5.500', allRisk: '€1.500–4.000', cyber: '€700–1.400', catastrofale: '€350–800', total: '€4.550–11.700', risk: 'alto' },
-  { sector: 'Sanità & Welfare Privato', rc: '€1.800–5.000', allRisk: '€600–1.800', cyber: '€1.200–3.000', catastrofale: '€200–500', total: '€3.800–10.300', risk: 'alto' },
+  { sector: 'Edilizia & Costruzioni', coperture: 'RC, CAR, infortuni, postuma', pesa: 'cantieri aperti, subappalti, tipo di lavori', risk: 'alto' },
+  { sector: 'Manifatturiero / Industria', coperture: 'RC prodotti, all risk, interruzione di esercizio', pesa: 'valore di impianti e macchinari, mercati di vendita, protezioni antincendio', risk: 'alto' },
+  { sector: 'Ristorazione & Hotellerie', coperture: 'RC verso i clienti, incendio, furto', pesa: 'superficie, coperti o camere, impianti di cucina', risk: 'medio' },
+  { sector: 'Commercio al Dettaglio', coperture: 'RC, furto, incendio', pesa: 'valore delle merci, zona, sistemi antifurto', risk: 'medio' },
+  { sector: 'IT & Servizi Digitali', coperture: 'RC professionale, cyber', pesa: 'dati trattati, clienti serviti, misure di sicurezza', risk: 'medio-alto' },
+  { sector: 'Studi Professionali', coperture: 'RC professionale, cyber, tutela legale', pesa: 'categoria, fatturato, massimale, retroattività', risk: 'medio' },
+  { sector: 'Trasporti & Logistica', coperture: 'RC vettoriale, flotta, merci trasportate', pesa: 'numero di mezzi, tratte, valore delle merci', risk: 'alto' },
+  { sector: 'Sanità & Welfare Privato', coperture: 'RC sanitaria, cyber, tutela legale', pesa: 'specialità, volume di prestazioni, dati sanitari', risk: 'alto' },
 ]
 
 const sizeData = [
-  { size: 'Micro (1–4 dip.)', spend: '€1.500–4.500', note: 'RC + tutela base' },
-  { size: 'Piccola (5–19 dip.)', spend: '€3.500–9.000', note: 'RC + All Risk + cyber' },
-  { size: 'Media (20–49 dip.)', spend: '€8.000–22.000', note: 'Pacchetto completo' },
-  { size: 'Grande (50–249 dip.)', spend: '€18.000–60.000+', note: 'Programma integrato' },
+  { size: 'Micro (1–4 dip.)', note: 'RC e tutela di base: spesso basta una multirischio ben costruita.' },
+  { size: 'Piccola (5–19 dip.)', note: 'RC, all risk e cyber. Con i dipendenti entrano gli infortuni.' },
+  { size: 'Media (20–49 dip.)', note: 'Pacchetto completo: conviene un programma unico con le scadenze allineate.' },
+  { size: 'Grande (50–249 dip.)', note: 'Programma integrato, con analisi dei rischi e polizze dedicate.' },
 ]
 
 // Solo cose che reggono se qualcuno le contesta. Fino al 25/10/2026 qui c'erano
@@ -103,18 +106,18 @@ export default function OsservatorioPmiPage() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-4">
               <span className="inline-block bg-white/10 border border-white/20 text-sm px-3 py-1 rounded-full">
-                📋 Valori di orientamento FIM — non statistiche ufficiali
+                📋 Guida FIM per settore
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-black mb-4">
               Osservatorio PMI<br />
-              <span className="text-accent">Quanto costa assicurare un&apos;impresa</span>
+              <span className="text-accent">Cosa pesa sul premio di un&apos;impresa</span>
             </h1>
             <p className="text-xl text-white/80 mb-6">
-              Ordini di grandezza dei premi per settore e dimensione, per capire da dove partire. Il numero vero per la tua impresa lo dà solo un preventivo.
+              Settore per settore, le coperture che contano e le voci che fanno salire o scendere il premio. Il numero per la tua impresa lo dà un preventivo.
             </p>
             <p className="text-white/60 text-sm">
-              Valori compilati dai broker FIM su profili standard · Testo aggiornato il 25/10/2026
+              Compilato dai broker FIM · Testo aggiornato il 26/10/2026
             </p>
           </div>
         </div>
@@ -128,21 +131,18 @@ export default function OsservatorioPmiPage() {
             {/* Benchmark per settore */}
             <div>
               <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">
-                Costi assicurativi per settore
+                Coperture e premio, settore per settore
               </h2>
               <p className="text-gray-600 mb-6">
-                Ordine di grandezza del premio annuo per una PMI con 5–20 dipendenti e fatturato tra €300K e €2M, con le coperture più comuni per ogni settore.
+                Per una PMI con 5–20 dipendenti: le coperture che contano di più in ogni settore e le voci che la compagnia guarda per calcolare il premio.
               </p>
               <div className="overflow-x-auto rounded-2xl shadow-sm">
                 <table className="w-full bg-white text-sm">
                   <thead>
                     <tr className="bg-primary text-white">
                       <th className="text-left px-4 py-3 font-semibold rounded-tl-2xl">Settore</th>
-                      <th className="text-left px-4 py-3 font-semibold">RC Impresa</th>
-                      <th className="text-left px-4 py-3 font-semibold">All Risk</th>
-                      <th className="text-left px-4 py-3 font-semibold">Cyber</th>
-                      <th className="text-left px-4 py-3 font-semibold">Catastrofale</th>
-                      <th className="text-left px-4 py-3 font-semibold">Totale stimato</th>
+                      <th className="text-left px-4 py-3 font-semibold">Coperture chiave</th>
+                      <th className="text-left px-4 py-3 font-semibold">Cosa pesa sul premio</th>
                       <th className="text-left px-4 py-3 font-semibold rounded-tr-2xl">Rischio</th>
                     </tr>
                   </thead>
@@ -150,11 +150,8 @@ export default function OsservatorioPmiPage() {
                     {sectorData.map((row, i) => (
                       <tr key={row.sector} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                         <td className="px-4 py-3 font-semibold text-primary">{row.sector}</td>
-                        <td className="px-4 py-3 text-gray-700">{row.rc}</td>
-                        <td className="px-4 py-3 text-gray-700">{row.allRisk}</td>
-                        <td className="px-4 py-3 text-gray-700">{row.cyber}</td>
-                        <td className="px-4 py-3 text-gray-700">{row.catastrofale}</td>
-                        <td className="px-4 py-3 font-bold text-gray-900">{row.total}</td>
+                        <td className="px-4 py-3 text-gray-700">{row.coperture}</td>
+                        <td className="px-4 py-3 text-gray-600">{row.pesa}</td>
                         <td className="px-4 py-3"><RiskBadge level={row.risk} /></td>
                       </tr>
                     ))}
@@ -162,24 +159,23 @@ export default function OsservatorioPmiPage() {
                 </table>
               </div>
               <p className="text-gray-400 text-xs mt-3">
-                * Valori di orientamento FIM su profili standard, non misurati su un campione di contratti. I premi effettivi dipendono da sinistrosità, massimali, franchigie e condizioni delle compagnie: il numero preciso lo dà un preventivo.
+                La catastrofale non è in tabella perché l&apos;obbligo vale in ogni settore, con la sola eccezione delle imprese agricole: ne parliamo più sotto.
               </p>
             </div>
 
             {/* Benchmark per dimensione */}
             <div>
               <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">
-                Spesa per dimensione aziendale
+                Cosa cambia con le dimensioni
               </h2>
               <p className="text-gray-600 mb-6">
-                La spesa cresce con le dimensioni. Conta però anche come è costruito il pacchetto: doppioni e scoperture si trovano in imprese di ogni taglia.
+                Con le dimensioni crescono le coperture da mettere in fila. Conta però anche come è costruito il pacchetto: doppioni e scoperture si trovano in imprese di ogni taglia.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {sizeData.map((item) => (
                   <div key={item.size} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div className="text-sm text-gray-500 mb-2 font-medium">{item.size}</div>
-                    <div className="text-2xl font-black text-primary mb-1">{item.spend}</div>
-                    <div className="text-xs text-gray-400">{item.note}</div>
+                    <div className="font-bold text-primary mb-2">{item.size}</div>
+                    <div className="text-sm text-gray-600 leading-relaxed">{item.note}</div>
                   </div>
                 ))}
               </div>
@@ -207,10 +203,10 @@ export default function OsservatorioPmiPage() {
             {/* CTA banner */}
             <div className="gradient-primary rounded-2xl p-8 text-white text-center">
               <h2 className="text-2xl font-black mb-3">
-                Scopri quanto spende la tua impresa
+                Quali coperture servono alla tua impresa?
               </h2>
               <p className="text-white/80 mb-6 max-w-xl mx-auto">
-                Usa il nostro calcolatore gratuito per ottenere una stima personalizzata basata sul tuo settore, dimensione e rischi specifici. Nessun impegno.
+                Il calcolatore gratuito ti dice in due minuti quali coperture guardare per prime, in base a settore, dimensione e rischi. Nessun impegno.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/calcolatore-rischi" className="btn-primary">
@@ -232,7 +228,7 @@ export default function OsservatorioPmiPage() {
             <div className="bg-gray-100 rounded-2xl p-6 text-sm text-gray-600">
               <h3 className="font-bold text-gray-800 mb-2">Nota metodologica</h3>
               <p className="leading-relaxed mb-2">
-                Questi non sono dati statistici. Le fasce di premio sono valori di orientamento che i broker FIM usano su profili standard di impresa: non vengono da un campione di contratti misurato né da statistiche IVASS o ANIA, e non costituiscono un&apos;offerta commerciale.
+                Qui non trovi prezzi, e non è una dimenticanza. Il premio lo calcola la compagnia sulla singola impresa: una fascia valida per tutte finirebbe per sembrare un&apos;offerta, e non lo è.
               </p>
               <p className="leading-relaxed">
                 I premi veri dipendono da sinistrosità, massimali, franchigie, ubicazione dei beni e condizioni aggiornate delle compagnie. Per un numero che valga per la tua impresa serve un preventivo, oppure il check-up gratuito delle polizze che hai già.

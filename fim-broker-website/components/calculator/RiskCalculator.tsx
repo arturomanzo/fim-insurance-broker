@@ -577,14 +577,12 @@ export default function RiskCalculator() {
             })}
           </div>
 
-          {/* Range costo */}
+          {/* Niente stima di costo: il premio lo calcola la compagnia (Arturo, 26/10/2026) */}
           <div className="bg-gray-50 rounded-xl border border-gray-200 p-4 mb-6">
-            <div className="text-xs text-gray-500 mb-1">Investimento annuo stimato (tutte le coperture)</div>
-            <div className="text-2xl font-black text-primary">
-              €{result.prezzoMin.toLocaleString('it-IT')} – €{result.prezzoMax.toLocaleString('it-IT')}
-              <span className="text-sm font-normal text-gray-500 ml-1">/anno</span>
-            </div>
-            <p className="text-xs text-gray-400 mt-1">Stima indicativa basata sul profilo. Il preventivo reale può variare in base a compagnia e condizioni specifiche.</p>
+            <div className="text-xs text-gray-500 mb-1">E il premio?</div>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              Lo calcola la compagnia sui tuoi dati: attività, fatturato, valori da assicurare, massimali. Te lo diamo con un preventivo, con le offerte di più compagnie a confronto.
+            </p>
           </div>
 
           {/* CTA */}
