@@ -56,9 +56,10 @@ const coverages = [
   {
     icon: '🚗',
     title: 'Flotta Aziendale',
-    desc: 'Gestione centralizzata di tutti i veicoli aziendali (auto, furgoni, camion) con condizioni vantaggiose rispetto a polizze individuali e unico interlocutore per tutti i sinistri.',
+    desc: 'Auto, furgoni e camion dell\'azienda: polizze singole allineate o libro matricola, scadenze sotto controllo e un solo interlocutore per i sinistri.',
     price: 'su preventivo',
     mandatory: true,
+    href: '/soluzioni/flotta-aziendale',
   },
   {
     icon: '💻',
@@ -230,6 +231,11 @@ export default function ArtigianiPmiPage() {
                 </div>
                 <h3 className="font-bold text-primary mb-2">{cov.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed flex-1">{cov.desc}</p>
+                {'href' in cov && cov.href && (
+                  <Link href={cov.href} className="text-sm font-semibold text-primary hover:text-accent mt-3">
+                    Approfondisci →
+                  </Link>
+                )}
               </Card>
             ))}
           </div>
