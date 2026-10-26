@@ -37,7 +37,7 @@ const faqJsonLd = {
     {
       '@type': 'Question',
       name: 'Quanto costa una polizza assicurativa per la mia azienda?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Il costo dipende da settore, dimensione aziendale e coperture scelte. Il calcolatore fornisce un range di stima basato su dati reali di mercato. Per una PMI con 5–20 dipendenti la spesa tipica è tra €2.800 e €12.000 annui. Richiedi un preventivo gratuito per dati precisi.' },
+      acceptedAnswer: { '@type': 'Answer', text: 'Il premio lo calcola la compagnia su settore, dimensione, valori assicurati e coperture scelte. Il calcolatore ti dice quali coperture guardare per prime; il premio te lo diamo con un preventivo gratuito.' },
     },
     {
       '@type': 'Question',
@@ -49,7 +49,7 @@ const faqJsonLd = {
 
 export const metadata: Metadata = {
   title: 'Calcolatore Rischio Assicurativo Gratuito',
-  description: 'Scopri in 2 minuti il tuo profilo di rischio assicurativo. Analisi gratuita personalizzata per privati, professionisti, PMI e imprese. Coperture raccomandate e preventivo immediato.',
+  description: 'Scopri in 2 minuti il tuo profilo di rischio assicurativo. Analisi gratuita personalizzata per privati, professionisti, PMI e imprese. Coperture raccomandate e preventivo su richiesta.',
   alternates: { canonical: '/calcolatore-rischi' },
   openGraph: {
     ...OG_BASE,
@@ -78,7 +78,7 @@ export default function CalcolatoreRischiPage() {
                 Calcolatore del Rischio Assicurativo
               </h1>
               <p className="text-white/80 text-lg md:text-xl">
-                Rispondi a 8 domande e scopri quali polizze ti servono davvero — con una stima del costo. Completamente gratuito, nessun impegno.
+                Rispondi a 8 domande e scopri quali polizze ti servono davvero. Completamente gratuito, nessun impegno.
               </p>
               <div className="flex flex-wrap items-center gap-6 mt-6 text-white/70 text-sm">
                 {['2 minuti', '100% gratuito', 'Analisi personalizzata', 'Nessun impegno'].map((label) => (

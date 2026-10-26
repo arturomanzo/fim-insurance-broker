@@ -206,12 +206,6 @@ function buildClientEmail(data: {
       }).join('')
     : ''
 
-  const stimaHtml = data.prezzoMin > 0 && data.prezzoMax > 0
-    ? `<p style="margin:0 0 20px;font-size:14px;color:#475569;line-height:1.6;">
-         La stima che hai visto, <strong>€${data.prezzoMin.toLocaleString('it-IT')}–€${data.prezzoMax.toLocaleString('it-IT')} l'anno</strong>, è la forbice tipica del tuo tipo di profilo per tutte le coperture messe insieme. Non è un preventivo: quello dipende da cosa fai davvero e da quanto fatturi, e per farlo servono due o tre domande in più.
-       </p>`
-    : ''
-
   return `<!DOCTYPE html>
 <html lang="it">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
@@ -233,7 +227,6 @@ function buildClientEmail(data: {
       ${copertureHtml}
 
       <div style="margin-top:24px;"></div>
-      ${stimaHtml}
 
       <p style="margin:0 0 8px;font-size:14px;color:#475569;line-height:1.6;">Se vuoi capire quale di queste ti serve davvero e a che condizioni, rispondi a questa mail e ne parliamo. Confrontiamo le offerte del mercato per te: siamo broker, non agenti di una compagnia, e la consulenza non ha un costo per te.</p>
     </div>

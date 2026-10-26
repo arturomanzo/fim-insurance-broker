@@ -16,6 +16,8 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\b(?:price|from|to):\s*'[\d.,]+\s*€/i, cosa: 'prezzo in una tabella o in un pacchetto' },
   { re: /\bpart[eo]n?o?\s+da\s+(?:circa\s+|poche\s+)?(?:\d|centinaia)/i, cosa: 'prezzo di partenza' },
   { re: /\bcosta\s+poche\s+centinaia\b/i, cosa: 'prezzo di partenza' },
+  { re: /€\s?\d[\d.,]*\s*[–-]\s*€?\s?\d/, cosa: 'fascia di prezzo' },
+  { re: /\bspesa tipica\b/i, cosa: 'fascia di prezzo' },
   { re: /\bsi ripaga\b/i, cosa: 'promessa di rientro della spesa' },
   { re: /Totale indicativo/, cosa: 'totale di un pacchetto' },
   { re: /\bmiglior[ei]?\s+prezz[oi]/i, cosa: 'miglior prezzo' },
@@ -79,6 +81,8 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     "parte da circa 100-150€ all'anno",
     'La polizza costa poche centinaia di euro.',
     'in molti casi si ripaga in pochi anni',
+    "rc: '€1.800–4.500',",
+    'la spesa tipica è tra €2.800 e €12.000 annui',
   ]
   for (const esempio of esempi) {
     assert.ok(VIETATE.some(({ re }) => re.test(esempio)), `non riconosciuta: ${esempio}`)
