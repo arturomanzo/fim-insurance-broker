@@ -52,7 +52,7 @@ export const services: Service[] = [
       'Infortuni del conducente',
     ],
     benefits: [
-      'Confronto tra le migliori compagnie',
+      'Confronto tra le compagnie partner',
       'Attestato di rischio controllato prima del rinnovo',
       'Assistenza nella gestione dei sinistri',
       'Consulente dedicato',

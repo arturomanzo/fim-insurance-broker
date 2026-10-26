@@ -375,7 +375,7 @@ export default function ChiSiamoPage() {
               Le Nostre Compagnie Partner
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-              Accesso alle migliori compagnie del mercato
+              Accesso a 20 compagnie partner
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Come broker indipendente, siamo convenzionati con le principali compagnie assicurative italiane e internazionali. Confrontiamo le offerte per trovare la soluzione più adatta a te.

@@ -29,7 +29,7 @@ const VANTAGGI = [
   {
     icon: '💡',
     title: 'Confronto tra compagnie',
-    desc: 'Accediamo alle migliori compagnie del mercato per trovare il rapporto qualità-prezzo ottimale.',
+    desc: 'Lavoriamo con 20 compagnie partner e ti mostriamo le alternative a confronto, garanzie e prezzo.',
   },
   {
     icon: '🤝',

@@ -6,7 +6,7 @@ import { RICONTATTO } from '@/lib/tempi'
 export const metadata: Metadata = {
   title: 'Analizza la tua Polizza Gratis',
   description:
-    'Carica il PDF della tua polizza e scopri in 30 secondi cosa ti manca, dove paghi troppo e come migliorare la tua copertura. Gratis, senza impegno.',
+    'Carica il PDF della tua polizza e scopri in 30 secondi cosa ti manca, dove ci sono doppioni e come migliorare la tua copertura. Gratis, senza impegno.',
   alternates: { canonical: '/analizza-polizza' },
   openGraph: {
     ...OG_BASE,
@@ -84,7 +84,7 @@ export default function AnalizzaPolizzaPage() {
       <section className="gradient-primary py-16 md:py-20 text-white">
         <div className="container-custom text-center">
           <span className="inline-block bg-white/10 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-5">
-            Esclusivo · Gratis · Nessun competitor lo fa
+            Gratis · Senza impegno
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
             Scopri se la tua polizza<br />
