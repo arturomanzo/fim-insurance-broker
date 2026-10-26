@@ -35,7 +35,7 @@ const GAP_EXAMPLES = [
   },
   {
     titolo: 'Zero copertura cyber',
-    desc: 'Solo il 21% delle PMI italiane ha una polizza cyber (Cyber Index PMI 2024). Un attacco ransomware costa in media €200k a una PMI.',
+    desc: 'Solo il 21% delle PMI italiane ha una polizza cyber (Cyber Index PMI 2024).',
     badge: 'Rischio crescente',
     badgeColor: 'bg-yellow-100 text-yellow-700',
   },

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 const risks = [
   { icon: '🌊', name: 'Alluvione ed esondazione', desc: 'Il rischio più diffuso in Italia' },
-  { icon: '🏔️', name: 'Terremoto e sisma', desc: '70% del territorio italiano ad alto rischio sismico' },
+  { icon: '🏔️', name: 'Terremoto e sisma', desc: 'Gran parte del territorio italiano è a rischio sismico' },
   { icon: '⛈️', name: 'Grandine', desc: 'Danni a tetti, veicoli, pannelli solari e colture' },
   { icon: '🪨', name: 'Frana e smottamento', desc: 'Sempre più frequente con i cambiamenti climatici' },
   { icon: '🌪️', name: 'Vento forte e tromba d\'aria', desc: 'Danni strutturali a tetti e facciate' },
@@ -104,10 +104,9 @@ export default function CatastrofiNaturaliPage() {
               Verifica la tua copertura attuale e colma il gap.
             </p>
             {/* Stat box */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               {[
-                { value: '94%', label: 'dei comuni italiani ad alto rischio idrogeologico' },
-                { value: '80%', label: 'delle case italiane non ha copertura catastrofale' },
+                { value: 'Casa', label: 'la polizza incendio standard di solito esclude terremoto e alluvione' },
                 { value: '2025', label: 'anno dell\'obbligo per le imprese italiane' },
               ].map((stat) => (
                 <div key={stat.label} className="bg-white/10 border border-white/20 rounded-xl p-4 text-center">
@@ -225,7 +224,7 @@ export default function CatastrofiNaturaliPage() {
               {
                 icon: '📈',
                 title: 'I sinistri climatici sono in aumento',
-                desc: "In Italia, gli eventi meteo estremi sono aumentati del +85% negli ultimi 20 anni. Non è più una questione di 'se' ma di 'quando'.",
+                desc: "In Italia alluvioni, grandinate e trombe d'aria non sono più eventi rari. Non è più una questione di 'se' ma di 'quando'.",
               },
               {
                 icon: '💸',

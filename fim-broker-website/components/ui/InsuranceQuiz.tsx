@@ -114,7 +114,7 @@ function getResult(answers: Answers): Result {
   // If coverage is incomplete
   if (current === 'no' || current === 'parziale') {
     if (!polizze.find((p) => p.name.includes('Casa'))) {
-      polizze.push({ name: 'Polizza Casa', urgency: 'media', reason: 'Spesso sottovalutata: copre l\'80% degli eventi dannosi più comuni.' })
+      polizze.push({ name: 'Polizza Casa', urgency: 'media', reason: 'Spesso sottovalutata: copre i danni più comuni, come incendio e acqua condotta, e la responsabilità verso i vicini.' })
     }
   }
 

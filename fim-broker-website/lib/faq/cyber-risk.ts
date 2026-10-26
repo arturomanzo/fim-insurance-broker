@@ -54,7 +54,7 @@ export const cyberRiskFaq: FaqCategory = {
     {
       question: 'La polizza cyber copre anche l\'errore umano (dipendente che clicca su phishing)?',
       answer:
-        'Sì. La grande maggioranza degli incidenti cyber (oltre il 90% secondo le statistiche) inizia da un errore umano — un clic su un link di phishing, una password debole, un allegato infetto aperto da un dipendente. Le polizze cyber moderne coprono esplicitamente questi scenari, purché l\'errore non sia intenzionale o fraudolento. Alcune polizze offrono anche formazione cyber per i dipendenti come servizio accessorio.',
+        'Sì. La maggior parte degli incidenti cyber inizia da un errore umano — un clic su un link di phishing, una password debole, un allegato infetto aperto da un dipendente. Le polizze cyber moderne coprono esplicitamente questi scenari, purché l\'errore non sia intenzionale o fraudolento. Alcune polizze offrono anche formazione cyber per i dipendenti come servizio accessorio.',
     },
   ],
 }

@@ -114,7 +114,7 @@ const solutions: Solution[] = [
     tagColor: 'bg-cyan-100 text-cyan-700',
     title: 'Cyber Risk',
     subtitle: 'PMI, professionisti e settori critici NIS2',
-    desc: 'Ransomware, data breach, sanzioni GDPR: il 68% delle PMI italiane ha subìto almeno un attacco negli ultimi 2 anni. Polizza DUAL Cyber Smart Plus con retroattività illimitata e copertura mondo intero.',
+    desc: 'Ransomware, data breach, sanzioni GDPR: un attacco può fermare l\'azienda per giorni. Polizza DUAL Cyber Smart Plus con retroattività illimitata e copertura mondo intero.',
     highlights: ['Ransomware e malware', 'Data breach GDPR', 'Business interruption', 'Retroattività illimitata'],
     cta: 'Scopri la copertura cyber',
     price: 'su preventivo',

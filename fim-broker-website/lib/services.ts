@@ -354,7 +354,7 @@ export const services: Service[] = [
       },
       {
         question: "Perché un'azienda ha bisogno della cyber risk?",
-        answer: 'La cyber risk copre i costi conseguenti a: violazioni di dati personali (data breach), attacchi ransomware con blocco dei sistemi, interruzione dell\'attività digitale, sanzioni GDPR, spese legali e di notifica agli interessati. Con l\'aumento degli attacchi informatici alle PMI (+65% nel 2024), è diventata una copertura essenziale.',
+        answer: 'La cyber risk copre i costi conseguenti a: violazioni di dati personali (data breach), attacchi ransomware con blocco dei sistemi, interruzione dell\'attività digitale, sanzioni GDPR, spese legali e di notifica agli interessati. Con gli attacchi informatici sempre più frequenti anche contro le PMI, è diventata una copertura essenziale.',
       },
       {
         question: "Cos'è la polizza D&O (Directors & Officers)?",

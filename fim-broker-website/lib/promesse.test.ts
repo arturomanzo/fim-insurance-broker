@@ -75,6 +75,25 @@ test('nessuna parola vietata nei testi del sito', () => {
   assert.deepEqual(trovate, [], `\n${trovate.join('\n')}`)
 })
 
+// Le statistiche di mercato ("il 68% delle PMI...") restano solo se portano
+// accanto la fonte con l'anno tra parentesi, per esempio "(Cyber Index PMI 2024)".
+// Senza fonte sono numeri che nessuno può controllare (decisione del 26/10/2026).
+const STATISTICA = /\b\d{1,3}(?:[.,]\d)?\s?%\s+(?:delle|dei|degli)\s+(?:PMI|famiglie|aziende|imprese|case|comuni|attacchi|incidenti)\b/i
+const FONTE = /\([^)]*\b(?:19|20)\d{2}\)/
+
+test('nessuna statistica di mercato senza fonte', () => {
+  const trovate: string[] = []
+  for (const file of CARTELLE.flatMap(fileSorgente)) {
+    const righe = readFileSync(join(RADICE, file), 'utf-8').split('\n')
+    righe.forEach((riga, i) => {
+      if (COMMENTO.test(riga)) return
+      const m = riga.match(STATISTICA)
+      if (m && !FONTE.test(riga)) trovate.push(`${file}:${i + 1} — «${m[0]}»`)
+    })
+  }
+  assert.deepEqual(trovate, [], `\n${trovate.join('\n')}`)
+})
+
 test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
   const esempi = [
     "price: 'da 150€/anno',",
@@ -103,4 +122,7 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     assert.ok(PAROLE_VIETATE.test(esempio), `non riconosciuta: ${esempio}`)
   }
   assert.ok(COMMENTO.test('  // fondamentale per E-E-A-T'))
+  assert.ok(STATISTICA.test('il 68% delle PMI italiane ha subìto almeno un attacco'))
+  assert.ok(!FONTE.test('il 68% delle PMI italiane ha subìto almeno un attacco'))
+  assert.ok(FONTE.test('Solo il 21% delle PMI italiane ha una polizza cyber (Cyber Index PMI 2024).'))
 })

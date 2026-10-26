@@ -148,7 +148,7 @@ export default function ArtigianiPmiPage() {
             {/* Pain point box */}
             <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
               <p className="text-white/90 text-sm">
-                <strong className="text-accent">Sapevi che</strong> — il 60% delle PMI italiane che subiscono un incendio non riapre entro 6 mesi?
+                <strong className="text-accent">Sapevi che</strong> — dopo un incendio grave un&apos;azienda può restare ferma per mesi, con i costi fissi che corrono?
                 La polizza interruzione di esercizio è quella che più spesso salva le aziende, eppure è la meno conosciuta.
               </p>
             </div>

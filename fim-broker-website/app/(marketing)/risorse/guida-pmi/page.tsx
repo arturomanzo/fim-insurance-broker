@@ -128,7 +128,7 @@ export default function GuidaPmiPage() {
                 <h2 className="text-2xl font-black text-primary m-0">Perché un&apos;impresa ha bisogno di assicurarsi</h2>
               </div>
               <p className="text-gray-700 leading-relaxed mb-4">
-                In Italia, quasi il 70% delle PMI è sottoassicurato o non ha coperture adeguate.
+                In Italia molte PMI scoprono di essere sottoassicurate solo quando arriva il sinistro.
                 Il risultato: quando accade un sinistro rilevante (incendio, infortunio grave, contestazione di un cliente),
                 l&apos;impresa si trova a dover far fronte a costi che possono arrivare a centinaia di migliaia di euro.
               </p>
@@ -236,7 +236,7 @@ export default function GuidaPmiPage() {
                     icon: '💻',
                     name: 'Cyber Risk',
                     priority: 'Media-Alta',
-                    desc: "Un ransomware blocca i tuoi sistemi. Dati dei clienti rubati. Sanzioni GDPR. La cyber risk copre i costi di ripristino IT, le spese legali, le sanzioni e il danno reputazionale. Non è più solo per le grandi aziende: il 43% degli attacchi informatici colpisce PMI.",
+                    desc: "Un ransomware blocca i tuoi sistemi. Dati dei clienti rubati. Sanzioni GDPR. La cyber risk copre i costi di ripristino IT, le spese legali, le sanzioni e il danno reputazionale. Non è più solo per le grandi aziende: le PMI sono un bersaglio frequente, perché spesso sono meno protette.",
                   },
                   {
                     icon: '⏸️',

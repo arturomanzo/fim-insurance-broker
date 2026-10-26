@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const painPoints = [
   { icon: '🔥', title: 'Fermo produzione', desc: 'Un incendio, un guasto a un macchinario chiave, un evento naturale: ogni giorno di fermo significa ordini persi e clienti che cercano altri fornitori.' },
   { icon: '🌍', title: 'RC prodotto export', desc: 'Vendere un prodotto in USA, UK o UE significa esporsi a richieste danni con criteri di responsabilità più stringenti rispetto all\'Italia.' },
-  { icon: '🔐', title: 'Cyber attacchi su OT', desc: 'PLC, SCADA e linee di produzione connesse sono target di ransomware. Un blocco di 7-15 giorni può costare il 5-10% del fatturato annuo.' },
+  { icon: '🔐', title: 'Cyber attacchi su OT', desc: 'PLC, SCADA e linee di produzione connesse sono target di ransomware. Una o due settimane di fermo pesano su consegne, penali e clienti.' },
   { icon: '⚠️', title: 'Catastrofi naturali 2025', desc: 'Dal 2025 le imprese italiane hanno l\'obbligo di assicurare immobili e impianti contro alluvioni, terremoti e frane (L. 213/2023, art. 1 comma 101).' },
 ]
 
@@ -115,7 +115,7 @@ export default function ManifatturieroPage() {
             </p>
             <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
               <p className="text-white/90 text-sm">
-                <strong className="text-accent">Sapevi che</strong> — il 60% delle PMI italiane che subiscono un incendio grave non riapre entro 6 mesi.
+                <strong className="text-accent">Sapevi che</strong> — dopo un incendio grave un&apos;azienda può restare ferma per mesi, con i costi fissi che corrono.
                 La Business Interruption è la copertura che più spesso salva l&apos;azienda — e spesso la meno conosciuta.
               </p>
             </div>
