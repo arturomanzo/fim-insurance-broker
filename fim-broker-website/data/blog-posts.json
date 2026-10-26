@@ -1,6 +1,53 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-cantiere-car-postuma-decennale-imprese-edili-2026",
+      "title": "Polizza CAR e postuma decennale: come assicurare davvero un cantiere nel 2026",
+      "excerpt": "Tra lavori in corso, danni a terzi e garanzie da consegnare all'acquirente, l'impresa edile ha tre coperture diverse che fanno cose diverse. Vediamo quali, e dove nascono i problemi.",
+      "category": "Aziendale",
+      "date": "26 Ottobre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Il cantiere non è coperto dalla RC generale dell'impresa",
+          "body": "È l'equivoco che incontro più spesso. Un'impresa edile ha la RCT, pensa di essere a posto, e scopre al primo sinistro che il danno all'opera in costruzione non è un danno a terzi: è un danno a una cosa propria o del committente, e la RCT non la tocca. La polizza che risponde dei danni materiali all'opera mentre la si costruisce è la CAR, Contractors All Risks, che è una copertura di cose, non di responsabilità. Servono entrambe, e servono scritte in modo che non lascino buchi fra l'una e l'altra."
+        },
+        {
+          "heading": "Cosa guarda un broker quando legge una CAR",
+          "body": "La CAR si gioca sulle sezioni e sulle partite, non sul premio di copertina. La sezione danni all'opera va dimensionata sul valore finale dei lavori comprensivo di materiali forniti dal committente, altrimenti scatta la proporzionale. E poi ci sono le estensioni che cambiano la vita a un'impresa: opere preesistenti, danni da errore di progettazione, manutenzione postuma, spese di demolizione e sgombero.",
+          "list": [
+            "Valore dell'opera dichiarato al netto o al lordo delle forniture del committente",
+            "Garanzia opere preesistenti, quando si lavora su un edificio già esistente",
+            "Periodo di manutenzione: solo visita o manutenzione estesa",
+            "Danni da gelo, vento, acqua e assestamento del terreno: spesso sottolimitati",
+            "Attrezzature, baraccamenti e impianti di cantiere, da assicurare a parte"
+          ]
+        },
+        {
+          "heading": "La RCT di cantiere: il punto dolente sono i danni a immobili vicini",
+          "body": "Scavi, demolizioni, battitura di pali, vibrazioni. Il danno tipico del cantiere urbano non è l'operaio che fa cadere un attrezzo, è la crepa nel muro del palazzo confinante. Molte RCT standard escludono o limitano pesantemente i danni da cedimento e franamento del terreno e quelli da vibrazioni: se l'impresa lavora in centro storico quella estensione va chiesta esplicitamente e va vista nel massimale, non solo nel titolo della garanzia. Ricordo anche l'articolo 2051 del Codice Civile: chi ha la custodia del cantiere risponde dei danni causati dalle cose che vi si trovano, salvo prova del caso fortuito, e la custodia in cantiere passa spesso di mano fra appaltatore e subappaltatore."
+        },
+        {
+          "heading": "La postuma decennale: non è un di più, per chi vende è un obbligo",
+          "body": "La legge impone al costruttore che vende un immobile da costruire a una persona fisica di consegnare, all'atto del trasferimento, una polizza indennitaria decennale a copertura dei danni materiali e diretti all'immobile derivanti da rovina totale o parziale o da gravi difetti costruttivi. È una polizza che si stipula prima, non dopo: va impostata in fase di progetto, perché la compagnia chiede perizie tecniche e un controllo indipendente sul cantiere, e a lavori finiti il treno è passato. Vale la pena ricordare anche l'articolo 2053 del Codice Civile, che rende il proprietario dell'edificio responsabile dei danni causati dalla rovina salvo prova che non dipenda da difetto di manutenzione o vizio di costruzione: la catena di responsabilità, in edilizia, non si chiude con il rogito."
+        },
+        {
+          "heading": "Chi paga e chi è assicurato: il nodo dei contraenti",
+          "body": "In un cantiere si muovono committente, general contractor, appaltatore, subappaltatori, progettista, direttore dei lavori. La CAR si può intestare al committente o all'impresa, e la differenza conta: se la stipula il committente e l'impresa è assicurata, la compagnia non potrà rivalersi su di lei; se la stipula l'impresa, i subappaltatori vanno nominati o restano terzi, con tutto quello che ne consegue sulla rivalsa. Nei capitolati queste clausole sono spesso scritte in due righe e poi disattese dalla polizza che si compra davvero. Il controllo di coerenza fra capitolato e polizza è il lavoro meno appariscente e più utile che facciamo su una pratica di cantiere."
+        },
+        {
+          "heading": "Il premio: da cosa dipende, prima di chiedere un numero",
+          "body": "Non serve chiedere quanto costa una CAR senza i dati: la valutazione parte dal valore dell'opera, dalla tipologia (nuova costruzione, ristrutturazione, lavori su preesistenze), dalla durata del cantiere, dalla presenza di scavi profondi o demolizioni, dalla natura del terreno e dalla vicinanza di altri fabbricati. Le franchigie e gli scoperti sulle garanzie di terreno e progettazione pesano quanto il massimale. Un'impresa che lavora in continuità può valutare una forma a polizza aperta che copre tutti i cantieri dichiarati nell'anno, invece di un contratto per ogni commessa."
+        },
+        {
+          "heading": "Parliamone prima di aprire il cantiere",
+          "body": "FIM Insurance Broker, con sede a Cisterna di Latina e iscrizione al RUI Sez. B n. B000405449, lavora accanto a imprese edili e committenti privati per impostare le coperture di cantiere mentre il progetto è ancora sul tavolo. Portateci il capitolato, il computo metrico e il cronoprogramma: da lì ricostruiamo chi deve essere assicurato, per cosa e con quali massimali, e confrontiamo le soluzioni disponibili sul mercato per il vostro caso. Un'ora di analisi prima dello scavo vale più di qualsiasi discussione dopo il sinistro."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "assicurazione-inquilino-rischio-locativo-ricorso-terzi-2026",
       "title": "Assicurazione per chi vive in affitto: rischio locativo e ricorso terzi vicini",
       "excerpt": "Chi abita in una casa in affitto risponde dei danni all'immobile e può essere chiamato a rispondere anche verso i vicini. Ecco come funzionano rischio locativo e ricorso terzi, e cosa serve davvero a un inquilino.",
