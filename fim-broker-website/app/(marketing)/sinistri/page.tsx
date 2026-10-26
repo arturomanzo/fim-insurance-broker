@@ -115,12 +115,11 @@ export default function SinistriPage() {
       {/* Numeri */}
       <section className="bg-white py-10 border-b border-gray-100">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
             {[
-              { num: '+500', label: 'Sinistri gestiti' },
-              { num: '94%', label: 'Tasso di liquidazione' },
               { num: '1 giorno', label: 'Lavorativo, per ricontattarti' },
-              { num: '30+', label: 'Anni di mestiere' },
+              { num: '20', label: 'Compagnie partner' },
+              { num: '30+', label: 'Anni di mestiere, dal 1993' },
             ].map((s) => (
               <div key={s.label}>
                 <div className="text-3xl font-black text-primary">{s.num}</div>

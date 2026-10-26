@@ -1,7 +1,7 @@
 const stats = [
   { value: '30+', label: 'Anni di mestiere', description: 'Di famiglia, dal 1993' },
   { value: '4.9/5', label: 'Rating Google Reviews', description: '★★★★★ clienti soddisfatti' },
-  { value: '20', label: 'Compagnie partner', description: 'Confrontiamo le migliori per te' },
+  { value: '20', label: 'Compagnie partner', description: 'Le confrontiamo per te' },
 ]
 
 export default function Stats() {

@@ -55,7 +55,7 @@ const TRUST_POINTS = [
   { label: 'Gratuito', desc: 'Nessun costo, nessun impegno' },
   { label: 'Sicuro', desc: 'Il PDF non viene salvato' },
   { label: 'Veloce', desc: 'Report pronto in 30 secondi' },
-  { label: 'Esperto', desc: 'Tutto il mercato a confronto' },
+  { label: 'Esperto', desc: 'Confronto con le coperture standard' },
 ]
 
 const FAQS = [
