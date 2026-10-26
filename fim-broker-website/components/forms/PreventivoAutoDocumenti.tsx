@@ -14,6 +14,7 @@ import {
   type DocSlot,
   type PreventivoAutoPrefill,
 } from '@/lib/preventivoDocumenti'
+import { RICONTATTO } from '@/lib/tempi'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -267,7 +268,7 @@ export default function PreventivoAutoDocumenti() {
         </div>
         <h3 className="text-2xl font-black text-primary mb-2">Documenti inviati!</h3>
         <p className="text-gray-600 max-w-md mx-auto">
-          Abbiamo ricevuto i tuoi documenti in modo sicuro. Ti ricontattiamo entro 24 ore lavorative
+          Abbiamo ricevuto i tuoi documenti in modo sicuro. Ti ricontattiamo {RICONTATTO}
           con le offerte a confronto. Trovi la conferma nella tua email.
         </p>
       </div>

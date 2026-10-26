@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { IconTrasparenza, IconDesign, IconVisione } from '@/components/icons/PilastriIcons'
 import Button from '@/components/ui/Button'
 import { OG_BASE } from '@/lib/seo'
+import { RICONTATTO } from '@/lib/tempi'
 
 export const metadata: Metadata = {
   // Title: 60 caratteri — entro la soglia ~60 oltre cui Google tronca in SERP.
@@ -227,7 +228,7 @@ export default function HomePage() {
                   step: '03',
                   icon: '📊',
                   title: 'Ricevi il preventivo',
-                  desc: 'Entro 24 ore lavorative ti presentiamo un preventivo dettagliato e personalizzato, senza impegno.',
+                  desc: `Ti ricontattiamo ${RICONTATTO}. Poi raccogliamo le quotazioni e ti presentiamo il confronto, senza impegno.`,
                 },
                 {
                   step: '04',
@@ -307,7 +308,7 @@ export default function HomePage() {
                 <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-1">Per PMI e professionisti</p>
                 <h3 className="text-lg font-black text-primary mb-1">Second Opinion assicurativa gratuita</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Hai già delle polizze? Inviaci i PDF: un consulente FIM analizza le lacune e ti risponde entro 48 ore.
+                  Hai già delle polizze? Inviaci i PDF: un consulente FIM analizza le lacune e ti ricontatta {RICONTATTO}.
                 </p>
               </div>
             </div>
@@ -408,7 +409,7 @@ export default function HomePage() {
             La tua mossa più strategica inizia qui
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Un&apos;analisi gratuita dei tuoi rischi, senza impegno. Decodifichiamo la complessità e ti presentiamo la soluzione giusta in 24 ore.
+            Un&apos;analisi gratuita dei tuoi rischi, senza impegno. Decodifichiamo la complessità e ti diciamo cosa serve davvero.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button variant="primary" size="lg" href="/preventivo">

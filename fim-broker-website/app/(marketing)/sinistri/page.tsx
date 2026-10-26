@@ -119,7 +119,7 @@ export default function SinistriPage() {
             {[
               { num: '+500', label: 'Sinistri gestiti' },
               { num: '94%', label: 'Tasso di liquidazione' },
-              { num: '< 24h', label: 'Presa in carico' },
+              { num: '1 giorno', label: 'Lavorativo, per ricontattarti' },
               { num: '30+', label: 'Anni di mestiere' },
             ].map((s) => (
               <div key={s.label}>

@@ -12,7 +12,7 @@ const SETTORE_QS = '?profilo=pmi&settore=Manifatturiero'
 export const metadata: Metadata = {
   title: 'Assicurazioni Manifatturiero — Property, Business Interruption, RC Prodotto',
   description:
-    'Polizze per industria manifatturiera e PMI produttive: All Risk Property su capannone e macchinari, Business Interruption, RC Prodotto (anche export USA/UK), Cyber OT/IT e trasporti merci. Preventivo in 24 ore.',
+    'Polizze per industria manifatturiera e PMI produttive: All Risk Property su capannone e macchinari, Business Interruption, RC Prodotto (anche export USA/UK), Cyber OT/IT e trasporti merci.',
   alternates: { canonical: '/soluzioni/settori/manifatturiero' },
   openGraph: {
     ...OG_BASE,

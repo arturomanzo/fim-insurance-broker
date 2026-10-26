@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { linkWhatsApp } from '@/lib/whatsappSito'
+import { RICONTATTO } from '@/lib/tempi'
 
 export default function Hero() {
   return (
@@ -44,7 +45,7 @@ export default function Hero() {
               <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Analisi gratuita · Risposta in 24 ore
+              Analisi gratuita · Ricontatto {RICONTATTO}
             </div>
 
             {/* CTAs */}

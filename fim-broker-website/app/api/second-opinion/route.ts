@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { sendLeadFromRequest } from '@/lib/metaCapi'
+import { RICONTATTO } from '@/lib/tempi'
 
 function validateEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -173,7 +174,7 @@ function buildClientConfirmHtml(rawNome: string): string {
       <p style="font-size: 16px; color: #1e293b; margin: 0 0 16px;">Gentile <strong>${nome}</strong>,</p>
       <p style="font-size: 15px; color: #475569; line-height: 1.7; margin: 0 0 20px;">
         Abbiamo ricevuto la tua richiesta di <strong>Second Opinion assicurativa</strong>.
-        Un nostro consulente analizzerà le tue polizze e ti contatterà entro <strong>48 ore lavorative</strong>
+        Un nostro consulente analizzerà le tue polizze e ti contatterà <strong>${RICONTATTO}</strong>
         con una Gap Analysis dettagliata sui rischi latenti nelle tue coperture attuali.
       </p>
       <div style="background: #f0f9ff; border-radius: 10px; padding: 16px 20px; margin: 0 0 24px; border-left: 4px solid #00b4c8;">

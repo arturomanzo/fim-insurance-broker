@@ -4,27 +4,28 @@ import PreventivoForm from '@/components/forms/PreventivoForm'
 import Card from '@/components/ui/Card'
 import { EMAIL_RCA } from '@/lib/contatti'
 import { OG_BASE } from '@/lib/seo'
+import { RICONTATTO } from '@/lib/tempi'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
 export const metadata: Metadata = {
   title: 'Richiedi Preventivo Gratuito',
-  description: 'Richiedi il tuo preventivo assicurativo gratuito e personalizzato. Risponderemo entro 24 ore con la soluzione migliore per te.',
+  description: `Richiedi il tuo preventivo assicurativo gratuito e personalizzato. Ti ricontattiamo ${RICONTATTO}.`,
   alternates: { canonical: '/preventivo' },
   openGraph: {
     ...OG_BASE,
     url: '/preventivo',
-    images: [{ url: '/api/og?title=Preventivo+Gratuito&tag=FIM+Insurance+Broker&sub=Preventivo+personalizzato+in+24+ore.+Senza+impegno.', width: 1200, height: 630 }],
+    images: [{ url: '/api/og?title=Preventivo+Gratuito&tag=FIM+Insurance+Broker&sub=Preventivo+personalizzato+senza+impegno.', width: 1200, height: 630 }],
   },
   twitter: {
-    images: ['/api/og?title=Preventivo+Gratuito&tag=FIM+Insurance+Broker&sub=Preventivo+personalizzato+in+24+ore.+Senza+impegno.'],
+    images: ['/api/og?title=Preventivo+Gratuito&tag=FIM+Insurance+Broker&sub=Preventivo+personalizzato+senza+impegno.'],
   },
 }
 
 const steps = [
   { n: '1', title: 'Compila il modulo', desc: 'Inserisci le tue informazioni e le tue esigenze assicurative.' },
   { n: '2', title: 'Riceviamo la richiesta', desc: 'Il nostro team analizza la tua richiesta e confronta le offerte.' },
-  { n: '3', title: 'Ti contattiamo', desc: 'Entro 24 ore ti presentiamo le offerte a confronto, con la nostra raccomandazione.' },
+  { n: '3', title: 'Ti contattiamo', desc: `Ti ricontattiamo ${RICONTATTO}. Quando le compagnie hanno quotato ti presentiamo le offerte a confronto, con la nostra raccomandazione.` },
 ]
 
 // HowTo schema — espone il processo "come richiedere un preventivo
@@ -37,8 +38,7 @@ const howToSchema = {
   '@id': `${BASE_URL}/preventivo#howto`,
   name: 'Come richiedere un preventivo assicurativo gratuito',
   description:
-    'Procedura in 3 step per ottenere un preventivo personalizzato da un broker indipendente. Risposta entro 24 ore, nessun costo, nessun impegno.',
-  totalTime: 'PT24H',
+    `Procedura in 3 step per ottenere un preventivo personalizzato da un broker indipendente. Ricontatto ${RICONTATTO}, nessun costo, nessun impegno.`,
   estimatedCost: { '@type': 'MonetaryAmount', currency: 'EUR', value: '0' },
   step: steps.map((s, i) => ({
     '@type': 'HowToStep',
@@ -129,7 +129,7 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
                   {[
                     '✓ Confronto tra 20 compagnie',
                     '✓ Consulenza gratuita e senza impegno',
-                    '✓ Risposta in 24 ore lavorative',
+                    `✓ Ricontatto ${RICONTATTO}`,
                     '✓ Assistenza post-vendita inclusa',
                     '✓ Gestione sinistri dedicata',
                     '✓ Nessun costo di intermediazione',

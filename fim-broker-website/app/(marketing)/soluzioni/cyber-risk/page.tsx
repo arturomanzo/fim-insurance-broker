@@ -6,6 +6,7 @@ import { cyberRiskFaq } from '@/lib/faq/cyber-risk'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { RICONTATTO } from '@/lib/tempi'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Cyber Risk — Protezione PMI e Professionisti da Attacchi Informatici',
@@ -437,7 +438,7 @@ export default function CyberRiskPage() {
             La tua azienda è protetta da un cyber attacco?
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Analisi gratuita del rischio cyber. Preventivo DUAL Cyber Smart Plus entro 24 ore.
+            Analisi gratuita del rischio cyber. Ti ricontattiamo {RICONTATTO}.
             Nessun impegno.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">

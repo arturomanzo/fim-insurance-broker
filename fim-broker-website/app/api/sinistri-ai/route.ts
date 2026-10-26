@@ -3,6 +3,7 @@ import { anthropic } from '@/lib/anthropic'
 import { AI_MODELS, FALLBACK_BETA } from '@/lib/ai-models'
 import { rateLimit } from '@/lib/rateLimit'
 import { haConsensoSanitario } from '@/lib/consensoSanitario'
+import { RICONTATTO } from '@/lib/tempi'
 
 export const runtime = 'nodejs'
 
@@ -25,7 +26,7 @@ Se il cliente ha già selezionato il tipo, procedi direttamente alla FASE 2. Alt
 ✅ Numero della polizza RC Auto
 
 **Furto / Furto con scasso:**
-⚠️ Denuncia alle Forze dell'Ordine OBBLIGATORIA entro 48 ore
+⚠️ Denuncia alle Forze dell'Ordine da fare subito: molte polizze fissano un termine breve
 ✅ Copia denuncia con numero di riferimento
 ✅ Lista dettagliata oggetti sottratti con valori stimati
 ✅ Foto danni da effrazione (porte, finestre, serrature)
@@ -80,9 +81,9 @@ Comunica sempre tempi stimati per quel tipo di sinistro:
 - Incendio: **30-90 giorni** (perizia obbligatoria)
 - Infortuni: **30-60 giorni**
 - Sinistri complessi o contestati: **90-180 giorni**
-Presa in carico FIM: entro **24 ore lavorative**
+Ricontatto FIM: **${RICONTATTO}**
 
-Spiega brevemente il processo: FIM riceve la pratica → presa in carico entro 24h → apertura denuncia con la compagnia → monitoraggio iter → aggiornamenti al cliente.
+Spiega brevemente il processo: FIM riceve la pratica → ricontatto ${RICONTATTO} → apertura denuncia con la compagnia → monitoraggio iter → aggiornamenti al cliente.
 
 ### FASE 5 — Dati personali e pre-compilazione form
 Quando hai raccolto le informazioni sull'evento, chiedi:

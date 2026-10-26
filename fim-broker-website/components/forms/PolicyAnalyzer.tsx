@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from 'react'
 import Button from '@/components/ui/Button'
 import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
+import { RICONTATTO } from '@/lib/tempi'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -441,7 +442,7 @@ export default function PolicyAnalyzer() {
               Parla con un consulente
             </a>
           </div>
-          <p className="text-xs opacity-60 mt-4">Risposta entro 24 ore · Nessun impegno</p>
+          <p className="text-xs opacity-60 mt-4">Ricontatto {RICONTATTO} · Nessun impegno</p>
         </div>
 
         {/* Restart */}

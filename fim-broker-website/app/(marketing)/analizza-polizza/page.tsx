@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import PolicyAnalyzer from '@/components/forms/PolicyAnalyzer'
 import { OG_BASE } from '@/lib/seo'
+import { RICONTATTO } from '@/lib/tempi'
 
 export const metadata: Metadata = {
   title: 'Analizza la tua Polizza Gratis',
@@ -197,7 +198,7 @@ export default function AnalizzaPolizzaPage() {
           <p className="text-gray-600 mb-6 max-w-xl mx-auto">
             L&apos;analisi AI è ottima per una singola polizza. Se hai un portafoglio complesso — RC, incendio, cyber, catastrofale —
             richiedi la <strong>Second Opinion gratuita</strong>: un consulente FIM fa la Gap Analysis su tutte le tue coperture
-            e ti ricontatta entro 48 ore.
+            e ti ricontatta {RICONTATTO}.
           </p>
           <a href="/seconda-opinione" className="btn-primary inline-block">
             Richiedi la Second Opinion gratuita →

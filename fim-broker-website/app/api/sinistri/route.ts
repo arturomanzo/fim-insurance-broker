@@ -3,6 +3,7 @@ import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { saveSinistro } from '@/lib/sinistriStore'
 import { haConsensoSanitario } from '@/lib/consensoSanitario'
+import { RICONTATTO } from '@/lib/tempi'
 
 interface SinistriRequest {
   nome: string
@@ -205,7 +206,7 @@ export async function POST(req: NextRequest) {
       <p style="font-size:16px;color:#1e293b;margin:0 0 16px;">Gentile <strong>${escapeHtml(nome)}</strong>,</p>
       <p style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 20px;">
         Abbiamo ricevuto la segnalazione del sinistro <strong>${escapeHtml(tipoSinistro)}</strong>.
-        Il nostro team la prenderà in carico e ti contatterà entro <strong>24 ore lavorative</strong>.
+        Il nostro team la prenderà in carico e ti contatterà <strong>${RICONTATTO}</strong>.
       </p>
       <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:20px;margin:24px 0;">
         <p style="margin:0 0 8px;font-weight:700;color:#0B1F3A;font-size:14px;">Riferimento pratica: ${id}</p>

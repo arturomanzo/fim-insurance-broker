@@ -5,6 +5,7 @@ import { pulisciCampagna } from '@/lib/campagna'
 import { rateLimit } from '@/lib/rateLimit'
 import { saveLead } from '@/lib/leadStore'
 import { sendLeadFromRequest } from '@/lib/metaCapi'
+import { RICONTATTO } from '@/lib/tempi'
 
 interface PreventivoRequest {
   tipo: string
@@ -58,9 +59,9 @@ const FIM_FROM = process.env.FIM_FROM_EMAIL || 'FIM Insurance Broker <noreply@fi
 
 const PROFILO_PRIORITY: Record<string, { label: string; color: string; bg: string; border: string; sla: string }> = {
   impresa:      { label: '🔴 Alta priorità', color: '#b91c1c', bg: '#fff1f2', border: '#fecdd3', sla: 'Rispondere entro 4 ore lavorative' },
-  pmi:          { label: '🟠 Alta priorità', color: '#b45309', bg: '#fffbeb', border: '#fde68a', sla: 'Rispondere entro 24 ore lavorative' },
-  professionista:{ label: '🟡 Media priorità', color: '#854d0e', bg: '#fefce8', border: '#fef08a', sla: 'Rispondere entro 24 ore lavorative' },
-  privato:      { label: '🟢 Standard',       color: '#166534', bg: '#f0fdf4', border: '#bbf7d0', sla: 'Rispondere entro 24 ore lavorative' },
+  pmi:          { label: '🟠 Alta priorità', color: '#b45309', bg: '#fffbeb', border: '#fde68a', sla: `Ricontattare ${RICONTATTO}` },
+  professionista:{ label: '🟡 Media priorità', color: '#854d0e', bg: '#fefce8', border: '#fef08a', sla: `Ricontattare ${RICONTATTO}` },
+  privato:      { label: '🟢 Standard',       color: '#166534', bg: '#f0fdf4', border: '#bbf7d0', sla: `Ricontattare ${RICONTATTO}` },
 }
 
 const PROFILO_LABELS_IT: Record<string, string> = {
@@ -271,8 +272,7 @@ function buildClientEmailHtml(rawNome: string, rawTipo: string): string {
       <p style="font-size: 16px; color: #1e293b; margin: 0 0 16px;">Gentile <strong>${nome}</strong>,</p>
       <p style="font-size: 15px; color: #475569; line-height: 1.7; margin: 0 0 20px;">
         Abbiamo ricevuto la tua richiesta di preventivo per <strong style="color: #0B1F3A;">${tipo}</strong>.
-        Il nostro team la analizzerà e ti contatterà entro <strong>24 ore lavorative</strong> con
-        la soluzione più adatta alle tue esigenze.
+        Il nostro team la analizzerà e ti ricontatterà <strong>${RICONTATTO}</strong>.
       </p>
 
       <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 20px; margin: 24px 0;">
@@ -499,7 +499,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: 'Richiesta ricevuta. Ti contatteremo entro 24 ore lavorative.',
+        message: `Richiesta ricevuta. Ti ricontattiamo ${RICONTATTO}.`,
         id: preventivoData.id,
       },
       { status: 200 }

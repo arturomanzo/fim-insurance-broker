@@ -7,6 +7,7 @@ import { catastrofiNaturaliFaq } from '@/lib/faq/catastrofi-naturali'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { RICONTATTO } from '@/lib/tempi'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Catastrofi Naturali — Alluvioni, Terremoti, Grandinate',
@@ -256,7 +257,7 @@ export default function CatastrofiNaturaliPage() {
             Sei coperto per le catastrofi naturali?
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Analisi gratuita della tua copertura attuale. Preventivo personalizzato entro 24 ore.
+            Analisi gratuita della tua copertura attuale. Ti ricontattiamo {RICONTATTO}.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">

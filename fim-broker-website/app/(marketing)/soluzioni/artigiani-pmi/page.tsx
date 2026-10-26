@@ -8,11 +8,12 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { RICONTATTO } from '@/lib/tempi'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Artigiani e PMI — Proteggi la tua Attività',
   description:
-    'Polizze assicurative per artigiani, commercianti e PMI italiane. RC impresa, all-risk capannone, infortuni dipendenti, flotta aziendale. Preventivo gratuito in 24 ore.',
+    'Polizze assicurative per artigiani, commercianti e PMI italiane. RC impresa, all-risk capannone, infortuni dipendenti, flotta aziendale.',
   alternates: { canonical: '/soluzioni/artigiani-pmi' },
   openGraph: {
     ...OG_BASE,
@@ -372,7 +373,7 @@ export default function ArtigianiPmiPage() {
           <h2 className="text-2xl font-bold text-primary mb-3">Hai già delle polizze? Scopri se ti coprono davvero</h2>
           <p className="text-gray-600 mb-6 max-w-xl mx-auto">
             Inviaci i PDF dei tuoi contratti attuali. Un consulente FIM fa la <strong>Gap Analysis gratuita</strong>
-            su RC, incendio, catastrofale e cyber — e ti dice dove sei scoperto, entro 48 ore.
+            su RC, incendio, catastrofale e cyber — e ti dice dove sei scoperto.
           </p>
           <Link href="/seconda-opinione" className="btn-primary inline-block">
             Richiedi la Second Opinion gratuita →
@@ -387,7 +388,7 @@ export default function ArtigianiPmiPage() {
             La tua attività è adeguatamente protetta?
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Un&apos;analisi gratuita dei tuoi rischi aziendali. Nessun impegno, risposta in 24 ore.
+            Un&apos;analisi gratuita dei tuoi rischi aziendali. Nessun impegno: ti ricontattiamo {RICONTATTO}.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/prenota-consulenza" className="btn-primary text-lg px-8 py-4">

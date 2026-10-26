@@ -8,11 +8,12 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
+import { RICONTATTO } from '@/lib/tempi'
 
 export const metadata: Metadata = {
   title: 'Assicurazione per Professionisti — RC Professionale Obbligatoria',
   description:
-    'RC Professionale per avvocati, commercialisti, ingegneri, consulenti e medici. Obbligatoria per legge, personalizzata per la tua categoria. Preventivo gratuito in 24 ore.',
+    'RC Professionale per avvocati, commercialisti, ingegneri, consulenti e medici. Obbligatoria per legge, personalizzata per la tua categoria. Preventivo gratuito.',
   alternates: { canonical: '/soluzioni/professionisti' },
   openGraph: {
     ...OG_BASE,
@@ -268,8 +269,8 @@ export default function ProfessionistiPage() {
                   },
                   {
                     icon: '⚡',
-                    title: 'Preventivo in 24 ore',
-                    desc: 'Compila il form con i tuoi dati: fatturato, categoria e massimale. Entro 24 ore lavorative hai un confronto di offerte personalizzato.',
+                    title: 'Confronto delle offerte',
+                    desc: `Compila il form con i tuoi dati: fatturato, categoria e massimale. Ti ricontattiamo ${RICONTATTO} e ti presentiamo il confronto appena le compagnie hanno quotato.`,
                   },
                   {
                     icon: '🤝',
@@ -294,7 +295,7 @@ export default function ProfessionistiPage() {
                   'Seleziona la tua categoria professionale',
                   'Indica il tuo fatturato annuo',
                   'Scegli il massimale desiderato',
-                  'Ricevi il confronto offerte entro 24 ore',
+                  `Ti ricontattiamo ${RICONTATTO}`,
                 ].map((step, i) => (
                   <div key={step} className="flex items-center gap-3">
                     <span className="w-7 h-7 rounded-full bg-accent-cta text-white text-xs font-black flex items-center justify-center flex-shrink-0">
@@ -307,7 +308,7 @@ export default function ProfessionistiPage() {
               <Link href="/preventivo" className="btn-primary w-full text-center block text-lg py-4">
                 Inizia il preventivo
               </Link>
-              <p className="text-center text-white/60 text-xs mt-3">Gratuito, senza impegno, risposta in 24 ore</p>
+              <p className="text-center text-white/60 text-xs mt-3">Gratuito, senza impegno: ti ricontattiamo {RICONTATTO}</p>
             </div>
           </div>
         </div>
@@ -322,7 +323,7 @@ export default function ProfessionistiPage() {
           <h2 className="text-2xl font-bold text-primary mb-3">Hai già una RC professionale? Scopri se ti copre davvero</h2>
           <p className="text-gray-600 mb-6 max-w-xl mx-auto">
             Inviaci il PDF del tuo contratto attuale. Un consulente FIM analizza massimali, esclusioni e lacune
-            e ti risponde con la <strong>Gap Analysis gratuita</strong> entro 48 ore — senza impegno.
+            e ti risponde con la <strong>Gap Analysis gratuita</strong>, senza impegno.
           </p>
           <Link href="/seconda-opinione" className="btn-primary inline-block">
             Richiedi la Second Opinion gratuita →
@@ -337,7 +338,7 @@ export default function ProfessionistiPage() {
             Sei in regola con la tua RC professionale?
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Verifica subito la tua copertura attuale o richiedi un preventivo. Risposta in 24 ore, consulenza gratuita.
+            Verifica subito la tua copertura attuale o richiedi un preventivo. Ti ricontattiamo {RICONTATTO}, consulenza gratuita.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/preventivo" className="btn-primary text-lg px-8 py-4">

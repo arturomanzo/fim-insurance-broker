@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { RICONTATTO } from '@/lib/tempi'
 
 const CITY = 'Aprilia'
 const SLUG = 'broker-assicurativo-aprilia'
@@ -55,7 +56,7 @@ const vantaggi = [
   { icon: '🎯', title: 'Indipendenza totale', desc: `Non rappresentiamo nessuna compagnia: a ${CITY} lavoriamo solo per il tuo interesse.` },
   { icon: '📊', title: '20 compagnie partner', desc: 'Allianz, Generali, AXA, HDI, Unipol, Prima e molte altre.' },
   { icon: '🤝', title: 'Consulente dedicato', desc: 'Un professionista che conosce il tuo nome, non un call center.' },
-  { icon: '⚡', title: 'Gestione sinistri', desc: 'Ti seguiamo dalla denuncia alla liquidazione con tempi rapidi e assistenza completa.' },
+  { icon: '⚡', title: 'Gestione sinistri', desc: 'Ti seguiamo dalla denuncia alla liquidazione e teniamo noi i contatti con la compagnia.' },
 ]
 
 export default function BrokerAprilia() {
@@ -201,7 +202,7 @@ export default function BrokerAprilia() {
             <Card className="text-center">
               <div className="text-3xl mb-3" aria-hidden="true">📧</div>
               <h3 className="font-bold text-primary mb-1">Email</h3>
-              <p className="text-gray-600 text-sm">info@fimbroker.it<br />Risposta entro 24 ore</p>
+              <p className="text-gray-600 text-sm">info@fimbroker.it<br />Ti ricontattiamo {RICONTATTO}</p>
             </Card>
           </div>
         </div>
@@ -214,7 +215,7 @@ export default function BrokerAprilia() {
             Richiedi un preventivo gratuito a {CITY}
           </h2>
           <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-            Compila il modulo online o chiamaci. Entro 24 ore riceverai un preventivo personalizzato
+            Compila il modulo online o chiamaci. Ti ricontattiamo {RICONTATTO} per il tuo preventivo personalizzato
             con le offerte di più compagnie a confronto.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
