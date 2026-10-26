@@ -133,7 +133,7 @@ function getResult(answers: Answers): Result {
     desc:
       current === 'completa'
         ? 'Hai già una buona base. Ti consigliamo una revisione professionale gratuita per verificare eventuali lacune e ottimizzare i premi.'
-        : 'Basandoci sulle tue risposte, queste sono le coperture più urgenti per il tuo profilo. Un broker FIM può aiutarti a trovare le soluzioni migliori al prezzo giusto.',
+        : 'Basandoci sulle tue risposte, queste sono le coperture che di solito pesano di più in situazioni come la tua. Quali servono davvero a te lo valuta un broker FIM con te, in consulenza.',
     polizze: unique.length > 0
       ? unique
       : [

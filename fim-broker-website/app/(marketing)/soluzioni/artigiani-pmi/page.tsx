@@ -313,7 +313,7 @@ export default function ArtigianiPmiPage() {
               <div className="space-y-4">
                 {[
                   { step: '01', title: 'Analisi dei rischi', desc: 'Capiamo la tua attività: settore, dipendenti, attrezzature, clienti. Identifichiamo le esposizioni reali.' },
-                  { step: '02', title: 'Confronto offerte', desc: 'Chiediamo preventivi alle compagnie partner. Selezioniamo le migliori per copertura e prezzo.' },
+                  { step: '02', title: 'Confronto offerte', desc: 'Chiediamo preventivi alle compagnie partner. Ti mostriamo le proposte a confronto, garanzie e prezzo.' },
                   { step: '03', title: 'Proposta chiara', desc: 'Ti presentiamo un confronto leggibile: cosa copre, cosa non copre, quanto costa, differenze tra opzioni.' },
                   { step: '04', title: 'Supporto continuo', desc: 'Rinnoviamo e adattiamo le polizze al crescere della tua attività. Ti affianchiamo nei sinistri.' },
                 ].map((item) => (

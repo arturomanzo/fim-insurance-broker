@@ -406,7 +406,7 @@ export default function CyberRiskPage() {
               {
                 icon: '🎯',
                 title: 'Mandato diretto DUAL',
-                desc: 'FIM ha un accordo diretto con DUAL — uno dei leader mondiali nel cyber risk. Accediamo a condizioni e massimali non disponibili sul mercato standard.',
+                desc: 'FIM ha un mandato diretto con DUAL Italia, specializzata nel cyber risk: la polizza la chiediamo noi, senza passare da un\'agenzia.',
               },
               {
                 icon: '🔍',

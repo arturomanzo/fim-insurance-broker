@@ -104,7 +104,7 @@ function getCoperture(profile: Profile, settore: string | null, answers: Record<
       priorita: answers.auto ? 'alta' : 'consigliata',
       motivo: answers.auto
         ? "Usi l'auto per lavoro: verifica che la polizza includa l'uso professionale e non solo privato."
-        : 'Ottimizza costo e copertura della tua polizza auto con le migliori offerte di mercato.',
+        : 'Ottimizza costo e copertura della tua polizza auto confrontando le offerte delle compagnie con cui lavoriamo.',
       slug: 'auto',
     })
     res.push({ nome: 'Assicurazione Salute', priorita: 'consigliata', motivo: "Accesso rapido a visite specialistiche e cure private, senza lunghe liste d'attesa del SSN.", slug: 'salute' })
@@ -598,7 +598,7 @@ export default function RiskCalculator() {
             </Link>
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">
-            Un consulente FIM analizzerà il tuo profilo e ti presenterà le migliori offerte di mercato. Nessun impegno.
+            Un consulente FIM analizzerà il tuo profilo e ti presenterà le offerte delle compagnie con cui lavoriamo. Nessun impegno.
           </p>
 
           {/* Restart */}

@@ -37,6 +37,10 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\btasso di liquidazione\b/i, cosa: 'numero promozionale senza fonte' },
   { re: /['"]Sinistri gestiti['"]/, cosa: 'numero promozionale senza fonte' },
   { re: /\btutto il mercato\b/i, cosa: 'copertura del mercato non documentata: le compagnie sono 20' },
+  { re: /\bmigliori\s+(?:compagnie|offerte|soluzioni)\b|\bsoluzioni\s+migliori\b/i, cosa: 'superlativo non verificabile' },
+  { re: /\bnessun\s+competitor\b|\bleader\s+mondial/i, cosa: 'confronto con i concorrenti non verificabile' },
+  { re: /nessun costo di intermediazione|senza costi aggiuntivi rispetto all'acquisto diretto/i, cosa: 'il compenso del broker è la provvigione compresa nel premio' },
+  { re: /\bpaghi troppo\b/i, cosa: 'promessa implicita di risparmio' },
 ]
 
 // Le parole che il CLAUDE.md vieta nei testi. Valgono per ciò che si legge sul
@@ -114,6 +118,9 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     'Ti ricontatteremo entro 48 ore lavorative.',
     "{ num: '< 24h', label: 'Presa in carico' },",
     'con tempi rapidi e assistenza completa',
+    "'✓ Nessun costo di intermediazione',",
+    'Esclusivo · Gratis · Nessun competitor lo fa',
+    'Accesso alle migliori compagnie del mercato',
     "{ num: '94%', label: 'Tasso di liquidazione' },",
     "{ label: '20 compagnie', desc: 'Confronto su tutto il mercato italiano' },",
   ]

@@ -75,7 +75,7 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
               Il tuo preventivo <span className="text-accent">personalizzato</span>
             </h1>
             <p className="text-xl text-white/80">
-              Nessun costo, nessun impegno. Confrontiamo le migliori offerte e ti presentiamo la soluzione ideale.
+              Nessun costo, nessun impegno. Confrontiamo le offerte delle compagnie con cui lavoriamo e ti diamo la nostra raccomandazione.
             </p>
           </div>
         </div>
@@ -132,7 +132,7 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
                     `✓ Ricontatto ${RICONTATTO}`,
                     '✓ Assistenza post-vendita inclusa',
                     '✓ Gestione sinistri dedicata',
-                    '✓ Nessun costo di intermediazione',
+                    '✓ Il nostro compenso è la provvigione compresa nel premio',
                   ].map((item) => (
                     <div key={item} className="text-gray-700 text-sm">{item}</div>
                   ))}
