@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description: 'Architetti della tua sicurezza. Traduciamo la complessità del mercato assicurativo in strategie di protezione su misura.',
     images: [
       {
-        url: '/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20In%20tutta%20Italia.',
+        url: '/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%2C%20un%20mestiere%20di%20famiglia%20dal%201993.%20In%20tutta%20Italia.',
         width: 1200,
         height: 630,
         alt: 'FIM Insurance Broker — Soluzioni Assicurative Personalizzate',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    images: ['/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%20con%2020%20anni%20di%20esperienza.%20In%20tutta%20Italia.'],
+    images: ['/api/og?title=Soluzioni%20Assicurative%20Personalizzate&sub=Broker%20indipendente%2C%20un%20mestiere%20di%20famiglia%20dal%201993.%20In%20tutta%20Italia.'],
   },
 }
 

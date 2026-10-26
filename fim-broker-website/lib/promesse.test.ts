@@ -32,6 +32,9 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\b(?:in|entro)\s+(?:24|48)\s*ore\b/i, cosa: 'tempo promesso: per il ricontatto usa RICONTATTO (lib/tempi.ts)' },
   { re: /\b(?:24|48)h\b(?!\/)/i, cosa: 'tempo promesso: per il ricontatto usa RICONTATTO (lib/tempi.ts)' },
   { re: /\btempi rapidi\b/i, cosa: 'promessa sui tempi di liquidazione' },
+  { re: /\btasso di liquidazione\b/i, cosa: 'numero promozionale senza fonte' },
+  { re: /['"]Sinistri gestiti['"]/, cosa: 'numero promozionale senza fonte' },
+  { re: /\btutto il mercato\b/i, cosa: 'copertura del mercato non documentata: le compagnie sono 20' },
 ]
 
 // Le parole che il CLAUDE.md vieta nei testi. Valgono per ciò che si legge sul
@@ -90,6 +93,8 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     'Ti ricontatteremo entro 48 ore lavorative.',
     "{ num: '< 24h', label: 'Presa in carico' },",
     'con tempi rapidi e assistenza completa',
+    "{ num: '94%', label: 'Tasso di liquidazione' },",
+    "{ label: '20 compagnie', desc: 'Confronto su tutto il mercato italiano' },",
   ]
   for (const esempio of esempi) {
     assert.ok(VIETATE.some(({ re }) => re.test(esempio)), `non riconosciuta: ${esempio}`)

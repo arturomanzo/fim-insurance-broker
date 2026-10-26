@@ -69,7 +69,7 @@ const TRUST_POINTS = [
   { label: 'Gratuito', desc: 'Nessun costo, nessun impegno di acquisto' },
   { label: 'Indipendente', desc: 'Non rappresentiamo compagnie, solo i tuoi interessi' },
   { label: '1 giorno', desc: `Ricontatto ${RICONTATTO}` },
-  { label: '20 compagnie', desc: 'Confronto su tutto il mercato italiano' },
+  { label: '20 compagnie', desc: 'Confronto tra le compagnie con cui lavoriamo' },
 ]
 
 export default function SecondaOpinionePage() {
