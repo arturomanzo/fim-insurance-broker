@@ -131,8 +131,8 @@ export default function FamigliePage() {
             </p>
             <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
               <p className="text-white/90 text-sm">
-                <strong className="text-accent">Sapevi che</strong> — il 68% delle famiglie italiane è sottoassicurata.
-                La polizza media copre meno del 40% del valore reale dell&apos;abitazione.
+                <strong className="text-accent">Sapevi che</strong> — molte case sono assicurate per un valore più basso di quello reale.
+                Quando arriva il danno, la compagnia paga in proporzione e la differenza resta a te.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">

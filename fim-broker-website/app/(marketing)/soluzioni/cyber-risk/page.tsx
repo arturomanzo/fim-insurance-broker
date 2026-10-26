@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 const threats = [
   { icon: '🔒', name: 'Ransomware', desc: 'Blocca i tuoi sistemi e chiede un riscatto' },
-  { icon: '🎣', name: 'Phishing', desc: '+90% degli attacchi inizia da un\'email' },
+  { icon: '🎣', name: 'Phishing', desc: 'La maggior parte degli attacchi parte da un\'email' },
   { icon: '💾', name: 'Data Breach', desc: 'Furto di dati di clienti e dipendenti' },
   { icon: '🛑', name: 'Fermo operativo', desc: 'Sistemi giù = zero ricavi ogni ora' },
   { icon: '⚖️', name: 'Sanzioni GDPR', desc: 'Fino al 4% del fatturato globale' },
@@ -164,15 +164,15 @@ export default function CyberRiskPage() {
               Noi no.
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-6">
-              Il 68% delle PMI italiane ha subìto almeno un attacco informatico negli ultimi 2 anni.
-              Il danno medio supera i 35.000€. La polizza cyber ti protegge da ransomware,
+              Un attacco informatico può fermare un&apos;azienda per giorni, anche piccola.
+              La polizza cyber ti protegge da ransomware,
               data breach, sanzioni GDPR e fermo operativo.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               {[
-                { value: '207 gg', label: 'tempo medio in cui un attacco resta silente prima di essere scoperto' },
-                { value: '90%', label: 'degli attacchi cyber inizia da un errore umano (phishing)' },
+                { value: '72 ore', label: 'per notificare al Garante una violazione dei dati personali (GDPR)' },
                 { value: '4%', label: 'del fatturato globale: sanzione massima GDPR per data breach' },
+                { value: '€10M', label: 'o il 2% del fatturato: sanzione NIS2 per i soggetti essenziali' },
               ].map((stat) => (
                 <div key={stat.label} className="bg-white/10 border border-white/20 rounded-xl p-4 text-center">
                   <div className="text-2xl font-black text-accent mb-1">{stat.value}</div>
