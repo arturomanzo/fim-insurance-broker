@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { NextRequest } from 'next/server'
 import FimLogo from '@/components/ui/FimLogo'
+import OgBadge, { OG_BADGES } from '@/components/seo/OgBadge'
 
 export const runtime = 'edge'
 
@@ -78,21 +79,8 @@ export async function GET(req: NextRequest) {
 
         {/* Bottom badge row */}
         <div style={{ display: 'flex', gap: '24px', marginTop: 'auto', paddingTop: '40px' }}>
-          {['Broker Indipendente', '20 Compagnie Partner', 'Preventivo Gratuito'].map((badge) => (
-            <div
-              key={badge}
-              style={{
-                background: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: '24px',
-                padding: '8px 20px',
-                color: 'rgba(255,255,255,0.75)',
-                fontSize: '15px',
-                fontWeight: '600',
-              }}
-            >
-              {`✓ ${badge}`}
-            </div>
+          {OG_BADGES.map((badge) => (
+            <OgBadge key={badge} testo={badge} />
           ))}
         </div>
 
