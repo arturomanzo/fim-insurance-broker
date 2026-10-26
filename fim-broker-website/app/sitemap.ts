@@ -62,6 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/soluzioni/catastrofi-naturali`, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/cyber-risk`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/soluzioni/flotta-aziendale`, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/stabilimenti-balneari`, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/scuole`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/soluzioni/scuole/affidamento-diretto-brokeraggio`, changeFrequency: 'yearly', priority: 0.7 },
     // Landing page verticali B2B
