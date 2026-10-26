@@ -10,6 +10,8 @@ import { join } from 'node:path'
 
 const RADICE = join(import.meta.dirname, '..')
 const CARTELLE = ['app', 'components', 'lib']
+// Gli articoli del blog stanno in un JSON: valgono le stesse regole delle pagine.
+const DATI = ['data/blog-posts.json']
 
 const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\b(?:price|priceFrom):\s*'(?:da|a partire da)\s/i, cosa: 'prezzo "da X" in una scheda' },
@@ -50,7 +52,7 @@ function fileSorgente(cartella: string): string[] {
 
 test('nessun prezzo e nessuna promessa nelle pagine del sito', () => {
   const trovate: string[] = []
-  for (const file of CARTELLE.flatMap(fileSorgente)) {
+  for (const file of [...CARTELLE.flatMap(fileSorgente), ...DATI]) {
     const righe = readFileSync(join(RADICE, file), 'utf-8').split('\n')
     righe.forEach((riga, i) => {
       for (const { re, cosa } of VIETATE) {
@@ -64,7 +66,7 @@ test('nessun prezzo e nessuna promessa nelle pagine del sito', () => {
 
 test('nessuna parola vietata nei testi del sito', () => {
   const trovate: string[] = []
-  for (const file of CARTELLE.flatMap(fileSorgente)) {
+  for (const file of [...CARTELLE.flatMap(fileSorgente), ...DATI]) {
     const righe = readFileSync(join(RADICE, file), 'utf-8').split('\n')
     righe.forEach((riga, i) => {
       if (COMMENTO.test(riga)) return
@@ -83,7 +85,7 @@ const FONTE = /\([^)]*\b(?:19|20)\d{2}\)/
 
 test('nessuna statistica di mercato senza fonte', () => {
   const trovate: string[] = []
-  for (const file of CARTELLE.flatMap(fileSorgente)) {
+  for (const file of [...CARTELLE.flatMap(fileSorgente), ...DATI]) {
     const righe = readFileSync(join(RADICE, file), 'utf-8').split('\n')
     righe.forEach((riga, i) => {
       if (COMMENTO.test(riga)) return
