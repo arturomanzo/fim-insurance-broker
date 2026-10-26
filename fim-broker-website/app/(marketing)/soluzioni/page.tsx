@@ -214,7 +214,7 @@ export default function SoluzioniPage() {
               { href: '/soluzioni/settori/edilizia', icon: '🏗️', title: 'Edilizia', desc: 'CAR, fideiussioni, infortuni operai, RC subappaltatori, decennale postuma.' },
               { href: '/soluzioni/settori/medico', icon: '⚕️', title: 'Settore Medico', desc: 'RC sanitaria Gelli-Bianco, Colpa Grave SSN, tutela legale, cyber GDPR.' },
               { href: '/soluzioni/settori/manifatturiero', icon: '🏭', title: 'Manifatturiero', desc: 'All Risk Property, Business Interruption, RC Prodotto export, Cyber OT.' },
-              { href: '/soluzioni/settori/welfare-aziendale', icon: '💼', title: 'Welfare Aziendale', desc: 'Polizze collettive deducibili, fidelizzano i dipendenti, abbattono le tasse.' },
+              { href: '/soluzioni/settori/welfare-aziendale', icon: '💼', title: 'Welfare Aziendale', desc: 'Polizze collettive salute, vita e infortuni per i dipendenti.' },
               { href: '/soluzioni/flotta-aziendale', icon: '🚚', title: 'Flotta Aziendale', desc: 'Auto, furgoni e mezzi da lavoro: polizze allineate o libro matricola, sinistri seguiti da noi.' },
               { href: '/soluzioni/stabilimenti-balneari', icon: '🏖️', title: 'Stabilimenti Balneari', desc: 'RC verso bagnanti e bagnini, strutture in spiaggia, mareggiate, meteo della stagione.' },
             ].map((s) => (
