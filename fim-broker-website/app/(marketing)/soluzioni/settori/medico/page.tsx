@@ -12,7 +12,7 @@ const SETTORE_QS = '?profilo=professionista&settore=RC+Professionale+Medico'
 export const metadata: Metadata = {
   title: 'Assicurazione Medici — RC Sanitaria, Colpa Grave, Cyber Studio',
   description:
-    'Polizze per medici, odontoiatri, strutture sanitarie e professionisti del settore salute. RC professionale Legge Gelli-Bianco, Colpa Grave SSN, tutela legale e cyber sanitario GDPR. Preventivo in 24 ore.',
+    'Polizze per medici, odontoiatri, strutture sanitarie e professionisti del settore salute. RC professionale Legge Gelli-Bianco, Colpa Grave SSN, tutela legale e cyber sanitario GDPR.',
   alternates: { canonical: '/soluzioni/settori/medico' },
   openGraph: {
     ...OG_BASE,

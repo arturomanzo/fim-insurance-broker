@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Button from '@/components/ui/Button'
 import { trackSecondOpinionSubmit } from '@/lib/analytics'
 import { metaLeadFields } from '@/lib/metaLead'
+import { RICONTATTO } from '@/lib/tempi'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -137,7 +138,7 @@ export default function SecondOpinionForm() {
         </div>
         <h3 className="text-xl font-bold text-primary mb-2">Richiesta inviata!</h3>
         <p className="text-gray-600 mb-1">
-          Un consulente FIM analizzerà le tue polizze e ti contatterà entro <strong>48 ore lavorative</strong>.
+          Un consulente FIM analizzerà le tue polizze e ti contatterà <strong>{RICONTATTO}</strong>.
         </p>
         <p className="text-gray-400 text-sm">Controlla anche la casella spam.</p>
       </div>
@@ -349,7 +350,7 @@ export default function SecondOpinionForm() {
       </Button>
 
       <p className="text-xs text-gray-400 text-center">
-        Risposta entro 48 ore lavorative · Servizio gratuito e senza impegno
+        Ricontatto {RICONTATTO} · Servizio gratuito e senza impegno
       </p>
     </form>
   )

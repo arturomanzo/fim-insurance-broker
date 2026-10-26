@@ -9,6 +9,7 @@ import CoverageTable from '@/components/ui/CoverageTable'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import PreventivoAutoDocumenti from '@/components/forms/PreventivoAutoDocumenti'
 import { OG_BASE } from '@/lib/seo'
+import { RICONTATTO } from '@/lib/tempi'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -230,7 +231,7 @@ export default async function ServizioPage({ params }: Props) {
                   </p>
                 </div>
                 <p className="text-white/80 text-sm mb-5">
-                  Ricevi un preventivo personalizzato entro 24 ore. Consulenza gratuita, nessun impegno.
+                  Ti ricontattiamo {RICONTATTO}. Consulenza gratuita, nessun impegno.
                 </p>
                 <Link href="/preventivo" className="btn-primary w-full text-center block mb-3">
                   Richiedi Preventivo

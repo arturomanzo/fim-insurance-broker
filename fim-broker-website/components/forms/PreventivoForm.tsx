@@ -13,6 +13,7 @@ import {
 } from '@/lib/analytics'
 import { metaLeadFields } from '@/lib/metaLead'
 import { campagnaPerInvio } from '@/lib/campagnaBrowser'
+import { RICONTATTO } from '@/lib/tempi'
 
 interface UtmData {
   utm_source?: string
@@ -199,7 +200,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
         </div>
         <h3 className="text-2xl font-black text-primary mb-2">Richiesta inviata!</h3>
         <p className="text-gray-600 mb-1">Ciao <strong>{nome}</strong>, abbiamo ricevuto la tua richiesta.</p>
-        <p className="text-gray-600 mb-6">Ti contatteremo entro <strong>24 ore lavorative</strong> con il preventivo personalizzato.</p>
+        <p className="text-gray-600 mb-6">Ti ricontattiamo <strong>{RICONTATTO}</strong> per il preventivo personalizzato.</p>
         {isAutoCopertura(copertura) && (
           <div className="max-w-md mx-auto mb-6 p-5 rounded-2xl border-2 border-accent/30 bg-accent/5 text-left">
             <p className="font-bold text-primary mb-1">🚗 Vuoi accelerare il preventivo auto?</p>
@@ -371,7 +372,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
             <Button type="submit" loading={status === 'loading'} size="lg" className="w-full">
               {status === 'loading' ? 'Invio in corso...' : 'Richiedi Preventivo Gratuito'}
             </Button>
-            <p className="text-center text-xs text-gray-400">Risposta entro 24 ore lavorative · Nessun impegno</p>
+            <p className="text-center text-xs text-gray-400">Ricontatto {RICONTATTO} · Nessun impegno</p>
           </div>
         </form>
       )}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { RICONTATTO } from '@/lib/tempi'
 
 const TIPI_SINISTRO = [
   'RC Auto / Incidente stradale',
@@ -78,7 +79,7 @@ export default function SinistriForm() {
           </p>
         )}
         <p className="text-green-700 mb-6">
-          Ti abbiamo inviato una conferma via email. Il nostro team ti contatterà entro 24 ore lavorative.
+          Ti abbiamo inviato una conferma via email. Il nostro team ti contatterà {RICONTATTO}.
         </p>
         <a
           href="tel:+390696883381"

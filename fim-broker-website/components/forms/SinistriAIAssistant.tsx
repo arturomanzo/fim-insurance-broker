@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import { CONSENSO_SANITARIO_TESTO } from '@/lib/consensoSanitario'
+import { RICONTATTO } from '@/lib/tempi'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -275,7 +276,7 @@ export default function SinistriAIAssistant() {
           </p>
         )}
         <p className="text-green-700 mb-6">
-          Ti abbiamo inviato una conferma via email. Il nostro team ti contatterà entro 24 ore lavorative.
+          Ti abbiamo inviato una conferma via email. Il nostro team ti contatterà {RICONTATTO}.
         </p>
         <a
           href="tel:+390696883381"

@@ -6,6 +6,7 @@ import { AUTHORS, buildPersonSchema } from '@/lib/authors'
 import { COMPAGNIE_NOMI } from '@/lib/compagnie'
 import { OG_BASE } from '@/lib/seo'
 import { linkWhatsApp } from '@/lib/whatsappSito'
+import { RICONTATTO } from '@/lib/tempi'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -263,7 +264,7 @@ export default function ChiSiamoPage() {
           <div className="mt-14 bg-white rounded-2xl border border-gray-100 p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
             <div>
               <h3 className="text-xl font-black text-primary mb-2">Vuoi parlare direttamente con noi?</h3>
-              <p className="text-gray-600">Prenota una consulenza gratuita — risponderemo entro 24 ore.</p>
+              <p className="text-gray-600">Prenota una consulenza gratuita: ti ricontattiamo {RICONTATTO}.</p>
             </div>
             <div className="flex flex-wrap gap-3 flex-shrink-0">
               <Link href="/prenota-consulenza" className="btn-primary px-6 py-3">

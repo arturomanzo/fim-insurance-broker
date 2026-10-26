@@ -3,18 +3,19 @@ import { SCADENZE_CATASTROFALE } from '@/lib/catastrofale'
 import SecondOpinionForm from '@/components/forms/SecondOpinionForm'
 import Card from '@/components/ui/Card'
 import { OG_BASE } from '@/lib/seo'
+import { RICONTATTO } from '@/lib/tempi'
 
 export const metadata: Metadata = {
   title: 'Check-up gratuito delle polizze aziendali | Second Opinion per PMI',
   description:
-    'Check-up gratuito delle polizze aziendali: inviaci i contratti attuali e ti mostriamo scoperture, doppioni e clausole critiche. Risposta in 48 ore.',
+    `Check-up gratuito delle polizze aziendali: inviaci i contratti attuali e ti mostriamo scoperture, doppioni e clausole critiche. Ti ricontattiamo ${RICONTATTO}.`,
   alternates: { canonical: '/seconda-opinione' },
   openGraph: {
     ...OG_BASE,
     url: '/seconda-opinione',
     title: 'Second Opinion Assicurativa — Gap Analysis Gratuita per PMI',
     description:
-      'Scopri i buchi nelle tue coperture assicurative attuali. Analisi gratuita da consulenti indipendenti. Risposta in 48 ore.',
+      `Scopri i buchi nelle tue coperture assicurative attuali. Analisi gratuita da consulenti indipendenti. Ti ricontattiamo ${RICONTATTO}.`,
     images: [{ url: '/api/og?title=Second+Opinion+Assicurativa&tag=PMI&sub=Gap+Analysis+gratuita+in+48+ore', width: 1200, height: 630 }],
   },
 }
@@ -60,14 +61,14 @@ const HOW_IT_WORKS = [
   {
     step: '3',
     title: 'Ricevi la Gap Analysis',
-    desc: 'Entro 48 ore lavorative: una chiamata con il consulente + report scritto con i rischi scoperti e le priorità di intervento.',
+    desc: `Ti ricontattiamo ${RICONTATTO} per fissare la chiamata con il consulente. Dopo la lettura delle polizze ricevi il report scritto con i rischi scoperti e le priorità di intervento.`,
   },
 ]
 
 const TRUST_POINTS = [
   { label: 'Gratuito', desc: 'Nessun costo, nessun impegno di acquisto' },
   { label: 'Indipendente', desc: 'Non rappresentiamo compagnie, solo i tuoi interessi' },
-  { label: '48 ore', desc: 'Risposta entro 2 giorni lavorativi' },
+  { label: '1 giorno', desc: `Ricontatto ${RICONTATTO}` },
   { label: '20 compagnie', desc: 'Confronto su tutto il mercato italiano' },
 ]
 
@@ -130,7 +131,7 @@ export default function SecondaOpinionePage() {
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-primary mb-2">Richiedi la tua Second Opinion</h2>
             <p className="text-gray-500">
-              Compila il form e allega le polizze. Ti ricontatteremo entro 48 ore lavorative.
+              Compila il form e allega le polizze. Ti ricontattiamo {RICONTATTO}.
             </p>
           </div>
           <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 md:p-8">
@@ -182,7 +183,7 @@ export default function SecondaOpinionePage() {
               <tbody>
                 {[
                   ['Chi analizza', 'Consulente umano FIM', 'Intelligenza artificiale'],
-                  ['Tempi', '48 ore lavorative', '30 secondi'],
+                  ['Tempi', `Ricontatto ${RICONTATTO}`, '30 secondi'],
                   ['N° polizze', 'Tutte le tue polizze insieme', '1 polizza alla volta'],
                   ['Output', 'Gap Analysis + chiamata', 'Report sullo schermo'],
                   ['Target ideale', 'PMI, professionisti, portafoglio complesso', 'Tutti (anche privati)'],

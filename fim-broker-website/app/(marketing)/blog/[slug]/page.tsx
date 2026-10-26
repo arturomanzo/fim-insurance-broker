@@ -10,6 +10,7 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { getAllPosts, getPostBySlug, parseItalianDate } from '@/lib/blog'
 import { getAuthor, buildPersonSchema } from '@/lib/authors'
 import { OG_BASE } from '@/lib/seo'
+import { RICONTATTO } from '@/lib/tempi'
 
 const BASE_URL = 'https://www.fimbroker.it'
 
@@ -234,7 +235,7 @@ export default async function BlogPostPage({ params }: Props) {
               <Card className="gradient-primary text-white" padding="lg">
                 <h3 className="font-bold mb-3">Hai domande?</h3>
                 <p className="text-white/80 text-sm mb-4">
-                  Il nostro team risponde gratuitamente entro 24 ore.
+                  Il nostro team ti ricontatta {RICONTATTO}, senza costi.
                 </p>
                 <Link href="/preventivo" className="btn-primary w-full text-center block mb-3 text-sm">
                   Richiedi Preventivo
