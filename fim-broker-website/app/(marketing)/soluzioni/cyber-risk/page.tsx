@@ -48,7 +48,7 @@ const coverages = [
   {
     icon: '🛡️',
     title: 'Responsabilità verso terzi',
-    desc: 'Copertura per le richieste di risarcimento di clienti, fornitori o dipendenti in seguito a violazione dei loro dati personali. Include spese legali e sanzioni GDPR.',
+    desc: 'Copertura per le richieste di risarcimento di clienti, fornitori o dipendenti in seguito a violazione dei loro dati personali. Include le spese legali; sulle sanzioni del Garante va letto il contratto, in genere restano all\'azienda.',
     included: true,
   },
   {
@@ -90,7 +90,7 @@ const targetProfiles = [
     icon: '🏥',
     title: 'Settori Critici NIS2',
     subtitle: 'Sanità, energia, PA, finanza',
-    desc: 'Soggetti alla Direttiva NIS2 (D.Lgs. 138/2024) con obblighi di sicurezza rafforzati. La polizza cyber è lo strumento di compliance più efficace per dimostrare gestione adeguata del rischio.',
+    desc: 'Soggetti alla Direttiva NIS2 (D.Lgs. 138/2024) con obblighi di sicurezza rafforzati. La polizza cyber non sostituisce le misure di sicurezza, ma aiuta a reggere il costo di un incidente.',
     risks: ['Obbligo NIS2 di risk management', 'Notifiche CSIRT obbligatorie', 'Sanzioni fino a €10M o 2% fatturato', 'Responsabilità management'],
   },
 ]
@@ -117,7 +117,7 @@ const scenarios = [
     title: 'Dipendente clicca su email phishing',
     context: 'PMI manifatturiera, 25 dipendenti',
     damage: 'Credenziali rubate, accesso ai dati di 2.000 clienti',
-    covered: 'Notifica Garante, comunicazione agli interessati, spese legali, sanzione GDPR',
+    covered: 'Notifica Garante, comunicazione agli interessati, spese legali',
     cost: '~45.000€ coperti',
   },
   {

@@ -11,7 +11,7 @@ import { notaPremio } from '@/lib/prezzi'
 export const metadata: Metadata = {
   title: 'Assicurazione Condominio — Globale Fabbricato e RC Amministratore',
   description:
-    'Polizze condominiali complete: globale fabbricato, RC amministratore (L. 220/2012), ascensori, tutela legale e D&O. Consulenza per amministratori in tutta Italia.',
+    'Polizze condominiali complete: globale fabbricato, RC amministratore, ascensori, tutela legale e D&O. Consulenza per amministratori in tutta Italia.',
   alternates: { canonical: '/soluzioni/condomini' },
   openGraph: {
     ...OG_BASE,
@@ -25,16 +25,16 @@ const coverages = [
   {
     icon: '🏢',
     title: 'Globale Fabbricato',
-    desc: 'La polizza di base di ogni condominio: copre la struttura da incendio, scoppio, fulmine, esplosione, danni elettrici, RC verso terzi (persone che si fanno male nelle parti comuni) e danni da acqua. Obbligatoria nei regolamenti della maggior parte dei condomini.',
+    desc: 'La polizza di base di ogni condominio: copre la struttura da incendio, scoppio, fulmine, esplosione, danni elettrici, RC verso terzi (persone che si fanno male nelle parti comuni) e danni da acqua. Molti regolamenti di condominio la prevedono.',
     price: 'su preventivo',
     tag: 'Base',
   },
   {
     icon: '👔',
     title: 'RC Amministratore',
-    desc: 'Obbligatoria per legge dal 2013 (L. 220/2012): copre i danni patrimoniali causati ai condomini dall\'amministratore per errori, omissioni o negligenze nella gestione. Include difesa legale, anche per azioni infondate.',
+    desc: 'L\'assemblea può chiederla come condizione per la nomina (art. 1129 c.c.): copre i danni patrimoniali causati ai condomini dall\'amministratore per errori, omissioni o negligenze nella gestione. Include difesa legale, anche per azioni infondate.',
     price: 'su preventivo',
-    tag: 'Obbligatoria',
+    tag: 'Da chiedere in assemblea',
   },
   {
     icon: '🛗',
@@ -62,7 +62,7 @@ const coverages = [
     title: 'Catastrofi Naturali',
     desc: 'Obbligatoria per le imprese dal 2025, raccomandata per i condomini. Copre danni da terremoto, alluvione, frana e grandine ai beni comuni. Spesso esclusa dalle polizze standard.',
     price: 'su preventivo',
-    tag: 'Obbligo dal 2025',
+    tag: 'Consigliata',
   },
 ]
 
@@ -116,8 +116,8 @@ export default function CondominiPage() {
             </p>
             <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
               <p className="text-white/90 text-sm">
-                <strong className="text-accent">Attenzione</strong> — la RC Amministratore è obbligatoria per legge (L. 220/2012).
-                Un amministratore privo di polizza è passibile di revoca dall&apos;incarico e risponde personalmente dei danni.
+                <strong className="text-accent">Attenzione</strong> — l&apos;assemblea può subordinare la nomina dell&apos;amministratore a una polizza RC (art. 1129 c.c.), e per i lavori straordinari il massimale va adeguato.
+                Senza polizza l&apos;amministratore risponde dei danni con il proprio patrimonio.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -180,7 +180,7 @@ export default function CondominiPage() {
                     </span>
                     {cov.tag && (
                       <span className={`text-xs font-bold px-2.5 py-1 rounded-full block ${
-                        cov.tag === 'Obbligatoria' || cov.tag === 'Obbligo dal 2025'
+                        cov.tag === 'Da chiedere in assemblea' || cov.tag === 'Consigliata'
                           ? 'bg-red-100 text-red-600'
                           : cov.tag === 'Base'
                           ? 'bg-blue-100 text-blue-700'
