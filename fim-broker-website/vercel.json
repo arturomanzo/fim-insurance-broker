@@ -17,6 +17,12 @@
       "has": [{ "type": "host", "value": "fimbroker.it" }],
       "destination": "https://www.fimbroker.it/$1",
       "permanent": true
+    },
+    {
+      "source": "/((?!api/|monitoring).*)",
+      "has": [{ "type": "host", "value": "fim-insurance-broker.vercel.app" }],
+      "destination": "https://www.fimbroker.it/$1",
+      "permanent": true
     }
   ],
   "crons": [
