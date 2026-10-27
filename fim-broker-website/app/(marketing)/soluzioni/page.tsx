@@ -73,11 +73,11 @@ const solutions: Solution[] = [
   {
     href: '/soluzioni/condomini',
     icon: '🏢',
-    tag: 'RC Amministratore obbligatoria per legge',
+    tag: 'Globale fabbricato e RC amministratore',
     tagColor: 'bg-orange-100 text-orange-700',
     title: 'Condomini',
     subtitle: 'Amministratori, assemblee condominiali, stabili residenziali',
-    desc: 'Globale fabbricato, RC ascensori, RC Amministratore (obbligatoria L. 220/2012) e tutela legale condominiale. FIM segue sinistri e rinnovi per conto del condominio.',
+    desc: 'Globale fabbricato, RC ascensori, RC Amministratore e tutela legale condominiale. FIM segue sinistri e rinnovi per conto del condominio.',
     highlights: ['Globale Fabbricato', 'RC Amministratore', 'RC Ascensori', 'Tutela Legale'],
     cta: 'Scopri le soluzioni per condomini',
     price: 'su preventivo',

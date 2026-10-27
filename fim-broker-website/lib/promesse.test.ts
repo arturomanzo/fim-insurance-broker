@@ -42,6 +42,8 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\bnessun\s+competitor\b|\bleader\s+mondial/i, cosa: 'confronto con i concorrenti non verificabile' },
   { re: /nessun costo di intermediazione|senza costi aggiuntivi rispetto all'acquisto diretto/i, cosa: 'il compenso del broker è la provvigione compresa nel premio' },
   { re: /\bpaghi troppo\b/i, cosa: 'promessa implicita di risparmio' },
+  { re: /\bRC\s+amministratore\b[^.'"]{0,40}\bobbligatoria\b|\bobbligatoria\s+(?:per legge\s+)?\(?L\. 220\/2012/i, cosa: 'la RC dell\'amministratore la può chiedere l\'assemblea (art. 1129 c.c.), non è un obbligo di legge' },
+  { re: /\b(?:include|copre|coprono)\b[^.]{0,80}\bsanzion[ei] GDPR\b/i, cosa: 'promessa di coprire le sanzioni del Garante: in genere restano all\'azienda' },
   { re: /\b(?:1[.,]22|6[.,]07)\s*milion|\b(?:1\.220|6\.070)\.000\b/i, cosa: 'massimali RC superati: oggi 6.450.000 € persone e 1.300.000 € cose (art. 128 CAP)' },
 ]
 
@@ -127,6 +129,9 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     "{ num: '94%', label: 'Tasso di liquidazione' },",
     "{ label: '20 compagnie', desc: 'Confronto su tutto il mercato italiano' },",
     'Il massimale minimo per legge è di 6,45 milioni di euro per danni a persone e 1,22 milioni per danni a cose.',
+    "tag: 'RC Amministratore obbligatoria per legge',",
+    'RC Amministratore (obbligatoria L. 220/2012) e tutela legale condominiale.',
+    'La cyber risk copre i costi di ripristino IT, le spese legali, le sanzioni GDPR e il danno reputazionale.',
   ]
   for (const esempio of esempi) {
     assert.ok(VIETATE.some(({ re }) => re.test(esempio)), `non riconosciuta: ${esempio}`)

@@ -16,9 +16,9 @@ export const condominiFaq: FaqCategory = {
         'Non esiste un obbligo di legge generalizzato, ma la polizza incendio fabbricato è quasi sempre prevista dal regolamento condominiale e richiesta dalle banche per i mutui sulle singole unità. In pratica, un condominio senza copertura assicurativa è esposto a rischi enormi: in caso di incendio o crollo strutturale, tutti i condomini risponderebbero in proporzione alle quote millesimali, potenzialmente con il proprio patrimonio personale.',
     },
     {
-      question: 'La RC Amministratore è davvero obbligatoria?',
+      question: 'La polizza RC dell\'amministratore è un obbligo di legge?',
       answer:
-        "Sì. La Legge 220/2012 (riforma del condominio) prevede che l'amministratore sia tenuto ad avere una polizza di RC professionale, a pena di revoca dall'incarico. La polizza deve coprire i danni cagionati nell'esercizio del mandato, con massimale adeguato. Molti amministratori hanno polizze insufficienti o con clausole limitative: è importante verificare i massimali e le esclusioni.",
+        "Non per legge in ogni caso. Dopo la riforma del 2012 l'art. 1129 del Codice Civile dice che l'assemblea può subordinare la nomina dell'amministratore a una polizza di responsabilità civile per gli atti compiuti nel mandato; se poi delibera lavori straordinari, l'amministratore deve adeguare il massimale. Conviene chiederla sempre: molti amministratori hanno polizze con massimali bassi o clausole limitative, e quelle le leggiamo noi prima della nomina.",
     },
     {
       question: 'Chi paga la polizza condominiale? Come si ripartisce il costo?',

@@ -236,7 +236,7 @@ export default function GuidaPmiPage() {
                     icon: '💻',
                     name: 'Cyber Risk',
                     priority: 'Media-Alta',
-                    desc: "Un ransomware blocca i tuoi sistemi. Dati dei clienti rubati. Sanzioni GDPR. La cyber risk copre i costi di ripristino IT, le spese legali, le sanzioni e il danno reputazionale. Non è più solo per le grandi aziende: le PMI sono un bersaglio frequente, perché spesso sono meno protette.",
+                    desc: "Un ransomware blocca i tuoi sistemi. Dati dei clienti rubati. Sanzioni GDPR. La cyber risk copre i costi di ripristino IT, le spese legali e la gestione della crisi; le sanzioni del Garante in genere restano all'azienda. Non è più solo per le grandi aziende: le PMI sono un bersaglio frequente, perché spesso sono meno protette.",
                   },
                   {
                     icon: '⏸️',
@@ -292,7 +292,7 @@ export default function GuidaPmiPage() {
                   { polizza: 'RC Impresa', regola: 'Minimo 1M€. Per attività con molto pubblico (negozi, ristoranti) o prodotti complessi, considera 2-5M€.' },
                   { polizza: 'All-risk sede e macchinari', regola: 'Deve corrispondere al valore di ricostruzione/sostituzione a nuovo, non al valore di mercato. Aggiorna ogni 2-3 anni per tenere conto dell\'inflazione.' },
                   { polizza: 'RC Professionale', regola: 'Dipende dal fatturato e dal tipo di attività. Per consulenti e professionisti: minimo 500.000€. Per chi lavora su grandi progetti: 1-5M€.' },
-                  { polizza: 'Cyber Risk', regola: 'Considera i costi di ripristino IT + le sanzioni GDPR (fino al 4% del fatturato globale). Minimo 250.000€ per PMI; 1M€+ per chi gestisce molti dati sensibili.' },
+                  { polizza: 'Cyber Risk', regola: 'Considera i costi di ripristino IT, il fermo e le richieste di risarcimento dei clienti. Minimo 250.000€ per PMI; 1M€+ per chi gestisce molti dati sensibili.' },
                 ].map((item) => (
                   <div key={item.polizza} className="flex gap-3 bg-white border border-gray-200 rounded-lg p-4">
                     <span className="text-accent font-black flex-shrink-0">→</span>
