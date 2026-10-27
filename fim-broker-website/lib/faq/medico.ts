@@ -23,7 +23,7 @@ export const medicoFaq: FaqCategory = {
     {
       question: 'Quale massimale scegliere per la RC sanitaria?',
       answer:
-        'Il D.M. 232/2023 ha fissato massimali minimi diversi per specialità: 1M€ per professioni a basso rischio (es. nutrizionista), fino a 4-5M€ per chirurgie ad alta complessità (ortopedia, chirurgia generale, ginecologia ostetricia). FIM analizza la tua specialità, il volume di prestazioni e la storia sinistri per consigliare il massimale adeguato — ricordando che in caso di danno grave a un paziente giovane le richieste possono superare i 2-3M€.',
+        'Il D.M. 232/2023 fissa i massimali minimi della RC sanitaria, più alti per chi svolge attività chirurgica, ortopedica, anestesiologica o di assistenza al parto. Il minimo di legge è il punto di partenza, non la scelta giusta: guardiamo la tua specialità, il volume di prestazioni e la storia sinistri, perché il danno grave a un paziente giovane può portare richieste molto più alte del minimo.',
     },
     {
       question: 'Sono uno studio dentistico con 3 dipendenti: cosa mi serve davvero?',
