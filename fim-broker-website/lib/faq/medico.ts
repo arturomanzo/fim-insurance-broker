@@ -23,7 +23,7 @@ export const medicoFaq: FaqCategory = {
     {
       question: 'Quale massimale scegliere per la RC sanitaria?',
       answer:
-        'Il D.M. 232/2023 fissa i massimali minimi della RC sanitaria, più alti per chi svolge attività chirurgica, ortopedica, anestesiologica o di assistenza al parto. Il minimo di legge è il punto di partenza, non la scelta giusta: guardiamo la tua specialità, il volume di prestazioni e la storia sinistri, perché il danno grave a un paziente giovane può portare richieste molto più alte del minimo.',
+        'Per il libero professionista il D.M. 232/2023 (art. 4, comma 2) fissa minimi di 1.000.000 € per sinistro, che salgono a 2.000.000 € per chi svolge anche attività chirurgica, ortopedica, anestesiologica o di parto; il massimale per anno deve essere almeno il triplo di quello per sinistro. Per le strutture che fanno chirurgia, ortopedia, anestesia o parto il minimo sale a 5.000.000 € per sinistro. Il minimo di legge è il punto di partenza, non la scelta giusta: guardiamo la tua specialità, il volume di prestazioni e la storia sinistri, perché il danno grave a un paziente giovane può portare richieste molto più alte del minimo.',
     },
     {
       question: 'Sono uno studio dentistico con 3 dipendenti: cosa mi serve davvero?',
