@@ -44,6 +44,7 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\bpaghi troppo\b/i, cosa: 'promessa implicita di risparmio' },
   { re: /\bRC\s+amministratore\b[^.'"]{0,40}\bobbligatoria\b|\bobbligatoria\s+(?:per legge\s+)?\(?L\. 220\/2012/i, cosa: 'la RC dell\'amministratore la può chiedere l\'assemblea (art. 1129 c.c.), non è un obbligo di legge' },
   { re: /\b(?:include|copre|coprono)\b[^.]{0,80}\bsanzion[ei] GDPR\b/i, cosa: 'promessa di coprire le sanzioni del Garante: in genere restano all\'azienda' },
+  { re: /\b990\/1969\b/, cosa: 'la L. 990/1969 è abrogata: l\'obbligo RC auto sta nell\'art. 122 del D.Lgs. 209/2005' },
   { re: /\b(?:1[.,]22|6[.,]07)\s*milion|\b(?:1\.220|6\.070)\.000\b/i, cosa: 'massimali RC superati: oggi 6.450.000 € persone e 1.300.000 € cose (art. 128 CAP)' },
 ]
 
@@ -129,6 +130,7 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     "{ num: '94%', label: 'Tasso di liquidazione' },",
     "{ label: '20 compagnie', desc: 'Confronto su tutto il mercato italiano' },",
     'Il massimale minimo per legge è di 6,45 milioni di euro per danni a persone e 1,22 milioni per danni a cose.',
+    "law: 'L. 990/1969',",
     "tag: 'RC Amministratore obbligatoria per legge',",
     'RC Amministratore (obbligatoria L. 220/2012) e tutela legale condominiale.',
     'La cyber risk copre i costi di ripristino IT, le spese legali, le sanzioni GDPR e il danno reputazionale.',
