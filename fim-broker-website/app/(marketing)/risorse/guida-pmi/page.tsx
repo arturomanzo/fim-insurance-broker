@@ -170,9 +170,9 @@ export default function GuidaPmiPage() {
                   },
                   {
                     name: 'RC Auto — Responsabilità Civile Autoveicoli',
-                    law: 'L. 990/1969',
-                    who: 'Chiunque circoli su strada con un veicolo',
-                    desc: 'Obbligatoria per tutti i veicoli, compresi quelli aziendali. Non copre i danni al proprio veicolo.',
+                    law: 'D.Lgs. 209/2005, art. 122',
+                    who: 'Chi fa circolare un veicolo a motore',
+                    desc: 'Obbligatoria per i veicoli a motore, compresi quelli aziendali. Non copre i danni al proprio veicolo.',
                   },
                   {
                     name: 'RC Professionale',
