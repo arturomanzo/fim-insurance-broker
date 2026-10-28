@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-08-27",
+  "aggiornato": "2026-10-28",
   "norme": [
     {
       "id": "L-289-2002",
@@ -439,6 +439,17 @@
       "fonte": "",
       "verificata_il": "",
       "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+    },
+    {
+      "id": "DLGS-36-2023",
+      "citazione": "D.Lgs. 36/2023",
+      "chiavi": [
+        "36/2023"
+      ],
+      "stato": "verificata",
+      "oggetto": "Codice dei contratti pubblici. Art. 106: garanzia provvisoria pari al 2 per cento del valore complessivo della procedura, che la stazione appaltante può motivatamente ridurre sino all'1 per cento o incrementare sino al 4 per cento; si costituisce come cauzione o come fideiussione bancaria o assicurativa. Art. 117: garanzia definitiva pari al 10 per cento dell'importo contrattuale, sotto forma di cauzione o fideiussione con le modalità dell'art. 106. Art. 125: anticipazione del prezzo pari al 20 per cento del valore del contratto, che i documenti di gara possono portare fino al 30 per cento.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2023-03-31;36~art106 (anche ~art117 e ~art125), testo vigente con ultimo aggiornamento all'atto dell'11/08/2026",
+      "verificata_il": "2026-10-28"
     }
   ]
 }
