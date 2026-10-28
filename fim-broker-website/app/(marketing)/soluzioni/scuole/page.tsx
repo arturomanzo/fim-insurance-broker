@@ -73,7 +73,7 @@ const rischi = [
   { area: 'Infortuni degli alunni', cosa: 'Cadute in palestra e nei cortili, incidenti nei laboratori, gruppo sportivo, tragitto casa-scuola nelle attività organizzate.' },
   { area: 'Responsabilità civile verso terzi', cosa: 'Danni causati da un alunno a un compagno o a cose altrui, danni durante uscite e manifestazioni, danni causati dal personale nell\'esercizio delle funzioni.' },
   { area: 'Uscite, viaggi e PCTO', cosa: 'Infortuni fuori sede, in Italia e all\'estero; spese sanitarie e rimpatrio; annullamento del viaggio; eventi presso le aziende ospitanti.' },
-  { area: 'Responsabilità del Dirigente e del D.S.G.A.', cosa: 'Azione di responsabilità amministrativo-contabile davanti alla Corte dei conti per danno erariale, con esposizione del patrimonio personale.' },
+  { area: 'Responsabilità del Dirigente e del D.S.G.A.', cosa: 'Azione di responsabilità amministrativo-contabile davanti alla Corte dei conti per danno erariale, con esposizione del patrimonio personale. Dal 1° gennaio 2027 la polizza per la colpa grave è obbligatoria.' },
   { area: 'Sicurezza sul lavoro', cosa: 'Il Dirigente è datore di lavoro ai sensi del D.Lgs. 81/2008. Gli alunni sono equiparati a lavoratori quando usano laboratori e attrezzature.' },
   { area: 'Patrimonio e dotazioni', cosa: 'Furto e danneggiamento di dotazioni informatiche, strumenti di laboratorio, attrezzature sportive e beni affidati alla custodia dell\'istituto.' },
   { area: 'Dati e sistemi', cosa: 'Violazione dei dati trattati dal registro elettronico e dalla segreteria, con obblighi di notifica (artt. 33 e 34 GDPR) e possibili richieste delle famiglie.' },
@@ -453,6 +453,13 @@ export default function ScuolePage() {
                   Come si affida il servizio di brokeraggio in una scuola statale:{' '}
                   <Link href="/soluzioni/scuole/affidamento-diretto-brokeraggio" className="text-primary font-semibold underline">
                     la guida, passo per passo
+                  </Link>
+                  .
+                </p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Per Dirigente e D.S.G.A., dal 2027:{' '}
+                  <Link href="/soluzioni/scuole/rc-patrimoniale-dirigente-dsga" className="text-primary font-semibold underline">
+                    la RC patrimoniale diventa un obbligo
                   </Link>
                   .
                 </p>
