@@ -461,6 +461,50 @@
       "oggetto": "Art. 1 nel testo dopo la L. 7 gennaio 2026, n. 1. Comma 1: responsabilità davanti alla Corte dei conti solo per dolo o colpa grave. Comma 1-octies: per la colpa grave a carico del responsabile non più del 30 per cento del danno accertato e non più del doppio della retribuzione lorda annua (non vale per dolo e illecito arricchimento). Comma 2: prescrizione in cinque anni dal fatto. Comma 4-bis: chi assume un incarico con gestione di risorse pubbliche deve stipulare prima dell'incarico una polizza per i danni patrimoniali causati all'amministrazione per colpa grave; si applica dal 1° gennaio 2027 (art. 1, c. 19-quinquies, D.L. 200/2025, conv. L. 26/2026).",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1994-01-14;20~art1 (testo vigente, ultimo aggiornamento all'atto del 20/08/2026)",
       "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "L-244-2007",
+      "citazione": "L. 244/2007",
+      "chiavi": [
+        "244/2007"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 3, comma 59: è nullo il contratto con cui un ente pubblico assicura i propri amministratori per la responsabilità per danni cagionati allo Stato o ad enti pubblici e per la responsabilità contabile. Chi pone in essere o proroga il contratto e il beneficiario rimborsano, a titolo di danno erariale, dieci volte i premi.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2007-12-24;244~art3",
+      "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "L-1-2026",
+      "citazione": "L. 1/2026",
+      "chiavi": [
+        "1/2026"
+      ],
+      "stato": "verificata",
+      "oggetto": "Legge 7 gennaio 2026, n. 1, riforma della Corte dei conti. Art. 1, c. 1, lett. a), n. 7: aggiunge il comma 4-bis all'art. 1 della L. 20/1994 (obbligo di polizza per la colpa grave per chi assume un incarico con gestione di risorse pubbliche).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2026-01-07;1~art1",
+      "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "DL-200-2025",
+      "citazione": "D.L. 200/2025",
+      "chiavi": [
+        "200/2025"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 1, comma 19-quinquies (conv. L. 26/2026): il comma 4-bis dell'art. 1 della L. 20/1994, introdotto dalla L. 1/2026, si applica a decorrere dal 1° gennaio 2027.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-12-31;200~art1",
+      "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "L-26-2026",
+      "citazione": "L. 26/2026",
+      "chiavi": [
+        "26/2026"
+      ],
+      "stato": "verificata",
+      "oggetto": "Legge 27 febbraio 2026, n. 26, di conversione con modificazioni del D.L. 200/2025 (fra le modifiche, l'art. 1, c. 19-quinquies sul comma 4-bis della L. 20/1994). Dato riportato da normattiva nelle note dell'art. 1 della L. 20/1994 e del D.L. 200/2025.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-12-31;200~art1",
+      "verificata_il": "2026-10-28"
     }
   ]
 }
