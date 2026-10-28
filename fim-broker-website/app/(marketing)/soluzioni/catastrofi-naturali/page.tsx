@@ -168,6 +168,12 @@ export default function CatastrofiNaturaliPage() {
               </div>
             ))}
           </div>
+          <p className="text-center text-gray-600 mt-8">
+            Sei in provincia di Latina?{' '}
+            <Link href="/soluzioni/catastrofi-naturali/latina" className="text-primary font-semibold underline">
+              Il rischio di alluvioni e frane comune per comune, sui dati ISPRA
+            </Link>
+          </p>
         </div>
       </section>
 

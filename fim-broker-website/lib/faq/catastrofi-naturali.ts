@@ -7,7 +7,7 @@ export const catastrofiNaturaliFaq: FaqCategory = {
   cta: {
     text: 'La tua azienda è in regola con la polizza catastrofale obbligatoria 2025?',
     description: 'Verifica gratuita della tua copertura attuale e quotazione su misura.',
-    primary: { label: 'Richiedi verifica', href: '/preventivo?profilo=catastrofale' },
+    primary: { label: 'Richiedi verifica', href: '/preventivo?profilo=pmi&settore=Polizza+Catastrofale' },
     secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
   },
   items: [
