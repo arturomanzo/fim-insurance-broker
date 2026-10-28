@@ -461,6 +461,13 @@ export default function ScuolePage() {
                   .
                 </p>
                 <p className="text-sm text-gray-600 leading-relaxed">
+                  Studenti in azienda:{' '}
+                  <Link href="/soluzioni/scuole/assicurazione-pcto" className="text-primary font-semibold underline">
+                    chi copre cosa nei percorsi scuola-lavoro
+                  </Link>
+                  .
+                </p>
+                <p className="text-sm text-gray-600 leading-relaxed">
                   Per Dirigente e D.S.G.A., dal 2027:{' '}
                   <Link href="/soluzioni/scuole/rc-patrimoniale-dirigente-dsga" className="text-primary font-semibold underline">
                     la RC patrimoniale diventa un obbligo
