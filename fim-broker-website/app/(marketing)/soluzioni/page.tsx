@@ -217,6 +217,7 @@ export default function SoluzioniPage() {
               { href: '/soluzioni/settori/welfare-aziendale', icon: '💼', title: 'Welfare Aziendale', desc: 'Polizze collettive salute, vita e infortuni per i dipendenti.' },
               { href: '/soluzioni/flotta-aziendale', icon: '🚚', title: 'Flotta Aziendale', desc: 'Auto, furgoni e mezzi da lavoro: polizze allineate o libro matricola, sinistri seguiti da noi.' },
               { href: '/soluzioni/stabilimenti-balneari', icon: '🏖️', title: 'Stabilimenti Balneari', desc: 'RC verso bagnanti e bagnini, strutture in spiaggia, mareggiate, meteo della stagione.' },
+              { href: '/soluzioni/affitti-brevi-litorale-pontino', icon: '🏠', title: 'Affitti Brevi', desc: 'Case affittate ai turisti sul litorale pontino: RC verso gli ospiti, danni ai vicini, obblighi del CIN.' },
             ].map((s) => (
               <Link
                 key={s.href}
