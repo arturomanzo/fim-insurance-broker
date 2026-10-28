@@ -60,6 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/soluzioni/artigiani-pmi`, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/condomini`, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/catastrofi-naturali`, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/soluzioni/catastrofi-naturali/latina`, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/cyber-risk`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/soluzioni/flotta-aziendale`, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/soluzioni/stabilimenti-balneari`, changeFrequency: 'monthly', priority: 0.85 },

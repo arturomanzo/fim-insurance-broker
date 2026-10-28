@@ -14,6 +14,7 @@ import { scuoleFaq } from './scuole'
 import { flottaAziendaleFaq } from './flotta-aziendale'
 import { stabilimentiBalneariFaq } from './stabilimenti-balneari'
 import { affittiBreviFaq } from './affitti-brevi'
+import { catastrofaleLatinaFaq } from './catastrofale-latina'
 
 export interface FaqItem {
   question: string
@@ -52,6 +53,7 @@ export const ALL_FAQS: readonly FaqCategory[] = [
   flottaAziendaleFaq,
   stabilimentiBalneariFaq,
   affittiBreviFaq,
+  catastrofaleLatinaFaq,
 ] as const
 
 export function getFaqBySlug(slug: string): FaqCategory | undefined {
