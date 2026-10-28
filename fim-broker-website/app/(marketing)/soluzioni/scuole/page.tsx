@@ -390,7 +390,11 @@ export default function ScuolePage() {
                 </p>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   Nelle paritarie il Codice non si applica: incarico e polizza si decidono con un atto interno, e il
-                  pacchetto è di solito più ampio perché edificio e dotazioni sono spesso della scuola.
+                  pacchetto è di solito più ampio perché edificio e dotazioni sono spesso della scuola.{' '}
+                  <Link href="/soluzioni/scuole/paritarie-asili-nido" className="text-primary font-semibold underline">
+                    Paritarie e asili nido, nel dettaglio
+                  </Link>
+                  .
                 </p>
               </div>
               <div className="bg-primary text-white rounded-2xl p-6 md:p-8">
