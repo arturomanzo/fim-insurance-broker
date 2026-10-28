@@ -40,7 +40,7 @@ export const scuoleFaq: FaqCategory = {
     {
       question: 'La responsabilità patrimoniale del Dirigente e del D.S.G.A. è compresa nella polizza della scuola?',
       answer:
-        "Di norma no. Dirigente Scolastico e Direttore S.G.A. rispondono in proprio, davanti alla Corte dei conti, del danno erariale causato nell'esercizio delle funzioni: la copertura di responsabilità civile patrimoniale è una polizza della persona, non dell'istituto. Nella nostra esperienza è la garanzia più spesso assente o sottodimensionata. Nel check-up la verifichiamo per prima.",
+        "Di norma no. Dirigente Scolastico e Direttore S.G.A. rispondono in proprio, davanti alla Corte dei conti, del danno erariale causato nell'esercizio delle funzioni: la copertura di responsabilità civile patrimoniale è una polizza della persona, non dell'istituto, e dal 1° gennaio 2027 è obbligatoria per chi gestisce risorse pubbliche (art. 1, comma 4-bis, L. 20/1994). Nella nostra esperienza è la garanzia più spesso assente o sottodimensionata. Nel check-up la verifichiamo per prima.",
     },
     {
       question: 'Come funzionano i sinistri con un broker?',
