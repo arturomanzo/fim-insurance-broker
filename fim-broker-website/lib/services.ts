@@ -552,6 +552,16 @@ export const services: Service[] = [
         href: '/blog/polizze-fideiussorie-cauzioni-imprese-2026',
         descrizione: 'Perché la cauzione non è una polizza che protegge voi, le clausole che cambiano tutto e cosa succede quando viene escussa.',
       },
+      {
+        titolo: 'Cauzione provvisoria e definitiva: quanto vale e come si riduce',
+        href: '/blog/cauzione-provvisoria-definitiva',
+        descrizione: 'Il 2 per cento per partecipare, il 10 per cento per firmare, le riduzioni per PMI e certificazioni e lo svincolo fino al collaudo (artt. 106 e 117 D.Lgs. 36/2023).',
+      },
+      {
+        titolo: 'Fideiussione per l\'anticipazione del prezzo',
+        href: '/blog/fideiussione-anticipazione-pnrr',
+        descrizione: 'Il 20 per cento del contratto pagato in anticipo, fino al 30 per cento se il bando lo prevede, e la garanzia che serve per incassarlo (art. 125 D.Lgs. 36/2023).',
+      },
     ],
   },
   {

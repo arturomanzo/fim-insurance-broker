@@ -1,6 +1,106 @@
 {
   "posts": [
     {
+      "slug": "cauzione-provvisoria-definitiva",
+      "title": "Cauzione provvisoria e definitiva negli appalti: quanto vale e come si riduce",
+      "excerpt": "Il 2 per cento per partecipare, il 10 per cento per firmare, le riduzioni per PMI e certificazioni e lo svincolo che va seguito fino al collaudo. Le regole del Codice dei contratti pubblici, lette sul testo vigente.",
+      "category": "Aziendale",
+      "date": "28 Ottobre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Due garanzie, due momenti diversi",
+          "body": "In una gara pubblica le garanzie sono due. La provvisoria accompagna l'offerta e protegge la stazione appaltante se chi vince non firma il contratto. La definitiva si consegna per firmare e copre l'esecuzione fino al collaudo. Le regole stanno negli articoli 106 e 117 del Codice dei contratti pubblici (D.Lgs. 36/2023), nel testo modificato dal correttivo del 31 dicembre 2024. Qui le leggiamo con gli occhi di chi deve presentare l'offerta."
+        },
+        {
+          "heading": "La garanzia provvisoria: il 2 per cento, salvo diversa scelta motivata",
+          "body": "L'offerta va accompagnata da una garanzia pari al 2 per cento del valore complessivo della procedura indicato nel bando o nella lettera d'invito. La stazione appaltante, motivando, può scendere fino all'1 per cento o salire fino al 4 per cento: la percentuale giusta è quella scritta nei documenti di gara. Si può costituire come cauzione, con bonifico a titolo di pegno, oppure come fideiussione bancaria o assicurativa.",
+          "list": [
+            "La fideiussione va emessa e firmata digitalmente e deve essere verificabile telematicamente presso chi la rilascia",
+            "Deve prevedere la rinuncia al beneficio della preventiva escussione, la rinuncia all'eccezione dell'art. 1957, secondo comma, del Codice Civile e il pagamento entro 15 giorni a semplice richiesta scritta",
+            "Deve valere almeno 180 giorni dalla presentazione dell'offerta, salvo durata diversa chiesta dal bando, che può chiedere anche l'impegno a rinnovarla",
+            "In un raggruppamento temporaneo, anche non ancora costituito, deve coprire le obbligazioni di ciascuna impresa",
+            "Per chi vince si svincola con la firma del contratto; per gli altri con la comunicazione dell'aggiudicazione, e comunque perde efficacia 30 giorni dopo l'aggiudicazione"
+          ]
+        },
+        {
+          "heading": "Le riduzioni: si sommano in cascata, ma vanno chieste",
+          "body": "L'articolo 106, comma 8, prevede quattro riduzioni dell'importo. Valgono sia per la provvisoria sia per la definitiva. Si applicano una dopo l'altra, ciascuna sull'importo che resta dalla precedente, e si ottengono solo se l'impresa le segnala nell'offerta e le documenta.",
+          "list": [
+            "30 per cento per chi ha la certificazione del sistema di qualità della serie UNI CEI ISO 9000",
+            "50 per cento per micro, piccole e medie imprese e per raggruppamenti o consorzi fatti solo da loro (non cumulabile con quella del 30 per cento)",
+            "Un ulteriore 10 per cento se la fideiussione è digitale e gestita su piattaforme a registri distribuiti o verificabile sul sito dell'emittente",
+            "Fino a un ulteriore 20 per cento per le certificazioni o i marchi dell'allegato II.13, se i documenti di gara li indicano e fissano la percentuale"
+          ]
+        },
+        {
+          "heading": "La garanzia definitiva: il 10 per cento, che cresce con il ribasso",
+          "body": "Per firmare il contratto l'appaltatore costituisce una garanzia pari al 10 per cento dell'importo contrattuale. Se il ribasso supera il 10 per cento, la garanzia aumenta di un punto per ogni punto di ribasso oltre il 10; se supera il 20 per cento, di due punti per ogni punto oltre il 20. Negli accordi quadro l'importo è al massimo il 2 per cento dell'accordo. Alla definitiva si applicano le stesse riduzioni della provvisoria. Nei lavori l'appaltatore può chiedere, prima della firma, di sostituirla con una ritenuta del 10 per cento sugli stati di avanzamento, e la stazione appaltante può opporsi per ragioni di rischio motivate. Se la definitiva non viene costituita, l'affidamento decade e la stazione appaltante incamera la provvisoria."
+        },
+        {
+          "heading": "Lo svincolo si segue, non arriva da solo",
+          "body": "La definitiva si svincola man mano che il lavoro avanza, fino all'80 per cento dell'importo iniziale. Lo svincolo è automatico, ma la condizione è consegnare al garante gli stati di avanzamento o un documento equivalente. Il resto rimane fino al certificato di collaudo provvisorio o di regolare esecuzione, e comunque non oltre dodici mesi dalla fine dei lavori. Se il garante non svincola entro 15 giorni dalla consegna dei documenti, è inadempiente verso l'impresa. Chi non manda i SAL continua a pagare una garanzia più alta del necessario."
+        },
+        {
+          "heading": "Un esempio di calcolo",
+          "body": "Esempio costruito per mostrare il meccanismo, non il caso di un cliente. Una piccola impresa partecipa a una gara di lavori con valore della procedura di 500.000 euro e un bando che chiede il 2 per cento. La provvisoria vale 10.000 euro. Con la riduzione per le PMI scende a 5.000 euro e con la fideiussione digitale verificabile online a 4.500 euro. L'impresa vince con un ribasso del 20 per cento e firma un contratto di 400.000 euro. La definitiva sale al 20 per cento, un punto in più per ognuno dei 10 punti di ribasso oltre il 10, e vale 80.000 euro. Le stesse riduzioni la portano a 40.000 euro e poi a 36.000 euro. Il premio lo calcola la compagnia sull'importo garantito, sulla durata e sul bilancio dell'impresa."
+        },
+        {
+          "heading": "Cosa facciamo noi",
+          "body": "FIM Insurance Broker, iscritta al RUI Sez. B n. B000405449, prepara la pratica di cauzione con i documenti che la compagnia chiede. Prima dell'emissione controlla che il testo della garanzia sia quello del bando e dello schema tipo, che le riduzioni a cui l'impresa ha diritto siano state applicate e che la durata copra la procedura. Dopo la firma seguiamo SAL e svincoli fino al collaudo. Mandaci il bando appena esce, non a ridosso della scadenza delle offerte: è la cosa che fa più differenza."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
+      "slug": "fideiussione-anticipazione-pnrr",
+      "title": "Fideiussione per l'anticipazione negli appalti, anche PNRR: quanto vale e come scende",
+      "excerpt": "Il 20 per cento del contratto che la stazione appaltante paga in anticipo, fino al 30 per cento se il bando lo prevede, e la garanzia che serve per incassarlo. Le regole dell'art. 125 del Codice dei contratti pubblici.",
+      "category": "Aziendale",
+      "date": "28 Ottobre 2026",
+      "readTime": "6 min",
+      "image": "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "L'anticipazione: soldi all'inizio del lavoro",
+          "body": "L'articolo 125 del Codice dei contratti pubblici (D.Lgs. 36/2023) riconosce all'appaltatore un'anticipazione pari al 20 per cento del valore del contratto. I documenti di gara possono portarla fino al 30 per cento. Nei lavori va pagata entro 15 giorni dall'effettivo inizio, cioè dalla consegna dei lavori, anche quando l'esecuzione parte in via d'urgenza. Nei contratti pluriennali di servizi e forniture si calcola anno per anno, sul valore delle prestazioni di ciascuna annualità. Le regole valgono anche per i contratti finanziati con il PNRR: la percentuale da usare è quella scritta nel bando, entro il tetto del codice.",
+          "list": [
+            "20 per cento del valore del contratto, fino al 30 per cento se il bando lo prevede",
+            "Nei lavori, pagata entro 15 giorni dalla consegna dei lavori",
+            "Nei pluriennali di servizi e forniture, calcolata su ogni annualità",
+            "Esclusi i contratti di forniture e servizi elencati nell'allegato II.14, con le eccezioni lì previste per i servizi di ingegneria e architettura"
+          ]
+        },
+        {
+          "heading": "La garanzia che serve per incassarla",
+          "body": "L'anticipazione si paga solo dopo che l'appaltatore ha consegnato una fideiussione bancaria o assicurativa. L'importo è pari all'anticipazione, maggiorato del tasso di interesse legale per il periodo necessario a recuperarla secondo il cronoprogramma. La rilasciano gli stessi soggetti abilitati per le cauzioni di gara, con le stesse modalità: firma digitale e verificabilità telematica presso l'emittente.",
+          "list": [
+            "Importo: anticipazione più interessi legali sul periodo di recupero",
+            "Emittente: banca, compagnia di assicurazione o intermediario finanziario abilitato (art. 106, comma 3)",
+            "Si riduce gradualmente e automaticamente mentre la stazione appaltante recupera l'anticipazione sui pagamenti"
+          ]
+        },
+        {
+          "heading": "Quando l'anticipazione va restituita",
+          "body": "Se l'esecuzione non procede secondo i tempi del contratto per ritardi imputabili all'appaltatore, l'impresa decade dall'anticipazione e deve restituirla, con gli interessi legali dalla data in cui l'ha ricevuta. È il caso in cui la stazione appaltante escute la fideiussione. A quel punto la compagnia paga e si rivale sull'impresa per l'intero importo, perché la garanzia protegge la stazione appaltante e non l'impresa."
+        },
+        {
+          "heading": "Un esempio",
+          "body": "Esempio costruito per mostrare il meccanismo, non il caso di un cliente. Un contratto di lavori da 1.000.000 di euro, con un bando che non alza la percentuale, dà diritto a un'anticipazione di 200.000 euro. La fideiussione vale 200.000 euro più gli interessi legali sul periodo di recupero previsto dal cronoprogramma. Man mano che i pagamenti dei SAL trattengono la quota di anticipazione, l'importo garantito scende. Se il bando avesse previsto il 30 per cento, anticipazione e fideiussione sarebbero di 300.000 euro."
+        },
+        {
+          "heading": "Gli errori che fanno perdere tempo",
+          "body": "Il primo è chiedere la fideiussione a lavori già consegnati: l'anticipazione arriva entro 15 giorni dall'inizio solo se la garanzia è pronta. Il secondo è un testo non conforme allo schema tipo, che la stazione appaltante rimanda indietro. Il terzo è non seguire la riduzione: la garanzia scende con il recupero, e i documenti che lo provano vanno mandati al garante."
+        },
+        {
+          "heading": "Cosa facciamo noi",
+          "body": "FIM Insurance Broker, iscritta al RUI Sez. B n. B000405449, prepara la richiesta di fideiussione insieme alla definitiva, così sono pronte entrambe alla firma del contratto. Controlliamo importo, durata e testo sul bando e sul cronoprogramma, e seguiamo le riduzioni fino al recupero completo. Il premio e la capacità di rilascio li decide la compagnia sul bilancio dell'impresa: la presentiamo al meglio, l'esito non lo possiamo promettere."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "assicurazione-cantiere-car-postuma-decennale-imprese-edili-2026",
       "title": "Polizza CAR e postuma decennale: come assicurare davvero un cantiere nel 2026",
       "excerpt": "Tra lavori in corso, danni a terzi e garanzie da consegnare all'acquirente, l'impresa edile ha tre coperture diverse che fanno cose diverse. Vediamo quali, e dove nascono i problemi.",
