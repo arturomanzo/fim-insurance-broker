@@ -115,7 +115,7 @@ export default function MedicoPage() {
             </p>
             <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
               <p className="text-white/90 text-sm">
-                <strong className="text-accent">Sapevi che</strong> — il D.M. 232/2023 ha definito i massimali minimi obbligatori per la RC sanitaria, più alti per chi fa chirurgia, ortopedia, anestesia o assiste al parto.
+                <strong className="text-accent">Sapevi che</strong> — il D.M. 232/2023 (art. 4) fissa i massimali minimi della RC sanitaria: per il libero professionista 1.000.000 € per sinistro, 2.000.000 € per chi fa chirurgia, ortopedia, anestesia o parto, con un massimale annuo almeno triplo.
                 Polizze sottodimensionate non rispettano l&apos;obbligo di legge e lasciano scoperte le richieste danni più gravi.
               </p>
             </div>
