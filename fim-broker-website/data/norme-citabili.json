@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-10-28",
+  "aggiornato": "2026-10-29",
   "norme": [
     {
       "id": "L-289-2002",
@@ -358,15 +358,14 @@
     },
     {
       "id": "213-2023",
-      "citazione": "213/2023",
+      "citazione": "L. 213/2023",
       "chiavi": [
         "213/2023"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Art. 1, commi 101-111, testo vigente: c. 101 obbligo per le imprese iscritte al registro delle imprese di assicurare terreni, fabbricati, impianti e macchinari, attrezzature (art. 2424 c.c., B-II 1-3) contro sismi, alluvioni, frane, inondazioni ed esondazioni, al valore di ricostruzione a nuovo o costo di rimpiazzo; c. 102 dell'inadempimento si tiene conto nell'assegnazione di contributi pubblici; c. 104 scoperto o franchigia non oltre il 15% del danno (non per le grandi imprese); c. 105-bis portale IVASS di comparazione; c. 106-107 obbligo a contrarre delle compagnie, sanzione da 100.000 a 500.000 euro, assicurabili solo immobili con titolo edilizio valido o in sanatoria/condono; c. 108 SACE riassicura fino al 50%; c. 111 esclusione delle imprese agricole (art. 2135 c.c.).",
+      "fonte": "https://www.normattiva.it/atto/caricaArticolo?art.codiceRedazionale=23G00223&art.idArticolo=1&art.progressivo=2 (art. 1, commi 101-200, testo vigente aggiornato al 06/10/2026)",
+      "verificata_il": "2026-10-29"
     },
     {
       "id": "2021-2118",
@@ -491,9 +490,9 @@
         "200/2025"
       ],
       "stato": "verificata",
-      "oggetto": "Art. 1, comma 19-quinquies (conv. L. 26/2026): il comma 4-bis dell'art. 1 della L. 20/1994, introdotto dalla L. 1/2026, si applica a decorrere dal 1° gennaio 2027.",
+      "oggetto": "Art. 1, comma 19-quinquies (conv. L. 26/2026): il comma 4-bis dell'art. 1 della L. 20/1994, introdotto dalla L. 1/2026, si applica a decorrere dal 1° gennaio 2027. Art. 16, comma 2: per somministrazione di alimenti e bevande e imprese turistico-ricettive, piccole e micro, il termine per la polizza catastrofale è prorogato al 31 marzo 2026.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-12-31;200~art1",
-      "verificata_il": "2026-10-28"
+      "verificata_il": "2026-10-29"
     },
     {
       "id": "L-26-2026",
@@ -505,6 +504,17 @@
       "oggetto": "Legge 27 febbraio 2026, n. 26, di conversione con modificazioni del D.L. 200/2025 (fra le modifiche, l'art. 1, c. 19-quinquies sul comma 4-bis della L. 20/1994). Dato riportato da normattiva nelle note dell'art. 1 della L. 20/1994 e del D.L. 200/2025.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-12-31;200~art1",
       "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "DL-39-2025",
+      "citazione": "D.L. 39/2025",
+      "chiavi": [
+        "39/2025"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 1 (conv. L. 78/2025): termine della polizza catastrofale differito al 1° ottobre 2025 per le medie imprese e al 31 dicembre 2025 per piccole e micro; fermo il 31 marzo 2025 per le grandi. Aggiunge al c. 101 della L. 213/2023 il valore di ricostruzione a nuovo, al c. 104 l'esenzione per le grandi imprese, al c. 106 la regola sugli immobili con titolo edilizio.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-03-31;39~art1",
+      "verificata_il": "2026-10-29"
     }
   ]
 }
