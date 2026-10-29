@@ -1,5 +1,5 @@
 import type { FaqCategory } from '.'
-import { OBBLIGO_CATASTROFALE } from '@/lib/catastrofale'
+import { OBBLIGO_CATASTROFALE, FRANCHIGIA_MASSIMA, OBBLIGO_A_CONTRARRE, VALORE_DA_ASSICURARE } from '@/lib/catastrofale'
 
 export const catastrofiNaturaliFaq: FaqCategory = {
   slug: 'catastrofi-naturali',
@@ -29,12 +29,12 @@ export const catastrofiNaturaliFaq: FaqCategory = {
     {
       question: "Come viene calcolato il risarcimento dopo un'alluvione?",
       answer:
-        'Il risarcimento dipende da: (1) il valore assicurato (deve corrispondere al valore reale di ricostruzione — occhio alla sottoassicurazione), (2) la franchigia (una parte del danno a carico dell\'assicurato, solitamente 2-10%), (3) il massimale della polizza. In caso di sinistro, la compagnia invia un perito per valutare i danni. FIM segue i propri clienti durante tutto il processo liquidativo.',
+        `Contano tre cose: il valore assicurato, che deve corrispondere a quanto costerebbe ricostruire o ricomprare (occhio alla sottoassicurazione); lo scoperto o la franchigia, cioè la parte di danno che resta a te; il massimale. Per le imprese obbligate la legge chiede di assicurare ${VALORE_DA_ASSICURARE} e ammette ${FRANCHIGIA_MASSIMA}. Per la casa decide il contratto. Dopo il sinistro la compagnia manda un perito: FIM segue i propri clienti per tutta la liquidazione.`,
     },
     {
       question: 'Abito in una zona a rischio alluvione: posso comunque assicurarmi?',
       answer:
-        'Sì, anche se alcune zone ad alto rischio possono avere premi più elevati o alcune compagnie possono non assicurarle. La buona notizia è che con la nuova legge sulle catastrofi naturali per le imprese, il governo sta lavorando a un sistema di pool assicurativo che garantisca la copertura anche nelle zone più esposte. FIM conosce le compagnie disponibili ad assicurare ogni tipo di zona.',
+        `Dipende se sei un'impresa o un privato. Se sei un'impresa obbligata, ${OBBLIGO_A_CONTRARRE}. Il premio però resta proporzionato al rischio. Per la casa l'obbligo a contrarre non c'è: in una zona molto esposta qualche compagnia può non assicurare o chiedere di più, ed è lì che conviene confrontare il mercato.`,
     },
   ],
 }

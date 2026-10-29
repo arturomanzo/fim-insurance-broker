@@ -52,7 +52,7 @@ const products = [
   {
     icon: '🌾',
     title: 'Polizze Agricole per Grandine e Gelo',
-    desc: 'Coperture specifiche per il settore agricolo: grandine su colture, gelo su frutteti, alluvione su terreni agricoli. Possibilità di polizze agevolate con contributo AGEA.',
+    desc: 'Coperture specifiche per il settore agricolo: grandine su colture, gelo su frutteti, alluvione su terreni agricoli. Per le imprese agricole la polizza catastrofale non è obbligatoria, ma i beni restano esposti.',
     price: 'su preventivo',
     audience: 'Agricoltori e agriturismo',
   },
@@ -99,7 +99,7 @@ export default function CatastrofiNaturaliPage() {
               casa e azienda
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-6">
-              Il 2023 ha dimostrato che in Italia può succedere ovunque: dall&apos;Emilia-Romagna alla Toscana, dal Lazio alla Sicilia.
+              Alluvioni, frane e terremoti in Italia non sono notizie lontane: capitano dove si vive e si lavora.
               Le polizze standard spesso non coprono le catastrofi naturali.
               Verifica la tua copertura attuale e colma il gap.
             </p>
