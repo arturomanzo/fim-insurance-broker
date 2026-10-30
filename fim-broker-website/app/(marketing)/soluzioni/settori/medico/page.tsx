@@ -25,8 +25,8 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '⚖️', title: 'Legge Gelli-Bianco', desc: 'La L. 24/2017 ha aumentato le tutele del paziente e i casi di responsabilità per il sanitario. La RC professionale è obbligatoria.' },
-  { icon: '🏥', title: 'Rivalsa della struttura', desc: 'In caso di sinistro, l\'azienda sanitaria può rivalersi sul medico per colpa grave fino a 3 volte la retribuzione lorda annua.' },
+  { icon: '⚖️', title: 'Legge Gelli-Bianco', desc: 'La L. 24/2017 obbliga ad assicurarsi tutti: le strutture, il libero professionista con la sua RC, chi lavora in struttura con la polizza per colpa grave (art. 10).' },
+  { icon: '🏥', title: 'Rivalsa della struttura', desc: 'Se la struttura risarcisce il paziente, può rivalersi sul sanitario solo per dolo o colpa grave, e per la colpa grave fino al triplo della retribuzione o del reddito professionale annuo (art. 9).' },
   { icon: '💻', title: 'Dati clinici e GDPR', desc: 'I dati sanitari sono "categoria particolare" GDPR. Una violazione comporta sanzioni fino a 20M€ e obbligo di notifica entro 72 ore.' },
   { icon: '📃', title: 'Denunce strumentali', desc: 'Anche un esito clinico avverso senza colpa può generare richieste danni. Servono avvocati e periti specializzati sin da subito.' },
 ]
@@ -35,14 +35,14 @@ const coverages = [
   {
     icon: '⚕️',
     title: 'RC Professionale Sanitaria',
-    desc: 'Copertura obbligatoria ex L. 24/2017 (Gelli-Bianco) per attività libero-professionale, intramoenia ed extramoenia. Massimali fino a 5M€, retroattività e ultrattività configurabili.',
+    desc: 'Obbligatoria per chi lavora in libera professione, nel proprio studio o appoggiandosi a una struttura privata (L. 24/2017, art. 10, c. 2). L\'intramoenia la copre la struttura. Massimali sopra i minimi del D.M. 232/2023, retroattività e ultrattività da leggere.',
     price: 'su preventivo',
     highlighted: true,
   },
   {
     icon: '🛡️',
-    title: 'Colpa Grave Dipendenti SSN',
-    desc: 'Per medici dipendenti del SSN o di strutture private convenzionate: copre la rivalsa dell\'azienda sanitaria per colpa grave (fino a 3 retribuzioni annue).',
+    title: 'Colpa Grave per chi lavora in struttura',
+    desc: 'Obbligatoria, a proprie spese, per chi lavora a qualunque titolo in una struttura pubblica o privata (L. 24/2017, art. 10, c. 3). Copre la rivalsa e l\'azione della Corte dei conti per colpa grave.',
     price: 'su preventivo',
     highlighted: false,
   },
@@ -109,7 +109,7 @@ export default function MedicoPage() {
               una <span className="text-accent">protezione completa</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
-              RC sanitaria Legge Gelli-Bianco, Colpa Grave per dipendenti SSN, tutela legale, cyber GDPR
+              RC sanitaria Legge Gelli-Bianco, colpa grave per chi lavora in struttura, tutela legale, cyber GDPR
               e copertura dello studio: FIM costruisce il pacchetto su misura per la tua specialità,
               con compagnie specializzate nel rischio sanitario.
             </p>
