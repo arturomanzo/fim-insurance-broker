@@ -149,7 +149,7 @@ export const services: Service[] = [
       },
       {
         question: "La polizza vita è pignorabile o tassabile in caso di eredità?",
-        answer: 'No. Il capitale liquidato ai beneficiari di una polizza vita caso morte è esente dall\'imposta di successione (art. 12 D.Lgs. 346/1990) e non è pignorabile né sequestrabile (art. 1923 Codice Civile). È uno degli strumenti di protezione patrimoniale più efficaci.',
+        answer: 'No. Il capitale che la compagnia paga ai beneficiari di una polizza vita caso morte non entra nell\'attivo ereditario (art. 97 del testo unico approvato con il D.Lgs. 123/2025, che ha preso il posto dell\'art. 12 del vecchio testo unico sulle successioni) e non può essere pignorato né sequestrato (art. 1923 c.c.). Restano salve le azioni dei creditori e degli eredi sui premi pagati.',
       },
       {
         question: 'Come scelgo i beneficiari della polizza vita?',

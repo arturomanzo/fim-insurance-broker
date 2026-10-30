@@ -128,7 +128,7 @@ export default function OsservatorioPrezziPage() {
             })}
           </div>
           <p className="text-center text-xs text-gray-400 mt-6">
-            ⚠️ Premi indicativi. Il premio effettivo dipende dal profilo individuale del cliente (art. 1882 c.c., D.Lgs. 209/2005).
+            ⚠️ Premi indicativi. Il premio effettivo lo calcola la compagnia sul profilo di ogni cliente.
           </p>
         </div>
       </section>

@@ -16,7 +16,7 @@ export const sinistriFaq: FaqCategory = {
     {
       question: 'Quanto tempo ho per denunciare un sinistro?',
       answer:
-        'In generale il sinistro va denunciato entro 3 giorni dall\'evento. Per la RC Auto il termine è fissato per legge a 3 giorni dall\'incidente (art. 1913 c.c.). Per altre polizze (casa, infortuni, vita, professionali) i termini possono variare da 3 a 15 giorni a seconda del contratto.\n\nApprofondimento. Il ritardo nella denuncia può comportare la perdita totale o parziale dell\'indennizzo se la compagnia dimostra di aver subito un pregiudizio (es. impossibilità di accertare i fatti). Contatta FIM subito dopo l\'evento, anche prima della scadenza: ti diciamo esattamente quali documenti raccogliere, come compilare la denuncia e quali errori evitare.',
+        'La regola del codice civile è tre giorni da quando il sinistro è avvenuto o da quando ne hai avuto notizia (art. 1913 c.c.). È una regola che il contratto può cambiare: alcune polizze casa, infortuni o professionali danno più tempo, e il termine giusto è quello scritto nelle tue condizioni. Per la RC Auto la denuncia si fa con il modulo di constatazione amichevole (art. 143 del Codice delle Assicurazioni) e, se il contratto non dice altro, vale lo stesso termine di tre giorni.\n\nApprofondimento. Il ritardo nella denuncia può comportare la perdita totale o parziale dell\'indennizzo se la compagnia dimostra di aver subito un pregiudizio (es. impossibilità di accertare i fatti). Contatta FIM subito dopo l\'evento, anche prima della scadenza: ti diciamo esattamente quali documenti raccogliere, come compilare la denuncia e quali errori evitare.',
     },
     {
       question: 'Cosa succede se la compagnia non mi vuole risarcire?',
