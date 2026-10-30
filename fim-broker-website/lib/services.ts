@@ -216,7 +216,7 @@ export const services: Service[] = [
       },
       {
         question: 'La polizza casa copre l\'alluvione e il terremoto?',
-        answer: 'Le polizze standard generalmente no: coprono incendio, furto e danni da acqua (rottura tubazioni). Per alluvione, esondazione e terremoto servono estensioni specifiche o una polizza catastrofi naturali. Dal 2025 questa copertura è obbligatoria per le imprese.',
+        answer: 'Le polizze standard generalmente no: coprono incendio, furto e danni da acqua (rottura tubazioni). Per alluvione, esondazione e terremoto servono estensioni specifiche o una polizza catastrofi naturali. Per le imprese è obbligatoria dal 2025, con scadenze diverse secondo la dimensione; per le famiglie resta una scelta.',
       },
       {
         question: 'Cosa si intende per "sottoassicurazione"?',
@@ -248,7 +248,7 @@ export const services: Service[] = [
         'Gioielli, contanti e oggetti d\'arte oltre i limiti di polizza',
         'Danni da animali domestici al proprio immobile',
       ],
-      note: 'Per immobili in zone a rischio sismico o idrogeologico la garanzia catastrofale va aggiunta: dal 2025 è obbligatoria per le imprese (L. 213/2023) e fortemente raccomandata per i privati.',
+      note: 'Per immobili in zone a rischio sismico o idrogeologico la garanzia catastrofale va aggiunta: per le imprese è obbligatoria (L. 213/2023, scadenze a scaglioni dal 2025), per le famiglie resta una scelta.',
     },
   },
   {
