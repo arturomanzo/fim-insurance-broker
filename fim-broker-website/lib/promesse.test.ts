@@ -50,6 +50,12 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\b990\/1969\b/, cosa: 'la L. 990/1969 è abrogata: l\'obbligo RC auto sta nell\'art. 122 del D.Lgs. 209/2005' },
   { re: /\b(?:1[.,]22|6[.,]07)\s*milion|\b(?:1\.220|6\.070)\.000\b/i, cosa: 'massimali RC superati: oggi 6.450.000 € persone e 1.300.000 € cose (art. 128 CAP)' },
   { re: /\bRC patrimoniale\b[^.]{0,60}\b(?:a carico|pagat[ao])\s+(?:della|dalla|dell'|dall')\s*(?:scuola|istituto)|\b(?:la scuola|l'istituto)\s+(?:paga|può pagare|si accolla)\b[^.]{0,40}\bRC patrimoniale\b/i, cosa: 'la RC patrimoniale di Dirigente e D.S.G.A. non la può pagare la scuola: contratto nullo (art. 3, c. 59, L. 244/2007)' },
+  { re: /\b49-bis\b[^.]{0,200}\bmonopattin|\bmonopattin[^.]{0,200}\b49-bis\b/i, cosa: 'l\'RC dei monopattini sta nell\'art. 1, c. 75-vicies quinquies, della L. 160/2019, modificato dall\'art. 14 della L. 177/2024: nessun art. 49-bis' },
+  { re: /\bregolamento\s+(?:UE\s+|europeo\s+)?(?:n\.\s*)?2021\/2118\b/i, cosa: 'la 2021/2118 è una direttiva, recepita con il D.Lgs. 184/2023' },
+  { re: /\b(?:Decreto[ -]Legge|D\.?L\.?)\s*155\/2024\b[^.]{0,60}\bobbligatori/i, cosa: 'l\'obbligo catastrofale viene dalla L. 213/2023, c. 101: il D.L. 155/2024 definisce solo i beni' },
+  { re: /\b198\/2007\b[^\n]{0,80}\bavvocat|\bavvocat[^\n]{0,80}\b198\/2007\b/i, cosa: 'la scelta dell\'avvocato nella tutela legale dipende dal contratto (art. 164 CAP), non dal D.Lgs. 198/2007' },
+  { re: /\bsenza (?:copertura |assicurazione )?RC\b[^.]{0,20}è reato\b/i, cosa: 'circolare senza RC auto è un illecito amministrativo (art. 193 CdS), non un reato' },
+  { re: /\bdanneggiato\b[^.]{0,100}\bsolo il nesso\b/i, cosa: 'nella responsabilità da prodotto il danneggiato prova difetto, danno e nesso (art. 120 Codice del Consumo)' },
 ]
 
 // Le parole che il CLAUDE.md vieta nei testi. Valgono per ciò che si legge sul
@@ -143,6 +149,12 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     'Restano fuori le imprese agricole, escluse dalla stessa legge (comma 110).',
     'il governo sta lavorando a un sistema di pool assicurativo che garantisca la copertura',
     "Esercitare senza copertura espone a sanzioni disciplinari, rischio penale per l'esercizio dell'attività e responsabilità patrimoniale illimitata.",
+    'La legge modifica il D.Lgs. 285/1992 introducendo l\'articolo 49-bis, che per la prima volta equipara i monopattini elettrici ai veicoli a motore',
+    'Il Regolamento UE 2021/2118, recepito in Italia nel 2023, ha introdotto significative novità nel sistema della RC Auto.',
+    'Dal 1° gennaio 2025, il Decreto Legge 155/2024 rende obbligatoria per tutte le imprese italiane la stipula di polizze contro i rischi catastrofali.',
+    "Libera scelta dell'avvocato di fiducia (garantita per legge dal D.Lgs. 198/2007)",
+    "L'uso di un veicolo aziendale senza copertura RC è reato, con sanzioni che vanno da 866 a 3.464 euro.",
+    "il danneggiato non deve necessariamente dimostrare la colpa dell'azienda, ma solo il nesso tra il prodotto e il danno subito.",
   ]
   for (const esempio of esempi) {
     assert.ok(VIETATE.some(({ re }) => re.test(esempio)), `non riconosciuta: ${esempio}`)

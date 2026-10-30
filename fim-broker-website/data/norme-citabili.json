@@ -166,39 +166,36 @@
     },
     {
       "id": "34-2026",
-      "citazione": "34/2026",
+      "citazione": "Legge 34/2026",
       "chiavi": [
         "34/2026"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 6 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "L. 11 marzo 2026, n. 34: ha inserito nell'art. 122-bis del Codice delle Assicurazioni Private le deroghe all'RC auto per i carrelli non immatricolati che lavorano in aree aziendali, per i veicoli usati solo in zone non accessibili al pubblico di aree ferroviarie, portuali e aeroportuali (c. 1-bis) e per le macchine agricole non immatricolate o senza certificato di idoneità che operano solo in fondi agricoli o spazi non accessibili al pubblico (c. 1-ter). Sempre a condizione che ci sia una RC verso terzi diversa da quella obbligatoria.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2026-03-11;34",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "231-2001",
-      "citazione": "231/2001",
+      "citazione": "D.Lgs. 231/2001",
       "chiavi": [
         "231/2001"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 3 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Responsabilità amministrativa delle persone giuridiche, delle società e delle associazioni per i reati commessi nel loro interesse o vantaggio da vertici e dipendenti. In vigore dal 4/7/2001.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2001-06-08;231",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "81-2008",
-      "citazione": "81/2008",
+      "citazione": "D.Lgs. 81/2008",
       "chiavi": [
         "81/2008"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Testo unico sulla salute e sicurezza nei luoghi di lavoro. Art. 18: obblighi del datore di lavoro e del dirigente; art. 2, c. 1, lett. a): equipara al lavoratore chi partecipa ad alternanza scuola-lavoro.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2008-04-09;81~art18",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "24-2017",
@@ -213,147 +210,91 @@
     },
     {
       "id": "157-1992",
-      "citazione": "157/1992",
+      "citazione": "Legge 157/1992",
       "chiavi": [
         "157/1992"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Art. 12, c. 8: per esercitare la caccia servono la polizza di responsabilità civile verso terzi e quella per gli infortuni. Massimali aggiornati dal DM 23/12/2020: 903.283,12 euro per sinistro, 677.462,34 euro per persona, 225.820,78 euro per animali o cose; infortuni 90.328,31 euro.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1992-02-11;157~art12",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "209-2005",
-      "citazione": "209/2005",
+      "citazione": "D.Lgs. 209/2005",
       "chiavi": [
         "209/2005"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Codice delle Assicurazioni Private. Letti: art. 109 (RUI), 122 e 122-bis (obbligo RC auto e deroghe), 123 (natanti), 128 (massimali minimi), titolo X (assicurazione obbligatoria veicoli e natanti), 164 (modalità di gestione dei sinistri di tutela legale), 173 (definizione di tutela legale).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-07;209",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "177-2024",
-      "citazione": "177/2024",
+      "citazione": "Legge 177/2024",
       "chiavi": [
         "177/2024"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Riforma del Codice della Strada, in vigore dal 14/12/2024. L'art. 14 modifica l'art. 1 della L. 160/2019 sui monopattini: contrassegno (c. 75-vicies quater), RC obbligatoria (c. 75-vicies quinquies), casco per tutti (c. 75-novies), divieto di circolare senza contrassegno o RC (c. 75-quater) con sanzione da 100 a 400 euro (c. 75-undevicies). Non introduce nessun art. 49-bis.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2024-11-25;177~art14",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "81-2017",
-      "citazione": "81/2017",
+      "citazione": "Legge 81/2017",
       "chiavi": [
         "81/2017"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Lavoro agile. Art. 22: il datore garantisce salute e sicurezza e consegna almeno una volta l'anno un'informativa scritta sui rischi. Art. 23: tutela INAIL per gli infortuni legati alla prestazione resa fuori dai locali aziendali e nel tragitto verso il luogo scelto, se la scelta è ragionevole.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2017-05-22;81",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "184-2023",
-      "citazione": "184/2023",
+      "citazione": "D.Lgs. 184/2023",
       "chiavi": [
         "184/2023"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Recepisce la Direttiva (UE) 2021/2118 sull'RC auto. In vigore dal 28/12/2023, si applica dal 23/12/2023 (art. 4, c. 1). Ha riscritto l'art. 122 CAP: obbligo a prescindere dal terreno e dal fatto che il veicolo sia fermo o in movimento, anche in zone ad accesso ristretto.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2023-11-22;184",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "138-2024",
-      "citazione": "138/2024",
+      "citazione": "D.Lgs. 138/2024",
       "chiavi": [
         "138/2024"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
-    },
-    {
-      "id": "171-2005",
-      "citazione": "171/2005",
-      "chiavi": [
-        "171/2005"
-      ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
-    },
-    {
-      "id": "229-2021",
-      "citazione": "229/2021",
-      "chiavi": [
-        "229/2021"
-      ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Recepisce la Direttiva (UE) 2022/2555 (NIS2) sulla cibersicurezza. In vigore dal 16/10/2024.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2024-09-04;138",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "206-2005",
-      "citazione": "206/2005",
+      "citazione": "D.Lgs. 206/2005",
       "chiavi": [
         "206/2005"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
-    },
-    {
-      "id": "198-2007",
-      "citazione": "198/2007",
-      "chiavi": [
-        "198/2007"
-      ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Codice del Consumo. Art. 120: il danneggiato deve provare il difetto, il danno e la connessione causale tra difetto e danno; il produttore prova i fatti che escludono la responsabilità (art. 118).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art120",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "14-2019",
-      "citazione": "14/2019",
+      "citazione": "D.Lgs. 14/2019",
       "chiavi": [
         "14/2019"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
-    },
-    {
-      "id": "285-1992",
-      "citazione": "285/1992",
-      "chiavi": [
-        "285/1992"
-      ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Codice della crisi d'impresa e dell'insolvenza. Art. 3: l'imprenditore collettivo deve istituire assetti organizzativi, amministrativi e contabili adeguati (art. 2086 c.c.) per rilevare per tempo la crisi.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2019-01-12;14~art3",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "213-2023",
@@ -368,15 +309,14 @@
     },
     {
       "id": "2021-2118",
-      "citazione": "2021/2118",
+      "citazione": "Direttiva UE 2021/2118",
       "chiavi": [
         "2021/2118"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Direttiva (UE) 2021/2118 del 24 novembre 2021, modifica la direttiva 2009/103/CE sull'RC auto. È una direttiva, non un regolamento: in Italia l'ha recepita il D.Lgs. 184/2023.",
+      "fonte": "https://eur-lex.europa.eu/eli/dir/2021/2118/oj",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "247-2012",
@@ -401,18 +341,6 @@
       "verificata_il": "2026-10-30"
     },
     {
-      "id": "139-2005",
-      "citazione": "139/2005",
-      "chiavi": [
-        "139/2005"
-      ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
-    },
-    {
       "id": "39-1989",
       "citazione": "L. 39/1989",
       "chiavi": [
@@ -422,18 +350,6 @@
       "oggetto": "Art. 3, c. 5-bis: per esercitare la mediazione serve idonea garanzia assicurativa per i rischi professionali; chi media senza è punito con una sanzione da 3.000 a 5.000 euro.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1989-02-03;39~art3",
       "verificata_il": "2026-10-30"
-    },
-    {
-      "id": "155-2024",
-      "citazione": "155/2024",
-      "chiavi": [
-        "155/2024"
-      ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
     },
     {
       "id": "DLGS-36-2023",
@@ -511,6 +427,28 @@
       "oggetto": "Art. 1 (conv. L. 78/2025): termine della polizza catastrofale differito al 1° ottobre 2025 per le medie imprese e al 31 dicembre 2025 per piccole e micro; fermo il 31 marzo 2025 per le grandi. Aggiunge al c. 101 della L. 213/2023 il valore di ricostruzione a nuovo, al c. 104 l'esenzione per le grandi imprese, al c. 106 la regola sugli immobili con titolo edilizio.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-03-31;39~art1",
       "verificata_il": "2026-10-29"
+    },
+    {
+      "id": "L-160-2019",
+      "citazione": "L. 160/2019",
+      "chiavi": [
+        "160/2019"
+      ],
+      "stato": "verificata",
+      "oggetto": "Legge di bilancio 2020. L'art. 1, commi 75 e seguenti, contiene le regole dei monopattini elettrici: c. 75-quinquies equiparati ai velocipedi per quanto non previsto; c. 75-vicies quinquies RC obbligatoria (art. 2054 c.c. e titolo X CAP); c. 75-quater e 75-undevicies sanzione da 100 a 400 euro senza contrassegno o RC; c. 75-novies casco per tutti; c. 75-duodevicies sanzione da 50 a 250 euro per le violazioni dei commi 75-sexies-75-quaterdecies.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2019-12-27;160~art1",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "CC-2054",
+      "citazione": "art. 2054 c.c.",
+      "chiavi": [
+        "cc-2054"
+      ],
+      "stato": "verificata",
+      "oggetto": "Circolazione di veicoli: il conducente risarcisce il danno se non prova di aver fatto tutto il possibile per evitarlo; il proprietario risponde in solido salvo circolazione contro la sua volontà.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art2054",
+      "verificata_il": "2026-10-30"
     }
   ]
 }
