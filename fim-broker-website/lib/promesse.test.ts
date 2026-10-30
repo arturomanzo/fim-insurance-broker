@@ -55,6 +55,7 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\b(?:Decreto[ -]Legge|D\.?L\.?)\s*155\/2024\b[^.]{0,60}\bobbligatori/i, cosa: 'l\'obbligo catastrofale viene dalla L. 213/2023, c. 101: il D.L. 155/2024 definisce solo i beni' },
   { re: /\b198\/2007\b[^\n]{0,80}\bavvocat|\bavvocat[^\n]{0,80}\b198\/2007\b/i, cosa: 'la scelta dell\'avvocato nella tutela legale dipende dal contratto (art. 164 CAP), non dal D.Lgs. 198/2007' },
   { re: /\bsenza (?:copertura |assicurazione )?RC\b[^.]{0,20}è reato\b/i, cosa: 'circolare senza RC auto è un illecito amministrativo (art. 193 CdS), non un reato' },
+  { re: /1° gennaio 2025[^.]{0,160}catastrofal|catastrofal[^.]{0,160}1° gennaio 2025/i, cosa: 'la catastrofale non è scattata il 1° gennaio 2025: scaglioni dal 31 marzo 2025 (lib/catastrofale.ts)' },
   { re: /\bdanneggiato\b[^.]{0,100}\bsolo il nesso\b/i, cosa: 'nella responsabilità da prodotto il danneggiato prova difetto, danno e nesso (art. 120 Codice del Consumo)' },
 ]
 
@@ -163,6 +164,7 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     "Libera scelta dell'avvocato di fiducia (garantita per legge dal D.Lgs. 198/2007)",
     "L'uso di un veicolo aziendale senza copertura RC è reato, con sanzioni che vanno da 866 a 3.464 euro.",
     "il danneggiato non deve necessariamente dimostrare la colpa dell'azienda, ma solo il nesso tra il prodotto e il danno subito.",
+    'Dal 1° gennaio 2025 le imprese con sede in Italia sono tenute per legge a stipulare una polizza catastrofale',
   ]
   for (const esempio of esempi) {
     assert.ok(VIETATE.some(({ re }) => re.test(esempio)), `non riconosciuta: ${esempio}`)

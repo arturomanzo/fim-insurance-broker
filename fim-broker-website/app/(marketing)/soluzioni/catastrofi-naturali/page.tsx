@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { NORMA_CATASTROFALE, SCADENZE_CATASTROFALE, CHI_E_ESCLUSO, CONSEGUENZA_CATASTROFALE } from '@/lib/catastrofale'
+import { NORMA_CATASTROFALE, SCADENZE_CATASTROFALE, CHI_E_ESCLUSO, CONSEGUENZA_CATASTROFALE, CHI_E_OBBLIGATO, BENI_DA_ASSICURARE } from '@/lib/catastrofale'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import FaqSection from '@/components/ui/FaqSection'
@@ -44,7 +44,7 @@ const products = [
   {
     icon: '🏭',
     title: 'Polizza Catastrofi per Imprese',
-    desc: 'Dal 1° gennaio 2025 le imprese italiane con immobili e macchinari iscritti a bilancio hanno obbligo di legge di assicurarsi contro i rischi catastrofali. FIM ti aiuta a essere in regola.',
+    desc: `La ${NORMA_CATASTROFALE} obbliga ${CHI_E_OBBLIGATO} ad assicurare ${BENI_DA_ASSICURARE} contro i rischi catastrofali, con scadenze a scaglioni tra il 2025 e il 2026. FIM ti aiuta a essere in regola.`,
     price: 'su preventivo',
     audience: 'PMI e aziende — OBBLIGO 2025',
     urgent: true,
