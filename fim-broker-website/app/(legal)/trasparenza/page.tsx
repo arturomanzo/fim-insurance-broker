@@ -167,9 +167,10 @@ const SEZIONI_MUP = [
           assicurativi complessi. Le due forme possono coesistere sullo stesso rapporto.
         </p>
         <p>
-          <strong>Su richiesta del contraente</strong> vengono comunicate la natura e
-          l&apos;ammontare del compenso percepito in relazione al contratto proposto, ai sensi
-          dell&apos;art. 119-bis del Codice delle Assicurazioni Private.
+          <strong>Prima della conclusione di ogni contratto</strong> viene comunicata la natura
+          del compenso percepito per quel contratto e, se è previsto un onorario, anche il suo
+          importo o il metodo per calcolarlo (art. 120-bis del Codice delle Assicurazioni Private).
+          Su richiesta del contraente viene comunicato anche l&apos;ammontare della provvigione.
         </p>
         <p>
           <strong>R.C. auto.</strong> Per i contratti del ramo responsabilità civile auto viene
@@ -208,9 +209,11 @@ const SEZIONI_MUP = [
           facoltà</strong> e opera con il regime del conto corrente separato.
         </p>
         <p>
-          <strong>Efficacia liberatoria.</strong> I premi pagati a FIM Insurance Broker si
-          considerano riscossi dall&apos;impresa di assicurazione dal momento del pagamento, con
-          effetto liberatorio per il contraente.
+          <strong>Efficacia liberatoria.</strong> Il premio pagato a FIM Insurance Broker si
+          considera pagato direttamente all&apos;impresa di assicurazione solo se l&apos;accordo
+          sottoscritto tra FIM Insurance Broker e quell&apos;impresa lo prevede (art. 118, comma 2,
+          del Codice delle Assicurazioni Private). Per ogni contratto il contraente lo sa prima
+          della firma, nell&apos;informativa precontrattuale.
         </p>
         <p><strong>Modalità di pagamento ammesse:</strong></p>
         <ol className="list-decimal pl-5 space-y-1 my-2">

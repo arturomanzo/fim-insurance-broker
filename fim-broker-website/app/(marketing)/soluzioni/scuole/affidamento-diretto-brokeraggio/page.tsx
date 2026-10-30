@@ -75,7 +75,7 @@ const passaggi = [
     n: '05',
     titolo: 'L\'incarico',
     testo:
-      'La lettera d\'incarico fissa compiti, durata, obblighi di riservatezza e la regola sui premi: pagati al broker, con effetto liberatorio per la scuola (art. 118 D.Lgs. 209/2005).',
+      'La lettera d\'incarico fissa compiti, durata, obblighi di riservatezza e la regola sui premi: pagati al broker, con effetto liberatorio per la scuola se l\'accordo del broker con la compagnia lo prevede (art. 118, c. 2, D.Lgs. 209/2005).',
   },
 ]
 
@@ -199,8 +199,9 @@ export default function AffidamentoBrokeraggioPage() {
           </p>
           <p>
             <strong>Art. 118 del D.Lgs. 209/2005.</strong> Il premio pagato al broker libera la scuola come se fosse
-            pagato alla compagnia. È la clausola che va scritta nell&apos;incarico e poi ripresa nei documenti della gara
-            sulle polizze.
+            pagato alla compagnia solo se l&apos;accordo tra il broker e la compagnia lo prevede (comma 2). È la clausola
+            che va scritta nell&apos;incarico e poi ripresa nei documenti della gara sulle polizze, così vale per
+            qualunque compagnia vinca.
           </p>
         </div>
       </section>
