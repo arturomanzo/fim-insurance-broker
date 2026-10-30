@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-10-29",
+  "aggiornato": "2026-10-30",
   "norme": [
     {
       "id": "L-289-2002",
@@ -202,15 +202,14 @@
     },
     {
       "id": "24-2017",
-      "citazione": "24/2017",
+      "citazione": "L. 24/2017",
       "chiavi": [
         "24/2017"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 2 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Legge Gelli-Bianco. Art. 7: la struttura risponde ex artt. 1218 e 1228 c.c. anche per l'intramoenia (c. 2); il sanitario in struttura risponde ex art. 2043 c.c. salvo contratto con il paziente (c. 3). Art. 9: rivalsa solo per dolo o colpa grave; per la colpa grave condanna e rivalsa non oltre il triplo della retribuzione lorda (pubblico, c. 5) o del reddito professionale (privato, c. 6); il limite non vale per i liberi professionisti. Art. 10: obbligo per le strutture (c. 1, anche intramoenia), per il libero professionista resta l'obbligo di legge (c. 2), chi opera a qualunque titolo in struttura stipula a proprie spese una polizza per colpa grave (c. 3).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2017-03-08;24~art10 (anche ~art7 e ~art9)",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "157-1992",
@@ -381,27 +380,25 @@
     },
     {
       "id": "247-2012",
-      "citazione": "247/2012",
+      "citazione": "L. 247/2012",
       "chiavi": [
         "247/2012"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Art. 12, c. 1: avvocati, associazioni e società fra professionisti devono stipulare una polizza di responsabilità civile professionale, compresa la custodia di documenti e somme, e renderne noti gli estremi al cliente.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2012-12-31;247~art12",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "137-2012",
-      "citazione": "137/2012",
+      "citazione": "D.P.R. 137/2012",
       "chiavi": [
         "137/2012"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Art. 5: il professionista deve stipulare idonea assicurazione per i danni al cliente e comunicarne estremi e massimale all'incarico; la violazione costituisce illecito disciplinare.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:2012-08-07;137~art5",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "139-2005",
@@ -417,15 +414,14 @@
     },
     {
       "id": "39-1989",
-      "citazione": "39/1989",
+      "citazione": "L. 39/1989",
       "chiavi": [
         "39/1989"
       ],
-      "stato": "da-verificare",
-      "oggetto": "",
-      "fonte": "",
-      "verificata_il": "",
-      "nota": "Già citata in 1 punto/i del blog prima dell'introduzione del controllo. Da leggere sulla fonte primaria e promuovere a «verificata», oppure da togliere dagli articoli."
+      "stato": "verificata",
+      "oggetto": "Art. 3, c. 5-bis: per esercitare la mediazione serve idonea garanzia assicurativa per i rischi professionali; chi media senza è punito con una sanzione da 3.000 a 5.000 euro.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1989-02-03;39~art3",
+      "verificata_il": "2026-10-30"
     },
     {
       "id": "155-2024",

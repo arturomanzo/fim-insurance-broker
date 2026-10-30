@@ -46,6 +46,7 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\b(?:include|copre|coprono)\b[^.]{0,80}\bsanzion[ei] GDPR\b/i, cosa: 'promessa di coprire le sanzioni del Garante: in genere restano all\'azienda' },
   { re: /comma 110\b[^.]{0,40}agricol|agricol[^.]{0,80}comma 110\b/i, cosa: 'le imprese agricole le esclude il comma 111 della L. 213/2023, non il 110' },
   { re: /\bpool assicurativ/i, cosa: 'nessun pool: la L. 213/2023 obbliga le compagnie a contrarre con le imprese obbligate (commi 106 e 107)' },
+  { re: /\bsenza (?:la )?(?:polizza|copertura)\b[^.]{0,80}\brischio penale\b|\brischio penale\b[^.]{0,80}\bsenza (?:la )?(?:polizza|copertura)\b/i, cosa: 'lavorare senza la polizza obbligatoria è un illecito disciplinare (D.P.R. 137/2012, art. 5), non un reato' },
   { re: /\b990\/1969\b/, cosa: 'la L. 990/1969 è abrogata: l\'obbligo RC auto sta nell\'art. 122 del D.Lgs. 209/2005' },
   { re: /\b(?:1[.,]22|6[.,]07)\s*milion|\b(?:1\.220|6\.070)\.000\b/i, cosa: 'massimali RC superati: oggi 6.450.000 € persone e 1.300.000 € cose (art. 128 CAP)' },
   { re: /\bRC patrimoniale\b[^.]{0,60}\b(?:a carico|pagat[ao])\s+(?:della|dalla|dell'|dall')\s*(?:scuola|istituto)|\b(?:la scuola|l'istituto)\s+(?:paga|può pagare|si accolla)\b[^.]{0,40}\bRC patrimoniale\b/i, cosa: 'la RC patrimoniale di Dirigente e D.S.G.A. non la può pagare la scuola: contratto nullo (art. 3, c. 59, L. 244/2007)' },
@@ -141,6 +142,7 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
     "La scuola può pagare anche la RC patrimoniale del D.S.G.A.",
     'Restano fuori le imprese agricole, escluse dalla stessa legge (comma 110).',
     'il governo sta lavorando a un sistema di pool assicurativo che garantisca la copertura',
+    "Esercitare senza copertura espone a sanzioni disciplinari, rischio penale per l'esercizio dell'attività e responsabilità patrimoniale illimitata.",
   ]
   for (const esempio of esempi) {
     assert.ok(VIETATE.some(({ re }) => re.test(esempio)), `non riconosciuta: ${esempio}`)

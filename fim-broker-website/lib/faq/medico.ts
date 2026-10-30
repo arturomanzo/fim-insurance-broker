@@ -13,12 +13,12 @@ export const medicoFaq: FaqCategory = {
     {
       question: 'La RC professionale medica è davvero obbligatoria?',
       answer:
-        "Sì. La L. 24/2017 (Gelli-Bianco) ha reso obbligatoria la copertura assicurativa per tutti gli esercenti professioni sanitarie, sia nell'attività libero-professionale sia in quella in regime di dipendenza (con polizza per colpa grave). L'obbligo è ribadito dal D.M. 232/2023 che ha definito i requisiti minimi delle polizze (massimali, retroattività, ultrattività). Esercitare senza copertura espone a sanzioni disciplinari, rischio penale per l'esercizio dell'attività e responsabilità patrimoniale illimitata.",
+        "Sì, in due forme. Chi lavora in libera professione deve avere la propria RC professionale (L. 24/2017, art. 10, c. 2). Chi lavora a qualunque titolo in una struttura pubblica o privata deve avere, a proprie spese, una polizza per colpa grave (art. 10, c. 3): il paziente di solito chiede i danni alla struttura, che poi può rivalersi. Il D.M. 232/2023 fissa i requisiti minimi delle polizze. Lavorare senza la polizza dovuta è un illecito disciplinare (D.P.R. 137/2012, art. 5) e lascia scoperto il patrimonio personale.",
     },
     {
-      question: 'Cosa cambia tra RC libero-professionale e Colpa Grave per dipendenti SSN?',
+      question: 'Cosa cambia tra RC libero-professionale e polizza per colpa grave?',
       answer:
-        "La RC libero-professionale copre l'attività privata del medico (studio, intramoenia, consulenze) e risponde direttamente al paziente per qualsiasi grado di colpa. La Colpa Grave per dipendenti SSN o strutture private convenzionate copre invece la rivalsa che la struttura può esercitare sul medico in caso di colpa grave: la struttura risarcisce il paziente, poi può chiedere al medico fino a 3 volte la retribuzione lorda annua. Sono due polizze distinte e spesso necessarie entrambe per chi svolge attività mista.",
+        "La RC libero-professionale copre l'attività in proprio, nello studio o in una struttura privata dove il paziente ha un contratto con te, per qualsiasi grado di colpa. La polizza per colpa grave serve a chi lavora in struttura: la struttura risarcisce il paziente, poi può rivalersi sul sanitario solo per dolo o colpa grave, e per la colpa grave non oltre il triplo della retribuzione o del reddito professionale annuo (L. 24/2017, art. 9). L'intramoenia la copre la struttura. Chi fa attività mista ha bisogno di tutte e due le polizze.",
     },
     {
       question: 'Quale massimale scegliere per la RC sanitaria?',
