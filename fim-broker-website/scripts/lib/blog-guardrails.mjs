@@ -29,7 +29,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const REGISTRO = resolve(__dirname, '../../data/norme-citabili.json')
 
 const TIPI_ATTO = String.raw`D\.?\s?Lgs\.?|Decreto\s+Legislativo|D\.?P\.?R\.?|Legge|L\.|Regolamento\s+UE|Reg\.\s*UE|Reg\.\s*IVASS|Direttiva`
-const RE_ATTO = new RegExp(String.raw`(?:${TIPI_ATTO})\s*n?\.?\s*(\d+)[/\s](\d{4})`, 'gi')
+const RE_ATTO = new RegExp(String.raw`(?<![A-Za-z])(?:${TIPI_ATTO})\s*n?\.?\s*(\d+)[/\s](\d{4})`, 'gi')
 const RE_CODICE_CIVILE = /art(?:icolo|\.)\s*(\d+)(?:\s*(?:bis|ter|quater))?\s*(?:del\s+)?(?:c\.c\.|codice\s+civile)/gi
 
 // Parole che il CLAUDE.md vieta in qualsiasi testo FIM, più i cloni più frequenti.

@@ -404,7 +404,7 @@ export default function SinistriAIAssistant() {
           />
           <span className="text-sm text-gray-600">
             Acconsento al trattamento dei miei dati personali ai sensi del{' '}
-            <a href="/privacy-policy" className="text-primary underline">Reg. UE 679/2016 (GDPR)</a>.
+            <a href="/privacy-policy" className="text-primary underline">Reg. UE 2016/679 (GDPR)</a>.
           </span>
         </label>
 

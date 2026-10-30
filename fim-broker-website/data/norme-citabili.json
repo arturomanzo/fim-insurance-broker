@@ -1,6 +1,6 @@
 {
   "_commento": [
-    "Registro delle norme che il blog può citare. Lo usa scripts/validate-blog.mjs (blocca le citazioni sconosciute)",
+    "Registro delle norme che il sito può citare: blog e pagine. Lo usano scripts/validate-blog.mjs e lib/norme.test.ts (bloccano le citazioni sconosciute)",
     "e scripts/generate-blog-post.mjs (il modello può citare SOLO le norme in stato «verificata»).",
     "«verificata» = testo letto sulla fonte primaria, con URL e data. «da-verificare» = arretrato ereditato,",
     "presente in articoli già pubblicati e non ancora confermato. Non promuovere una norma senza averla letta:",
@@ -448,6 +448,259 @@
       "stato": "verificata",
       "oggetto": "Circolazione di veicoli: il conducente risarcisce il danno se non prova di aver fatto tutto il possibile per evitarlo; il proprietario risponde in solido salvo circolazione contro la sua volontà.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art2054",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DLGS-196-2003",
+      "citazione": "D.Lgs. 196/2003",
+      "chiavi": [
+        "196/2003"
+      ],
+      "stato": "verificata",
+      "oggetto": "Codice in materia di protezione dei dati personali. Art. 122: archiviare o leggere informazioni sul terminale dell'utente (cookie) è consentito solo col suo consenso informato, salvo i casi tecnici.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2003-06-30;196~art122",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DLGS-68-2018",
+      "citazione": "D.Lgs. 68/2018",
+      "chiavi": [
+        "68/2018"
+      ],
+      "stato": "verificata",
+      "oggetto": "Recepisce la Direttiva (UE) 2016/97 sulla distribuzione assicurativa (IDD) modificando il Codice delle Assicurazioni Private.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2018-05-21;68",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DLGS-28-2010",
+      "citazione": "D.Lgs. 28/2010",
+      "chiavi": [
+        "28/2010"
+      ],
+      "stato": "verificata",
+      "oggetto": "Mediazione civile. Art. 5, c. 1: per i contratti assicurativi la mediazione è condizione di procedibilità della domanda giudiziale. Art. 5, c. 3, lett. c): la condizione si assolve anche con la procedura dell'art. 187.1 CAP (Arbitro Assicurativo).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2010-03-04;28~art5",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "REG-IVASS-40-2018",
+      "citazione": "Reg. IVASS 40/2018",
+      "chiavi": [
+        "40/2018"
+      ],
+      "stato": "verificata",
+      "oggetto": "Regolamento IVASS n. 40 del 2 agosto 2018 sulla distribuzione assicurativa e riassicurativa: RUI, regole di comportamento, informativa precontrattuale, formazione.",
+      "fonte": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2018/n40/index.html",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DLGS-231-2007",
+      "citazione": "D.Lgs. 231/2007",
+      "chiavi": [
+        "231/2007"
+      ],
+      "stato": "verificata",
+      "oggetto": "Prevenzione dell'uso del sistema finanziario a scopo di riciclaggio e finanziamento del terrorismo: adeguata verifica della clientela.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2007-11-21;231",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "REG-UE-2017-1469",
+      "citazione": "Reg. UE 2017/1469",
+      "chiavi": [
+        "2017/1469"
+      ],
+      "stato": "verificata",
+      "oggetto": "Regolamento di esecuzione (UE) 2017/1469: formato standardizzato del documento informativo per i prodotti assicurativi danni (IPID, in Italia DIP Danni).",
+      "fonte": "https://eur-lex.europa.eu/eli/reg_impl/2017/1469/oj",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "REG-UE-1286-2014",
+      "citazione": "Reg. UE 1286/2014",
+      "chiavi": [
+        "1286/2014"
+      ],
+      "stato": "verificata",
+      "oggetto": "Regolamento (UE) n. 1286/2014 (PRIIPs): documento contenente le informazioni chiave (KID) per i prodotti d'investimento assicurativi.",
+      "fonte": "https://eur-lex.europa.eu/eli/reg/2014/1286/oj",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "REG-UE-2024-1689",
+      "citazione": "Reg. UE 2024/1689",
+      "chiavi": [
+        "2024/1689"
+      ],
+      "stato": "verificata",
+      "oggetto": "Regolamento (UE) 2024/1689 sull'intelligenza artificiale (AI Act). Art. 50: chi offre un sistema che interagisce con le persone deve informarle che parlano con un'IA.",
+      "fonte": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DL-145-2023",
+      "citazione": "D.L. 145/2023",
+      "chiavi": [
+        "145/2023"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 13-ter: codice identificativo nazionale (CIN) per le locazioni brevi e turistiche, rilevatori di gas e monossido ed estintori, SCIA per chi affitta in forma d'impresa, con le relative sanzioni. Non impone polizze.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2023-10-18;145~art13ter",
+      "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "DLGS-49-2010",
+      "citazione": "D.Lgs. 49/2010",
+      "chiavi": [
+        "49/2010"
+      ],
+      "stato": "verificata",
+      "oggetto": "Recepisce la Direttiva 2007/60/CE sulle alluvioni. Art. 6: mappe di pericolosità per scenari di scarsa, media ed elevata probabilità.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2010-02-23;49~art6",
+      "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "CC-1129",
+      "citazione": "art. 1129 c.c.",
+      "chiavi": [
+        "cc-1129"
+      ],
+      "stato": "verificata",
+      "oggetto": "Nomina dell'amministratore di condominio: l'assemblea può subordinarla alla presentazione di una polizza individuale di RC per gli atti compiuti nel mandato; per i lavori straordinari il massimale va adeguato.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1129",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "L-136-2010",
+      "citazione": "Legge 136/2010",
+      "chiavi": [
+        "136/2010"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 3: tracciabilità dei flussi finanziari negli appalti pubblici (conto dedicato, CIG nei pagamenti).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2010-08-13;136~art3",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "L-145-2018",
+      "citazione": "L. 145/2018",
+      "chiavi": [
+        "145/2018"
+      ],
+      "stato": "verificata",
+      "oggetto": "Legge di bilancio 2019. Art. 1, commi 784 e seguenti: percorsi per le competenze trasversali e l'orientamento, oggi percorsi di formazione scuola-lavoro. Il c. 784-novies, inserito dall'art. 7 del D.L. 159/2025, vieta di adibire gli studenti a lavorazioni ad elevato rischio individuate nel DVR dell'impresa ospitante.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2018-12-30;145~art1",
+      "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "L-62-2000",
+      "citazione": "L. 62/2000",
+      "chiavi": [
+        "62/2000"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 1: il sistema nazionale di istruzione è costituito dalle scuole statali e dalle scuole paritarie private e degli enti locali.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2000-03-10;62~art1",
+      "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "DLGS-65-2017",
+      "citazione": "D.Lgs. 65/2017",
+      "chiavi": [
+        "65/2017"
+      ],
+      "stato": "verificata",
+      "oggetto": "Sistema integrato di educazione e istruzione 0-6. Art. 2: i nidi sono servizi educativi per l'infanzia, distinti dalle scuole dell'infanzia.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2017-04-13;65~art2",
+      "verificata_il": "2026-10-28"
+    },
+    {
+      "id": "L-312-1980",
+      "citazione": "L. 312/1980",
+      "chiavi": [
+        "312/1980"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 61: la responsabilità patrimoniale del personale scolastico per danni all'Amministrazione connessi a comportamenti degli alunni è limitata a dolo o colpa grave nella vigilanza; l'Amministrazione si surroga al personale nelle azioni dei terzi.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1980-06-11;312~art61",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DLGS-122-2005",
+      "citazione": "D.Lgs. 122/2005",
+      "chiavi": [
+        "122/2005"
+      ],
+      "stato": "verificata",
+      "oggetto": "Art. 4: il costruttore che vende un immobile da costruire deve consegnare all'acquirente, a pena di nullità, una polizza indennitaria decennale per i danni dell'art. 1669 c.c. (rovina o gravi difetti costruttivi).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-06-20;122~art4",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DLGS-152-2006",
+      "citazione": "D.Lgs. 152/2006",
+      "chiavi": [
+        "152/2006"
+      ],
+      "stato": "verificata",
+      "oggetto": "Testo Unico Ambientale. Parte sesta: chi causa un danno ambientale ne sostiene i costi di prevenzione e ripristino (principio «chi inquina paga»).",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2006-04-03;152",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "CC-1669",
+      "citazione": "art. 1669 c.c.",
+      "chiavi": [
+        "cc-1669"
+      ],
+      "stato": "verificata",
+      "oggetto": "Rovina e difetti di cose immobili: per dieci anni dal compimento l'appaltatore risponde di rovina, pericolo di rovina o gravi difetti, se denunciati entro un anno dalla scoperta.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1669",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "CC-2135",
+      "citazione": "art. 2135 c.c.",
+      "chiavi": [
+        "cc-2135"
+      ],
+      "stato": "verificata",
+      "oggetto": "Definizione di imprenditore agricolo: coltivazione del fondo, selvicoltura, allevamento di animali e attività connesse.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art2135",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "CC-1913",
+      "citazione": "art. 1913 c.c.",
+      "chiavi": [
+        "cc-1913"
+      ],
+      "stato": "verificata",
+      "oggetto": "Avviso del sinistro entro tre giorni da quando è avvenuto o l'assicurato ne ha avuto conoscenza. Non è tra le norme inderogabili dell'art. 1932: il contratto può prevedere un termine diverso.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1913",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "CC-1923",
+      "citazione": "art. 1923 c.c.",
+      "chiavi": [
+        "cc-1923"
+      ],
+      "stato": "verificata",
+      "oggetto": "Le somme dovute dall'assicuratore al contraente o al beneficiario non possono essere sottoposte ad azione esecutiva o cautelare; restano salve revocatoria, collazione e riduzione rispetto ai premi pagati.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1923",
+      "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DLGS-123-2025",
+      "citazione": "D.Lgs. 123/2025",
+      "chiavi": [
+        "123/2025"
+      ],
+      "stato": "verificata",
+      "oggetto": "Testo unico dell'imposta di registro e degli altri tributi indiretti, compresa l'imposta su successioni e donazioni. Art. 97, c. 1, lett. c): non entrano nell'attivo ereditario le indennità spettanti per diritto proprio agli eredi da assicurazioni stipulate dal defunto. Ha sostituito l'art. 12 del D.Lgs. 346/1990, oggi abrogato.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2025-08-01;123",
       "verificata_il": "2026-10-30"
     }
   ]
