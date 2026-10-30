@@ -101,6 +101,10 @@ test('nessuna parola vietata nei testi del sito', () => {
 // Senza fonte sono numeri che nessuno può controllare (decisione del 26/10/2026).
 const STATISTICA = /\b\d{1,3}(?:[.,]\d)?\s?%\s+(?:delle|dei|degli)\s+(?:PMI|famiglie|aziende|imprese|case|comuni|attacchi|incidenti)\b/i
 const FONTE = /\([^)]*\b(?:19|20)\d{2}\)/
+// Anche "X milioni di persone/lavoratori/italiani": un numero così va con la sua
+// fonte nella stessa frase (era passato "oltre 11 milioni" al posto dei 5,8 ISTAT).
+const MILIONI = /\b\d[\d.,]*\s+milioni\s+di\s+(?:persone|italiani|lavoratori|famiglie|imprese|utenti|professionisti)\b/i
+const FONTE_NOMINATA = /\b(?:secondo|dati)\b[^.]{0,120}\b(?:ISTAT|ACI|INPS|INAIL|IVASS|ANIA|Politecnico|Osservatorio|Banca d'Italia|Eurostat)\b/i
 
 test('nessuna statistica di mercato senza fonte', () => {
   const trovate: string[] = []
@@ -110,6 +114,10 @@ test('nessuna statistica di mercato senza fonte', () => {
       if (COMMENTO.test(riga)) return
       const m = riga.match(STATISTICA)
       if (m && !FONTE.test(riga)) trovate.push(`${file}:${i + 1} — «${m[0]}»`)
+      for (const frase of riga.split(/(?<=[.!?])\s+/)) {
+        const n = frase.match(MILIONI)
+        if (n && !FONTE.test(frase) && !FONTE_NOMINATA.test(frase)) trovate.push(`${file}:${i + 1} — «${n[0]}»`)
+      }
     })
   }
   assert.deepEqual(trovate, [], `\n${trovate.join('\n')}`)
@@ -166,4 +174,7 @@ test('i filtri riconoscono le frasi che hanno già fatto danni', () => {
   assert.ok(STATISTICA.test('il 68% delle PMI italiane ha subìto almeno un attacco'))
   assert.ok(!FONTE.test('il 68% delle PMI italiane ha subìto almeno un attacco'))
   assert.ok(FONTE.test('Solo il 21% delle PMI italiane ha una polizza cyber (Cyber Index PMI 2024).'))
+  assert.ok(MILIONI.test('In Italia oltre 18 milioni di persone praticano sport'))
+  assert.ok(!FONTE_NOMINATA.test('In Italia oltre 18 milioni di persone praticano sport'))
+  assert.ok(FONTE_NOMINATA.test("Secondo l'Osservatorio Smart Working del Politecnico di Milano, nel 2025 circa 3,57 milioni di lavoratori"))
 })
