@@ -208,12 +208,14 @@ const SEZIONI_MUP = [
           (art. 117, comma 3-bis, del Codice). <strong>FIM Insurance Broker non si avvale di questa
           facoltà</strong> e opera con il regime del conto corrente separato.
         </p>
+        {/* Arturo, 31/10/2026: tutti gli accordi con le imprese prevedono l'incasso. Se se ne
+            aggiunge uno che non lo prevede, questo paragrafo torna condizionato (art. 118, c. 2). */}
         <p>
           <strong>Efficacia liberatoria.</strong> Il premio pagato a FIM Insurance Broker si
-          considera pagato direttamente all&apos;impresa di assicurazione solo se l&apos;accordo
-          sottoscritto tra FIM Insurance Broker e quell&apos;impresa lo prevede (art. 118, comma 2,
-          del Codice delle Assicurazioni Private). Per ogni contratto il contraente lo sa prima
-          della firma, nell&apos;informativa precontrattuale.
+          considera pagato direttamente all&apos;impresa di assicurazione, con effetto liberatorio
+          per il contraente: gli accordi sottoscritti da FIM Insurance Broker con le imprese di cui
+          distribuisce i contratti prevedono l&apos;incasso dei premi (art. 118, comma 2, del Codice
+          delle Assicurazioni Private).
         </p>
         <p><strong>Modalità di pagamento ammesse:</strong></p>
         <ol className="list-decimal pl-5 space-y-1 my-2">
