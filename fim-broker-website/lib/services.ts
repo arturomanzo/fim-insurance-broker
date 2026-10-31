@@ -133,7 +133,7 @@ export const services: Service[] = [
     faq: [
       {
         question: 'Posso dedurre i premi vita dalle tasse?',
-        answer: 'Sì. I premi per polizze vita caso morte e invalidità permanente sono detraibili al 19% fino a 530€ annui (art. 15 TUIR). Le polizze previdenziali complementari sono invece deducibili dal reddito fino a 5.164,57€/anno.',
+        answer: 'Sì. I premi per polizze caso morte e invalidità permanente non inferiore al 5% sono detraibili al 19% fino a 530€ annui, e fino a 1.291,14€ quelli per la non autosufficienza (art. 14, comma 1, lett. o), del Testo unico delle imposte sui redditi, D.Lgs. 117/2026, che dal 2027 ha preso il posto dell\'art. 15 del TUIR). Le polizze previdenziali complementari sono invece deducibili dal reddito fino a 5.164,57€/anno.',
       },
       {
         question: "Cos'è una polizza unit-linked?",

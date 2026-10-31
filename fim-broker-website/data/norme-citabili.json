@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-10-30",
+  "aggiornato": "2026-10-31",
   "norme": [
     {
       "id": "L-289-2002",
@@ -702,6 +702,17 @@
       "oggetto": "Testo unico dell'imposta di registro e degli altri tributi indiretti, compresa l'imposta su successioni e donazioni. Art. 97, c. 1, lett. c): non entrano nell'attivo ereditario le indennità spettanti per diritto proprio agli eredi da assicurazioni stipulate dal defunto. Ha sostituito l'art. 12 del D.Lgs. 346/1990, oggi abrogato.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2025-08-01;123",
       "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "DLGS-117-2026",
+      "citazione": "D.Lgs. 117/2026",
+      "chiavi": [
+        "117/2026"
+      ],
+      "stato": "verificata",
+      "oggetto": "Nuovo Testo unico delle imposte sui redditi, in vigore dal 4/7/2026, applicato dal 1° gennaio 2027 (art. 377), quando sostituisce il D.P.R. 917/1986 (TUIR). Art. 14, c. 1, lett. o) (ex art. 15 TUIR): detrazione del 19% per premi caso morte o invalidità permanente non inferiore al 5%, fino a 530 euro, e per la non autosufficienza fino a 1.291,14 euro.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2026-06-19;117",
+      "verificata_il": "2026-10-31"
     }
   ]
 }
