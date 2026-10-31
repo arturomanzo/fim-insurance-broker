@@ -65,7 +65,7 @@ function normalizza(chiave) {
 
 /** Tutto il testo di un post, in un colpo solo. */
 export function testoDi(post) {
-  const pezzi = [post.title, post.excerpt]
+  const pezzi = [post.title, post.excerpt, post.seoTitle, post.seoDescription]
   for (const s of post.sections ?? []) {
     pezzi.push(s.heading, s.body, ...(s.list ?? []))
   }

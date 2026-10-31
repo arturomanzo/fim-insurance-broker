@@ -13,14 +13,19 @@ import { OG_BASE } from '@/lib/seo'
 import { RICONTATTO } from '@/lib/tempi'
 
 export const metadata: Metadata = {
-  // Title: 60 caratteri — entro la soglia ~60 oltre cui Google tronca in SERP.
+  // Title scelto da Arturo il 31/10/2026 dopo i dati di Search Console: su
+  // "assicurazione cisterna di latina" la home era 4ª con quasi zero clic e il
+  // vecchio titolo ("Chiarezza in Azione | In tutta Italia") non diceva né
+  // broker né territorio. 72 caratteri: oltre i ~60 Google tronca solo la coda
+  // del brand, le parole che contano restano visibili. Il motto resta nello
+  // slogan del JSON-LD e sulla pagina.
   title: {
-    absolute: 'FIM Insurance Broker · Chiarezza in Azione | In tutta Italia',
+    absolute: 'Broker Assicurativo a Cisterna di Latina e Latina | FIM Insurance Broker',
   },
-  // Description: 149 caratteri — entro la soglia ~160 di Google.
-  // USP "indipendente" + numero compagnie + CTA "analisi gratuita".
+  // Description: entro la soglia ~160 di Google.
+  // USP "indipendente" + territorio + numero compagnie + CTA "analisi gratuita".
   description:
-    'Broker assicurativo indipendente, in tutta Italia: confrontiamo 20 compagnie per trovare la polizza migliore per te. Analisi gratuita, senza impegno.',
+    'Broker assicurativo indipendente a Cisterna di Latina, al lavoro in tutta Italia: confrontiamo 20 compagnie per trovare la polizza giusta. Analisi gratuita.',
   alternates: { canonical: '/' },
   openGraph: {
     ...OG_BASE,
