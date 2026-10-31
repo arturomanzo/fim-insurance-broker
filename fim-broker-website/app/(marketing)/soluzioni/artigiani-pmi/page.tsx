@@ -9,11 +9,22 @@ import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { RICONTATTO } from '@/lib/tempi'
+import {
+  NORMA_CATASTROFALE,
+  CHI_E_OBBLIGATO,
+  BENI_DA_ASSICURARE,
+  EVENTI_CATASTROFALI,
+  CHI_E_ESCLUSO,
+  CONSEGUENZA_CATASTROFALE,
+} from '@/lib/catastrofale'
 
+// Titolo e H1 rivisti il 31/10/2026 sui dati di Search Console: la pagina era in
+// posizione 26 e il vecchio H1 ("Proteggi la tua attività senza spendere troppo")
+// non conteneva né "assicurazione" né "artigiani" né "PMI", e prometteva un risparmio.
 export const metadata: Metadata = {
-  title: 'Assicurazione Artigiani e PMI — Proteggi la tua Attività',
+  title: { absolute: 'Assicurazione artigiani e PMI: cosa serve | FIM Broker' },
   description:
-    'Polizze assicurative per artigiani, commercianti e PMI italiane. RC impresa, all-risk capannone, infortuni dipendenti, flotta aziendale.',
+    'Quali assicurazioni sono obbligatorie per artigiani e PMI e quali servono davvero: RC impresa, incendio, infortuni, catastrofale. Analisi gratuita dei rischi.',
   alternates: { canonical: '/soluzioni/artigiani-pmi' },
   openGraph: {
     ...OG_BASE,
@@ -92,6 +103,31 @@ const coverages = [
   },
 ]
 
+// Cosa chiede la legge. Solo norme presenti e verificate in data/norme-citabili.json;
+// la catastrofale prende il testo da lib/catastrofale.ts, non va riscritta a mano.
+const obblighi = [
+  {
+    titolo: 'INAIL, se hai dipendenti o lavori con le mani',
+    testo:
+      "Infortuni sul lavoro e malattie professionali dei dipendenti si assicurano all'INAIL (D.P.R. 1124/1965). Lo stesso vale per l'artigiano titolare che lavora di persona nella sua impresa. Non è una polizza che scegli: è un'assicurazione pubblica, con premi calcolati sulle retribuzioni e sul tipo di lavoro.",
+    href: '/blog/assicurazione-infortuni-dipendenti-guida-2026',
+    link: "Cosa l'INAIL non copre",
+  },
+  {
+    titolo: 'RC auto sui veicoli aziendali',
+    testo:
+      "Furgoni, auto e camion dell'impresa devono avere la RC auto come qualunque veicolo che circola (D.Lgs. 209/2005). Con più mezzi conviene metterli sotto un solo controllo, per non perdere una scadenza.",
+    href: '/soluzioni/flotta-aziendale',
+    link: 'Flotta aziendale',
+  },
+  {
+    titolo: 'Polizza catastrofale',
+    testo: `La ${NORMA_CATASTROFALE} obbliga ${CHI_E_OBBLIGATO} ad assicurare ${BENI_DA_ASSICURARE} contro ${EVENTI_CATASTROFALI}. Restano fuori ${CHI_E_ESCLUSO}. Per chi non è in regola ${CONSEGUENZA_CATASTROFALE}.`,
+    href: '/soluzioni/catastrofi-naturali',
+    link: "Come funziona l'obbligo",
+  },
+]
+
 const sectors = [
   { name: 'Elettricisti e Idraulici', icon: '⚡' },
   { name: 'Carpentieri e Falegnami', icon: '🔨' },
@@ -135,10 +171,8 @@ export default function ArtigianiPmiPage() {
               🏭 Soluzioni per piccole e medie imprese
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
-              Proteggi la tua{' '}
-              <span className="text-accent">attività</span>
-              <br />
-              senza spendere troppo
+              Assicurazione per{' '}
+              <span className="text-accent">artigiani e PMI</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
               Un incendio, un incidente sul lavoro, una contestazione di un cliente:
@@ -149,7 +183,7 @@ export default function ArtigianiPmiPage() {
             <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
               <p className="text-white/90 text-sm">
                 <strong className="text-accent">Sapevi che</strong> — dopo un incendio grave un&apos;azienda può restare ferma per mesi, con i costi fissi che corrono?
-                La polizza interruzione di esercizio è quella che più spesso salva le aziende, eppure è la meno conosciuta.
+                La polizza interruzione di esercizio paga proprio quei mesi, ed è una delle coperture che troviamo più spesso mancanti nelle polizze che le imprese ci portano da analizzare.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -197,6 +231,40 @@ export default function ArtigianiPmiPage() {
               + altri settori
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Obblighi di legge */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-10">
+            <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              Cosa chiede la legge
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
+              Quali assicurazioni sono obbligatorie per artigiani e PMI
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Gli obblighi sono pochi e valgono per quasi tutte le imprese. Alcune attività ne hanno altri,
+              previsti dalle loro regole di settore, e molti committenti chiedono la RC impresa nel contratto
+              anche quando la legge non la impone.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {obblighi.map((o) => (
+              <Card key={o.titolo} className="flex flex-col">
+                <h3 className="font-bold text-primary mb-2">{o.titolo}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed flex-1">{o.testo}</p>
+                <Link href={o.href} className="text-sm font-semibold text-primary hover:text-accent mt-3">
+                  {o.link} →
+                </Link>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-gray-600 max-w-2xl mx-auto mt-8">
+            Tutto il resto, cioè RC impresa, incendio e furto, infortuni integrativa e interruzione di esercizio,
+            la legge non lo chiede. È però quello che tiene in piedi l&apos;azienda il giorno dopo un sinistro.
+          </p>
         </div>
       </section>
 
@@ -307,8 +375,9 @@ export default function ArtigianiPmiPage() {
                 Non ti vendiamo una polizza.<br />Ti costruiamo una protezione.
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                La maggior parte dei broker vende polizze standard. FIM parte dall&apos;analisi dei rischi reali della tua attività.
-                Il risultato: nessuna copertura inutile, nessun gap pericoloso.
+                Una polizza presa a scatola chiusa copre quello che c&apos;è scritto, non quello che serve a te.
+                FIM parte dall&apos;analisi dei rischi reali della tua attività, per non farti pagare coperture inutili
+                e non lasciare scoperto quello che conta.
               </p>
               <div className="space-y-4">
                 {[

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
-import { OBBLIGO_CATASTROFALE } from '@/lib/catastrofale'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { OG_BASE } from '@/lib/seo'
+import Link from 'next/link'
+import FaqSection from '@/components/ui/FaqSection'
+import { calcolatoreRischiFaq } from '@/lib/faq/calcolatore-rischi'
 
 const RiskCalculator = dynamic(() => import('@/components/calculator/RiskCalculator'), {
   loading: () => (
@@ -15,41 +17,12 @@ const RiskCalculator = dynamic(() => import('@/components/calculator/RiskCalcula
   ),
 })
 
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Il calcolatore del rischio è davvero gratuito?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Sì, il calcolatore è completamente gratuito e senza impegno. Non è richiesto alcun pagamento né la stipula di una polizza. Puoi ottenere la tua analisi del rischio in 2 minuti inserendo solo nome e email.' },
-    },
-    {
-      '@type': 'Question',
-      name: 'Come funziona il calcolatore del rischio assicurativo?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Il calcolatore analizza il tuo profilo (privato, professionista, PMI o grande impresa), il settore di attività e le risposte a domande specifiche sui rischi della tua attività. Un algoritmo proprietario calcola un punteggio di rischio da 0 a 100 e identifica le coperture più urgenti e consigliate per il tuo profilo.' },
-    },
-    {
-      '@type': 'Question',
-      name: 'Quali coperture assicurative vengono raccomandate?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Le raccomandazioni dipendono dal profilo. Per i privati: auto, casa, vita, salute. Per i professionisti: RC professionale, cyber, previdenza complementare. Per le PMI: RC impresa, All Risk aziendale, Cyber Risk, polizza catastrofale obbligatoria dal 2025, welfare dipendenti.' },
-    },
-    {
-      '@type': 'Question',
-      name: 'Quanto costa una polizza assicurativa per la mia azienda?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Il premio lo calcola la compagnia su settore, dimensione, valori assicurati e coperture scelte. Il calcolatore ti dice quali coperture guardare per prime; il premio te lo diamo con un preventivo gratuito.' },
-    },
-    {
-      '@type': 'Question',
-      name: 'La polizza catastrofale è obbligatoria per le imprese?',
-      acceptedAnswer: { '@type': 'Answer', text: OBBLIGO_CATASTROFALE },
-    },
-  ],
-}
-
+// Titolo e H1 rivisti il 31/10/2026 sui dati di Search Console: "analisi del
+// rischio gratuita" aveva 276 impressioni in posizione ~81 e la pagina aveva
+// circa cento parole di testo oltre al quiz.
 export const metadata: Metadata = {
-  title: 'Calcolatore Rischio Assicurativo Gratuito',
-  description: 'Scopri in 2 minuti il tuo profilo di rischio assicurativo. Analisi gratuita personalizzata per privati, professionisti, PMI e imprese. Coperture raccomandate e preventivo su richiesta.',
+  title: { absolute: 'Analisi del rischio assicurativo gratuita | FIM Broker' },
+  description: 'Rispondi a poche domande e scopri quali coperture servono a te, alla tua famiglia o alla tua impresa. Gratuita e senza impegno: ti spieghiamo anche perché.',
   alternates: { canonical: '/calcolatore-rischi' },
   openGraph: {
     ...OG_BASE,
@@ -62,20 +35,16 @@ export const metadata: Metadata = {
 export default function CalcolatoreRischiPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-20 overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <span className="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-                Strumento gratuito
+                Calcolatore del rischio · gratuito
               </span>
               <h1 className="text-3xl md:text-5xl font-black text-white mb-4">
-                Calcolatore del Rischio Assicurativo
+                Analisi del rischio assicurativo gratuita
               </h1>
               <p className="text-white/80 text-lg md:text-xl">
                 Rispondi a 8 domande e scopri quali polizze ti servono davvero. Completamente gratuito, nessun impegno.
@@ -116,14 +85,70 @@ export default function CalcolatoreRischiPage() {
         </div>
       </section>
 
+      {/* Come funziona: testo leggibile da chi arriva da Google, sotto il quiz */}
+      <section className="section-padding bg-white">
+        <div className="container-custom max-w-3xl">
+          <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
+            Come funziona l&apos;analisi del rischio
+          </h2>
+          <div className="space-y-4 text-gray-700 leading-relaxed">
+            <p>
+              Un&apos;analisi del rischio assicurativo parte da una domanda semplice: cosa ti può succedere che non
+              riusciresti a pagare da solo? Per una famiglia di solito è la casa, il reddito di chi lavora, la salute.
+              Per un professionista è l&apos;errore che un cliente ti contesta. Per un&apos;impresa sono i danni a terzi,
+              un incendio, un fermo dell&apos;attività, un attacco informatico.
+            </p>
+            <p>
+              Il calcolatore ti fa scegliere il profilo e il settore, poi ti chiede alcune cose sulla tua situazione.
+              Alla fine ti dà un punteggio da 0 a 100 e un elenco di coperture in ordine di priorità, ognuna con il
+              motivo per cui te la suggerisce. È un primo orientamento: ti dice da dove cominciare, non quanto pagherai.
+            </p>
+          </div>
+
+          <h2 className="text-2xl md:text-3xl font-black text-primary mt-12 mb-6">
+            Dopo il calcolatore: le polizze che hai già
+          </h2>
+          <div className="space-y-4 text-gray-700 leading-relaxed">
+            <p>
+              Il passo che conta di più viene dopo. Quasi tutti hanno già qualche polizza, presa in momenti diversi
+              da persone diverse. Le leggiamo per intero, condizioni generali comprese, e cerchiamo tre cose: i rischi
+              che nessuna copre, le garanzie che paghi due volte e le clausole che al momento del sinistro possono
+              ridurre o negare l&apos;indennizzo. Poi ti proponiamo solo quello che manca, con le offerte di più
+              compagnie a confronto.
+            </p>
+            <p>
+              Funziona così perché un broker non rappresenta nessuna compagnia. In più le regole sulla distribuzione
+              assicurativa (IDD, recepita con il D.Lgs. 68/2018) chiedono a chi propone una polizza di partire dalle
+              richieste e dalle esigenze del cliente.{' '}
+              <Link href="/seconda-opinione" className="text-primary font-semibold hover:text-accent">
+                Puoi mandarci le tue polizze da qui
+              </Link>
+              .
+            </p>
+          </div>
+
+          <h2 className="text-2xl md:text-3xl font-black text-primary mt-12 mb-6">
+            Perché è gratuita
+          </h2>
+          <p className="text-gray-700 leading-relaxed">
+            Per te l&apos;analisi non costa niente e non ti obbliga a nulla. Se decidi di assicurarti tramite noi, il
+            compenso di FIM lo paga la compagnia con cui colloca il contratto. È il modo in cui lavorano i broker e lo
+            trovi scritto nell&apos;informativa precontrattuale che ti consegniamo prima di qualunque proposta. Il premio
+            lo decide la compagnia sui tuoi dati: noi ti mostriamo le alternative, la scelta resta tua.
+          </p>
+        </div>
+      </section>
+
+      <FaqSection items={calcolatoreRischiFaq.items} cta={calcolatoreRischiFaq.cta} />
+
       {/* Why trust us */}
       <section className="py-12 bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
             {[
               { icon: '🔍', title: 'Analisi indipendente', desc: 'Non siamo legati a nessuna compagnia. Le nostre raccomandazioni sono basate solo sulle tue esigenze reali.' },
-              { icon: '📋', title: 'Il mercato a confronto', desc: 'I nostri consulenti analizzano le offerte delle principali compagnie italiane per trovare la soluzione migliore.' },
-              { icon: '🛡️', title: 'Iscritti al RUI', desc: 'FIM Insurance Broker è iscritta al RUI Sez. B n. B000405449 ed è soggetta alla vigilanza IVASS: l&apos;iscrizione si verifica sul registro pubblico.' },
+              { icon: '📋', title: 'Il mercato a confronto', desc: 'I nostri consulenti mettono a confronto le offerte di più compagnie per trovare quella giusta per te.' },
+              { icon: '🛡️', title: 'Iscritti al RUI', desc: "FIM Insurance Broker è iscritta al RUI Sez. B n. B000405449 ed è soggetta alla vigilanza IVASS: l'iscrizione si verifica sul registro pubblico." },
             ].map((item) => (
               <div key={item.title} className="p-6">
                 <div className="text-4xl mb-3">{item.icon}</div>

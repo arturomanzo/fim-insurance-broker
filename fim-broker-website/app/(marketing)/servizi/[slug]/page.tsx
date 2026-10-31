@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return { title: 'Servizio non trovato' }
   const ogUrl = `/api/og?title=${encodeURIComponent(service.title)}&tag=Servizi&sub=${encodeURIComponent(service.shortDescription.slice(0, 90))}`
   return {
-    title: service.title,
-    description: service.shortDescription,
+    title: service.seoTitle ? { absolute: `${service.seoTitle} | FIM Broker` } : service.title,
+    description: service.seoDescription ?? service.shortDescription,
     alternates: {
       canonical: `/servizi/${service.slug}`,
     },
@@ -108,7 +108,7 @@ export default async function ServizioPage({ params }: Props) {
               <span className="text-6xl hidden sm:block flex-shrink-0">{service.icon}</span>
               <div>
                 <h1 className="text-4xl md:text-5xl font-black mb-4">
-                  {service.title}
+                  {service.h1 ?? service.title}
                 </h1>
                 <p className="text-xl text-white/80 leading-relaxed">{service.description}</p>
               </div>
@@ -150,6 +150,15 @@ export default async function ServizioPage({ params }: Props) {
                   ))}
                 </div>
               </Card>
+
+              {/* Sezioni per caso d'uso: testo che risponde alle ricerche specifiche
+                  (es. "cauzioni doganali"), mostrato solo se il servizio le definisce. */}
+              {service.sezioni?.map((s) => (
+                <Card key={s.titolo}>
+                  <h2 className="text-2xl font-black text-primary mb-4">{s.titolo}</h2>
+                  <p className="text-gray-700 leading-relaxed">{s.testo}</p>
+                </Card>
+              ))}
 
               {/* Coverage table — candidato a Featured Snippet tabellare AEO.
                   Mostrata solo se il servizio definisce `coverage` (vedi lib/services.ts) */}

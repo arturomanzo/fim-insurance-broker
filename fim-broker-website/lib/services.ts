@@ -31,6 +31,16 @@ export interface Service {
   coverage?: Coverage
   /** Articoli e guide collegati, mostrati dopo le domande frequenti. */
   approfondimenti?: Array<{ titolo: string; href: string; descrizione: string }>
+  /**
+   * Titolo e descrizione per Google, se diversi da `title` e `shortDescription`.
+   * Con `seoTitle` la pagina esce come "seoTitle | FIM Broker" (entro ~60 car.).
+   */
+  seoTitle?: string
+  seoDescription?: string
+  /** H1 della pagina, se più descrittivo del nome breve usato in menu e breadcrumb. */
+  h1?: string
+  /** Sezioni di testo mostrate dopo "Cosa è incluso": una per ogni caso d'uso. */
+  sezioni?: Array<{ titolo: string; testo: string }>
 }
 
 export const services: Service[] = [
@@ -476,6 +486,41 @@ export const services: Service[] = [
     // compagnia sul singolo rilascio e FIM non ha dati per documentarli.
     slug: 'cauzioni-fideiussioni',
     title: 'Cauzioni e Fideiussioni',
+    // Search Console al 31/10/2026: posizione media 43 su "cauzioni", dove vincono
+    // compagnie e dizionari. Le ricerche alla nostra portata sono più precise
+    // ("cauzioni latina", "cauzioni provvisorie latina", "cauzioni doganali",
+    // "polizze fideiussorie"): titolo, H1 e sezioni rispondono a quelle.
+    seoTitle: 'Cauzioni e fideiussioni assicurative a Latina',
+    seoDescription:
+      "Garanzie provvisorie e definitive per le gare, cauzioni doganali, fiscali e per locazioni. Dalla pratica allo svincolo, con un broker a Cisterna di Latina.",
+    h1: 'Cauzioni e fideiussioni assicurative per imprese',
+    sezioni: [
+      {
+        titolo: 'Cauzione provvisoria e definitiva per le gare d\'appalto',
+        testo:
+          "Per partecipare a una gara pubblica il Codice dei contratti pubblici (D.Lgs. 36/2023) chiede una garanzia provvisoria, di regola pari al 2 per cento del valore della procedura: la stazione appaltante può abbassarla fino all'1 o alzarla fino al 4 (art. 106). Chi vince firma il contratto con una garanzia definitiva del 10 per cento dell'importo contrattuale (art. 117). Tutte e due possono essere fideiussioni assicurative. Il bando però decide il resto: testo della garanzia, durata, clausole, riduzioni. Per questo leggiamo il bando prima di chiedere l'emissione, non dopo.",
+      },
+      {
+        titolo: 'Garanzia sull\'anticipazione del prezzo',
+        testo:
+          "Quando il contratto prevede l'anticipazione del prezzo (art. 125 del D.Lgs. 36/2023), la stazione appaltante la versa all'impresa contro una garanzia. È la cauzione che più spesso si chiede in fretta, a contratto appena firmato, quindi conviene prepararla insieme alla definitiva.",
+      },
+      {
+        titolo: 'Cauzioni doganali e fiscali',
+        testo:
+          "Chi importa o esporta può pagare dazi, IVA all'importazione e accise in modo differito, o gestire un deposito doganale, solo se presta una garanzia. Il fisco la chiede in alcuni casi di rimborso IVA e di rateizzazione. Qui il testo lo fissa l'ente e i documenti richiesti cambiano da caso a caso: vi diciamo prima cosa serve, così la pratica non torna indietro.",
+      },
+      {
+        titolo: 'Fideiussioni per locazioni e cauzioni edilizie',
+        testo:
+          "Nei contratti di affitto, soprattutto commerciali, la fideiussione prende il posto del deposito in contanti: il locatore è garantito e l'impresa non immobilizza liquidità. Per i lavori edili il comune può chiedere una garanzia sugli oneri di urbanizzazione pagati a rate o sulle opere a scomputo. In entrambi i casi la garanzia va tenuta viva fino alla fine e poi svincolata per iscritto.",
+      },
+      {
+        titolo: 'Cauzioni per imprese della provincia di Latina',
+        testo:
+          "Il nostro ufficio è a Cisterna di Latina, in Via Roma 41. Se la vostra impresa partecipa a gare di comuni, consorzi ed enti della provincia di Latina o del Lazio, potete mandarci il disciplinare oppure passare in ufficio con il bando in mano. Lo leggiamo con voi e vi diciamo quale garanzia serve, con quale testo e quali documenti chiederà la compagnia. Premio ed emissione li decide la compagnia sul bilancio dell'impresa: noi presentiamo la pratica al meglio, l'esito non possiamo prometterlo.",
+      },
+    ],
     shortDescription: 'Cauzioni e fideiussioni assicurative per gare d\'appalto, contratti pubblici e privati, dogane, fisco e locazioni. Dalla richiesta allo svincolo.',
     description:
       'Una gara d\'appalto chiede una garanzia provvisoria per partecipare e una definitiva per firmare il contratto. Fisco e dogana la chiedono per rateizzazioni, rimborsi IVA e dazi, il locatore al posto del deposito in contanti. La fideiussione assicurativa fa lo stesso lavoro di quella bancaria senza toccare il fido in banca. Noi prepariamo la pratica con i documenti che la compagnia chiederà, controlliamo che il testo della garanzia sia quello richiesto dal bando e seguiamo le riduzioni e lo svincolo fino alla fine. Premio e capacità di rilascio li decide la compagnia sul bilancio dell\'impresa: possiamo presentarla al meglio, non promettere l\'esito.',
