@@ -8,10 +8,9 @@ import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
 
-// Pagina P15 del piano SEO (marketing/seo nel gestionale), nella versione senza
-// polizze agevolate sul raccolto: finché Arturo non conferma l'accesso tramite un
-// consorzio di difesa, la pagina parla di serre, fabbricati, mezzi e responsabilità
-// civile. Norme lette su normattiva il 31/10/2026: L. 213/2023, art. 1, c. 111;
+// Pagina P15 del piano SEO (marketing/seo nel gestionale). Sul raccolto FIM colloca
+// polizze private, non quelle agevolate con contributo pubblico (Arturo, 31/10/2026):
+// la pagina ne parla senza contributi, consorzi di difesa né piani assicurativi. Norme lette su normattiva il 31/10/2026: L. 213/2023, art. 1, c. 111;
 // L. 234/2021, art. 1, c. 515; art. 2135 c.c.; artt. 122 e 122-bis CAP.
 
 const SLUG = 'soluzioni/aziende-agricole'
@@ -74,6 +73,12 @@ const coverages = [
     icon: '🍽️',
     title: 'Agriturismo e vendita diretta',
     desc: 'RC verso gli ospiti e i clienti, prodotti venduti o serviti in azienda, camere e attività per i visitatori.',
+    highlighted: false,
+  },
+  {
+    icon: '🌾',
+    title: 'Raccolto: grandine, gelo e altri eventi',
+    desc: 'Polizze private sulle colture in campo, da firmare prima della stagione. Contano il valore dichiarato della produzione, le soglie di danno e le franchigie per coltura.',
     highlighted: false,
   },
 ]
@@ -231,8 +236,9 @@ export default function AziendeAgricolePage() {
             restano fuori. Nessuno ti obbliga ad assicurarli, ed è proprio per questo che spesso non lo sono.
           </p>
           <p>
-            Le polizze sul raccolto sono un mondo a parte, con regole e contributi propri: questa pagina parla di tutto il resto. Se ti
-            interessano, chiedicelo e ti diciamo cosa possiamo fare per la tua azienda.
+            Per il raccolto lavoriamo con polizze private, senza contributo pubblico: coprono le colture in campo contro grandine,
+            gelo e gli altri eventi scritti nel contratto, e vanno firmate prima che la stagione cominci. Le leggiamo con te coltura per
+            coltura, perché soglie di danno e franchigie cambiano molto da una all&apos;altra.
           </p>
           <p>
             Per le altre imprese, scadenze e regole dell&apos;obbligo sono nella pagina{' '}
