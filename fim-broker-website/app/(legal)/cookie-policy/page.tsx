@@ -13,7 +13,7 @@ export default function CookiePolicyPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Cookie Policy</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Settembre 2026</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Ottobre 2026</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -63,6 +63,18 @@ export default function CookiePolicyPage() {
                 <li><strong>fim_campagna</strong> (session storage): ricorda da dove sei arrivato sul sito (parametri utm della campagna, sito di provenienza, prima pagina vista e ora di arrivo), così sappiamo quale annuncio ha portato la richiesta che invii con un modulo. Non contiene dati personali e si cancella quando chiudi la scheda.</li>
                 <li>Cookie di sessione e di sicurezza necessari alla navigazione e all&apos;area riservata</li>
               </ul>
+
+              <h3>Statistiche di visita senza cookie</h3>
+              <p>
+                Per sapere quante persone visitano il sito e quali pagine leggono usiamo{' '}
+                <strong>Vercel Web Analytics</strong>, fornito da Vercel Inc., la piattaforma che
+                ospita il sito. Non usa cookie, quindi non ti chiediamo il consenso. Le visite
+                vengono contate in forma aggregata: per distinguere una visita dall&apos;altra Vercel
+                usa un codice calcolato dalla richiesta del browser, che viene scartato dopo 24 ore e non permette
+                di riconoscerti nei giorni successivi né su altri siti. Vediamo solo totali per
+                pagina, provenienza, Paese e tipo di dispositivo, mai dati riferiti a una singola
+                persona.
+              </p>
 
               <h3>Cookie analitici (previo consenso)</h3>
               <p>
@@ -129,7 +141,7 @@ export default function CookiePolicyPage() {
             <section>
               <h2>Trasferimenti extra-UE e ulteriori informazioni</h2>
               <p>
-                Alcuni fornitori (Google, Microsoft, Meta) possono trattare dati anche al di fuori
+                Alcuni fornitori (Google, Microsoft, Meta, Vercel) possono trattare dati anche al di fuori
                 dell&apos;Unione Europea sulla base delle garanzie previste dagli artt. 44 ss. GDPR
                 (Clausole Contrattuali Standard ed eventuali certificazioni Data Privacy Framework).
                 Per il dettaglio sui trattamenti, le basi giuridiche e i tuoi diritti consulta la
