@@ -4,8 +4,8 @@ import { notaPremio } from '@/lib/prezzi'
 // Domande della pagina P15 (/soluzioni/aziende-agricole). Norme lette su
 // normattiva il 31/10/2026: L. 213/2023, art. 1, c. 111 (esclusione e rinvio alla
 // L. 234/2021, art. 1, c. 515 e seguenti), art. 2135 c.c., art. 122 e 122-bis,
-// c. 1-ter, CAP. Niente polizze agevolate sul raccolto: FIM non ha ancora detto se
-// ci arriva tramite un consorzio di difesa, e finché non lo dice la pagina tace.
+// c. 1-ter, CAP. Sul raccolto FIM colloca polizze private, non quelle agevolate con
+// contributo pubblico (Arturo, 31/10/2026): niente contributi né consorzi di difesa.
 export const aziendeAgricoleFaq: FaqCategory = {
   slug: 'aziende-agricole',
   title: 'Aziende agricole',
@@ -40,6 +40,11 @@ export const aziendeAgricoleFaq: FaqCategory = {
       question: 'Braccianti e stagionali sono coperti?',
       answer:
         "L'INAIL copre l'infortunio del lavoratore, ma se dipende da una tua responsabilità l'INAIL può rivalersi su di te, e il lavoratore può chiedere il danno che l'INAIL non paga. Per questo serve la responsabilità civile verso i prestatori di lavoro (RCO), che deve comprendere anche chi lavora per la sola stagione.",
+    },
+    {
+      question: 'Assicurate anche il raccolto?',
+      answer:
+        "Sì, con polizze private sulle colture in campo, contro la grandine e gli altri eventi scritti nel contratto. Non lavoriamo con le polizze agevolate che passano dai consorzi di difesa e prevedono un contributo pubblico. La polizza va firmata prima della stagione: il danno di una grandinata già caduta non si assicura più. Prima di firmare guardiamo con te il valore dichiarato della produzione, la soglia di danno sotto la quale non si paga e la franchigia di ogni coltura.",
     },
     {
       question: "Quanto costa assicurare un'azienda agricola?",
