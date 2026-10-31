@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Montserrat, Source_Serif_4 } from 'next/font/google'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ClarityLoader from '@/components/analytics/ClarityLoader'
@@ -372,6 +373,14 @@ w.setTimeout(trigger,3500);
         {/* Da quale campagna arriva il visitatore: lo allegano i moduli che
             creano un lead (lib/campagnaBrowser.ts). */}
         <AttribuzioneCampagna />
+        {/* Vercel Web Analytics — conteggio visite senza cookie e senza
+            identificativi persistenti, quindi fuori dal banner: conta anche
+            chi rifiuta i cookie statistici, che GA4 non vede. Script e invio
+            dati passano dal nostro dominio (percorso generato da Vercel al
+            build), quindi bastano i 'self' già presenti nella CSP. Va
+            attivato anche nella scheda Analytics del progetto su Vercel,
+            altrimenti non registra nulla. */}
+        <Analytics />
         <CookieBanner />
       </body>
     </html>
