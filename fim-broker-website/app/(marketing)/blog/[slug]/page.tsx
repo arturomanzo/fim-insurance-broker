@@ -42,8 +42,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const publishedTime = parseItalianDate(post.date)
   const modifiedTime = parseItalianDate(post.updatedDate ?? post.date)
   return {
-    title: post.title,
-    description: post.excerpt,
+    // Con seoTitle il suffisso è quello corto ("| FIM Broker") per restare
+    // entro i ~60 caratteri che Google mostra; senza, vale il template del layout.
+    title: post.seoTitle ? { absolute: `${post.seoTitle} | FIM Broker` } : post.title,
+    description: post.seoDescription ?? post.excerpt,
     alternates: {
       canonical: `/blog/${slug}`,
     },

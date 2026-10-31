@@ -10,6 +10,15 @@ export interface BlogPost {
   slug: string
   title: string
   excerpt: string
+  /**
+   * Titolo e descrizione per Google, se diversi da quelli editoriali.
+   * Servono quando il titolo dell'articolo è lungo e in SERP viene troncato:
+   * l'H1 resta `title`, Google vede `seoTitle | FIM Broker` (entro ~60 car.).
+   * Scelti sui dati di Search Console del 31/10/2026 (pagine con molte
+   * impressioni e pochi clic).
+   */
+  seoTitle?: string
+  seoDescription?: string
   category: string
   date: string
   updatedDate?: string
