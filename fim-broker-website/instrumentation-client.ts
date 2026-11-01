@@ -14,19 +14,15 @@ Sentry.init({
   // Campiona il 10% delle transazioni di performance in produzione
   tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
 
-  // Replay: cattura il 5% delle sessioni normali, 100% degli errori
-  replaysSessionSampleRate: 0.05,
-  replaysOnErrorSampleRate: 1.0,
+  // Niente Session Replay (01/11/2026): da solo era la parte più pesante del
+  // JavaScript della home. Con Lighthouse mobile la home stava a 53 di
+  // performance, con il thread principale bloccato per circa 3 secondi, e
+  // quasi tutto veniva dai chunk di Sentry. Gli errori continuano ad arrivare
+  // con stack, pagina e navigazione; manca solo la registrazione della
+  // sessione. Se un giorno serve, va caricata dopo l'interazione e non al load.
 
   // Non registra errori in sviluppo locale
   enabled: process.env.NODE_ENV === 'production',
-
-  integrations: [
-    Sentry.replayIntegration({
-      maskAllText: true,
-      blockAllMedia: true,
-    }),
-  ],
 })
 
 // Segnala a Sentry le transizioni di rotta, per legare gli errori alla
