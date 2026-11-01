@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { RICONTATTO } from '@/lib/tempi'
+import RcaProvinciaLatina from '@/components/osservatorio/RcaProvinciaLatina'
 
 const CITY = 'Aprilia'
 const SLUG = 'broker-assicurativo-aprilia'
@@ -117,6 +118,9 @@ export default function BrokerAprilia() {
           </div>
         </div>
       </section>
+
+      {/* RC auto in provincia: dato IVASS dell'Osservatorio */}
+      <RcaProvinciaLatina citta={CITY} />
 
       {/* Dipartimento Scuole */}
       <section className="py-10 bg-primary/5 border-y border-primary/10">
