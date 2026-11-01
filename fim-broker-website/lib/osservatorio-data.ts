@@ -34,6 +34,41 @@ export const ivassRcAuto = {
   quartileAlto: 422,
 } as const
 
+/**
+ * Provincia di Latina e Lazio, autovetture, stesso trimestre. Dalle tavole
+ * allegate alla stessa comunicazione (xlsx «tavole II trimestre»): tavola A12
+ * (premio per provincia) e A15 (per classe d'età). Lette il 01/11/2026.
+ * Le cifre sono medie in euro con un decimale, come nelle tavole.
+ */
+export const ivassLatina = {
+  fonte: 'IVASS, tavole della Comunicazione statistica n. 7/2026 (tavole A12 e A15)',
+  url: 'https://www.ivass.it/pubblicazioni-e-statistiche/statistiche/comunicazioni-statistiche/2026/cs-n-7-2026/cs_n_7_2026_tavole_II_trimestre.xlsx',
+  periodo: 'II trimestre 2026',
+  media: 472.9,
+  mediana: 416.4,
+  contratti: 20457,
+  variazioneAnnua: 2.3,
+  /** Posizione tra le province per premio medio, dalla più cara. */
+  posizione: 11,
+  province: 106,
+  /** Media nazionale delle autovetture nella tavola A1, stesso trimestre. */
+  mediaItalia: 421.5,
+  lazio: [
+    { provincia: 'Roma', media: 504.7 },
+    { provincia: 'Latina', media: 472.9 },
+    { provincia: 'Rieti', media: 445.2 },
+    { provincia: 'Frosinone', media: 401.6 },
+    { provincia: 'Viterbo', media: 378.0 },
+  ],
+  perEta: [
+    { classe: 'fino a 24 anni', media: 1131.6 },
+    { classe: '25-34 anni', media: 653.2 },
+    { classe: '35-44 anni', media: 478.5 },
+    { classe: '45-59 anni', media: 466.8 },
+    { classe: '60 anni e oltre', media: 428.9 },
+  ],
+} as const
+
 export type RamoSenzaCifre = {
   name: string
   icon: string
