@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { sendLeadFromRequest } from '@/lib/metaCapi'
+import { inviaLead } from '@/lib/codaLead'
+import { pulisciCampagna } from '@/lib/campagna'
+import { leadScuole } from '@/lib/leadModuli'
 import {
   RUOLO_LABELS,
   SCUOLE_EMAIL,
@@ -32,6 +35,8 @@ interface ScuoleRequest {
   compagnia?: string
   messaggio?: string
   privacy: boolean
+  /** Da quale campagna arriva (lib/campagnaBrowser.ts): la ripulisce pulisciCampagna. */
+  campagna?: unknown
   website?: string // honeypot — deve essere assente o vuoto
   // Meta CAPI (vedi lib/metaLead.ts): deduplica col Pixel browser
   eventId?: string
@@ -260,6 +265,26 @@ export async function POST(req: NextRequest) {
       fullName: nome,
       contentCategory: 'scuole',
     })
+
+    // Prima l'archivio del gestionale (lib/codaLead.ts: se non risponde il lead
+    // va in coda), poi le mail, che restano come prima. inviaLead non lancia mai.
+    await inviaLead(
+      leadScuole({
+        id: data.id,
+        nome,
+        email,
+        telefono,
+        istituto,
+        tipoIstituto: data.tipoIstituto,
+        comune,
+        ruolo: data.ruolo,
+        scadenza,
+        compagnia,
+        messaggio,
+        campagna: pulisciCampagna(body.campagna),
+      }),
+      'dipartimento scuole',
+    )
 
     if (resend) {
       await Promise.all([

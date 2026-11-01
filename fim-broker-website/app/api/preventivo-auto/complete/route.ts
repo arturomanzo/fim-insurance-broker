@@ -9,6 +9,9 @@ import {
   isValidDocSlot,
 } from '@/lib/preventivoDocumenti'
 import { RICONTATTO } from '@/lib/tempi'
+import { inviaLead } from '@/lib/codaLead'
+import { pulisciCampagna } from '@/lib/campagna'
+import { leadPreventivoAuto } from '@/lib/leadModuli'
 
 function validateEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -191,6 +194,22 @@ export async function POST(req: NextRequest) {
     }
 
     const payload = { id, nome, email, telefono, targa, note, utmSource, links }
+
+    // Prima l'archivio del gestionale (lib/codaLead.ts: se non risponde il lead
+    // va in coda), poi le mail, che restano come prima. inviaLead non lancia mai.
+    await inviaLead(
+      leadPreventivoAuto({
+        id,
+        nome,
+        email,
+        telefono,
+        targa,
+        note,
+        documenti: links.map((l) => l.label),
+        campagna: pulisciCampagna(body?.campagna),
+      }),
+      'preventivo auto documenti',
+    )
 
     if (resend) {
       await Promise.all([

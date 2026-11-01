@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { sendLeadFromRequest } from '@/lib/metaCapi'
+import { inviaLead } from '@/lib/codaLead'
+import { pulisciCampagna } from '@/lib/campagna'
+import { leadContatto } from '@/lib/leadModuli'
 
 interface ContactRequest {
   nome: string
@@ -10,6 +13,8 @@ interface ContactRequest {
   oggetto?: string
   messaggio: string
   privacy: boolean
+  /** Da quale campagna arriva (lib/campagnaBrowser.ts): la ripulisce pulisciCampagna. */
+  campagna?: unknown
   website?: string // honeypot — deve essere assente o vuoto
   // Meta CAPI (vedi lib/metaLead.ts): deduplica col Pixel browser
   eventId?: string
@@ -225,6 +230,13 @@ export async function POST(req: NextRequest) {
       fullName: nome,
       contentCategory: 'contatto',
     })
+
+    // Prima l'archivio del gestionale (lib/codaLead.ts: se non risponde il lead
+    // va in coda), poi le mail, che restano come prima. inviaLead non lancia mai.
+    await inviaLead(
+      leadContatto({ id: contactData.id, nome, email, telefono, oggetto, messaggio, campagna: pulisciCampagna(body.campagna) }),
+      'modulo contatti',
+    )
 
     if (resend) {
       await Promise.all([

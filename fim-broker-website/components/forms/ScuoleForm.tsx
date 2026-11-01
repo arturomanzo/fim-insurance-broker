@@ -5,6 +5,7 @@ import Button from '@/components/ui/Button'
 import { trackScuoleSubmit } from '@/lib/analytics'
 import { metaLeadFields } from '@/lib/metaLead'
 import { RUOLI, SCUOLE_EMAIL, TIPI_ISTITUTO } from '@/lib/scuole'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -71,7 +72,7 @@ export default function ScuoleForm() {
       const res = await fetch('/api/scuole', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, ...meta }),
+        body: JSON.stringify({ ...formData, ...meta, campagna: campagnaPerInvio() }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {

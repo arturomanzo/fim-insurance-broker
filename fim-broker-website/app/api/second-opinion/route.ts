@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 import { sendLeadFromRequest } from '@/lib/metaCapi'
+import { inviaLead } from '@/lib/codaLead'
+import { pulisciCampagna } from '@/lib/campagna'
+import { leadSecondOpinion } from '@/lib/leadModuli'
 import { RICONTATTO } from '@/lib/tempi'
 
 function validateEmail(email: string): boolean {
@@ -242,8 +245,10 @@ export async function POST(req: NextRequest) {
     }
 
     const rawFiles = formData.getAll('polizze') as File[]
+    // Il modulo tiene il totale sotto i 4 MB (Vercel rifiuta oltre 4,5 MB):
+    // qui resta il filtro sul tipo e sul numero.
     const validFiles = rawFiles.filter(
-      (f) => f instanceof File && f.size > 0 && f.type === 'application/pdf' && f.size <= 10 * 1024 * 1024
+      (f) => f instanceof File && f.size > 0 && f.type === 'application/pdf'
     ).slice(0, 5)
 
     const requestData = {
@@ -266,6 +271,32 @@ export async function POST(req: NextRequest) {
       fullName: nome,
       contentCategory: 'second_opinion',
     })
+
+    // Prima l'archivio del gestionale (lib/codaLead.ts: se non risponde il lead
+    // va in coda), poi le mail, che restano come prima. inviaLead non lancia mai.
+    // Il modulo è multipart: la campagna arriva come stringa JSON.
+    let campagnaGrezza: unknown
+    try {
+      campagnaGrezza = JSON.parse(String(formData.get('campagna') ?? ''))
+    } catch {
+      campagnaGrezza = undefined
+    }
+    await inviaLead(
+      leadSecondOpinion({
+        id: requestData.id,
+        nome,
+        email,
+        telefono,
+        azienda,
+        settore,
+        compagnieAttuali,
+        note,
+        numPolizze: validFiles.length,
+        oscuraPremio,
+        campagna: pulisciCampagna(campagnaGrezza),
+      }),
+      'seconda opinione',
+    )
 
     if (resend) {
       const attachments = await Promise.all(

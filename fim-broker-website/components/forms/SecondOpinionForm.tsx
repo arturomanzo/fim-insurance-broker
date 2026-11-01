@@ -5,6 +5,7 @@ import Button from '@/components/ui/Button'
 import { trackSecondOpinionSubmit } from '@/lib/analytics'
 import { metaLeadFields } from '@/lib/metaLead'
 import { RICONTATTO } from '@/lib/tempi'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -41,6 +42,9 @@ const SETTORI = [
   { value: 'altro', label: 'Altro' },
 ]
 
+const MAX_FILE = 5
+const MAX_TOTALE_BYTE = 4 * 1024 * 1024
+
 export default function SecondOpinionForm() {
   const [formData, setFormData] = useState<FormData>({
     nome: '',
@@ -57,6 +61,7 @@ export default function SecondOpinionForm() {
   const [files, setFiles] = useState<File[]>([])
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState<string>('')
+  const [fileAvviso, setFileAvviso] = useState('')
   const [utmSource, setUtmSource] = useState<string | undefined>()
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -74,17 +79,30 @@ export default function SecondOpinionForm() {
     }))
   }
 
+  // Vercel rifiuta le richieste sopra 4,5 MB: i PDF passano nel corpo della
+  // richiesta, quindi il tetto è sul totale, non sul singolo file. Chi ha
+  // polizze più pesanti le manda per mail.
   const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selected = Array.from(e.target.files ?? [])
-    const valid = selected.filter((f) => f.type === 'application/pdf' && f.size <= 10 * 1024 * 1024)
-    setFiles((prev) => {
-      const combined = [...prev, ...valid]
-      return combined.slice(0, 5) // max 5 file
-    })
+    const selected = Array.from(e.target.files ?? []).filter((f) => f.type === 'application/pdf')
+    const tenuti = [...files]
+    let scartati = 0
+    for (const f of selected) {
+      const totale = tenuti.reduce((s, x) => s + x.size, 0)
+      if (tenuti.length < MAX_FILE && totale + f.size <= MAX_TOTALE_BYTE) tenuti.push(f)
+      else scartati++
+    }
+    setFiles(tenuti)
+    setFileAvviso(
+      scartati > 0
+        ? `${scartati === 1 ? 'Un file non è stato aggiunto' : `${scartati} file non sono stati aggiunti`}: si possono caricare al massimo ${MAX_FILE} PDF e 4 MB in tutto. Le polizze più pesanti mandale a info@fimbroker.it.`
+        : '',
+    )
+    e.target.value = ''
   }
 
   const removeFile = (index: number) => {
     setFiles((prev) => prev.filter((_, i) => i !== index))
+    setFileAvviso('')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -112,6 +130,8 @@ export default function SecondOpinionForm() {
       payload.append('eventId', meta.eventId)
       if (meta.eventSourceUrl) payload.append('eventSourceUrl', meta.eventSourceUrl)
       payload.append('marketingConsent', String(meta.marketingConsent))
+      const campagna = campagnaPerInvio()
+      if (campagna) payload.append('campagna', JSON.stringify(campagna))
       files.forEach((f) => payload.append('polizze', f))
 
       const res = await fetch('/api/second-opinion', { method: 'POST', body: payload })
@@ -252,7 +272,7 @@ export default function SecondOpinionForm() {
 
       {/* Upload polizze */}
       <div>
-        <label className="label-field">Polizze da analizzare (PDF, max 5 file · 10 MB ciascuno)</label>
+        <label className="label-field">Polizze da analizzare (PDF, massimo 5 file e 4 MB in tutto)</label>
         <div
           className="mt-1 border-2 border-dashed border-gray-200 rounded-xl p-5 text-center cursor-pointer hover:border-primary/40 transition-colors"
           onClick={() => fileInputRef.current?.click()}
@@ -277,6 +297,12 @@ export default function SecondOpinionForm() {
             className="hidden"
           />
         </div>
+
+        {fileAvviso && (
+          <p role="alert" className="mt-2 text-sm text-red-700">
+            {fileAvviso}
+          </p>
+        )}
 
         {files.length > 0 && (
           <ul className="mt-3 space-y-2">

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Button from '@/components/ui/Button'
 import { trackPrenotazioneSubmit } from '@/lib/analytics'
 import { metaLeadFields } from '@/lib/metaLead'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -94,7 +95,7 @@ export default function PrenotazioneForm() {
       const res = await fetch('/api/prenota', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, ...meta }),
+        body: JSON.stringify({ ...formData, ...meta, campagna: campagnaPerInvio() }),
       })
       if (!res.ok) throw new Error()
       trackPrenotazioneSubmit(formData.servizio || 'non specificato', utmSource, meta.eventId)
