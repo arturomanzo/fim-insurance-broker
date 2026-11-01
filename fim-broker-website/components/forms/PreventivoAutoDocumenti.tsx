@@ -15,6 +15,7 @@ import {
   type PreventivoAutoPrefill,
 } from '@/lib/preventivoDocumenti'
 import { RICONTATTO } from '@/lib/tempi'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -244,6 +245,7 @@ export default function PreventivoAutoDocumenti() {
           website: formData.website,
           utmSource,
           documenti,
+          campagna: campagnaPerInvio(),
         }),
       })
       const completeData = await completeRes.json()

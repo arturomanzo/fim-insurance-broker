@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { inviaLead } from '@/lib/codaLead'
+import { pulisciCampagna } from '@/lib/campagna'
+import { leadGuidaPmi } from '@/lib/leadModuli'
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rateLimit'
 
@@ -132,9 +135,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Inserisci un indirizzo email valido.' }, { status: 400 })
     }
 
-    // Add to newsletter audience
+    // Consenso marketing: casella separata, facoltativa e spenta di default.
+    // Fino al 01/11/2026 chi scaricava la guida finiva nella newsletter senza
+    // averlo chiesto; ora ci entra solo chi spunta la casella, come nel
+    // calcolatore.
+    const marketing = body?.marketing === true
+
+    // Prima l'archivio del gestionale (lib/codaLead.ts: se non risponde il lead
+    // va in coda), poi le mail, che restano come prima. inviaLead non lancia mai.
+    await inviaLead(
+      leadGuidaPmi({
+        id: `GUIDA-${Date.now()}`,
+        nome,
+        email,
+        attivita: tipo,
+        marketing,
+        campagna: pulisciCampagna(body?.campagna),
+      }),
+      'guida PMI',
+    )
+
     const audienceId = process.env.RESEND_AUDIENCE_ID
-    if (resend && audienceId) {
+    if (resend && audienceId && marketing) {
       await resend.contacts.create({ audienceId, email, firstName: nome, unsubscribed: false }).catch(() => {
         // Ignore 409 (already exists)
       })

@@ -31,7 +31,10 @@ Riferimento: `components/forms/ContactForm.tsx` e `components/forms/CollaboraFor
 - `useState` per `formData` + `status: 'idle' | 'loading' | 'success' | 'error'`
 - Campo honeypot `website` nascosto visivamente (anti-bot)
 - Lettura UTM da `sessionStorage` key `fim_utm` in `useEffect`
-- Se il modulo crea un lead nel gestionale: allega `campagna: campagnaPerInvio()` (`lib/campagnaBrowser.ts`) al POST, e la route passa `pulisciCampagna(body.campagna)` a `inviaLead` (`lib/campagna.ts`). gclid/fbclid ci sono solo col consenso marketing. Test: `npm test`
+- Ogni modulo che porta un cliente crea il lead nel gestionale (dal 01/11/2026 tutti: preventivo, calcolatore, FIMA, analizza-polizza, contatti, prenotazione, scuole, seconda opinione, preventivo auto, guida PMI; resta fuori solo «Collabora», che è una candidatura). Prima `inviaLead` (`lib/codaLead.ts`, con la coda se il gestionale non risponde), poi le mail. Il lead si costruisce in `lib/leadModuli.ts` con l'id della mail al team come `lead_id`.
+- Iscrizione alla newsletter solo con una casella marketing separata, facoltativa e spenta di default (calcolatore, guida PMI).
+- Un modulo con file manda `multipart/form-data`: la rotta va aggiunta a `API_POST_MULTIPART_ALLOWED` in `middleware.ts`, altrimenti prende 415. Vercel rifiuta i corpi sopra 4,5 MB: tetto sul totale dei file.
+- Il modulo allega `campagna: campagnaPerInvio()` (`lib/campagnaBrowser.ts`) al POST, e la route passa `pulisciCampagna(body.campagna)` a `inviaLead` (`lib/campagna.ts`). gclid/fbclid ci sono solo col consenso marketing. Test: `npm test`
 - Submit → `fetch('/api/...')` → success: chiama `track*Submit()` da `lib/analytics.ts` + stato `success`
 - Schermata di conferma inline quando `status === 'success'` (no redirect)
 - Errori: `errorMsg` state + fallback generico `"Errore nell'invio. Riprova o contattaci al +39 06 96883381."`

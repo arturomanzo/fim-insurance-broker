@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Button from '@/components/ui/Button'
 import { trackContactSubmit } from '@/lib/analytics'
 import { metaLeadFields } from '@/lib/metaLead'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -54,7 +55,7 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, ...meta }),
+        body: JSON.stringify({ ...formData, ...meta, campagna: campagnaPerInvio() }),
       })
       if (!res.ok) throw new Error()
       trackContactSubmit(utmSource, meta.eventId)

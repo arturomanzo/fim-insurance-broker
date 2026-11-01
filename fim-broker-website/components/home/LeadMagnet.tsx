@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
+import { trackGuidaPmiSubmit } from '@/lib/analytics'
 
 const tipoOptions = [
   'Artigiano / commerciante',
@@ -15,6 +17,9 @@ export default function LeadMagnet() {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [tipo, setTipo] = useState('')
+  // Consenso commerciale: separato, facoltativo, spento di default. Senza, la
+  // guida arriva lo stesso ma l'indirizzo non entra nella newsletter.
+  const [marketing, setMarketing] = useState(false)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
 
@@ -27,13 +32,14 @@ export default function LeadMagnet() {
       const res = await fetch('/api/lead-magnet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, tipo }),
+        body: JSON.stringify({ nome, email, tipo, marketing, campagna: campagnaPerInvio() }),
       })
       const data = await res.json()
       if (!res.ok) {
         setError(data.error || 'Si è verificato un errore.')
         setStatus('error')
       } else {
+        trackGuidaPmiSubmit(tipo)
         setStatus('success')
       }
     } catch {
@@ -168,6 +174,20 @@ export default function LeadMagnet() {
                     </select>
                   </div>
 
+                  <div className="flex items-start gap-3">
+                    <input
+                      id="lm-marketing"
+                      type="checkbox"
+                      checked={marketing}
+                      onChange={(e) => setMarketing(e.target.checked)}
+                      className="mt-1 w-4 h-4 rounded border-gray-300 text-primary accent-primary cursor-pointer"
+                      disabled={status === 'loading'}
+                    />
+                    <label htmlFor="lm-marketing" className="text-sm text-gray-600 cursor-pointer">
+                      Facoltativo: voglio ricevere guide e aggiornamenti assicurativi da FIM. Posso disiscrivermi quando voglio.
+                    </label>
+                  </div>
+
                   {error && (
                     <p className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg p-3">
                       {error}
@@ -197,7 +217,7 @@ export default function LeadMagnet() {
                     <Link href="/privacy-policy" className="underline hover:text-gray-600">
                       Privacy Policy
                     </Link>
-                    . Nessuno spam, disiscrizione facile.
+                    . La guida arriva per email anche senza la casella qui sopra.
                   </p>
                 </form>
               </>

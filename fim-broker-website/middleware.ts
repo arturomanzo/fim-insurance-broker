@@ -28,6 +28,10 @@ const API_GET_ALLOWED = new Set([
  * `List-Unsubscribe=One-Click` in form-encoded, non in JSON.
  */
 const API_POST_FORM_ALLOWED = new Set(['/api/newsletter/disiscriviti'])
+// Rotte che ricevono file nel corpo della richiesta. Fino al 01/11/2026 non
+// c'era: la seconda opinione manda i PDF in multipart e prendeva 415 da qui,
+// quindi nessuna richiesta arrivava (almeno dal 24/08/2026).
+const API_POST_MULTIPART_ALLOWED = new Set(['/api/second-opinion'])
 
 /**
  * Security middleware
@@ -105,7 +109,8 @@ export function middleware(request: NextRequest) {
   if (method === 'POST') {
     const ct = request.headers.get('content-type') ?? ''
     const formOk = API_POST_FORM_ALLOWED.has(pathname) && ct.includes('application/x-www-form-urlencoded')
-    if (!ct.includes('application/json') && !formOk) {
+    const multipartOk = API_POST_MULTIPART_ALLOWED.has(pathname) && ct.includes('multipart/form-data')
+    if (!ct.includes('application/json') && !formOk && !multipartOk) {
       return NextResponse.json({ error: 'Content-Type non supportato' }, { status: 415 })
     }
   }

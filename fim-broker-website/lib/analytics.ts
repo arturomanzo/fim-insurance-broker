@@ -276,6 +276,16 @@ export function trackSecondOpinionSubmit(settore: string, utmSource?: string, ev
   )
 }
 
+// ── Guida PMI (lead magnet) ──────────────────────────────────────────────────
+
+/** Guida PMI richiesta: dal 01/11/2026 il contatto arriva al gestionale come lead. */
+export function trackGuidaPmiSubmit(attivita: string) {
+  track('generate_lead', {
+    event_category: 'guida_pmi',
+    attivita: attivita || '(non indicata)',
+  })
+}
+
 // ── Analizza la tua polizza ──────────────────────────────────────────────────
 
 /** Analisi AI riuscita: dal 01/11/2026 nome ed email arrivano al gestionale come lead. */
