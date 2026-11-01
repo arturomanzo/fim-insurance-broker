@@ -5,6 +5,8 @@ import Button from '@/components/ui/Button'
 import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import { RICONTATTO } from '@/lib/tempi'
+import { campagnaPerInvio } from '@/lib/campagnaBrowser'
+import { trackAnalisiPolizzaSubmit } from '@/lib/analytics'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -210,6 +212,7 @@ export default function PolicyAnalyzer() {
           email: formData.email,
           pdfBase64,
           website: formData.website,
+          campagna: campagnaPerInvio(),
         }),
       })
 
@@ -222,6 +225,7 @@ export default function PolicyAnalyzer() {
         return
       }
 
+      trackAnalisiPolizzaSubmit(data.analysis?.tipoPolizza ?? '')
       setResult(data.analysis)
       setNome(data.nome)
       setStep('result')
@@ -569,7 +573,7 @@ export default function PolicyAnalyzer() {
           <a href="/privacy-policy" className="text-primary underline" target="_blank">
             Privacy Policy
           </a>{' '}
-          e il trattamento dei miei dati per l&apos;analisi della polizza. Il documento PDF non viene salvato. *
+          e il trattamento dei miei dati per l&apos;analisi della polizza e per essere ricontattato da FIM sui risultati. Il documento PDF non viene salvato. *
         </span>
       </label>
 

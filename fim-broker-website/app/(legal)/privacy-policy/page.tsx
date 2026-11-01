@@ -71,7 +71,10 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <strong>Analizza Polizza</strong>: il documento PDF che carichi viene trasmesso ad
                   Anthropic per l&apos;analisi e la generazione del report. Il file è elaborato in modo
-                  transitorio e non viene conservato sui nostri server al termine dell&apos;analisi. Il
+                  transitorio e non viene conservato sui nostri server al termine dell&apos;analisi.
+                  Nome, email e una sintesi del report (compagnia, tipo di polizza, scadenza, premio,
+                  punteggio, lacune e raccomandazioni) sono salvati nel nostro archivio contatti per
+                  ricontattarti sui risultati, e trattati come quelli dei moduli di contatto del sito. Il
                   report ha valore informativo e non costituisce una valutazione di adeguatezza ai sensi
                   della normativa IVASS.
                 </li>

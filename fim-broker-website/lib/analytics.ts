@@ -276,6 +276,16 @@ export function trackSecondOpinionSubmit(settore: string, utmSource?: string, ev
   )
 }
 
+// ── Analizza la tua polizza ──────────────────────────────────────────────────
+
+/** Analisi AI riuscita: dal 01/11/2026 nome ed email arrivano al gestionale come lead. */
+export function trackAnalisiPolizzaSubmit(tipoPolizza: string) {
+  track('generate_lead', {
+    event_category: 'analizza_polizza',
+    tipo_polizza: tipoPolizza || '(non rilevato)',
+  })
+}
+
 // ── Funnel scuole (Dipartimento Scuole) ──────────────────────────────────────
 
 /**
