@@ -46,22 +46,14 @@ jobs:
             --assertions.seo=0
         continue-on-error: true
 
-      - name: Genera report HTML
-        run: |
-          lhci collect \
-            --url=https://www.fimbroker.it/ \
-            --numberOfRuns=1 \
-            --settings.chromeFlags="--no-sandbox --headless" \
-            --settings.output=html \
-            --settings.outputPath=./lhci-report.html
-        continue-on-error: true
-
       - name: Upload report come artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: lighthouse-report-${{ github.run_number }}
-          path: |
-            .lighthouseci/
-            lhci-report.html
+          # lhci collect salva i report (lhr-*.html e .json) in .lighthouseci/, che
+          # è una cartella nascosta: senza include-hidden-files l'upload la salta
+          # e l'artifact non veniva mai creato.
+          path: .lighthouseci/
+          include-hidden-files: true
           retention-days: 30
