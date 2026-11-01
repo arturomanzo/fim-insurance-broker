@@ -84,11 +84,11 @@ export default function LaSciaRecensionePage() {
 
         {/* Back link */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link href="/" className="text-primary hover:underline text-sm">
+          <Link href="/" className="text-primary underline text-sm">
             ← Torna alla home
           </Link>
           <span className="hidden sm:inline text-gray-300">|</span>
-          <Link href="/contatti" className="text-primary hover:underline text-sm">
+          <Link href="/contatti" className="text-primary underline text-sm">
             Hai bisogno di supporto?
           </Link>
         </div>

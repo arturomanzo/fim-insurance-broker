@@ -132,7 +132,7 @@ export default function CookiePolicyPage() {
                 </li>
                 <li>
                   <strong>Opt-out di terze parti</strong>: Google Ads/Analytics su{' '}
-                  <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">adssettings.google.com</a>;
+                  <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">adssettings.google.com</a>;
                   preferenze pubblicitarie Meta dalle impostazioni del tuo account Facebook/Instagram.
                 </li>
               </ul>
@@ -145,7 +145,7 @@ export default function CookiePolicyPage() {
                 dell&apos;Unione Europea sulla base delle garanzie previste dagli artt. 44 ss. GDPR
                 (Clausole Contrattuali Standard ed eventuali certificazioni Data Privacy Framework).
                 Per il dettaglio sui trattamenti, le basi giuridiche e i tuoi diritti consulta la
-                nostra <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
+                nostra <a href="/privacy-policy" className="text-primary underline">Privacy Policy</a>.
               </p>
             </section>
 
@@ -154,7 +154,7 @@ export default function CookiePolicyPage() {
               <p>
                 Questa Cookie Policy può essere aggiornata per adeguarla a modifiche normative o agli
                 strumenti utilizzati. Ti consigliamo di consultarla periodicamente. Per informazioni:{' '}
-                <a href="mailto:privacy@fimbroker.it" className="text-primary hover:underline">privacy@fimbroker.it</a>.
+                <a href="mailto:privacy@fimbroker.it" className="text-primary underline">privacy@fimbroker.it</a>.
               </p>
             </section>
           </div>

@@ -260,7 +260,7 @@ export default async function BlogPostPage({ params }: Props) {
                         </span>
                       </Link>
                     ))}
-                  <Link href="/blog" className="block text-sm text-primary hover:underline mt-2">
+                  <Link href="/blog" className="block text-sm text-primary underline mt-2">
                     Tutti gli articoli →
                   </Link>
                 </div>

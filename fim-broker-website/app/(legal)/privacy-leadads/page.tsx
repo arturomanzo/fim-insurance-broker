@@ -34,7 +34,7 @@ export default function PrivacyLeadAdsPage() {
                 iscritta al RUI Sez. B n. B000405449.
               </p>
               <p>
-                Contatto privacy: <a href="mailto:privacy@fimbroker.it" className="text-primary hover:underline">privacy@fimbroker.it</a><br />
+                Contatto privacy: <a href="mailto:privacy@fimbroker.it" className="text-primary underline">privacy@fimbroker.it</a><br />
                 PEC: fiminsurancebrokersas@pec.it
               </p>
             </section>
@@ -143,7 +143,7 @@ export default function PrivacyLeadAdsPage() {
               </ul>
               <p>
                 Per esercitare i propri diritti è sufficiente scrivere a:{' '}
-                <a href="mailto:privacy@fimbroker.it" className="text-primary hover:underline">privacy@fimbroker.it</a>{' '}
+                <a href="mailto:privacy@fimbroker.it" className="text-primary underline">privacy@fimbroker.it</a>{' '}
                 indicando in oggetto &ldquo;Richiesta privacy Lead Meta&rdquo;. FIM Insurance Broker
                 risponderà entro 30 giorni dalla ricezione.
               </p>
@@ -170,9 +170,9 @@ export default function PrivacyLeadAdsPage() {
               <h2>10. Privacy generale del sito</h2>
               <p>
                 Per la disciplina generale del trattamento dei dati raccolti tramite il sito{' '}
-                <a href="/privacy-policy" className="text-primary hover:underline">fimbroker.it</a>{' '}
+                <a href="/privacy-policy" className="text-primary underline">fimbroker.it</a>{' '}
                 e per l&apos;uso dei cookie, consulta la{' '}
-                <a href="/cookie-policy" className="text-primary hover:underline">Cookie Policy</a>.
+                <a href="/cookie-policy" className="text-primary underline">Cookie Policy</a>.
               </p>
             </section>
           </div>

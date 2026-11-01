@@ -566,7 +566,7 @@ export default function PolicyAnalyzer() {
         />
         <span className="text-sm text-gray-600">
           Accetto la{' '}
-          <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">
+          <a href="/privacy-policy" className="text-primary underline" target="_blank">
             Privacy Policy
           </a>{' '}
           e il trattamento dei miei dati per l&apos;analisi della polizza. Il documento PDF non viene salvato. *

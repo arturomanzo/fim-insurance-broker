@@ -332,7 +332,7 @@ export default function SecondOpinionForm() {
         />
         <span className="text-sm text-gray-600">
           Accetto la{' '}
-          <a href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noreferrer">
+          <a href="/privacy-policy" className="text-primary underline" target="_blank" rel="noreferrer">
             Privacy Policy
           </a>{' '}
           e il trattamento dei dati personali, inclusi i documenti allegati. *

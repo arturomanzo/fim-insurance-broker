@@ -48,7 +48,7 @@ export default async function AreaClientePage({ searchParams }: PageProps) {
           <div className="mt-6 text-center space-y-2">
             <p className="text-gray-400 text-xs">
               Non riesci ad accedere?{' '}
-              <a href="tel:+390696883381" className="text-primary hover:underline">
+              <a href="tel:+390696883381" className="text-primary underline">
                 Chiamaci al 06 96883381
               </a>
             </p>

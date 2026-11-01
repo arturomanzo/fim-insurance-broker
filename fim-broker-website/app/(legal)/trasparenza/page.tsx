@@ -37,8 +37,8 @@ const SEZIONI_MUP = [
         <p><strong>P.IVA / C.F.:</strong> 02637640596 — <strong>REA:</strong> LT - 187466</p>
         <p>
           <strong>Recapiti:</strong> tel. {TEL} — email{' '}
-          <a href={`mailto:${EMAIL_INFO}`} className="text-primary hover:underline">{EMAIL_INFO}</a>{' '}
-          — PEC <a href={`mailto:${PEC}`} className="text-primary hover:underline">{PEC}</a>
+          <a href={`mailto:${EMAIL_INFO}`} className="text-primary underline">{EMAIL_INFO}</a>{' '}
+          — PEC <a href={`mailto:${PEC}`} className="text-primary underline">{PEC}</a>
         </p>
         <p>
           <strong>Sito internet</strong> attraverso cui avviene la promozione dei contratti di
@@ -50,7 +50,7 @@ const SEZIONI_MUP = [
           {RUI_DATA_ISCRIZIONE ? <>, iscrizione decorrente dal {RUI_DATA_ISCRIZIONE}</> : null}.
           Gli estremi identificativi e la decorrenza dell&apos;iscrizione possono essere verificati
           consultando il RUI su{' '}
-          <a href="https://servizi.ivass.it/RuirPubblica" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">servizi.ivass.it/RuirPubblica</a>.
+          <a href="https://servizi.ivass.it/RuirPubblica" target="_blank" rel="noopener noreferrer" className="text-primary underline">servizi.ivass.it/RuirPubblica</a>.
         </p>
         <p>
           <strong>Tipologia di attività di distribuzione svolta:</strong> distribuzione assicurativa
@@ -61,7 +61,7 @@ const SEZIONI_MUP = [
         <p>
           <strong>Autorità di vigilanza:</strong> IVASS — Istituto per la Vigilanza sulle
           Assicurazioni, Via del Quirinale 21, 00187 Roma —{' '}
-          <a href="https://www.ivass.it" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">www.ivass.it</a>.
+          <a href="https://www.ivass.it" target="_blank" rel="noopener noreferrer" className="text-primary underline">www.ivass.it</a>.
         </p>
       </>
     ),
@@ -85,7 +85,7 @@ const SEZIONI_MUP = [
           l&apos;identità dell&apos;altro intermediario, la sezione del RUI a cui appartiene e il
           ruolo svolto sono indicati nel Modulo consegnato per quel contratto. L&apos;elenco delle
           imprese raggiunte tramite collaborazione è riportato{' '}
-          <a href="#imprese" className="text-primary hover:underline">più sotto in questa pagina</a>.
+          <a href="#imprese" className="text-primary underline">più sotto in questa pagina</a>.
         </p>
       </>
     ),
@@ -138,10 +138,10 @@ const SEZIONI_MUP = [
           FIM Insurance Broker <strong>non distribuisce in via esclusiva</strong> i contratti di una
           o più imprese di assicurazione e non è vincolata da obblighi contrattuali che le impongano
           di farlo. Per questo motivo la denominazione delle imprese di cui distribuisce i contratti
-          è <a href="#imprese" className="text-primary hover:underline">pubblicata in questa pagina</a>{' '}
+          è <a href="#imprese" className="text-primary underline">pubblicata in questa pagina</a>{' '}
           e tenuta aggiornata. Il contraente può in ogni momento chiederne la consegna o la
           trasmissione su supporto durevole scrivendo a{' '}
-          <a href={`mailto:${EMAIL_INFO}`} className="text-primary hover:underline">{EMAIL_INFO}</a>.
+          <a href={`mailto:${EMAIL_INFO}`} className="text-primary underline">{EMAIL_INFO}</a>.
         </p>
         <p>
           Prima di ogni proposta vengono raccolte — anche mediante questionario scritto — le
@@ -254,9 +254,9 @@ const SEZIONI_MUP = [
           recapiti:
         </p>
         <ul className="list-disc pl-5 space-y-1 my-2">
-          <li>PEC: <a href={`mailto:${PEC}`} className="text-primary hover:underline">{PEC}</a></li>
+          <li>PEC: <a href={`mailto:${PEC}`} className="text-primary underline">{PEC}</a></li>
           <li>Raccomandata A/R: Ufficio Reclami — FIM Insurance Broker S.a.s., Via Roma 41, 04012 Cisterna di Latina (LT)</li>
-          <li>Email: <a href={`mailto:${EMAIL_RECLAMI}`} className="text-primary hover:underline">{EMAIL_RECLAMI}</a></li>
+          <li>Email: <a href={`mailto:${EMAIL_RECLAMI}`} className="text-primary underline">{EMAIL_RECLAMI}</a></li>
         </ul>
         <p>Il riscontro scritto arriva entro <strong>45 giorni</strong> dalla ricezione del reclamo.</p>
         <p>
@@ -273,14 +273,14 @@ const SEZIONI_MUP = [
           Assicurazioni Private e dell&apos;art. 141, comma 7, del Codice del Consumo, e
           disciplinato dal Decreto interministeriale MIMIT 6 novembre 2024, n. 215. Il ricorso si
           presenta esclusivamente online tramite il portale{' '}
-          <a href="https://www.arbitroassicurativo.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">arbitroassicurativo.org</a>,
+          <a href="https://www.arbitroassicurativo.org" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium">arbitroassicurativo.org</a>,
           dove sono consultabili i requisiti di ammissibilità e le modalità di presentazione. La
           procedura è operativa dal 15 gennaio 2026.
         </p>
         <p>
           <strong>Altri rimedi.</strong> Restano disponibili la segnalazione a IVASS per violazioni
           della normativa di settore (
-          <a href="https://www.ivass.it/consumatori/reclami/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">ivass.it/consumatori/reclami</a>
+          <a href="https://www.ivass.it/consumatori/reclami/" target="_blank" rel="noopener noreferrer" className="text-primary underline">ivass.it/consumatori/reclami</a>
           ), gli altri sistemi alternativi di risoluzione delle controversie indicati nei DIP
           Aggiuntivi, la mediazione in materia di contratti assicurativi (D.Lgs. 28/2010) e, in ogni
           caso, il ricorso all&apos;Autorità Giudiziaria.
@@ -300,12 +300,12 @@ const SEZIONI_MUP = [
           contraente può rivolgersi al Fondo di garanzia gestito da{' '}
           {FONDO_GARANZIA_BROKER.gestore} — {FONDO_GARANZIA_BROKER.indirizzo}, tel.{' '}
           {FONDO_GARANZIA_BROKER.telefono},{' '}
-          <a href={`mailto:${FONDO_GARANZIA_BROKER.email}`} className="text-primary hover:underline">{FONDO_GARANZIA_BROKER.email}</a>{' '}
-          (<a href={FONDO_GARANZIA_BROKER.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">consap.it/fondo-brokers</a>).
+          <a href={`mailto:${FONDO_GARANZIA_BROKER.email}`} className="text-primary underline">{FONDO_GARANZIA_BROKER.email}</a>{' '}
+          (<a href={FONDO_GARANZIA_BROKER.url} target="_blank" rel="noopener noreferrer" className="text-primary underline">consap.it/fondo-brokers</a>).
         </p>
         <p className="text-sm bg-accent/10 border-l-4 border-accent p-3 rounded-r">
           Procedura dettagliata, modulistica e canali di contatto sulla pagina{' '}
-          <Link href="/reclami" className="text-primary hover:underline font-semibold">Reclami e Arbitro Assicurativo</Link>.
+          <Link href="/reclami" className="text-primary underline font-semibold">Reclami e Arbitro Assicurativo</Link>.
         </p>
       </>
     ),
@@ -477,7 +477,7 @@ export default function TrasparenzaPage() {
             <p className="text-gray-700 mt-4 text-sm">
               Per ricevere copia dei documenti relativi a una specifica compagnia o a un prodotto,
               chiedila in fase di preventivo o scrivici a{' '}
-              <a href={`mailto:${EMAIL_INFO}`} className="text-primary hover:underline">{EMAIL_INFO}</a>.
+              <a href={`mailto:${EMAIL_INFO}`} className="text-primary underline">{EMAIL_INFO}</a>.
             </p>
           </Card>
 
@@ -523,7 +523,7 @@ export default function TrasparenzaPage() {
               è datata, sottoscritta dalle parti e integrata con le informazioni specifiche del
               rapporto e del contratto proposto. Per la copia controfirmata o per qualsiasi
               chiarimento, scrivi a{' '}
-              <a href={`mailto:${EMAIL_INFO}`} className="text-primary hover:underline">{EMAIL_INFO}</a>.
+              <a href={`mailto:${EMAIL_INFO}`} className="text-primary underline">{EMAIL_INFO}</a>.
             </p>
           </Card>
         </div>

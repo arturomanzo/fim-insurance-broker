@@ -198,7 +198,7 @@ export default function PrivacyPolicyPage() {
               <h2>8. Cookie</h2>
               <p>
                 Per informazioni sull&apos;uso dei cookie, consulta la nostra{' '}
-                <a href="/cookie-policy" className="text-primary hover:underline">Cookie Policy</a>.
+                <a href="/cookie-policy" className="text-primary underline">Cookie Policy</a>.
               </p>
             </section>
 

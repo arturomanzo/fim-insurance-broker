@@ -52,7 +52,7 @@ export default function MagicLinkForm({ nextPath }: Props) {
           Non trovi l&apos;email? Controlla lo spam o{' '}
           <button
             onClick={() => setStatus('idle')}
-            className="text-primary hover:underline"
+            className="text-primary underline"
           >
             riprova
           </button>.

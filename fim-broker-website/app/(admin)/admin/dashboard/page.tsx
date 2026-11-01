@@ -47,7 +47,7 @@ export default async function AdminDashboardPage() {
           href="https://fim-gestionale-next.vercel.app/scadenzario"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm font-semibold text-primary hover:underline"
+          className="text-sm font-semibold text-primary underline"
         >
           Apri lo scadenzario nel gestionale →
         </a>
