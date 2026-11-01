@@ -254,7 +254,7 @@ export default function PolicyAnalyzer() {
           <div className="bg-accent h-2 rounded-full animate-pulse" style={{ width: '70%' }}></div>
         </div>
         <p className="text-xs text-gray-500 max-w-xs">
-          Il nostro agente AI sta leggendo ogni clausola della tua polizza. Ci vogliono circa 30 secondi.
+          Il nostro agente AI sta leggendo ogni clausola della tua polizza. Ci vuole circa un minuto.
         </p>
       </div>
     )

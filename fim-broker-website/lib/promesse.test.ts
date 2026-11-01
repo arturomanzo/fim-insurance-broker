@@ -42,6 +42,8 @@ const VIETATE: Array<{ re: RegExp; cosa: string }> = [
   { re: /\bnessun\s+competitor\b|\bleader\s+mondial/i, cosa: 'confronto con i concorrenti non verificabile' },
   { re: /nessun costo di intermediazione|senza costi aggiuntivi rispetto all'acquisto diretto/i, cosa: 'il compenso del broker è la provvigione compresa nel premio' },
   { re: /\bpaghi troppo\b/i, cosa: 'promessa implicita di risparmio' },
+  { re: /\bcostando troppo\b|\bstai pagando troppo\b/i, cosa: 'promessa implicita di risparmio: l\'analisi AI non ha prezzi di mercato, dice da cosa dipende il premio' },
+  { re: /\b30 secondi\b/i, cosa: 'l\'analisi della polizza misurata il 01/11/2026 dura 38-42 secondi su un PDF di due pagine, di più su un contratto vero: «circa un minuto»' },
   { re: /\bprezzi indicativi\b|\bquanto cost\w+ mediamente\b/i, cosa: 'la guida PMI non ha prezzi (dice «qui non trovi una tabella di prezzi»): promettere prezzi o costi medi non mantiene la promessa' },
   { re: /\bRC\s+amministratore\b[^.'"]{0,40}\bobbligatoria\b|\bobbligatoria\s+(?:per legge\s+)?\(?L\. 220\/2012/i, cosa: 'la RC dell\'amministratore la può chiedere l\'assemblea (art. 1129 c.c.), non è un obbligo di legge' },
   { re: /\b(?:include|copre|coprono)\b[^.]{0,80}\bsanzion[ei] GDPR\b/i, cosa: 'promessa di coprire le sanzioni del Garante: in genere restano all\'azienda' },

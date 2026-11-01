@@ -82,7 +82,7 @@ Se sai su quale pagina si trova l'utente, personalizza le risposte:
 
 STRUMENTI DISPONIBILI PER IL CLIENTE:
 - Calcolatore del rischio gratuito: ${FIMA_CONFIG.sito}/calcolatore-rischi (consiglia se il cliente non sa da dove iniziare)
-- Analizza la tua polizza (AI): ${FIMA_CONFIG.sito}/analizza-polizza (carica il PDF e ottieni un'analisi in 60 secondi)
+- Analizza la tua polizza (AI): ${FIMA_CONFIG.sito}/analizza-polizza (carica il PDF e ottieni un'analisi in circa un minuto)
 - Seconda opinione assicurativa: ${FIMA_CONFIG.sito}/seconda-opinione (per chi vuole confrontare la copertura attuale)
 - Cyber Health Check (PDF gratuito): ${FIMA_CONFIG.sito}/docs/cyber-health-check.pdf (autovalutazione rischio cyber per aziende)
 - Guida gratuita per PMI: ${FIMA_CONFIG.sito}/risorse/guida-pmi

@@ -6,12 +6,12 @@ import { RICONTATTO } from '@/lib/tempi'
 export const metadata: Metadata = {
   title: 'Analizza la tua Polizza Gratis',
   description:
-    'Carica il PDF della tua polizza e scopri in 30 secondi cosa ti manca, dove ci sono doppioni e come migliorare la tua copertura. Gratis, senza impegno.',
+    'Carica il PDF della tua polizza e scopri in circa un minuto cosa copre davvero, dove sono le lacune e cosa conviene rivedere. Gratis, senza impegno.',
   alternates: { canonical: '/analizza-polizza' },
   openGraph: {
     ...OG_BASE,
     url: '/analizza-polizza',
-    title: 'Analizza la tua Polizza Gratis — Report AI in 30 secondi',
+    title: 'Analizza la tua Polizza Gratis — Report AI in circa un minuto',
     description:
       'Scopri le lacune della tua polizza e le voci che pesano di più sul premio. Analisi gratuita con intelligenza artificiale.',
     images: [{ url: '/api/og?title=Analizza+la+tua+Polizza+Gratis', width: 1200, height: 630 }],
@@ -32,7 +32,7 @@ const HOW_IT_WORKS = [
   {
     step: '2',
     title: 'L\'AI analizza tutto',
-    desc: 'Il nostro agente AI legge ogni clausola, identifica le coperture, rileva le lacune e confronta con il mercato.',
+    desc: 'Il nostro agente AI legge ogni clausola, identifica le coperture e rileva le lacune rispetto alle coperture standard del mercato italiano.',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -54,7 +54,7 @@ const HOW_IT_WORKS = [
 const TRUST_POINTS = [
   { label: 'Gratuito', desc: 'Nessun costo, nessun impegno' },
   { label: 'Sicuro', desc: 'Il PDF non viene salvato' },
-  { label: 'Veloce', desc: 'Report pronto in 30 secondi' },
+  { label: 'Veloce', desc: 'Report pronto in circa un minuto' },
   { label: 'Esperto', desc: 'Confronto con le coperture standard' },
 ]
 
@@ -87,12 +87,12 @@ export default function AnalizzaPolizzaPage() {
             Gratis · Senza impegno
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
-            Scopri se la tua polizza<br />
-            <span className="text-accent">ti sta costando troppo</span>
+            Scopri cosa copre davvero<br />
+            <span className="text-accent">la tua polizza</span>
           </h1>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
-            Carica il PDF della tua polizza attuale. In 30 secondi il nostro agente AI analizza
-            coperture, lacune e prezzi — e ti dice esattamente cosa cambiare.
+            Carica il PDF della tua polizza attuale. In circa un minuto il nostro agente AI legge
+            coperture, esclusioni e lacune, e ti dice cosa conviene rivedere e da cosa dipende il premio.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
             {TRUST_POINTS.map((t) => (
@@ -142,7 +142,7 @@ export default function AnalizzaPolizzaPage() {
                 </svg>
               </div>
               <h2 className="text-2xl font-bold text-primary">Analizza la tua polizza</h2>
-              <p className="text-gray-500 text-sm mt-1">Carica il PDF e ottieni il report gratuito in 30 secondi</p>
+              <p className="text-gray-500 text-sm mt-1">Carica il PDF e ottieni il report gratuito in circa un minuto</p>
             </div>
             <PolicyAnalyzer />
           </div>
