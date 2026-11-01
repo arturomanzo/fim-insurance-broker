@@ -1,184 +1,165 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { reportData } from '@/lib/osservatorio-data'
+import { altriRami, ivassRcAuto } from '@/lib/osservatorio-data'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 
-// L'anno nel titolo viene dal dato, non da una stringa scritta a mano: il
-// report è fermo al Q1 2025 e un titolo che dicesse "2026" spaccerebbe dati
-// vecchi di 17 mesi per correnti. Quando il cron trimestrale aggiorna
-// `osservatorio-data.ts`, titolo e og seguono da soli.
-const YEAR = reportData.quarter.split(' ').pop()
+// Dal 01/11/2026 l'unica cifra della pagina è quella IVASS sulla RC auto, con
+// fonte e periodo accanto (vedi lib/osservatorio-data.ts). Anno e periodo nel
+// titolo vengono dal dato: quando si aggiorna il dato, seguono da soli.
+const { anno, periodo } = ivassRcAuto
 
 export const metadata: Metadata = {
-  title: `Osservatorio Prezzi Assicurativi ${YEAR} — Trend e Analisi del Mercato Italiano`,
-  description:
-    'Ordini di grandezza dei premi assicurativi in Italia — RC Auto, casa, vita, salute e aziendali — per capire da dove partire. Valori di orientamento compilati dai broker FIM, non statistiche ufficiali.',
+  title: `Osservatorio Prezzi Assicurativi ${anno} — RC auto secondo IVASS e cosa pesa sugli altri premi`,
+  description: `Il prezzo medio della RC auto in Italia secondo l'indagine IPER di IVASS (${periodo}) e, per casa, salute, vita, RC professionale e aziende, da cosa dipende il premio.`,
   alternates: { canonical: '/osservatorio-prezzi' },
   openGraph: {
     ...OG_BASE,
     url: '/osservatorio-prezzi',
-    title: `Osservatorio Prezzi Assicurativi ${YEAR} — FIM Insurance Broker`,
-    description: 'Ordini di grandezza dei premi assicurativi italiani: RC Auto, casa, vita, salute, aziendali. Valori di orientamento FIM.',
-    images: [{ url: `/api/og?title=Osservatorio+Prezzi+${YEAR}&tag=FIM+Insurance+Broker&sub=Trend+e+analisi+del+mercato+assicurativo+italiano`, width: 1200, height: 630 }],
+    title: `Osservatorio Prezzi Assicurativi ${anno} — FIM Insurance Broker`,
+    description: `Prezzo medio RC auto secondo IVASS (${periodo}) e da cosa dipendono gli altri premi.`,
+    images: [{ url: `/api/og?title=Osservatorio+Prezzi+${anno}&tag=FIM+Insurance+Broker&sub=RC+auto+secondo+IVASS+e+cosa+pesa+sugli+altri+premi`, width: 1200, height: 630 }],
   },
 }
 
-const trendIcon: Record<string, { icon: string; color: string; label: string }> = {
-  up: { icon: '↑', color: 'text-red-600', label: 'In aumento' },
-  down: { icon: '↓', color: 'text-green-600', label: 'In calo' },
-  stable: { icon: '→', color: 'text-amber-600', label: 'Stabile' },
-}
-
-function formatChange(change: number) {
-  const sign = change > 0 ? '+' : ''
-  return `${sign}${change.toFixed(1)}%`
-}
+const fmtPerc = (n: number) => `${n > 0 ? '+' : ''}${n.toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`
+const fmtData = (iso: string) => new Date(iso).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
 
 export default function OsservatorioPrezziPage() {
-  const { categories, regionData, summary, quarter, lastUpdated, methodology } = reportData
+  const r = ivassRcAuto
+  const direzioneAnno = r.variazioneAnnua > 0 ? 'in aumento' : r.variazioneAnnua < 0 ? 'in calo' : 'invariato'
 
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Report',
-    name: `Osservatorio Prezzi Assicurativi ${quarter}`,
-    description: summary,
-    datePublished: new Date(lastUpdated).toISOString(),
-    dateModified: new Date(lastUpdated).toISOString(),
-    publisher: {
-      '@type': 'Organization',
-      name: 'FIM Insurance Broker',
-      url: 'https://www.fimbroker.it',
-    },
-    about: { '@type': 'Thing', name: 'Mercato assicurativo italiano' },
+    name: `Osservatorio Prezzi Assicurativi ${anno}`,
+    description: `Prezzo medio della RC auto secondo IVASS (${periodo}) e fattori che determinano gli altri premi.`,
+    datePublished: '2026-11-01',
+    dateModified: '2026-11-01',
+    publisher: { '@type': 'Organization', name: 'FIM Insurance Broker', url: 'https://www.fimbroker.it' },
+    citation: r.url,
+    about: { '@type': 'Thing', name: 'Prezzi delle assicurazioni in Italia' },
   }
 
   return (
     <div>
       <BreadcrumbSchema items={[{ name: 'Home', href: '/' }, { name: 'Osservatorio Prezzi', href: '/osservatorio-prezzi' }]} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
       {/* Hero */}
       <section className="gradient-primary py-16 md:py-20">
         <div className="container-custom text-center">
           <span className="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            📊 Report {quarter}
+            📊 Dati IVASS, {periodo}
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-white mb-4">
             Osservatorio Prezzi<br className="hidden sm:block" /> Assicurativi Italia
           </h1>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto mb-6">{summary}</p>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-white/60 text-sm">
-            <span>
-              🗓️ Aggiornato al{' '}
-              {new Date(lastUpdated).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
-            </span>
-            <span>📋 Valori di orientamento FIM — non statistiche ufficiali</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Price cards */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">Premi medi per categoria</h2>
-            <p className="text-gray-500 text-sm">Direzione attesa dei premi, non una variazione misurata</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((cat) => {
-              const t = trendIcon[cat.trend]
-              return (
-                <div key={cat.name} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl">{cat.icon}</span>
-                      <h3 className="font-bold text-primary">{cat.name}</h3>
-                    </div>
-                    <span className={`text-sm font-bold ${t.color}`}>
-                      {t.icon} {formatChange(cat.change)}
-                    </span>
-                  </div>
-                  <div className="mb-4">
-                    <div className="text-3xl font-black text-primary">
-                      {cat.avgPremium.toLocaleString('it-IT')}€
-                      <span className="text-gray-400 text-base font-normal">
-                        /{'priceUnit' in cat && cat.priceUnit ? cat.priceUnit.replace('€/', '') : 'anno'}
-                      </span>
-                    </div>
-                    <div className="text-xs text-gray-400 mt-0.5">
-                      Media mercato italiano • range {cat.priceRange.min.toLocaleString('it-IT')}–
-                      {cat.priceRange.max.toLocaleString('it-IT')}€
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{cat.insight}</p>
-                  <div className="space-y-1">
-                    {cat.factors.map((f) => (
-                      <div key={f} className="flex items-center gap-2 text-xs text-gray-500">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                        {f}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-          <p className="text-center text-xs text-gray-400 mt-6">
-            ⚠️ Premi indicativi. Il premio effettivo lo calcola la compagnia sul profilo di ogni cliente.
+          <p className="text-white/80 text-lg max-w-2xl mx-auto">
+            Quanto costa davvero la RC auto lo misura IVASS, e qui trovi il suo dato. Per gli altri rami una media
+            nazionale non esiste, e ti diciamo da cosa dipende il premio.
           </p>
         </div>
       </section>
 
-      {/* Regional data */}
-      <section className="section-padding bg-white">
+      {/* RC auto: il dato IVASS */}
+      <section className="section-padding bg-gray-50">
         <div className="container-custom max-w-3xl">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">RC Auto per regione</h2>
-            <p className="text-gray-500 text-sm">
-              Ordine di grandezza del premio annuo per un profilo standard (30 anni, berlina, città media)
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl">🚗</span>
+              <h2 className="text-2xl font-black text-primary">RC auto: il prezzo medio in Italia</h2>
+            </div>
+            <div className="text-5xl font-black text-primary mb-1">
+              {r.prezzoMedio} €
+            </div>
+            <p className="text-xs text-gray-500 mb-6">
+              Prezzo medio della garanzia RC auto delle autovetture, {periodo}. Fonte: {r.fonte}, pubblicata il{' '}
+              {fmtData(r.pubblicata)}.
             </p>
-          </div>
-          <div className="space-y-3">
-            {regionData.map((r) => {
-              // La barra è proporzionale al centro della fascia. Niente freccia
-              // di tendenza per regione: dire se un premio sale o scende è una
-              // misurazione, e qui non ce n'è una.
-              const maxVal = Math.max(...regionData.map((x) => x.rcAutoMax))
-              const pct = ((r.rcAutoMin + r.rcAutoMax) / 2 / maxVal) * 100
-              return (
-                <div key={r.region} className="bg-gray-50 rounded-xl p-4">
-                  <div className="flex items-center justify-between gap-3 mb-2">
-                    <span className="font-bold text-primary">{r.region}</span>
-                    <span className="font-black text-primary tabular-nums">
-                      {r.rcAutoMin}–{r.rcAutoMax} €/anno
-                    </span>
-                  </div>
-                  <div className="h-2 bg-gray-200 rounded-full overflow-hidden mb-1">
-                    <div className="h-full gradient-primary rounded-full" style={{ width: `${pct}%` }} />
-                  </div>
-                  <p className="text-xs text-gray-500">{r.note}</p>
-                </div>
-              )
-            })}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div className="bg-gray-50 rounded-xl p-4">
+                <div className="text-xl font-black text-primary">{fmtPerc(r.variazioneAnnua)}</div>
+                <div className="text-xs text-gray-500">su un anno prima</div>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-4">
+                <div className="text-xl font-black text-primary">{fmtPerc(r.variazioneTrimestre)}</div>
+                <div className="text-xs text-gray-500">sul trimestre prima</div>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-4">
+                <div className="text-xl font-black text-primary">{r.medianaProvince} €</div>
+                <div className="text-xs text-gray-500">metà delle province sta sopra</div>
+              </div>
+            </div>
+            <p className="text-gray-600 text-sm leading-relaxed mb-3">
+              Secondo i dati IVASS il prezzo medio è {direzioneAnno} su un anno, e tra una provincia e l&apos;altra la
+              differenza resta forte: nel quarto di province più care si superano i {r.quartileAlto} euro.
+            </p>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              È una media sui contratti delle autovetture rilevati da IVASS. Il tuo premio dipende da classe di merito, età, zona, veicolo e
+              garanzie scelte, e può stare parecchio sopra o sotto. Se vuoi sapere dove sta il tuo, mandaci la polizza
+              in corso.{' '}
+              <a href={r.url} className="text-accent font-semibold underline" target="_blank" rel="noopener noreferrer">
+                Leggi il report IVASS
+              </a>
+              .
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Methodology */}
+      {/* Altri rami: senza cifre */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">Gli altri rami: da cosa dipende il premio</h2>
+            <p className="text-gray-500 text-sm max-w-2xl mx-auto">
+              Per casa, salute, vita, RC professionale e aziende non c&apos;è una media nazionale pubblica sul premio
+              pagato, e un numero inventato ti porterebbe fuori strada. Ecco cosa guarda la compagnia quando lo calcola.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {altriRami.map((ramo) => (
+              <div key={ramo.name} className="bg-gray-50 rounded-2xl border border-gray-100 p-6 flex flex-col">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">{ramo.icon}</span>
+                  <h3 className="font-bold text-primary">{ramo.name}</h3>
+                </div>
+                <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{ramo.testo}</p>
+                <div className="space-y-1 mb-4">
+                  {ramo.fattori.map((f) => (
+                    <div key={f} className="flex items-center gap-2 text-xs text-gray-500">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                      {f}
+                    </div>
+                  ))}
+                </div>
+                <Link href={ramo.href} className="text-accent font-semibold text-sm underline">
+                  Vai alla pagina →
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Metodo */}
       <section className="py-12 bg-gray-50">
         <div className="container-custom max-w-3xl">
           <div className="bg-white rounded-2xl border border-gray-100 p-6">
             <h3 className="font-bold text-primary mb-2 flex items-center gap-2">
               <span>📋</span> Da dove vengono questi numeri
             </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">{methodology}</p>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              L&apos;unica cifra di questa pagina è quella di IVASS: l&apos;indagine IPER rileva ogni trimestre i prezzi
+              effettivamente pagati per la RC auto su un campione di contratti, e li pubblica tra le comunicazioni
+              statistiche. Noi la riportiamo con la fonte e il periodo, e la aggiorniamo quando esce quella nuova. Per
+              gli altri rami non pubblichiamo medie: non c&apos;è una fonte ufficiale sul premio per contratto, e il nostro
+              portafoglio è troppo piccolo per dirne una che valga per tutti.
+            </p>
             <p className="text-gray-600 text-sm leading-relaxed mt-3">
-              Per un numero che vale per te e non per un profilo medio, il preventivo è
-              gratuito: <Link href="/preventivo" className="text-accent font-semibold underline">richiedilo qui</Link>.
+              Per un numero che vale per te, il preventivo è gratuito:{' '}
+              <Link href="/preventivo" className="text-accent font-semibold underline">richiedilo qui</Link>.
             </p>
           </div>
         </div>
@@ -187,14 +168,14 @@ export default function OsservatorioPrezziPage() {
       {/* CTA */}
       <section className="gradient-primary py-14">
         <div className="container-custom text-center">
-          <h2 className="text-2xl md:text-3xl font-black text-white mb-3">Stai pagando il giusto?</h2>
+          <h2 className="text-2xl md:text-3xl font-black text-white mb-3">Vuoi capire dove sta il tuo premio?</h2>
           <p className="text-white/80 mb-6 max-w-lg mx-auto text-sm">
-            Confronta il tuo premio attuale con i dati dell&apos;Osservatorio. I nostri broker analizzano la tua polizza
-            gratuitamente e ti dicono se ci sono voci da rivedere.
+            Mandaci la polizza in corso: la leggiamo, ti diciamo cosa copre davvero e se ci sono voci da rivedere.
+            L&apos;analisi è gratuita.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/preventivo" className="btn-primary bg-accent hover:bg-accent-dark text-primary font-bold px-6 py-4">
-              Confronta il mio premio →
+            <Link href="/analizza-polizza" className="btn-primary bg-accent hover:bg-accent-dark text-primary font-bold px-6 py-4">
+              Fai analizzare la polizza →
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white px-6 py-4">
               📞 06 96883381
