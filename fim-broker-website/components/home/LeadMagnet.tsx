@@ -65,7 +65,7 @@ export default function LeadMagnet() {
             </h2>
             <p className="text-white/80 text-lg leading-relaxed mb-8">
               Tutto quello che un imprenditore, artigiano o professionista deve sapere sulle assicurazioni —
-              spiegato in modo chiaro, senza gergo tecnico, con prezzi indicativi inclusi.
+              spiegato in modo chiaro, senza gergo tecnico.
             </p>
             {/* What's inside */}
             <div className="space-y-3">
@@ -74,7 +74,7 @@ export default function LeadMagnet() {
                 'Come calcolare i massimali giusti per la tua attività',
                 'RC Impresa, Cyber, D&O: quando servono davvero',
                 'Come funziona la gestione di un sinistro',
-                'Prezzi indicativi per le coperture principali',
+                'Cosa fa variare il premio delle coperture principali',
                 'La checklist dei rischi per PMI italiane',
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">

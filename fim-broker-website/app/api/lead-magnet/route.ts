@@ -31,12 +31,12 @@ function buildGuideEmailHtml(nome: string, tipo: string): string {
         <span style="color: white; font-weight: 900; font-size: 28px;">📋</span>
       </div>
       <h1 style="color: white; margin: 0; font-size: 22px; font-weight: 900;">La tua guida è pronta!</h1>
-      <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0; font-size: 15px;">Guida alle Assicurazioni per PMI 2025</p>
+      <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0; font-size: 15px;">Guida alle Assicurazioni per PMI</p>
     </div>
     <div style="padding: 32px;">
       <p style="font-size: 16px; color: #1e293b; margin: 0 0 16px;">Ciao <strong>${safeName}</strong>,</p>
       <p style="font-size: 15px; color: #475569; line-height: 1.7; margin: 0 0 20px;">
-        Grazie per aver richiesto la <strong>Guida Completa alle Assicurazioni per PMI 2025</strong>.
+        Grazie per aver richiesto la <strong>Guida Completa alle Assicurazioni per PMI</strong>.
         ${safeType ? `La guida è pensata per ${safeType} come te, con informazioni pratiche e aggiornate.` : ''}
       </p>
       <p style="font-size: 15px; color: #475569; line-height: 1.7; margin: 0 0 24px;">
@@ -46,7 +46,7 @@ function buildGuideEmailHtml(nome: string, tipo: string): string {
         <li>Quali assicurazioni sono obbligatorie per la tua attività?</li>
         <li>Come scegliere il giusto massimale?</li>
         <li>Come funziona la gestione sinistri?</li>
-        <li>Quanto costano mediamente le polizze principali?</li>
+        <li>Cosa fa variare il premio delle polizze principali?</li>
         <li>RC Impresa, All-risk, Cyber: cosa serve davvero?</li>
       </ul>
       <div style="text-align: center; margin: 0 0 32px;">
@@ -146,7 +146,7 @@ export async function POST(req: NextRequest) {
         resend.emails.send({
           from: FIM_FROM,
           to: [email],
-          subject: '📋 La tua Guida Assicurazioni PMI 2025 — FIM Insurance Broker',
+          subject: '📋 La tua Guida Assicurazioni PMI — FIM Insurance Broker',
           html: buildGuideEmailHtml(nome, tipo),
         }),
         resend.emails.send({
