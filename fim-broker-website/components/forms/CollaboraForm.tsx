@@ -285,7 +285,7 @@ export default function CollaboraForm() {
         />
         <span className="text-sm text-gray-600">
           Accetto la{' '}
-          <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">
+          <a href="/privacy-policy" className="text-primary underline" target="_blank">
             Privacy Policy
           </a>{' '}
           e il trattamento dei dati personali ai fini della valutazione della candidatura. *

@@ -480,7 +480,7 @@ export default function RiskCalculator() {
               />
               <label htmlFor="calc-privacy" className="text-sm text-gray-600 cursor-pointer">
                 Acconsento al trattamento dei dati personali secondo la{' '}
-                <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Policy</Link>. Riceverò via email il riepilogo dell&apos;analisi.
+                <Link href="/privacy-policy" className="text-primary underline" target="_blank">Privacy Policy</Link>. Riceverò via email il riepilogo dell&apos;analisi.
               </label>
             </div>
             {/* Consenso commerciale: separato, facoltativo, spento di default.

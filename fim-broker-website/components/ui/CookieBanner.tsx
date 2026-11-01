@@ -148,7 +148,7 @@ export default function CookieBanner() {
             usato e cookie di profilazione per misurare le nostre campagne pubblicitarie. Le ultime
             due cose sono separate: puoi accettarne una e rifiutare l&apos;altra da
             &ldquo;Personalizza&rdquo;.{' '}
-            <Link href="/cookie-policy" className="text-primary hover:underline font-medium">
+            <Link href="/cookie-policy" className="text-primary underline font-medium">
               Leggi la Cookie Policy
             </Link>
           </p>

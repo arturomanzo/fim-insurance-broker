@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import Button from '@/components/ui/Button'
 import { PREFILL_SESSION_KEY, type PreventivoAutoPrefill } from '@/lib/preventivoDocumenti'
 import {
@@ -358,7 +359,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
                   className="mt-1 w-4 h-4 rounded border-gray-300 text-primary accent-primary" />
                 <span className="text-sm text-gray-600">
                   Ho letto e accetto la{' '}
-                  <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Policy</Link>{' '}
+                  <Link href="/privacy-policy" className="text-primary underline" target="_blank">Privacy Policy</Link>{' '}
                   e acconsento al trattamento dei miei dati per ricevere il preventivo. *
                 </span>
               </label>
@@ -377,5 +378,20 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
         </form>
       )}
     </div>
+  )
+}
+
+/**
+ * Il form con la preselezione presa dall'URL: ?profilo= (o ?tipo=) sceglie il
+ * profilo e porta al passo 2, ?settore= preseleziona la copertura. Va dentro un
+ * <Suspense>, così la pagina /preventivo resta statica.
+ */
+export function PreventivoFormDaUrl() {
+  const params = useSearchParams()
+  return (
+    <PreventivoForm
+      initialProfile={params.get('profilo') ?? params.get('tipo')}
+      initialSettore={params.get('settore')}
+    />
   )
 }

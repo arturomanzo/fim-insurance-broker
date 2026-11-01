@@ -39,7 +39,7 @@ export default function NoteLegaliPage() {
               </p>
               <p>
                 L&apos;iscrizione è verificabile sul sito IVASS:{' '}
-                <a href="https://servizi.ivass.it/RuirPubblica/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                <a href="https://servizi.ivass.it/RuirPubblica/" target="_blank" rel="noopener noreferrer" className="text-primary underline">
                   servizi.ivass.it/RuirPubblica
                 </a>.
               </p>
@@ -62,7 +62,7 @@ export default function NoteLegaliPage() {
                 (MUP)</strong> previsto dall&apos;Allegato 3 al Regolamento IVASS n. 40/2018, che dal
                 Provvedimento n. 147/2024 ha sostituito i precedenti Allegati 3, 4, 4-bis e 4-ter &mdash;
                 è disponibile nella sezione{' '}
-                <Link href="/trasparenza" className="text-primary hover:underline font-medium">Trasparenza</Link>{' '}
+                <Link href="/trasparenza" className="text-primary underline font-medium">Trasparenza</Link>{' '}
                 e viene consegnata al cliente prima della sottoscrizione di ogni contratto.
               </p>
             </section>
@@ -116,7 +116,7 @@ export default function NoteLegaliPage() {
                 <li>
                   <strong>Reclamo all&apos;intermediario.</strong> Il cliente invia reclamo scritto a
                   FIM Insurance Broker S.a.s. — PEC{' '}
-                  <a href="mailto:fiminsurancebrokersas@pec.it" className="text-primary hover:underline">fiminsurancebrokersas@pec.it</a>{' '}
+                  <a href="mailto:fiminsurancebrokersas@pec.it" className="text-primary underline">fiminsurancebrokersas@pec.it</a>{' '}
                   o raccomandata A/R a Via Roma 41, 04012 Cisterna di Latina (LT). Riscontro entro{' '}
                   <strong>45 giorni</strong> dalla ricezione.
                 </li>
@@ -133,7 +133,7 @@ export default function NoteLegaliPage() {
                   all&apos;Arbitro Assicurativo entro <strong>12 mesi</strong> dalla data del reclamo all&apos;impresa.
                   Il ricorso si presenta online (contributo di 20 euro, rimborsato in caso di
                   accoglimento) sul portale{' '}
-                  <a href="https://www.arbitroassicurativo.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">arbitroassicurativo.org</a>.
+                  <a href="https://www.arbitroassicurativo.org" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium">arbitroassicurativo.org</a>.
                   La decisione dell&apos;Arbitro non è vincolante per il cliente, che resta libero di
                   adire l&apos;Autorità Giudiziaria.
                 </li>
@@ -144,7 +144,7 @@ export default function NoteLegaliPage() {
               <ul className="list-disc pl-5 space-y-1 my-3">
                 <li>
                   Presentare segnalazione a IVASS per violazioni della normativa di settore —{' '}
-                  <a href="https://www.ivass.it/consumatori/reclami/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">ivass.it/consumatori/reclami</a>.
+                  <a href="https://www.ivass.it/consumatori/reclami/" target="_blank" rel="noopener noreferrer" className="text-primary underline">ivass.it/consumatori/reclami</a>.
                 </li>
                 <li>
                   Attivare la <strong>mediazione obbligatoria</strong> ex D.Lgs. 28/2010 in materia di contratti assicurativi,
@@ -157,7 +157,7 @@ export default function NoteLegaliPage() {
               </ul>
               <p className="bg-accent/10 border-l-4 border-accent p-4 rounded-r">
                 Per la procedura completa, la modulistica e i riferimenti normativi visita la pagina dedicata{' '}
-                <Link href="/reclami" className="text-primary hover:underline font-semibold">Reclami e Arbitro Assicurativo</Link>.
+                <Link href="/reclami" className="text-primary underline font-semibold">Reclami e Arbitro Assicurativo</Link>.
               </p>
             </section>
 
@@ -165,8 +165,8 @@ export default function NoteLegaliPage() {
               <h2>Contatti</h2>
               <p>
                 Per qualsiasi informazione:{' '}
-                <a href="mailto:info@fimbroker.it" className="text-primary hover:underline">info@fimbroker.it</a>{' '}
-                | <a href="tel:+390696883381" className="text-primary hover:underline">+39 06 96883381</a>
+                <a href="mailto:info@fimbroker.it" className="text-primary underline">info@fimbroker.it</a>{' '}
+                | <a href="tel:+390696883381" className="text-primary underline">+39 06 96883381</a>
               </p>
             </section>
           </div>

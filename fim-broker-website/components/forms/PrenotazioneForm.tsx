@@ -268,7 +268,7 @@ export default function PrenotazioneForm() {
         />
         <span className="text-sm text-gray-600">
           Accetto la{' '}
-          <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">
+          <a href="/privacy-policy" className="text-primary underline" target="_blank">
             Privacy Policy
           </a>{' '}
           e il trattamento dei dati personali per la gestione della prenotazione. *

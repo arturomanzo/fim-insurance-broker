@@ -144,7 +144,7 @@ export default function ContattiPage() {
                   {channel.email === EMAIL_RECLAMI && (
                     <p className="text-gray-500 text-xs mt-2">
                       Vedi la{' '}
-                      <Link href="/reclami" className="text-primary hover:underline">
+                      <Link href="/reclami" className="text-primary underline">
                         procedura reclami completa
                       </Link>
                       .

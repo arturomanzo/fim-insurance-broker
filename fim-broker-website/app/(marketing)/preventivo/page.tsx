@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import Image from 'next/image'
-import PreventivoForm from '@/components/forms/PreventivoForm'
+import PreventivoForm, { PreventivoFormDaUrl } from '@/components/forms/PreventivoForm'
 import Card from '@/components/ui/Card'
 import { EMAIL_RCA } from '@/lib/contatti'
 import { OG_BASE } from '@/lib/seo'
@@ -49,15 +50,13 @@ const howToSchema = {
   })),
 }
 
-interface PageProps {
-  searchParams: Promise<{ profilo?: string; tipo?: string; settore?: string }>
-}
-
-export default async function PreventivoPage({ searchParams }: PageProps) {
-  const params = await searchParams
-  const initialProfile = params.profilo ?? params.tipo ?? null
-  const initialSettore = params.settore ?? null
-
+// Pagina statica: i parametri dell'URL (?profilo=, ?tipo=, ?settore=) li legge
+// il form nel browser. Finché la pagina leggeva searchParams sul server era
+// dinamica, e Next mandava title e meta description in streaming in fondo al
+// body invece che nell'<head> (Lighthouse SEO: «Document does not have a meta
+// description»). Il fallback è lo stesso form senza preselezione: chi arriva
+// senza parametri vede da subito la pagina definitiva.
+export default function PreventivoPage() {
   return (
     <div>
       <script
@@ -91,7 +90,7 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
                   {step.n}
                 </div>
                 <div>
-                  <h3 className="font-bold text-primary mb-1">{step.title}</h3>
+                  <h2 className="font-bold text-primary mb-1">{step.title}</h2>
                   <p className="text-gray-600 text-sm">{step.desc}</p>
                 </div>
               </div>
@@ -107,7 +106,9 @@ export default async function PreventivoPage({ searchParams }: PageProps) {
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-black text-primary mb-6">Inserisci i tuoi dati</h2>
               <Card padding="lg">
-                <PreventivoForm initialProfile={initialProfile} initialSettore={initialSettore} />
+                <Suspense fallback={<PreventivoForm />}>
+                  <PreventivoFormDaUrl />
+                </Suspense>
               </Card>
             </div>
 

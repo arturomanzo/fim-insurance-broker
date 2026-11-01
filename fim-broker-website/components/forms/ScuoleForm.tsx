@@ -288,7 +288,7 @@ export default function ScuoleForm() {
         />
         <span className="text-sm text-gray-600">
           Ho letto la{' '}
-          <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">
+          <a href="/privacy-policy" className="text-primary underline" target="_blank">
             Privacy Policy
           </a>{' '}
           e acconsento al trattamento dei dati per la risposta a questa richiesta. *
