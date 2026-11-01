@@ -24,27 +24,18 @@ jobs:
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@0.14.x
 
-      - name: Run Lighthouse su pagine chiave
-        run: |
-          lhci collect \
-            --url=https://www.fimbroker.it/ \
-            --url=https://www.fimbroker.it/soluzioni \
-            --url=https://www.fimbroker.it/preventivo \
-            --url=https://www.fimbroker.it/chi-siamo \
-            --url=https://www.fimbroker.it/calcolatore-rischi \
-            --numberOfRuns=2 \
-            --settings.chromeFlags="--no-sandbox --headless"
-        continue-on-error: true
+      # Pagine, numero di giri e soglie stanno in lighthouserc.json (radice del repo).
+      # Fino al 01/11/2026 l'assert usava il preset lighthouse:recommended con
+      # continue-on-error: decine di voci rosse ogni settimana e job comunque
+      # verde, così nessuno ha visto per mesi il bottone principale sotto il
+      # contrasto minimo (#225). Ora poche soglie, e il job diventa rosso quando
+      # una pagina che porta contatti scende sotto: GitHub manda la mail.
+      # La performance resta un avviso: sui runner di GitHub oscilla di 10-30 punti.
+      - name: Run Lighthouse su pagine che portano contatti
+        run: lhci collect
 
-      - name: Assert soglie minime di qualità
-        run: |
-          lhci assert \
-            --preset=lighthouse:recommended \
-            --assertions.performance=0 \
-            --assertions.accessibility=0 \
-            --assertions.best-practices=0 \
-            --assertions.seo=0
-        continue-on-error: true
+      - name: Assert soglie (accessibilità, SEO, best practice; performance solo avviso)
+        run: lhci assert
 
       - name: Upload report come artifact
         uses: actions/upload-artifact@v4

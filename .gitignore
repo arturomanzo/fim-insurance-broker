@@ -1,1 +1,4 @@
 .vercel
+
+# Report locali di Lighthouse CI (lighthouserc.json)
+.lighthouseci/
