@@ -65,6 +65,9 @@ const LEAD_VALUES: Record<string, number> = {
   preventivo: 11,
   preventivo_auto_documenti: 11,
   second_opinion: 11,
+  // Chi carica la sua polizza e lascia l'email chiede la stessa cosa della
+  // seconda opinione, solo per una polizza (01/11/2026, scelta di Arturo).
+  analizza_polizza: 11,
   prenotazione: 11,
   // Intento più debole degli altri form: chiede informazioni, non un preventivo.
   contact: 6,
@@ -77,6 +80,10 @@ const DEFAULT_LEAD_VALUE = 6
 /**
  * Tipi di lead che contano come CONVERSIONE COMMERCIALE per Google Ads.
  *
+ * `guida_pmi` è fuori per lo stesso motivo (scelta di Arturo del 01/11/2026):
+ * chi scarica una guida si sta informando, e contarlo insegnerebbe ad Ads a
+ * portare lettori invece di clienti. Resta su GA4 e Meta.
+ *
  * `collabora` è volutamente fuori: è una candidatura, non una richiesta di
  * polizza. Includerla insegnerebbe all'algoritmo a portare curriculum invece
  * di clienti — lo stesso errore per cui oggi la campagna insegue le "azioni
@@ -86,6 +93,7 @@ const COMMERCIAL_LEAD_TYPES = new Set([
   'preventivo',
   'preventivo_auto_documenti',
   'second_opinion',
+  'analizza_polizza',
   'prenotazione',
   'contact',
   'scuole',
@@ -288,7 +296,7 @@ export function trackGuidaPmiSubmit(attivita: string) {
 
 // ── Analizza la tua polizza ──────────────────────────────────────────────────
 
-/** Analisi AI riuscita: dal 01/11/2026 nome ed email arrivano al gestionale come lead. */
+/** Analisi AI riuscita: nome ed email arrivano al gestionale come lead. Conta su Google Ads (11 €). */
 export function trackAnalisiPolizzaSubmit(tipoPolizza: string) {
   track('generate_lead', {
     event_category: 'analizza_polizza',
