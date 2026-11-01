@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { altriRami, ivassRcAuto } from '@/lib/osservatorio-data'
+import { altriRami, ivassLatina, ivassRcAuto } from '@/lib/osservatorio-data'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 }
 
 const fmtPerc = (n: number) => `${n > 0 ? '+' : ''}${n.toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`
+const fmtEuro = (n: number) => n.toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 })
 const fmtData = (iso: string) => new Date(iso).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
 
 export default function OsservatorioPrezziPage() {
@@ -108,8 +109,11 @@ export default function OsservatorioPrezziPage() {
         </div>
       </section>
 
+      {/* Provincia di Latina: tavole IVASS */}
+      <LatinaSezione />
+
       {/* Altri rami: senza cifre */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">Gli altri rami: da cosa dipende il premio</h2>
@@ -120,7 +124,7 @@ export default function OsservatorioPrezziPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {altriRami.map((ramo) => (
-              <div key={ramo.name} className="bg-gray-50 rounded-2xl border border-gray-100 p-6 flex flex-col">
+              <div key={ramo.name} className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">{ramo.icon}</span>
                   <h3 className="font-bold text-primary">{ramo.name}</h3>
@@ -144,7 +148,7 @@ export default function OsservatorioPrezziPage() {
       </section>
 
       {/* Metodo */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-white">
         <div className="container-custom max-w-3xl">
           <div className="bg-white rounded-2xl border border-gray-100 p-6">
             <h3 className="font-bold text-primary mb-2 flex items-center gap-2">
@@ -184,5 +188,64 @@ export default function OsservatorioPrezziPage() {
         </div>
       </section>
     </div>
+  )
+}
+
+function LatinaSezione() {
+  const l = ivassLatina
+  const differenza = Math.round(l.media - l.mediaItalia)
+  const massimo = Math.max(...l.lazio.map((p) => p.media))
+  return (
+    <section className="section-padding bg-white">
+      <div className="container-custom max-w-3xl">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-black text-primary mb-2">E in provincia di Latina?</h2>
+          <p className="text-gray-500 text-sm">
+            Autovetture, {l.periodo}. Fonte: {l.fonte}.
+          </p>
+        </div>
+        <div className="bg-gray-50 rounded-2xl border border-gray-100 p-6 md:p-8 mb-6">
+          <div className="text-4xl font-black text-primary mb-1">{fmtEuro(l.media)} €</div>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            Secondo le tavole IVASS è il premio medio RC auto in provincia di Latina, su {l.contratti.toLocaleString('it-IT')}{' '}
+            contratti: {differenza} euro sopra la media nazionale di {fmtEuro(l.mediaItalia)} euro, {fmtPerc(l.variazioneAnnua)}{' '}
+            su un anno. Latina è {l.posizione}ª su {l.province} province per premio medio, dalla più cara.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 className="font-bold text-primary mb-3">Le province del Lazio</h3>
+            <div className="space-y-2">
+              {l.lazio.map((p) => (
+                <div key={p.provincia} className={`rounded-xl p-3 ${p.provincia === 'Latina' ? 'bg-accent/10' : 'bg-gray-50'}`}>
+                  <div className="flex items-center justify-between text-sm mb-1">
+                    <span className="font-semibold text-primary">{p.provincia}</span>
+                    <span className="font-bold text-primary tabular-nums">{fmtEuro(p.media)} €</span>
+                  </div>
+                  <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-full gradient-primary rounded-full" style={{ width: `${(p.media / massimo) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="font-bold text-primary mb-3">Latina, per età di chi assicura</h3>
+            <div className="space-y-2">
+              {l.perEta.map((e) => (
+                <div key={e.classe} className="flex items-center justify-between bg-gray-50 rounded-xl p-3 text-sm">
+                  <span className="text-gray-600">{e.classe}</span>
+                  <span className="font-bold text-primary tabular-nums">{fmtEuro(e.media)} €</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 mt-3">
+              Sono medie: a parità di età contano classe di merito, veicolo, comune e garanzie.{' '}
+              <a href={l.url} className="text-accent underline" target="_blank" rel="noopener noreferrer">Tavole IVASS</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
