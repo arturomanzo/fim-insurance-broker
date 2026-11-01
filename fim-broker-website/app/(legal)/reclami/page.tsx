@@ -75,7 +75,7 @@ export default function ReclamiPage() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Header */}
           <Card padding="lg">
-            <p className="text-accent text-sm font-semibold tracking-wider uppercase mb-2">Trasparenza · Reg. IVASS 40/2018 · DM MIMIT 215/2024</p>
+            <p className="text-accent-cta text-sm font-semibold tracking-wider uppercase mb-2">Trasparenza · Reg. IVASS 40/2018 · DM MIMIT 215/2024</p>
             <h1 className="text-3xl md:text-4xl font-black text-primary mb-3">Reclami e Arbitro Assicurativo</h1>
             <p className="text-gray-600 leading-relaxed">
               Se ritieni di aver subito un disservizio da parte di FIM Insurance Broker o di una delle compagnie
@@ -148,7 +148,7 @@ export default function ReclamiPage() {
             <h2 className="text-2xl font-bold text-primary mb-4">Canali per reclami a FIM Insurance Broker</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="p-4 bg-accent/5 border border-accent/20 rounded-lg">
-                <p className="text-xs uppercase tracking-wider text-accent font-semibold mb-1">PEC (canale preferenziale)</p>
+                <p className="text-xs uppercase tracking-wider text-accent-cta font-semibold mb-1">PEC (canale preferenziale)</p>
                 <a href={`mailto:${PEC_RECLAMI}`} className="text-primary font-medium hover:underline break-all">{PEC_RECLAMI}</a>
               </div>
               <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
@@ -183,7 +183,7 @@ export default function ReclamiPage() {
                   <h3 className="font-semibold text-primary mb-1">{r.title}</h3>
                   <p className="text-sm text-gray-700 mb-1">{r.desc}</p>
                   {r.link && r.linkLabel && (
-                    <a href={r.link} target="_blank" rel="noopener noreferrer" className="text-sm text-accent-dark hover:underline">
+                    <a href={r.link} target="_blank" rel="noopener noreferrer" className="text-sm text-accent-cta hover:underline">
                       {r.linkLabel} ↗
                     </a>
                   )}

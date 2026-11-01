@@ -159,7 +159,7 @@ export default function ProfessionistiPage() {
       {/* Categories */}
       <section className="py-10 bg-white border-b border-gray-100">
         <div className="container-custom">
-          <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6">
+          <p className="text-center text-sm font-semibold text-gray-500 uppercase tracking-widest mb-6">
             Categorie che proteggiamo
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -195,7 +195,7 @@ export default function ProfessionistiPage() {
               <Card key={cov.title} className="flex flex-col">
                 <div className="flex items-start justify-between mb-4">
                   <span className="text-3xl">{cov.icon}</span>
-                  <span className="text-xs font-bold text-accent bg-accent/10 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold text-accent-cta bg-accent/10 px-3 py-1 rounded-full">
                     {cov.price}
                   </span>
                 </div>
@@ -204,7 +204,7 @@ export default function ProfessionistiPage() {
               </Card>
             ))}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p className="text-center text-xs text-gray-500 mt-6">
             {notaPremio('categoria professionale, fatturato, massimale scelto e storico sinistri')}
           </p>
         </div>
@@ -249,7 +249,7 @@ export default function ProfessionistiPage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
                 Il vantaggio FIM
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">

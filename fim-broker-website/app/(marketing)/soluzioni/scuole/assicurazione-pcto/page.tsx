@@ -170,7 +170,7 @@ export default function AssicurazionePctoPage() {
             {chiCopre.map((c) => (
               <Card key={c.titolo}>
                 <h3 className="font-bold text-primary mb-1">{c.titolo}</h3>
-                <p className="text-xs font-semibold text-accent mb-3">{c.chi}</p>
+                <p className="text-xs font-semibold text-accent-cta mb-3">{c.chi}</p>
                 <p className="text-gray-600 text-sm leading-relaxed">{c.testo}</p>
               </Card>
             ))}

@@ -253,7 +253,7 @@ export default function PolicyAnalyzer() {
         <div className="w-64 bg-gray-200 rounded-full h-2">
           <div className="bg-accent h-2 rounded-full animate-pulse" style={{ width: '70%' }}></div>
         </div>
-        <p className="text-xs text-gray-400 max-w-xs">
+        <p className="text-xs text-gray-500 max-w-xs">
           Il nostro agente AI sta leggendo ogni clausola della tua polizza. Ci vogliono circa 30 secondi.
         </p>
       </div>
@@ -519,8 +519,8 @@ export default function PolicyAnalyzer() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
               <p className="text-gray-700 font-medium mb-1">Trascina qui il PDF della polizza</p>
-              <p className="text-gray-400 text-sm">oppure clicca per selezionare il file</p>
-              <p className="text-gray-400 text-xs mt-2">PDF · max 3 MB</p>
+              <p className="text-gray-500 text-sm">oppure clicca per selezionare il file</p>
+              <p className="text-gray-500 text-xs mt-2">PDF · max 3 MB</p>
             </div>
           )}
         </div>
@@ -583,7 +583,7 @@ export default function PolicyAnalyzer() {
         Analizza la mia polizza gratis
       </Button>
 
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-gray-500 text-center">
         Il documento viene analizzato e poi scartato. Non viene salvato sui nostri server.
       </p>
     </form>

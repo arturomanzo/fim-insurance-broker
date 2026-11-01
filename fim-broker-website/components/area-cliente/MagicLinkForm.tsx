@@ -48,7 +48,7 @@ export default function MagicLinkForm({ nextPath }: Props) {
           Controlla la tua casella <strong>{email}</strong>.<br />
           Il link è valido per <strong>1 ora</strong>.
         </p>
-        <p className="text-gray-400 text-xs mt-4">
+        <p className="text-gray-500 text-xs mt-4">
           Non trovi l&apos;email? Controlla lo spam o{' '}
           <button
             onClick={() => setStatus('idle')}
@@ -87,7 +87,7 @@ export default function MagicLinkForm({ nextPath }: Props) {
       >
         {status === 'loading' ? 'Invio in corso…' : 'Invia link di accesso'}
       </button>
-      <p className="text-center text-xs text-gray-400">
+      <p className="text-center text-xs text-gray-500">
         Riceverai un link sicuro valido 1 ora — nessuna password richiesta
       </p>
     </form>

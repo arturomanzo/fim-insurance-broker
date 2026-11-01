@@ -359,7 +359,7 @@ export default function TrasparenzaPage() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Header */}
           <Card padding="lg">
-            <p className="text-accent text-sm font-semibold tracking-wider uppercase mb-2">
+            <p className="text-accent-cta text-sm font-semibold tracking-wider uppercase mb-2">
               Trasparenza · {NORMATIVA_LABEL}
             </p>
             <h1 className="text-3xl md:text-4xl font-black text-primary mb-3">
@@ -396,7 +396,7 @@ export default function TrasparenzaPage() {
             <div className="space-y-8">
               {SEZIONI_MUP.map((s) => (
                 <div key={s.n}>
-                  <p className="text-xs uppercase tracking-wider text-accent font-semibold mb-1">{s.n}</p>
+                  <p className="text-xs uppercase tracking-wider text-accent-cta font-semibold mb-1">{s.n}</p>
                   <h3 className="text-lg font-semibold text-primary mb-3">{s.title}</h3>
                   <div className="prose-fim text-sm text-gray-700 space-y-2">{s.body}</div>
                 </div>

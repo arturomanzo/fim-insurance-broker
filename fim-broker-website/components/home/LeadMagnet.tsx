@@ -56,7 +56,7 @@ export default function LeadMagnet() {
 
           {/* Left: offer */}
           <div className="text-white">
-            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-accent">
+            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-accent-light">
               📋 Guida gratuita — Scarica ora
             </div>
             <h2 className="text-3xl md:text-4xl font-black mb-5 leading-tight">
@@ -192,7 +192,7 @@ export default function LeadMagnet() {
                     )}
                   </button>
 
-                  <p className="text-center text-xs text-gray-400 leading-relaxed">
+                  <p className="text-center text-xs text-gray-500 leading-relaxed">
                     Inviando accetti la nostra{' '}
                     <Link href="/privacy-policy" className="underline hover:text-gray-600">
                       Privacy Policy

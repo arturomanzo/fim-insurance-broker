@@ -119,10 +119,10 @@ export default function AnalizzaPolizzaPage() {
                   {item.icon}
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-accent uppercase tracking-wide mb-1">
+                  <p className="text-xs font-bold text-accent-cta uppercase tracking-wide mb-1">
                     Step {item.step}
                   </p>
-                  <h3 className="font-bold text-gray-800 mb-1">{item.title}</h3>
+                  <h2 className="font-bold text-gray-800 mb-1">{item.title}</h2>
                   <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </div>

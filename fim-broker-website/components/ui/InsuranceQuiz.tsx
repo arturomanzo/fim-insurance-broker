@@ -223,7 +223,7 @@ export default function InsuranceQuiz() {
           </button>
         </div>
 
-        <p className="text-xs text-gray-400 text-center mt-4">
+        <p className="text-xs text-gray-500 text-center mt-4">
           Risultato indicativo — un consulente FIM verificherà la tua situazione specifica gratuitamente.
         </p>
       </div>
@@ -234,7 +234,7 @@ export default function InsuranceQuiz() {
     <div>
       {/* Progress */}
       <div className="mb-6">
-        <div className="flex justify-between text-xs text-gray-400 mb-2">
+        <div className="flex justify-between text-xs text-gray-500 mb-2">
           <span>Domanda {currentStep + 1} di {steps.length}</span>
           <span>{Math.round(progress)}% completato</span>
         </div>
@@ -275,7 +275,7 @@ export default function InsuranceQuiz() {
       {currentStep > 0 && (
         <button
           onClick={() => setCurrentStep((s) => s - 1)}
-          className="mt-6 text-sm text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1"
+          className="mt-6 text-sm text-gray-500 hover:text-gray-600 transition-colors flex items-center gap-1"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

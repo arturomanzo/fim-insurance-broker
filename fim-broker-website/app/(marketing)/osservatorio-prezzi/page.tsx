@@ -100,7 +100,7 @@ export default function OsservatorioPrezziPage() {
               È una media sui contratti delle autovetture rilevati da IVASS. Il tuo premio dipende da classe di merito, età, zona, veicolo e
               garanzie scelte, e può stare parecchio sopra o sotto. Se vuoi sapere dove sta il tuo, mandaci la polizza
               in corso.{' '}
-              <a href={r.url} className="text-accent font-semibold underline" target="_blank" rel="noopener noreferrer">
+              <a href={r.url} className="text-accent-cta font-semibold underline" target="_blank" rel="noopener noreferrer">
                 Leggi il report IVASS
               </a>
               .
@@ -138,7 +138,7 @@ export default function OsservatorioPrezziPage() {
                     </div>
                   ))}
                 </div>
-                <Link href={ramo.href} className="text-accent font-semibold text-sm underline">
+                <Link href={ramo.href} className="text-accent-cta font-semibold text-sm underline">
                   Vai alla pagina →
                 </Link>
               </div>
@@ -163,7 +163,7 @@ export default function OsservatorioPrezziPage() {
             </p>
             <p className="text-gray-600 text-sm leading-relaxed mt-3">
               Per un numero che vale per te, il preventivo è gratuito:{' '}
-              <Link href="/preventivo" className="text-accent font-semibold underline">richiedilo qui</Link>.
+              <Link href="/preventivo" className="text-accent-cta font-semibold underline">richiedilo qui</Link>.
             </p>
           </div>
         </div>
@@ -241,7 +241,7 @@ function LatinaSezione() {
             </div>
             <p className="text-xs text-gray-500 mt-3">
               Sono medie: a parità di età contano classe di merito, veicolo, comune e garanzie.{' '}
-              <a href={l.url} className="text-accent underline" target="_blank" rel="noopener noreferrer">Tavole IVASS</a>.
+              <a href={l.url} className="text-accent-cta underline" target="_blank" rel="noopener noreferrer">Tavole IVASS</a>.
             </p>
           </div>
         </div>

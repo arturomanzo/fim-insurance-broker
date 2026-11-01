@@ -61,7 +61,7 @@ export default async function AdminLeadsPage() {
       {leads.length === 0 ? (
         <div className="bg-gray-50 border border-gray-200 rounded-2xl p-10 text-center">
           <p className="font-semibold text-gray-500">Nessuna richiesta di preventivo ancora ricevuta.</p>
-          <p className="text-sm text-gray-400 mt-1">Apparirà qui ogni volta che un utente compila il form sul sito.</p>
+          <p className="text-sm text-gray-500 mt-1">Apparirà qui ogni volta che un utente compila il form sul sito.</p>
         </div>
       ) : (
         <LeadsTable leads={leads} statoColors={STATO_COLORS} />

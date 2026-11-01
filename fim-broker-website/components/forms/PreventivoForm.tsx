@@ -218,7 +218,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <Link href="/prenota-consulenza" className="btn-secondary">Prenota una slot</Link>
         </div>
         <button onClick={() => { setStatus('idle'); setStep(1); setProfile(null); setCopertura(''); setNome(''); setCognome(''); setEmail(''); setTelefono(''); setTarga('') }}
-          className="mt-6 text-sm text-gray-400 hover:text-gray-600 transition-colors">
+          className="mt-6 text-sm text-gray-500 hover:text-gray-600 transition-colors">
           ↺ Invia un&apos;altra richiesta
         </button>
       </div>
@@ -238,7 +238,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
                 </svg>
               ) : s}
             </div>
-            <span className={`text-xs font-medium hidden sm:block ${step === s ? 'text-primary' : step > s ? 'text-accent' : 'text-gray-400'}`}>
+            <span className={`text-xs font-medium hidden sm:block ${step === s ? 'text-primary' : step > s ? 'text-accent-cta' : 'text-gray-500'}`}>
               {['Profilo', 'Copertura', 'Dati'][i]}
             </span>
             {i < 2 && <div className={`flex-1 h-0.5 mx-1 rounded ${step > s ? 'bg-accent' : 'bg-gray-200'}`} />}
@@ -257,7 +257,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
                 className="group text-left p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition-all duration-200">
                 <div className="text-2xl mb-2">{p.emoji}</div>
                 <div className="font-bold text-primary text-sm mb-0.5 group-hover:text-primary-light">{p.label}</div>
-                <div className="text-gray-400 text-xs">{p.desc}</div>
+                <div className="text-gray-500 text-xs">{p.desc}</div>
               </button>
             ))}
           </div>
@@ -267,7 +267,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
       {/* Step 2 — Copertura */}
       {step === 2 && profile && (
         <div className="animate-fade-in">
-          <button onClick={() => setStep(1)} className="flex items-center gap-1 text-sm text-gray-400 hover:text-primary mb-5 transition-colors">
+          <button onClick={() => setStep(1)} className="flex items-center gap-1 text-sm text-gray-500 hover:text-primary mb-5 transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -305,7 +305,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
             <input type="text" name="website" value={website} onChange={(e) => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" />
           </div>
-          <button type="button" onClick={() => setStep(2)} className="flex items-center gap-1 text-sm text-gray-400 hover:text-primary mb-5 transition-colors">
+          <button type="button" onClick={() => setStep(2)} className="flex items-center gap-1 text-sm text-gray-500 hover:text-primary mb-5 transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -350,7 +350,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
                 <input type="text" value={targa}
                   onChange={(e) => setTarga(e.target.value.toUpperCase())}
                   placeholder="AB123CD" className="input-field uppercase" maxLength={15} autoComplete="off" />
-                <p className="text-xs text-gray-400 mt-1">Indicandola ora ci permetti di preparare il preventivo più velocemente.</p>
+                <p className="text-xs text-gray-500 mt-1">Indicandola ora ci permetti di preparare il preventivo più velocemente.</p>
               </div>
             )}
             <div>
@@ -373,7 +373,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
             <Button type="submit" loading={status === 'loading'} size="lg" className="w-full">
               {status === 'loading' ? 'Invio in corso...' : 'Richiedi Preventivo Gratuito'}
             </Button>
-            <p className="text-center text-xs text-gray-400">Ricontatto {RICONTATTO} · Nessun impegno</p>
+            <p className="text-center text-xs text-gray-500">Ricontatto {RICONTATTO} · Nessun impegno</p>
           </div>
         </form>
       )}

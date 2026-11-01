@@ -325,7 +325,7 @@ export default function RiskCalculator() {
                         </svg>
                       ) : s}
                     </div>
-                    <span className={`text-xs font-medium hidden sm:block ${active ? 'text-primary' : done ? 'text-accent' : 'text-gray-400'}`}>{label}</span>
+                    <span className={`text-xs font-medium hidden sm:block ${active ? 'text-primary' : done ? 'text-accent-cta' : 'text-gray-500'}`}>{label}</span>
                     {i < 3 && <div className={`flex-1 h-0.5 mx-2 rounded ${done ? 'bg-accent' : 'bg-gray-200'}`} />}
                   </div>
                 </div>
@@ -512,7 +512,7 @@ export default function RiskCalculator() {
                 'Visualizza la mia analisi del rischio →'
               )}
             </button>
-            <p className="text-xs text-gray-400 text-center">Nessun impegno. La consulenza iniziale è sempre gratuita.</p>
+            <p className="text-xs text-gray-500 text-center">Nessun impegno. La consulenza iniziale è sempre gratuita.</p>
           </form>
         </div>
       )}
@@ -521,7 +521,7 @@ export default function RiskCalculator() {
       {step === 5 && result && (
         <div className="animate-fade-in">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+            <div className="inline-flex items-center gap-2 bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
               Analisi completata per {form.nome}
             </div>
             <h2 className="text-2xl font-black text-primary mb-2">Il tuo profilo di rischio</h2>
@@ -597,7 +597,7 @@ export default function RiskCalculator() {
               Prenota consulenza
             </Link>
           </div>
-          <p className="text-center text-xs text-gray-400 mt-4">
+          <p className="text-center text-xs text-gray-500 mt-4">
             Un consulente FIM analizzerà il tuo profilo e ti presenterà le offerte delle compagnie con cui lavoriamo. Nessun impegno.
           </p>
 

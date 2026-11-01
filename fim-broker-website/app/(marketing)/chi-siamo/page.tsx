@@ -212,7 +212,7 @@ export default function ChiSiamoPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-14">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Il nostro team
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -241,7 +241,7 @@ export default function ChiSiamoPage() {
                   {/* Name overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                     <div className="font-black text-lg leading-tight">{member.name}</div>
-                    <div className="text-accent text-sm font-semibold">{member.role}</div>
+                    <div className="text-accent-cta text-sm font-semibold">{member.role}</div>
                   </div>
                 </div>
                 {/* Bio */}
@@ -338,7 +338,7 @@ export default function ChiSiamoPage() {
             {certifications.map((cert) => (
               <Card key={cert.title} className="text-center">
                 <div className="text-4xl mb-4">{cert.icon}</div>
-                <span className="inline-block bg-accent/10 text-accent text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">
+                <span className="inline-block bg-accent/10 text-accent-cta text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">
                   {cert.badge}
                 </span>
                 <h3 className="font-bold text-primary mb-2">{cert.title}</h3>
@@ -356,7 +356,7 @@ export default function ChiSiamoPage() {
                   href="https://www.ivass.it/consumatori/rui/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent underline underline-offset-2 hover:text-primary transition-colors"
+                  className="text-accent-cta underline underline-offset-2 hover:text-primary transition-colors"
                 >
                   ivass.it/consumatori/rui
                 </a>

@@ -137,7 +137,7 @@ export default function ContattiPage() {
                   <p className="text-gray-600 text-sm mb-2">{channel.desc}</p>
                   <a
                     href={`mailto:${channel.email}`}
-                    className="text-accent-dark font-semibold text-sm hover:underline break-all"
+                    className="text-accent-cta font-semibold text-sm hover:underline break-all"
                   >
                     {channel.email}
                   </a>

@@ -60,8 +60,8 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-lg
-           hover:bg-accent-dark transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent-cta text-white font-semibold rounded-lg
+           hover:bg-accent-cta-hover transition-all duration-200 shadow-sm hover:shadow-md;
   }
 
   .btn-secondary {

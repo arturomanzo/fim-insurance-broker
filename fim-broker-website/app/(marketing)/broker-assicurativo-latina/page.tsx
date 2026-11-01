@@ -101,7 +101,7 @@ export default function BrokerLatina() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-14">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               I nostri servizi
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -131,7 +131,7 @@ export default function BrokerLatina() {
       <section className="py-10 bg-primary/5 border-y border-primary/10">
         <div className="container-custom flex flex-col md:flex-row md:items-center md:justify-between gap-5">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold text-accent uppercase tracking-widest mb-1">Dipartimento Scuole</p>
+            <p className="text-xs font-bold text-accent-cta uppercase tracking-widest mb-1">Dipartimento Scuole</p>
             <h2 className="text-xl md:text-2xl font-black text-primary mb-1">Istituti scolastici di {CITY} e provincia</h2>
             <p className="text-gray-600 text-sm leading-relaxed">
               Check-up gratuito delle polizze in essere, capitolato tecnico e confronto delle offerte.

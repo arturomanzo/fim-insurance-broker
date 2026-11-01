@@ -181,7 +181,7 @@ export default function CatastrofiNaturaliPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Le nostre soluzioni
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -192,14 +192,14 @@ export default function CatastrofiNaturaliPage() {
             {products.map((p) => (
               <Card key={p.title} className={`flex flex-col relative ${p.urgent ? 'border-2 border-red-200' : ''}`}>
                 {p.urgent && (
-                  <div className="absolute -top-3 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                  <div className="absolute -top-3 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                     OBBLIGO 2025
                   </div>
                 )}
                 <div className="flex items-start justify-between mb-4 mt-2">
                   <span className="text-3xl">{p.icon}</span>
                   <div className="text-right">
-                    <span className="text-xs font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-full block">
+                    <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full block">
                       {p.price}
                     </span>
                   </div>
@@ -213,7 +213,7 @@ export default function CatastrofiNaturaliPage() {
               </Card>
             ))}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p className="text-center text-xs text-gray-500 mt-6">
             {notaPremio('zona, tipo di immobile, valori assicurati e rischio specifico')}
           </p>
         </div>

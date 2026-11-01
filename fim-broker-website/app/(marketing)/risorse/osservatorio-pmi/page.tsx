@@ -158,7 +158,7 @@ export default function OsservatorioPmiPage() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-gray-400 text-xs mt-3">
+              <p className="text-gray-500 text-xs mt-3">
                 La catastrofale non è in tabella perché l&apos;obbligo vale in ogni settore, con la sola eccezione delle imprese agricole: ne parliamo più sotto.
               </p>
             </div>

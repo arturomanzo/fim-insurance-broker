@@ -47,7 +47,7 @@ export default async function AdminSinistriPage() {
       {sinistri.length === 0 ? (
         <div className="bg-gray-50 border border-gray-200 rounded-2xl p-10 text-center">
           <p className="font-semibold text-gray-500">Nessuna pratica sinistro ancora ricevuta.</p>
-          <p className="text-sm text-gray-400 mt-1">Apparirà qui ogni volta che un utente apre una pratica sinistro dal sito.</p>
+          <p className="text-sm text-gray-500 mt-1">Apparirà qui ogni volta che un utente apre una pratica sinistro dal sito.</p>
         </div>
       ) : (
         <SinistriTable sinistri={sinistri} statoColors={STATO_COLORS} />
