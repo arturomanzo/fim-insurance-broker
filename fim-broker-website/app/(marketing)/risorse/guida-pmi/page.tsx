@@ -80,9 +80,9 @@ export default function GuidaPmiPage() {
               sulle assicurazioni — spiegato in modo chiaro, senza gergo tecnico.
             </p>
             <div className="flex flex-wrap gap-4 text-white/70 text-sm">
-              <span>✓ Prezzi indicativi inclusi</span>
+              <span>✓ Cosa fa variare il premio</span>
               <span>✓ Normativa italiana</span>
-              <span>✓ Checklist scaricabile</span>
+              <span>✓ Checklist dei rischi</span>
             </div>
           </div>
         </div>
