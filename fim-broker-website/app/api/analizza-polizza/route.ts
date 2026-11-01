@@ -3,6 +3,9 @@ import Anthropic from '@anthropic-ai/sdk'
 import type { BetaRequestDocumentBlock } from '@anthropic-ai/sdk/resources/beta/messages/messages'
 import { AI_MODELS, FALLBACK_BETA } from '@/lib/ai-models'
 import { rateLimit } from '@/lib/rateLimit'
+import { inviaLead } from '@/lib/codaLead'
+import { pulisciCampagna } from '@/lib/campagna'
+import { riepilogoAnalisi, tipoLeadAnalisi, type ReportPerLead } from '@/lib/analisiPolizza'
 
 export const runtime = 'nodejs'
 // Opus 5 con il thinking acceso impiega ~60s su un PDF di poche pagine: col
@@ -125,7 +128,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json()
-    const { nome, email, pdfBase64, website } = body
+    const { nome, email, pdfBase64, website, campagna } = body
 
     // Honeypot
     if (website) {
@@ -207,7 +210,7 @@ Note:
       `[analizza-polizza] in=${message.usage.input_tokens} out=${message.usage.output_tokens}`,
     )
 
-    const analysisData = JSON.parse(content.text) as {
+    const analysisData = JSON.parse(content.text) as ReportPerLead & {
       valutazioneGlobale: { punteggio: number }
     }
     // Il punteggio finisce in una barra da 1 a 10: fuori scala la romperebbe.
@@ -215,6 +218,22 @@ Note:
     if (typeof p === 'number') {
       analysisData.valutazioneGlobale.punteggio = Math.max(1, Math.min(10, Math.round(p)))
     }
+
+    // Il lead va nel gestionale come quelli degli altri moduli (lib/codaLead.ts:
+    // se il gestionale non risponde finisce in coda). Solo dopo un'analisi
+    // riuscita: un errore fa riprovare il visitatore e creerebbe doppioni.
+    // inviaLead non lancia mai, quindi il report arriva comunque.
+    const [primoNome, ...restoNome] = nomeSafe.split(/\s+/)
+    await inviaLead({
+      lead_id: `ANALISI-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      nome: primoNome,
+      cognome: restoNome.join(' ') || undefined,
+      email: emailSafe,
+      tipo: tipoLeadAnalisi(analysisData),
+      messaggio: riepilogoAnalisi(analysisData),
+      referrer: 'analizza-polizza',
+      campagna: pulisciCampagna(campagna),
+    }, 'analizza-polizza')
 
     return NextResponse.json({ success: true, analysis: analysisData, nome: nomeSafe })
   } catch (error) {

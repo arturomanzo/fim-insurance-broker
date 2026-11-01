@@ -176,14 +176,14 @@ export default function SecondaOpinionePage() {
                   <th className="text-left p-3 font-semibold text-gray-600 border border-gray-200"></th>
                   <th className="text-center p-3 font-semibold text-primary border border-gray-200">Second Opinion</th>
                   <th className="text-center p-3 font-semibold text-gray-600 border border-gray-200">
-                    <a href="/analizza-polizza" className="hover:underline">Analisi AI istantanea</a>
+                    <a href="/analizza-polizza" className="hover:underline">Analisi AI in circa un minuto</a>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {[
                   ['Chi analizza', 'Consulente umano FIM', 'Intelligenza artificiale'],
-                  ['Tempi', `Ricontatto ${RICONTATTO}`, '30 secondi'],
+                  ['Tempi', `Ricontatto ${RICONTATTO}`, 'Circa un minuto'],
                   ['N° polizze', 'Tutte le tue polizze insieme', '1 polizza alla volta'],
                   ['Output', 'Gap Analysis + chiamata', 'Report sullo schermo'],
                   ['Target ideale', 'PMI, professionisti, portafoglio complesso', 'Tutti (anche privati)'],
