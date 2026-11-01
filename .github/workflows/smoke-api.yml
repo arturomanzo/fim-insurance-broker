@@ -1,0 +1,29 @@
+name: Prova di vita dei moduli
+
+# Ogni mattina manda una richiesta vuota a ogni rotta dei moduli del sito e
+# controlla che risponda con la propria validazione (400). Nato il 01/11/2026:
+# la seconda opinione rispondeva 415 a tutti da almeno due mesi e nessuno se
+# n'era accorto. Una richiesta vuota non manda mail e non crea lead.
+# Se il job diventa rosso, GitHub manda la mail.
+
+on:
+  schedule:
+    # 06:37 UTC, prima che apra l'ufficio
+    - cron: '37 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    name: Rotte dei moduli su www.fimbroker.it
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Prova le rotte
+        run: node fim-broker-website/scripts/smoke-api.mjs https://www.fimbroker.it
