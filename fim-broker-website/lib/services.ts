@@ -1,4 +1,5 @@
 import { OBBLIGO_CATASTROFALE } from '@/lib/catastrofale'
+import { ivassLatina, ivassRcAuto } from '@/lib/osservatorio-data'
 
 export interface Coverage {
   /** Cosa la polizza copre tipicamente. Lista concisa, snippet-friendly. */
@@ -77,8 +78,12 @@ export const services: Service[] = [
         answer: 'La Kasko copre i danni al tuo veicolo indipendentemente da chi ha causato il sinistro: incidenti colpa tua, grandine, atti vandalici e danni in sosta. Conviene su auto nuove o di valore superiore a 15.000€, o se percorri molti km/anno.',
       },
       {
+        question: 'Quanto costa in media la RC auto?',
+        answer: `Secondo l'indagine IPER di IVASS sul ${ivassRcAuto.periodo}, il prezzo medio della RC auto delle autovetture in Italia è ${ivassRcAuto.prezzoMedio} euro; in provincia di Latina è ${ivassLatina.media.toLocaleString('it-IT')} euro. Sono medie: il tuo premio dipende da classe di merito, età, zona, veicolo e garanzie. I dati completi sono nell'Osservatorio Prezzi.`,
+      },
+      {
         question: 'Posso cambiare assicurazione auto a metà anno?',
-        answer: 'Sì. Dopo il primo anno puoi disdire la polizza con 15 giorni di preavviso rispetto alla scadenza oppure aspettare la scadenza annuale. In alcuni casi la legge ti consente il recesso anticipato (es. vendita del veicolo, sinistro con liquidazione parziale).',
+        answer: "Di norma il cambio si fa alla scadenza, perché il contratto RC auto è annuale. Alla scadenza non serve la disdetta: per l'art. 170-bis del Codice delle Assicurazioni il contratto si chiude da solo, non si rinnova in modo tacito, e la compagnia ti tiene coperto fino a 15 giorni dopo, in attesa della nuova polizza. Prima della scadenza il contratto si può chiudere in casi come la vendita, la demolizione o il furto del veicolo, alle condizioni scritte in polizza.",
       },
       {
         question: 'Come funziona la classe di merito bonus/malus?',
