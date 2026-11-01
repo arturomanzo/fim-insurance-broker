@@ -67,7 +67,7 @@ function SlotUploader({
     <div>
       <label className="block text-sm font-semibold text-primary mb-1">
         {slot.label}
-        {slot.required ? <span className="text-red-500"> *</span> : <span className="text-gray-400 font-normal"> (opzionale)</span>}
+        {slot.required ? <span className="text-red-500"> *</span> : <span className="text-gray-500 font-normal"> (opzionale)</span>}
       </label>
 
       {file ? (
@@ -111,6 +111,7 @@ function SlotUploader({
         ref={inputRef}
         type="file"
         accept={DOC_ACCEPT}
+        aria-label={`Carica ${slot.hint}`}
         className="sr-only"
         onChange={(e) => onSelect(slot.key, e.target.files?.[0])}
       />

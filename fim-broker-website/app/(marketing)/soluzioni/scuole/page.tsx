@@ -265,7 +265,7 @@ export default function ScuolePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {figure.map((f) => (
               <Card key={f.ruolo} padding="lg" className="h-full">
-                <p className="text-xs font-bold text-accent uppercase tracking-widest mb-2">{f.ruolo}</p>
+                <p className="text-xs font-bold text-accent-cta uppercase tracking-widest mb-2">{f.ruolo}</p>
                 <h3 className="text-xl font-black text-primary mb-3">{f.titolo}</h3>
                 <p className="text-gray-600 leading-relaxed">{f.testo}</p>
               </Card>
@@ -299,7 +299,7 @@ export default function ScuolePage() {
             ))}
           </div>
           <div className="mt-8 bg-primary/5 border border-primary/10 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto">
-            <p className="text-xs font-bold text-accent uppercase tracking-widest mb-2">Un chiarimento che fa risparmiare discussioni</p>
+            <p className="text-xs font-bold text-accent-cta uppercase tracking-widest mb-2">Un chiarimento che fa risparmiare discussioni</p>
             <p className="text-gray-700 leading-relaxed">
               L&apos;edificio scolastico appartiene all&apos;ente locale: il Comune per infanzia, primaria e secondaria di
               primo grado, la Provincia o la Città metropolitana per la secondaria di secondo grado. L&apos;istituto non
@@ -372,7 +372,7 @@ export default function ScuolePage() {
                     </span>
                     <div>
                       <h3 className="font-bold text-primary">{p.titolo}</h3>
-                      <p className="text-xs font-semibold text-accent mb-1">{p.chi}</p>
+                      <p className="text-xs font-semibold text-accent-cta mb-1">{p.chi}</p>
                       <p className="text-gray-600 text-sm leading-relaxed">{p.testo}</p>
                     </div>
                   </li>
@@ -423,14 +423,14 @@ export default function ScuolePage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div>
-              <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
                 Che cosa consegniamo
               </span>
               <h2 className="text-3xl font-black text-primary mb-6">Documenti scritti, non pareri a voce</h2>
               <ul className="space-y-3 mb-8">
                 {consegne.map((c) => (
                   <li key={c} className="flex items-start gap-3 text-gray-700">
-                    <span className="w-6 h-6 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                    <span className="w-6 h-6 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
                     <span className="leading-relaxed">{c}</span>
                   </li>
                 ))}
@@ -484,7 +484,7 @@ export default function ScuolePage() {
               <div className="space-y-4">
                 {calendario.map((c) => (
                   <Card key={c.quando} className="flex items-start gap-4">
-                    <span className="text-sm font-black text-accent w-36 flex-shrink-0 leading-snug">{c.quando}</span>
+                    <span className="text-sm font-black text-accent-cta w-36 flex-shrink-0 leading-snug">{c.quando}</span>
                     <p className="text-gray-600 text-sm leading-relaxed">{c.cosa}</p>
                   </Card>
                 ))}
@@ -505,7 +505,7 @@ export default function ScuolePage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
             <div className="lg:col-span-2">
-              <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
                 Check-up gratuito
               </span>
               <h2 className="text-3xl font-black text-primary mb-4">Mandateci le polizze, ve le leggiamo</h2>
@@ -519,7 +519,7 @@ export default function ScuolePage() {
                 <ul className="space-y-2">
                   {documentiCheckup.map((d) => (
                     <li key={d} className="flex items-start gap-3 text-sm text-gray-700">
-                      <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
                       {d}
                     </li>
                   ))}

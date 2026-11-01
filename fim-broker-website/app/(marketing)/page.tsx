@@ -99,7 +99,7 @@ export default function HomePage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Chi siamo
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -128,7 +128,7 @@ export default function HomePage() {
                   'Copertura Viaggi',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
-                    <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+                    <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
                     {item}
                   </li>
                 ))}
@@ -159,7 +159,7 @@ export default function HomePage() {
                   'Welfare aziendale e Salute',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
-                    <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+                    <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
                     {item}
                   </li>
                 ))}
@@ -202,7 +202,7 @@ export default function HomePage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-14">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Il nostro processo
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -264,7 +264,7 @@ export default function HomePage() {
       <section className="py-14 bg-white">
         <div className="container-custom">
           <div className="text-center mb-6">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full">
               Strumenti gratuiti
             </span>
             <h2 className="text-2xl md:text-3xl font-black text-primary mt-3 mb-1">Non sai da dove iniziare?</h2>
@@ -284,7 +284,7 @@ export default function HomePage() {
                 >
                   Inizia il quiz →
                 </Link>
-                <p className="text-white/40 text-xs mt-3">1 minuto · Gratuito · Senza dati personali</p>
+                <p className="text-white/60 text-xs mt-3">1 minuto · Gratuito · Senza dati personali</p>
               </div>
             </div>
             {/* Calcolatore */}
@@ -300,7 +300,7 @@ export default function HomePage() {
                 >
                   Calcola il mio rischio →
                 </Link>
-                <p className="text-white/40 text-xs mt-3">2 minuti · Gratuito · Analisi personalizzata</p>
+                <p className="text-white/60 text-xs mt-3">2 minuti · Gratuito · Analisi personalizzata</p>
               </div>
             </div>
           </div>

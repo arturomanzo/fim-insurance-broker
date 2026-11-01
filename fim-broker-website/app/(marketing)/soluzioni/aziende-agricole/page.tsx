@@ -202,7 +202,7 @@ export default function AziendeAgricolePage() {
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
                   <span className="text-3xl">{cov.icon}</span>
-                  <span className="text-xs font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-full">
+                  <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     su preventivo
                   </span>
                 </div>
@@ -214,7 +214,7 @@ export default function AziendeAgricolePage() {
               </Card>
             ))}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p className="text-center text-xs text-gray-500 mt-6">
             {notaPremio('superficie e tipo di colture, fabbricati e serre, numero di mezzi, addetti, attività connesse e garanzie scelte')}
           </p>
         </div>
@@ -273,7 +273,7 @@ export default function AziendeAgricolePage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Esempio
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
@@ -312,7 +312,7 @@ export default function AziendeAgricolePage() {
                 </p>
               </div>
             </div>
-            <p className="text-xs text-gray-400 mt-6">
+            <p className="text-xs text-gray-500 mt-6">
               Scenario costruito a titolo di esempio: non racconta il caso di un cliente FIM.
             </p>
           </div>

@@ -361,7 +361,7 @@ export default function SinistriAIAssistant() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">N° polizza <span className="text-gray-400 font-normal">(opzionale)</span></label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">N° polizza <span className="text-gray-500 font-normal">(opzionale)</span></label>
             <input
               type="text"
               value={form.numero_polizza}
@@ -371,7 +371,7 @@ export default function SinistriAIAssistant() {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Compagnia <span className="text-gray-400 font-normal">(opzionale)</span></label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Compagnia <span className="text-gray-500 font-normal">(opzionale)</span></label>
             <input
               type="text"
               value={form.compagnia}
@@ -498,7 +498,7 @@ export default function SinistriAIAssistant() {
               setTimeout(() => sendMessage('Vorrei aprire una pratica sinistro'), 50)
             }}
             disabled={!consensoSanitario}
-            className="text-xs text-gray-400 hover:text-primary underline transition-colors disabled:opacity-40 disabled:pointer-events-none"
+            className="text-xs text-gray-500 hover:text-primary underline transition-colors disabled:opacity-40 disabled:pointer-events-none"
           >
             Preferisci descrivere liberamente il tuo sinistro?
           </button>

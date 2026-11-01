@@ -293,7 +293,7 @@ export default function CatastrofaleLatinaPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Esempi
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -308,12 +308,12 @@ export default function CatastrofaleLatinaPage() {
               <Card key={e.title} className="flex flex-col">
                 <span className="text-3xl mb-3 block">{e.icon}</span>
                 <h3 className="font-bold text-primary mb-1">{e.title}</h3>
-                <p className="text-xs font-semibold text-accent mb-3">{e.luogo}</p>
+                <p className="text-xs font-semibold text-accent-cta mb-3">{e.luogo}</p>
                 <p className="text-gray-600 text-sm leading-relaxed flex-1">{e.desc}</p>
               </Card>
             ))}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p className="text-center text-xs text-gray-500 mt-6">
             {notaPremio('indirizzo dei beni, valori da assicurare, eventi scelti, franchigie e limiti di indennizzo')}
           </p>
         </div>

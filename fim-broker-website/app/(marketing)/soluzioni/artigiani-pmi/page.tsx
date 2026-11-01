@@ -217,7 +217,7 @@ export default function ArtigianiPmiPage() {
       {/* Sectors */}
       <section className="py-10 bg-white border-b border-gray-100">
         <div className="container-custom">
-          <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6">
+          <p className="text-center text-sm font-semibold text-gray-500 uppercase tracking-widest mb-6">
             Settori che proteggiamo
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -227,7 +227,7 @@ export default function ArtigianiPmiPage() {
                 {s.name}
               </div>
             ))}
-            <div className="flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-lg px-4 py-2 text-sm font-semibold text-accent">
+            <div className="flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-lg px-4 py-2 text-sm font-semibold text-accent-cta">
               + altri settori
             </div>
           </div>
@@ -288,11 +288,11 @@ export default function ArtigianiPmiPage() {
                 <div className="flex items-start justify-between mb-4">
                   <span className="text-3xl">{cov.icon}</span>
                   <div className="text-right">
-                    <span className="text-xs font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-full block">
+                    <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full block">
                       {cov.price}
                     </span>
                     {cov.mandatory && (
-                      <span className="text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-full block mt-1">
+                      <span className="text-xs font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-full block mt-1">
                         obbligatoria
                       </span>
                     )}
@@ -308,7 +308,7 @@ export default function ArtigianiPmiPage() {
               </Card>
             ))}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p className="text-center text-xs text-gray-500 mt-6">
             {notaPremio('settore di attività, fatturato e valori assicurati')}
           </p>
 
@@ -317,7 +317,7 @@ export default function ArtigianiPmiPage() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full -translate-y-20 translate-x-20" />
             <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
               <div className="lg:col-span-2">
-                <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-3 py-1 text-xs font-bold text-accent mb-4">
+                <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-3 py-1 text-xs font-bold text-accent-light mb-4">
                   <span>⚖️</span>
                   NUOVO SERVIZIO
                 </div>
@@ -368,7 +368,7 @@ export default function ArtigianiPmiPage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
                 Come lavoriamo
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
@@ -410,7 +410,7 @@ export default function ArtigianiPmiPage() {
                 ].map((item) => (
                   <div key={item.name} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-2 text-sm">
-                      <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold">✓</span>
+                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold">✓</span>
                       <span className="text-gray-700">{item.name}</span>
                     </div>
                     <span className="text-xs text-gray-500 text-right">{item.fattore}</span>

@@ -13,7 +13,7 @@ function KpiCard({ label, value, sub, color }: { label: string; value: string | 
     <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
       <div className={`text-2xl font-black mb-1 ${color ?? 'text-primary'}`}>{value}</div>
       <div className="text-sm font-medium text-gray-700">{label}</div>
-      {sub && <div className="text-xs text-gray-400 mt-0.5">{sub}</div>}
+      {sub && <div className="text-xs text-gray-500 mt-0.5">{sub}</div>}
     </div>
   )
 }

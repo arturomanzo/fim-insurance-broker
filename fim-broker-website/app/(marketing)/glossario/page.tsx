@@ -364,7 +364,7 @@ export default function GlossarioPage() {
                       <p className="text-gray-600 text-sm leading-relaxed mb-3">{item.definition}</p>
                       {item.related && item.related.length > 0 && (
                         <div className="flex items-center flex-wrap gap-2">
-                          <span className="text-xs text-gray-400 font-medium">Vedi anche:</span>
+                          <span className="text-xs text-gray-500 font-medium">Vedi anche:</span>
                           {item.related.map((rel) => (
                             <span key={rel} className="text-xs bg-primary/5 text-primary px-2.5 py-1 rounded-full font-medium">
                               {rel}

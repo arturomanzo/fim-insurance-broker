@@ -69,7 +69,7 @@ export default function GuidaPmiPage() {
             <span className="text-white/80">Guida PMI</span>
           </div>
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-accent">
+            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-accent-light">
               📋 Guida gratuita
             </div>
             <h1 className="text-4xl md:text-5xl font-black mb-5 leading-tight">
@@ -94,7 +94,7 @@ export default function GuidaPmiPage() {
           {/* Sidebar — indice */}
           <aside className="lg:col-span-1">
             <div className="sticky top-24 bg-gray-50 rounded-2xl p-6 border border-gray-200">
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Indice</p>
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Indice</p>
               <nav className="space-y-2">
                 {sections.map((s) => (
                   <a
@@ -102,7 +102,7 @@ export default function GuidaPmiPage() {
                     href={`#${s.id}`}
                     className="flex items-start gap-2 text-sm text-gray-600 hover:text-primary transition-colors group"
                   >
-                    <span className="text-accent font-black text-xs mt-0.5 flex-shrink-0">{s.number}</span>
+                    <span className="text-accent-cta font-black text-xs mt-0.5 flex-shrink-0">{s.number}</span>
                     <span className="group-hover:underline leading-tight">{s.title}</span>
                   </a>
                 ))}
@@ -192,10 +192,10 @@ export default function GuidaPmiPage() {
                     <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                       <h3 className={`font-bold text-lg m-0 ${item.urgent ? 'text-red-800' : 'text-primary'}`}>{item.name}</h3>
                       {item.urgent && (
-                        <span className="text-xs font-bold bg-red-500 text-white px-2.5 py-1 rounded-full">OBBLIGO DAL 2025</span>
+                        <span className="text-xs font-bold bg-red-600 text-white px-2.5 py-1 rounded-full">OBBLIGO DAL 2025</span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 mb-2">Riferimento normativo: <code className="bg-gray-100 px-1.5 py-0.5 rounded">{item.law}</code></p>
+                    <p className="text-xs text-gray-600 mb-2">Riferimento normativo: <code className="bg-gray-100 px-1.5 py-0.5 rounded">{item.law}</code></p>
                     <p className="text-xs font-semibold text-gray-600 mb-2">Chi è obbligato: {item.who}</p>
                     <p className="text-sm text-gray-600 leading-relaxed m-0">{item.desc}</p>
                   </div>
@@ -375,7 +375,7 @@ export default function GuidaPmiPage() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-xs text-gray-400 mt-3 not-prose">
+              <p className="text-xs text-gray-500 mt-3 not-prose">
                 Il numero che conta è il preventivo sui tuoi dati reali, con le offerte di più compagnie a confronto.
               </p>
             </section>

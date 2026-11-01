@@ -165,7 +165,7 @@ export default function CookieBanner() {
                   </p>
                 </div>
                 <div className="flex-shrink-0 mt-0.5">
-                  <span className="text-xs font-semibold text-green-600 bg-green-100 px-2.5 py-1 rounded-full">
+                  <span className="text-xs font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">
                     Sempre attivi
                   </span>
                 </div>

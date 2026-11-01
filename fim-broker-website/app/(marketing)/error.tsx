@@ -37,9 +37,9 @@ export default function MarketingError({
             Torna alla Home
           </Link>
         </div>
-        <p className="text-xs text-gray-400 mt-8">
+        <p className="text-xs text-gray-500 mt-8">
           Hai bisogno di aiuto?{' '}
-          <a href="tel:+390696883381" className="text-accent hover:underline">
+          <a href="tel:+390696883381" className="text-accent-cta underline">
             Chiamaci: +39 06 96883381
           </a>
         </p>

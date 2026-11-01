@@ -106,7 +106,7 @@ export default function LeadsTable({ leads, statoColors }: Props) {
       <div className="px-6 py-4 border-b border-gray-50 flex flex-wrap items-center gap-3 justify-between">
         <div className="flex items-center gap-3">
           <h2 className="font-bold text-primary">Richieste ricevute</h2>
-          <span className="text-xs text-gray-400">{leads.length} totali</span>
+          <span className="text-xs text-gray-500">{leads.length} totali</span>
           {altaCount > 0 && (
             <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full border border-red-200">
               {altaCount} ad alta priorità
@@ -185,7 +185,7 @@ export default function LeadsTable({ leads, statoColors }: Props) {
           <tbody className="divide-y divide-gray-50">
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={8} className="px-6 py-8 text-center text-gray-400 text-sm">
+                <td colSpan={8} className="px-6 py-8 text-center text-gray-500 text-sm">
                   Nessun lead con priorità «{filter}».
                 </td>
               </tr>
@@ -226,7 +226,7 @@ export default function LeadsTable({ leads, statoColors }: Props) {
 
                 <td className="px-4 py-3">
                   <div className="font-medium text-gray-800">{lead.nome} {lead.cognome}</div>
-                  {lead.profilo && <div className="text-xs text-gray-400">{lead.profilo}</div>}
+                  {lead.profilo && <div className="text-xs text-gray-500">{lead.profilo}</div>}
                 </td>
 
                 <td className="px-4 py-3">

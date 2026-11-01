@@ -129,7 +129,7 @@ function NavDropdown({ links }: { links: { href: string; label: string; desc: st
                 <span className={clsx('text-sm font-medium', isActive ? 'text-primary' : 'text-gray-700')}>
                   {link.label}
                 </span>
-                <span className="text-xs text-gray-400 mt-0.5">{link.desc}</span>
+                <span className="text-xs text-gray-500 mt-0.5">{link.desc}</span>
               </Link>
             )
           })}

@@ -140,7 +140,7 @@ export default function SecondOpinionForm() {
         <p className="text-gray-600 mb-1">
           Un consulente FIM analizzerà le tue polizze e ti contatterà <strong>{RICONTATTO}</strong>.
         </p>
-        <p className="text-gray-400 text-sm">Controlla anche la casella spam.</p>
+        <p className="text-gray-500 text-sm">Controlla anche la casella spam.</p>
       </div>
     )
   }
@@ -267,7 +267,7 @@ export default function SecondOpinionForm() {
           <p className="text-sm text-gray-500">
             <span className="font-medium text-primary">Clicca per caricare</span> i PDF delle tue polizze
           </p>
-          <p className="text-xs text-gray-400 mt-1">Puoi oscurare i premi prima di inviare — non ci interessa il costo, ma le coperture</p>
+          <p className="text-xs text-gray-500 mt-1">Puoi oscurare i premi prima di inviare — non ci interessa il costo, ma le coperture</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -349,7 +349,7 @@ export default function SecondOpinionForm() {
         Invia richiesta di Second Opinion
       </Button>
 
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-gray-500 text-center">
         Ricontatto {RICONTATTO} · Servizio gratuito e senza impegno
       </p>
     </form>

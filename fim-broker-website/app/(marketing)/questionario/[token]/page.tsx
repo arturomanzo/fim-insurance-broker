@@ -80,7 +80,7 @@ export default async function QuestionarioPage({ params }: PageProps) {
               dichiarazioni={vista.dichiarazioni}
               conferma={vista.stato === 'da_confermare' ? vista.conferma : undefined}
             />
-            <p className="text-xs text-gray-400 mt-8">
+            <p className="text-xs text-gray-500 mt-8">
               FIM Insurance Broker S.a.s. di Manzo Arturo &amp; C. · Via Roma 41, 04012 Cisterna di Latina (LT) ·
               Iscritta al RUI Sezione B N. B000405449 · Soggetta alla vigilanza dell&apos;IVASS (www.ivass.it) ·
               Versione del questionario {vista.versione}

@@ -175,7 +175,7 @@ export default function CollaboraConNoiPage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-14">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Perché FIM
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -218,7 +218,7 @@ export default function CollaboraConNoiPage() {
               <Card key={p.title} hover className="h-full flex flex-col">
                 <div className="text-4xl mb-4">{p.icon}</div>
                 <h3 className="font-black text-primary text-xl mb-1">{p.title}</h3>
-                <span className="inline-block bg-accent/10 text-accent text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide w-fit">
+                <span className="inline-block bg-accent/10 text-accent-cta text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide w-fit">
                   {p.subtitle}
                 </span>
                 <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">{p.desc}</p>
@@ -247,7 +247,7 @@ export default function CollaboraConNoiPage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-14">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Il percorso
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -312,7 +312,7 @@ export default function CollaboraConNoiPage() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
-              <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
                 Candidatura
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">

@@ -174,7 +174,7 @@ export default function SoluzioniPage() {
                 <div className="px-8 pb-8 border-t border-gray-50 pt-5">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs text-gray-500">{sol.priceLabel ?? 'Premio'}</span>
-                    <span className="text-sm font-bold text-accent">{sol.price}</span>
+                    <span className="text-sm font-bold text-accent-cta">{sol.price}</span>
                   </div>
                   <Link
                     href={sol.href}
@@ -189,7 +189,7 @@ export default function SoluzioniPage() {
               </div>
             ))}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p className="text-center text-xs text-gray-500 mt-6">
             * I prezzi indicati sono puramente orientativi e non costituiscono offerta contrattuale ai sensi del D.Lgs. 209/2005 (Codice delle Assicurazioni Private). Il premio effettivo è determinato dalla compagnia assicuratrice in base al profilo del cliente e alle condizioni di polizza. FIM Insurance Broker opera come intermediario assicurativo indipendente iscritto al RUI IVASS.
           </p>
         </div>
@@ -199,7 +199,7 @@ export default function SoluzioniPage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-10">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Landing verticali
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-3">
@@ -230,7 +230,7 @@ export default function SoluzioniPage() {
                   <h3 className="font-bold text-primary group-hover:text-primary-light text-lg">{s.title}</h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">{s.desc}</p>
-                <span className="inline-flex items-center gap-1 text-accent text-sm font-semibold">
+                <span className="inline-flex items-center gap-1 text-accent-cta text-sm font-semibold">
                   Approfondisci
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />

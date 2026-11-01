@@ -138,7 +138,7 @@ export default function CondominiPage() {
       {/* Building types */}
       <section className="py-10 bg-white border-b border-gray-100">
         <div className="container-custom">
-          <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6">
+          <p className="text-center text-sm font-semibold text-gray-500 uppercase tracking-widest mb-6">
             Tipologie di edificio che gestiamo
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -148,7 +148,7 @@ export default function CondominiPage() {
                 {b.name}
               </div>
             ))}
-            <div className="flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-lg px-4 py-2 text-sm font-semibold text-accent">
+            <div className="flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-lg px-4 py-2 text-sm font-semibold text-accent-cta">
               + altri
             </div>
           </div>
@@ -175,13 +175,13 @@ export default function CondominiPage() {
                 <div className="flex items-start justify-between mb-4">
                   <span className="text-3xl">{cov.icon}</span>
                   <div className="text-right space-y-1">
-                    <span className="text-xs font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-full block">
+                    <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full block">
                       {cov.price}
                     </span>
                     {cov.tag && (
                       <span className={`text-xs font-bold px-2.5 py-1 rounded-full block ${
                         cov.tag === 'Da chiedere in assemblea' || cov.tag === 'Consigliata'
-                          ? 'bg-red-100 text-red-600'
+                          ? 'bg-red-100 text-red-700'
                           : cov.tag === 'Base'
                           ? 'bg-blue-100 text-blue-700'
                           : 'bg-gray-100 text-gray-600'
@@ -196,7 +196,7 @@ export default function CondominiPage() {
               </Card>
             ))}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p className="text-center text-xs text-gray-500 mt-6">
             {notaPremio('numero di unità, valori a rischio e zona')}
           </p>
         </div>
@@ -207,7 +207,7 @@ export default function CondominiPage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+              <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
                 Perché scegliere FIM per il condominio
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-primary mb-6">
@@ -248,7 +248,7 @@ export default function CondominiPage() {
                 ].map((item) => (
                   <div key={item.name} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-2 text-sm">
-                      <span className="w-5 h-5 bg-accent/10 text-accent rounded-full flex items-center justify-center text-xs font-bold">✓</span>
+                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold">✓</span>
                       <span className="text-gray-700">{item.name}</span>
                     </div>
                     <span className="text-xs text-gray-500 text-right">{item.fattore}</span>
@@ -260,7 +260,7 @@ export default function CondominiPage() {
                   Quanto costa lo calcoliamo sui dati del vostro edificio, con le offerte di più compagnie a confronto.
                 </p>
               </div>
-              <p className="text-xs text-gray-400 mb-4">Ripartizione millesimale: ogni condomino paga in proporzione alla propria quota</p>
+              <p className="text-xs text-gray-500 mb-4">Ripartizione millesimale: ogni condomino paga in proporzione alla propria quota</p>
               <Link href="/preventivo" className="btn-primary w-full text-center block">
                 Preventivo per il mio condominio
               </Link>

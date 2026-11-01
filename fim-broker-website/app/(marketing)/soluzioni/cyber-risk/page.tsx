@@ -226,7 +226,7 @@ export default function CyberRiskPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Cosa copre la polizza
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -245,7 +245,7 @@ export default function CyberRiskPage() {
                   <div>
                     <h3 className="font-bold text-primary text-base leading-tight">{c.title}</h3>
                     {c.included && (
-                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-green-600 mt-0.5">
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-green-700 mt-0.5">
                         ✓ Inclusa
                       </span>
                     )}
@@ -278,7 +278,7 @@ export default function CyberRiskPage() {
                 ))}
               </div>
               <div className="px-6 py-4 bg-accent/5 border-t border-primary/10">
-                <p className="text-xs text-gray-500 leading-relaxed">
+                <p className="text-xs text-gray-600 leading-relaxed">
                   {notaPremio('fatturato, settore, dati trattati e misure di sicurezza in atto')}
                 </p>
               </div>
@@ -330,7 +330,7 @@ export default function CyberRiskPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Scenari reali
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -343,7 +343,7 @@ export default function CyberRiskPage() {
                 <div className="bg-red-50 border-b border-red-100 px-5 py-4">
                   <span className="text-3xl block mb-2">{s.icon}</span>
                   <h3 className="font-black text-primary text-base leading-tight">{s.title}</h3>
-                  <p className="text-gray-500 text-xs mt-1">{s.context}</p>
+                  <p className="text-gray-600 text-xs mt-1">{s.context}</p>
                 </div>
                 <div className="px-5 py-4 space-y-3">
                   <div>
@@ -351,7 +351,7 @@ export default function CyberRiskPage() {
                     <p className="text-sm text-gray-700">{s.damage}</p>
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-green-600 uppercase tracking-wide mb-1">La polizza copre</p>
+                    <p className="text-xs font-bold text-green-700 uppercase tracking-wide mb-1">La polizza copre</p>
                     <p className="text-sm text-gray-700">{s.covered}</p>
                   </div>
                   <div className="pt-2 border-t border-gray-100">

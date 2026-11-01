@@ -50,7 +50,7 @@ export default function AuthorBox({ author, publishedDate, modifiedDate }: Autho
               {author.name}
             </Link>
           </h3>
-          <p className="text-sm font-semibold text-accent mt-0.5">{author.role}</p>
+          <p className="text-sm font-semibold text-accent-cta mt-0.5">{author.role}</p>
 
           <p className="text-gray-700 text-sm leading-relaxed mt-3">{author.bio}</p>
 

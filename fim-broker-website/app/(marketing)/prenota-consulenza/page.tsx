@@ -153,7 +153,7 @@ export default function PrenotaConsulenzaPage() {
                   </div>
                   <div className="flex justify-between border-t border-gray-200 pt-2 mt-2">
                     <span className="text-gray-500">Sabato – Domenica</span>
-                    <span className="text-gray-400">Chiuso</span>
+                    <span className="text-gray-500">Chiuso</span>
                   </div>
                 </div>
               </div>

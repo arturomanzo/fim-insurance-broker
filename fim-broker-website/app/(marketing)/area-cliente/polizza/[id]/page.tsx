@@ -126,7 +126,7 @@ export default async function PolicyDetailPage({ params }: PageProps) {
           <div className="divide-y divide-gray-50">
             {righe.map((row) => (
               <div key={row.label} className="px-6 py-4 grid grid-cols-5 gap-2">
-                <span className="col-span-2 text-gray-400 text-sm">{row.label}</span>
+                <span className="col-span-2 text-gray-500 text-sm">{row.label}</span>
                 <span className="col-span-3 text-gray-800 text-sm font-medium">{row.value}</span>
               </div>
             ))}
@@ -148,7 +148,7 @@ export default async function PolicyDetailPage({ params }: PageProps) {
                 <li key={doc.id} className="px-6 py-4 flex items-center justify-between gap-4">
                   <div className="min-w-0">
                     <span className="text-sm font-medium text-gray-800 break-words">{doc.nome}</span>
-                    <span className="ml-2 text-xs text-gray-400">{DOC_TYPE_LABELS[doc.tipo] ?? doc.tipo}</span>
+                    <span className="ml-2 text-xs text-gray-500">{DOC_TYPE_LABELS[doc.tipo] ?? doc.tipo}</span>
                   </div>
                   <a
                     href={`/api/area-cliente/documento?id=${doc.id}`}
@@ -164,7 +164,7 @@ export default async function PolicyDetailPage({ params }: PageProps) {
           )}
         </div>
 
-        <p className="text-gray-400 text-xs mb-6">
+        <p className="text-gray-500 text-xs mb-6">
           Fanno fede il contratto e le condizioni di polizza della compagnia. Se un dato qui non ti torna, dicci pure: lo controlliamo insieme.
         </p>
 

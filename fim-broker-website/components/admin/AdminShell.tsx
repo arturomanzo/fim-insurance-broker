@@ -154,7 +154,7 @@ export default function AdminShell({ children, title, backHref }: Props) {
             <h1 className="font-bold text-primary text-base truncate">{title}</h1>
           </div>
 
-          <span className="text-xs text-gray-400 hidden sm:block">Pannello Amministrativo</span>
+          <span className="text-xs text-gray-500 hidden sm:block">Pannello Amministrativo</span>
         </header>
 
         {/* Content */}

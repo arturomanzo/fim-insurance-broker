@@ -187,7 +187,7 @@ export default function SinistriForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">N° polizza <span className="text-gray-400 font-normal">(opzionale)</span></label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">N° polizza <span className="text-gray-500 font-normal">(opzionale)</span></label>
           <input
             type="text"
             value={form.numero_polizza}
@@ -197,7 +197,7 @@ export default function SinistriForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Compagnia assicuratrice <span className="text-gray-400 font-normal">(opzionale)</span></label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Compagnia assicuratrice <span className="text-gray-500 font-normal">(opzionale)</span></label>
           <input
             type="text"
             value={form.compagnia}

@@ -34,7 +34,7 @@ export default function SinistriTable({ sinistri, statoColors }: Props) {
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-gray-50 flex items-center justify-between">
         <h2 className="font-bold text-primary">Pratiche sinistro</h2>
-        <span className="text-xs text-gray-400">{sinistri.length} totali</span>
+        <span className="text-xs text-gray-500">{sinistri.length} totali</span>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
@@ -50,7 +50,7 @@ export default function SinistriTable({ sinistri, statoColors }: Props) {
               <tr key={s.id} className="hover:bg-gray-50/50">
                 <td className="px-4 py-3">
                   <div className="font-mono text-xs text-gray-500">{s.id}</div>
-                  <div className="text-gray-400 text-xs">
+                  <div className="text-gray-500 text-xs">
                     {new Date(s.timestamp).toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })}
                   </div>
                 </td>
@@ -63,7 +63,7 @@ export default function SinistriTable({ sinistri, statoColors }: Props) {
                 </td>
                 <td className="px-4 py-3">
                   <span className="font-semibold text-red-700">{s.tipoSinistro}</span>
-                  {s.compagnia && <div className="text-xs text-gray-400">{s.compagnia}</div>}
+                  {s.compagnia && <div className="text-xs text-gray-500">{s.compagnia}</div>}
                 </td>
                 <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">
                   {new Date(s.dataEvento).toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })}

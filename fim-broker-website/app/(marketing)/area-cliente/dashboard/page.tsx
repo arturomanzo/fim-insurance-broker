@@ -46,23 +46,23 @@ function PolicyCard({ policy }: { policy: PolizzaConStato }) {
 
       <div className="grid grid-cols-2 gap-3 text-sm mb-4">
         <div>
-          <span className="text-gray-400 text-xs uppercase tracking-wide">Decorrenza</span>
+          <span className="text-gray-500 text-xs uppercase tracking-wide">Decorrenza</span>
           <p className="text-gray-700 font-medium">{dataEstesa(policy.decorrenza)}</p>
         </div>
         <div>
-          <span className="text-gray-400 text-xs uppercase tracking-wide">Scadenza</span>
+          <span className="text-gray-500 text-xs uppercase tracking-wide">Scadenza</span>
           <p className={`font-medium ${policy.visibile === 'in-scadenza' ? 'text-orange-600' : 'text-gray-700'}`}>
             {policy.visibile === 'da-aggiornare' ? 'In aggiornamento' : dataEstesa(policy.scadenza)}
           </p>
         </div>
         {frazionamento && (
           <div>
-            <span className="text-gray-400 text-xs uppercase tracking-wide">Pagamento</span>
+            <span className="text-gray-500 text-xs uppercase tracking-wide">Pagamento</span>
             <p className="text-gray-700 font-medium">{frazionamento}</p>
           </div>
         )}
         <div>
-          <span className="text-gray-400 text-xs uppercase tracking-wide">Contraente</span>
+          <span className="text-gray-500 text-xs uppercase tracking-wide">Contraente</span>
           <p className="text-gray-700 font-medium truncate">{policy.contraente || '—'}</p>
         </div>
       </div>
@@ -212,7 +212,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
             <Sezione titolo="Polizze sospese" colore="bg-gray-400" polizze={suspended} />
 
             {policies.length > 0 && (
-              <p className="text-gray-400 text-xs mb-6">
+              <p className="text-gray-500 text-xs mb-6">
                 Qui vedi le polizze che seguiamo direttamente. Se manca qualcosa, o un dato non ti torna, dicci pure: lo controlliamo insieme.
               </p>
             )}

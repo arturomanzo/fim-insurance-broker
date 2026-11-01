@@ -215,7 +215,7 @@ export default function PrenotazioneForm() {
             required
             className="input-field"
           />
-          <p className="text-xs text-gray-400 mt-1">Lun – Ven, giorni lavorativi</p>
+          <p className="text-xs text-gray-500 mt-1">Lun – Ven, giorni lavorativi</p>
         </div>
         <div>
           <label htmlFor="prenota-orario" className="label-field">Orario preferito *</label>

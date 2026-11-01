@@ -46,13 +46,13 @@ export default async function AreaClientePage({ searchParams }: PageProps) {
 
           {/* Info */}
           <div className="mt-6 text-center space-y-2">
-            <p className="text-gray-400 text-xs">
+            <p className="text-gray-500 text-xs">
               Non riesci ad accedere?{' '}
               <a href="tel:+390696883381" className="text-primary underline">
                 Chiamaci al 06 96883381
               </a>
             </p>
-            <p className="text-gray-400 text-xs">
+            <p className="text-gray-500 text-xs">
               L&apos;Area Cliente è disponibile per i clienti FIM con polizze attive.
             </p>
           </div>

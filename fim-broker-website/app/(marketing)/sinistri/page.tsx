@@ -134,7 +134,7 @@ export default function SinistriPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <span className="inline-block bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
+            <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
               Come funziona
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
@@ -153,7 +153,7 @@ export default function SinistriPage() {
                     <div>
                       <h3 className="font-bold text-primary text-lg mb-1">{step.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed mb-2">{step.desc}</p>
-                      <p className="text-xs text-accent font-semibold">{step.detail}</p>
+                      <p className="text-xs text-accent-cta font-semibold">{step.detail}</p>
                     </div>
                   </div>
                 </Card>
