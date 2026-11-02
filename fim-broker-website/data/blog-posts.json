@@ -1,6 +1,48 @@
 {
   "posts": [
     {
+      "slug": "imprese-agricole-rischi-catastrofali-coperture-2026",
+      "title": "Imprese agricole e rischi catastrofali: fuori dall'obbligo, non fuori dal rischio",
+      "excerpt": "Le imprese agricole sono escluse dall'obbligo di polizza catastrofale previsto per le altre imprese iscritte al registro delle imprese. Questo non significa che gelate, alluvioni e grandine non le riguardino: cambia solo chi deve decidere come proteggersi.",
+      "category": "Aziendale",
+      "date": "2 Novembre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "L'obbligo catastrofale c'è, ma l'agricoltura ne è fuori",
+          "body": "L'art. 1, commi 101 e seguenti della L. 213/2023 impone alle imprese iscritte al registro delle imprese di assicurare terreni, fabbricati, impianti, macchinari e attrezzature contro sismi, alluvioni, frane, inondazioni ed esondazioni. Il comma 111 esclude però le imprese agricole come definite dall'art. 2135 c.c., e rinvia al Fondo mutualistico nazionale istituito dall'art. 1, c. 515 della L. 234/2021, gestito da ISMEA. Il punto che vedo trascurato in azienda è un altro: esclusione dall'obbligo non vuol dire che il danno, quando arriva, lo paghi qualcun altro."
+        },
+        {
+          "heading": "Il Fondo mutualistico copre le produzioni, non il resto",
+          "body": "Il Fondo istituito dalla legge di bilancio 2022 riguarda i danni catastrofali meteoclimatici alle produzioni agricole causati da alluvione, gelo o brina e siccità. Sono tre eventi e un oggetto preciso: la produzione. Il capannone, la serra, il magazzino, la cella frigorifera, il trattore, l'impianto fotovoltaico sul tetto della stalla restano fuori da quel perimetro e vanno protetti con contratti separati, se si vuole che siano protetti.",
+          "list": [
+            "produzioni in campo: perimetro del Fondo mutualistico",
+            "fabbricati rurali e serre: da valutare con una polizza property",
+            "macchine e attrezzature agricole: coperture incendio, furto, danni accidentali",
+            "scorte e prodotto stoccato: capitolo a sé, spesso dimenticato in polizza"
+          ]
+        },
+        {
+          "heading": "Attenzione a chi è davvero impresa agricola",
+          "body": "Il comma 111 rinvia all'art. 2135 c.c.: coltivazione del fondo, selvicoltura, allevamento e attività connesse. Molte realtà oggi hanno una parte di attività che agricola non è, o lavorano attraverso una società diversa dall'azienda agricola: una società che trasforma e commercializza, una immobiliare che possiede i capannoni, una srl di servizi conto terzi. In quei casi l'esclusione va verificata soggetto per soggetto, perché l'obbligo segue l'impresa iscritta al registro, e il comma 102 prevede che dell'inadempimento si tenga conto nell'assegnazione di contributi pubblici."
+        },
+        {
+          "heading": "I rischi che in azienda agricola pesano più del terremoto",
+          "body": "Nella mia esperienza con le aziende del Lazio meridionale, le chiamate arrivano quasi sempre per tre motivi: grandine su serre e colture protette, vento forte che scoperchia, incendio di un mezzo o di un deposito. Poi c'è la responsabilità civile, che in agricoltura ha due fronti specifici: il danno causato dagli animali, che l'art. 2052 c.c. mette a carico del proprietario o di chi se ne serve salvo il caso fortuito, e il danno da cose in custodia dell'art. 2051 c.c., che tocca recinzioni, cancelli, fossi e strade poderali. La Legge 34/2026 ha poi inserito nell'art. 122-bis del Codice delle Assicurazioni Private una deroga all'RC auto per le macchine agricole non immatricolate o prive di certificato di idoneità che operano solo in fondi agricoli o spazi non accessibili al pubblico, ma a condizione che esista una responsabilità civile verso terzi diversa da quella obbligatoria: se quella copertura in azienda non c'è, la deroga non vi serve a niente."
+        },
+        {
+          "heading": "Come impostiamo l'analisi, concretamente",
+          "body": "Si parte dai valori: quanto vale ricostruire i fabbricati, quanto vale il parco macchine, quanto prodotto avete mediamente in magazzino a fine stagione. Poi si guardano le esposizioni del territorio, perché una pianura con reticolo idrografico vicino e una collina non pongono lo stesso problema. Solo a quel punto ha senso parlare di franchigie, scoperti e limiti di indennizzo, che sono la parte del contratto dove si decide davvero quanto riceverete."
+        },
+        {
+          "heading": "Parliamone prima della prossima stagione",
+          "body": "FIM Insurance Broker ha sede a Cisterna di Latina ed è iscritta al RUI alla Sez. B con il n. B000405449: lavoriamo come broker, quindi dalla parte di chi si assicura, confrontando le soluzioni disponibili sul mercato e leggendo le esclusioni insieme a voi prima della firma. Se gestite un'azienda agricola o una società collegata e non avete chiaro cosa sia coperto e cosa no, portateci le polizze in essere e la visura: ne ricaviamo una mappa delle scoperture in un incontro. Scriveteci o chiamateci per fissare un appuntamento."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "rc-patrimoniale-obbligatoria-2027-dipendenti-pubblici",
       "title": "RC patrimoniale obbligatoria dal 2027: cosa cambia per chi gestisce soldi pubblici",
       "excerpt": "Dal 1° gennaio 2027 chi gestisce risorse pubbliche deve avere una polizza per la colpa grave. Chi riguarda, chi la paga e cosa guardare nel contratto.",
