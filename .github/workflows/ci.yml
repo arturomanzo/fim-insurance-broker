@@ -28,7 +28,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # 22: i test sono .ts e Node li esegue senza compilarli solo dalla 22.18
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: fim-broker-website/package-lock.json
 
@@ -40,6 +41,12 @@ jobs:
 
       - name: Type check
         run: npx tsc --noEmit
+
+      # Fino al 02/11/2026 la CI non li lanciava: anti-promesse (prezzi,
+      # risparmi, superlativi, norme sbagliate), registro delle norme, campagna,
+      # lead dei moduli. Giravano solo a mano.
+      - name: Test (npm test)
+        run: npm test
 
       - name: Canonical
         run: npm run validate-canonical

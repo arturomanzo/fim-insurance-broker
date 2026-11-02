@@ -24,7 +24,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # 22: i controlli in lib/*.test.ts sono .ts, eseguibili senza build dalla 22.18
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: fim-broker-website/package-lock.json
 
@@ -48,6 +49,14 @@ jobs:
         env:
           BLOG_AVVISI_DETTAGLIO: '1'
         run: node scripts/validate-blog.mjs
+
+      # Secondo cancello: le stesse regole che valgono per i testi scritti a mano.
+      # promesse.test.ts blocca prezzi, risparmi promessi, superlativi e norme
+      # sbagliate anche dentro data/blog-posts.json; norme.test.ts tiene il
+      # registro delle norme citabili. Fino al 02/11/2026 qui non giravano.
+      - name: Controlli anti-promesse e norme
+        working-directory: fim-broker-website
+        run: node --test lib/promesse.test.ts lib/norme.test.ts
 
       - name: Verifica modifiche al blog
         id: check_changes
