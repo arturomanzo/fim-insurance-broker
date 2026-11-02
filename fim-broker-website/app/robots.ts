@@ -4,8 +4,19 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
 // AI crawler espliciti — permettiamo l'accesso per massimizzare le citazioni
 // nelle risposte di ChatGPT, Claude, Perplexity, Google AI Overviews, Bing
-// Copilot e Common Crawl. Eccezioni come /api/ e /_next/ restano disallow
-// per evitare crawl di endpoint dinamici e bundle interni.
+// Copilot e Common Crawl. /api/ resta disallow per non far chiamare le rotte
+// dei moduli ai crawler, tranne /api/og.
+//
+// Fino al 02/11/2026 era disallow anche /_next/: lì stanno CSS e JavaScript
+// (/_next/static) e le immagini ottimizzate (/_next/image). Google chiede di non
+// bloccarli, altrimenti rende le pagine senza stile e non indicizza le immagini.
+// E /api/og, le anteprime per i social, finiva sotto /api/: LinkedInBot rispetta
+// il robots.txt, quindi i link condivisi rischiavano di uscire senza immagine.
+// Per Google vince la regola più lunga: Allow /api/og batte Disallow /api/.
+const REGOLE = {
+  allow: ['/', '/api/og'],
+  disallow: ['/api/', '/questionario/'],
+}
 const AI_BOTS = [
   'GPTBot',              // OpenAI training crawler
   'OAI-SearchBot',       // OpenAI search citations
@@ -29,16 +40,14 @@ export default function robots(): MetadataRoute.Robots {
       // Crawler generici (Google, Bing, DuckDuckGo, …)
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/api/', '/_next/', '/questionario/'],
+        ...REGOLE,
       },
 
       // Crawler AI espliciti: stesse regole del generico, ma dichiarazione
       // esplicita per massimizzare crawl rate e citabilità.
       ...AI_BOTS.map((userAgent) => ({
         userAgent,
-        allow: '/',
-        disallow: ['/api/', '/_next/', '/questionario/'],
+        ...REGOLE,
       })),
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
