@@ -23,3 +23,14 @@ test('sinergia e «in un mondo in cui» sono vietate come le altre parole da AI'
   assert.equal(errori('Una sinergia tra broker e cliente.').length, 1)
   assert.equal(errori('In un mondo in cui tutto cambia, la polizza resta.').length, 1)
 })
+
+test('l\'esperienza di FIM data per fatto è vietata', () => {
+  assert.equal(errori('Nella mia esperienza le chiamate arrivano quasi sempre per tre motivi.').length, 2)
+  assert.equal(errori('Sono scenari che vediamo sempre più spesso tra i nostri clienti.').length, 2)
+  assert.equal(errori('Queste sono le situazioni in cui i nostri clienti ci dicono di aver apprezzato la differenza.').length, 1)
+})
+
+test('il tono del broker senza casistica inventata va bene', () => {
+  assert.deepEqual(errori('Capisco la resistenza, ma è un rischio d\'impresa come gli altri.'), [])
+  assert.deepEqual(errori('Il punto che vedo trascurato è un altro: chi paga il danno.'), [])
+})
