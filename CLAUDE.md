@@ -67,6 +67,7 @@ Quando un valore è usato in più di un file (form + route + page), estrarre in 
 ### Norme e numeri
 Ogni norma citata, nel blog e nelle pagine, deve stare in `data/norme-citabili.json` in stato `verificata`, con fonte e data. Lo controllano `node scripts/validate-blog.mjs` e `lib/norme.test.ts` (`npm test`): dal 02/11/2026 girano tutti e due nella CI e prima di ogni articolo del blog generato in automatico. Una norma nuova si legge prima sul testo vigente (normattiva, EUR-Lex, ivass.it) e poi si aggiunge al registro: non si toglie il controllo. Gli errori trovati a fine ottobre 2026 vengono da qui: articoli abrogati (art. 12 D.Lgs. 346/1990), commi sbagliati, regole date per sempre vere quando valgono a condizione (art. 118, c. 2, CAP: il premio pagato al broker libera il cliente solo se l'accordo con la compagnia lo prevede).
 Un numero di mercato ("X% delle PMI", "X milioni di persone") esce solo con la fonte nella stessa frase. Lo controlla `lib/promesse.test.ts`.
+Quando si corregge un articolo del blog nella sostanza (norme, numeri, promesse, frasi riscritte), il suo `updatedDate` in `data/blog-posts.json` prende la data del giorno: la pagina mostra «Aggiornato il», e `dateModified` e sitemap lo passano a Google. Un ritocco al solo titolo SEO non conta.
 
 ---
 
