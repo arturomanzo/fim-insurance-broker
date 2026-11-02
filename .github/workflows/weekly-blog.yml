@@ -56,7 +56,7 @@ jobs:
       # registro delle norme citabili. Fino al 02/11/2026 qui non giravano.
       - name: Controlli anti-promesse e norme
         working-directory: fim-broker-website
-        run: node --test lib/promesse.test.ts lib/norme.test.ts
+        run: node --test lib/promesse.test.ts lib/norme.test.ts lib/stileBlog.test.ts
 
       - name: Verifica modifiche al blog
         id: check_changes

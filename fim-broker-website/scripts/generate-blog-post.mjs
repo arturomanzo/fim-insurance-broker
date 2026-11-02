@@ -209,7 +209,7 @@ ${elencoNorme}
    Se ti serve una norma che non è in elenco, NON inventarla e NON tirare a indovinare l'anno o il numero: descrivi l'obbligo senza attribuirlo, per esempio «la legge impone a...» invece di «il D.Lgs. X/AAAA impone a...». Attribuire un obbligo alla norma sbagliata è l'errore più grave che puoi fare qui, e ne abbiamo già corretto uno: il D.Lgs. 36/2021 non impone l'assicurazione dei tesserati sportivi, quella viene dall'art. 51 della L. 289/2002 ed è del 2002.
    Quando citi una norma dell'elenco, attieniti a quello che dice la sua descrizione. Non estenderne la portata.
 
-2. PAROLE VIETATE, sempre: «fondamentale», «inoltre», «panorama», «in conclusione», «cruciale», «in sintesi», «è importante notare», «al fine di». Se una frase ne ha bisogno, riscrivi la frase.
+2. PAROLE VIETATE, sempre: «fondamentale», «inoltre», «panorama», «in conclusione», «cruciale», «in sintesi», «sinergia», «in un mondo in cui», «è importante notare», «al fine di», e la costruzione «non solo... ma anche». Se una frase ne ha bisogno, riscrivi la frase.
 
 3. NIENTE PROMESSE. Non scrivere che una polizza fa risparmiare, né di quanto; non scrivere «senza sorprese», «sempre coperto», «nessun rischio». Un cliente può pretendere quello che gli hai promesso per iscritto. Se vuoi parlare di prezzo, di' da cosa dipende, non quanto costa.
 

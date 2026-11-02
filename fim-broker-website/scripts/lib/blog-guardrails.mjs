@@ -36,7 +36,13 @@ const RE_CODICE_CIVILE = /art(?:icolo|\.)\s*(\d+)(?:\s*(?:bis|ter|quater))?\s*(?
 const PAROLE_AI = [
   'fondamentale', 'fondamentali', 'inoltre', 'panorama', 'in conclusione',
   'cruciale', 'cruciali', 'in sintesi', 'è importante notare', 'al fine di',
+  // Aggiunte il 02/11/2026: le vietano le preferenze di Arturo, qui mancavano.
+  'sinergia', 'sinergie', 'in un mondo in cui',
 ]
+
+// «non solo... ma (anche)» nella stessa frase: lo schema da testo generato che
+// le preferenze di Arturo vietano. «Non solo» da solo («non solo d'estate») va bene.
+const RE_NON_SOLO_MA = /\bnon solo\b[^.;:!?]{0,140}?\bma\b/i
 
 // Frasi che prendono un impegno: sono le più pericolose, perché un errore qui
 // non è un'imprecisione ma una promessa che il cliente può pretendere.
@@ -119,6 +125,12 @@ export function controllaPost(post, registro, { severo = false } = {}) {
       if (severo) errori.push(msg)
       else avvisi.push(msg)
     }
+  }
+
+  if (RE_NON_SOLO_MA.test(testo)) {
+    const msg = `"${dove}" — costruzione vietata dalle regole di stile: «non solo... ma».`
+    if (severo) errori.push(msg)
+    else avvisi.push(msg)
   }
 
   for (const { re, cosa } of PROMESSE) {
