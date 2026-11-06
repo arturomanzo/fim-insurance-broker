@@ -68,6 +68,9 @@ const LEAD_VALUES: Record<string, number> = {
   // Chi carica la sua polizza e lascia l'email chiede la stessa cosa della
   // seconda opinione, solo per una polizza (01/11/2026, scelta di Arturo).
   analizza_polizza: 11,
+  // Chi carica un bando o un contratto ha già una gara o un incarico davanti:
+  // 10 € (06/11/2026, scelta di Arturo).
+  verifica_requisiti: 10,
   prenotazione: 11,
   // Intento più debole degli altri form: chiede informazioni, non un preventivo.
   contact: 6,
@@ -94,6 +97,7 @@ const COMMERCIAL_LEAD_TYPES = new Set([
   'preventivo_auto_documenti',
   'second_opinion',
   'analizza_polizza',
+  'verifica_requisiti',
   'prenotazione',
   'contact',
   'scuole',
@@ -306,7 +310,7 @@ export function trackAnalisiPolizzaSubmit(tipoPolizza: string) {
 
 // ── Verifica i requisiti assicurativi ────────────────────────────────────────
 
-/** Verifica AI riuscita: il lead arriva al gestionale. `tipo` è quello del lead (cauzioni, CAR…). */
+/** Verifica AI riuscita: il lead arriva al gestionale. `tipo` è quello del lead (cauzioni, CAR…). Conta su Google Ads (10 €). */
 export function trackVerificaRequisitiSubmit(tipo: string, conPolizza: boolean) {
   track('generate_lead', {
     event_category: 'verifica_requisiti',
