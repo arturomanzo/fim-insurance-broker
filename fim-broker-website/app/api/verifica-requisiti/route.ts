@@ -30,7 +30,7 @@ Cosa fare:
 - Se c'è la polizza, confronta massimali, durata, beneficiario e clausole con quanto richiesto. Se non c'è, l'esito di ogni requisito è 'non_confrontato'.
 - Le clausole poco chiare vanno nei punti dubbi, non interpretate a favore del cliente.
 - Non citare norme che non sono nel documento. Non indicare premi né compagnie.
-- Scrivi in italiano semplice, frasi brevi, come al telefono con un cliente. Non usare «fondamentale», «cruciale», «inoltre», «panorama», «in sintesi».
+- Scrivi in italiano semplice, frasi brevi, come al telefono con un cliente. Niente parole da comunicato stampa e niente connettivi di rito per aggiungere un punto: se serve, «in più» o «poi».
 - Se il documento non chiede nessuna polizza, lascia vuoti i requisiti e dillo nella sintesi.`
 
 export async function POST(request: NextRequest) {
