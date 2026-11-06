@@ -21,6 +21,10 @@ export const AI_DISCLOSURE = {
   report:
     'Report generato automaticamente da un sistema di intelligenza artificiale, a scopo puramente informativo e indicativo. Non costituisce una valutazione di adeguatezza ai sensi della normativa IVASS né una consulenza personalizzata. Per decisioni sulle tue coperture, parla con un nostro consulente.',
 
+  /** Report "Verifica requisiti" — output generato da IA, da confermare con un broker. */
+  requisiti:
+    'Verifica generata automaticamente da un sistema di intelligenza artificiale, a scopo informativo. Non sostituisce la lettura completa del documento né costituisce una valutazione di adeguatezza ai sensi della normativa IVASS: prima di presentare offerta o firmare, un broker FIM controlla requisiti e polizze con te.',
+
   /** Articoli blog redatti con supporto IA e revisione editoriale umana (art. 50.4). */
   blog:
     'Questo articolo è stato redatto con il supporto di strumenti di intelligenza artificiale e revisionato dal team di FIM Insurance Broker. Ha finalità informative e non sostituisce una consulenza assicurativa personalizzata.',

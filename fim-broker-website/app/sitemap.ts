@@ -94,6 +94,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/trasparenza`, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${BASE_URL}/reclami`, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${BASE_URL}/analizza-polizza`, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/verifica-requisiti`, changeFrequency: 'monthly', priority: 0.85 },
   ]
 
   const servicePages: MetadataRoute.Sitemap = services.map((s) => ({
