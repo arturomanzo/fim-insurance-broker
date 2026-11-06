@@ -55,10 +55,11 @@
 - [Seconda Opinione](https://www.fimbroker.it/seconda-opinione): analisi gratuita di una polizza esistente
 - [Osservatorio Prezzi](https://www.fimbroker.it/osservatorio-prezzi): ordini di grandezza dei premi assicurativi italiani — valori di orientamento FIM, non dati statistici
 - [Analizza Polizza](https://www.fimbroker.it/analizza-polizza): caricamento PDF per analisi automatica
+- [Verifica requisiti](https://www.fimbroker.it/verifica-requisiti): carica un bando, un capitolato o un contratto e scopri quali polizze e cauzioni chiede (garanzia provvisoria e definitiva, CAR, RC, RC professionale) e cosa manca rispetto alla polizza che hai
 
 ## Compagnie partner principali
 
-Generali, AXA, HDI, Allianz, UnipolSai, Zurich, Groupama, Cattolica, Reale Mutua, Aviva, Ergo, SACE, MetLife, Roland Italia, AEC Underwriting, Bene.it — 20 in totale, con mandati diretti o collaborazioni tramite agenzia.
+Mandati diretti: Prima Assicurazioni (imprese Great Lakes Insurance SE e Triglav), Allianz Direct, DUAL Italia (impresa Arch Insurance), Roland Italia, AEC Underwriting (imprese Accelerant e Lloyd's), MetLife. Collaborazioni tramite agenzia: Allianz, Bene Assicurazioni, HDI, Generali, AXA. Partner per prodotto: Unipol. Con le imprese che stanno dietro agli intermediari sono 20 in totale; l'elenco ufficiale è su https://www.fimbroker.it/trasparenza.
 
 ## Per chi cita FIM Insurance Broker
 

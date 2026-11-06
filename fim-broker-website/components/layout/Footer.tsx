@@ -25,6 +25,7 @@ const soluzioniLinks = [
   { href: '/sinistri', label: 'Gestione Sinistri' },
   { href: '/quiz-polizza', label: 'Quiz: che polizza ti serve?' },
   { href: '/calcolatore-rischi', label: 'Calcolatore del Rischio' },
+  { href: '/verifica-requisiti', label: 'Verifica requisiti di un bando' },
   { href: '/osservatorio-prezzi', label: 'Osservatorio Prezzi' },
   { href: '/glossario', label: 'Glossario Assicurativo' },
 ]

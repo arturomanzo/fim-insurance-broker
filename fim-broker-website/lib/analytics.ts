@@ -304,6 +304,17 @@ export function trackAnalisiPolizzaSubmit(tipoPolizza: string) {
   })
 }
 
+// ── Verifica i requisiti assicurativi ────────────────────────────────────────
+
+/** Verifica AI riuscita: il lead arriva al gestionale. `tipo` è quello del lead (cauzioni, CAR…). */
+export function trackVerificaRequisitiSubmit(tipo: string, conPolizza: boolean) {
+  track('generate_lead', {
+    event_category: 'verifica_requisiti',
+    tipo_requisiti: tipo || '(nessuno)',
+    con_polizza: conPolizza ? 'si' : 'no',
+  })
+}
+
 // ── Funnel scuole (Dipartimento Scuole) ──────────────────────────────────────
 
 /**
