@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-10-30",
+  "aggiornato": "2026-11-07",
   "norme": [
     {
       "id": "L-289-2002",
@@ -226,9 +226,9 @@
         "209/2005"
       ],
       "stato": "verificata",
-      "oggetto": "Codice delle Assicurazioni Private. Letti: art. 109 (RUI), 122 e 122-bis (obbligo RC auto e deroghe), 123 (natanti), 128 (massimali minimi), titolo X (assicurazione obbligatoria veicoli e natanti), 164 (modalità di gestione dei sinistri di tutela legale), 173 (definizione di tutela legale). Letti il 30/10/2026: art. 117 (conto separato; c. 3-bis fideiussione al 4% in alternativa), art. 118 (il premio pagato al broker libera il contraente solo se l'accordo con l'impresa lo prevede, c. 2), art. 119-bis (regole di comportamento), art. 120-bis (natura del compenso prima della conclusione; importo dell'onorario), art. 131, c. 2-bis (provvigioni RC auto), art. 143 (denuncia con il modulo).",
+      "oggetto": "Codice delle Assicurazioni Private. Letti: art. 109 (RUI), 122 e 122-bis (obbligo RC auto e deroghe), 123 (natanti), 128 (massimali minimi), titolo X (assicurazione obbligatoria veicoli e natanti), 164 (modalità di gestione dei sinistri di tutela legale), 173 (definizione di tutela legale). Letti il 30/10/2026: art. 117 (conto separato; c. 3-bis fideiussione al 4% in alternativa), art. 118 (il premio pagato al broker libera il contraente solo se l'accordo con l'impresa lo prevede, c. 2), art. 119-bis (regole di comportamento), art. 120-bis (natura del compenso prima della conclusione; importo dell'onorario), art. 131, c. 2-bis (provvigioni RC auto), art. 143 (denuncia con il modulo). Letti il 07/11/2026: art. 119-ter, c. 1 e 2 (informazioni su richieste ed esigenze prima del contratto; ogni contratto proposto coerente con esse), art. 134, c. 3 (la classe di merito si riferisce al proprietario), art. 171 (vendita del veicolo: a scelta irrevocabile dell'alienante risoluzione con rimborso del rateo, cessione all'acquirente o sostituzione con altro veicolo; obbligo di avviso; copertura sul nuovo veicolo dal nuovo certificato).",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-07;209",
-      "verificata_il": "2026-10-30"
+      "verificata_il": "2026-11-07"
     },
     {
       "id": "177-2024",
@@ -495,6 +495,17 @@
       "verificata_il": "2026-10-30"
     },
     {
+      "id": "REG-IVASS-58-2026",
+      "citazione": "Reg. IVASS 58/2026",
+      "chiavi": [
+        "58/2026"
+      ],
+      "stato": "verificata",
+      "oggetto": "Regolamento IVASS n. 58 del 10 febbraio 2026: informazioni aggiuntive dell'attestazione di sinistralità pregressa (Reg. UE 2024/1855) e classe di merito di conversione universale. Art. 8: in caso di cessazione documentata del rischio l'ultimo attestato vale cinque anni dalla scadenza del contratto; oltre 15 giorni dalla scadenza serve la dichiarazione di mancato utilizzo. Art. 10: lett. c) passaggio fra coniugi, uniti civilmente e conviventi; lett. e) stessa classe sul nuovo veicolo se si dimostra vendita, demolizione, furto denunciato, cessazione della circolazione, esportazione o conto vendita del precedente; lett. k) con la cessione del contratto il cessionario tiene la classe fino alla scadenza, poi CU 14, e il cedente la conserva per la validità dell'attestato.",
+      "fonte": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2026/n58/index.html",
+      "verificata_il": "2026-11-07"
+    },
+    {
       "id": "DLGS-231-2007",
       "citazione": "D.Lgs. 231/2007",
       "chiavi": [
@@ -669,6 +680,17 @@
       "oggetto": "Definizione di imprenditore agricolo: coltivazione del fondo, selvicoltura, allevamento di animali e attività connesse.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art2135",
       "verificata_il": "2026-10-30"
+    },
+    {
+      "id": "CC-1910",
+      "citazione": "art. 1910 c.c.",
+      "chiavi": [
+        "cc-1910"
+      ],
+      "stato": "verificata",
+      "oggetto": "Più assicurazioni per lo stesso rischio presso assicuratori diversi: l'assicurato deve avvisare ciascuno di tutte le altre; se omette l'avviso con dolo, gli assicuratori non pagano. Al sinistro avvisa tutti indicando gli altri e può chiedere a ciascuno l'indennità del proprio contratto, purché il totale non superi il danno; regresso proporzionale fra assicuratori.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1910",
+      "verificata_il": "2026-11-07"
     },
     {
       "id": "CC-1913",
