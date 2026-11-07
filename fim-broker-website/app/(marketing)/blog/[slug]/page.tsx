@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import Badge from '@/components/ui/Badge'
@@ -33,10 +34,17 @@ export async function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }))
 }
 
+// Solo gli slug di generateStaticParams esistono: un indirizzo sconosciuto
+// prende 404 dal router, prima del rendering. Fino al 07/11/2026 qualunque
+// /blog/qualcosa rispondeva 200 con un finto articolo indicizzabile, e il
+// notFound() nella pagina da solo non basta: il loading.tsx di (marketing)
+// avvia lo streaming e lo status resta 200.
+export const dynamicParams = false
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlug(slug)
-  if (!post) return { title: 'Articolo non trovato' }
+  if (!post) notFound()
   const author = getAuthor(post.author)
   const ogImageUrl = `/api/og?title=${encodeURIComponent(post.title)}&tag=${encodeURIComponent(post.category)}&sub=${encodeURIComponent(post.excerpt.slice(0, 90))}`
   const publishedTime = parseItalianDate(post.date)
@@ -69,15 +77,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = getPostBySlug(slug)
+  if (!post) notFound()
   const allPosts = getAllPosts()
 
-  const title = post?.title ?? slug.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())
-  const category = post?.category ?? 'Assicurazioni'
-  const date = post?.date ?? ''
-  const readTime = post?.readTime ?? '5 min'
-  const author = getAuthor(post?.author)
+  const { title, category, date, readTime } = post
+  const author = getAuthor(post.author)
   const datePublishedIso = parseItalianDate(date)
-  const dateModifiedIso = parseItalianDate(post?.updatedDate ?? date)
+  const dateModifiedIso = parseItalianDate(post.updatedDate ?? date)
 
   const articleSchema = {
     '@context': 'https://schema.org',

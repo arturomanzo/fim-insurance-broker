@@ -19,10 +19,15 @@ export async function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }))
 }
 
+// Solo gli slug di generateStaticParams esistono: uno sconosciuto prende 404
+// dal router. Il notFound() nella pagina da solo dava 200, perché il
+// loading.tsx di (marketing) avvia lo streaming prima (corretto il 07/11/2026).
+export const dynamicParams = false
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const service = getServiceBySlug(slug)
-  if (!service) return { title: 'Servizio non trovato' }
+  if (!service) notFound()
   const ogUrl = `/api/og?title=${encodeURIComponent(service.title)}&tag=Servizi&sub=${encodeURIComponent(service.shortDescription.slice(0, 90))}`
   return {
     title: service.seoTitle ? { absolute: `${service.seoTitle} | FIM Broker` } : service.title,
