@@ -56,6 +56,20 @@ const PROMESSE = [
   { re: /(?:oltre|più\s+di)\s+(?:30|trenta)\s+compagnie|\b30\+\s*compagnie/i, cosa: 'claim «30+ compagnie» (i mandati e le collaborazioni sono 20)' },
 ]
 
+// Esperienza di FIM raccontata come fatto: «nella mia esperienza le chiamate
+// arrivano per tre motivi», «scenari che vediamo tra i nostri clienti». Il
+// modello non conosce né lo studio né i clienti, e mette in bocca ad Arturo una
+// casistica che nessuno ha contato. Nato il 02/11/2026 dall'articolo sulle
+// imprese agricole: è lo stesso errore delle testimonianze inventate (#152).
+const ESPERIENZE = [
+  /\bnella\s+(?:mia|nostra)\s+esperienza\b/i,
+  /\b(?:tra|fra)\s+i\s+nostri\s+clienti\b/i,
+  /\bi\s+nostri\s+clienti\s+ci\b/i,
+  /\b(?:vedo|vediamo)\s+(?:spesso|sempre|ripetersi)\b/i,
+  /\ble\s+chiamate\s+(?:ci\s+)?arrivano\b/i,
+  /\b(?:mi|ci)\s+capita\b/i,
+]
+
 export function caricaRegistro(percorso = REGISTRO) {
   const reg = JSON.parse(readFileSync(percorso, 'utf-8'))
   const perChiave = new Map()
@@ -137,6 +151,15 @@ export function controllaPost(post, registro, { severo = false } = {}) {
     const m = testo.match(re)
     if (m) {
       const msg = `"${dove}" — ${cosa}: «${m[0]}».`
+      if (severo) errori.push(msg)
+      else avvisi.push(msg)
+    }
+  }
+
+  for (const re of ESPERIENZE) {
+    const m = testo.match(re)
+    if (m) {
+      const msg = `"${dove}" — esperienza di FIM data per fatto, senza che nessuno l'abbia contata: «${m[0]}».`
       if (severo) errori.push(msg)
       else avvisi.push(msg)
     }
