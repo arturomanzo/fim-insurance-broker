@@ -12,6 +12,12 @@
     { "source": "/gestionerischio", "destination": "/servizi", "permanent": true },
     { "source": "/Gestionerischio", "destination": "/servizi", "permanent": true },
     { "source": "/moduli/Termini.rtf", "destination": "/note-legali", "permanent": true },
+    { "source": "/index.htm", "destination": "/", "permanent": true },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/prodotti.htm", "destination": "/servizi", "permanent": true },
+    { "source": "/prodotti.html", "destination": "/servizi", "permanent": true },
+    { "source": "/:pagina([^/.]+)\\.htm", "destination": "/:pagina", "permanent": true },
+    { "source": "/:pagina([^/.]+)\\.html", "destination": "/:pagina", "permanent": true },
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "fimbroker.it" }],
