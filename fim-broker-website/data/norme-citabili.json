@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-11-07",
+  "aggiornato": "2026-11-09",
   "norme": [
     {
       "id": "L-289-2002",
@@ -490,9 +490,9 @@
         "40/2018"
       ],
       "stato": "verificata",
-      "oggetto": "Regolamento IVASS n. 40 del 2 agosto 2018 sulla distribuzione assicurativa e riassicurativa: RUI, regole di comportamento, informativa precontrattuale, formazione.",
-      "fonte": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2018/n40/index.html",
-      "verificata_il": "2026-10-30"
+      "oggetto": "Regolamento IVASS n. 40 del 2 agosto 2018 sulla distribuzione assicurativa e riassicurativa: RUI, regole di comportamento, informativa precontrattuale, formazione. Art. 89 (aggiornamento professionale): c. 2 l'aggiornamento è svolto annualmente, a partire dal 1° gennaio dell'anno successivo a quello di iscrizione nel Registro o di inizio dell'attività, e comunque in occasione dell'evoluzione della normativa; c. 4 consiste in corsi di durata non inferiore a 30 ore annuali, in aula o con le modalità equivalenti dell'art. 91; c. 5 in deroga, 15 ore annuali per gli intermediari a titolo accessorio della sez. E e per i relativi addetti operanti nei locali; c. 6 obblighi sospesi nei casi di inoperatività, gravidanza, grave malattia o infortunio e assenza continuativa oltre 6 mesi. La norma non fissa il 31 dicembre come termine: parla di obbligo annuale.",
+      "fonte": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2018/n40/Regolamento_IVASS_40_del_2_agosto_2018_consolidato.pdf (testo consolidato, art. 89)",
+      "verificata_il": "2026-11-09"
     },
     {
       "id": "REG-IVASS-58-2026",
@@ -735,6 +735,28 @@
       "oggetto": "Legge di bilancio 2022. Art. 1, c. 515: istituisce il Fondo mutualistico nazionale per la copertura dei danni catastrofali meteoclimatici alle produzioni agricole causati da alluvione, gelo o brina e siccità; c. 516: gestore ISMEA. È il fondo a cui rinvia il c. 111 dell'art. 1 della L. 213/2023 per le imprese agricole escluse dall'obbligo catastrofale.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2021-12-30;234~art1",
       "verificata_il": "2026-10-31"
+    },
+    {
+      "id": "REG-IVASS-59-2026",
+      "citazione": "Reg. IVASS 59/2026",
+      "chiavi": [
+        "59/2026"
+      ],
+      "stato": "verificata",
+      "oggetto": "Regolamento IVASS n. 59 del 22 settembre 2026: modello di relazione in tema di repressione delle frodi previsto dall'art. 30, c. 1, del D.L. 1/2012 (conv. L. 27/2012). Art. 3: si applica alle imprese autorizzate in Italia e alle imprese comunitarie ammesse a operare in Italia in libera prestazione di servizi o in stabilimento, abilitate all'RC auto obbligatoria. Art. 5: la relazione è composta da quattro prospetti numerici e un questionario — dati per provincia sui sinistri denunciati, esposti al rischio frode, oggetto di approfondimento, chiusi senza seguito per attività antifrode, con denunce o querele e oggetto di disconoscimento; sinistri gestiti in CARD; denunce e querele su sinistri e su contratti, compresi i contratti annullati per furto d'identità e intestazione fittizia; questionario sull'organizzazione antifrode in assunzione e in liquidazione. Art. 6, c. 1: la relazione, approvata dall'organo amministrativo, si trasmette entro il 31 maggio di ogni anno; cc. 2-3 esoneri. Art. 7: abroga il Reg. ISVAP 44/2012 e il Provv. IVASS 1/2013. Art. 9: entra in vigore il giorno successivo alla pubblicazione in Gazzetta Ufficiale.",
+      "fonte": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2026/n59/Regolamento_59_del_22_settembre_2026.pdf",
+      "verificata_il": "2026-11-09"
+    },
+    {
+      "id": "DIR-UE-2025-2",
+      "citazione": "Direttiva UE 2025/2",
+      "chiavi": [
+        "2025/2"
+      ],
+      "stato": "verificata",
+      "oggetto": "Direttiva (UE) 2025/2 del Parlamento europeo e del Consiglio del 27 novembre 2024, pubblicata in GU UE l'8 gennaio 2025: modifica la direttiva 2009/138/CE (Solvency II) quanto a proporzionalità, qualità della vigilanza, informativa, misure sulle garanzie a lungo termine, strumenti macroprudenziali, rischi di sostenibilità e vigilanza transfrontaliera e di gruppo, e modifica le direttive 2002/87/CE e 2013/34/UE. È una direttiva: in Italia al 09/11/2026 il recepimento è ancora uno schema di decreto legislativo (Atto del Governo n. 443) all'esame della VI Commissione Finanze della Camera, su cui l'IVASS ha depositato una memoria il 29 ottobre 2026. Non citarla come diritto interno già in vigore.",
+      "fonte": "https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=OJ%3AL_202500002",
+      "verificata_il": "2026-11-09"
     }
   ]
 }
