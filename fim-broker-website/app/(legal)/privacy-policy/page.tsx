@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
       <div className="container-custom">
         <Card padding="lg" className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-black text-primary mb-2">Privacy Policy</h1>
-          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Ottobre 2026</p>
+          <p className="text-gray-500 text-sm mb-8">Ultimo aggiornamento: Novembre 2026</p>
 
           <div className="prose-fim space-y-8">
             <section>
@@ -90,6 +90,16 @@ export default function PrivacyPolicyPage() {
                 dell&apos;operatore.
               </p>
               <p>
+                Nelle videochiamate di lavoro svolte con <strong>Google Meet</strong> possiamo attivare
+                la trascrizione automatica della conversazione, una funzione del servizio Google
+                Workspace. Dalla trascrizione, con gli strumenti di IA indicati sopra, prepariamo un
+                verbale (partecipanti, decisioni, importi e scadenze) che un operatore FIM verifica e
+                conserva nella pratica a cui si riferisce. La trascrizione è cancellata entro 30 giorni
+                dalla redazione del verbale. Ti avvisiamo all&apos;inizio della chiamata e puoi chiedere
+                che la trascrizione non venga attivata; non la attiviamo mai quando si parla di dati
+                relativi alla salute.
+              </p>
+              <p>
                 Questi strumenti hanno carattere informativo e di supporto: <strong>non adottano
                 decisioni automatizzate che producono effetti giuridici</strong> o incidono in modo
                 analogo sulla tua persona ai sensi dell&apos;art. 22 GDPR. Una parte dei contenuti del
@@ -140,6 +150,7 @@ export default function PrivacyPolicyPage() {
                 <li>Dati contrattuali: 10 anni dall&apos;ultima operazione</li>
                 <li>Dati per preventivi non conclusi: 24 mesi</li>
                 <li>Documenti caricati per la preventivazione: cancellati al termine della preventivazione (al massimo 30 giorni dal caricamento)</li>
+                <li>Trascrizioni delle videochiamate di lavoro: cancellate entro 30 giorni dalla redazione del verbale; il verbale segue i tempi della pratica</li>
                 <li>Dati di navigazione: 13 mesi</li>
                 <li>Dati per newsletter: fino alla revoca del consenso</li>
               </ul>
@@ -190,9 +201,28 @@ export default function PrivacyPolicyPage() {
                   alla newsletter (Resend Audiences). Il trasferimento avviene sulla base delle
                   Clausole Contrattuali Standard (SCC).
                 </li>
+                <li>
+                  <strong>Google LLC</strong> (USA), tramite Google Ireland Ltd — archiviazione in cloud
+                  dei documenti e delle copie di sicurezza del gestionale (Google Drive) e trascrizione
+                  delle videochiamate di lavoro (Google Meet), come descritto alla sezione 3. Il
+                  trasferimento avviene sulla base del Data Privacy Framework UE-USA e delle Clausole
+                  Contrattuali Standard (SCC).
+                </li>
+                <li>
+                  <strong>Adobe Inc.</strong> (USA), tramite Adobe Systems Software Ireland Ltd —
+                  digitalizzazione, conservazione e firma elettronica dei documenti (Adobe Acrobat,
+                  Adobe Scan, Acrobat Sign). Il trasferimento avviene sulla base del Data Privacy
+                  Framework UE-USA e delle Clausole Contrattuali Standard (SCC).
+                </li>
+                <li>
+                  <strong>Apple Inc.</strong> (USA), tramite Apple Distribution International Ltd
+                  (Irlanda) — archiviazione in cloud dei documenti di lavoro e delle copie di sicurezza
+                  cifrate (iCloud). Il trasferimento avviene sulla base del Data Privacy Framework UE-USA
+                  e delle Clausole Contrattuali Standard (SCC).
+                </li>
               </ul>
               <p>
-                I predetti fornitori garantiscono un livello di protezione adeguato ai sensi dell&apos;art. 46 GDPR.
+                I predetti fornitori garantiscono un livello di protezione adeguato ai sensi degli artt. 45 e 46 GDPR.
                 Per maggiori informazioni sui trasferimenti puoi scrivere a: privacy@fimbroker.it
               </p>
             </section>
