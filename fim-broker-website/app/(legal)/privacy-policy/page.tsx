@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
               <ul>
                 <li><strong>Dati di navigazione</strong>: indirizzo IP, tipo di browser, pagine visitate, per finalità statistiche anonime</li>
                 <li><strong>Dati forniti dall&apos;utente</strong>: nome, cognome, email, telefono, richiesti per l&apos;erogazione dei servizi di preventivazione e consulenza</li>
-                <li><strong>Dati di comunicazione</strong>: messaggi inviati tramite form di contatto o tramite l&apos;assistente virtuale FIMA (elaborati da Anthropic AI per generare le risposte)</li>
+                <li><strong>Dati di comunicazione</strong>: messaggi inviati tramite form di contatto o tramite l&apos;assistente virtuale FIMA (elaborati da Anthropic AI per generare le risposte), nonché messaggi scritti e vocali, email e videochiamate scambiati con FIM nell&apos;ambito del rapporto</li>
                 <li><strong>Dati di iscrizione alla newsletter</strong>: indirizzo email fornito volontariamente per ricevere comunicazioni commerciali e aggiornamenti assicurativi (solo previo consenso esplicito)</li>
                 <li><strong>Documenti caricati per la preventivazione</strong>: documenti che l&apos;utente sceglie volontariamente di caricare (es. carta d&apos;identità, patente, libretto di circolazione, visura), trattati al solo fine di elaborare il preventivo richiesto. I file sono conservati in archivio cifrato ad accesso riservato e cancellati al termine della preventivazione (base giuridica: esecuzione di misure precontrattuali su richiesta dell&apos;interessato)</li>
               </ul>
@@ -100,6 +100,12 @@ export default function PrivacyPolicyPage() {
                 relativi alla salute.
               </p>
               <p>
+                Se ci invii <strong>messaggi vocali tramite WhatsApp</strong>, il loro contenuto è
+                trascritto in testo con i servizi di OpenAI, così da poterlo leggere e archiviare nella
+                pratica. Le risposte possono essere preparate con gli strumenti di IA indicati sopra e
+                sono inviate solo dopo la verifica di un operatore FIM.
+              </p>
+              <p>
                 Questi strumenti hanno carattere informativo e di supporto: <strong>non adottano
                 decisioni automatizzate che producono effetti giuridici</strong> o incidono in modo
                 analogo sulla tua persona ai sensi dell&apos;art. 22 GDPR. Una parte dei contenuti del
@@ -112,6 +118,15 @@ export default function PrivacyPolicyPage() {
                 trattamento</strong> ai sensi dell&apos;art. 28 del GDPR, sulla base di apposito
                 accordo di nomina, trattando i dati esclusivamente su istruzione documentata di FIM
                 Insurance Broker e nel rispetto di adeguate misure di sicurezza e riservatezza.
+              </p>
+              <p>
+                Per le notifiche interne e per approvare le comunicazioni ai clienti, il personale FIM
+                usa l&apos;applicazione di messaggistica <strong>Telegram</strong>, i cui dati per gli
+                utenti europei sono conservati in data center nei Paesi Bassi. Su Telegram passano solo
+                i riferimenti necessari alla gestione della pratica (ad esempio nome, numero di polizza
+                e data di scadenza): codici fiscali, coordinate bancarie, targhe, indirizzi email
+                personali e dati relativi alla salute non vi transitano e sono oscurati automaticamente
+                prima dell&apos;invio.
               </p>
             </section>
 
@@ -191,7 +206,8 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <strong>OpenAI Ireland Ltd</strong> (Dublino, Irlanda) — trascrive i messaggi vocali
                   che il personale FIM invia al proprio assistente interno e ne converte le risposte
-                  in audio, come descritto alla sezione 3. I dati possono essere elaborati negli Stati
+                  in audio, e trascrive i messaggi vocali che i clienti inviano a FIM tramite WhatsApp,
+                  come descritto alla sezione 3. I dati possono essere elaborati negli Stati
                   Uniti da società del gruppo OpenAI; il trasferimento avviene sulla base delle
                   Clausole Contrattuali Standard (SCC) approvate dalla Commissione Europea.
                 </li>
@@ -219,6 +235,17 @@ export default function PrivacyPolicyPage() {
                   (Irlanda) — archiviazione in cloud dei documenti di lavoro e delle copie di sicurezza
                   cifrate (iCloud). Il trasferimento avviene sulla base del Data Privacy Framework UE-USA
                   e delle Clausole Contrattuali Standard (SCC).
+                </li>
+                <li>
+                  <strong>Vercel Inc.</strong> (USA) — infrastruttura su cui funzionano questo sito e il
+                  gestionale interno di FIM. Il trasferimento avviene sulla base del Data Privacy
+                  Framework UE-USA e delle Clausole Contrattuali Standard (SCC).
+                </li>
+                <li>
+                  <strong>Meta Platforms Ireland Ltd</strong> (Irlanda), con trasferimento a Meta
+                  Platforms, Inc. (USA) — servizio WhatsApp Business, usato per le comunicazioni con i
+                  clienti. Il trasferimento avviene sulla base del Data Privacy Framework UE-USA e delle
+                  Clausole Contrattuali Standard (SCC).
                 </li>
               </ul>
               <p>
