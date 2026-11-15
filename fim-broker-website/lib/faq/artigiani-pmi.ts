@@ -13,7 +13,7 @@ export const artigianiPmiFaq: FaqCategory = {
     {
       question: 'Quali assicurazioni sono obbligatorie per un datore di lavoro?',
       answer:
-        "Per i datori di lavoro con dipendenti, la principale assicurazione obbligatoria è quella INAIL (Infortuni sul Lavoro), gestita direttamente dall'ente. A questa si aggiunge la RC auto per i veicoli aziendali (obbligatoria per legge). Per alcune attività specifiche (es. impianti termici, ascensori, gru) ci sono ulteriori obblighi. Molte altre coperture (RC impresa, incendio, ecc.) non sono obbligatorie per legge ma sono prassi comune e spesso richieste da clienti/appaltanti.",
+        "Per i datori di lavoro con dipendenti, la principale assicurazione obbligatoria è quella INAIL (Infortuni sul Lavoro), gestita direttamente dall'ente. A questa si aggiunge la RC auto per i veicoli aziendali (obbligatoria per legge). Molte altre coperture (RC impresa, incendio, ecc.) non sono obbligatorie per legge ma sono prassi comune e spesso richieste da clienti/appaltanti.",
     },
     {
       question: "Ho già l'INAIL: perché dovrei fare anche la polizza infortuni integrativa?",
