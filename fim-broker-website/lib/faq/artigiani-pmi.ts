@@ -13,12 +13,15 @@ export const artigianiPmiFaq: FaqCategory = {
     {
       question: 'Quali assicurazioni sono obbligatorie per un datore di lavoro?',
       answer:
-        "Per i datori di lavoro con dipendenti, la principale assicurazione obbligatoria è quella INAIL (Infortuni sul Lavoro), gestita direttamente dall'ente. A questa si aggiunge la RC auto per i veicoli aziendali (obbligatoria per legge). Per alcune attività specifiche (es. impianti termici, ascensori, gru) ci sono ulteriori obblighi. Molte altre coperture (RC impresa, incendio, ecc.) non sono obbligatorie per legge ma sono prassi comune e spesso richieste da clienti/appaltanti.",
+        "Per i datori di lavoro con dipendenti, la principale assicurazione obbligatoria è quella INAIL (Infortuni sul Lavoro), gestita direttamente dall'ente. A questa si aggiunge la RC auto per i veicoli aziendali (obbligatoria per legge). Molte altre coperture (RC impresa, incendio, ecc.) non sono obbligatorie per legge ma sono prassi comune e spesso richieste da clienti/appaltanti.",
     },
     {
       question: "Ho già l'INAIL: perché dovrei fare anche la polizza infortuni integrativa?",
       answer:
-        "L'INAIL copre solo gli infortuni sul lavoro e le malattie professionali, ma con limiti importanti: la rendita INAIL per invalidità permanente è calcolata sulla retribuzione dichiarata (spesso bassa per molti artigiani), non copre le prime 3 giorni di inabilità temporanea, e non copre le spese mediche eccedenti il Servizio Sanitario. La polizza integrativa colma questi gap: indennità giornaliera sin dal primo giorno, rimborso spese mediche private, e capitali aggiuntivi per invalidità grave.",
+        // Riscritta il 15/11/2026: prima diceva "non copre le prime 3 giorni" e
+        // dava per certa una rendita "calcolata sulla retribuzione dichiarata".
+        // Artt. 68 e 73 D.P.R. 1124/1965 letti su normattiva il 15/11/2026.
+        "L'INAIL copre gli infortuni sul lavoro e le malattie professionali, con regole che lasciano dei buchi. L'indennità per l'inabilità temporanea parte dal quarto giorno successivo all'infortunio ed è pari al 60% della retribuzione giornaliera (art. 68 D.P.R. 1124/1965). Per un dipendente la giornata dell'infortunio e i giorni di attesa li paga il datore di lavoro (art. 73); l'artigiano titolare un datore di lavoro non ce l'ha, e quei giorni restano scoperti. L'INAIL di regola non rimborsa le visite e le cure private, e i postumi permanenti li indennizza secondo le sue tabelle, che non sempre bastano a coprire il reddito perso. La polizza infortuni integrativa serve a questo: una diaria che può partire dal primo giorno, il rimborso delle spese mediche e un capitale in più se l'invalidità è grave.",
     },
     {
       question: 'Cosa copre esattamente la RC impresa e quanto costa?',
