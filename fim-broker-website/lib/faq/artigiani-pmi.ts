@@ -1,4 +1,10 @@
 import type { FaqCategory } from '.'
+import {
+  NORMA_CATASTROFALE,
+  BENI_DA_ASSICURARE,
+  EVENTI_CATASTROFALI,
+  CHI_E_ESCLUSO,
+} from '@/lib/catastrofale'
 
 export const artigianiPmiFaq: FaqCategory = {
   slug: 'artigiani-pmi',
@@ -13,7 +19,9 @@ export const artigianiPmiFaq: FaqCategory = {
     {
       question: 'Quali assicurazioni sono obbligatorie per un datore di lavoro?',
       answer:
-        "Per i datori di lavoro con dipendenti, la principale assicurazione obbligatoria è quella INAIL (Infortuni sul Lavoro), gestita direttamente dall'ente. A questa si aggiunge la RC auto per i veicoli aziendali (obbligatoria per legge). Molte altre coperture (RC impresa, incendio, ecc.) non sono obbligatorie per legge ma sono prassi comune e spesso richieste da clienti/appaltanti.",
+        // Dal 15/11/2026 cita anche la catastrofale, con il testo di lib/catastrofale.ts,
+        // come la sezione "Cosa chiede la legge" della stessa pagina.
+        `Per i datori di lavoro con dipendenti, la principale assicurazione obbligatoria è quella INAIL (Infortuni sul Lavoro), gestita direttamente dall'ente. A questa si aggiunge la RC auto per i veicoli aziendali (obbligatoria per legge). Quasi tutte le imprese devono poi assicurare ${BENI_DA_ASSICURARE} contro ${EVENTI_CATASTROFALI} (${NORMA_CATASTROFALE}): ne restano fuori ${CHI_E_ESCLUSO}. Molte altre coperture (RC impresa, incendio, ecc.) non sono obbligatorie per legge ma sono prassi comune e spesso richieste da clienti/appaltanti.`,
     },
     {
       question: "Ho già l'INAIL: perché dovrei fare anche la polizza infortuni integrativa?",
