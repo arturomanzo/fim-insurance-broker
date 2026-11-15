@@ -9,7 +9,8 @@ Routine editoriale della pagina aziendale
 `linkedin.com/company/fim-insurance-broker-s-a-s-di-manzo-arturo-c`.
 
 Due uscite a settimana, **martedì e giovedì**. La bozza si prepara la sera prima
-(lunedì e mercoledì); Arturo la legge la mattina e pubblica lui.
+(lunedì e mercoledì); Arturo la legge la mattina e la pubblica lui, oppure dà
+l'ok e la pubblica Claude tramite Zapier (sezione 6).
 
 ## Le due rubriche
 
@@ -126,6 +127,44 @@ Il campo `post` contiene il testo INTEGRALE, così Arturo lo legge e lo copia da
 telefono senza aprire il Mac. Telegram taglia a 4096 caratteri e il nodo accorcia
 il post a 3.200, quindi non allegare altro al messaggio.
 
+## 6. Pubblica tramite Zapier (solo dopo l'ok di Arturo)
+
+Dal 15 novembre 2026 la Pagina si può pubblicare dal connettore Zapier di
+claude.ai, con l'app LinkedIn e l'azione **Create Company Update** collegata
+all'account di Arturo. La prima uscita, il post del 12/11 sulla colpa grave di
+docenti e ATA, è passata con testo completo, parentesi, hashtag e immagine.
+
+**Prima di pubblicare serve l'ok esplicito di Arturo su quel post**: testo e
+immagine. Una bozza approvata la settimana prima non vale per un post nuovo.
+
+Come si fa:
+
+1. `inspect_zapier_actions` con `tool_name: linkedin_create_company_update` ed
+   `enum_property: company_id`. Si usa la Pagina **FIM Insurance Broker**, che
+   deve comparire fra i valori; l'id va letto lì ogni volta, non ricopiato a mano.
+   Se la Pagina non c'è o la connessione risulta scaduta, ci si ferma e si chiede
+   ad Arturo di ricollegare LinkedIn su Zapier.
+2. `execute_zapier_write_action` con questi parametri:
+   - `comment`: il testo integrale del `post.md`, cioè quello dopo il front matter,
+     senza ritocchi;
+   - `allow_reserved_characters: "false"`, così Zapier protegge da solo parentesi
+     e cancelletti. Non va fatto anche a mano, sennò si raddoppia;
+   - `image_type: "post_media"`;
+   - `image`: l'URL pubblico dell'immagine su
+     `https://www.fimbroker.it/social/linkedin/<data>/`. Quindi la bozza deve
+     essere già su `main` e online.
+3. Zapier non ha un campo per il testo alternativo dell'immagine. L'etichetta IA
+   resta come ultima riga del post, e quella basta.
+
+**Se Zapier risponde con un errore, NON si riprova.** Il 15/11/2026 l'azione ha
+risposto "Could not find entity" due volte, eppure il post era uscito tutte e
+due le volte: doppione da cancellare a mano. Dopo un errore si chiede ad Arturo
+di guardare la Pagina e si riprova solo se il post non c'è. Il post si
+cancella solo a mano: Zapier qui non ha un'azione per eliminarlo.
+
+Dopo la pubblicazione, `stato: pubblicato il <data> via Zapier` nel front matter
+del `post.md`.
+
 ## Quando arriverà l'accesso API (vincolo)
 
 La richiesta Community Management API inviata a LinkedIn il 19 agosto 2026
@@ -147,3 +186,4 @@ Tier, nel nuovo form si dichiara **solo Page management**.
 - [ ] Se l'immagine è generata con Higgsfield: riga "Immagine generata con intelligenza artificiale." in fondo al post e nel testo alternativo
 - [ ] Tema diverso dalle ultime tre settimane
 - [ ] Bozza salvata nella cartella della data giusta
+- [ ] Se si pubblica via Zapier: ok esplicito di Arturo su questo post, una sola chiamata, e dopo un errore nessun nuovo tentativo finché Arturo non ha guardato la Pagina

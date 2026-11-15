@@ -6,7 +6,7 @@ fonte: art. 2048 c.c.; art. 61 L. 312/1980, letto su normattiva il 07/11/2026; a
 immagine: immagine.jpg (generata con Higgsfield: etichetta IA nel post e nel testo alternativo)
 link: nel corpo, obiettivo traffico verso l'articolo
 nota: il 29/10 è uscito il post sull'obbligo di RC patrimoniale dal 2027 per chi gestisce soldi pubblici; questo parla di chi quell'obbligo non ce l'ha
-stato: bozza da approvare
+stato: pubblicato il 15/11/2026 via Zapier (prima prova; un doppione uscito per errore è stato cancellato a mano)
 ---
 
 «Sono un docente, l'obbligo del 2027 non mi riguarda. Quindi sono a posto?»
