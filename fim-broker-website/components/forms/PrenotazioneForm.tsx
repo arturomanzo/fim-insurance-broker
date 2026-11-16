@@ -161,7 +161,7 @@ export default function PrenotazioneForm() {
           <input
             id="prenota-email"
             autoComplete="email"
-            type="email"
+            type="email" spellCheck={false}
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -255,7 +255,7 @@ export default function PrenotazioneForm() {
           value={formData.note}
           onChange={handleChange}
           rows={3}
-          placeholder="Descrivi brevemente la tua situazione o le tue esigenze..."
+          placeholder="Descrivi brevemente la tua situazione o le tue esigenze…"
           className="input-field resize-none"
         />
       </div>

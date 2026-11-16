@@ -67,7 +67,7 @@ export default function MagicLinkForm({ nextPath }: Props) {
         <label htmlFor="area-cliente-email" className="label-field">Email associata alle tue polizze</label>
         <input
           id="area-cliente-email"
-          type="email"
+          type="email" spellCheck={false}
           autoComplete="email"
           value={email}
           onChange={(e) => { setEmail(e.target.value); setErrorMsg('') }}
@@ -80,11 +80,11 @@ export default function MagicLinkForm({ nextPath }: Props) {
         />
       </div>
       {status === 'error' && (
-        <p className="text-red-500 text-sm">{errorMsg}</p>
+        <p role="alert" className="text-red-600 text-sm">{errorMsg}</p>
       )}
       <button
         type="submit"
-        disabled={status === 'loading' || !email.trim()}
+        disabled={status === 'loading'}
         className="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? 'Invio in corso…' : 'Invia link di accesso'}

@@ -147,7 +147,7 @@ export default function CollaboraForm() {
           <input
             id="collabora-email"
             autoComplete="email"
-            type="email"
+            type="email" spellCheck={false}
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -273,7 +273,7 @@ export default function CollaboraForm() {
           onChange={handleChange}
           required
           rows={5}
-          placeholder="Descrivi brevemente il tuo percorso, i tuoi obiettivi e cosa ti attrae di una collaborazione con FIM..."
+          placeholder="Descrivi brevemente il tuo percorso, i tuoi obiettivi e cosa ti attrae di una collaborazione con FIM…"
           className="input-field resize-none"
         />
       </div>

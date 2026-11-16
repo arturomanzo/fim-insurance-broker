@@ -19,12 +19,12 @@ import {
 const ERRORE_INVIO = "Errore nell'invio. Riprova o contattaci al +39 06 96883381."
 
 const MESSAGGI_ATTESA = [
-  'Carico il documento...',
-  'Cerco le clausole sulle garanzie...',
-  'Calcolo importi e massimali richiesti...',
-  'Confronto con la tua polizza...',
-  'Segno i punti da chiarire...',
-  'Preparo il riepilogo...',
+  'Carico il documento…',
+  'Cerco le clausole sulle garanzie…',
+  'Calcolo importi e massimali richiesti…',
+  'Confronto con la tua polizza…',
+  'Segno i punti da chiarire…',
+  'Preparo il riepilogo…',
 ]
 
 const ESITO_STILE: Record<Esito, string> = {
@@ -227,7 +227,7 @@ export default function VerificaRequisiti() {
           <div className="absolute inset-0 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
         </div>
         <div>
-          <p className="text-lg font-semibold text-primary mb-1">Verifica in corso...</p>
+          <p className="text-lg font-semibold text-primary mb-1">Verifica in corso…</p>
           <p className="text-gray-500 text-sm animate-pulse">{messaggio}</p>
         </div>
         <p className="text-xs text-gray-500 max-w-xs">
@@ -441,7 +441,7 @@ export default function VerificaRequisiti() {
           <input
             id="vr-email"
             autoComplete="email"
-            type="email"
+            type="email" spellCheck={false}
             value={formData.email}
             onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
             required

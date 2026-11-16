@@ -122,7 +122,7 @@ export default function ContactForm() {
           <input
             id="contact-email"
             autoComplete="email"
-            type="email"
+            type="email" spellCheck={false}
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -170,7 +170,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={5}
-          placeholder="Scrivi il tuo messaggio..."
+          placeholder="Scrivi il tuo messaggio…"
           className="input-field resize-none"
         />
       </div>

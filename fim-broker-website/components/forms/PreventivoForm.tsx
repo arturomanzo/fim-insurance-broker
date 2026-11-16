@@ -139,6 +139,9 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
     if (!telefono.trim()) e.telefono = 'Campo obbligatorio'
     if (!privacy) e.privacy = 'Accetta la privacy policy per continuare'
     setErrors(e)
+    // Porta il cursore sul primo campo da correggere, nell'ordine del modulo.
+    const primo = ['nome', 'cognome', 'email', 'telefono', 'privacy'].find((k) => e[k])
+    if (primo) document.getElementById(`prev-${primo}`)?.focus()
     return Object.keys(e).length === 0
   }
 
@@ -231,7 +234,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
       <div className="flex items-center gap-2 mb-8">
         {([1, 2, 3] as const).map((s, i) => (
           <div key={s} className="flex items-center gap-2 flex-1">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all ${step === s ? 'bg-primary text-white' : step > s ? 'bg-accent-cta text-white' : 'bg-gray-200 text-gray-500'}`}>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 transition ${step === s ? 'bg-primary text-white' : step > s ? 'bg-accent-cta text-white' : 'bg-gray-200 text-gray-500'}`}>
               {step > s ? (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -254,7 +257,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {PROFILES.map((p) => (
               <button key={p.id} onClick={() => { setProfile(p.id); setStep(2); trackPreventivoStep1(p.id) }}
-                className="group text-left p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition-all duration-200">
+                className="group text-left p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition duration-200">
                 <div className="text-2xl mb-2">{p.emoji}</div>
                 <div className="font-bold text-primary text-sm mb-0.5 group-hover:text-primary-light">{p.label}</div>
                 <div className="text-gray-500 text-xs">{p.desc}</div>
@@ -280,7 +283,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <div className="flex flex-wrap gap-2 mb-5">
             {COPERTURE[profile].map((c) => (
               <button key={c} onClick={() => setCopertura(c)}
-                className={`px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all ${copertura === c ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-600 hover:border-primary/50 hover:text-primary'}`}>
+                className={`px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition ${copertura === c ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-600 hover:border-primary/50 hover:text-primary'}`}>
                 {c}
               </button>
             ))}
@@ -288,7 +291,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <div className="mb-5">
             <label htmlFor="prev-note" className="label-field">Note aggiuntive (facoltativo)</label>
             <textarea id="prev-note" value={note} onChange={(e) => setNote(e.target.value)} rows={3}
-              placeholder="Descrivi brevemente le tue esigenze o situazione attuale..."
+              placeholder="Descrivi brevemente le tue esigenze o situazione attuale…"
               className="input-field resize-none text-sm" maxLength={600} />
           </div>
           <button onClick={() => { setStep(3); trackPreventivoStep2(profile, copertura || 'non selezionata') }}
@@ -319,29 +322,29 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="prev-nome" className="label-field">Nome *</label>
-                <input id="prev-nome" type="text" autoComplete="given-name" value={nome} onChange={(e) => { setNome(e.target.value); setErrors((p) => ({ ...p, nome: '' })) }}
+                <input id="prev-nome" aria-invalid={!!errors.nome} aria-describedby={errors.nome ? "prev-nome-errore" : undefined} type="text" autoComplete="given-name" value={nome} onChange={(e) => { setNome(e.target.value); setErrors((p) => ({ ...p, nome: '' })) }}
                   placeholder="Mario" className="input-field" maxLength={100} />
-                {errors.nome && <p className="text-red-500 text-xs mt-1">{errors.nome}</p>}
+                {errors.nome && <p id="prev-nome-errore" className="text-red-600 text-xs mt-1">{errors.nome}</p>}
               </div>
               <div>
                 <label htmlFor="prev-cognome" className="label-field">Cognome *</label>
-                <input id="prev-cognome" type="text" autoComplete="family-name" value={cognome} onChange={(e) => { setCognome(e.target.value); setErrors((p) => ({ ...p, cognome: '' })) }}
+                <input id="prev-cognome" aria-invalid={!!errors.cognome} aria-describedby={errors.cognome ? "prev-cognome-errore" : undefined} type="text" autoComplete="family-name" value={cognome} onChange={(e) => { setCognome(e.target.value); setErrors((p) => ({ ...p, cognome: '' })) }}
                   placeholder="Rossi" className="input-field" maxLength={100} />
-                {errors.cognome && <p className="text-red-500 text-xs mt-1">{errors.cognome}</p>}
+                {errors.cognome && <p id="prev-cognome-errore" className="text-red-600 text-xs mt-1">{errors.cognome}</p>}
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="prev-email" className="label-field">Email *</label>
-                <input id="prev-email" type="email" autoComplete="email" value={email} onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: '' })) }}
+                <input id="prev-email" aria-invalid={!!errors.email} aria-describedby={errors.email ? "prev-email-errore" : undefined} type="email" spellCheck={false} autoComplete="email" value={email} onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: '' })) }}
                   placeholder="mario@email.it" className="input-field" maxLength={200} />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                {errors.email && <p id="prev-email-errore" className="text-red-600 text-xs mt-1">{errors.email}</p>}
               </div>
               <div>
                 <label htmlFor="prev-telefono" className="label-field">Telefono *</label>
-                <input id="prev-telefono" type="tel" autoComplete="tel" value={telefono} onChange={(e) => { setTelefono(e.target.value); setErrors((p) => ({ ...p, telefono: '' })) }}
+                <input id="prev-telefono" aria-invalid={!!errors.telefono} aria-describedby={errors.telefono ? "prev-telefono-errore" : undefined} type="tel" autoComplete="tel" value={telefono} onChange={(e) => { setTelefono(e.target.value); setErrors((p) => ({ ...p, telefono: '' })) }}
                   placeholder="+39 333 1234567" className="input-field" maxLength={30} />
-                {errors.telefono && <p className="text-red-500 text-xs mt-1">{errors.telefono}</p>}
+                {errors.telefono && <p id="prev-telefono-errore" className="text-red-600 text-xs mt-1">{errors.telefono}</p>}
               </div>
             </div>
             {isAutoCopertura(copertura) && (
@@ -349,13 +352,14 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
                 <label htmlFor="prev-targa" className="label-field">Targa del veicolo (facoltativo)</label>
                 <input id="prev-targa" type="text" value={targa}
                   onChange={(e) => setTarga(e.target.value.toUpperCase())}
-                  placeholder="AB123CD" className="input-field uppercase" maxLength={15} autoComplete="off" />
+                  placeholder="AB123CD" className="input-field uppercase" maxLength={15} autoComplete="off"
+                  autoCapitalize="characters" spellCheck={false} />
                 <p className="text-xs text-gray-500 mt-1">Indicandola ora ci permetti di preparare il preventivo più velocemente.</p>
               </div>
             )}
             <div>
               <label className="flex items-start gap-3 cursor-pointer">
-                <input type="checkbox" checked={privacy} onChange={(e) => { setPrivacy(e.target.checked); setErrors((p) => ({ ...p, privacy: '' })) }}
+                <input id="prev-privacy" type="checkbox" checked={privacy} aria-invalid={!!errors.privacy} aria-describedby={errors.privacy ? 'prev-privacy-errore' : undefined} onChange={(e) => { setPrivacy(e.target.checked); setErrors((p) => ({ ...p, privacy: '' })) }}
                   className="mt-1 w-4 h-4 rounded border-gray-300 text-primary accent-primary" />
                 <span className="text-sm text-gray-600">
                   Ho letto e accetto la{' '}
@@ -363,7 +367,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
                   e acconsento al trattamento dei miei dati per ricevere il preventivo. *
                 </span>
               </label>
-              {errors.privacy && <p className="text-red-500 text-xs mt-1">{errors.privacy}</p>}
+              {errors.privacy && <p id="prev-privacy-errore" className="text-red-600 text-xs mt-1">{errors.privacy}</p>}
             </div>
             {status === 'error' && (
               <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
@@ -371,7 +375,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
               </div>
             )}
             <Button type="submit" loading={status === 'loading'} size="lg" className="w-full">
-              {status === 'loading' ? 'Invio in corso...' : 'Richiedi Preventivo Gratuito'}
+              {status === 'loading' ? 'Invio in corso…' : 'Richiedi Preventivo Gratuito'}
             </Button>
             <p className="text-center text-xs text-gray-500">Ricontatto {RICONTATTO} · Nessun impegno</p>
           </div>
