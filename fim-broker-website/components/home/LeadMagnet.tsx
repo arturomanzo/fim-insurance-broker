@@ -130,6 +130,7 @@ export default function LeadMagnet() {
                     </label>
                     <input
                       id="lm-nome"
+                      autoComplete="name"
                       type="text"
                       required
                       value={nome}
@@ -146,6 +147,7 @@ export default function LeadMagnet() {
                     </label>
                     <input
                       id="lm-email"
+                      autoComplete="email"
                       type="email"
                       required
                       value={email}

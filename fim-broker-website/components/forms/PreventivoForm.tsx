@@ -286,8 +286,8 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
             ))}
           </div>
           <div className="mb-5">
-            <label className="label-field">Note aggiuntive (facoltativo)</label>
-            <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3}
+            <label htmlFor="prev-note" className="label-field">Note aggiuntive (facoltativo)</label>
+            <textarea id="prev-note" value={note} onChange={(e) => setNote(e.target.value)} rows={3}
               placeholder="Descrivi brevemente le tue esigenze o situazione attuale..."
               className="input-field resize-none text-sm" maxLength={600} />
           </div>
@@ -318,36 +318,36 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="label-field">Nome *</label>
-                <input type="text" value={nome} onChange={(e) => { setNome(e.target.value); setErrors((p) => ({ ...p, nome: '' })) }}
+                <label htmlFor="prev-nome" className="label-field">Nome *</label>
+                <input id="prev-nome" type="text" autoComplete="given-name" value={nome} onChange={(e) => { setNome(e.target.value); setErrors((p) => ({ ...p, nome: '' })) }}
                   placeholder="Mario" className="input-field" maxLength={100} />
                 {errors.nome && <p className="text-red-500 text-xs mt-1">{errors.nome}</p>}
               </div>
               <div>
-                <label className="label-field">Cognome *</label>
-                <input type="text" value={cognome} onChange={(e) => { setCognome(e.target.value); setErrors((p) => ({ ...p, cognome: '' })) }}
+                <label htmlFor="prev-cognome" className="label-field">Cognome *</label>
+                <input id="prev-cognome" type="text" autoComplete="family-name" value={cognome} onChange={(e) => { setCognome(e.target.value); setErrors((p) => ({ ...p, cognome: '' })) }}
                   placeholder="Rossi" className="input-field" maxLength={100} />
                 {errors.cognome && <p className="text-red-500 text-xs mt-1">{errors.cognome}</p>}
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="label-field">Email *</label>
-                <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: '' })) }}
+                <label htmlFor="prev-email" className="label-field">Email *</label>
+                <input id="prev-email" type="email" autoComplete="email" value={email} onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: '' })) }}
                   placeholder="mario@email.it" className="input-field" maxLength={200} />
                 {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
               </div>
               <div>
-                <label className="label-field">Telefono *</label>
-                <input type="tel" value={telefono} onChange={(e) => { setTelefono(e.target.value); setErrors((p) => ({ ...p, telefono: '' })) }}
+                <label htmlFor="prev-telefono" className="label-field">Telefono *</label>
+                <input id="prev-telefono" type="tel" autoComplete="tel" value={telefono} onChange={(e) => { setTelefono(e.target.value); setErrors((p) => ({ ...p, telefono: '' })) }}
                   placeholder="+39 333 1234567" className="input-field" maxLength={30} />
                 {errors.telefono && <p className="text-red-500 text-xs mt-1">{errors.telefono}</p>}
               </div>
             </div>
             {isAutoCopertura(copertura) && (
               <div>
-                <label className="label-field">Targa del veicolo (facoltativo)</label>
-                <input type="text" value={targa}
+                <label htmlFor="prev-targa" className="label-field">Targa del veicolo (facoltativo)</label>
+                <input id="prev-targa" type="text" value={targa}
                   onChange={(e) => setTarga(e.target.value.toUpperCase())}
                   placeholder="AB123CD" className="input-field uppercase" maxLength={15} autoComplete="off" />
                 <p className="text-xs text-gray-500 mt-1">Indicandola ora ci permetti di preparare il preventivo più velocemente.</p>

@@ -449,9 +449,11 @@ export default function RiskCalculator() {
             <input type="text" name="website" value={form.website} onChange={(e) => setForm((p) => ({ ...p, website: e.target.value }))} className="hidden" tabIndex={-1} autoComplete="off" />
 
             <div>
-              <label className="label-field">Nome *</label>
+              <label htmlFor="calc-nome" className="label-field">Nome *</label>
               <input
+                id="calc-nome"
                 type="text"
+                autoComplete="name"
                 value={form.nome}
                 onChange={(e) => setForm((p) => ({ ...p, nome: e.target.value }))}
                 placeholder="Il tuo nome"
@@ -460,9 +462,11 @@ export default function RiskCalculator() {
               />
             </div>
             <div>
-              <label className="label-field">Email *</label>
+              <label htmlFor="calc-email" className="label-field">Email *</label>
               <input
+                id="calc-email"
                 type="email"
+                autoComplete="email"
                 value={form.email}
                 onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
                 placeholder="tua@email.com"

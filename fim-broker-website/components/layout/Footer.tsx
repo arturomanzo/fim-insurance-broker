@@ -146,6 +146,8 @@ function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="La tua email"
+        aria-label="La tua email"
+        autoComplete="email"
         required
         disabled={status === 'loading'}
         className="w-full px-4 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-60"

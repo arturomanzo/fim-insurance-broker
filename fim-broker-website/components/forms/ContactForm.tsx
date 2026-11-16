@@ -107,6 +107,7 @@ export default function ContactForm() {
           <label htmlFor="contact-nome" className="label-field">Nome e Cognome *</label>
           <input
             id="contact-nome"
+            autoComplete="name"
             type="text"
             name="nome"
             value={formData.nome}
@@ -120,6 +121,7 @@ export default function ContactForm() {
           <label htmlFor="contact-email" className="label-field">Email *</label>
           <input
             id="contact-email"
+            autoComplete="email"
             type="email"
             name="email"
             value={formData.email}
@@ -136,6 +138,7 @@ export default function ContactForm() {
           <label htmlFor="contact-telefono" className="label-field">Telefono</label>
           <input
             id="contact-telefono"
+            autoComplete="tel"
             type="tel"
             name="telefono"
             value={formData.telefono}
