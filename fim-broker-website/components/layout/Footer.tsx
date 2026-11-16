@@ -100,7 +100,19 @@ function NewsletterForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!consent) return
+    // Il pulsante resta attivo: se manca qualcosa lo diciamo qui, accanto al modulo.
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setErrorMsg('Scrivi un indirizzo email valido.')
+      setStatus('error')
+      document.getElementById('newsletter-email')?.focus()
+      return
+    }
+    if (!consent) {
+      setErrorMsg('Spunta il consenso per iscriverti.')
+      setStatus('error')
+      document.getElementById('newsletter-consenso')?.focus()
+      return
+    }
     setStatus('loading')
     setErrorMsg('')
     try {
@@ -142,9 +154,10 @@ function NewsletterForm() {
   return (
     <form className="space-y-3" onSubmit={handleSubmit} noValidate>
       <input
-        type="email"
+        id="newsletter-email"
+        type="email" spellCheck={false}
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => { setEmail(e.target.value); if (status === 'error') setStatus('idle') }}
         placeholder="La tua email"
         aria-label="La tua email"
         autoComplete="email"
@@ -164,9 +177,10 @@ function NewsletterForm() {
       />
       <label className="flex items-start gap-2 cursor-pointer">
         <input
+          id="newsletter-consenso"
           type="checkbox"
           checked={consent}
-          onChange={(e) => setConsent(e.target.checked)}
+          onChange={(e) => { setConsent(e.target.checked); if (status === 'error') setStatus('idle') }}
           disabled={status === 'loading'}
           className="mt-0.5 w-4 h-4 accent-accent flex-shrink-0"
         />
@@ -178,11 +192,11 @@ function NewsletterForm() {
         </span>
       </label>
       {status === 'error' && (
-        <p className="text-red-300 text-xs">{errorMsg}</p>
+        <p role="alert" className="text-red-300 text-xs">{errorMsg}</p>
       )}
       <button
         type="submit"
-        disabled={status === 'loading' || !consent}
+        disabled={status === 'loading'}
         className="w-full px-4 py-2.5 bg-accent text-primary font-semibold text-sm rounded-lg hover:bg-accent-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? 'Iscrizione in corso…' : 'Iscriviti'}

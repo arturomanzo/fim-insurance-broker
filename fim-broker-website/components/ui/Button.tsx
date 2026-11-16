@@ -7,19 +7,19 @@ import { clsx } from 'clsx'
 // ── Shared style constants ──────────────────────────────────────────────────
 
 const base =
-  'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2'
+  'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
 
 const variants = {
   primary:
-    'bg-accent-cta text-white hover:bg-accent-cta-hover focus:ring-accent shadow-sm hover:shadow-md',
+    'bg-accent-cta text-white hover:bg-accent-cta-hover focus-visible:ring-accent shadow-sm hover:shadow-md',
   secondary:
-    'bg-primary text-white hover:bg-primary-light focus:ring-primary shadow-sm hover:shadow-md',
+    'bg-primary text-white hover:bg-primary-light focus-visible:ring-primary shadow-sm hover:shadow-md',
   outline:
-    'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary',
+    'border-2 border-primary text-primary hover:bg-primary hover:text-white focus-visible:ring-primary',
   ghost:
-    'text-primary hover:bg-primary/10 focus:ring-primary',
+    'text-primary hover:bg-primary/10 focus-visible:ring-primary',
   'outline-white':
-    'border-2 border-white text-white hover:bg-white hover:text-primary focus:ring-white',
+    'border-2 border-white text-white hover:bg-white hover:text-primary focus-visible:ring-white',
 } as const
 
 const sizes = {

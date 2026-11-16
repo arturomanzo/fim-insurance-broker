@@ -32,7 +32,7 @@ interface FormData {
 }
 
 const SETTORI = [
-  { value: '', label: 'Seleziona settore...' },
+  { value: '', label: 'Seleziona settore…' },
   { value: 'artigianato', label: 'Artigianato / Manifattura' },
   { value: 'commercio', label: 'Commercio / Retail' },
   { value: 'edilizia', label: 'Edilizia / Costruzioni' },
@@ -220,7 +220,7 @@ export default function SecondOpinionForm() {
           <input
             id="so-email"
             autoComplete="email"
-            type="email"
+            type="email" spellCheck={false}
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -268,7 +268,7 @@ export default function SecondOpinionForm() {
             name="compagnieAttuali"
             value={formData.compagnieAttuali}
             onChange={handleChange}
-            placeholder="Generali, AXA, ..."
+            placeholder="Generali, AXA…"
             className="input-field"
           />
         </div>
@@ -346,7 +346,7 @@ export default function SecondOpinionForm() {
           value={formData.note}
           onChange={handleChange}
           rows={3}
-          placeholder="Specificità del tuo settore, sinistri recenti, coperture che ritieni critiche..."
+          placeholder="Specificità del tuo settore, sinistri recenti, coperture che ritieni critiche…"
           className="input-field resize-none"
         />
       </div>

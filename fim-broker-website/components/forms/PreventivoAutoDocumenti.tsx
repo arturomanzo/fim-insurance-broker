@@ -313,7 +313,7 @@ export default function PreventivoAutoDocumenti() {
         </div>
         <div>
           <label htmlFor="pad-email" className="label-field">Email *</label>
-          <input id="pad-email" type="email" required value={formData.email}
+          <input id="pad-email" type="email" spellCheck={false} required value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="input-field" autoComplete="email" />
         </div>
         <div>

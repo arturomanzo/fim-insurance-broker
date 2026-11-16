@@ -84,12 +84,12 @@ function scoreBg(score: number) {
 }
 
 const LOADING_MESSAGES = [
-  'Caricamento del documento...',
-  'Identifico il tipo di polizza...',
-  'Estraggo coperture e massimali...',
-  'Ricerco lacune e rischi scoperti...',
-  'Confronto con il mercato italiano...',
-  'Preparo il report personalizzato...',
+  'Caricamento del documento…',
+  'Identifico il tipo di polizza…',
+  'Estraggo coperture e massimali…',
+  'Ricerco lacune e rischi scoperti…',
+  'Confronto con il mercato italiano…',
+  'Preparo il report personalizzato…',
 ]
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -251,7 +251,7 @@ export default function PolicyAnalyzer() {
           </div>
         </div>
         <div>
-          <p className="text-lg font-semibold text-primary mb-1">Analisi in corso...</p>
+          <p className="text-lg font-semibold text-primary mb-1">Analisi in corso…</p>
           <p className="text-gray-500 text-sm animate-pulse">{loadingMsg}</p>
         </div>
         <div className="w-64 bg-gray-200 rounded-full h-2">
@@ -560,7 +560,7 @@ export default function PolicyAnalyzer() {
           <input
             id="pa-email"
             autoComplete="email"
-            type="email"
+            type="email" spellCheck={false}
             value={formData.email}
             onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
             required

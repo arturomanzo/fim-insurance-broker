@@ -318,7 +318,7 @@ export default function RiskCalculator() {
               return (
                 <div key={label} className="flex items-center gap-1 flex-1">
                   <div className={`flex items-center gap-1.5 ${i < 3 ? 'flex-1' : ''}`}>
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all ${done ? 'bg-accent-cta text-white' : active ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500'}`}>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition ${done ? 'bg-accent-cta text-white' : active ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500'}`}>
                       {done ? (
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -345,7 +345,7 @@ export default function RiskCalculator() {
               <button
                 key={p.id}
                 onClick={() => handleProfileSelect(p.id)}
-                className="group text-left p-5 rounded-2xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
+                className="group text-left p-5 rounded-2xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition duration-200 hover:-translate-y-0.5"
               >
                 <div className="text-3xl mb-3">{p.emoji}</div>
                 <div className="font-bold text-primary text-lg mb-1 group-hover:text-primary-light transition-colors">{p.label}</div>
@@ -374,7 +374,7 @@ export default function RiskCalculator() {
               <button
                 key={s}
                 onClick={() => handleSectorSelect(s)}
-                className="px-5 py-3 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-primary/5 text-gray-700 hover:text-primary font-medium text-sm transition-all duration-200"
+                className="px-5 py-3 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-primary/5 text-gray-700 hover:text-primary font-medium text-sm transition duration-200"
               >
                 {s}
               </button>
@@ -404,13 +404,13 @@ export default function RiskCalculator() {
                 <div className="flex gap-3">
                   <button
                     onClick={() => handleAnswer(q.id, true)}
-                    className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold border-2 transition-all ${form.answers[q.id] === true ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-700 hover:border-primary/50'}`}
+                    className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold border-2 transition ${form.answers[q.id] === true ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-700 hover:border-primary/50'}`}
                   >
                     {q.yesLabel}
                   </button>
                   <button
                     onClick={() => handleAnswer(q.id, false)}
-                    className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold border-2 transition-all ${form.answers[q.id] === false ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-700 hover:border-primary/50'}`}
+                    className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold border-2 transition ${form.answers[q.id] === false ? 'border-primary bg-primary text-white' : 'border-gray-200 text-gray-700 hover:border-primary/50'}`}
                   >
                     {q.noLabel}
                   </button>
@@ -465,7 +465,7 @@ export default function RiskCalculator() {
               <label htmlFor="calc-email" className="label-field">Email *</label>
               <input
                 id="calc-email"
-                type="email"
+                type="email" spellCheck={false}
                 autoComplete="email"
                 value={form.email}
                 onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
@@ -552,7 +552,7 @@ export default function RiskCalculator() {
             <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden mb-3">
               <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-amber-400 to-red-500 rounded-full" />
               <div
-                className="absolute top-0 bottom-0 right-0 bg-gray-200 rounded-r-full transition-all duration-700"
+                className="absolute top-0 bottom-0 right-0 bg-gray-200 rounded-r-full transition-[width] duration-700"
                 style={{ width: `${100 - result.punteggio}%` }}
               />
             </div>

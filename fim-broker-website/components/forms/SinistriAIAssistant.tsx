@@ -342,7 +342,7 @@ export default function SinistriAIAssistant() {
               onChange={e => setField('tipo_sinistro', e.target.value)}
               className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white"
             >
-              <option value="">Seleziona...</option>
+              <option value="">Seleziona…</option>
               {CLAIM_TYPES.map(t => (
                 <option key={t.id} value={t.id}>{t.label}</option>
               ))}
@@ -382,7 +382,7 @@ export default function SinistriAIAssistant() {
               type="text"
               value={form.compagnia}
               onChange={e => setField('compagnia', e.target.value)}
-              placeholder="es. Allianz, Generali..."
+              placeholder="es. Allianz, Generali…"
               className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
             />
           </div>
@@ -397,7 +397,7 @@ export default function SinistriAIAssistant() {
             value={form.descrizione}
             onChange={e => setField('descrizione', e.target.value)}
             className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary resize-none"
-            placeholder="Descrivi brevemente cosa è successo, dove e come..."
+            placeholder="Descrivi brevemente cosa è successo, dove e come…"
           />
         </div>
 
@@ -426,7 +426,7 @@ export default function SinistriAIAssistant() {
           disabled={submitStatus === 'loading'}
           className="w-full bg-primary hover:bg-primary/90 disabled:opacity-60 text-white font-bold py-4 px-8 rounded-xl transition-colors text-base"
         >
-          {submitStatus === 'loading' ? 'Invio in corso...' : 'Invia pratica sinistro →'}
+          {submitStatus === 'loading' ? 'Invio in corso…' : 'Invia pratica sinistro →'}
         </button>
       </form>
     )
@@ -489,7 +489,7 @@ export default function SinistriAIAssistant() {
               key={id}
               onClick={() => selectClaimType(id)}
               disabled={!consensoSanitario}
-              className="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 hover:bg-primary/5 transition-all text-center group disabled:opacity-40 disabled:pointer-events-none"
+              className="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 hover:bg-primary/5 transition text-center group disabled:opacity-40 disabled:pointer-events-none"
             >
               <span className="text-2xl">{icon}</span>
               <span className="text-xs font-semibold text-gray-700 group-hover:text-primary transition-colors leading-tight">{label}</span>
@@ -523,7 +523,7 @@ export default function SinistriAIAssistant() {
         <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-lg">🤖</div>
         <div>
           <h3 className="font-bold text-white text-sm">Agente Sinistri AI</h3>
-          <p className="text-white/70 text-xs">{isStreaming ? 'Sta scrivendo...' : 'Online'}</p>
+          <p className="text-white/70 text-xs">{isStreaming ? 'Sta scrivendo…' : 'Online'}</p>
         </div>
         <button
           onClick={() => setPhase('select')}
@@ -592,7 +592,7 @@ export default function SinistriAIAssistant() {
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Scrivi qui..."
+          placeholder="Scrivi qui…"
           disabled={isStreaming}
           className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary disabled:opacity-50"
         />

@@ -218,7 +218,7 @@ export default function ScuoleForm() {
           <input
             id="scuole-email"
             autoComplete="email"
-            type="email"
+            type="email" spellCheck={false}
             name="email"
             value={formData.email}
             onChange={handleChange}

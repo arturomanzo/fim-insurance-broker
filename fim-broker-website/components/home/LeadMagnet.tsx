@@ -109,7 +109,7 @@ export default function LeadMagnet() {
                 </p>
                 <Link
                   href="/risorse/guida-pmi"
-                  className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-[gap]"
                 >
                   Leggi la guida direttamente →
                 </Link>
@@ -148,7 +148,7 @@ export default function LeadMagnet() {
                     <input
                       id="lm-email"
                       autoComplete="email"
-                      type="email"
+                      type="email" spellCheck={false}
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
