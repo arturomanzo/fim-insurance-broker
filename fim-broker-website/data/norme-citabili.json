@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-11-07",
+  "aggiornato": "2026-11-16",
   "norme": [
     {
       "id": "L-289-2002",
@@ -226,9 +226,9 @@
         "209/2005"
       ],
       "stato": "verificata",
-      "oggetto": "Codice delle Assicurazioni Private. Letti: art. 109 (RUI), 122 e 122-bis (obbligo RC auto e deroghe), 123 (natanti), 128 (massimali minimi), titolo X (assicurazione obbligatoria veicoli e natanti), 164 (modalità di gestione dei sinistri di tutela legale), 173 (definizione di tutela legale). Letti il 30/10/2026: art. 117 (conto separato; c. 3-bis fideiussione al 4% in alternativa), art. 118 (il premio pagato al broker libera il contraente solo se l'accordo con l'impresa lo prevede, c. 2), art. 119-bis (regole di comportamento), art. 120-bis (natura del compenso prima della conclusione; importo dell'onorario), art. 131, c. 2-bis (provvigioni RC auto), art. 143 (denuncia con il modulo). Letti il 07/11/2026: art. 119-ter, c. 1 e 2 (informazioni su richieste ed esigenze prima del contratto; ogni contratto proposto coerente con esse), art. 134, c. 3 (la classe di merito si riferisce al proprietario), art. 171 (vendita del veicolo: a scelta irrevocabile dell'alienante risoluzione con rimborso del rateo, cessione all'acquirente o sostituzione con altro veicolo; obbligo di avviso; copertura sul nuovo veicolo dal nuovo certificato).",
+      "oggetto": "Codice delle Assicurazioni Private. Letti: art. 109 (RUI), 122 e 122-bis (obbligo RC auto e deroghe), 123 (natanti), 128 (massimali minimi), titolo X (assicurazione obbligatoria veicoli e natanti), 164 (modalità di gestione dei sinistri di tutela legale), 173 (definizione di tutela legale). Letti il 30/10/2026: art. 117 (conto separato; c. 3-bis fideiussione al 4% in alternativa), art. 118 (il premio pagato al broker libera il contraente solo se l'accordo con l'impresa lo prevede, c. 2), art. 119-bis (regole di comportamento), art. 120-bis (natura del compenso prima della conclusione; importo dell'onorario), art. 131, c. 2-bis (provvigioni RC auto), art. 143 (denuncia con il modulo). Letti il 07/11/2026: art. 119-ter, c. 1 e 2 (informazioni su richieste ed esigenze prima del contratto; ogni contratto proposto coerente con esse), art. 134, c. 3 (la classe di merito si riferisce al proprietario), art. 171 (vendita del veicolo: a scelta irrevocabile dell'alienante risoluzione con rimborso del rateo, cessione all'acquirente o sostituzione con altro veicolo; obbligo di avviso; copertura sul nuovo veicolo dal nuovo certificato). Letto il 16/11/2026: art. 170-bis (durata annuale dell'RC auto, risoluzione automatica alla scadenza e divieto di tacito rinnovo; preavviso di almeno trenta giorni e obbligo dell'impresa di mantenere operante la garanzia del precedente contratto fino all'effetto della nuova polizza e comunque non oltre il quindicesimo giorno dopo la scadenza; c. 1-bis per i rischi accessori).",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-07;209",
-      "verificata_il": "2026-11-07"
+      "verificata_il": "2026-11-16"
     },
     {
       "id": "177-2024",
@@ -435,9 +435,9 @@
         "160/2019"
       ],
       "stato": "verificata",
-      "oggetto": "Legge di bilancio 2020. L'art. 1, commi 75 e seguenti, contiene le regole dei monopattini elettrici: c. 75-quinquies equiparati ai velocipedi per quanto non previsto; c. 75-vicies quinquies RC obbligatoria (art. 2054 c.c. e titolo X CAP); c. 75-quater e 75-undevicies sanzione da 100 a 400 euro senza contrassegno o RC; c. 75-novies casco per tutti; c. 75-duodevicies sanzione da 50 a 250 euro per le violazioni dei commi 75-sexies-75-quaterdecies.",
+      "oggetto": "Legge di bilancio 2020. L'art. 1, commi 75 e seguenti, contiene le regole dei monopattini elettrici: c. 75-quinquies equiparati ai velocipedi per quanto non previsto; c. 75-vicies quinquies RC obbligatoria (art. 2054 c.c. e titolo X CAP); c. 75-quater e 75-undevicies sanzione da 100 a 400 euro senza contrassegno o RC; c. 75-novies casco per tutti; c. 75-duodevicies sanzione da 50 a 250 euro per le violazioni dei commi 75-sexies-75-quaterdecies. Letto il 16/11/2026: art. 1, c. 762, l'IMU si versa in due rate scadenti il 16 giugno e il 16 dicembre, con facoltà del contribuente di pagare l'intero in un'unica soluzione entro il 16 giugno; la prima rata è pari all'imposta del primo semestre con aliquota e detrazione dell'anno precedente.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2019-12-27;160~art1",
-      "verificata_il": "2026-10-30"
+      "verificata_il": "2026-11-16"
     },
     {
       "id": "CC-2054",
@@ -735,6 +735,39 @@
       "oggetto": "Legge di bilancio 2022. Art. 1, c. 515: istituisce il Fondo mutualistico nazionale per la copertura dei danni catastrofali meteoclimatici alle produzioni agricole causati da alluvione, gelo o brina e siccità; c. 516: gestore ISMEA. È il fondo a cui rinvia il c. 111 dell'art. 1 della L. 213/2023 per le imprese agricole escluse dall'obbligo catastrofale.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2021-12-30;234~art1",
       "verificata_il": "2026-10-31"
+    },
+    {
+      "id": "CC-1901",
+      "citazione": "art. 1901 c.c.",
+      "chiavi": [
+        "cc-1901"
+      ],
+      "stato": "verificata",
+      "oggetto": "Mancato pagamento del premio. Se non si paga il premio o la prima rata, l'assicurazione resta sospesa fino alle ore ventiquattro del giorno in cui il contraente paga quanto dovuto. Se non si pagano i premi successivi, l'assicurazione resta sospesa dalle ore ventiquattro del quindicesimo giorno dopo la scadenza. In entrambi i casi il contratto è risoluto di diritto se l'assicuratore non agisce per la riscossione entro sei mesi dalla scadenza del premio o della rata; all'assicuratore spettano solo il premio del periodo di assicurazione in corso e il rimborso delle spese. L'ultimo comma non si applica alle assicurazioni sulla vita.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1901",
+      "verificata_il": "2026-11-16"
+    },
+    {
+      "id": "CC-1932",
+      "citazione": "art. 1932 c.c.",
+      "chiavi": [
+        "cc-1932"
+      ],
+      "stato": "verificata",
+      "oggetto": "Norme inderogabili. Gli artt. 1887, 1892, 1893, 1894, 1897, 1898, 1899 c. 2, 1901, 1903 c. 2, 1914 c. 2, 1915 c. 2, 1917 c. 3 e 4 e 1926 non possono essere derogati se non in senso più favorevole all'assicurato; le clausole che derogano in senso meno favorevole sono sostituite di diritto dalle corrispondenti disposizioni di legge. L'art. 1913 (avviso del sinistro) non è nell'elenco.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1932",
+      "verificata_il": "2026-11-16"
+    },
+    {
+      "id": "CC-1898",
+      "citazione": "art. 1898 c.c.",
+      "chiavi": [
+        "cc-1898"
+      ],
+      "stato": "verificata",
+      "oggetto": "Aggravamento del rischio. Il contraente deve dare immediato avviso all'assicuratore dei mutamenti che aggravano il rischio al punto che l'assicuratore non avrebbe consentito l'assicurazione o l'avrebbe consentita per un premio più alto. L'assicuratore può recedere per iscritto entro un mese dall'avviso o dalla conoscenza; il recesso ha effetto immediato se non avrebbe assicurato, dopo quindici giorni se avrebbe chiesto un premio maggiore. Se il sinistro avviene prima che siano decorsi quei termini, l'assicuratore non risponde quando non avrebbe assicurato, altrimenti l'indennizzo è ridotto in proporzione fra premio pattuito e premio che sarebbe stato fissato. È fra le norme inderogabili dell'art. 1932 solo in senso più favorevole all'assicurato.",
+      "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1898",
+      "verificata_il": "2026-11-16"
     }
   ]
 }
