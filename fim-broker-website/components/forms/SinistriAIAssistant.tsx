@@ -310,15 +310,17 @@ export default function SinistriAIAssistant() {
         {/* Dati personali */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
-            { field: 'nome', label: 'Nome', placeholder: 'Mario', type: 'text', required: true },
-            { field: 'cognome', label: 'Cognome', placeholder: 'Rossi', type: 'text', required: true },
-            { field: 'email', label: 'Email', placeholder: 'mario@esempio.it', type: 'email', required: true },
-            { field: 'telefono', label: 'Telefono', placeholder: '+39 06 1234567', type: 'tel', required: true },
-          ].map(({ field, label, placeholder, type, required }) => (
+            { field: 'nome', label: 'Nome', placeholder: 'Mario', type: 'text', required: true, autoComplete: 'given-name' },
+            { field: 'cognome', label: 'Cognome', placeholder: 'Rossi', type: 'text', required: true, autoComplete: 'family-name' },
+            { field: 'email', label: 'Email', placeholder: 'mario@esempio.it', type: 'email', required: true, autoComplete: 'email' },
+            { field: 'telefono', label: 'Telefono', placeholder: '+39 06 1234567', type: 'tel', required: true, autoComplete: 'tel' },
+          ].map(({ field, label, placeholder, type, required, autoComplete }) => (
             <div key={field}>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">{label} {required && '*'}</label>
+              <label htmlFor={`sinistro-${field}`} className="block text-sm font-semibold text-gray-700 mb-1">{label} {required && '*'}</label>
               <input
+                id={`sinistro-${field}`}
                 type={type}
+                autoComplete={autoComplete}
                 required={required}
                 value={form[field as keyof FormData] as string}
                 onChange={e => setField(field as keyof FormData, e.target.value)}
@@ -332,8 +334,9 @@ export default function SinistriAIAssistant() {
         {/* Dati sinistro */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Tipo sinistro *</label>
+            <label htmlFor="sinistro-tipo" className="block text-sm font-semibold text-gray-700 mb-1">Tipo sinistro *</label>
             <select
+              id="sinistro-tipo"
               required
               value={form.tipo_sinistro}
               onChange={e => setField('tipo_sinistro', e.target.value)}
@@ -347,8 +350,9 @@ export default function SinistriAIAssistant() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Data dell&apos;evento *</label>
+            <label htmlFor="sinistro-data" className="block text-sm font-semibold text-gray-700 mb-1">Data dell&apos;evento *</label>
             <input
+              id="sinistro-data"
               type="date"
               required
               value={form.data_evento}
@@ -361,8 +365,9 @@ export default function SinistriAIAssistant() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">N° polizza <span className="text-gray-500 font-normal">(opzionale)</span></label>
+            <label htmlFor="sinistro-polizza" className="block text-sm font-semibold text-gray-700 mb-1">N° polizza <span className="text-gray-500 font-normal">(opzionale)</span></label>
             <input
+              id="sinistro-polizza"
               type="text"
               value={form.numero_polizza}
               onChange={e => setField('numero_polizza', e.target.value)}
@@ -371,8 +376,9 @@ export default function SinistriAIAssistant() {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Compagnia <span className="text-gray-500 font-normal">(opzionale)</span></label>
+            <label htmlFor="sinistro-compagnia" className="block text-sm font-semibold text-gray-700 mb-1">Compagnia <span className="text-gray-500 font-normal">(opzionale)</span></label>
             <input
+              id="sinistro-compagnia"
               type="text"
               value={form.compagnia}
               onChange={e => setField('compagnia', e.target.value)}
@@ -383,8 +389,9 @@ export default function SinistriAIAssistant() {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Descrizione dell&apos;evento *</label>
+          <label htmlFor="sinistro-descrizione" className="block text-sm font-semibold text-gray-700 mb-1">Descrizione dell&apos;evento *</label>
           <textarea
+            id="sinistro-descrizione"
             required
             rows={4}
             value={form.descrizione}

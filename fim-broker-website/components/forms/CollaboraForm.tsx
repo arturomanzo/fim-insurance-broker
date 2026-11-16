@@ -132,6 +132,7 @@ export default function CollaboraForm() {
           <label htmlFor="collabora-nome" className="label-field">Nome e Cognome *</label>
           <input
             id="collabora-nome"
+            autoComplete="name"
             type="text"
             name="nome"
             value={formData.nome}
@@ -145,6 +146,7 @@ export default function CollaboraForm() {
           <label htmlFor="collabora-email" className="label-field">Email *</label>
           <input
             id="collabora-email"
+            autoComplete="email"
             type="email"
             name="email"
             value={formData.email}
@@ -161,6 +163,7 @@ export default function CollaboraForm() {
           <label htmlFor="collabora-telefono" className="label-field">Telefono</label>
           <input
             id="collabora-telefono"
+            autoComplete="tel"
             type="tel"
             name="telefono"
             value={formData.telefono}
@@ -220,8 +223,8 @@ export default function CollaboraForm() {
         </select>
       </div>
 
-      <div>
-        <label className="label-field">Sei iscritto al RUI?</label>
+      <fieldset>
+        <legend className="label-field">Sei iscritto al RUI?</legend>
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-1">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -253,10 +256,11 @@ export default function CollaboraForm() {
             value={formData.numeroRui}
             onChange={handleChange}
             placeholder="Numero di iscrizione RUI (es. B000123456)"
+            aria-label="Numero di iscrizione RUI"
             className="input-field mt-3"
           />
         )}
-      </div>
+      </fieldset>
 
       <div>
         <label htmlFor="collabora-messaggio" className="label-field">

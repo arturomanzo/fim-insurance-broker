@@ -189,6 +189,7 @@ export default function SecondOpinionForm() {
           <label htmlFor="so-nome" className="label-field">Nome e Cognome *</label>
           <input
             id="so-nome"
+            autoComplete="name"
             type="text"
             name="nome"
             value={formData.nome}
@@ -202,6 +203,7 @@ export default function SecondOpinionForm() {
           <label htmlFor="so-azienda" className="label-field">Azienda / Ragione sociale</label>
           <input
             id="so-azienda"
+            autoComplete="organization"
             type="text"
             name="azienda"
             value={formData.azienda}
@@ -217,6 +219,7 @@ export default function SecondOpinionForm() {
           <label htmlFor="so-email" className="label-field">Email *</label>
           <input
             id="so-email"
+            autoComplete="email"
             type="email"
             name="email"
             value={formData.email}
@@ -230,6 +233,7 @@ export default function SecondOpinionForm() {
           <label htmlFor="so-telefono" className="label-field">Telefono *</label>
           <input
             id="so-telefono"
+            autoComplete="tel"
             type="tel"
             name="telefono"
             value={formData.telefono}

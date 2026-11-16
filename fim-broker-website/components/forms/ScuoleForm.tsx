@@ -139,6 +139,7 @@ export default function ScuoleForm() {
           <label htmlFor="scuole-istituto" className="label-field">Istituto *</label>
           <input
             id="scuole-istituto"
+            autoComplete="organization"
             type="text"
             name="istituto"
             value={formData.istituto}
@@ -183,6 +184,7 @@ export default function ScuoleForm() {
           <label htmlFor="scuole-nome" className="label-field">Nome e Cognome *</label>
           <input
             id="scuole-nome"
+            autoComplete="name"
             type="text"
             name="nome"
             value={formData.nome}
@@ -215,6 +217,7 @@ export default function ScuoleForm() {
           <label htmlFor="scuole-email" className="label-field">Email istituzionale *</label>
           <input
             id="scuole-email"
+            autoComplete="email"
             type="email"
             name="email"
             value={formData.email}
@@ -228,6 +231,7 @@ export default function ScuoleForm() {
           <label htmlFor="scuole-telefono" className="label-field">Telefono della segreteria</label>
           <input
             id="scuole-telefono"
+            autoComplete="tel"
             type="tel"
             name="telefono"
             value={formData.telefono}

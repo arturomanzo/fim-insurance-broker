@@ -64,9 +64,11 @@ export default function MagicLinkForm({ nextPath }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="label-field">Email associata alle tue polizze</label>
+        <label htmlFor="area-cliente-email" className="label-field">Email associata alle tue polizze</label>
         <input
+          id="area-cliente-email"
           type="email"
+          autoComplete="email"
           value={email}
           onChange={(e) => { setEmail(e.target.value); setErrorMsg('') }}
           placeholder="mario@esempio.it"

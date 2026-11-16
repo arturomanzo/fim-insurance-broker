@@ -480,9 +480,18 @@ export default function PolicyAnalyzer() {
 
       {/* File upload area */}
       <div>
-        <label className="label-field">La tua polizza (PDF) *</label>
+        <label id="pa-file-label" className="label-field">La tua polizza (PDF) *</label>
         <div
+          role="button"
+          tabIndex={0}
+          aria-labelledby="pa-file-label"
           onClick={() => fileInputRef.current?.click()}
+          onKeyDown={(e) => {
+            // Solo se il tasto è premuto sull'area stessa, non sul pulsante «Rimuovi» al suo interno
+            if (e.target !== e.currentTarget || (e.key !== 'Enter' && e.key !== ' ')) return
+            e.preventDefault()
+            fileInputRef.current?.click()
+          }}
           onDrop={handleDrop}
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
           onDragLeave={() => setIsDragging(false)}
@@ -537,6 +546,7 @@ export default function PolicyAnalyzer() {
           <label htmlFor="pa-nome" className="label-field">Nome e Cognome *</label>
           <input
             id="pa-nome"
+            autoComplete="name"
             type="text"
             value={formData.nome}
             onChange={(e) => setFormData((p) => ({ ...p, nome: e.target.value }))}
@@ -549,6 +559,7 @@ export default function PolicyAnalyzer() {
           <label htmlFor="pa-email" className="label-field">Email *</label>
           <input
             id="pa-email"
+            autoComplete="email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}

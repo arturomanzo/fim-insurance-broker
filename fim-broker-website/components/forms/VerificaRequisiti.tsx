@@ -74,7 +74,12 @@ function CaricaPdf({
         role="button"
         tabIndex={0}
         onClick={() => inputRef.current?.click()}
-        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && inputRef.current?.click()}
+        onKeyDown={(e) => {
+          // Solo se il tasto è premuto sull'area stessa, non sul pulsante «Rimuovi» al suo interno
+          if (e.target !== e.currentTarget || (e.key !== 'Enter' && e.key !== ' ')) return
+          e.preventDefault()
+          inputRef.current?.click()
+        }}
         onDrop={(e) => {
           e.preventDefault()
           setTrascina(false)
@@ -422,6 +427,7 @@ export default function VerificaRequisiti() {
           <label htmlFor="vr-nome" className="label-field">Nome e cognome o ragione sociale *</label>
           <input
             id="vr-nome"
+            autoComplete="name"
             type="text"
             value={formData.nome}
             onChange={(e) => setFormData((p) => ({ ...p, nome: e.target.value }))}
@@ -434,6 +440,7 @@ export default function VerificaRequisiti() {
           <label htmlFor="vr-email" className="label-field">Email *</label>
           <input
             id="vr-email"
+            autoComplete="email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
@@ -447,6 +454,7 @@ export default function VerificaRequisiti() {
         <label htmlFor="vr-telefono" className="label-field">Telefono (facoltativo, per le gare in scadenza)</label>
         <input
           id="vr-telefono"
+          autoComplete="tel"
           type="tel"
           value={formData.telefono}
           onChange={(e) => setFormData((p) => ({ ...p, telefono: e.target.value }))}
