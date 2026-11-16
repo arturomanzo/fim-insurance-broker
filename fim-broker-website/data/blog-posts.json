@@ -1,6 +1,51 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-interruzione-attivita-business-interruption-2026",
+      "title": "Interruzione di attività: la perdita che la polizza incendio non ti paga",
+      "excerpt": "Dopo un incendio o un allagamento la compagnia ricostruisce il capannone e sostituisce i macchinari, ma i mesi di fermo restano a carico tuo. La garanzia di interruzione di attività serve esattamente a coprire quel buco.",
+      "category": "Aziendale",
+      "date": "16 Novembre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "Il danno materiale è solo metà del conto",
+          "body": "Quando brucia un reparto produttivo o un temporale allaga il magazzino, l'imprenditore pensa subito al valore di quello che ha perso: muri, impianti, macchinari, merce. Quella parte la gestisce la polizza incendio, che indennizza il bene secondo le somme e le condizioni pattuite. Il problema arriva dopo, nei mesi in cui l'azienda è ferma o lavora a metà regime: gli stipendi vanno pagati lo stesso, i canoni di locazione e di leasing scadono comunque, i costi fissi non si fermano insieme alla produzione. Se in polizza non hai una garanzia dedicata, quella perdita resta integralmente tua."
+        },
+        {
+          "heading": "Come è costruita la garanzia",
+          "body": "L'interruzione di attività, o business interruption, interviene quando un danno materiale indennizzabile ai sensi della polizza blocca o riduce l'attività. Le compagnie la propongono in due forme principali e la differenza non è di dettaglio, perché cambia come si calcola l'indennizzo e quanto serve dimostrare dopo il sinistro.",
+          "list": [
+            "Diaria giornaliera: un importo fisso per ogni giorno di fermo, entro un numero massimo di giorni. Semplice da liquidare, ma copre solo se l'importo pattuito è vicino alla perdita reale.",
+            "Margine di contribuzione: si indennizza la perdita di margine lordo più i costi fissi che continuano a maturare, entro il periodo di indennizzo scelto. Richiede documentazione contabile, ma segue l'andamento vero dell'azienda.",
+            "Maggiori costi di esercizio: le spese sostenute per limitare il fermo, come l'affitto di un capannone provvisorio o il ricorso a terzisti."
+          ]
+        },
+        {
+          "heading": "Il periodo di indennizzo è la scelta che pesa di più",
+          "body": "Il periodo di indennizzo è il numero di mesi durante i quali la compagnia riconosce la perdita. Va stimato sul tempo reale di rientro alla normalità, non su quello di ricostruzione dell'immobile: dopo un incendio serve la perizia, poi la rimozione delle macerie, i permessi, la ricostruzione, la rimessa in funzione degli impianti e infine il recupero della clientela andata altrove. Un'impresa con macchinari su misura, con tempi di consegna lunghi, può avere bisogno di un orizzonte ben più ampio di sei mesi. Scegliere un periodo troppo corto significa trovarsi scoperti proprio nella fase in cui i costi continuano e i ricavi non sono ancora tornati."
+        },
+        {
+          "heading": "Fermi senza incendio: il punto da chiarire in fase di trattativa",
+          "body": "Molte interruzioni nascono fuori dalle mura aziendali: il fornitore chiave che si blocca, il cliente strategico che non può ricevere, un blackout prolungato, un attacco informatico che ferma gestionale e linea di produzione. Queste ipotesi non rientrano automaticamente nella business interruption classica, che quasi sempre presuppone un danno materiale diretto ai beni assicurati. Esistono estensioni specifiche, come la contingent business interruption sui fornitori, e la business interruption da evento cyber, che normalmente vive dentro una polizza cyber e non dentro l'incendio. Vanno chieste, lette e quantificate una per una."
+        },
+        {
+          "heading": "Il rapporto con l'obbligo catastrofale",
+          "body": "L'art. 1, commi 101 e seguenti della L. 213/2023 impone alle imprese iscritte al registro delle imprese di assicurare terreni, fabbricati, impianti, macchinari e attrezzature contro sismi, alluvioni, frane, inondazioni ed esondazioni, al valore di ricostruzione a nuovo o costo di rimpiazzo. L'obbligo riguarda i beni, non la perdita di reddito: aver adempiuto non significa aver coperto il fermo che segue un'alluvione. Le imprese agricole dell'art. 2135 c.c. restano fuori dall'obbligo per effetto del comma 111, con rinvio al Fondo mutualistico istituito dall'art. 1, c. 515 della L. 234/2021. Chi vuole tutelare anche i mesi di inattività dopo un evento catastrofale deve verificare se e come la garanzia di interruzione segue gli stessi eventi."
+        },
+        {
+          "heading": "Gli errori che si pagano al momento della liquidazione",
+          "body": "Il primo è sottostimare la somma assicurata: se il margine lordo dichiarato è inferiore a quello reale, in molti contratti scatta la proporzionale e l'indennizzo si riduce. Il secondo è non aggiornare i valori dopo una crescita del fatturato o un nuovo investimento produttivo. Il terzo riguarda la denuncia: l'art. 1913 c.c. fissa il termine di tre giorni da quando il sinistro è avvenuto o l'assicurato ne ha avuto conoscenza, e poiché non è una norma inderogabile il contratto può prevedere un termine diverso, quindi va letto. Conservare contabilità, ordini e documenti di trasporto dei mesi precedenti è ciò che rende dimostrabile la perdita davanti al perito."
+        },
+        {
+          "heading": "Parliamone sui tuoi numeri",
+          "body": "Dimensionare una garanzia di interruzione di attività significa partire dal bilancio, dai costi fissi e dai tempi tecnici di ripartenza della tua azienda, non da un modello standard. FIM Insurance Broker, con sede a Cisterna di Latina e iscritta al RUI Sez. B n. B000405449, lavora come broker: analizza il rischio, confronta le soluzioni di mercato disponibili e ti spiega per iscritto cosa è coperto e cosa no. Portaci la polizza che hai già e il bilancio dell'ultimo esercizio: da lì si capisce in mezz'ora dove sei esposto."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "classe-di-merito-attestato-rischio-regolamento-ivass-58-2026",
       "title": "Classe di merito e attestato di rischio: cosa cambia con il Regolamento IVASS 58/2026",
       "excerpt": "La classe di merito segue il proprietario del veicolo, non l'automobilista in generale. Il Regolamento IVASS n. 58 del 10 febbraio 2026 ha riordinato attestato di sinistralità, passaggi in famiglia e conservazione della classe: ecco come usarli bene.",
