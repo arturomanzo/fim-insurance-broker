@@ -5,7 +5,7 @@ import { EMAIL_RECLAMI, PEC } from '@/lib/contatti'
 
 export const metadata: Metadata = {
   title: 'Reclami e Arbitro Assicurativo',
-  description: 'Procedura reclami FIM Insurance Broker conforme al Reg. IVASS 40/2018: reclamo all\'intermediario, reclamo all\'impresa, ricorso all\'Arbitro Assicurativo operativo dal 15 gennaio 2026 (DM MIMIT 215/2024).',
+  description: 'Procedura reclami FIM Insurance Broker: reclamo all\'intermediario, reclamo all\'impresa, ricorso all\'Arbitro Assicurativo contro il broker o la compagnia, con ricorsi dal 15 gennaio 2026 (DM MIMIT 215/2024).',
   alternates: { canonical: '/reclami' },
 }
 
@@ -36,14 +36,16 @@ const steps = [
   {
     n: 3,
     title: 'Ricorso all\'Arbitro Assicurativo',
-    when: 'Decorsi i 45 giorni senza riscontro o in caso di risposta non soddisfacente da parte dell\'impresa.',
+    when: 'Se non sei soddisfatto della risposta di FIM o della compagnia, o se la risposta non arriva entro 45 giorni. Il ricorso può riguardare sia FIM, come intermediario, sia la compagnia.',
+    link: { href: 'https://www.arbitroassicurativo.org', label: 'www.arbitroassicurativo.org' },
     how: [
-      'Portale ufficiale: arbitroassicurativo.org',
-      'Ricorso online, senza obbligo di assistenza legale; contributo di 20 euro, rimborsato in caso di accoglimento.',
-      'Termine: entro 12 mesi dalla data del reclamo presentato all\'impresa.',
-      'La decisione dell\'Arbitro non è vincolante per il cliente, che resta libero di adire l\'Autorità Giudiziaria.',
+      'Solo online, sul portale ufficiale dell\'Arbitro, dove trovi i requisiti di ammissibilità e la procedura.',
+      'Prima serve il reclamo: il ricorso è ammesso solo dopo un reclamo scritto a FIM o alla compagnia, ed entro 12 mesi dalla sua presentazione. I fatti devono risalire a non più di 3 anni prima del reclamo.',
+      'Contributo di 20 euro, rimborsato se il ricorso viene accolto. Non serve l\'avvocato.',
+      'Limiti per le richieste di denaro: 25.000 euro nei rami danni, 150.000 o 300.000 euro nei rami vita; nessun limite se chiedi solo di accertare un tuo diritto. Sono esclusi i sinistri del Fondo vittime della strada, le materie di competenza CONSAP e i grandi rischi.',
+      'Il ricorso all\'Arbitro vale come tentativo obbligatorio prima della causa, al posto della mediazione. La decisione non vincola il cliente, che resta libero di rivolgersi al giudice.',
     ],
-    time: 'Procedura istituita presso l\'IVASS ai sensi dell\'art. 187.1 del Codice delle Assicurazioni Private e disciplinata dal Decreto interministeriale MIMIT 6 novembre 2024, n. 215. Operativa dal 15 gennaio 2026.',
+    time: 'Arbitro istituito presso l\'IVASS ai sensi dell\'art. 187.1 del Codice delle Assicurazioni Private (D.Lgs. 209/2005) e disciplinato dal DM MIMIT 6 novembre 2024, n. 215. Ricorsi dal 15 gennaio 2026.',
   },
 ] as const
 
@@ -55,8 +57,8 @@ const altRoutes = [
     linkLabel: 'ivass.it/consumatori/reclami',
   },
   {
-    title: 'Mediazione obbligatoria',
-    desc: 'In materia di contratti assicurativi (D.Lgs. 28/2010), presso un Organismo di Mediazione iscritto al Ministero della Giustizia. Il ricorso preventivo all\'Arbitro Assicurativo assolve alla condizione di procedibilità.',
+    title: 'Mediazione',
+    desc: 'Per i contratti assicurativi è obbligatoria prima della causa (D.Lgs. 28/2010), presso un Organismo di Mediazione iscritto al Ministero della Giustizia, in alternativa al ricorso all\'Arbitro Assicurativo, che assolve anch\'esso la condizione di procedibilità.',
     link: 'https://www.giustizia.it/giustizia/it/mg_2_5_7.page',
     linkLabel: 'giustizia.it — Organismi di Mediazione',
   },
@@ -80,10 +82,11 @@ export default function ReclamiPage() {
             <p className="text-gray-600 leading-relaxed">
               Se ritieni di aver subito un disservizio da parte di FIM Insurance Broker o di una delle compagnie
               con cui hai sottoscritto una polizza per il nostro tramite, hai diritto a una procedura strutturata,
-              gratuita e tempi certi di risposta. Dal 15 gennaio 2026 è operativo l&apos;<strong>Arbitro Assicurativo</strong>,
-              l&apos;organismo di risoluzione alternativa delle controversie istituito presso l&apos;IVASS e disciplinato dal DM MIMIT 6 novembre 2024, n. 215.
+              gratuita e tempi certi di risposta. Dal 15 gennaio 2026 puoi presentare ricorso all&apos;<strong>Arbitro Assicurativo</strong>,
+              l&apos;organismo di risoluzione alternativa delle controversie istituito presso l&apos;IVASS e disciplinato dal DM MIMIT 6 novembre 2024, n. 215,
+              sia contro FIM sia contro la compagnia.
             </p>
-            <p className="text-gray-500 text-sm mt-4">Ultimo aggiornamento: Maggio 2026</p>
+            <p className="text-gray-500 text-sm mt-4">Ultimo aggiornamento: Novembre 2026</p>
           </Card>
 
           {/* I 3 livelli */}
@@ -107,6 +110,14 @@ export default function ReclamiPage() {
                   </p>
                   <div className="mb-3">
                     <p className="text-gray-700 text-sm font-semibold mb-1">Come presentarlo:</p>
+                    {'link' in s && (
+                      <p className="text-sm text-gray-700 mb-1">
+                        Portale ufficiale:{' '}
+                        <a href={s.link.href} target="_blank" rel="noopener noreferrer" className="text-primary font-medium underline hover:no-underline">
+                          {s.link.label}
+                        </a>
+                      </p>
+                    )}
                     <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
                       {s.how.map((h) => (
                         <li key={h}>{h}</li>
@@ -124,7 +135,7 @@ export default function ReclamiPage() {
             <h2 className="text-2xl font-bold text-primary mb-4">Cosa indicare nel reclamo</h2>
             <p className="text-gray-700 mb-4">
               Per consentire un riscontro rapido e completo, ti chiediamo di includere nel reclamo le seguenti
-              informazioni minime previste dal Regolamento IVASS 40/2018:
+              informazioni:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-gray-700">
               <li><strong>Dati del reclamante:</strong> nome, cognome, codice fiscale, indirizzo, recapito telefonico ed email.</li>
@@ -200,8 +211,9 @@ export default function ReclamiPage() {
               <li>D.Lgs. 21 maggio 2018, n. 68 — Recepimento Direttiva (UE) 2016/97 (IDD).</li>
               <li>Regolamento IVASS n. 40 del 2 agosto 2018 — Disciplina dei requisiti e delle modalità di svolgimento dell&apos;attività di distribuzione assicurativa e riassicurativa, come modificato dal <strong>Provvedimento IVASS n. 163 del 2025</strong>.</li>
               <li>Regolamento IVASS n. 41 del 2 agosto 2018 — Disciplina degli obblighi di informazione e regole di comportamento, come modificato dal <strong>Provvedimento IVASS n. 163 del 2025</strong>.</li>
-              <li>Decreto interministeriale MIMIT 6 novembre 2024, n. 215 — Disciplina dell&apos;<strong>Arbitro Assicurativo</strong> (operativo dal 15 gennaio 2026).</li>
-              <li>D.Lgs. 4 marzo 2010, n. 28 — Mediazione obbligatoria in materia civile e commerciale (compresi i contratti assicurativi).</li>
+              <li>Regolamento ISVAP n. 24 del 19 maggio 2008 — Procedura di presentazione e gestione dei reclami, e successive modifiche.</li>
+              <li>Decreto interministeriale MIMIT 6 novembre 2024, n. 215 — Disciplina dell&apos;<strong>Arbitro Assicurativo</strong> (ricorsi dal 15 gennaio 2026).</li>
+              <li>D.Lgs. 4 marzo 2010, n. 28 — Mediazione in materia civile e commerciale (compresi i contratti assicurativi), art. 5.</li>
               <li>Reg. (UE) 2016/679 — GDPR.</li>
             </ul>
           </Card>
