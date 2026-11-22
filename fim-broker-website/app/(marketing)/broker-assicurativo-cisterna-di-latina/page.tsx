@@ -77,8 +77,8 @@ export default function BrokerCisterna() {
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
               FIM Insurance Broker è il tuo broker assicurativo indipendente nella provincia di {CITY}.
-              Confrontiamo le offerte delle compagnie del mercato per trovare la polizza perfetta per te,
-              al prezzo più competitivo del mercato.
+              Confrontiamo le offerte di più compagnie, cerchiamo la copertura adatta a te
+              e ti spieghiamo da cosa dipende il premio.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/preventivo" className="btn-primary px-6 py-3">

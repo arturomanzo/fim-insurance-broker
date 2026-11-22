@@ -110,7 +110,6 @@ const scenarios = [
     context: 'Studio di commercialisti, 5 dipendenti',
     damage: 'Sistemi bloccati per 4 giorni, recupero dati, clienti non serviti',
     covered: 'Ripristino tecnico + 4 giorni di mancato reddito + gestione comunicazione',
-    cost: '~18.000€ coperti',
   },
   {
     icon: '📧',
@@ -118,7 +117,6 @@ const scenarios = [
     context: 'PMI manifatturiera, 25 dipendenti',
     damage: 'Credenziali rubate, accesso ai dati di 2.000 clienti',
     covered: 'Notifica Garante, comunicazione agli interessati, spese legali',
-    cost: '~45.000€ coperti',
   },
   {
     icon: '💳',
@@ -126,7 +124,6 @@ const scenarios = [
     context: 'Negozio online, 3M€ fatturato',
     damage: 'Sito down 18 ore, dati pagamento clienti esposti',
     covered: 'Mancati ricavi, forensi IT, notifiche PCI DSS e GDPR, PR di crisi',
-    cost: '~62.000€ coperti',
   },
 ]
 
@@ -331,7 +328,7 @@ export default function CyberRiskPage() {
         <div className="container-custom">
           <div className="text-center mb-12">
             <span className="inline-block bg-accent/10 text-accent-cta text-sm font-semibold px-4 py-1.5 rounded-full mb-3">
-              Scenari reali
+              Esempi
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
               Cosa succederebbe senza copertura
@@ -347,22 +344,21 @@ export default function CyberRiskPage() {
                 </div>
                 <div className="px-5 py-4 space-y-3">
                   <div>
-                    <p className="text-xs font-bold text-red-600 uppercase tracking-wide mb-1">Danno subìto</p>
+                    <p className="text-xs font-bold text-red-600 uppercase tracking-wide mb-1">Il danno</p>
                     <p className="text-sm text-gray-700">{s.damage}</p>
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-green-700 uppercase tracking-wide mb-1">La polizza copre</p>
+                    <p className="text-xs font-bold text-green-700 uppercase tracking-wide mb-1">Cosa può coprire la polizza</p>
                     <p className="text-sm text-gray-700">{s.covered}</p>
-                  </div>
-                  <div className="pt-2 border-t border-gray-100">
-                    <span className="inline-block bg-green-50 text-green-700 font-black text-sm px-3 py-1 rounded-full">
-                      {s.cost}
-                    </span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+          <p className="mx-auto mt-6 max-w-5xl text-center text-xs text-gray-500">
+            Scenari costruiti a titolo di esempio: non raccontano casi di clienti FIM. Cosa viene pagato lo dicono le
+            condizioni di polizza, con massimali, franchigie ed esclusioni.
+          </p>
         </div>
       </section>
 
