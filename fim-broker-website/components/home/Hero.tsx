@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { linkWhatsApp } from '@/lib/whatsappSito'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import { SPUNTA } from '@/lib/icone'
 
 export default function Hero() {
   return (
@@ -72,13 +74,13 @@ export default function Hero() {
             {/* Trust badges */}
             <div className="flex flex-wrap gap-5 text-white/70 text-sm">
               {[
-                { icon: '✓', label: 'Analisi oggettiva e trasparente' },
-                { icon: '✓', label: 'Guida esperta nella complessità' },
-                { icon: '✓', label: 'Nel mestiere dal 1993' },
-                { icon: '✓', label: '20 compagnie confrontate' },
+                { label: 'Analisi oggettiva e trasparente' },
+                { label: 'Guida esperta nella complessità' },
+                { label: 'Nel mestiere dal 1993' },
+                { label: '20 compagnie confrontate' },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-2">
-                  <span className="text-accent font-bold">{item.icon}</span>
+                  <Icona forma={SPUNTA} size={14} className="text-accent" />
                   {item.label}
                 </div>
               ))}

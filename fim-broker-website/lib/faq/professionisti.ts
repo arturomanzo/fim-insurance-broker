@@ -10,7 +10,7 @@ export const professionistiFaq: FaqCategory = {
     text: 'Hai dubbi sulla tua RC professionale?',
     description: 'Confrontiamo le offerte delle principali compagnie e ti diciamo se sei davvero coperto.',
     primary: { label: 'Richiedi preventivo', href: '/preventivo?profilo=professionista' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

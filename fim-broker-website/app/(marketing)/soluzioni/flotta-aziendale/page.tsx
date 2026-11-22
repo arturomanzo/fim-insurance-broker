@@ -7,6 +7,21 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  AUTO,
+  CALENDARIO,
+  CEROTTO,
+  CHIAVE_INGLESE,
+  FIAMMA,
+  FURGONE,
+  IMPATTO,
+  RICAMBIO,
+  RICEVUTA,
+  SOCCORSO,
+  TELEFONO,
+  VETRO,
+} from '@/lib/icone'
 
 // Pagina P18 del piano SEO (marketing/seo nel gestionale). Niente numeri sul
 // portafoglio FIM e niente soglie di veicoli: il minimo per il libro matricola
@@ -31,45 +46,45 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '📅', title: 'Scadenze sparse', desc: 'Ogni mezzo ha la sua data. Basta un rinnovo dimenticato e un furgone resta fermo in piazzale, o peggio circola senza copertura.' },
-  { icon: '🔁', title: 'Mezzi che entrano ed escono', desc: 'Un\'auto nuova, un furgone venduto, un camion a noleggio. Con le polizze singole ogni cambio è una pratica a sé.' },
-  { icon: '🧾', title: 'Garanzie a macchia di leopardo', desc: 'Tre furgoni uguali, tre polizze diverse: uno con furto e incendio, uno con la cristalli, uno con la sola RC auto.' },
-  { icon: '🛠️', title: 'Sinistri da rincorrere', desc: 'Denunce, periti, carrozzerie. E intanto il mezzo fermo non lavora e qualcuno in azienda passa le giornate al telefono.' },
+  { icon: CALENDARIO, title: 'Scadenze sparse', desc: 'Ogni mezzo ha la sua data. Basta un rinnovo dimenticato e un furgone resta fermo in piazzale, o peggio circola senza copertura.' },
+  { icon: RICAMBIO, title: 'Mezzi che entrano ed escono', desc: 'Un\'auto nuova, un furgone venduto, un camion a noleggio. Con le polizze singole ogni cambio è una pratica a sé.' },
+  { icon: RICEVUTA, title: 'Garanzie a macchia di leopardo', desc: 'Tre furgoni uguali, tre polizze diverse: uno con furto e incendio, uno con la cristalli, uno con la sola RC auto.' },
+  { icon: CHIAVE_INGLESE, title: 'Sinistri da rincorrere', desc: 'Denunce, periti, carrozzerie. E intanto il mezzo fermo non lavora e qualcuno in azienda passa le giornate al telefono.' },
 ]
 
 const coverages = [
   {
-    icon: '🚗',
+    icon: AUTO,
     title: 'RC Auto',
     desc: 'Obbligatoria per ogni veicolo che circola. Su una flotta conta come sono scritti massimali, rivalse e conducenti ammessi, mezzo per mezzo.',
     highlighted: true,
   },
   {
-    icon: '🔥',
+    icon: FIAMMA,
     title: 'Furto e incendio',
     desc: 'Per i mezzi di valore e per quelli che passano la notte in strada o in cantiere. Si sceglie veicolo per veicolo, non per forza su tutta la flotta.',
     highlighted: false,
   },
   {
-    icon: '💥',
+    icon: IMPATTO,
     title: 'Kasko e collisione',
     desc: 'Copre i danni al tuo veicolo anche quando la colpa è del tuo autista. Ha senso sui mezzi nuovi o in leasing, meno su quelli a fine carriera.',
     highlighted: false,
   },
   {
-    icon: '🪟',
+    icon: VETRO,
     title: 'Cristalli',
     desc: 'Parabrezza e vetri rotti sono il sinistro più frequente su chi fa tanti chilometri. Contano franchigia e rete di riparatori convenzionati.',
     highlighted: false,
   },
   {
-    icon: '🛻',
+    icon: SOCCORSO,
     title: 'Assistenza stradale',
     desc: 'Soccorso, traino e, dove previsto, veicolo sostitutivo. Per un mezzo da lavoro il giorno di fermo pesa quanto il danno.',
     highlighted: false,
   },
   {
-    icon: '🩹',
+    icon: CEROTTO,
     title: 'Infortuni del conducente',
     desc: 'La RC auto risarcisce gli altri, non chi guida il veicolo responsabile. Questa garanzia copre l\'autista, dipendente o titolare.',
     highlighted: false,
@@ -119,7 +134,8 @@ export default function FlottaAziendalePage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🚚 Aziende con auto, furgoni e mezzi da lavoro
+              <Icona forma={FURGONE} size={16} />
+              Aziende con auto, furgoni e mezzi da lavoro
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Tanti mezzi,<br />
@@ -167,7 +183,7 @@ export default function FlottaAziendalePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {painPoints.map((p) => (
               <Card key={p.title} className="border-l-4 border-l-red-400">
-                <span className="text-3xl mb-3 block">{p.icon}</span>
+                <Icona forma={p.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{p.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
               </Card>
@@ -232,7 +248,7 @@ export default function FlottaAziendalePage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     su preventivo
                   </span>
@@ -342,7 +358,8 @@ export default function FlottaAziendalePage() {
               Richiedi preventivo flotta
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

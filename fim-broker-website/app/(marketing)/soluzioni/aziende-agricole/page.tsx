@@ -7,6 +7,19 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  CASCO,
+  GRANDINE,
+  OMBRELLO,
+  ONDA,
+  POSATE,
+  SERRA,
+  SPIGA,
+  TELEFONO,
+  TERREMOTO,
+  TRATTORE,
+} from '@/lib/icone'
 
 // Pagina P15 del piano SEO (marketing/seo nel gestionale). Sul raccolto FIM colloca
 // polizze private, non quelle agevolate con contributo pubblico (Arturo, 31/10/2026):
@@ -32,51 +45,51 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '🌨️', title: 'La grandinata sulle serre', desc: 'Dieci minuti di ghiaccio e i teli sono da rifare, con le piantine sotto. Molte polizze trattano le serre come beni a parte, o non le coprono.' },
-  { icon: '🚜', title: 'Il trattore che esce dal fondo', desc: 'Basta un tratto di strada provinciale tra due appezzamenti. Senza la RC giusta, il danno a chi passa lo paghi tu.' },
-  { icon: '🌊', title: "L'alluvione sul capannone", desc: "Per le imprese agricole l'obbligo catastrofale non c'è. Il rischio sì: fabbricati e macchinari restano scoperti se non li assicuri tu." },
-  { icon: '👷', title: 'Il bracciante che si fa male', desc: 'Personale stagionale, mezzi, attrezzi. Un infortunio grave può diventare una causa contro di te.' },
+  { icon: GRANDINE, title: 'La grandinata sulle serre', desc: 'Dieci minuti di ghiaccio e i teli sono da rifare, con le piantine sotto. Molte polizze trattano le serre come beni a parte, o non le coprono.' },
+  { icon: TRATTORE, title: 'Il trattore che esce dal fondo', desc: 'Basta un tratto di strada provinciale tra due appezzamenti. Senza la RC giusta, il danno a chi passa lo paghi tu.' },
+  { icon: ONDA, title: "L'alluvione sul capannone", desc: "Per le imprese agricole l'obbligo catastrofale non c'è. Il rischio sì: fabbricati e macchinari restano scoperti se non li assicuri tu." },
+  { icon: CASCO, title: 'Il bracciante che si fa male', desc: 'Personale stagionale, mezzi, attrezzi. Un infortunio grave può diventare una causa contro di te.' },
 ]
 
 const coverages = [
   {
-    icon: '🤝',
+    icon: OMBRELLO,
     title: 'RC conduzione dell\'azienda',
     desc: 'Danni a terzi dall\'attività agricola: animali che escono dal recinto, rami che cadono sulla strada, trattamenti che finiscono sul campo del vicino.',
     highlighted: true,
   },
   {
-    icon: '👷',
+    icon: CASCO,
     title: 'RC verso i dipendenti (RCO)',
     desc: 'Copre le richieste di danni dei lavoratori e la rivalsa dell\'INAIL. Deve comprendere braccianti e stagionali.',
     highlighted: false,
   },
   {
-    icon: '🏡',
+    icon: SERRA,
     title: 'Serre e strutture',
     desc: 'Serre, tunnel, ombreggianti, impianti di irrigazione contro grandine, vento e neve. Qui contano le esclusioni sulle coperture in plastica e i limiti per evento.',
     highlighted: false,
   },
   {
-    icon: '🏚️',
+    icon: TERREMOTO,
     title: 'Fabbricati, macchinari e scorte',
     desc: 'Capannoni, stalle, magazzini, celle frigo, prodotti stoccati contro incendio ed eventi atmosferici. Terremoto e alluvione si aggiungono a scelta: per l\'impresa agricola non c\'è obbligo.',
     highlighted: false,
   },
   {
-    icon: '🚜',
+    icon: TRATTORE,
     title: 'Trattori e mezzi agricoli',
     desc: 'RC auto per i mezzi che vanno su strada, RC verso terzi per quelli che restano nel fondo, danni ai mezzi stessi e furto.',
     highlighted: false,
   },
   {
-    icon: '🍽️',
+    icon: POSATE,
     title: 'Agriturismo e vendita diretta',
     desc: 'RC verso gli ospiti e i clienti, prodotti venduti o serviti in azienda, camere e attività per i visitatori.',
     highlighted: false,
   },
   {
-    icon: '🌾',
+    icon: SPIGA,
     title: 'Raccolto: grandine, gelo e altri eventi',
     desc: 'Polizze private sulle colture in campo, da firmare prima della stagione. Contano il valore dichiarato della produzione, le soglie di danno e le franchigie per coltura.',
     highlighted: false,
@@ -126,7 +139,8 @@ export default function AziendeAgricolePage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🌾 Aziende agricole, serre e agriturismi
+              <Icona forma={SPIGA} size={16} />
+              Aziende agricole, serre e agriturismi
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Il raccolto è una cosa,<br />
@@ -174,7 +188,7 @@ export default function AziendeAgricolePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {painPoints.map((p) => (
               <Card key={p.title} className="border-l-4 border-l-red-400">
-                <span className="text-3xl mb-3 block">{p.icon}</span>
+                <Icona forma={p.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{p.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
               </Card>
@@ -201,7 +215,7 @@ export default function AziendeAgricolePage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     su preventivo
                   </span>
@@ -339,7 +353,8 @@ export default function AziendeAgricolePage() {
               Richiedi un preventivo
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

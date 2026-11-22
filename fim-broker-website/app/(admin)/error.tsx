@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ALLERTA } from '@/lib/icone'
 
 interface ErrorProps {
   error: Error & { digest?: string }
@@ -15,9 +17,7 @@ export default function AdminError({ error, reset }: ErrorProps) {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center bg-white rounded-2xl shadow-lg p-10">
-        <div className="mb-6 inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-xl">
-          <span className="text-3xl">⚠️</span>
-        </div>
+        <Icona forma={ALLERTA} size={64} className="mx-auto mb-6 text-primary" />
         <h1 className="text-2xl font-black text-gray-900 mb-3">Errore Admin</h1>
         <p className="text-gray-500 mb-8">
           Si è verificato un errore nel pannello di amministrazione.

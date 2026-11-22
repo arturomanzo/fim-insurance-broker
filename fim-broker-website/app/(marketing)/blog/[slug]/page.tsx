@@ -9,9 +9,12 @@ import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { getAllPosts, getPostBySlug, parseItalianDate } from '@/lib/blog'
+import { leggiSegno } from '@/lib/senzaEmoji'
 import { getAuthor, buildPersonSchema } from '@/lib/authors'
 import { OG_BASE } from '@/lib/seo'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ALLERTA, CROCE, TELEFONO } from '@/lib/icone'
 
 const BASE_URL = 'https://www.fimbroker.it'
 
@@ -182,17 +185,31 @@ export default async function BlogPostPage({ params }: Props) {
                         {section.heading && (
                           <h2 className="text-xl font-black text-primary mb-3">{section.heading}</h2>
                         )}
-                        <p className="text-gray-700 leading-relaxed">{section.body}</p>
+                        <p className="whitespace-pre-line text-gray-700 leading-relaxed">{section.body}</p>
                         {section.list && (
                           <ul className="mt-3 space-y-2">
-                            {section.list.map((item, j) => (
-                              <li key={j} className="flex items-start gap-2 text-gray-700">
-                                <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span className="text-sm leading-relaxed">{item}</span>
-                              </li>
-                            ))}
+                            {section.list.map((item, j) => {
+                              // ✅ e ❌ nel testo valgono «coperto» ed «escluso»: mai spunta verde su un'esclusione
+                              const { segno, testo } = leggiSegno(item)
+                              return (
+                                <li key={j} className="flex items-start gap-2 text-gray-700">
+                                  {segno === 'no' ? (
+                                    <Icona forma={CROCE} size={16} className="mx-0.5 mt-1 text-red-600" />
+                                  ) : segno === 'attenzione' ? (
+                                    <Icona forma={ALLERTA} size={16} className="mx-0.5 mt-1 text-amber-700" />
+                                  ) : (
+                                    <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                  )}
+                                  <span className="text-sm leading-relaxed">
+                                    {segno === 'si' && <span className="sr-only">Coperto: </span>}
+                                    {segno === 'no' && <span className="sr-only">Escluso: </span>}
+                                    {testo}
+                                  </span>
+                                </li>
+                              )
+                            })}
                           </ul>
                         )}
                       </div>
@@ -222,7 +239,8 @@ export default async function BlogPostPage({ params }: Props) {
                       Richiedi Preventivo Gratuito
                     </Link>
                     <a href="tel:+390696883381" className="btn-secondary text-sm px-5 py-2.5">
-                      📞 06 96883381
+                      <Icona forma={TELEFONO} size={16} />
+                      06 96883381
                     </a>
                   </div>
                 </div>
@@ -249,7 +267,8 @@ export default async function BlogPostPage({ params }: Props) {
                   Richiedi Preventivo
                 </Link>
                 <a href="tel:+390696883381" className="btn-outline-white w-full text-center block text-sm">
-                  📞 06 96883381
+                  <Icona forma={TELEFONO} size={16} className="inline-block align-[-0.15em] mr-2" />
+                  06 96883381
                 </a>
               </Card>
 

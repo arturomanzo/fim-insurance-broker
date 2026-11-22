@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import { LUCCHETTO, LUCCHETTO_APERTO, PROFESSIONISTA, TELEFONO } from '@/lib/icone'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -126,12 +128,12 @@ export default function QuizPolizzaPage() {
         <div className="container-custom max-w-3xl">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
             {[
-              { icon: '🔒', title: 'Dati al sicuro', desc: 'Non chiediamo email o dati personali per il quiz. Il risultato è istantaneo.' },
-              { icon: '🤝', title: 'Senza vincoli', desc: 'Il quiz è puramente orientativo. Nessun obbligo di acquisto o contatto.' },
-              { icon: '👨‍💼', title: 'Verifica con un esperto', desc: 'Vuoi approfondire? Un broker FIM analizza gratuitamente la tua situazione.' },
+              { icon: LUCCHETTO, title: 'Dati al sicuro', desc: 'Non chiediamo email o dati personali per il quiz. Il risultato è istantaneo.' },
+              { icon: LUCCHETTO_APERTO, title: 'Senza vincoli', desc: 'Il quiz è puramente orientativo. Nessun obbligo di acquisto o contatto.' },
+              { icon: PROFESSIONISTA, title: 'Verifica con un esperto', desc: 'Vuoi approfondire? Un broker FIM analizza gratuitamente la tua situazione.' },
             ].map((item) => (
               <div key={item.title} className="p-4">
-                <div className="text-3xl mb-2">{item.icon}</div>
+                <Icona forma={item.icon} size={48} className="mb-2 mx-auto text-primary" />
                 <h3 className="font-bold text-primary mb-1 text-sm">{item.title}</h3>
                 <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
               </div>
@@ -149,7 +151,8 @@ export default function QuizPolizzaPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a href="tel:+390696883381" className="btn-primary bg-accent hover:bg-accent-dark text-primary font-bold px-6 py-3">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={18} />
+              06 96883381
             </a>
             <Link href="/preventivo" className="btn-outline-white px-6 py-3">
               Preventivo gratuito

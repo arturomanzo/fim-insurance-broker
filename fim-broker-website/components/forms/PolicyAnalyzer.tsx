@@ -7,6 +7,8 @@ import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import { RICONTATTO } from '@/lib/tempi'
 import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 import { trackAnalisiPolizzaSubmit } from '@/lib/analytics'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ALLERTA, CROCE, SPUNTA } from '@/lib/icone'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -311,7 +313,7 @@ export default function PolicyAnalyzer() {
               <p className="text-gray-600 leading-relaxed">{result.valutazioneGlobale?.sintesi}</p>
               {lacuneAlte.length > 0 && (
                 <p className="mt-3 text-red-600 text-sm font-medium">
-                  ⚠ {lacuneAlte.length} lacuna{lacuneAlte.length > 1 ? 'e' : ''} critica{lacuneAlte.length > 1 ? 'e' : ''} rilevata{lacuneAlte.length > 1 ? 'e' : ''}
+                  <Icona forma={ALLERTA} size={16} className="inline-block align-[-0.15em] mr-2" />{lacuneAlte.length} lacuna{lacuneAlte.length > 1 ? 'e' : ''} critica{lacuneAlte.length > 1 ? 'e' : ''} rilevata{lacuneAlte.length > 1 ? 'e' : ''}
                 </p>
               )}
             </div>
@@ -325,7 +327,7 @@ export default function PolicyAnalyzer() {
         {result.coperture?.length > 0 && (
           <section>
             <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
-              <span className="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-xs">✓</span>
+              <span className="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-xs"><Icona forma={SPUNTA} size={12} /></span>
               Coperture incluse
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -518,7 +520,7 @@ export default function PolicyAnalyzer() {
                 className="ml-2 text-gray-400 hover:text-red-500"
                 aria-label="Rimuovi file"
               >
-                ✕
+                <Icona forma={CROCE} size={14} className="inline-block align-[-0.1em]" />
               </button>
             </div>
           ) : (

@@ -13,7 +13,7 @@ export const aziendeAgricoleFaq: FaqCategory = {
     text: 'Hai un\'azienda agricola o un agriturismo?',
     description: 'Mandaci le polizze in corso: ti diciamo cosa copre davvero su serre, fabbricati, mezzi e responsabilità civile.',
     primary: { label: 'Richiedi analisi gratuita', href: '/preventivo?profilo=pmi' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

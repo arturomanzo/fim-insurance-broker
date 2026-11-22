@@ -8,17 +8,8 @@ import { OG_BASE } from '@/lib/seo'
 import { linkWhatsApp } from '@/lib/whatsappSito'
 import { RICONTATTO } from '@/lib/tempi'
 import { RUI_NUMERO } from '@/lib/compliance'
-import {
-  CappelloTetto,
-  TettoAnalisi,
-  TettoBilancia,
-  TettoDati,
-  TettoGuida,
-  TettoLavoro,
-  TettoRegole,
-  TettoScarica,
-  TettoStrategia,
-} from '@/components/icons/TettoIcons'
+import { CappelloTetto, Icona } from '@/components/icons/TettoIcons'
+import { ANALISI, BANDIERA, BILANCIA, BORSA, BUSSOLA, LUCCHETTO, REGOLE, SCARICA } from '@/lib/icone'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -89,19 +80,19 @@ const team = [
 
 const certifications = [
   {
-    icon: TettoLavoro,
+    icon: BORSA,
     title: 'Garanzia RC Professionale',
     desc: 'Copertura assicurativa per responsabilità civile professionale come previsto dalla normativa vigente.',
     badge: 'D.Lgs 209/2005',
   },
   {
-    icon: TettoDati,
+    icon: LUCCHETTO,
     title: 'Conformità GDPR',
     desc: 'Trattamento dei dati personali nel pieno rispetto del Regolamento UE 2016/679 e del Codice Privacy.',
     badge: 'Reg. UE 2016/679',
   },
   {
-    icon: TettoRegole,
+    icon: REGOLE,
     title: 'Regole di comportamento IDD',
     desc: 'Distribuzione assicurativa conforme alla Direttiva IDD recepita in Italia con il D.Lgs. 68/2018.',
     badge: 'D.Lgs 68/2018',
@@ -195,13 +186,13 @@ export default function ChiSiamoPage() {
               </div>
               <div className="space-y-3 mt-6">
                 {[
-                  { icon: TettoAnalisi, title: 'Analisi oggettiva', desc: 'Dati concreti, non opinioni. Cerchiamo la verità nei numeri per consigliarti senza conflitti di interesse.' },
-                  { icon: TettoGuida, title: 'Guida nella complessità', desc: 'Prendiamo il timone nei momenti critici: sinistri, contenziosi, rinnovi strategici.' },
-                  { icon: TettoStrategia, title: 'Visione strategica', desc: 'L\'assicurazione non è un costo: è un investimento. Ti aiutiamo a pianificare per crescere.' },
-                  { icon: TettoBilancia, title: 'Indipendenza assoluta', desc: 'Non rappresentiamo compagnie. Le offerte di 20 partner confrontate con un solo obiettivo: il tuo.' },
+                  { icon: ANALISI, title: 'Analisi oggettiva', desc: 'Dati concreti, non opinioni. Cerchiamo la verità nei numeri per consigliarti senza conflitti di interesse.' },
+                  { icon: BUSSOLA, title: 'Guida nella complessità', desc: 'Prendiamo il timone nei momenti critici: sinistri, contenziosi, rinnovi strategici.' },
+                  { icon: BANDIERA, title: 'Visione strategica', desc: 'L\'assicurazione non è un costo: è un investimento. Ti aiutiamo a pianificare per crescere.' },
+                  { icon: BILANCIA, title: 'Indipendenza assoluta', desc: 'Non rappresentiamo compagnie. Le offerte di 20 partner confrontate con un solo obiettivo: il tuo.' },
                 ].map((val) => (
                   <Card key={val.title} className="flex items-start gap-4">
-                    <val.icon size={44} className="text-primary" />
+                    <Icona forma={val.icon} size={44} className="text-primary" />
                     <div>
                       <h3 className="font-bold text-primary mb-0.5">{val.title}</h3>
                       <p className="text-gray-600 text-sm">{val.desc}</p>
@@ -293,7 +284,7 @@ export default function ChiSiamoPage() {
                 download
                 className="btn-secondary px-6 py-3"
               >
-                <TettoScarica size={24} />
+                <Icona forma={SCARICA} size={24} />
                 Scarica la brochure
               </a>
             </div>
@@ -370,7 +361,7 @@ export default function ChiSiamoPage() {
             <ul className="divide-y divide-gray-200">
               {certifications.map((cert) => (
                 <li key={cert.title} className="flex items-start gap-5 py-7 sm:gap-7">
-                  <cert.icon size={64} className="text-primary" />
+                  <Icona forma={cert.icon} size={64} className="text-primary" />
                   <div>
                     <h3 className="text-lg font-bold text-primary">{cert.title}</h3>
                     <p className="mt-1 text-xs font-bold uppercase tracking-wide text-accent-cta">{cert.badge}</p>

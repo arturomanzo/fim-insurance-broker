@@ -3,6 +3,8 @@
 import { useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import Link from 'next/link'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ALLERTA } from '@/lib/icone'
 
 interface ErrorProps {
   error: Error & { digest?: string }
@@ -17,9 +19,7 @@ export default function GlobalError({ error, reset }: ErrorProps) {
   return (
     <div className="min-h-screen gradient-primary flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
-        <div className="mb-6 inline-flex items-center justify-center w-20 h-20 bg-white/10 rounded-2xl">
-          <span className="text-4xl">⚠️</span>
-        </div>
+        <Icona forma={ALLERTA} size={72} className="mx-auto mb-6 text-white" />
         <h1 className="text-3xl font-black text-white mb-3">
           Qualcosa è andato storto
         </h1>

@@ -15,7 +15,7 @@ export const scuoleRcPatrimonialeFaq: FaqCategory = {
     description:
       'Mandaci la polizza che hai, se ce l\'hai. Ti diciamo in modo riservato se regge: retroattività, postuma, cosa esclude. È una questione tua, non della scuola.',
     primary: { label: 'Scrivi al Dipartimento Scuole', href: `mailto:${SCUOLE_EMAIL}` },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

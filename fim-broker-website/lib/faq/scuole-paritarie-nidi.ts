@@ -14,7 +14,7 @@ export const scuoleParitarieNidiFaq: FaqCategory = {
     description:
       'Mandateci le polizze che avete. Le leggiamo per intero e vi diciamo per iscritto cosa copre, cosa manca e cosa si paga due volte.',
     primary: { label: 'Scrivi al Dipartimento Scuole', href: `mailto:${SCUOLE_EMAIL}` },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

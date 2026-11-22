@@ -5,6 +5,21 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { RICONTATTO } from '@/lib/tempi'
 import RcaProvinciaLatina from '@/components/osservatorio/RcaProvinciaLatina'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  AUTO,
+  BARRE,
+  BILANCIA,
+  CASA,
+  CONDOMINIO,
+  CRONOMETRO,
+  CUORE,
+  PALAZZO,
+  PERSONE,
+  POSTA,
+  SEGNAPOSTO,
+  TELEFONO,
+} from '@/lib/icone'
 
 const CITY = 'Latina'
 const SLUG = 'broker-assicurativo-latina'
@@ -50,19 +65,19 @@ export const metadata: Metadata = {
 }
 
 const servizi = [
-  { icon: '🚗', title: 'RC Auto e Moto', desc: `Polizze auto e moto con le offerte di più compagnie a confronto, per chi abita a ${CITY} e provincia.` },
-  { icon: '🏠', title: 'Assicurazione Casa', desc: 'Protezione completa per il tuo immobile: incendio, furto, calamità naturali.' },
-  { icon: '❤️', title: 'Polizze Vita e Salute', desc: 'Coperture vita, infortuni e spese mediche per te e la tua famiglia.' },
-  { icon: '🏢', title: 'Polizze Aziendali', desc: `RC professionale, cyber risk, D&O e welfare per aziende della provincia di ${CITY}.` },
-  { icon: '🏗️', title: 'Condomini e Fabbricati', desc: 'Polizze globale fabbricati, RC condominio e copertura catastrofale.' },
-  { icon: '⚖️', title: 'Tutela Legale', desc: 'Protezione legale per privati e professionisti in caso di controversie.' },
+  { icon: AUTO, title: 'RC Auto e Moto', desc: `Polizze auto e moto con le offerte di più compagnie a confronto, per chi abita a ${CITY} e provincia.` },
+  { icon: CASA, title: 'Assicurazione Casa', desc: 'Protezione completa per il tuo immobile: incendio, furto, calamità naturali.' },
+  { icon: CUORE, title: 'Polizze Vita e Salute', desc: 'Coperture vita, infortuni e spese mediche per te e la tua famiglia.' },
+  { icon: PALAZZO, title: 'Polizze Aziendali', desc: `RC professionale, cyber risk, D&O e welfare per aziende della provincia di ${CITY}.` },
+  { icon: CONDOMINIO, title: 'Condomini e Fabbricati', desc: 'Polizze globale fabbricati, RC condominio e copertura catastrofale.' },
+  { icon: BILANCIA, title: 'Tutela Legale', desc: 'Protezione legale per privati e professionisti in caso di controversie.' },
 ]
 
 const vantaggi = [
-  { icon: '🎯', title: 'Indipendenza totale', desc: `Non rappresentiamo nessuna compagnia: a ${CITY} lavoriamo solo per il tuo interesse.` },
-  { icon: '📊', title: '20 compagnie partner', desc: 'Allianz, Generali, AXA, HDI, Unipol, Prima e molte altre.' },
-  { icon: '🤝', title: 'Consulente dedicato', desc: 'Un professionista che conosce il tuo nome, non un call center.' },
-  { icon: '⚡', title: 'Gestione sinistri', desc: 'Ti seguiamo dalla denuncia alla liquidazione e teniamo noi i contatti con la compagnia.' },
+  { icon: BILANCIA, title: 'Indipendenza totale', desc: `Non rappresentiamo nessuna compagnia: a ${CITY} lavoriamo solo per il tuo interesse.` },
+  { icon: BARRE, title: '20 compagnie partner', desc: 'Allianz, Generali, AXA, HDI, Unipol, Prima e molte altre.' },
+  { icon: PERSONE, title: 'Consulente dedicato', desc: 'Un professionista che conosce il tuo nome, non un call center.' },
+  { icon: CRONOMETRO, title: 'Gestione sinistri', desc: 'Ti seguiamo dalla denuncia alla liquidazione e teniamo noi i contatti con la compagnia.' },
 ]
 
 export default function BrokerLatina() {
@@ -75,7 +90,7 @@ export default function BrokerLatina() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <span className="inline-block bg-white/10 border border-white/20 text-sm px-4 py-1.5 rounded-full mb-4">
-              📍 {CITY} e provincia
+              <Icona forma={SEGNAPOSTO} size={16} className="inline-block align-[-0.15em] mr-2" />{CITY} e provincia
             </span>
             <h1 className="text-4xl md:text-5xl font-black mb-6">
               Broker assicurativo a <span className="text-accent">{CITY}</span>
@@ -90,7 +105,8 @@ export default function BrokerLatina() {
                 Preventivo Gratuito
               </Link>
               <a href="tel:+390696883381" className="btn-outline-white px-6 py-3">
-                📞 06 96883381
+                <Icona forma={TELEFONO} size={18} />
+                06 96883381
               </a>
             </div>
           </div>
@@ -115,7 +131,7 @@ export default function BrokerLatina() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {servizi.map((s) => (
               <Card key={s.title} hover className="h-full">
-                <div className="text-4xl mb-4" aria-hidden="true">{s.icon}</div>
+                <Icona forma={s.icon} size={56} className="mb-4 text-primary" />
                 <h3 className="font-black text-primary text-lg mb-2">{s.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{s.desc}</p>
               </Card>
@@ -175,7 +191,7 @@ export default function BrokerLatina() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {vantaggi.map((v) => (
                 <Card key={v.title} className="h-full">
-                  <div className="text-3xl mb-3" aria-hidden="true">{v.icon}</div>
+                  <Icona forma={v.icon} size={48} className="mb-3 text-primary" />
                   <h3 className="font-bold text-primary mb-1">{v.title}</h3>
                   <p className="text-gray-600 text-sm">{v.desc}</p>
                 </Card>
@@ -199,17 +215,17 @@ export default function BrokerLatina() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="text-center">
-              <div className="text-3xl mb-3" aria-hidden="true">📍</div>
+              <Icona forma={SEGNAPOSTO} size={48} className="mb-3 mx-auto text-primary" />
               <h3 className="font-bold text-primary mb-1">Sede</h3>
               <p className="text-gray-600 text-sm">Via Roma 41<br />04012 Cisterna di Latina (LT)</p>
             </Card>
             <Card className="text-center">
-              <div className="text-3xl mb-3" aria-hidden="true">📞</div>
+              <Icona forma={TELEFONO} size={48} className="mb-3 mx-auto text-primary" />
               <h3 className="font-bold text-primary mb-1">Telefono</h3>
               <p className="text-gray-600 text-sm">+39 06 96883381<br />Lun-Ven 9:30-13:00 / 15:30-18:30</p>
             </Card>
             <Card className="text-center">
-              <div className="text-3xl mb-3" aria-hidden="true">📧</div>
+              <Icona forma={POSTA} size={48} className="mb-3 mx-auto text-primary" />
               <h3 className="font-bold text-primary mb-1">Email</h3>
               <p className="text-gray-600 text-sm">info@fimbroker.it<br />Ti ricontattiamo {RICONTATTO}</p>
             </Card>

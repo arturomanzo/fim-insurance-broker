@@ -15,7 +15,7 @@ export const famiglieFaq: FaqCategory = {
     text: 'Vuoi una consulenza gratuita sulle coperture della tua famiglia?',
     description: 'Analizziamo insieme polizze attive, gap di copertura e duplicati. Senza impegno.',
     primary: { label: 'Prenota Consulenza', href: '/prenota-consulenza' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

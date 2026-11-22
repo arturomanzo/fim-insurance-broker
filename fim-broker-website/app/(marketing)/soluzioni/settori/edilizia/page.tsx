@@ -6,6 +6,17 @@ import { ediliziaFaq } from '@/lib/faq/edilizia'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ALLERTA,
+  CANTIERE,
+  CASCO,
+  ISTITUZIONE,
+  MONDO,
+  OMBRELLO,
+  SIGILLO,
+  TELEFONO,
+} from '@/lib/icone'
 
 const SETTORE_QS = '?profilo=pmi&settore=Edilizia'
 
@@ -25,50 +36,50 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '⚠️', title: 'Cantiere bloccato', desc: 'Furto materiali, danni atmosferici, incendio: ogni giorno di fermo cantiere costa migliaia di euro in penali e ritardi sul SAL.' },
-  { icon: '📋', title: 'Fideiussioni richieste', desc: 'Se il bando chiede la garanzia provvisoria o il contratto la definitiva, senza fideiussione non entri in gara, non firmi e non incassi l\'anticipazione.' },
-  { icon: '👷', title: 'Infortuni operai', desc: 'L\'INAIL copre solo una parte. Una lesione grave a un operaio può portare a richieste di danni che azzerano i margini.' },
-  { icon: '🏗️', title: 'Responsabilità decennale', desc: 'Per 10 anni dopo la consegna sei responsabile dei vizi gravi dell\'opera. Una perizia su un edificio nuovo può chiederti centinaia di migliaia di euro.' },
+  { icon: ALLERTA, title: 'Cantiere bloccato', desc: 'Furto materiali, danni atmosferici, incendio: ogni giorno di fermo cantiere costa migliaia di euro in penali e ritardi sul SAL.' },
+  { icon: SIGILLO, title: 'Fideiussioni richieste', desc: 'Se il bando chiede la garanzia provvisoria o il contratto la definitiva, senza fideiussione non entri in gara, non firmi e non incassi l\'anticipazione.' },
+  { icon: CASCO, title: 'Infortuni operai', desc: 'L\'INAIL copre solo una parte. Una lesione grave a un operaio può portare a richieste di danni che azzerano i margini.' },
+  { icon: CANTIERE, title: 'Responsabilità decennale', desc: 'Per 10 anni dopo la consegna sei responsabile dei vizi gravi dell\'opera. Una perizia su un edificio nuovo può chiederti centinaia di migliaia di euro.' },
 ]
 
 const coverages = [
   {
-    icon: '🏗️',
+    icon: CANTIERE,
     title: 'CAR (Contractors All Risk)',
     desc: 'Copertura "all-risk" del cantiere: opere in costruzione, materiali in magazzino e in opera, attrezzature, danni a terzi e a opere preesistenti. La polizza più richiesta nei capitolati di gara.',
     price: 'su preventivo',
     highlighted: true,
   },
   {
-    icon: '📜',
+    icon: SIGILLO,
     title: 'Fideiussioni Cauzionali',
     desc: 'Garanzia provvisoria e definitiva, anticipazione, buona esecuzione: per le gare pubbliche secondo il D.Lgs. 36/2023 (Codice dei contratti pubblici) e per i contratti privati. Premio e tempi li decide la compagnia dopo aver valutato l\'impresa.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '👷',
+    icon: CASCO,
     title: 'Infortuni Operai (Integrativa INAIL)',
     desc: 'Copre il gap della rendita INAIL: capitali per invalidità permanente calcolati sulla retribuzione reale, diaria per inabilità temporanea, rimborso spese mediche.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🤝',
+    icon: OMBRELLO,
     title: 'RC Subappaltatori e Postuma',
     desc: 'Risponde dei danni causati da subappaltatori in cantiere e copre la responsabilità per vizi e difetti emersi dopo la consegna dell\'opera (postuma 2 o 10 anni).',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🏛️',
+    icon: ISTITUZIONE,
     title: 'Decennale Postuma D.M. 154/2022',
     desc: 'Obbligatoria per il costruttore che vende a una persona fisica un immobile da costruire (art. 4 D.Lgs. 122/2005). Copre per 10 anni i danni all\'immobile da rovina totale o parziale e da gravi difetti costruttivi.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🌍',
+    icon: MONDO,
     title: 'RC Inquinamento Cantiere',
     desc: 'Sversamenti accidentali, contaminazione del suolo, danni ambientali. Copre i danni a terzi e i costi di bonifica che il D.Lgs. 152/2006 (Testo Unico Ambientale) mette a carico di chi inquina.',
     price: 'su preventivo',
@@ -102,7 +113,8 @@ export default function EdiliziaPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🏗️ Imprese edili, costruzioni e installatori
+              <Icona forma={CANTIERE} size={16} />
+              Imprese edili, costruzioni e installatori
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               In edilizia un imprevisto<br />
@@ -127,7 +139,8 @@ export default function EdiliziaPage() {
                 </svg>
               </Link>
               <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-                📞 06 96883381
+                <Icona forma={TELEFONO} size={20} />
+                06 96883381
               </a>
             </div>
           </div>
@@ -151,7 +164,7 @@ export default function EdiliziaPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {painPoints.map((p) => (
               <Card key={p.title} className="border-l-4 border-l-red-400">
-                <span className="text-3xl mb-3 block">{p.icon}</span>
+                <Icona forma={p.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{p.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
               </Card>
@@ -178,7 +191,7 @@ export default function EdiliziaPage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     {cov.price}
                   </span>
@@ -268,7 +281,8 @@ export default function EdiliziaPage() {
               Richiedi preventivo Edilizia
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

@@ -9,6 +9,8 @@ import {
   type ConsentChoice,
   type StoredConsent,
 } from '@/lib/consent'
+import { Icona } from '@/components/icons/TettoIcons'
+import { BISCOTTO } from '@/lib/icone'
 
 // Estensione type-safe del global window per gtag (Consent Mode v2).
 // Il default consent ("denied") e l'inizializzazione di gtag avvengono
@@ -138,7 +140,7 @@ export default function CookieBanner() {
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
         {/* Header */}
         <div className="gradient-primary px-6 py-4 flex items-center gap-3">
-          <span className="text-2xl" aria-hidden="true">🍪</span>
+          <Icona forma={BISCOTTO} size={40} className="text-white" />
           <h2 className="text-white font-bold text-lg" id="cookie-banner-title">Preferenze Cookie</h2>
         </div>
 

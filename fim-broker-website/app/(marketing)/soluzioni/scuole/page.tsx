@@ -8,6 +8,8 @@ import ScuoleForm from '@/components/forms/ScuoleForm'
 import { scuoleFaq } from '@/lib/faq/scuole'
 import { SCUOLE_DOCS, SCUOLE_EMAIL, SCUOLE_PEC } from '@/lib/scuole'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import { SPUNTA } from '@/lib/icone'
 
 const SLUG = 'soluzioni/scuole'
 const BASE_URL = 'https://www.fimbroker.it'
@@ -430,7 +432,7 @@ export default function ScuolePage() {
               <ul className="space-y-3 mb-8">
                 {consegne.map((c) => (
                   <li key={c} className="flex items-start gap-3 text-gray-700">
-                    <span className="w-6 h-6 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                    <span className="w-6 h-6 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"><Icona forma={SPUNTA} size={12} /></span>
                     <span className="leading-relaxed">{c}</span>
                   </li>
                 ))}
@@ -519,7 +521,7 @@ export default function ScuolePage() {
                 <ul className="space-y-2">
                   {documentiCheckup.map((d) => (
                     <li key={d} className="flex items-start gap-3 text-sm text-gray-700">
-                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"><Icona forma={SPUNTA} size={12} /></span>
                       {d}
                     </li>
                   ))}

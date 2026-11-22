@@ -9,7 +9,7 @@ export const sinistriFaq: FaqCategory = {
   cta: {
     text: 'Hai un sinistro aperto adesso?',
     description: 'Contattaci subito — ogni ora conta nella gestione di un sinistro.',
-    primary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    primary: { label: '06 96883381', href: 'tel:+390696883381' },
     secondary: { label: 'Apri pratica online', href: '/sinistri' },
   },
   items: [

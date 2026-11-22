@@ -15,6 +15,8 @@ import {
   type Esito,
   type RisultatoVerifica,
 } from '@/lib/verificaRequisiti'
+import { Icona } from '@/components/icons/TettoIcons'
+import { CROCE } from '@/lib/icone'
 
 const ERRORE_INVIO = "Errore nell'invio. Riprova o contattaci al +39 06 96883381."
 
@@ -120,7 +122,7 @@ function CaricaPdf({
               className="ml-2 text-gray-400 hover:text-red-500"
               aria-label="Rimuovi file"
             >
-              ✕
+              <Icona forma={CROCE} size={14} className="inline-block align-[-0.1em]" />
             </button>
           </div>
         ) : (

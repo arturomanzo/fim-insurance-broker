@@ -8,6 +8,21 @@ import { sinistriFaq } from '@/lib/faq/sinistri'
 import { EMAIL_SINISTRI } from '@/lib/contatti'
 import { OG_BASE } from '@/lib/seo'
 import { linkWhatsApp } from '@/lib/whatsappSito'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  AUTO,
+  BORSA,
+  CASA,
+  CEROTTO,
+  ELENCO,
+  FABBRICA,
+  FUMETTO,
+  INVIA,
+  MONETE,
+  PERSONE,
+  TELEFONO,
+  VENTO,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Gestione Sinistri',
@@ -25,35 +40,35 @@ export const metadata: Metadata = {
 const steps = [
   {
     num: '01',
-    icon: '📞',
+    icon: TELEFONO,
     title: 'Ci contatti subito',
     desc: 'Appena accade il sinistro, chiami il nostro numero dedicato o scriva su WhatsApp. Siamo disponibili per guidarti fin dal primo momento.',
     detail: 'Non aspettare giorni — ogni ora conta nella gestione di un sinistro.',
   },
   {
     num: '02',
-    icon: '📋',
+    icon: ELENCO,
     title: 'Raccogliamo la documentazione',
     desc: 'Il nostro team raccoglie e verifica tutta la documentazione necessaria: foto, perizie, testimonianze, referti. Ti diciamo esattamente cosa serve.',
     detail: 'Documentazione incompleta è la causa principale dei ritardi nella liquidazione.',
   },
   {
     num: '03',
-    icon: '📨',
+    icon: INVIA,
     title: 'Denunciamo alla compagnia',
     desc: 'Presentiamo la denuncia del sinistro alla compagnia assicuratrice in modo corretto e tempestivo, usando il linguaggio tecnico che massimizza le possibilità di liquidazione.',
     detail: 'Ogni compagnia ha procedure diverse. Le conosciamo tutte.',
   },
   {
     num: '04',
-    icon: '🤝',
+    icon: PERSONE,
     title: 'Trattiamo per te',
     desc: 'Monitoriamo l\'iter della pratica, rispondiamo alle richieste di integrazione e trattiamo direttamente con i liquidatori per ottenere il massimo riconoscimento.',
     detail: 'Siamo dalla tua parte — non dalla parte della compagnia.',
   },
   {
     num: '05',
-    icon: '💰',
+    icon: MONETE,
     title: 'Ottieni il rimborso',
     desc: 'Ti teniamo aggiornato sull\'esito della liquidazione e, se necessario, impugniamo le decisioni ingiuste della compagnia con perizie di parte e mediazione.',
     detail: 'Tempi medi di liquidazione: 15-45 giorni per sinistri semplici.',
@@ -61,12 +76,12 @@ const steps = [
 ]
 
 const sinistroTypes = [
-  { icon: '🚗', title: 'RC Auto e Kasko', desc: 'Incidenti stradali, danni a terzi, furto veicolo, eventi atmosferici su auto.' },
-  { icon: '🏠', title: 'Danni alla Casa', desc: 'Allagamenti, incendi, furti, danni da eventi atmosferici, RC condominiale.' },
-  { icon: '⚕️', title: 'Infortuni e Salute', desc: 'Rimborso spese mediche, indennità da infortunio, diarie ospedaliere.' },
-  { icon: '💼', title: 'RC Professionale', desc: 'Danni causati a clienti nell\'esercizio dell\'attività professionale.' },
-  { icon: '🏭', title: 'Sinistri Aziendali', desc: 'Danni alla proprietà, interruzione dell\'attività, responsabilità civile.' },
-  { icon: '🌪️', title: 'Catastrofi Naturali', desc: 'Alluvioni, terremoti, trombe d\'aria, grandine su immobili e attrezzature.' },
+  { icon: AUTO, title: 'RC Auto e Kasko', desc: 'Incidenti stradali, danni a terzi, furto veicolo, eventi atmosferici su auto.' },
+  { icon: CASA, title: 'Danni alla Casa', desc: 'Allagamenti, incendi, furti, danni da eventi atmosferici, RC condominiale.' },
+  { icon: CEROTTO, title: 'Infortuni e Salute', desc: 'Rimborso spese mediche, indennità da infortunio, diarie ospedaliere.' },
+  { icon: BORSA, title: 'RC Professionale', desc: 'Danni causati a clienti nell\'esercizio dell\'attività professionale.' },
+  { icon: FABBRICA, title: 'Sinistri Aziendali', desc: 'Danni alla proprietà, interruzione dell\'attività, responsabilità civile.' },
+  { icon: VENTO, title: 'Catastrofi Naturali', desc: 'Alluvioni, terremoti, trombe d\'aria, grandine su immobili e attrezzature.' },
 ]
 
 export default function SinistriPage() {
@@ -91,7 +106,8 @@ export default function SinistriPage() {
                 href="tel:+390696883381"
                 className="btn-primary bg-accent hover:bg-accent-dark text-primary font-bold px-8 py-4"
               >
-                📞 Chiama ora: 06 96883381
+                <Icona forma={TELEFONO} size={18} />
+                Chiama ora: 06 96883381
               </a>
               <a
                 href={linkWhatsApp('Ciao, ho un sinistro e ho bisogno di assistenza.', '/sinistri')}
@@ -99,7 +115,8 @@ export default function SinistriPage() {
                 rel="noopener noreferrer"
                 className="btn-outline-white px-8 py-4"
               >
-                💬 WhatsApp
+                <Icona forma={FUMETTO} size={18} />
+                WhatsApp
               </a>
             </div>
             <p className="text-white/70 text-sm mt-4">
@@ -149,7 +166,7 @@ export default function SinistriPage() {
                 </div>
                 <Card padding="md" className="flex-1">
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl">{step.icon}</span>
+                    <Icona forma={step.icon} size={40} className="text-primary" />
                     <div>
                       <h3 className="font-bold text-primary text-lg mb-1">{step.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed mb-2">{step.desc}</p>
@@ -175,7 +192,7 @@ export default function SinistriPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {sinistroTypes.map((s) => (
               <Card key={s.title} padding="md" className="hover:shadow-md transition-shadow">
-                <span className="text-3xl mb-3 block">{s.icon}</span>
+                <Icona forma={s.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{s.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{s.desc}</p>
               </Card>
@@ -211,7 +228,8 @@ export default function SinistriPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a href="tel:+390696883381" className="btn-primary bg-accent hover:bg-accent-dark text-primary font-bold px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={18} />
+              06 96883381
             </a>
             <Link href="/preventivo" className="btn-outline-white px-8 py-4">
               Non ho ancora una polizza FIM

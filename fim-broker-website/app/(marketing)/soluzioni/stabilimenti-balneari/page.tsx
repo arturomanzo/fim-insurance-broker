@@ -7,6 +7,18 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  CALICE,
+  CEROTTO,
+  LUCCHETTO,
+  OMBRELLO,
+  ONDA,
+  PIOGGIA,
+  SALVAGENTE,
+  SPIAGGIA,
+  TELEFONO,
+} from '@/lib/icone'
 
 // Pagina P17 del piano SEO (marketing/seo nel gestionale). Niente prezzi,
 // niente obblighi di legge generici sulla RC (li fissano concessione e regole
@@ -31,45 +43,45 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '🩼', title: 'Il bagnante che si fa male', desc: 'Una passerella bagnata, un ombrellone che vola con il vento, un lettino che cede. La richiesta di danni arriva al gestore.' },
-  { icon: '🌊', title: 'La mareggiata d\'inverno', desc: 'Arriva quando lo stabilimento è chiuso e si porta via passerelle, cabine e pedane. Molte polizze la escludono.' },
-  { icon: '🛟', title: 'Bagnini e stagionali', desc: 'Personale che cambia ogni estate, contratti brevi, lavoro in acqua. Un infortunio grave può finire in una causa contro di te.' },
-  { icon: '🌧️', title: 'L\'estate che non arriva', desc: 'Un giugno di pioggia pesa sull\'incasso dell\'anno. Le spese fisse restano uguali.' },
+  { icon: CEROTTO, title: 'Il bagnante che si fa male', desc: 'Una passerella bagnata, un ombrellone che vola con il vento, un lettino che cede. La richiesta di danni arriva al gestore.' },
+  { icon: ONDA, title: 'La mareggiata d\'inverno', desc: 'Arriva quando lo stabilimento è chiuso e si porta via passerelle, cabine e pedane. Molte polizze la escludono.' },
+  { icon: SALVAGENTE, title: 'Bagnini e stagionali', desc: 'Personale che cambia ogni estate, contratti brevi, lavoro in acqua. Un infortunio grave può finire in una causa contro di te.' },
+  { icon: PIOGGIA, title: 'L\'estate che non arriva', desc: 'Un giugno di pioggia pesa sull\'incasso dell\'anno. Le spese fisse restano uguali.' },
 ]
 
 const coverages = [
   {
-    icon: '🤝',
+    icon: OMBRELLO,
     title: 'RC verso terzi (RCT)',
     desc: 'Danni a bagnanti e clienti: cadute, oggetti che volano, incidenti in acqua nella zona sorvegliata. Va controllato che copra tutte le attività, dal noleggio pedalò all\'animazione.',
     highlighted: true,
   },
   {
-    icon: '🛟',
+    icon: SALVAGENTE,
     title: 'RC verso i dipendenti (RCO)',
     desc: 'Copre le richieste di danni di bagnini e personale e la rivalsa dell\'INAIL. Deve comprendere stagionali e contratti brevi.',
     highlighted: false,
   },
   {
-    icon: '🏖️',
+    icon: SPIAGGIA,
     title: 'Strutture ed eventi atmosferici',
     desc: 'Cabine, chioschi, passerelle e impianti contro incendio, vento e mareggiate. Qui contano le esclusioni sui beni all\'aperto e i limiti per evento.',
     highlighted: false,
   },
   {
-    icon: '🔒',
+    icon: LUCCHETTO,
     title: 'Furto e attrezzature',
     desc: 'Lettini, ombrelloni, pedalò, impianti del bar. Con le condizioni di custodia scritte in modo che si possano rispettare davvero in spiaggia.',
     highlighted: false,
   },
   {
-    icon: '🍹',
+    icon: CALICE,
     title: 'Bar e ristorazione',
     desc: 'RC per i prodotti somministrati, per esempio un\'intossicazione alimentare, e danni alle attrezzature della cucina.',
     highlighted: false,
   },
   {
-    icon: '☔',
+    icon: PIOGGIA,
     title: 'Polizza parametrica sul meteo',
     desc: 'Paga un importo stabilito prima quando si supera una soglia misurata, come i giorni di pioggia in stagione. Protegge l\'incasso; non tutte le compagnie la offrono.',
     highlighted: false,
@@ -119,7 +131,8 @@ export default function StabilimentiBalneariPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🏖️ Stabilimenti balneari, lidi e chioschi
+              <Icona forma={SPIAGGIA} size={16} />
+              Stabilimenti balneari, lidi e chioschi
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               In spiaggia il rischio<br />
@@ -166,7 +179,7 @@ export default function StabilimentiBalneariPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {painPoints.map((p) => (
               <Card key={p.title} className="border-l-4 border-l-red-400">
-                <span className="text-3xl mb-3 block">{p.icon}</span>
+                <Icona forma={p.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{p.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
               </Card>
@@ -193,7 +206,7 @@ export default function StabilimentiBalneariPage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     su preventivo
                   </span>
@@ -302,7 +315,8 @@ export default function StabilimentiBalneariPage() {
               Richiedi un preventivo
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

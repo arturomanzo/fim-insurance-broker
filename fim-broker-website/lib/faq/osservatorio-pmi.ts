@@ -7,7 +7,7 @@ export const osservatorioPmiFaq: FaqCategory = {
   cta: {
     text: 'Vuoi sapere quali coperture servono alla tua impresa?',
     description: 'Calcolatore di rischio gratuito basato su settore, dimensione ed esposizione reale.',
-    primary: { label: '📊 Calcola rischio', href: '/calcolatore-rischi' },
+    primary: { label: 'Calcola rischio', href: '/calcolatore-rischi' },
     secondary: { label: 'Richiedi preventivo', href: '/preventivo?profilo=pmi' },
   },
   items: [

@@ -1,4 +1,5 @@
 import { clsx } from 'clsx'
+import { senzaEmoji } from '@/lib/senzaEmoji'
 
 interface ChatBubbleProps {
   role: 'user' | 'assistant'
@@ -30,7 +31,7 @@ export default function ChatBubble({ role, content, isStreaming }: ChatBubblePro
             : 'bg-gray-100 text-gray-800 rounded-tl-sm'
         )}
       >
-        {content}
+        {isUser ? content : senzaEmoji(content)}
         {isStreaming && (
           <span className="inline-flex gap-1 ml-1">
             <span className="w-1 h-1 bg-current rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />

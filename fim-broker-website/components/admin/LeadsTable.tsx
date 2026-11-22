@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Lead } from '@/lib/leadStore'
+import { Icona } from '@/components/icons/TettoIcons'
+import { STELLA } from '@/lib/icone'
 
 interface Props {
   leads: Lead[]
@@ -142,7 +144,7 @@ export default function LeadsTable({ leads, statoColors }: Props) {
             {scoring ? (
               <span className="inline-block w-3 h-3 border-2 border-white/40 border-t-white rounded-full animate-spin" />
             ) : (
-              <span>✦</span>
+              <Icona forma={STELLA} size={12} />
             )}
             {scoring ? 'Analisi in corso…' : `Scorea AI (${unscoredCount})`}
           </button>
@@ -270,7 +272,7 @@ export default function LeadsTable({ leads, statoColors }: Props) {
                         disabled={updating === lead.id}
                         className="text-[10px] text-indigo-600 hover:text-indigo-800 font-medium disabled:opacity-40"
                       >
-                        ✦ Scorea
+                        <Icona forma={STELLA} size={12} className="mr-1 inline-block" />Scorea
                       </button>
                     )}
                   </div>

@@ -1,4 +1,6 @@
 import type { Coverage } from '@/lib/services'
+import { Icona } from '@/components/icons/TettoIcons'
+import { CROCE, SPUNTA } from '@/lib/icone'
 
 interface CoverageTableProps {
   coverage: Coverage
@@ -69,7 +71,7 @@ export default function CoverageTable({ coverage, serviceName }: CoverageTablePr
                 {coverage.covered[i] && (
                   <span className="inline-flex items-start gap-2">
                     <span className="text-green-600 mt-0.5 flex-shrink-0" aria-hidden="true">
-                      ✓
+                      <Icona forma={SPUNTA} size={14} className="inline-block align-[-0.1em]" />
                     </span>
                     {coverage.covered[i]}
                   </span>
@@ -79,7 +81,7 @@ export default function CoverageTable({ coverage, serviceName }: CoverageTablePr
                 {coverage.notCovered[i] && (
                   <span className="inline-flex items-start gap-2">
                     <span className="text-red-500 mt-0.5 flex-shrink-0" aria-hidden="true">
-                      ✗
+                      <Icona forma={CROCE} size={14} className="inline-block align-[-0.1em]" />
                     </span>
                     {coverage.notCovered[i]}
                   </span>

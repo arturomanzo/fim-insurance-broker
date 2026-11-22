@@ -8,7 +8,7 @@ export const stabilimentiBalneariFaq: FaqCategory = {
     text: 'Gestisci uno stabilimento sul litorale?',
     description: 'Mandaci le polizze in corso e l\'atto di concessione: ti diciamo cosa copre davvero, mareggiate comprese.',
     primary: { label: 'Richiedi analisi gratuita', href: '/preventivo?profilo=pmi' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

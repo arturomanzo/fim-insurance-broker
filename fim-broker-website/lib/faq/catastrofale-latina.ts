@@ -11,7 +11,7 @@ export const catastrofaleLatinaFaq: FaqCategory = {
     text: 'Hai un\'impresa o una casa in provincia di Latina?',
     description: 'Mandaci le polizze che hai e l\'indirizzo dei beni: guardiamo insieme mappe ISPRA e condizioni, prima che serva.',
     primary: { label: 'Richiedi analisi gratuita', href: '/preventivo?profilo=pmi&settore=Polizza+Catastrofale' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

@@ -11,6 +11,22 @@ import { IconTrasparenza, IconDesign, IconVisione } from '@/components/icons/Pil
 import Button from '@/components/ui/Button'
 import { OG_BASE } from '@/lib/seo'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ANALISI,
+  BANDIERA,
+  BARRE,
+  BILANCIA,
+  BUSSOLA,
+  CONFERMA,
+  DOMANDA,
+  ELENCO,
+  LENTE,
+  PALAZZO,
+  PERSONA,
+  SPUNTA,
+  TELEFONO,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   // Title scelto da Arturo il 31/10/2026 dopo i dati di Search Console: su
@@ -48,22 +64,22 @@ export const metadata: Metadata = {
 
 const whyFIM = [
   {
-    icon: '🔍',
+    icon: ANALISI,
     title: 'La competenza del Saggio',
     desc: 'Analisi oggettiva, dati concreti, trasparenza assoluta. Non vendiamo prodotti: traduciamo la complessità assicurativa in decisioni chiare.',
   },
   {
-    icon: '🧭',
+    icon: BUSSOLA,
     title: 'La guida del Navigatore',
     desc: 'Quando le acque si fanno tempestose — un sinistro, una scadenza critica, un contenzioso — prendiamo il timone al tuo fianco.',
   },
   {
-    icon: '🎯',
+    icon: BANDIERA,
     title: 'Strategia, non burocrazia',
     desc: 'L\'assicurazione non è un obbligo difensivo. Con FIM diventa la tua mossa più strategica: protezione mirata, zero sprechi.',
   },
   {
-    icon: '🤝',
+    icon: BILANCIA,
     title: 'Indipendenza totale',
     desc: 'Non rappresentiamo nessuna compagnia. Confrontiamo il mercato con un solo obiettivo: il tuo interesse.',
   },
@@ -112,9 +128,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Privati */}
             <div className="group rounded-2xl border-2 border-gray-100 hover:border-primary/30 bg-white p-8 transition-all duration-300 hover:shadow-lg">
-              <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-primary/15 transition-colors">
-                👤
-              </div>
+              <Icona forma={PERSONA} size={56} className="mb-6 text-primary" />
               <h3 className="text-2xl font-black text-primary mb-3">Privati</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Proteggi te e la tua famiglia con le polizze più adatte alle tue esigenze, scelte confrontando più compagnie.
@@ -128,7 +142,7 @@ export default function HomePage() {
                   'Copertura Viaggi',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
-                    <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+                    <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"><Icona forma={SPUNTA} size={12} /></span>
                     {item}
                   </li>
                 ))}
@@ -143,9 +157,7 @@ export default function HomePage() {
 
             {/* Aziende */}
             <div className="group rounded-2xl border-2 border-gray-100 hover:border-accent/40 bg-white p-8 transition-all duration-300 hover:shadow-lg">
-              <div className="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-accent/15 transition-colors">
-                🏢
-              </div>
+              <Icona forma={PALAZZO} size={56} className="mb-6 text-primary" />
               <h3 className="text-2xl font-black text-primary mb-3">Aziende e PMI</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Soluzioni assicurative complete per proteggere la tua attività, i tuoi dipendenti e il tuo patrimonio.
@@ -159,7 +171,7 @@ export default function HomePage() {
                   'Welfare aziendale e Salute',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
-                    <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+                    <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"><Icona forma={SPUNTA} size={12} /></span>
                     {item}
                   </li>
                 ))}
@@ -219,25 +231,25 @@ export default function HomePage() {
               {[
                 {
                   step: '01',
-                  icon: '📋',
+                  icon: ELENCO,
                   title: 'Raccontaci le tue esigenze',
                   desc: 'Compila il form online o chiamaci. Ci dici di cosa hai bisogno e raccogliamo tutte le informazioni necessarie.',
                 },
                 {
                   step: '02',
-                  icon: '🔎',
+                  icon: LENTE,
                   title: 'Analizziamo il mercato',
                   desc: 'I nostri consulenti confrontano le offerte delle principali compagnie assicurative per trovare la soluzione ideale.',
                 },
                 {
                   step: '03',
-                  icon: '📊',
+                  icon: BARRE,
                   title: 'Ricevi il preventivo',
                   desc: `Ti ricontattiamo ${RICONTATTO}. Poi raccogliamo le quotazioni e ti presentiamo il confronto, senza impegno.`,
                 },
                 {
                   step: '04',
-                  icon: '✅',
+                  icon: CONFERMA,
                   title: 'Attivi la polizza',
                   desc: 'Scegli la copertura più adatta e attiviamo la polizza. Ti seguiamo anche dopo, per rinnovi e sinistri.',
                 },
@@ -245,7 +257,7 @@ export default function HomePage() {
                 <div key={item.step} className="flex flex-col items-center text-center group">
                   <div className="relative mb-5">
                     <div className="w-20 h-20 rounded-2xl gradient-primary flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
-                      <span className="text-3xl" aria-hidden="true">{item.icon}</span>
+                      <Icona forma={item.icon} size={48} className="text-white" />
                     </div>
                     <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-accent-cta text-white text-xs font-black flex items-center justify-center shadow">
                       {item.step}
@@ -275,7 +287,7 @@ export default function HomePage() {
             <div className="relative rounded-3xl overflow-hidden gradient-primary p-8">
               <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/5" />
               <div className="relative">
-                <div className="w-16 h-16 bg-white/15 rounded-2xl flex items-center justify-center text-4xl mb-4">❓</div>
+                <Icona forma={DOMANDA} size={64} className="mb-4 text-white" />
                 <h3 className="text-xl font-black text-white mb-2">Quiz: che polizza ti serve?</h3>
                 <p className="text-white/70 text-sm mb-4 leading-relaxed">4 domande per scoprire le coperture su misura per il tuo profilo.</p>
                 <Link
@@ -291,7 +303,7 @@ export default function HomePage() {
             <div className="relative rounded-3xl overflow-hidden bg-gray-900 p-8">
               <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-accent/10" />
               <div className="relative">
-                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-4xl mb-4">📊</div>
+                <Icona forma={BARRE} size={64} className="mb-4 text-white" />
                 <h3 className="text-xl font-black text-white mb-2">Calcolatore del Rischio</h3>
                 <p className="text-white/70 text-sm mb-4 leading-relaxed">Analisi approfondita con punteggio di rischio e stima del costo annuo.</p>
                 <Link
@@ -308,7 +320,7 @@ export default function HomePage() {
           {/* Second Opinion — banner full-width per PMI */}
           <div className="mt-6 rounded-3xl border border-primary/20 bg-primary/5 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-start gap-4">
-              <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">🔍</div>
+              <Icona forma={LENTE} size={56} className="text-primary" />
               <div>
                 <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-1">Per PMI e professionisti</p>
                 <h3 className="text-lg font-black text-primary mb-1">Second Opinion assicurativa gratuita</h3>
@@ -351,7 +363,7 @@ export default function HomePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {whyFIM.map((item) => (
                   <div key={item.title} className="flex items-start gap-3">
-                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                    <Icona forma={item.icon} size={40} className="text-primary" />
                     <div>
                       <h3 className="font-bold text-primary mb-1">{item.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
@@ -421,7 +433,8 @@ export default function HomePage() {
               Richiedi Preventivo
             </Button>
             <Button variant="outline-white" size="lg" href="tel:+390696883381" external>
-              📞 Chiama ora
+              <Icona forma={TELEFONO} size={18} />
+              Chiama ora
             </Button>
           </div>
         </div>

@@ -7,7 +7,7 @@ export const manifatturieroFaq: FaqCategory = {
     text: 'Vuoi una valutazione completa del rischio della tua impresa manifatturiera?',
     description: 'Analisi gap su Property, BI, RC Prodotto e Catastrofale. Senza impegno.',
     primary: { label: 'Prenota Consulenza', href: '/prenota-consulenza' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

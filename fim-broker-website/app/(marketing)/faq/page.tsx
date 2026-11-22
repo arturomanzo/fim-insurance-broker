@@ -4,6 +4,8 @@ import FaqSection from '@/components/ui/FaqSection'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { ALL_FAQS, buildFaqSchema } from '@/lib/faq'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import { TELEFONO } from '@/lib/icone'
 
 export const metadata: Metadata = {
   // Title corto + template-suffix "| FIM Insurance Broker" applicato dal root layout
@@ -107,7 +109,8 @@ export default function FaqIndexPage() {
               Prenota Consulenza Gratuita
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

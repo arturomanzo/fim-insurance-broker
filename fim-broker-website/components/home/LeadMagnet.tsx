@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 import { trackGuidaPmiSubmit } from '@/lib/analytics'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ELENCO, SPUNTA } from '@/lib/icone'
 
 const tipoOptions = [
   'Artigiano / commerciante',
@@ -63,7 +65,8 @@ export default function LeadMagnet() {
           {/* Left: offer */}
           <div className="text-white">
             <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-accent-light">
-              📋 Guida gratuita — Scarica ora
+              <Icona forma={ELENCO} size={16} />
+              Guida gratuita — Scarica ora
             </div>
             <h2 className="text-3xl md:text-4xl font-black mb-5 leading-tight">
               Guida Completa alle<br />
@@ -85,7 +88,7 @@ export default function LeadMagnet() {
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
                   <span className="w-5 h-5 bg-accent-cta rounded-full flex items-center justify-center text-white text-xs font-black flex-shrink-0">
-                    ✓
+                    <Icona forma={SPUNTA} size={12} />
                   </span>
                   <span className="text-white/90 text-sm">{item}</span>
                 </div>
@@ -210,7 +213,10 @@ export default function LeadMagnet() {
                         Invio in corso…
                       </span>
                     ) : (
-                      '📋 Inviami la Guida Gratis'
+                      <span className="flex items-center justify-center gap-2">
+                        <Icona forma={ELENCO} size={18} />
+                        Inviami la Guida Gratis
+                      </span>
                     )}
                   </button>
 

@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { campagnaPerInvio } from '@/lib/campagnaBrowser'
+import { Icona } from '@/components/icons/TettoIcons'
+import { BARRE, BORSA, FABBRICA, PALAZZO, PERSONA } from '@/lib/icone'
 
 type Profile = 'privato' | 'professionista' | 'pmi' | 'impresa'
 
@@ -35,25 +37,25 @@ interface RiskResult {
 const PROFILES = [
   {
     id: 'privato' as Profile,
-    emoji: '👤',
+    emoji: PERSONA,
     label: 'Privato',
     desc: 'Proteggere me stesso e la mia famiglia',
   },
   {
     id: 'professionista' as Profile,
-    emoji: '💼',
+    emoji: BORSA,
     label: 'Libero Professionista',
     desc: 'Consulente, medico, avvocato, ingegnere…',
   },
   {
     id: 'pmi' as Profile,
-    emoji: '🏢',
+    emoji: PALAZZO,
     label: 'PMI / Artigiano',
     desc: 'Azienda con 1–50 dipendenti',
   },
   {
     id: 'impresa' as Profile,
-    emoji: '🏭',
+    emoji: FABBRICA,
     label: 'Grande Impresa',
     desc: 'Struttura con 50+ dipendenti',
   },
@@ -347,7 +349,7 @@ export default function RiskCalculator() {
                 onClick={() => handleProfileSelect(p.id)}
                 className="group text-left p-5 rounded-2xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition duration-200 hover:-translate-y-0.5"
               >
-                <div className="text-3xl mb-3">{p.emoji}</div>
+                <Icona forma={p.emoji} size={48} className="mb-3 text-primary" />
                 <div className="font-bold text-primary text-lg mb-1 group-hover:text-primary-light transition-colors">{p.label}</div>
                 <div className="text-gray-500 text-sm">{p.desc}</div>
               </button>
@@ -438,7 +440,7 @@ export default function RiskCalculator() {
             Indietro
           </button>
           <div className="bg-primary/5 border border-primary/20 rounded-2xl p-5 mb-6 flex items-start gap-3">
-            <div className="text-2xl flex-shrink-0">📊</div>
+            <Icona forma={BARRE} size={40} className="text-primary" />
             <div>
               <div className="font-bold text-primary mb-1">La tua analisi è pronta!</div>
               <p className="text-gray-600 text-sm">Inserisci i tuoi dati per visualizzare il profilo di rischio personalizzato e le coperture raccomandate.</p>

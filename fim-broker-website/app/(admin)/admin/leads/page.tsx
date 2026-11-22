@@ -54,7 +54,7 @@ export default async function AdminLeadsPage() {
           <div className="text-2xl font-black mb-1 text-red-600">
             {leads.filter((l) => l.ai_priority === 'alta').length}
           </div>
-          <div className="text-sm font-medium text-red-700">🔴 Alta priorità</div>
+          <div className="text-sm font-medium text-red-700"><span className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full bg-red-500" aria-hidden="true" />Alta priorità</div>
         </div>
       </div>
 

@@ -4,6 +4,8 @@ import FaqSection from '@/components/ui/FaqSection'
 import { osservatorioPmiFaq } from '@/lib/faq/osservatorio-pmi'
 import { OG_BASE } from '@/lib/seo'
 import { SCADENZE_CATASTROFALE, CHI_E_ESCLUSO, CONSEGUENZA_CATASTROFALE } from '@/lib/catastrofale'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ALLERTA, BARRE, CATENA, CRESCITA, ELENCO, GIORNALE, PERSONE } from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Osservatorio PMI Assicurazioni | Cosa pesa sul premio di un\'impresa',
@@ -72,10 +74,10 @@ const sizeData = [
 // fatturato" (che riguarda le spese per il personale, non il fatturato): numeri
 // senza fonte o sbagliati, tolti.
 const tendenze = [
-  { icon: '⚠️', title: 'Polizza catastrofale obbligatoria', desc: `L'obbligo è scattato ${SCADENZE_CATASTROFALE}. Restano fuori ${CHI_E_ESCLUSO}. Per chi non è in regola ${CONSEGUENZA_CATASTROFALE}.` },
-  { icon: '🔐', title: 'Cyber e catena di fornitura', desc: 'Il D.Lgs. 138/2024, che recepisce la direttiva NIS2, chiede alle imprese che ricadono nella norma di curare anche la sicurezza dei fornitori. Per chi lavora con loro, misure informatiche e a volte una polizza cyber entrano fra le richieste.' },
-  { icon: '📈', title: 'RC impresa da confrontare', desc: 'Per lo stesso rischio le tariffe RC cambiano parecchio da una compagnia all\'altra. Prima del rinnovo conviene confrontarle e rileggere massimali e franchigie.' },
-  { icon: '👥', title: 'Welfare aziendale', desc: 'Le polizze sanitarie e infortuni per i dipendenti dentro un piano di welfare hanno un trattamento fiscale agevolato. Il quanto dipende dal piano: va valutato insieme al commercialista.' },
+  { icon: ALLERTA, title: 'Polizza catastrofale obbligatoria', desc: `L'obbligo è scattato ${SCADENZE_CATASTROFALE}. Restano fuori ${CHI_E_ESCLUSO}. Per chi non è in regola ${CONSEGUENZA_CATASTROFALE}.` },
+  { icon: CATENA, title: 'Cyber e catena di fornitura', desc: 'Il D.Lgs. 138/2024, che recepisce la direttiva NIS2, chiede alle imprese che ricadono nella norma di curare anche la sicurezza dei fornitori. Per chi lavora con loro, misure informatiche e a volte una polizza cyber entrano fra le richieste.' },
+  { icon: CRESCITA, title: 'RC impresa da confrontare', desc: 'Per lo stesso rischio le tariffe RC cambiano parecchio da una compagnia all\'altra. Prima del rinnovo conviene confrontarle e rileggere massimali e franchigie.' },
+  { icon: PERSONE, title: 'Welfare aziendale', desc: 'Le polizze sanitarie e infortuni per i dipendenti dentro un piano di welfare hanno un trattamento fiscale agevolato. Il quanto dipende dal piano: va valutato insieme al commercialista.' },
 ]
 
 function RiskBadge({ level }: { level: string }) {
@@ -106,7 +108,8 @@ export default function OsservatorioPmiPage() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-4">
               <span className="inline-block bg-white/10 border border-white/20 text-sm px-3 py-1 rounded-full">
-                📋 Guida FIM per settore
+                <Icona forma={ELENCO} size={16} className="inline-block align-[-0.15em] mr-2" />
+                Guida FIM per settore
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-black mb-4">
@@ -192,7 +195,7 @@ export default function OsservatorioPmiPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {tendenze.map((trend) => (
                   <div key={trend.title} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div className="text-3xl mb-3">{trend.icon}</div>
+                    <Icona forma={trend.icon} size={48} className="mb-3 text-primary" />
                     <h3 className="font-bold text-primary mb-2">{trend.title}</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">{trend.desc}</p>
                   </div>
@@ -210,7 +213,8 @@ export default function OsservatorioPmiPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/calcolatore-rischi" className="btn-primary">
-                  📊 Calcola il mio profilo di rischio
+                  <Icona forma={BARRE} size={18} />
+                  Calcola il mio profilo di rischio
                 </Link>
                 <Link href="/preventivo?profilo=pmi" className="bg-white/10 border border-white/30 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/20 transition-colors">
                   Richiedi preventivo gratuito
@@ -245,15 +249,16 @@ export default function OsservatorioPmiPage() {
           <h2 className="text-xl font-black text-primary mb-6">Risorse correlate</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { href: '/risorse/guida-pmi', label: '📋 Guida PMI', desc: 'La guida completa alle assicurazioni aziendali obbligatorie e consigliate.' },
-              { href: '/calcolatore-rischi', label: '📊 Calcolatore del Rischio', desc: 'Valuta il profilo di rischio della tua impresa in 2 minuti.' },
-              { href: '/blog/polizze-obbligatorie-aziende-italia-2025', label: '📰 Polizze obbligatorie per le imprese', desc: 'Le assicurazioni che la legge impone alle imprese italiane.' },
+              { href: '/risorse/guida-pmi', icon: ELENCO, label: 'Guida PMI', desc: 'La guida completa alle assicurazioni aziendali obbligatorie e consigliate.' },
+              { href: '/calcolatore-rischi', icon: BARRE, label: 'Calcolatore del Rischio', desc: 'Valuta il profilo di rischio della tua impresa in 2 minuti.' },
+              { href: '/blog/polizze-obbligatorie-aziende-italia-2025', icon: GIORNALE, label: 'Polizze obbligatorie per le imprese', desc: 'Le assicurazioni che la legge impone alle imprese italiane.' },
             ].map((res) => (
               <Link
                 key={res.href}
                 href={res.href}
                 className="p-5 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-md transition-all group"
               >
+                <Icona forma={res.icon} size={44} className="mb-3 text-primary" />
                 <div className="font-bold text-primary mb-1 group-hover:text-accent transition-colors">{res.label}</div>
                 <div className="text-gray-500 text-sm">{res.desc}</div>
               </Link>

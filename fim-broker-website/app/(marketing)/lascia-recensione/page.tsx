@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Icona } from '@/components/icons/TettoIcons'
+import { STELLA } from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Lascia una Recensione',
@@ -22,9 +24,7 @@ export default function LaSciaRecensionePage() {
       <div className="container-custom py-16 max-w-2xl mx-auto text-center">
 
         {/* Gratitude header */}
-        <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
-          <span className="text-4xl">⭐</span>
-        </div>
+        <Icona forma={STELLA} size={80} className="mx-auto mb-6 text-primary" />
 
         <h1 className="text-3xl md:text-4xl font-black text-primary mb-4">
           Grazie per aver scelto FIM!

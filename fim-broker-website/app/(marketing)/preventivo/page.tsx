@@ -6,6 +6,8 @@ import Card from '@/components/ui/Card'
 import { EMAIL_RCA } from '@/lib/contatti'
 import { OG_BASE } from '@/lib/seo'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import { SPUNTA, TELEFONO } from '@/lib/icone'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -128,14 +130,17 @@ export default function PreventivoPage() {
                 <h3 className="font-bold text-primary mb-4">Perché FIM?</h3>
                 <div className="space-y-3">
                   {[
-                    '✓ Confronto tra 20 compagnie',
-                    '✓ Consulenza gratuita e senza impegno',
-                    `✓ Ricontatto ${RICONTATTO}`,
-                    '✓ Assistenza post-vendita inclusa',
-                    '✓ Gestione sinistri dedicata',
-                    '✓ Il nostro compenso è la provvigione compresa nel premio',
+                    'Confronto tra 20 compagnie',
+                    'Consulenza gratuita e senza impegno',
+                    `Ricontatto ${RICONTATTO}`,
+                    'Assistenza post-vendita inclusa',
+                    'Gestione sinistri dedicata',
+                    'Il nostro compenso è la provvigione compresa nel premio',
                   ].map((item) => (
-                    <div key={item} className="text-gray-700 text-sm">{item}</div>
+                    <div key={item} className="flex items-start gap-2 text-gray-700 text-sm">
+                      <Icona forma={SPUNTA} size={14} className="mt-1 text-accent-cta" />
+                      {item}
+                    </div>
                   ))}
                 </div>
               </Card>
@@ -145,7 +150,8 @@ export default function PreventivoPage() {
                 <h3 className="font-bold mb-3">Preferisci chiamare?</h3>
                 <p className="text-white/80 text-sm mb-4">Siamo disponibili dal lunedì al venerdì 9:30-13:00 e 15:30-18:30.</p>
                 <a href="tel:+390696883381" className="btn-primary w-full text-center block">
-                  📞 06 96883381
+                  <Icona forma={TELEFONO} size={18} className="mr-2 inline-block align-[-0.15em]" />
+                  06 96883381
                 </a>
                 <p className="text-white/80 text-sm mt-4">
                   Per un preventivo auto (RCA) scrivici a{' '}

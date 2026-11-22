@@ -13,7 +13,7 @@ export const artigianiPmiFaq: FaqCategory = {
     text: 'Non sai quali coperture servono davvero alla tua attività?',
     description: 'Analisi gratuita dei rischi e proposta su misura, senza impegno.',
     primary: { label: 'Prenota Consulenza', href: '/prenota-consulenza' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

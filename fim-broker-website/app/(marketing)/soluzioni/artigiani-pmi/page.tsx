@@ -17,6 +17,29 @@ import {
   CHI_E_ESCLUSO,
   CONSEGUENZA_CATASTROFALE,
 } from '@/lib/catastrofale'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  AUTO,
+  BILANCIA,
+  CANTIERE,
+  CASCO,
+  CHIAVE_INGLESE,
+  COMPUTER,
+  FABBRICA,
+  FIAMMA,
+  FORBICI,
+  FULMINE,
+  FURGONE,
+  MARTELLO,
+  NEGOZIO,
+  PACCO,
+  PAUSA,
+  POSATE,
+  SPIGA,
+  SPUNTA,
+  STAMPANTE,
+  TELEFONO,
+} from '@/lib/icone'
 
 // Titolo e H1 rivisti il 31/10/2026 sui dati di Search Console: la pagina era in
 // posizione 26 e il vecchio H1 ("Proteggi la tua attività senza spendere troppo")
@@ -38,35 +61,35 @@ export const metadata: Metadata = {
 
 const coverages = [
   {
-    icon: '🏭',
+    icon: FABBRICA,
     title: 'RC Impresa',
     desc: 'Responsabilità civile per danni causati a terzi durante l\'attività: un cliente che si fa male nel tuo negozio, un prodotto difettoso che causa danni. È la prima polizza da avere, qualunque sia l\'attività.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '🔥',
+    icon: FIAMMA,
     title: 'All-Risk Capannone e Macchinari',
     desc: 'Copre struttura, attrezzature e stock da incendio, furto, allagamento ed eventi atmosferici. Per un artigiano o una PMI, fermare la produzione può significare perdere contratti e clienti.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '👷',
+    icon: CASCO,
     title: 'Infortuni Dipendenti (Integrativa INAIL)',
     desc: 'L\'INAIL copre solo una parte degli infortuni sul lavoro. La polizza integrativa copre il gap: invalidità permanente, diaria da ricovero e rimborso spese mediche non riconosciute dall\'INAIL.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '🚚',
+    icon: FURGONE,
     title: 'Merci in Transito',
     desc: 'Copre le merci durante il trasporto, sia che usi mezzi propri che corrieri terzi. Un danno alle merci in consegna può significare perdere il cliente e pagare il risarcimento.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '🚗',
+    icon: AUTO,
     title: 'Flotta Aziendale',
     desc: 'Auto, furgoni e camion dell\'azienda: polizze singole allineate o libro matricola, scadenze sotto controllo e un solo interlocutore per i sinistri.',
     price: 'su preventivo',
@@ -74,28 +97,28 @@ const coverages = [
     href: '/soluzioni/flotta-aziendale',
   },
   {
-    icon: '💻',
+    icon: COMPUTER,
     title: 'Cyber Risk',
     desc: 'Un ransomware blocca i tuoi sistemi gestionali. Dati clienti rubati. Sanzioni GDPR. La cyber risk copre i costi di ripristino, le spese legali e i danni reputazionali. Ora essenziale anche per le PMI.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '⏸️',
+    icon: PAUSA,
     title: 'Interruzione di Esercizio',
     desc: 'Se un sinistro (incendio, alluvione) blocca la tua attività, questa polizza compensa il mancato guadagno durante il periodo di fermo. Spesso sottovalutata, può salvare l\'azienda.',
     price: 'inclusa in all-risk',
     mandatory: false,
   },
   {
-    icon: '🏗️',
+    icon: CANTIERE,
     title: 'Cantieri e CAR',
     desc: 'Per imprese edili e installatori: polizza CAR (Contractors All Risk) che copre i lavori in cantiere, i materiali e la responsabilità verso terzi durante i lavori.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '⚖️',
+    icon: BILANCIA,
     title: 'Tutela Legale Aziende',
     desc: 'Copre le spese di avvocato, perito e CTU in caso di procedimenti penali (D.Lgs. 231/2001), controversie con dipendenti, fornitori o clienti, e azioni di responsabilità contro amministratori. Completa la RC proteggendo anche l\'imprenditore.',
     price: 'su preventivo',
@@ -129,18 +152,18 @@ const obblighi = [
 ]
 
 const sectors = [
-  { name: 'Elettricisti e Idraulici', icon: '⚡' },
-  { name: 'Carpentieri e Falegnami', icon: '🔨' },
-  { name: 'Meccanici e Carrozzerie', icon: '🔧' },
-  { name: 'Bar e Ristoranti', icon: '🍕' },
-  { name: 'Negozi e Commercio', icon: '🏪' },
-  { name: 'Imprese Edili', icon: '🏗️' },
-  { name: 'Trasportatori', icon: '🚚' },
-  { name: 'Parrucchieri ed Estetisti', icon: '💇' },
-  { name: 'Stampatori e Grafici', icon: '🖨️' },
-  { name: 'Produzione Alimentare', icon: '🥗' },
-  { name: 'Logistica e Magazzini', icon: '📦' },
-  { name: 'IT e Software House', icon: '💻' },
+  { name: 'Elettricisti e Idraulici', icon: FULMINE },
+  { name: 'Carpentieri e Falegnami', icon: MARTELLO },
+  { name: 'Meccanici e Carrozzerie', icon: CHIAVE_INGLESE },
+  { name: 'Bar e Ristoranti', icon: POSATE },
+  { name: 'Negozi e Commercio', icon: NEGOZIO },
+  { name: 'Imprese Edili', icon: CANTIERE },
+  { name: 'Trasportatori', icon: FURGONE },
+  { name: 'Parrucchieri ed Estetisti', icon: FORBICI },
+  { name: 'Stampatori e Grafici', icon: STAMPANTE },
+  { name: 'Produzione Alimentare', icon: SPIGA },
+  { name: 'Logistica e Magazzini', icon: PACCO },
+  { name: 'IT e Software House', icon: COMPUTER },
 ]
 
 export default function ArtigianiPmiPage() {
@@ -168,7 +191,8 @@ export default function ArtigianiPmiPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🏭 Soluzioni per piccole e medie imprese
+              <Icona forma={FABBRICA} size={16} />
+              Soluzioni per piccole e medie imprese
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Assicurazione per{' '}
@@ -194,7 +218,8 @@ export default function ArtigianiPmiPage() {
                 </svg>
               </Link>
               <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-                📞 06 96883381
+                <Icona forma={TELEFONO} size={20} />
+                06 96883381
               </a>
             </div>
           </div>
@@ -223,7 +248,7 @@ export default function ArtigianiPmiPage() {
           <div className="flex flex-wrap justify-center gap-3">
             {sectors.map((s) => (
               <div key={s.name} className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-sm font-medium text-gray-700">
-                <span>{s.icon}</span>
+                <Icona forma={s.icon} size={20} className="text-primary" />
                 {s.name}
               </div>
             ))}
@@ -286,7 +311,7 @@ export default function ArtigianiPmiPage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className="flex flex-col">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <div className="text-right">
                     <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full block">
                       {cov.price}
@@ -318,7 +343,7 @@ export default function ArtigianiPmiPage() {
             <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
               <div className="lg:col-span-2">
                 <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-3 py-1 text-xs font-bold text-accent-light mb-4">
-                  <span>⚖️</span>
+                  <Icona forma={BILANCIA} size={20} className="text-white" />
                   NUOVO SERVIZIO
                 </div>
                 <h3 className="text-2xl md:text-3xl font-black mb-3">
@@ -342,19 +367,19 @@ export default function ArtigianiPmiPage() {
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3 text-sm">
                 <div className="flex items-start gap-2">
-                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-accent flex-shrink-0"><Icona forma={SPUNTA} size={14} className="inline-block align-[-0.1em]" /></span>
                   <span className="text-white/90">Tutela penale D.Lgs. 231/2001</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-accent flex-shrink-0"><Icona forma={SPUNTA} size={14} className="inline-block align-[-0.1em]" /></span>
                   <span className="text-white/90">Danni patrimoniali (D&amp;O) amministratori e sindaci</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-accent flex-shrink-0"><Icona forma={SPUNTA} size={14} className="inline-block align-[-0.1em]" /></span>
                   <span className="text-white/90">Controversie con dipendenti e fornitori</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-accent flex-shrink-0">✓</span>
+                  <span className="text-accent flex-shrink-0"><Icona forma={SPUNTA} size={14} className="inline-block align-[-0.1em]" /></span>
                   <span className="text-white/90">Libera scelta dell&apos;avvocato di fiducia</span>
                 </div>
               </div>
@@ -410,7 +435,7 @@ export default function ArtigianiPmiPage() {
                 ].map((item) => (
                   <div key={item.name} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-2 text-sm">
-                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold">✓</span>
+                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold"><Icona forma={SPUNTA} size={12} /></span>
                       <span className="text-gray-700">{item.name}</span>
                     </div>
                     <span className="text-xs text-gray-500 text-right">{item.fattore}</span>
@@ -464,7 +489,8 @@ export default function ArtigianiPmiPage() {
               Prenota Consulenza Gratuita
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { services } from '@/lib/services'
+import { Icona } from '@/components/icons/TettoIcons'
 
 export default function ServicesGrid() {
   return (
@@ -35,9 +36,9 @@ export default function ServicesGrid() {
                   />
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                  {/* Icon badge */}
-                  <div className="absolute bottom-3 left-3 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-sm text-xl">
-                    {service.icon}
+                  {/* Sulla foto serve un fondo: è l'unico posto dove l'icona ne ha uno */}
+                  <div className="absolute bottom-3 left-3 flex h-14 w-14 items-center justify-center rounded-xl bg-white shadow-sm">
+                    <Icona forma={service.icon} size={44} className="text-primary" />
                   </div>
                 </div>
 

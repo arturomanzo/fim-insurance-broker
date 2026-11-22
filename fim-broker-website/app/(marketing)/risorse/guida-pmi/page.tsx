@@ -2,6 +2,20 @@ import type { Metadata } from 'next'
 import { SCADENZE_CATASTROFALE, CONSEGUENZA_CATASTROFALE } from '@/lib/catastrofale'
 import Link from 'next/link'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ALLERTA,
+  BILANCIA,
+  CASCO,
+  COMPUTER,
+  ELENCO,
+  FIAMMA,
+  FURGONE,
+  IDEA,
+  PAUSA,
+  SPUNTA,
+  TELEFONO,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Guida Completa alle Assicurazioni per PMI',
@@ -70,7 +84,8 @@ export default function GuidaPmiPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-accent-light">
-              📋 Guida gratuita
+              <Icona forma={ELENCO} size={16} />
+              Guida gratuita
             </div>
             <h1 className="text-4xl md:text-5xl font-black mb-5 leading-tight">
               Guida Completa alle<br />Assicurazioni per PMI
@@ -80,9 +95,9 @@ export default function GuidaPmiPage() {
               sulle assicurazioni — spiegato in modo chiaro, senza gergo tecnico.
             </p>
             <div className="flex flex-wrap gap-4 text-white/70 text-sm">
-              <span>✓ Cosa fa variare il premio</span>
-              <span>✓ Normativa italiana</span>
-              <span>✓ Checklist dei rischi</span>
+              <span><Icona forma={SPUNTA} size={18} className="inline-block align-[-0.15em] mr-2" />Cosa fa variare il premio</span>
+              <span><Icona forma={SPUNTA} size={18} className="inline-block align-[-0.15em] mr-2" />Normativa italiana</span>
+              <span><Icona forma={SPUNTA} size={18} className="inline-block align-[-0.15em] mr-2" />Checklist dei rischi</span>
             </div>
           </div>
         </div>
@@ -112,7 +127,8 @@ export default function GuidaPmiPage() {
                   Preventivo gratuito
                 </Link>
                 <a href="tel:+390696883381" className="mt-2 text-center text-sm text-gray-500 hover:text-primary block">
-                  📞 06 96883381
+                  <Icona forma={TELEFONO} size={16} className="inline-block align-[-0.15em] mr-2" />
+                  06 96883381
                 </a>
               </div>
             </div>
@@ -137,7 +153,7 @@ export default function GuidaPmiPage() {
                 alla compagnia assicurativa, in cambio di un premio annuale certo e relativamente contenuto.
               </p>
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 not-prose mb-4">
-                <p className="text-blue-800 text-sm font-semibold mb-2">💡 Il concetto chiave</p>
+                <p className="text-blue-800 text-sm font-semibold mb-2"><Icona forma={IDEA} size={16} className="inline-block align-[-0.15em] mr-2" />Il concetto chiave</p>
                 <p className="text-blue-700 text-sm leading-relaxed">
                   Un incendio nel capannone può costare centinaia di migliaia di euro. La polizza all-risk costa una frazione di quella cifra.
                   La logica è semplice: paghi una piccola certezza per evitare una grande incertezza.
@@ -215,44 +231,44 @@ export default function GuidaPmiPage() {
               <div className="not-prose space-y-4">
                 {[
                   {
-                    icon: '🔥',
+                    icon: FIAMMA,
                     name: 'All-risk Sede, Capannone e Macchinari',
                     priority: 'Alta',
                     desc: 'Copre la struttura fisica (muri, impianti, tetto), le attrezzature e le scorte da incendio, furto, allagamento ed eventi atmosferici. Include spesso l\'interruzione di esercizio. È la polizza che più frequentemente salva le PMI.',
                   },
                   {
-                    icon: '⚖️',
+                    icon: BILANCIA,
                     name: 'RC Impresa (Responsabilità Civile verso Terzi)',
                     priority: 'Alta',
                     desc: "Copre i danni causati a terzi nell'esercizio dell'attività: un cliente che si fa male, un prodotto difettoso, danni causati da dipendenti durante il lavoro. Senza questa polizza, un singolo sinistro grave può azzerare il patrimonio aziendale.",
                   },
                   {
-                    icon: '👷',
+                    icon: CASCO,
                     name: 'Infortuni Dipendenti (Integrativa INAIL)',
                     priority: 'Alta per datori di lavoro',
                     desc: "L'INAIL copre solo parte degli infortuni e con limiti significativi. La polizza integrativa colma il gap: indennità dal primo giorno, rimborso spese mediche private, capitali aggiuntivi per invalidità grave. Sempre più richiesta nei contratti collettivi.",
                   },
                   {
-                    icon: '💻',
+                    icon: COMPUTER,
                     name: 'Cyber Risk',
                     priority: 'Media-Alta',
                     desc: "Un ransomware blocca i tuoi sistemi. Dati dei clienti rubati. Sanzioni GDPR. La cyber risk copre i costi di ripristino IT, le spese legali e la gestione della crisi; le sanzioni del Garante in genere restano all'azienda. Non è più solo per le grandi aziende: le PMI sono un bersaglio frequente, perché spesso sono meno protette.",
                   },
                   {
-                    icon: '⏸️',
+                    icon: PAUSA,
                     name: 'Interruzione di Esercizio',
                     priority: 'Media',
                     desc: "Se un sinistro (incendio, alluvione) blocca la produzione, questa polizza copre il mancato guadagno durante il periodo di fermo. È spesso inclusa nella polizza all-risk. Senza di essa, l'impresa deve far fronte alle spese fisse (affitti, stipendi) senza incassi.",
                   },
                   {
-                    icon: '🚛',
+                    icon: FURGONE,
                     name: 'Merci in Transito',
                     priority: 'Media',
                     desc: "Copre le merci durante il trasporto, sia con mezzi propri che attraverso corrieri terzi. Un danno alle merci in consegna può significare perdere il cliente e pagare il risarcimento. Il corriere ha una responsabilità limitata per legge.",
                   },
                 ].map((item) => (
                   <div key={item.name} className="flex items-start gap-4 bg-white border border-gray-200 rounded-xl p-5">
-                    <span className="text-3xl flex-shrink-0">{item.icon}</span>
+                    <Icona forma={item.icon} size={48} className="text-primary" />
                     <div>
                       <div className="flex flex-wrap items-center gap-2 mb-1.5">
                         <h3 className="font-bold text-primary m-0 text-base">{item.name}</h3>
@@ -280,7 +296,7 @@ export default function GuidaPmiPage() {
                 un massimale troppo basso lascia scoperti i rischi maggiori; uno troppo alto aumenta inutilmente il premio.
               </p>
               <div className="not-prose bg-amber-50 border border-amber-200 rounded-xl p-5 mb-5">
-                <p className="text-amber-800 text-sm font-semibold mb-2">⚠️ Il rischio della sottoassicurazione</p>
+                <p className="text-amber-800 text-sm font-semibold mb-2"><Icona forma={ALLERTA} size={16} className="inline-block align-[-0.15em] mr-2" />Il rischio della sottoassicurazione</p>
                 <p className="text-amber-700 text-sm leading-relaxed m-0">
                   Se assicuri macchinari che valgono 200.000€ per soli 100.000€, in caso di sinistro totale riceverai solo il 50% del danno reale.
                   Questo principio — chiamato &ldquo;regola proporzionale&rdquo; — si applica anche ai sinistri parziali.
@@ -426,7 +442,8 @@ export default function GuidaPmiPage() {
                   Richiedi preventivo
                 </Link>
                 <a href="tel:+390696883381" className="btn-outline-white px-6 py-3">
-                  📞 06 96883381
+                  <Icona forma={TELEFONO} size={18} />
+                  06 96883381
                 </a>
               </div>
             </div>

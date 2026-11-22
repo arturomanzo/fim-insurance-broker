@@ -17,7 +17,7 @@ export const calcolatoreRischiFaq: FaqCategory = {
     description:
       'Mandaci i contratti che hai. Li leggiamo per intero e ti diciamo dove sei scoperto e dove paghi due volte la stessa cosa.',
     primary: { label: 'Richiedi la Second Opinion', href: '/seconda-opinione' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

@@ -2,6 +2,24 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ALLERTA,
+  BILANCIA,
+  BORSA,
+  CANTIERE,
+  CASA,
+  CONDOMINIO,
+  CROCE_MEDICA,
+  FABBRICA,
+  FURGONE,
+  LUCCHETTO,
+  ONDA,
+  SCUOLA,
+  SPIAGGIA,
+  SPIGA,
+  type Forma,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Soluzioni per Settore',
@@ -20,8 +38,10 @@ export const metadata: Metadata = {
 
 interface Solution {
   href: string
-  icon: string
+  icon: Forma
   tag: string
+  /** Triangolo di allerta davanti all'etichetta */
+  avviso?: boolean
   tagColor: string
   title: string
   subtitle: string
@@ -36,7 +56,7 @@ interface Solution {
 const solutions: Solution[] = [
   {
     href: '/soluzioni/famiglie',
-    icon: '🏠',
+    icon: CASA,
     tag: 'Per privati e nuclei familiari',
     tagColor: 'bg-purple-100 text-purple-700',
     title: 'Famiglie e Privati',
@@ -48,7 +68,7 @@ const solutions: Solution[] = [
   },
   {
     href: '/soluzioni/professionisti',
-    icon: '⚖️',
+    icon: BILANCIA,
     tag: 'Obbligatoria per molte categorie',
     tagColor: 'bg-blue-100 text-blue-700',
     title: 'Professionisti',
@@ -60,7 +80,7 @@ const solutions: Solution[] = [
   },
   {
     href: '/soluzioni/artigiani-pmi',
-    icon: '🏭',
+    icon: FABBRICA,
     tag: 'Per piccole e medie imprese',
     tagColor: 'bg-green-100 text-green-700',
     title: 'Artigiani e PMI',
@@ -72,7 +92,7 @@ const solutions: Solution[] = [
   },
   {
     href: '/soluzioni/condomini',
-    icon: '🏢',
+    icon: CONDOMINIO,
     tag: 'Globale fabbricato e RC amministratore',
     tagColor: 'bg-orange-100 text-orange-700',
     title: 'Condomini',
@@ -84,7 +104,7 @@ const solutions: Solution[] = [
   },
   {
     href: '/soluzioni/scuole',
-    icon: '🏫',
+    icon: SCUOLA,
     tag: 'Dipartimento Scuole — istituti statali e paritari',
     tagColor: 'bg-amber-100 text-amber-800',
     title: 'Istituti Scolastici',
@@ -97,8 +117,9 @@ const solutions: Solution[] = [
   },
   {
     href: '/soluzioni/catastrofi-naturali',
-    icon: '🌊',
-    tag: '⚠️ Obbligo di legge dal 2025 per le imprese',
+    icon: ONDA,
+    avviso: true,
+    tag: 'Obbligo di legge dal 2025 per le imprese',
     tagColor: 'bg-red-100 text-red-700',
     title: 'Catastrofi Naturali',
     subtitle: 'Privati, famiglie e imprese — tutto il territorio italiano',
@@ -109,7 +130,7 @@ const solutions: Solution[] = [
   },
   {
     href: '/soluzioni/cyber-risk',
-    icon: '🔒',
+    icon: LUCCHETTO,
     tag: 'NIS2 — Obblighi per 66.000 aziende italiane',
     tagColor: 'bg-cyan-100 text-cyan-700',
     title: 'Cyber Risk',
@@ -153,8 +174,9 @@ export default function SoluzioniPage() {
                 {/* Top section */}
                 <div className="p-8 flex-1">
                   <div className="flex items-start justify-between mb-5">
-                    <span className="text-5xl">{sol.icon}</span>
+                    <Icona forma={sol.icon} size={64} className="text-primary" />
                     <span className={`text-xs font-bold px-3 py-1.5 rounded-full ${sol.tagColor}`}>
+                      {sol.avviso && <Icona forma={ALLERTA} size={14} className="mr-1 inline-block align-[-0.15em]" />}
                       {sol.tag}
                     </span>
                   </div>
@@ -211,14 +233,14 @@ export default function SoluzioniPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { href: '/soluzioni/settori/edilizia', icon: '🏗️', title: 'Edilizia', desc: 'CAR, fideiussioni, infortuni operai, RC subappaltatori, decennale postuma.' },
-              { href: '/soluzioni/settori/medico', icon: '⚕️', title: 'Settore Medico', desc: 'RC sanitaria Gelli-Bianco, Colpa Grave SSN, tutela legale, cyber GDPR.' },
-              { href: '/soluzioni/settori/manifatturiero', icon: '🏭', title: 'Manifatturiero', desc: 'All Risk Property, Business Interruption, RC Prodotto export, Cyber OT.' },
-              { href: '/soluzioni/settori/welfare-aziendale', icon: '💼', title: 'Welfare Aziendale', desc: 'Polizze collettive salute, vita e infortuni per i dipendenti.' },
-              { href: '/soluzioni/flotta-aziendale', icon: '🚚', title: 'Flotta Aziendale', desc: 'Auto, furgoni e mezzi da lavoro: polizze allineate o libro matricola, sinistri seguiti da noi.' },
-              { href: '/soluzioni/stabilimenti-balneari', icon: '🏖️', title: 'Stabilimenti Balneari', desc: 'RC verso bagnanti e bagnini, strutture in spiaggia, mareggiate, meteo della stagione.' },
-              { href: '/soluzioni/aziende-agricole', icon: '🌾', title: 'Aziende Agricole', desc: 'Serre e strutture, fabbricati e mezzi agricoli, RC verso terzi e braccianti, agriturismo.' },
-              { href: '/soluzioni/affitti-brevi-litorale-pontino', icon: '🏠', title: 'Affitti Brevi', desc: 'Case affittate ai turisti sul litorale pontino: RC verso gli ospiti, danni ai vicini, obblighi del CIN.' },
+              { href: '/soluzioni/settori/edilizia', icon: CANTIERE, title: 'Edilizia', desc: 'CAR, fideiussioni, infortuni operai, RC subappaltatori, decennale postuma.' },
+              { href: '/soluzioni/settori/medico', icon: CROCE_MEDICA, title: 'Settore Medico', desc: 'RC sanitaria Gelli-Bianco, Colpa Grave SSN, tutela legale, cyber GDPR.' },
+              { href: '/soluzioni/settori/manifatturiero', icon: FABBRICA, title: 'Manifatturiero', desc: 'All Risk Property, Business Interruption, RC Prodotto export, Cyber OT.' },
+              { href: '/soluzioni/settori/welfare-aziendale', icon: BORSA, title: 'Welfare Aziendale', desc: 'Polizze collettive salute, vita e infortuni per i dipendenti.' },
+              { href: '/soluzioni/flotta-aziendale', icon: FURGONE, title: 'Flotta Aziendale', desc: 'Auto, furgoni e mezzi da lavoro: polizze allineate o libro matricola, sinistri seguiti da noi.' },
+              { href: '/soluzioni/stabilimenti-balneari', icon: SPIAGGIA, title: 'Stabilimenti Balneari', desc: 'RC verso bagnanti e bagnini, strutture in spiaggia, mareggiate, meteo della stagione.' },
+              { href: '/soluzioni/aziende-agricole', icon: SPIGA, title: 'Aziende Agricole', desc: 'Serre e strutture, fabbricati e mezzi agricoli, RC verso terzi e braccianti, agriturismo.' },
+              { href: '/soluzioni/affitti-brevi-litorale-pontino', icon: CASA, title: 'Affitti Brevi', desc: 'Case affittate ai turisti sul litorale pontino: RC verso gli ospiti, danni ai vicini, obblighi del CIN.' },
             ].map((s) => (
               <Link
                 key={s.href}
@@ -226,7 +248,7 @@ export default function SoluzioniPage() {
                 className="group bg-gray-50 hover:bg-primary/5 border border-gray-100 hover:border-primary/30 rounded-2xl p-6 transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">{s.icon}</span>
+                  <Icona forma={s.icon} size={48} className="text-primary" />
                   <h3 className="font-bold text-primary group-hover:text-primary-light text-lg">{s.title}</h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">{s.desc}</p>

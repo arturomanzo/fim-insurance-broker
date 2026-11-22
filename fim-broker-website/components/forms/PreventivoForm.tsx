@@ -15,6 +15,8 @@ import {
 import { metaLeadFields } from '@/lib/metaLead'
 import { campagnaPerInvio } from '@/lib/campagnaBrowser'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import { AUTO, BORSA, FABBRICA, PALAZZO, PERSONA, TELEFONO } from '@/lib/icone'
 
 interface UtmData {
   utm_source?: string
@@ -56,10 +58,10 @@ interface Props {
 type Profile = 'privato' | 'professionista' | 'pmi' | 'impresa'
 
 const PROFILES = [
-  { id: 'privato' as Profile, emoji: '👤', label: 'Privato', desc: 'Auto, casa, vita, salute, viaggio' },
-  { id: 'professionista' as Profile, emoji: '💼', label: 'Libero Professionista', desc: 'RC professionale, cyber, previdenza' },
-  { id: 'pmi' as Profile, emoji: '🏢', label: 'PMI / Artigiano', desc: 'RC impresa, all-risk, flotta, welfare' },
-  { id: 'impresa' as Profile, emoji: '🏭', label: 'Grande Impresa', desc: 'Programma assicurativo integrato' },
+  { id: 'privato' as Profile, emoji: PERSONA, label: 'Privato', desc: 'Auto, casa, vita, salute, viaggio' },
+  { id: 'professionista' as Profile, emoji: BORSA, label: 'Libero Professionista', desc: 'RC professionale, cyber, previdenza' },
+  { id: 'pmi' as Profile, emoji: PALAZZO, label: 'PMI / Artigiano', desc: 'RC impresa, all-risk, flotta, welfare' },
+  { id: 'impresa' as Profile, emoji: FABBRICA, label: 'Grande Impresa', desc: 'Programma assicurativo integrato' },
 ]
 
 const COPERTURE: Record<Profile, string[]> = {
@@ -207,7 +209,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
         <p className="text-gray-600 mb-6">Ti ricontattiamo <strong>{RICONTATTO}</strong> per il preventivo personalizzato.</p>
         {isAutoCopertura(copertura) && (
           <div className="max-w-md mx-auto mb-6 p-5 rounded-2xl border-2 border-accent/30 bg-accent/5 text-left">
-            <p className="font-bold text-primary mb-1">🚗 Vuoi accelerare il preventivo auto?</p>
+            <p className="font-bold text-primary mb-1"><Icona forma={AUTO} size={18} className="inline-block align-[-0.15em] mr-2" />Vuoi accelerare il preventivo auto?</p>
             <p className="text-sm text-gray-600 mb-4">
               Carica subito libretto, documento e patente: prepariamo il preventivo senza email avanti e indietro.
             </p>
@@ -217,7 +219,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
           </div>
         )}
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="tel:+390696883381" className="btn-primary">📞 Chiama subito: 06 96883381</a>
+          <a href="tel:+390696883381" className="btn-primary"><Icona forma={TELEFONO} size={18} />Chiama subito: 06 96883381</a>
           <Link href="/prenota-consulenza" className="btn-secondary">Prenota una slot</Link>
         </div>
         <button onClick={() => { setStatus('idle'); setStep(1); setProfile(null); setCopertura(''); setNome(''); setCognome(''); setEmail(''); setTelefono(''); setTarga('') }}
@@ -258,7 +260,7 @@ export default function PreventivoForm({ initialProfile, initialSettore }: Props
             {PROFILES.map((p) => (
               <button key={p.id} onClick={() => { setProfile(p.id); setStep(2); trackPreventivoStep1(p.id) }}
                 className="group text-left p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 bg-white hover:shadow-md transition duration-200">
-                <div className="text-2xl mb-2">{p.emoji}</div>
+                <Icona forma={p.emoji} size={40} className="mb-2 text-primary" />
                 <div className="font-bold text-primary text-sm mb-0.5 group-hover:text-primary-light">{p.label}</div>
                 <div className="text-gray-500 text-xs">{p.desc}</div>
               </button>
