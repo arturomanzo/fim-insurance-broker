@@ -46,6 +46,9 @@ const securityHeaders = [
   },
 
   // Content Security Policy
+  // - form-action 'none': tutti i moduli inviano con fetch. Con 'self', un clic
+  //   prima che parta JavaScript li spediva in GET e metteva nome, mail e
+  //   telefono nell'indirizzo, quindi nei log (22/11/2026)
   // - unsafe-inline su script-src: richiesto da Next.js (idratazione React) e Google Tag Manager
   // - googletagmanager.com: Google Analytics 4
   // - maps.google.com + www.google.com in frame-src: Google Maps embed
@@ -68,7 +71,7 @@ const securityHeaders = [
       "frame-ancestors 'self'",
       "object-src 'none'",
       "base-uri 'self'",
-      "form-action 'self'",
+      "form-action 'none'",
       "worker-src 'self' blob:",
       "manifest-src 'self'",
       "upgrade-insecure-requests",

@@ -23,7 +23,8 @@ export async function generateStaticParams() {
 
 // Solo gli slug di generateStaticParams esistono: uno sconosciuto prende 404
 // dal router. Il notFound() nella pagina da solo dava 200, perché il
-// loading.tsx di (marketing) avvia lo streaming prima (corretto il 07/11/2026).
+// loading.tsx che allora stava in (marketing) avviava lo streaming prima
+// (corretto il 07/11/2026).
 export const dynamicParams = false
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

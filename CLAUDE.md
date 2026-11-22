@@ -51,6 +51,12 @@ Riferimento: `app/api/contact/route.ts` e `app/api/collabora/route.ts`.
 - Dev fallback: se `RESEND_API_KEY` assente → `console.log` del payload
 - Response: `{ success, message, id }` o `{ error }`
 
+### Senza JavaScript
+Controllato da `lib/senzaScript.test.ts`.
+
+- Niente `loading.tsx` sopra le pagine pubbliche: il contenuto arriverebbe nascosto, in attesa di uno script. Sta solo nell'area cliente dietro login (dashboard, dettaglio polizza).
+- La CSP ha `form-action 'none'`: un modulo invia solo con `fetch`. Non riportarla a `'self'`: un clic prima dell'idratazione metterebbe i dati personali nell'indirizzo.
+
 ### Pagine marketing
 Riferimento: `app/(marketing)/chi-siamo/page.tsx` e `app/(marketing)/collabora-con-noi/page.tsx`.
 

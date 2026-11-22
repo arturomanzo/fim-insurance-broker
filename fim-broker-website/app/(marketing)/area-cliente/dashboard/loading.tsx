@@ -1,3 +1,6 @@
+// Solo qui e nel dettaglio polizza, che aspettano il gestionale. Sulle pagine
+// pubbliche no: con un loading.tsx il contenuto arriva nascosto e senza
+// JavaScript non si vede (lib/senzaScript.test.ts).
 export default function Loading() {
   return (
     <div className="min-h-screen bg-gray-50 animate-pulse">
