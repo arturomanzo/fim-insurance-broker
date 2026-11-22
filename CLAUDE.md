@@ -138,7 +138,7 @@ Elenco rivisto il 24/10/2026 sulle polizze in corso nel gestionale. Zurich, Grou
 
 > ⚠️ **Dalbogg non è più operativa** — non citarla mai in contenuti, preventivi o comunicazioni.
 >
-> ⚠️ **WAKAM è stata bloccata da IVASS** — resta fuori dall'elenco anche se nel gestionale ha ancora polizze in corso.
+> ⚠️ **WAKAM: riammessa il 29/10/2026, canale FIM da confermare.** La vigilanza francese ACPR l'aveva fermata il 25/09; dopo l'acquisizione di AmTrust può di nuovo sottoscrivere e rinnovare ([comunicato IVASS del 29/10/2026](https://www.ivass.it/media/comunicati/documenti/2026/ivcs848.pdf)). Non scrivere che è bloccata, e nemmeno che è autorizzata da IVASS. Resta fuori dall'elenco e nel blocco rinnovi del gestionale finché il canale non conferma per iscritto e Arturo non dà l'ok.
 
 ---
 
