@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import PrenotazioneForm from '@/components/forms/PrenotazioneForm'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ANALISI, IDEA, LUCCHETTO_APERTO, SEGNAPOSTO } from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Prenota una Consulenza Gratuita',
@@ -22,22 +24,22 @@ export const metadata: Metadata = {
 
 const VANTAGGI = [
   {
-    icon: '🎯',
+    icon: ANALISI,
     title: 'Analisi personalizzata',
     desc: 'Studiamo la tua situazione e ti proponiamo solo le coperture di cui hai davvero bisogno.',
   },
   {
-    icon: '💡',
+    icon: IDEA,
     title: 'Confronto tra compagnie',
     desc: 'Lavoriamo con 20 compagnie partner e ti mostriamo le alternative a confronto, garanzie e prezzo.',
   },
   {
-    icon: '🤝',
+    icon: LUCCHETTO_APERTO,
     title: 'Nessun impegno',
     desc: 'La consulenza è completamente gratuita. Decidi tu se e quando procedere.',
   },
   {
-    icon: '📍',
+    icon: SEGNAPOSTO,
     title: 'In ufficio o online',
     desc: 'Vieni da noi a Cisterna di Latina oppure organizziamo una videochiamata.',
   },
@@ -103,7 +105,7 @@ export default function PrenotaConsulenzaPage() {
                 <div className="space-y-4">
                   {VANTAGGI.map((v) => (
                     <div key={v.title} className="flex items-start gap-3">
-                      <span className="text-2xl mt-0.5">{v.icon}</span>
+                      <Icona forma={v.icon} size={40} className="mt-0.5 text-primary" />
                       <div>
                         <p className="font-semibold text-gray-800 text-sm">{v.title}</p>
                         <p className="text-gray-500 text-xs leading-relaxed mt-0.5">{v.desc}</p>

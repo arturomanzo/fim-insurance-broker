@@ -15,7 +15,7 @@ export const scuolePctoFaq: FaqCategory = {
     description:
       'Mandateci la polizza della scuola e una convenzione tipo. Vi diciamo per iscritto se gli studenti in azienda sono coperti per quello che può succedere davvero.',
     primary: { label: 'Scrivi al Dipartimento Scuole', href: `mailto:${SCUOLE_EMAIL}` },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

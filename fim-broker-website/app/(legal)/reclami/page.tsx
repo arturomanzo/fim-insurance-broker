@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import { EMAIL_RECLAMI, PEC } from '@/lib/contatti'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ESTERNO } from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Reclami e Arbitro Assicurativo',
@@ -184,7 +186,7 @@ export default function ReclamiPage() {
                   <p className="text-sm text-gray-700 mb-1">{r.desc}</p>
                   {r.link && r.linkLabel && (
                     <a href={r.link} target="_blank" rel="noopener noreferrer" className="text-sm text-accent-cta hover:underline">
-                      {r.linkLabel} ↗
+                      {r.linkLabel} <Icona forma={ESTERNO} size={16} className="inline-block align-[-0.15em] mr-2" />
                     </a>
                   )}
                 </li>

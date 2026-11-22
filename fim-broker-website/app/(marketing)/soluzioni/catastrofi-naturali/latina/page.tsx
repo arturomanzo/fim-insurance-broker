@@ -9,6 +9,8 @@ import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
 import { NORMA_CATASTROFALE, CHI_E_OBBLIGATO, BENI_DA_ASSICURARE, EVENTI_CATASTROFALI, CONSEGUENZA_CATASTROFALE } from '@/lib/catastrofale'
 import { COMUNI_LATINA, PROVINCIA_LATINA, LAZIO, FONTE_RISCHIO_LATINA, piuEsposti, percentuale } from '@/lib/rischioLatina'
+import { Icona } from '@/components/icons/TettoIcons'
+import { FABBRICA, FRANA, MAPPA, NEGOZIO, ONDA, PIOGGIA, SPIAGGIA } from '@/lib/icone'
 
 // Pagina P4 del piano SEO (marketing/seo nel gestionale). I numeri vengono tutti
 // da lib/rischioLatina.ts (ISPRA IdroGEO, Edizione 2024): non scriverne a mano
@@ -36,21 +38,21 @@ const elenco = (comuni: { nome: string }[]) => comuni.map((c) => c.nome).join(',
 
 const evidenze = [
   {
-    icon: '🌊',
+    icon: ONDA,
     title: 'Alluvioni poco frequenti (P2)',
     comuni: piuEsposti('alluvioneP2'),
     campo: 'alluvioneP2' as const,
     nota: 'Tempo di ritorno fra 100 e 200 anni.',
   },
   {
-    icon: '🌧️',
+    icon: PIOGGIA,
     title: 'Eventi estremi (P1)',
     comuni: piuEsposti('alluvioneP1'),
     campo: 'alluvioneP1' as const,
     nota: 'Lo scenario raro: quello per cui si compra una polizza.',
   },
   {
-    icon: '🪨',
+    icon: FRANA,
     title: 'Frane, pericolosità elevata o molto elevata',
     comuni: piuEsposti('franaP3P4'),
     campo: 'franaP3P4' as const,
@@ -60,19 +62,19 @@ const evidenze = [
 
 const esempi = [
   {
-    icon: '🏭',
+    icon: FABBRICA,
     title: 'Il capannone in zona industriale',
     luogo: 'Aprilia, Cisterna, Latina',
     desc: 'L\'obbligo c\'è, qualunque sia il comune. Guardiamo che fabbricato, impianti e macchinari siano assicurati per quanto costerebbe rifarli, e che la polizza nomini davvero tutti gli eventi della legge, terremoto compreso.',
   },
   {
-    icon: '🏪',
+    icon: NEGOZIO,
     title: 'Il negozio in pianura',
     luogo: 'Terracina, Fondi, Sezze',
     desc: 'Le aree allagabili poco frequenti sono piccole, quelle dello scenario estremo molto più larghe. Qui contano la merce in magazzino, gli arredi e il fermo dell\'attività: sono le voci che una polizza minima spesso lascia fuori.',
   },
   {
-    icon: '🏖️',
+    icon: SPIAGGIA,
     title: 'La struttura ricettiva sulla costa',
     luogo: 'Sperlonga, San Felice Circeo, Ponza',
     desc: 'Acqua da una parte, frana dall\'altra. Guardiamo franchigie e limiti di indennizzo per evento, e se la polizza paga anche le settimane in cui la struttura resta chiusa.',
@@ -125,7 +127,7 @@ export default function CatastrofaleLatinaPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🗺️ {COMUNI_LATINA.length} comuni, dati ISPRA
+              <Icona forma={MAPPA} size={16} />{COMUNI_LATINA.length} comuni, dati ISPRA
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Polizza catastrofale in provincia di Latina:<br />
@@ -175,7 +177,7 @@ export default function CatastrofaleLatinaPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {evidenze.map((e) => (
               <Card key={e.title} className="flex flex-col">
-                <span className="text-3xl mb-3 block">{e.icon}</span>
+                <Icona forma={e.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-3">{e.title}</h3>
                 <ul className="space-y-2 flex-1">
                   {e.comuni.map((c) => (
@@ -306,7 +308,7 @@ export default function CatastrofaleLatinaPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {esempi.map((e) => (
               <Card key={e.title} className="flex flex-col">
-                <span className="text-3xl mb-3 block">{e.icon}</span>
+                <Icona forma={e.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-1">{e.title}</h3>
                 <p className="text-xs font-semibold text-accent-cta mb-3">{e.luogo}</p>
                 <p className="text-gray-600 text-sm leading-relaxed flex-1">{e.desc}</p>

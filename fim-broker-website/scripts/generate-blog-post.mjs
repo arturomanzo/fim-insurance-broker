@@ -201,7 +201,7 @@ Genera un nuovo articolo su un argomento assicurativo diverso da quelli già esi
 - Welfare aziendale e polizze dipendenti
 - Riforma pensionistica e previdenza complementare
 
-Sette paletti, tutti vincolanti.
+Otto paletti, tutti vincolanti.
 
 1. NORME. Puoi citare estremi di legge SOLO se sono in questo elenco, che è stato letto sulla fonte primaria:
 ${elencoNorme}
@@ -220,6 +220,8 @@ ${elencoNorme}
 6. NIENTE ESPERIENZE INVENTATE. Non conosci lo studio né i suoi clienti: non scrivere «nella mia esperienza», «le chiamate arrivano quasi sempre per...», «vediamo spesso tra i nostri clienti», «i nostri clienti ci dicono». Sono casistiche che nessuno ha contato, messe in bocca ad Arturo. Spiega il rischio e la norma; la voce del broker sta nel tono, non in aneddoti.
 
 7. SCRITTURA. Frasi brevi, discorso fluido, niente elenchi puntati dove basta una frase, niente riassunto finale di rito. Assumi un ruolo concreto: il broker che spiega, non la voce neutra da manuale.
+
+8. NIENTE EMOJI e niente simboli tipo spunte o crocette, né nel testo né negli elenchi. Un elenco mette una spunta davanti a ogni riga: quindi in "list" mai le esclusioni, quelle si scrivono nel testo.
 ${sezioneCorrezioni}
 
 Almeno quattro sezioni, ognuna di due-quattro frasi; "list" solo dove un elenco aggiunge qualcosa, altrimenti null. Il testo è utile e porta a una consulenza con FIM.`

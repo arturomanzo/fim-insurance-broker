@@ -7,6 +7,20 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  BILANCIA,
+  CALENDARIO,
+  CASA,
+  CEROTTO,
+  CONDOMINIO,
+  DIVANO,
+  DOCUMENTO,
+  GOCCIA,
+  LUCCHETTO,
+  OMBRELLO,
+  TELEFONO,
+} from '@/lib/icone'
 
 // Pagina P16 del piano SEO (marketing/seo nel gestionale). Gli obblighi sono
 // quelli dell'art. 13-ter del D.L. 145/2023, letto su normattiva il 28/10/2026:
@@ -32,10 +46,10 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '🩹', title: 'L\'ospite che si fa male', desc: 'Una doccia scivolosa, una scala, un balcone. La richiesta di danni arriva al proprietario, non alla piattaforma.' },
-  { icon: '💧', title: 'Il piano di sotto allagato', desc: 'Un rubinetto lasciato aperto la sera del check-out. I danni ai vicini e al condominio li chiedono a te.' },
-  { icon: '📄', title: 'La polizza casa che non sa', desc: 'Scritta per chi ci abita o affitta con un contratto lungo. Se l\'uso cambia e non lo dichiari, al sinistro può non rispondere.' },
-  { icon: '📅', title: 'Le settimane che saltano', desc: 'Dopo un danno serio l\'appartamento resta chiuso in piena stagione. Le prenotazioni si cancellano, le spese restano.' },
+  { icon: CEROTTO, title: 'L\'ospite che si fa male', desc: 'Una doccia scivolosa, una scala, un balcone. La richiesta di danni arriva al proprietario, non alla piattaforma.' },
+  { icon: GOCCIA, title: 'Il piano di sotto allagato', desc: 'Un rubinetto lasciato aperto la sera del check-out. I danni ai vicini e al condominio li chiedono a te.' },
+  { icon: DOCUMENTO, title: 'La polizza casa che non sa', desc: 'Scritta per chi ci abita o affitta con un contratto lungo. Se l\'uso cambia e non lo dichiari, al sinistro può non rispondere.' },
+  { icon: CALENDARIO, title: 'Le settimane che saltano', desc: 'Dopo un danno serio l\'appartamento resta chiuso in piena stagione. Le prenotazioni si cancellano, le spese restano.' },
 ]
 
 const obblighi = [
@@ -58,37 +72,37 @@ const obblighi = [
 
 const coverages = [
   {
-    icon: '🤝',
+    icon: OMBRELLO,
     title: 'RC verso ospiti e terzi',
     desc: 'Lesioni e danni subiti dagli ospiti durante il soggiorno, e i danni che l\'appartamento causa a vicini e passanti.',
     highlighted: true,
   },
   {
-    icon: '🏢',
+    icon: CONDOMINIO,
     title: 'Danni a vicini e condominio',
     desc: 'Acqua, fumo, incendio partiti dal tuo appartamento, e i danni che gli ospiti fanno alle parti comuni.',
     highlighted: false,
   },
   {
-    icon: '🛋️',
+    icon: DIVANO,
     title: 'Danni all\'immobile e agli arredi',
     desc: 'Rotture, guasti e atti vandalici causati dagli ospiti. Qui contano le esclusioni sull\'uso turistico.',
     highlighted: false,
   },
   {
-    icon: '🔒',
+    icon: LUCCHETTO,
     title: 'Furto del contenuto',
     desc: 'Arredi, elettrodomestici e dotazioni dell\'appartamento, con condizioni di custodia che chi affitta può rispettare davvero.',
     highlighted: false,
   },
   {
-    icon: '📅',
+    icon: CALENDARIO,
     title: 'Perdita delle pigioni',
     desc: 'Se dopo un sinistro l\'appartamento non si può affittare, l\'indennizzo per le settimane perse.',
     highlighted: false,
   },
   {
-    icon: '⚖️',
+    icon: BILANCIA,
     title: 'Tutela legale',
     desc: 'Controversie con ospiti, gestori o vicini: avvocato e spese legali.',
     highlighted: false,
@@ -138,7 +152,8 @@ export default function AffittiBreviPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🏠 Sabaudia, San Felice Circeo, Terracina, Sperlonga
+              <Icona forma={CASA} size={16} />
+              Sabaudia, San Felice Circeo, Terracina, Sperlonga
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Affitti casa per pochi giorni?<br />
@@ -185,7 +200,7 @@ export default function AffittiBreviPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {painPoints.map((p) => (
               <Card key={p.title} className="border-l-4 border-l-red-400">
-                <span className="text-3xl mb-3 block">{p.icon}</span>
+                <Icona forma={p.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{p.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
               </Card>
@@ -239,7 +254,7 @@ export default function AffittiBreviPage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     su preventivo
                   </span>
@@ -353,7 +368,8 @@ export default function AffittiBreviPage() {
               Richiedi un preventivo
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

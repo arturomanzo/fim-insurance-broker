@@ -4,6 +4,8 @@ import ContactForm from '@/components/forms/ContactForm'
 import Card from '@/components/ui/Card'
 import { EMAIL_CHANNELS, EMAIL_RECLAMI } from '@/lib/contatti'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import { OROLOGIO, POSTA, SEGNAPOSTO, TELEFONO } from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Contatti',
@@ -21,24 +23,24 @@ export const metadata: Metadata = {
 
 const contactInfo = [
   {
-    icon: '📍',
+    icon: SEGNAPOSTO,
     title: 'Sede',
     lines: ['Via Roma 41', '04012 Cisterna di Latina (LT)'],
   },
   {
-    icon: '📞',
+    icon: TELEFONO,
     title: 'Telefono',
     lines: ['+39 06 96883381', 'Fax: 06 45220215', 'Lun-Ven 9:30-13:00 / 15:30-18:30'],
     href: 'tel:+390696883381',
   },
   {
-    icon: '📧',
+    icon: POSTA,
     title: 'Email',
     lines: ['info@fimbroker.it'],
     href: 'mailto:info@fimbroker.it',
   },
   {
-    icon: '⏰',
+    icon: OROLOGIO,
     title: 'Orari',
     lines: ['Lun - Ven: 9:30-13:00 / 15:30-18:30', 'Sab - Dom: Chiuso'],
   },
@@ -80,7 +82,7 @@ export default function ContattiPage() {
             <div className="space-y-4">
               {contactInfo.map((info) => (
                 <Card key={info.title} className="flex items-start gap-4">
-                  <span className="text-3xl flex-shrink-0">{info.icon}</span>
+                  <Icona forma={info.icon} size={48} className="text-primary" />
                   <div>
                     <h3 className="font-bold text-primary mb-1">{info.title}</h3>
                     {info.lines.map((line, i) => (
@@ -131,7 +133,7 @@ export default function ContattiPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {EMAIL_CHANNELS.map((channel) => (
               <Card key={channel.email} className="flex items-start gap-4">
-                <span className="text-2xl flex-shrink-0" aria-hidden="true">✉️</span>
+                <Icona forma={POSTA} size={40} className="text-primary" />
                 <div>
                   <h3 className="font-bold text-primary mb-1">{channel.title}</h3>
                   <p className="text-gray-600 text-sm mb-2">{channel.desc}</p>
@@ -171,7 +173,8 @@ export default function ContattiPage() {
               href="tel:+390696883381"
               className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-light transition-colors whitespace-nowrap"
             >
-              📞 Assistenza Sinistri 24/7
+              <Icona forma={TELEFONO} size={18} className="inline-block align-[-0.15em] mr-2" />
+              Assistenza Sinistri 24/7
             </a>
           </div>
         </div>

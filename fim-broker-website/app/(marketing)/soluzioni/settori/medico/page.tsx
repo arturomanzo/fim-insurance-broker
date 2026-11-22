@@ -6,6 +6,19 @@ import { medicoFaq } from '@/lib/faq/medico'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  BILANCIA,
+  BORSA,
+  CEROTTO,
+  COMPUTER,
+  CROCE_MEDICA,
+  DOCUMENTO,
+  LUCCHETTO,
+  OMBRELLO,
+  OSPEDALE,
+  TELEFONO,
+} from '@/lib/icone'
 
 const SETTORE_QS = '?profilo=professionista&settore=RC+Professionale+Medico'
 
@@ -25,50 +38,50 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '⚖️', title: 'Legge Gelli-Bianco', desc: 'La L. 24/2017 obbliga ad assicurarsi tutti: le strutture, il libero professionista con la sua RC, chi lavora in struttura con la polizza per colpa grave (art. 10).' },
-  { icon: '🏥', title: 'Rivalsa della struttura', desc: 'Se la struttura risarcisce il paziente, può rivalersi sul sanitario solo per dolo o colpa grave, e per la colpa grave fino al triplo della retribuzione o del reddito professionale annuo (art. 9).' },
-  { icon: '💻', title: 'Dati clinici e GDPR', desc: 'I dati sanitari sono "categoria particolare" GDPR. Una violazione comporta sanzioni fino a 20M€ e obbligo di notifica entro 72 ore.' },
-  { icon: '📃', title: 'Denunce strumentali', desc: 'Anche un esito clinico avverso senza colpa può generare richieste danni. Servono avvocati e periti specializzati sin da subito.' },
+  { icon: BILANCIA, title: 'Legge Gelli-Bianco', desc: 'La L. 24/2017 obbliga ad assicurarsi tutti: le strutture, il libero professionista con la sua RC, chi lavora in struttura con la polizza per colpa grave (art. 10).' },
+  { icon: OSPEDALE, title: 'Rivalsa della struttura', desc: 'Se la struttura risarcisce il paziente, può rivalersi sul sanitario solo per dolo o colpa grave, e per la colpa grave fino al triplo della retribuzione o del reddito professionale annuo (art. 9).' },
+  { icon: COMPUTER, title: 'Dati clinici e GDPR', desc: 'I dati sanitari sono "categoria particolare" GDPR. Una violazione comporta sanzioni fino a 20M€ e obbligo di notifica entro 72 ore.' },
+  { icon: DOCUMENTO, title: 'Denunce strumentali', desc: 'Anche un esito clinico avverso senza colpa può generare richieste danni. Servono avvocati e periti specializzati sin da subito.' },
 ]
 
 const coverages = [
   {
-    icon: '⚕️',
+    icon: CROCE_MEDICA,
     title: 'RC Professionale Sanitaria',
     desc: 'Obbligatoria per chi lavora in libera professione, nel proprio studio o appoggiandosi a una struttura privata (L. 24/2017, art. 10, c. 2). L\'intramoenia la copre la struttura. Massimali sopra i minimi del D.M. 232/2023, retroattività e ultrattività da leggere.',
     price: 'su preventivo',
     highlighted: true,
   },
   {
-    icon: '🛡️',
+    icon: OMBRELLO,
     title: 'Colpa Grave per chi lavora in struttura',
     desc: 'Obbligatoria, a proprie spese, per chi lavora a qualunque titolo in una struttura pubblica o privata (L. 24/2017, art. 10, c. 3). Copre la rivalsa e l\'azione della Corte dei conti per colpa grave.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '⚖️',
+    icon: BILANCIA,
     title: 'Tutela Legale Medica',
     desc: 'Spese di avvocato, perito di parte e consulente medico-legale per procedimenti penali (lesioni colpose, omicidio colposo) e disciplinari (Ordine dei Medici).',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🔒',
+    icon: LUCCHETTO,
     title: 'Cyber Sanitario & GDPR',
     desc: 'Ransomware sulle cartelle cliniche, furto dati pazienti, sanzioni Garante Privacy. Copre costi di ripristino, notifica obbligatoria, spese legali e indennizzi.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🏢',
+    icon: BORSA,
     title: 'Studio Professionale & Strumenti',
     desc: 'Incendio, furto e all-risk su locali e apparecchiature mediche (ecografi, riuniti odontoiatrici, autoclavi). Copertura anche per perdita di profitto da fermo studio.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🩹',
+    icon: CEROTTO,
     title: 'Infortuni Professionali',
     desc: 'Punture accidentali, contaminazione biologica, incidenti durante guardia o reperibilità. Diaria da inabilità e capitali per invalidità permanente.',
     price: 'su preventivo',
@@ -102,7 +115,8 @@ export default function MedicoPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              ⚕️ Medici, odontoiatri e strutture sanitarie
+              <Icona forma={CROCE_MEDICA} size={16} />
+              Medici, odontoiatri e strutture sanitarie
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Per chi cura,<br />
@@ -127,7 +141,8 @@ export default function MedicoPage() {
                 </svg>
               </Link>
               <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-                📞 06 96883381
+                <Icona forma={TELEFONO} size={20} />
+                06 96883381
               </a>
             </div>
           </div>
@@ -151,7 +166,7 @@ export default function MedicoPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {painPoints.map((p) => (
               <Card key={p.title} className="border-l-4 border-l-red-400">
-                <span className="text-3xl mb-3 block">{p.icon}</span>
+                <Icona forma={p.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{p.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
               </Card>
@@ -178,7 +193,7 @@ export default function MedicoPage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     {cov.price}
                   </span>
@@ -268,7 +283,8 @@ export default function MedicoPage() {
               Richiedi preventivo Sanitario
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

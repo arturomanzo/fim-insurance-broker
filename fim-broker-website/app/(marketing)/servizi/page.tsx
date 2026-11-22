@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { services } from '@/lib/services'
 import Card from '@/components/ui/Card'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -101,7 +102,7 @@ export default function ServiziPage() {
             {services.map((service) => (
               <Link key={service.slug} href={`/servizi/${service.slug}`} className="group">
                 <Card hover className="h-full">
-                  <div className="text-5xl mb-4">{service.icon}</div>
+                  <Icona forma={service.icon} size={64} className="mb-4 text-primary" />
                   <h2 className="text-xl font-bold text-primary mb-3 group-hover:text-primary-light transition-colors">
                     {service.title}
                   </h2>

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import { DOMANDA } from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Glossario Assicurativo — Tutti i Termini Spiegati in Modo Semplice',
@@ -381,7 +383,7 @@ export default function GlossarioPage() {
 
           {/* Missing term CTA */}
           <div className="mt-16 bg-white rounded-3xl border border-gray-100 p-8 text-center shadow-sm">
-            <div className="text-3xl mb-3">🤔</div>
+            <Icona forma={DOMANDA} size={48} className="mb-3 mx-auto text-primary" />
             <h3 className="text-xl font-black text-primary mb-2">Non trovi un termine?</h3>
             <p className="text-gray-600 text-sm mb-6 max-w-md mx-auto">
               Il glossario è in continuo aggiornamento. Chiedi a FIMA — il nostro assistente AI — o contattaci direttamente.

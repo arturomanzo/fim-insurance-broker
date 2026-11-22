@@ -7,7 +7,7 @@ export const medicoFaq: FaqCategory = {
     text: 'Sei un medico, dentista o struttura sanitaria?',
     description: 'Verifica gratuita della tua RC Gelli-Bianco e analisi completa dei rischi clinici.',
     primary: { label: 'Richiedi verifica', href: '/preventivo?profilo=medico' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

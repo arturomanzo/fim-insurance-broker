@@ -3,6 +3,26 @@ import Link from 'next/link'
 import Card from '@/components/ui/Card'
 import CollaboraForm from '@/components/forms/CollaboraForm'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  BILANCIA,
+  CATENA,
+  CHIAVE_INGLESE,
+  COMPUTER,
+  CRESCITA,
+  ELENCO,
+  GERMOGLIO,
+  LIBRO,
+  MEGAFONO,
+  MONETE,
+  ORGANIGRAMMA,
+  PALAZZO,
+  PERSONE,
+  PROFESSIONISTA,
+  TELEFONO,
+  TOCCO,
+  TROFEO,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Collabora con Noi',
@@ -20,32 +40,32 @@ export const metadata: Metadata = {
 
 const vantaggi = [
   {
-    icon: '🎯',
+    icon: BILANCIA,
     title: 'Indipendenza',
     desc: 'Lavori con un broker non legato a nessuna compagnia. Solo l\'interesse del cliente guida le scelte.',
   },
   {
-    icon: '🏢',
+    icon: PALAZZO,
     title: '20 compagnie partner',
     desc: 'Accesso diretto alle principali compagnie del mercato: Allianz, Generali, AXA, HDI, Unipol, Prima e molte altre.',
   },
   {
-    icon: '📚',
+    icon: LIBRO,
     title: 'Formazione continua',
     desc: 'Supporto formativo, aggiornamento IVASS obbligatorio e affiancamento per crescere professionalmente.',
   },
   {
-    icon: '💻',
+    icon: COMPUTER,
     title: 'Strumenti digitali',
     desc: 'CRM, preventivatori multi-compagnia, assistente AI e back-office dedicato per lavorare in modo efficiente.',
   },
   {
-    icon: '🤝',
+    icon: PERSONE,
     title: 'Ambiente collaborativo',
     desc: 'Un team che condivide conoscenze e supporto, non competizione interna. Crescere insieme è il nostro metodo.',
   },
   {
-    icon: '📈',
+    icon: CRESCITA,
     title: 'Portafoglio consolidato',
     desc: 'Un mestiere di famiglia dal 1993 ti dà una base solida su cui costruire il tuo lavoro.',
   },
@@ -53,7 +73,7 @@ const vantaggi = [
 
 const profili = [
   {
-    icon: '🧑‍💼',
+    icon: PROFESSIONISTA,
     title: 'Subagenti / Collaboratori',
     subtitle: 'RUI Sez. E',
     desc: 'Per chi ha già esperienza nel settore e vuole operare con mandato di un broker indipendente, mantenendo autonomia e flessibilità.',
@@ -64,7 +84,7 @@ const profili = [
     ],
   },
   {
-    icon: '🎓',
+    icon: TOCCO,
     title: 'Broker',
     subtitle: 'RUI Sez. B',
     desc: 'Accordi di collaborazione tra broker ai sensi dell\'art. 42 del Regolamento IVASS, per ampliare il portafoglio prodotti dei clienti.',
@@ -75,7 +95,7 @@ const profili = [
     ],
   },
   {
-    icon: '🏛️',
+    icon: ORGANIGRAMMA,
     title: 'Agenti',
     subtitle: 'RUI Sez. A',
     desc: 'Collaborazioni su prodotti specifici non disponibili nel proprio mandato, nel rispetto della normativa sulle collaborazioni orizzontali.',
@@ -86,7 +106,7 @@ const profili = [
     ],
   },
   {
-    icon: '🔗',
+    icon: CATENA,
     title: 'Segnalatori',
     subtitle: 'Introduttori d\'affari',
     desc: 'Per commercialisti, consulenti, amministratori di condominio e altri professionisti che vogliono segnalare clienti con accordo trasparente.',
@@ -97,7 +117,7 @@ const profili = [
     ],
   },
   {
-    icon: '🌱',
+    icon: GERMOGLIO,
     title: 'Giovani talenti',
     subtitle: 'Percorsi di inserimento',
     desc: 'Per neolaureati e neodiplomati interessati al mondo assicurativo. Formazione dedicata, affiancamento e percorso verso l\'iscrizione RUI.',
@@ -133,12 +153,12 @@ const steps = [
 ]
 
 const offriamo = [
-  { icon: '💰', text: 'Provvigioni competitive e trasparenti' },
-  { icon: '📋', text: 'Back-office dedicato per polizze e sinistri' },
-  { icon: '🛠️', text: 'CRM e strumenti digitali professionali' },
-  { icon: '🎓', text: 'Formazione IVASS e aggiornamento obbligatorio' },
-  { icon: '📣', text: 'Supporto marketing e lead generation' },
-  { icon: '🏆', text: 'Brand riconosciuto sul territorio dal 1993' },
+  { icon: MONETE, text: 'Provvigioni competitive e trasparenti' },
+  { icon: ELENCO, text: 'Back-office dedicato per polizze e sinistri' },
+  { icon: CHIAVE_INGLESE, text: 'CRM e strumenti digitali professionali' },
+  { icon: TOCCO, text: 'Formazione IVASS e aggiornamento obbligatorio' },
+  { icon: MEGAFONO, text: 'Supporto marketing e lead generation' },
+  { icon: TROFEO, text: 'Brand riconosciuto sul territorio dal 1993' },
 ]
 
 export default function CollaboraConNoiPage() {
@@ -189,7 +209,7 @@ export default function CollaboraConNoiPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {vantaggi.map((v) => (
               <Card key={v.title} hover className="h-full">
-                <div className="text-4xl mb-4">{v.icon}</div>
+                <Icona forma={v.icon} size={56} className="mb-4 text-primary" />
                 <h3 className="font-black text-primary text-lg mb-2">{v.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{v.desc}</p>
               </Card>
@@ -216,7 +236,7 @@ export default function CollaboraConNoiPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {profili.map((p) => (
               <Card key={p.title} hover className="h-full flex flex-col">
-                <div className="text-4xl mb-4">{p.icon}</div>
+                <Icona forma={p.icon} size={56} className="mb-4 text-primary" />
                 <h3 className="font-black text-primary text-xl mb-1">{p.title}</h3>
                 <span className="inline-block bg-accent/10 text-accent-cta text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide w-fit">
                   {p.subtitle}
@@ -298,7 +318,7 @@ export default function CollaboraConNoiPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {offriamo.map((o) => (
                 <Card key={o.text} className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">{o.icon}</span>
+                  <Icona forma={o.icon} size={40} className="text-primary" />
                   <p className="text-gray-700 text-sm font-medium">{o.text}</p>
                 </Card>
               ))}
@@ -342,7 +362,8 @@ export default function CollaboraConNoiPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a href="tel:+390696883381" className="btn-primary text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
             <Link href="/prenota-consulenza" className="btn-outline-white text-lg px-8 py-4">
               Prenota un colloquio

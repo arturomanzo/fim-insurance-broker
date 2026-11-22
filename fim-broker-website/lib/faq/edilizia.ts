@@ -7,7 +7,7 @@ export const ediliziaFaq: FaqCategory = {
     text: 'Hai un cantiere in partenza o una gara da preparare?',
     description: 'CAR, postuma decennale e fideiussioni: partiamo dal capitolato e ti diciamo cosa serve davvero.',
     primary: { label: 'Richiedi quotazione', href: '/preventivo?profilo=pmi&settore=Edilizia' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

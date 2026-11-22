@@ -5,6 +5,8 @@ import { OG_BASE } from '@/lib/seo'
 import Link from 'next/link'
 import FaqSection from '@/components/ui/FaqSection'
 import { calcolatoreRischiFaq } from '@/lib/faq/calcolatore-rischi'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ANALISI, BARRE, REGOLE } from '@/lib/icone'
 
 const RiskCalculator = dynamic(() => import('@/components/calculator/RiskCalculator'), {
   loading: () => (
@@ -146,12 +148,12 @@ export default function CalcolatoreRischiPage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
             {[
-              { icon: '🔍', title: 'Analisi indipendente', desc: 'Non siamo legati a nessuna compagnia. Le nostre raccomandazioni sono basate solo sulle tue esigenze reali.' },
-              { icon: '📋', title: 'Il mercato a confronto', desc: 'I nostri consulenti mettono a confronto le offerte di più compagnie per trovare quella giusta per te.' },
-              { icon: '🛡️', title: 'Iscritti al RUI', desc: "FIM Insurance Broker è iscritta al RUI Sez. B n. B000405449 ed è soggetta alla vigilanza IVASS: l'iscrizione si verifica sul registro pubblico." },
+              { icon: ANALISI, title: 'Analisi indipendente', desc: 'Non siamo legati a nessuna compagnia. Le nostre raccomandazioni sono basate solo sulle tue esigenze reali.' },
+              { icon: BARRE, title: 'Il mercato a confronto', desc: 'I nostri consulenti mettono a confronto le offerte di più compagnie per trovare quella giusta per te.' },
+              { icon: REGOLE, title: 'Iscritti al RUI', desc: "FIM Insurance Broker è iscritta al RUI Sez. B n. B000405449 ed è soggetta alla vigilanza IVASS: l'iscrizione si verifica sul registro pubblico." },
             ].map((item) => (
               <div key={item.title} className="p-6">
-                <div className="text-4xl mb-3">{item.icon}</div>
+                <Icona forma={item.icon} size={56} className="mb-3 mx-auto text-primary" />
                 <h3 className="font-bold text-primary mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
               </div>

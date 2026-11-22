@@ -6,6 +6,8 @@ import { trackSecondOpinionSubmit } from '@/lib/analytics'
 import { metaLeadFields } from '@/lib/metaLead'
 import { RICONTATTO } from '@/lib/tempi'
 import { campagnaPerInvio } from '@/lib/campagnaBrowser'
+import { Icona } from '@/components/icons/TettoIcons'
+import { CROCE } from '@/lib/icone'
 
 const UTM_SESSION_KEY = 'fim_utm'
 
@@ -319,7 +321,7 @@ export default function SecondOpinionForm() {
                   className="text-gray-400 hover:text-red-500 ml-2 transition-colors"
                   aria-label={`Rimuovi ${f.name}`}
                 >
-                  ✕
+                  <Icona forma={CROCE} size={14} className="inline-block align-[-0.1em]" />
                 </button>
               </li>
             ))}

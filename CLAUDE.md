@@ -62,7 +62,12 @@ Riferimento: `app/(marketing)/chi-siamo/page.tsx` e `app/(marketing)/collabora-c
 - Array di dati a module-level (vantaggi, profili, steps, ecc.) — leggibili e facili da maintenere
 
 ### Icone
-Riferimento: `components/icons/TettoIcons.tsx` (prima pagina: chi-siamo, 22/11/2026). Niente emoji come icone nelle pagine nuove o rifatte: si usa il set «Sotto il tetto» (tetto del logo in geometria pulita + oggetto pieno, regole in cima al file), e un'icona che manca si aggiunge lì. Niente fondini né tondini dietro. Il tetto è la costante `TETTO` di quel file (sei punti): mai copiare `LOGO_PATH_ROOF` o altri pezzi del logo fuori dal logo, sono ricalchi e ingranditi ondeggiano. Le altre pagine hanno ancora le emoji e si convertono solo dopo l'ok di Arturo.
+Riferimento: `components/icons/TettoIcons.tsx` (`<Icona forma={AUTO} size={48} />`) e `lib/icone.ts` (le forme). Dal 22/11/2026 il sito non ha emoji: lo controlla `lib/emoji.test.ts` (`npm test`), non si toglie il controllo.
+- Set «Sotto il tetto»: tetto del logo in geometria pulita + oggetto pieno. Da 24px in su c'è il tetto, sotto (bottoni, etichette, elenchi) resta l'oggetto.
+- Colore: `text-primary` su chiaro, `text-white` su scuro. Niente fondini né tondini dietro, salvo sopra una foto.
+- Il tetto è la costante `TETTO`: mai copiare `LOGO_PATH_ROOF` o altri pezzi del logo fuori dal logo, sono ricalchi e ingranditi ondeggiano. Mai uno scudo sotto il tetto: rifarebbe il logo.
+- Nei dati (`icon:`) va la forma importata, non una stringa. Un'icona che manca si disegna in `lib/icone.ts` con le regole scritte lì e si guarda a 240 e a 20 pixel.
+- Uniche eccezioni: ✅ ❌ ⚠️ a inizio riga negli elenchi degli articoli già pubblicati e nelle risposte dell'assistente sinistri. Sono segnali di senso e la pagina li disegna come icone (`leggiSegno`). Le mail (`app/api`) sono fuori dal controllo.
 
 ### Costanti condivise
 Quando un valore è usato in più di un file (form + route + page), estrarre in `lib/<feature>.ts` come `as const` con helper tipizzati. Vedi `lib/collabora.ts` per il pattern: `PROFILI`, `PROFILO_LABELS`, `isValidProfilo()`.

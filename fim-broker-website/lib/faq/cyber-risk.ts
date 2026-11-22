@@ -11,7 +11,7 @@ export const cyberRiskFaq: FaqCategory = {
     text: 'Quant\'è esposta la tua azienda al rischio cyber?',
     description: 'Scarica il Cyber Health Check gratuito o richiedi una consulenza dedicata.',
     primary: { label: 'Richiedi preventivo cyber', href: '/preventivo?profilo=azienda&tipo=cyber' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

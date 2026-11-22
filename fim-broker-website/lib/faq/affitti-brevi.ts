@@ -12,7 +12,7 @@ export const affittiBreviFaq: FaqCategory = {
     text: 'Affitti casa per pochi giorni sul litorale?',
     description: 'Mandaci la polizza casa che hai e dicci quante notti affitti all\'anno: ti diciamo cosa copre davvero quando ci sono gli ospiti.',
     primary: { label: 'Richiedi analisi gratuita', href: '/preventivo?profilo=privato' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

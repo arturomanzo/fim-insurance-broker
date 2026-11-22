@@ -8,6 +8,23 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ALLERTA,
+  AUTO,
+  CASA,
+  CRESCITA,
+  FABBRICA,
+  FRANA,
+  GRANDINE,
+  ISTITUZIONE,
+  MONETE,
+  NEVE,
+  ONDA,
+  SPIGA,
+  TERREMOTO,
+  VENTO,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Catastrofi Naturali — Alluvioni, Terremoti, Grandinate',
@@ -25,24 +42,24 @@ export const metadata: Metadata = {
 }
 
 const risks = [
-  { icon: '🌊', name: 'Alluvione ed esondazione', desc: 'Il rischio più diffuso in Italia' },
-  { icon: '🏔️', name: 'Terremoto e sisma', desc: 'Gran parte del territorio italiano è a rischio sismico' },
-  { icon: '⛈️', name: 'Grandine', desc: 'Danni a tetti, veicoli, pannelli solari e colture' },
-  { icon: '🪨', name: 'Frana e smottamento', desc: 'Sempre più frequente con i cambiamenti climatici' },
-  { icon: '🌪️', name: 'Vento forte e tromba d\'aria', desc: 'Danni strutturali a tetti e facciate' },
-  { icon: '❄️', name: 'Nevicate eccezionali', desc: 'Danni per peso neve su strutture e coperture' },
+  { icon: ONDA, name: 'Alluvione ed esondazione', desc: 'Il rischio più diffuso in Italia' },
+  { icon: TERREMOTO, name: 'Terremoto e sisma', desc: 'Gran parte del territorio italiano è a rischio sismico' },
+  { icon: GRANDINE, name: 'Grandine', desc: 'Danni a tetti, veicoli, pannelli solari e colture' },
+  { icon: FRANA, name: 'Frana e smottamento', desc: 'Sempre più frequente con i cambiamenti climatici' },
+  { icon: VENTO, name: 'Vento forte e tromba d\'aria', desc: 'Danni strutturali a tetti e facciate' },
+  { icon: NEVE, name: 'Nevicate eccezionali', desc: 'Danni per peso neve su strutture e coperture' },
 ]
 
 const products = [
   {
-    icon: '🏠',
+    icon: CASA,
     title: 'Estensione Catastrofi su Polizza Casa',
     desc: 'Aggiungi la copertura catastrofi naturali alla tua polizza casa esistente o stipula una nuova polizza multirischio che includa alluvione, terremoto e grandine.',
     price: 'su preventivo',
     audience: 'Privati e famiglie',
   },
   {
-    icon: '🏭',
+    icon: FABBRICA,
     title: 'Polizza Catastrofi per Imprese',
     desc: `La ${NORMA_CATASTROFALE} obbliga ${CHI_E_OBBLIGATO} ad assicurare ${BENI_DA_ASSICURARE} contro i rischi catastrofali, con scadenze a scaglioni tra il 2025 e il 2026. FIM ti aiuta a essere in regola.`,
     price: 'su preventivo',
@@ -50,14 +67,14 @@ const products = [
     urgent: true,
   },
   {
-    icon: '🌾',
+    icon: SPIGA,
     title: 'Polizze Agricole per Grandine e Gelo',
     desc: 'Coperture specifiche per il settore agricolo: grandine su colture, gelo su frutteti, alluvione su terreni agricoli. Per le imprese agricole la polizza catastrofale non è obbligatoria, ma i beni restano esposti.',
     price: 'su preventivo',
     audience: 'Agricoltori e agriturismo',
   },
   {
-    icon: '🚗',
+    icon: AUTO,
     title: 'Grandine sul Veicolo',
     desc: 'Molte polizze RC auto non coprono la grandine. Verifica la tua copertura attuale e aggiungi la protezione eventi atmosferici al tuo veicolo.',
     price: 'su preventivo',
@@ -90,7 +107,8 @@ export default function CatastrofiNaturaliPage() {
           <div className="max-w-3xl">
             {/* Urgent alert */}
             <div className="inline-flex items-center gap-2 bg-red-500/20 border border-red-400/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-red-200">
-              ⚠️ Obbligo di legge per le imprese dal 2025
+              <Icona forma={ALLERTA} size={16} />
+              Obbligo di legge per le imprese dal 2025
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Alluvioni, terremoti,<br />
@@ -135,7 +153,7 @@ export default function CatastrofiNaturaliPage() {
         <div className="container-custom">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-start sm:items-center gap-3">
-              <span className="text-2xl flex-shrink-0">⚠️</span>
+              <Icona forma={ALLERTA} size={40} className="text-primary" />
               <div>
                 <p className="font-bold text-red-800">Imprenditori: l&apos;obbligo di legge è in vigore per tutte le imprese</p>
                 <p className="text-red-700 text-sm">La {NORMA_CATASTROFALE} è scattata {SCADENZE_CATASTROFALE}. Restano fuori {CHI_E_ESCLUSO}. Per chi non è in regola {CONSEGUENZA_CATASTROFALE}.</p>
@@ -162,7 +180,7 @@ export default function CatastrofiNaturaliPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {risks.map((r) => (
               <div key={r.name} className="text-center p-4 bg-gray-50 rounded-xl border border-gray-100">
-                <span className="text-4xl block mb-3">{r.icon}</span>
+                <Icona forma={r.icon} size={56} className="mb-3 mx-auto text-primary" />
                 <p className="font-semibold text-primary text-sm mb-1">{r.name}</p>
                 <p className="text-gray-500 text-xs">{r.desc}</p>
               </div>
@@ -197,7 +215,7 @@ export default function CatastrofiNaturaliPage() {
                   </div>
                 )}
                 <div className="flex items-start justify-between mb-4 mt-2">
-                  <span className="text-3xl">{p.icon}</span>
+                  <Icona forma={p.icon} size={48} className="text-primary" />
                   <div className="text-right">
                     <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full block">
                       {p.price}
@@ -228,23 +246,23 @@ export default function CatastrofiNaturaliPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                icon: '📈',
+                icon: CRESCITA,
                 title: 'I sinistri climatici sono in aumento',
                 desc: "In Italia alluvioni, grandinate e trombe d'aria non sono più eventi rari. Non è più una questione di 'se' ma di 'quando'.",
               },
               {
-                icon: '💸',
+                icon: MONETE,
                 title: 'Il danno medio è elevato',
                 desc: "Un'alluvione può rendere inagibile una casa per mesi, un terremoto può distruggerla del tutto. Rifarla costa molto più di qualunque premio.",
               },
               {
-                icon: '🏛️',
+                icon: ISTITUZIONE,
                 title: 'Gli aiuti pubblici non bastano',
                 desc: "I risarcimenti dello Stato dopo le catastrofi sono spesso parziali, tardivi e subordinati a dichiarazioni di stato di emergenza. Non fare affidamento solo su di essi.",
               },
             ].map((item) => (
               <div key={item.title} className="text-center">
-                <span className="text-4xl block mb-4">{item.icon}</span>
+                <Icona forma={item.icon} size={56} className="mb-4 mx-auto text-primary" />
                 <h3 className="font-bold text-primary mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
               </div>

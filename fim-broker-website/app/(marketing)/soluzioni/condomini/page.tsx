@@ -7,6 +7,23 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ASCENSORE,
+  BILANCIA,
+  CANTIERE,
+  CONDOMINIO,
+  CRAVATTA,
+  GOCCIA,
+  HOTEL,
+  ISTITUZIONE,
+  NEGOZIO,
+  ONDA,
+  PISCINA,
+  SPUNTA,
+  TELEFONO,
+  VILLETTE,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Condominio — Globale Fabbricato e RC Amministratore',
@@ -23,42 +40,42 @@ export const metadata: Metadata = {
 
 const coverages = [
   {
-    icon: '🏢',
+    icon: CONDOMINIO,
     title: 'Globale Fabbricato',
     desc: 'La polizza di base di ogni condominio: copre la struttura da incendio, scoppio, fulmine, esplosione, danni elettrici, RC verso terzi (persone che si fanno male nelle parti comuni) e danni da acqua. Molti regolamenti di condominio la prevedono.',
     price: 'su preventivo',
     tag: 'Base',
   },
   {
-    icon: '👔',
+    icon: CRAVATTA,
     title: 'RC Amministratore',
     desc: 'L\'assemblea può chiederla come condizione per la nomina (art. 1129 c.c.): copre i danni patrimoniali causati ai condomini dall\'amministratore per errori, omissioni o negligenze nella gestione. Include difesa legale, anche per azioni infondate.',
     price: 'su preventivo',
     tag: 'Da chiedere in assemblea',
   },
   {
-    icon: '🛗',
+    icon: ASCENSORE,
     title: 'Ascensori e Impianti',
     desc: 'RC specifica per danni causati dall\'ascensore a persone o cose, richiesta dalla normativa sugli impianti di sollevamento. Copre anche guasti meccanici, responsabilità verso passeggeri bloccati e spese di soccorso.',
     price: 'su preventivo',
     tag: 'Raccomandata',
   },
   {
-    icon: '💧',
+    icon: GOCCIA,
     title: 'Danni da Acqua Estesi',
     desc: 'Estensione della globale fabbricato per i danni da infiltrazione, rottura tubature e allagamenti: spesso inclusa, ma con franchigie e massimali variabili. Da guardare con attenzione nei palazzi con impianti datati.',
     price: 'inclusa o in add.',
     tag: null,
   },
   {
-    icon: '⚖️',
+    icon: BILANCIA,
     title: 'Tutela Legale Condominiale',
     desc: 'Copre le spese legali del condominio per controversie con appaltatori, fornitori di servizi, condomini morosi e terzi. Consente di agire giudizialmente senza pesare sul fondo condominiale.',
     price: 'su preventivo',
     tag: null,
   },
   {
-    icon: '🌊',
+    icon: ONDA,
     title: 'Catastrofi Naturali',
     desc: 'Obbligatoria per le imprese dal 2025, raccomandata per i condomini. Copre danni da terremoto, alluvione, frana e grandine ai beni comuni. Spesso esclusa dalle polizze standard.',
     price: 'su preventivo',
@@ -67,14 +84,14 @@ const coverages = [
 ]
 
 const buildingTypes = [
-  { name: 'Condomini residenziali', icon: '🏢' },
-  { name: 'Piccoli stabili (< 8 unità)', icon: '🏘️' },
-  { name: 'Palazzi di pregio storico', icon: '🏛️' },
-  { name: 'Complessi con piscina/palestra', icon: '🏊' },
-  { name: 'Edifici con locali commerciali', icon: '🏪' },
-  { name: 'Nuove costruzioni', icon: '🏗️' },
-  { name: 'Villette a schiera', icon: '🏡' },
-  { name: 'Residence e hotel residence', icon: '🏨' },
+  { name: 'Condomini residenziali', icon: CONDOMINIO },
+  { name: 'Piccoli stabili (< 8 unità)', icon: CONDOMINIO },
+  { name: 'Palazzi di pregio storico', icon: ISTITUZIONE },
+  { name: 'Complessi con piscina/palestra', icon: PISCINA },
+  { name: 'Edifici con locali commerciali', icon: NEGOZIO },
+  { name: 'Nuove costruzioni', icon: CANTIERE },
+  { name: 'Villette a schiera', icon: VILLETTE },
+  { name: 'Residence e hotel residence', icon: HOTEL },
 ]
 
 export default function CondominiPage() {
@@ -101,7 +118,8 @@ export default function CondominiPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🏢 Soluzioni per amministratori e condomini
+              <Icona forma={CONDOMINIO} size={16} />
+              Soluzioni per amministratori e condomini
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Assicurazioni condominiali{' '}
@@ -128,7 +146,8 @@ export default function CondominiPage() {
                 </svg>
               </Link>
               <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-                📞 06 96883381
+                <Icona forma={TELEFONO} size={20} />
+                06 96883381
               </a>
             </div>
           </div>
@@ -144,7 +163,7 @@ export default function CondominiPage() {
           <div className="flex flex-wrap justify-center gap-3">
             {buildingTypes.map((b) => (
               <div key={b.name} className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-sm font-medium text-gray-700">
-                <span>{b.icon}</span>
+                <Icona forma={b.icon} size={20} className="text-primary" />
                 {b.name}
               </div>
             ))}
@@ -173,7 +192,7 @@ export default function CondominiPage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className="flex flex-col">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <div className="text-right space-y-1">
                     <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full block">
                       {cov.price}
@@ -248,7 +267,7 @@ export default function CondominiPage() {
                 ].map((item) => (
                   <div key={item.name} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-2 text-sm">
-                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold">✓</span>
+                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold"><Icona forma={SPUNTA} size={12} /></span>
                       <span className="text-gray-700">{item.name}</span>
                     </div>
                     <span className="text-xs text-gray-500 text-right">{item.fattore}</span>
@@ -287,7 +306,8 @@ export default function CondominiPage() {
               Prenota Consulenza Gratuita
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

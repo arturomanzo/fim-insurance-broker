@@ -5,6 +5,22 @@ import AiNotice from '@/components/ui/AiNotice'
 import { AI_DISCLOSURE } from '@/lib/ai-disclosure'
 import { CONSENSO_SANITARIO_TESTO } from '@/lib/consensoSanitario'
 import { RICONTATTO } from '@/lib/tempi'
+import { leggiSegno } from '@/lib/senzaEmoji'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ALLERTA,
+  AUTO,
+  CEROTTO,
+  CONFERMA,
+  CROCE,
+  ELENCO,
+  FIAMMA,
+  FUMETTO,
+  GOCCIA,
+  LUCCHETTO,
+  SPUNTA,
+  TELEFONO,
+} from '@/lib/icone'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -32,12 +48,12 @@ interface FormData {
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const CLAIM_TYPES = [
-  { id: 'RC Auto / Incidente stradale', icon: '🚗', label: 'Incidente Auto' },
-  { id: 'Furto / Furto con scasso', icon: '🔒', label: 'Furto' },
-  { id: 'Incendio', icon: '🔥', label: 'Incendio' },
-  { id: 'Danni acqua / Allagamento', icon: '💧', label: 'Danni Acqua' },
-  { id: 'Infortuni / Responsabilità civile', icon: '🏥', label: 'Infortuni / RC' },
-  { id: 'Altro', icon: '📋', label: 'Altro' },
+  { id: 'RC Auto / Incidente stradale', icon: AUTO, label: 'Incidente Auto' },
+  { id: 'Furto / Furto con scasso', icon: LUCCHETTO, label: 'Furto' },
+  { id: 'Incendio', icon: FIAMMA, label: 'Incendio' },
+  { id: 'Danni acqua / Allagamento', icon: GOCCIA, label: 'Danni Acqua' },
+  { id: 'Infortuni / Responsabilità civile', icon: CEROTTO, label: 'Infortuni / RC' },
+  { id: 'Altro', icon: ELENCO, label: 'Altro' },
 ]
 
 const EMPTY_FORM: FormData = {
@@ -67,9 +83,17 @@ function stripFormDataTag(text: string): string {
 function renderMessageContent(content: string) {
   // Convert markdown-like formatting to simple HTML
   const lines = content.split('\n')
-  return lines.map((line, i) => {
-    if (line.startsWith('✅') || line.startsWith('⚠️')) {
-      return <div key={i} className="flex gap-2 items-start my-0.5">{line}</div>
+  return lines.map((riga, i) => {
+    const { segno, testo: line } = leggiSegno(riga)
+    if (segno) {
+      const forma = segno === 'si' ? SPUNTA : segno === 'no' ? CROCE : ALLERTA
+      const colore = segno === 'si' ? 'text-accent-cta' : segno === 'no' ? 'text-red-600' : 'text-amber-700'
+      return (
+        <div key={i} className="flex gap-2 items-start my-0.5">
+          <Icona forma={forma} size={14} className={`mt-1 ${colore}`} />
+          <span>{line.replace(/\*\*([^*]+)\*\*/g, '$1')}</span>
+        </div>
+      )
     }
     if (line.startsWith('**') && line.endsWith('**')) {
       return <p key={i} className="font-bold mt-2 mb-1">{line.slice(2, -2)}</p>
@@ -268,7 +292,7 @@ export default function SinistriAIAssistant() {
   if (phase === 'success') {
     return (
       <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
-        <div className="text-4xl mb-4">✅</div>
+        <Icona forma={CONFERMA} size={56} className="mb-4 mx-auto text-primary" />
         <h3 className="text-xl font-bold text-green-800 mb-2">Pratica aperta con successo</h3>
         {praticaId && (
           <p className="text-sm text-green-700 mb-2">
@@ -282,7 +306,8 @@ export default function SinistriAIAssistant() {
           href="tel:+390696883381"
           className="inline-block bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors"
         >
-          📞 Vuoi parlare subito? 06 96883381
+          <Icona forma={TELEFONO} size={18} className="inline-block align-[-0.15em] mr-2" />
+          Vuoi parlare subito? 06 96883381
         </a>
       </div>
     )
@@ -293,7 +318,7 @@ export default function SinistriAIAssistant() {
       <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 space-y-6">
         {/* Header */}
         <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
-          <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-lg">✅</div>
+          <Icona forma={CONFERMA} size={40} className="text-primary" />
           <div>
             <h3 className="font-bold text-gray-900">Form pre-compilato dall&apos;AI</h3>
             <p className="text-xs text-gray-500">Verifica i dati, modifica se necessario, poi invia.</p>
@@ -439,7 +464,7 @@ export default function SinistriAIAssistant() {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-5 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-xl">🤖</div>
+          <Icona forma={FUMETTO} size={40} className="text-white" />
           <div>
             <h3 className="font-bold text-white text-base">Agente Sinistri AI</h3>
             <p className="text-white/70 text-xs">Ti guido passo per passo nell&apos;apertura della pratica</p>
@@ -456,7 +481,7 @@ export default function SinistriAIAssistant() {
         {/* Greeting */}
         <div className="px-6 pt-6 pb-4">
           <div className="flex gap-3">
-            <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">🤖</div>
+            <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-sm flex-shrink-0 mt-0.5 text-primary"><Icona forma={FUMETTO} size={18} /></div>
             <div className="bg-gray-50 rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-gray-700 leading-relaxed">
               Ciao! Sono l&apos;Agente Sinistri di FIM. Sono qui per guidarti nella raccolta della documentazione corretta e nell&apos;apertura della tua pratica.
               <br /><br />
@@ -491,7 +516,7 @@ export default function SinistriAIAssistant() {
               disabled={!consensoSanitario}
               className="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-100 hover:border-primary/40 hover:bg-primary/5 transition text-center group disabled:opacity-40 disabled:pointer-events-none"
             >
-              <span className="text-2xl">{icon}</span>
+              <Icona forma={icon} size={40} className="mx-auto text-primary" />
               <span className="text-xs font-semibold text-gray-700 group-hover:text-primary transition-colors leading-tight">{label}</span>
             </button>
           ))}
@@ -520,7 +545,7 @@ export default function SinistriAIAssistant() {
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col" style={{ minHeight: '520px' }}>
       {/* Header */}
       <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-4 flex items-center gap-3 flex-shrink-0">
-        <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-lg">🤖</div>
+        <Icona forma={FUMETTO} size={36} className="text-white" />
         <div>
           <h3 className="font-bold text-white text-sm">Agente Sinistri AI</h3>
           <p className="text-white/70 text-xs">{isStreaming ? 'Sta scrivendo…' : 'Online'}</p>
@@ -541,11 +566,11 @@ export default function SinistriAIAssistant() {
         {messages.map((msg, i) => (
           <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
             {msg.role === 'assistant' && (
-              <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">🤖</div>
+              <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-sm flex-shrink-0 mt-0.5 text-primary"><Icona forma={FUMETTO} size={18} /></div>
             )}
             <div
               className={`
-                rounded-2xl px-4 py-3 text-sm leading-relaxed max-w-[85%]
+                rounded-2xl px-4 py-3 text-sm leading-relaxed max-w-[85%] [overflow-wrap:anywhere]
                 ${msg.role === 'user'
                   ? 'bg-primary text-white rounded-tr-sm'
                   : 'bg-gray-50 text-gray-700 rounded-tl-sm'
@@ -570,7 +595,7 @@ export default function SinistriAIAssistant() {
       {/* Form ready banner */}
       {hasFormReady && (
         <div className="mx-5 mb-4 bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3 flex-shrink-0">
-          <span className="text-xl">✅</span>
+          <Icona forma={CONFERMA} size={32} className="text-primary" />
           <div className="flex-1">
             <p className="text-sm font-bold text-green-800">Form pre-compilato</p>
             <p className="text-xs text-green-700">Ho raccolto tutti i dati. Rivedi e invia la pratica.</p>

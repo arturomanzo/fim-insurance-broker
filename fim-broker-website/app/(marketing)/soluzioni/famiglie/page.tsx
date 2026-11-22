@@ -7,6 +7,25 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import LeadMagnet from '@/components/home/LeadMagnet'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  AEREO,
+  ANZIANO,
+  BILANCIA,
+  CANE,
+  CASA,
+  CEROTTO,
+  CHIAVE,
+  COPPIA,
+  CUORE,
+  FAMIGLIA,
+  OSPEDALE,
+  PERSONA,
+  SPORT,
+  SPUNTA,
+  TELEFONO,
+  ZAMPA,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Assicurazioni per Famiglie e Privati — Casa, Vita, Salute',
@@ -23,56 +42,56 @@ export const metadata: Metadata = {
 
 const coverages = [
   {
-    icon: '🏠',
+    icon: CASA,
     title: 'Casa e Abitazione',
     desc: 'Copre l\'abitazione da incendio, furto, allagamento, danni da eventi atmosferici e guasti agli impianti. Include la RC capofamiglia: i danni causati a terzi da te, dai tuoi familiari o dai tuoi animali domestici.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '❤️',
+    icon: CUORE,
     title: 'Assicurazione Vita (TCM)',
     desc: 'La polizza temporanea caso morte garantisce un capitale ai tuoi familiari se dovesse succederti qualcosa. Essenziale se hai un mutuo, figli a carico o un coniuge non autonomo economicamente.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '🏥',
+    icon: OSPEDALE,
     title: 'Salute Integrativa',
     desc: 'Copre le spese mediche non rimborsate dal SSN: visite specialistiche, esami diagnostici, interventi chirurgici in cliniche private e degenza ospedaliera. Riduce i tempi di attesa e sceglie il medico.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '🦺',
+    icon: CEROTTO,
     title: 'Infortuni Privati',
     desc: 'Ti protegge 24 ore su 24, anche fuori dal lavoro e nello sport amatoriale: invalidità permanente, diaria da ricovero e rimborso spese mediche per infortuni avvenuti nel tempo libero.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '⚖️',
+    icon: BILANCIA,
     title: 'Tutela Legale',
     desc: 'Copre le spese legali per controversie in ambito stradale, condominiale, lavorativo e dei consumatori. Avere un avvocato dalla propria parte senza costi aggiuntivi cambia la prospettiva in molte dispute.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '👴',
+    icon: ANZIANO,
     title: 'Long Term Care (LTC)',
     desc: 'Eroga una rendita mensile se dovessi diventare non autosufficiente per malattia, infortunio o demenza senile. Tutela il patrimonio familiare dai costi elevatissimi dell\'assistenza continuativa.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '✈️',
+    icon: AEREO,
     title: 'Viaggi e Vacanze',
     desc: 'Copre spese mediche all\'estero, rimpatrio, bagaglio smarrito, cancellazione del viaggio e assistenza H24. Indispensabile per chi viaggia fuori dall\'UE o pratica sport in montagna.',
     price: 'su preventivo',
     mandatory: false,
   },
   {
-    icon: '🐾',
+    icon: ZAMPA,
     title: 'Animali Domestici',
     desc: 'RC per danni causati dal tuo cane o gatto a terzi, più copertura per spese veterinarie in caso di malattia o infortunio. Per molte razze la RC è raccomandata anche contrattualmente da condomini e affittacamere.',
     price: 'su preventivo',
@@ -81,15 +100,15 @@ const coverages = [
 ]
 
 const profiles = [
-  { name: 'Giovani coppie', icon: '💑' },
-  { name: 'Famiglie con figli', icon: '👨‍👩‍👧' },
-  { name: 'Proprietari di casa', icon: '🏠' },
-  { name: 'Affittuari', icon: '🔑' },
-  { name: 'Over 60', icon: '👴' },
-  { name: 'Single', icon: '🧑' },
-  { name: 'Sportivi amatoriali', icon: '🏃' },
-  { name: 'Viaggiatori frequenti', icon: '✈️' },
-  { name: 'Proprietari di animali', icon: '🐕' },
+  { name: 'Giovani coppie', icon: COPPIA },
+  { name: 'Famiglie con figli', icon: FAMIGLIA },
+  { name: 'Proprietari di casa', icon: CASA },
+  { name: 'Affittuari', icon: CHIAVE },
+  { name: 'Over 60', icon: ANZIANO },
+  { name: 'Single', icon: PERSONA },
+  { name: 'Sportivi amatoriali', icon: SPORT },
+  { name: 'Viaggiatori frequenti', icon: AEREO },
+  { name: 'Proprietari di animali', icon: CANE },
 ]
 
 export default function FamigliePage() {
@@ -116,7 +135,8 @@ export default function FamigliePage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🏠 Soluzioni per privati e famiglie
+              <Icona forma={CASA} size={16} />
+              Soluzioni per privati e famiglie
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Proteggi ciò che{' '}
@@ -143,7 +163,8 @@ export default function FamigliePage() {
                 </svg>
               </Link>
               <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-                📞 06 96883381
+                <Icona forma={TELEFONO} size={20} />
+                06 96883381
               </a>
             </div>
           </div>
@@ -159,7 +180,7 @@ export default function FamigliePage() {
           <div className="flex flex-wrap justify-center gap-3">
             {profiles.map((p) => (
               <div key={p.name} className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-sm font-medium text-gray-700">
-                <span>{p.icon}</span>
+                <Icona forma={p.icon} size={20} className="text-primary" />
                 {p.name}
               </div>
             ))}
@@ -185,7 +206,7 @@ export default function FamigliePage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className="flex flex-col">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     {cov.price}
                   </span>
@@ -247,7 +268,7 @@ export default function FamigliePage() {
                 ].map((item) => (
                   <div key={item.name} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                     <div className="flex items-center gap-2 text-sm">
-                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold">✓</span>
+                      <span className="w-5 h-5 bg-accent/10 text-accent-cta rounded-full flex items-center justify-center text-xs font-bold"><Icona forma={SPUNTA} size={12} /></span>
                       <span className="text-gray-700">{item.name}</span>
                     </div>
                     <span className="text-xs text-gray-500 text-right">{item.fattore}</span>
@@ -286,7 +307,8 @@ export default function FamigliePage() {
               Prenota Consulenza Gratuita
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

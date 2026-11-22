@@ -3,8 +3,27 @@
 import { useState } from 'react'
 import { SCADENZE_CATASTROFALE } from '@/lib/catastrofale'
 import Link from 'next/link'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  AUTO,
+  BILANCIA,
+  BORSA,
+  CASA,
+  CEROTTO,
+  CUORE,
+  FABBRICA,
+  FAMIGLIA,
+  LIVELLO_0,
+  LIVELLO_1,
+  LIVELLO_2,
+  LIVELLO_3,
+  LUCCHETTO,
+  MONETE,
+  PALAZZO,
+  type Forma,
+} from '@/lib/icone'
 
-type Option = { value: string; label: string; icon: string }
+type Option = { value: string; label: string; icon: Forma }
 type Step = {
   id: string
   question: string
@@ -18,10 +37,10 @@ const steps: Step[] = [
     question: 'Chi sei?',
     subtitle: 'Seleziona il tuo profilo per ricevere consigli personalizzati.',
     options: [
-      { value: 'privato', label: 'Privato / Famiglia', icon: '👨‍👩‍👧' },
-      { value: 'professionista', label: 'Libero Professionista', icon: '💼' },
-      { value: 'pmi', label: 'PMI / Imprenditore', icon: '🏭' },
-      { value: 'grande-impresa', label: 'Grande Impresa', icon: '🏢' },
+      { value: 'privato', label: 'Privato / Famiglia', icon: FAMIGLIA },
+      { value: 'professionista', label: 'Libero Professionista', icon: BORSA },
+      { value: 'pmi', label: 'PMI / Imprenditore', icon: FABBRICA },
+      { value: 'grande-impresa', label: 'Grande Impresa', icon: PALAZZO },
     ],
   },
   {
@@ -29,30 +48,30 @@ const steps: Step[] = [
     question: 'Qual è la tua priorità principale?',
     subtitle: 'Cosa vuoi proteggere prima di tutto?',
     options: [
-      { value: 'patrimonio', label: 'Patrimonio e beni', icon: '🏠' },
-      { value: 'reddito', label: 'Reddito e lavoro', icon: '💰' },
-      { value: 'salute', label: 'Salute e famiglia', icon: '❤️' },
-      { value: 'responsabilita', label: 'Responsabilità civile', icon: '⚖️' },
+      { value: 'patrimonio', label: 'Patrimonio e beni', icon: CASA },
+      { value: 'reddito', label: 'Reddito e lavoro', icon: MONETE },
+      { value: 'salute', label: 'Salute e famiglia', icon: CUORE },
+      { value: 'responsabilita', label: 'Responsabilità civile', icon: BILANCIA },
     ],
   },
   {
     id: 'concern',
     question: 'Qual è la tua preoccupazione maggiore?',
     options: [
-      { value: 'incidente', label: 'Incidenti stradali', icon: '🚗' },
-      { value: 'furto', label: 'Furto o danni alla proprietà', icon: '🔐' },
-      { value: 'malattia', label: 'Malattia o infortuni', icon: '🏥' },
-      { value: 'causa-legale', label: 'Cause legali o sanzioni', icon: '📋' },
+      { value: 'incidente', label: 'Incidenti stradali', icon: AUTO },
+      { value: 'furto', label: 'Furto o danni alla proprietà', icon: LUCCHETTO },
+      { value: 'malattia', label: 'Malattia o infortuni', icon: CEROTTO },
+      { value: 'causa-legale', label: 'Cause legali o sanzioni', icon: BILANCIA },
     ],
   },
   {
     id: 'current',
     question: 'Hai già una copertura assicurativa?',
     options: [
-      { value: 'no', label: 'No, parto da zero', icon: '🆕' },
-      { value: 'parziale', label: 'Solo RC Auto obbligatoria', icon: '🟡' },
-      { value: 'alcune', label: 'Ho alcune polizze', icon: '🟢' },
-      { value: 'completa', label: 'Credo di essere ben coperto', icon: '✅' },
+      { value: 'no', label: 'No, parto da zero', icon: LIVELLO_0 },
+      { value: 'parziale', label: 'Solo RC Auto obbligatoria', icon: LIVELLO_1 },
+      { value: 'alcune', label: 'Ho alcune polizze', icon: LIVELLO_2 },
+      { value: 'completa', label: 'Credo di essere ben coperto', icon: LIVELLO_3 },
     ],
   },
 ]
@@ -264,7 +283,7 @@ export default function InsuranceQuiz() {
                 isSelected ? 'border-primary bg-primary/10' : 'border-gray-200'
               }`}
             >
-              <span className="text-3xl flex-shrink-0">{opt.icon}</span>
+              <Icona forma={opt.icon} size={48} className="text-primary" />
               <span className="font-semibold text-gray-700 text-sm leading-tight">{opt.label}</span>
             </button>
           )

@@ -7,6 +7,32 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  AMO,
+  ANALISI,
+  BILANCIA,
+  CALO,
+  CARTA,
+  COMPUTER,
+  CRONOMETRO,
+  DATI,
+  ELENCO,
+  FABBRICA,
+  LUCCHETTO,
+  LUCCHETTO_APERTO,
+  MONDO,
+  MONETE,
+  OMBRELLO,
+  OSPEDALE,
+  POSTA,
+  SALVAGENTE,
+  SCARICA,
+  SIGILLO,
+  SIRENA,
+  SPUNTA,
+  STOP,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Assicurazione Cyber Risk — Protezione PMI e Professionisti da Attacchi Informatici',
@@ -24,47 +50,47 @@ export const metadata: Metadata = {
 }
 
 const threats = [
-  { icon: '🔒', name: 'Ransomware', desc: 'Blocca i tuoi sistemi e chiede un riscatto' },
-  { icon: '🎣', name: 'Phishing', desc: 'La maggior parte degli attacchi parte da un\'email' },
-  { icon: '💾', name: 'Data Breach', desc: 'Furto di dati di clienti e dipendenti' },
-  { icon: '🛑', name: 'Fermo operativo', desc: 'Sistemi giù = zero ricavi ogni ora' },
-  { icon: '⚖️', name: 'Sanzioni GDPR', desc: 'Fino al 4% del fatturato globale' },
-  { icon: '🌐', name: 'Attacchi supply chain', desc: 'Vulnerabilità nei fornitori IT' },
+  { icon: LUCCHETTO, name: 'Ransomware', desc: 'Blocca i tuoi sistemi e chiede un riscatto' },
+  { icon: AMO, name: 'Phishing', desc: 'La maggior parte degli attacchi parte da un\'email' },
+  { icon: DATI, name: 'Data Breach', desc: 'Furto di dati di clienti e dipendenti' },
+  { icon: STOP, name: 'Fermo operativo', desc: 'Sistemi giù = zero ricavi ogni ora' },
+  { icon: BILANCIA, name: 'Sanzioni GDPR', desc: 'Fino al 4% del fatturato globale' },
+  { icon: MONDO, name: 'Attacchi supply chain', desc: 'Vulnerabilità nei fornitori IT' },
 ]
 
 const coverages = [
   {
-    icon: '💻',
+    icon: COMPUTER,
     title: 'Ripristino sistemi e dati',
     desc: 'Copertura dei costi tecnici per recuperare dati criptati o cancellati, ripristinare sistemi e infrastrutture IT compromesse dopo un attacco ransomware o malware.',
     included: true,
   },
   {
-    icon: '📉',
+    icon: CALO,
     title: 'Interruzione attività (BI Cyber)',
     desc: 'Risarcimento del mancato guadagno durante il periodo di fermo operativo causato da un cyber attacco. Massimale fino a 30 giorni, franchigia temporale di 8 ore.',
     included: true,
   },
   {
-    icon: '🛡️',
+    icon: OMBRELLO,
     title: 'Responsabilità verso terzi',
     desc: 'Copertura per le richieste di risarcimento di clienti, fornitori o dipendenti in seguito a violazione dei loro dati personali. Include le spese legali; sulle sanzioni del Garante va letto il contratto, in genere restano all\'azienda.',
     included: true,
   },
   {
-    icon: '🚨',
+    icon: SIRENA,
     title: 'Gestione crisi e notifiche',
     desc: 'Rimborso dei costi per esperti forensi IT, comunicazione di crisi, notifiche obbligatorie al Garante Privacy e agli interessati entro i 72 ore GDPR.',
     included: true,
   },
   {
-    icon: '💰',
+    icon: MONETE,
     title: 'Estorsione cyber',
     desc: 'Copertura per le spese di gestione di un\'estorsione ransomware: negoziatori specializzati, eventuali pagamenti del riscatto e supporto tecnico per il recovery.',
     included: true,
   },
   {
-    icon: '⚡',
+    icon: CRONOMETRO,
     title: 'Retroattività illimitata',
     desc: 'Copertura estesa anche a violazioni avvenute prima della stipula ma scoperte durante la validità della polizza. Conta, perché un attacco può restare nascosto per mesi prima di essere scoperto.',
     included: true,
@@ -73,21 +99,21 @@ const coverages = [
 
 const targetProfiles = [
   {
-    icon: '🏭',
+    icon: FABBRICA,
     title: 'PMI e Aziende',
     subtitle: 'Fatturato fino a 50M€',
     desc: 'Imprese manifatturiere, commerciali, di servizi che gestiscono dati clienti, ordini, fatture. Particolarmente esposte: e-commerce, aziende con ERP/CRM cloud, manifatturiero con sistemi OT.',
     risks: ['Ransomware su server aziendali', 'Furto listini e dati clienti', 'Fermo produzione', 'Violazioni GDPR B2B'],
   },
   {
-    icon: '⚖️',
+    icon: BILANCIA,
     title: 'Professionisti e Studi',
     subtitle: 'Avvocati, commercialisti, medici, consulenti',
     desc: 'Trattano dati sensibili di clienti e pazienti. Soggetti al GDPR con obblighi specifici. Un data breach può significare revoca dell\'iscrizione all\'albo oltre alle sanzioni.',
     risks: ['Furto cartelle pazienti/clienti', 'Violazione segreto professionale', 'Blocco studio per ransomware', 'Sanzioni Garante Privacy'],
   },
   {
-    icon: '🏥',
+    icon: OSPEDALE,
     title: 'Settori Critici NIS2',
     subtitle: 'Sanità, energia, PA, finanza',
     desc: 'Soggetti alla Direttiva NIS2 (D.Lgs. 138/2024) con obblighi di sicurezza rafforzati. La polizza cyber non sostituisce le misure di sicurezza, ma aiuta a reggere il costo di un incidente.',
@@ -105,21 +131,21 @@ const dualDifferentiators = [
 
 const scenarios = [
   {
-    icon: '🔓',
+    icon: LUCCHETTO_APERTO,
     title: 'Ransomware blocca il tuo gestionale',
     context: 'Studio di commercialisti, 5 dipendenti',
     damage: 'Sistemi bloccati per 4 giorni, recupero dati, clienti non serviti',
     covered: 'Ripristino tecnico + 4 giorni di mancato reddito + gestione comunicazione',
   },
   {
-    icon: '📧',
+    icon: POSTA,
     title: 'Dipendente clicca su email phishing',
     context: 'PMI manifatturiera, 25 dipendenti',
     damage: 'Credenziali rubate, accesso ai dati di 2.000 clienti',
     covered: 'Notifica Garante, comunicazione agli interessati, spese legali',
   },
   {
-    icon: '💳',
+    icon: CARTA,
     title: 'Attacco al sito e-commerce',
     context: 'Negozio online, 3M€ fatturato',
     damage: 'Sito down 18 ore, dati pagamento clienti esposti',
@@ -152,7 +178,8 @@ export default function CyberRiskPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-1.5 text-sm font-semibold mb-5 text-accent-light">
-              🛡️ DUAL Cyber Smart Plus — Mandato diretto FIM
+              <Icona forma={OMBRELLO} size={16} />
+              DUAL Cyber Smart Plus — Mandato diretto FIM
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Un attacco cyber<br />
@@ -189,7 +216,8 @@ export default function CyberRiskPage() {
                 download
                 className="btn-outline-white text-lg px-8 py-4"
               >
-                📋 Scarica Cyber Health Check
+                <Icona forma={ELENCO} size={20} />
+                Scarica Cyber Health Check
               </a>
             </div>
           </div>
@@ -210,7 +238,7 @@ export default function CyberRiskPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {threats.map((t) => (
               <div key={t.name} className="text-center p-4 bg-gray-50 rounded-xl border border-gray-100">
-                <span className="text-4xl block mb-3">{t.icon}</span>
+                <Icona forma={t.icon} size={56} className="mb-3 mx-auto text-primary" />
                 <p className="font-semibold text-primary text-sm mb-1">{t.name}</p>
                 <p className="text-gray-500 text-xs">{t.desc}</p>
               </div>
@@ -238,12 +266,13 @@ export default function CyberRiskPage() {
             {coverages.map((c) => (
               <Card key={c.title} className="flex flex-col">
                 <div className="flex items-start gap-3 mb-3">
-                  <span className="text-3xl flex-shrink-0">{c.icon}</span>
+                  <Icona forma={c.icon} size={48} className="text-primary" />
                   <div>
                     <h3 className="font-bold text-primary text-base leading-tight">{c.title}</h3>
                     {c.included && (
                       <span className="inline-flex items-center gap-1 text-xs font-semibold text-green-700 mt-0.5">
-                        ✓ Inclusa
+                        <Icona forma={SPUNTA} size={14} />
+                        Inclusa
                       </span>
                     )}
                   </div>
@@ -299,7 +328,7 @@ export default function CyberRiskPage() {
             {targetProfiles.map((p) => (
               <Card key={p.title} className="flex flex-col">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-4xl">{p.icon}</span>
+                  <Icona forma={p.icon} size={56} className="text-primary" />
                   <div>
                     <h3 className="font-black text-primary text-lg">{p.title}</h3>
                     <p className="text-gray-500 text-sm">{p.subtitle}</p>
@@ -338,7 +367,7 @@ export default function CyberRiskPage() {
             {scenarios.map((s) => (
               <div key={s.title} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <div className="bg-red-50 border-b border-red-100 px-5 py-4">
-                  <span className="text-3xl block mb-2">{s.icon}</span>
+                  <Icona forma={s.icon} size={48} className="mb-2 text-primary" />
                   <h3 className="font-black text-primary text-base leading-tight">{s.title}</h3>
                   <p className="text-gray-600 text-xs mt-1">{s.context}</p>
                 </div>
@@ -366,7 +395,7 @@ export default function CyberRiskPage() {
       <section className="section-padding bg-primary">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto bg-white/10 border border-white/20 rounded-2xl p-8 md:p-10 text-center">
-            <div className="text-4xl mb-4">📋</div>
+            <Icona forma={ELENCO} size={56} className="mb-4 mx-auto text-white" />
             <h2 className="text-2xl md:text-3xl font-black text-white mb-3">
               Cyber Health Check — gratuito
             </h2>
@@ -381,7 +410,8 @@ export default function CyberRiskPage() {
                 download
                 className="btn-primary px-8 py-4 text-lg"
               >
-                📥 Scarica la Checklist PDF
+                <Icona forma={SCARICA} size={20} />
+                Scarica la Checklist PDF
               </a>
               <Link href="/preventivo?profilo=azienda&tipo=cyber" className="btn-outline-white px-8 py-4 text-lg">
                 Richiedi consulenza cyber
@@ -400,23 +430,23 @@ export default function CyberRiskPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                icon: '🎯',
+                icon: SIGILLO,
                 title: 'Mandato diretto DUAL',
                 desc: 'FIM ha un mandato diretto con DUAL Italia, specializzata nel cyber risk: la polizza la chiediamo noi, senza passare da un\'agenzia.',
               },
               {
-                icon: '🔍',
+                icon: ANALISI,
                 title: 'Analisi del rischio reale',
                 desc: 'Non vendiamo polizze: analizziamo prima il tuo profilo di rischio cyber reale. Valutiamo fatturato, dati trattati, settore, misure in atto e costruiamo la copertura giusta.',
               },
               {
-                icon: '🆘',
+                icon: SALVAGENTE,
                 title: 'Assistenza al sinistro',
                 desc: 'In caso di attacco, siamo il tuo primo punto di contatto. Coordiniamo l\'intervento degli esperti DUAL e seguiamo l\'intero processo liquidativo al posto tuo.',
               },
             ].map((item) => (
               <div key={item.title} className="text-center">
-                <span className="text-4xl block mb-4">{item.icon}</span>
+                <Icona forma={item.icon} size={56} className="mb-4 mx-auto text-primary" />
                 <h3 className="font-bold text-primary mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
               </div>

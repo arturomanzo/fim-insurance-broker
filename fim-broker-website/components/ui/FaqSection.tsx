@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import FaqAccordion from './FaqAccordion'
 import { buildFaqSchema, type FaqCta, type FaqItem } from '@/lib/faq'
+import { Icona } from '@/components/icons/TettoIcons'
+import { TELEFONO } from '@/lib/icone'
 
 interface FaqSectionProps {
   items: readonly FaqItem[]
@@ -23,11 +25,12 @@ function CtaButton({
   const className =
     variant === 'primary'
       ? 'btn-primary px-6 py-3'
-      : 'inline-flex items-center justify-center px-6 py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-colors'
+      : 'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-colors'
   const isExternal = href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('http')
   if (isExternal) {
     return (
       <a href={href} className={className}>
+        {href.startsWith('tel:') && <Icona forma={TELEFONO} size={18} />}
         {label}
       </a>
     )

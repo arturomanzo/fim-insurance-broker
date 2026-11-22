@@ -6,6 +6,20 @@ import { manifatturieroFaq } from '@/lib/faq/manifatturiero'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ALLERTA,
+  COMPUTER,
+  FABBRICA,
+  FIAMMA,
+  FURGONE,
+  LUCCHETTO,
+  MONDO,
+  PACCO,
+  PAUSA,
+  TELEFONO,
+  VENTO,
+} from '@/lib/icone'
 
 const SETTORE_QS = '?profilo=pmi&settore=Manifatturiero'
 
@@ -25,50 +39,50 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '🔥', title: 'Fermo produzione', desc: 'Un incendio, un guasto a un macchinario chiave, un evento naturale: ogni giorno di fermo significa ordini persi e clienti che cercano altri fornitori.' },
-  { icon: '🌍', title: 'RC prodotto export', desc: 'Vendere un prodotto in USA, UK o UE significa esporsi a richieste danni con criteri di responsabilità più stringenti rispetto all\'Italia.' },
-  { icon: '🔐', title: 'Cyber attacchi su OT', desc: 'PLC, SCADA e linee di produzione connesse sono target di ransomware. Una o due settimane di fermo pesano su consegne, penali e clienti.' },
-  { icon: '⚠️', title: 'Catastrofi naturali 2025', desc: 'Dal 2025 le imprese italiane hanno l\'obbligo di assicurare immobili e impianti contro alluvioni, terremoti e frane (L. 213/2023, art. 1 comma 101).' },
+  { icon: FIAMMA, title: 'Fermo produzione', desc: 'Un incendio, un guasto a un macchinario chiave, un evento naturale: ogni giorno di fermo significa ordini persi e clienti che cercano altri fornitori.' },
+  { icon: MONDO, title: 'RC prodotto export', desc: 'Vendere un prodotto in USA, UK o UE significa esporsi a richieste danni con criteri di responsabilità più stringenti rispetto all\'Italia.' },
+  { icon: LUCCHETTO, title: 'Cyber attacchi su OT', desc: 'PLC, SCADA e linee di produzione connesse sono target di ransomware. Una o due settimane di fermo pesano su consegne, penali e clienti.' },
+  { icon: ALLERTA, title: 'Catastrofi naturali 2025', desc: 'Dal 2025 le imprese italiane hanno l\'obbligo di assicurare immobili e impianti contro alluvioni, terremoti e frane (L. 213/2023, art. 1 comma 101).' },
 ]
 
 const coverages = [
   {
-    icon: '🏭',
+    icon: FABBRICA,
     title: 'All Risk Property',
     desc: 'Copertura "all-risk" su capannone, magazzini, scorte, macchinari di produzione e impianti tecnologici. Indennizza tutti i danni salvo le esclusioni espresse.',
     price: 'su preventivo',
     highlighted: true,
   },
   {
-    icon: '⏸️',
+    icon: PAUSA,
     title: 'Business Interruption',
     desc: 'Compensa il margine di contribuzione perso durante il fermo produzione causato da un sinistro indennizzabile. La copertura che più spesso salva l\'azienda.',
     price: 'inclusa in Property',
     highlighted: false,
   },
   {
-    icon: '📦',
+    icon: PACCO,
     title: 'RC Prodotto (con export)',
     desc: 'Risponde dei danni causati a terzi dai prodotti immessi sul mercato, anche dopo la vendita. Estensioni specifiche per export USA, Canada e UK con relativi standard.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🛡️',
+    icon: COMPUTER,
     title: 'Cyber Risk OT/IT',
     desc: 'Ransomware, business email compromise, blocco linee di produzione, esfiltrazione progetti. Copre ripristino, riscatto (dove consentito), spese legali e BI cyber.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🚚',
+    icon: FURGONE,
     title: 'Trasporti Merci',
     desc: 'Merci in arrivo (acquisti) e in partenza (vendite), trasporto su gomma, mare, ferrovia o aereo. Copertura "magazzino-magazzino" con clausole Institute Cargo.',
     price: 'su preventivo',
     highlighted: false,
   },
   {
-    icon: '🌪️',
+    icon: VENTO,
     title: 'Catastrofi Naturali (Obbligo 2025)',
     desc: 'Alluvione, terremoto, frana e smottamento su immobili e impianti. Obbligo di legge per le imprese ex L. 213/2023, con sanzioni per mancata adesione.',
     price: 'su preventivo',
@@ -102,7 +116,8 @@ export default function ManifatturieroPage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              🏭 Industria, produzione e PMI manifatturiere
+              <Icona forma={FABBRICA} size={16} />
+              Industria, produzione e PMI manifatturiere
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Quando si ferma la produzione<br />
@@ -127,7 +142,8 @@ export default function ManifatturieroPage() {
                 </svg>
               </Link>
               <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-                📞 06 96883381
+                <Icona forma={TELEFONO} size={20} />
+                06 96883381
               </a>
             </div>
           </div>
@@ -151,7 +167,7 @@ export default function ManifatturieroPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {painPoints.map((p) => (
               <Card key={p.title} className="border-l-4 border-l-red-400">
-                <span className="text-3xl mb-3 block">{p.icon}</span>
+                <Icona forma={p.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{p.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
               </Card>
@@ -178,7 +194,7 @@ export default function ManifatturieroPage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     {cov.price}
                   </span>
@@ -268,7 +284,8 @@ export default function ManifatturieroPage() {
               Richiedi preventivo Manifatturiero
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

@@ -8,7 +8,7 @@ export const welfareAziendaleFaq: FaqCategory = {
     text: 'Vuoi disegnare un piano welfare per la tua azienda?',
     description: 'Analisi gratuita del CCNL applicato e delle coperture che servono davvero.',
     primary: { label: 'Prenota Consulenza', href: '/prenota-consulenza' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

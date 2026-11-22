@@ -1,5 +1,17 @@
 import { OBBLIGO_CATASTROFALE } from '@/lib/catastrofale'
 import { ivassLatina, ivassRcAuto } from '@/lib/osservatorio-data'
+import {
+  AEREO,
+  AUTO,
+  BANDIERA,
+  BILANCIA,
+  CASA,
+  CUORE,
+  OSPEDALE,
+  PALAZZO,
+  SIGILLO,
+  type Forma,
+} from './icone'
 
 export interface Coverage {
   /** Cosa la polizza copre tipicamente. Lista concisa, snippet-friendly. */
@@ -15,7 +27,7 @@ export interface Service {
   title: string
   shortDescription: string
   description: string
-  icon: string
+  icon: Forma
   color: string
   image: string
   features: string[]
@@ -51,7 +63,7 @@ export const services: Service[] = [
     shortDescription: 'RC Auto, Kasko, Furto e Incendio. Le offerte di più compagnie a confronto sul tuo veicolo.',
     description:
       'Proteggi il tuo veicolo con le soluzioni assicurative più complete del mercato. Da FIM trovi polizze personalizzate per ogni esigenza, dalla semplice RC obbligatoria fino alla Kasko totale.',
-    icon: '🚗',
+    icon: AUTO,
     color: 'blue',
     image: '/images/brand/auto-road.jpg',
     features: [
@@ -128,7 +140,7 @@ export const services: Service[] = [
     shortDescription: 'Proteggi il futuro tuo e della tua famiglia con piani vita e previdenziali su misura.',
     description:
       'Le polizze vita FIM garantiscono serenità finanziaria a te e alla tua famiglia. Offriamo soluzioni temporanee caso morte, miste, unit-linked e piani di accumulo previdenziale.',
-    icon: '❤️',
+    icon: CUORE,
     color: 'red',
     image: '/images/brand/vita-structure.jpg',
     features: [
@@ -199,7 +211,7 @@ export const services: Service[] = [
     shortDescription: 'Polizze complete per la tua abitazione: incendio, furto, RC del proprietario e molto altro.',
     description:
       'La tua casa è il tuo bene più prezioso. FIM offre polizze globali fabbricato e multirischio casa che coprono ogni tipo di danno, dal furto agli eventi atmosferici.',
-    icon: '🏠',
+    icon: CASA,
     color: 'green',
     image: '/images/brand/casa-model.jpg',
     features: [
@@ -272,7 +284,7 @@ export const services: Service[] = [
     shortDescription: 'Polizze sanitarie individuali e collettive per accedere alle migliori cure mediche.',
     description:
       'La salute è il bene più prezioso. Con una polizza sanitaria accedi alle strutture private convenzionate, hai il rimborso delle spese mediche e un\'indennità in caso di infortunio, nei limiti del contratto.',
-    icon: '🏥',
+    icon: OSPEDALE,
     color: 'teal',
     image: '/images/brand/salute-dna.jpg',
     features: [
@@ -345,7 +357,7 @@ export const services: Service[] = [
     shortDescription: 'Soluzioni assicurative complete per imprese: RC, D&O, cyber risk, property e benefit aziendali.',
     description:
       'FIM è il partner assicurativo di fiducia per le imprese. Dalla RC professionale alla cyber risk, dalle polizze property ai piani welfare aziendale, proteggiamo ogni aspetto della tua attività.',
-    icon: '🏢',
+    icon: PALAZZO,
     color: 'purple',
     image: '/images/brand/cyber-chain.jpg',
     features: [
@@ -418,7 +430,7 @@ export const services: Service[] = [
     shortDescription: 'Viaggia sereno con coperture mediche, annullamento viaggio e bagagli in tutto il mondo.',
     description:
       'Parti senza preoccupazioni con le polizze viaggio FIM. Dalla gita in Europa al viaggio intercontinentale, copriamo spese mediche, annullamento, ritardi e perdita bagagli.',
-    icon: '✈️',
+    icon: AEREO,
     color: 'orange',
     image: '/images/brand/viaggio-bussola.jpg',
     features: [
@@ -529,7 +541,7 @@ export const services: Service[] = [
     shortDescription: 'Cauzioni e fideiussioni assicurative per gare d\'appalto, contratti pubblici e privati, dogane, fisco e locazioni. Dalla richiesta allo svincolo.',
     description:
       'Una gara d\'appalto chiede una garanzia provvisoria per partecipare e una definitiva per firmare il contratto. Fisco e dogana la chiedono per rateizzazioni, rimborsi IVA e dazi, il locatore al posto del deposito in contanti. La fideiussione assicurativa fa lo stesso lavoro di quella bancaria senza toccare il fido in banca. Noi prepariamo la pratica con i documenti che la compagnia chiederà, controlliamo che il testo della garanzia sia quello richiesto dal bando e seguiamo le riduzioni e lo svincolo fino alla fine. Premio e capacità di rilascio li decide la compagnia sul bilancio dell\'impresa: possiamo presentarla al meglio, non promettere l\'esito.',
-    icon: '🔐',
+    icon: SIGILLO,
     color: 'amber',
     image: '/images/brand/cauzioni-seal.jpg',
     features: [
@@ -620,7 +632,7 @@ export const services: Service[] = [
     shortDescription: 'Protezione legale a 360° per imprenditori, amministratori e aziende: tutela penale, D&O e controversie commerciali.',
     description:
       'La RC Azienda copre i danni causati a terzi, ma lascia scoperti i costi legali dell\'imprenditore e dei suoi amministratori. Con la Tutela Legale Aziende completiamo la protezione: spese di avvocato, perito, CTU e consulenti in procedimenti penali, contenziosi con dipendenti, fornitori e clienti, e azioni di responsabilità contro amministratori e sindaci. Una copertura indispensabile in un\'epoca in cui un procedimento penale per reati colposi o la responsabilità amministrativa ex D.Lgs. 231/2001 possono colpire qualsiasi impresa.',
-    icon: '⚖️',
+    icon: BILANCIA,
     color: 'indigo',
     image: '/images/brand/tutela-legale.jpg',
     features: [
@@ -696,7 +708,7 @@ export const services: Service[] = [
     shortDescription: 'Analisi dei rischi, programmi assicurativi su misura e monitoraggio continuo. Prima i rischi, poi la copertura.',
     description:
       'Il Risk Management è il cuore del lavoro di un vero broker. Non partiamo dalla polizza ma dall\'analisi dei rischi reali della tua attività: operativi, patrimoniali, legali, reputazionali e di business continuity. Solo dopo aver mappato e pesato ogni esposizione costruiamo il programma assicurativo ottimale — nessuna copertura inutile, nessun gap pericoloso. Questo approccio consulenziale è ciò che distingue FIM da un semplice intermediario: non vendiamo polizze, gestiamo rischi.',
-    icon: '🎯',
+    icon: BANDIERA,
     color: 'slate',
     image: '/images/brand/shield-craft.jpg',
     features: [

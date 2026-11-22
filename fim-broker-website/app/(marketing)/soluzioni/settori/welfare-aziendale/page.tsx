@@ -6,6 +6,19 @@ import { welfareAziendaleFaq } from '@/lib/faq/welfare-aziendale'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  ANZIANO,
+  BORSA,
+  CUORE,
+  ELENCO,
+  MONETE,
+  NEONATO,
+  OSPEDALE,
+  OSSO,
+  PORTA,
+  TELEFONO,
+} from '@/lib/icone'
 
 const SETTORE_QS = '?profilo=pmi&settore=Welfare+Aziendale'
 
@@ -25,45 +38,45 @@ export const metadata: Metadata = {
 }
 
 const painPoints = [
-  { icon: '💸', title: 'Aumenti che si perdono per strada', desc: 'Tra contributi e tasse, di un aumento in busta paga al dipendente arriva molto meno di quanto costa all\'azienda.' },
-  { icon: '🚪', title: 'Persone che se ne vanno', desc: 'Sostituire chi lascia costa: ricerca, formazione e mesi in cui il nuovo arrivato non rende ancora come il vecchio.' },
-  { icon: '📋', title: 'Un fisco da impostare bene', desc: 'Le polizze collettive hanno un trattamento fiscale di favore, ma solo se il piano è scritto nel modo giusto: regolamento o accordo, categorie di dipendenti, limiti per persona.' },
-  { icon: '🏥', title: 'Liste d\'attesa lunghe', desc: 'Visite ed esami nel pubblico richiedono spesso tempi lunghi: i dipendenti chiedono coperture salute come benefit.' },
+  { icon: MONETE, title: 'Aumenti che si perdono per strada', desc: 'Tra contributi e tasse, di un aumento in busta paga al dipendente arriva molto meno di quanto costa all\'azienda.' },
+  { icon: PORTA, title: 'Persone che se ne vanno', desc: 'Sostituire chi lascia costa: ricerca, formazione e mesi in cui il nuovo arrivato non rende ancora come il vecchio.' },
+  { icon: ELENCO, title: 'Un fisco da impostare bene', desc: 'Le polizze collettive hanno un trattamento fiscale di favore, ma solo se il piano è scritto nel modo giusto: regolamento o accordo, categorie di dipendenti, limiti per persona.' },
+  { icon: OSPEDALE, title: 'Liste d\'attesa lunghe', desc: 'Visite ed esami nel pubblico richiedono spesso tempi lunghi: i dipendenti chiedono coperture salute come benefit.' },
 ]
 
 const coverages = [
   {
-    icon: '🏥',
+    icon: OSPEDALE,
     title: 'Polizza Salute Collettiva',
     desc: 'Rimborso visite specialistiche, esami diagnostici, ricoveri e interventi in strutture private convenzionate. Network nazionale, accesso diretto senza anticipare somme.',
     highlighted: true,
   },
   {
-    icon: '❤️',
+    icon: CUORE,
     title: 'TCM Collettiva (Vita)',
     desc: 'Capitale assicurato che la compagnia versa ai familiari in caso di decesso del dipendente. Strumento di tutela e fidelizzazione, particolarmente apprezzato dai quadri.',
     highlighted: false,
   },
   {
-    icon: '🦴',
+    icon: OSSO,
     title: 'Infortuni Professionali ed Extra',
     desc: 'Integrativa INAIL per gli infortuni sul lavoro + estensione al tempo libero (24h/24). Indennizzi per invalidità permanente, ricovero e rimborso spese mediche.',
     highlighted: false,
   },
   {
-    icon: '🧓',
+    icon: ANZIANO,
     title: 'Long Term Care (LTC)',
     desc: 'Rendita vitalizia in caso di non autosufficienza del dipendente o dei familiari. Un benefit che alcuni contratti collettivi prevedono già.',
     highlighted: false,
   },
   {
-    icon: '👶',
+    icon: NEONATO,
     title: 'Welfare Famiglia & Maternità',
     desc: 'Estensione delle coperture salute al nucleo familiare (coniuge e figli), pacchetti maternità, prevenzione pediatrica. Forte impatto sulla retention femminile.',
     highlighted: false,
   },
   {
-    icon: '🏛️',
+    icon: MONETE,
     title: 'Previdenza Complementare',
     desc: 'Versamenti del datore di lavoro a fondi pensione negoziali o aperti. Vantaggi fiscali per azienda e dipendente, integrazione della pensione pubblica.',
     highlighted: false,
@@ -96,7 +109,8 @@ export default function WelfareAziendalePage() {
           </div>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
-              💼 PMI, studi professionali e medie imprese
+              <Icona forma={BORSA} size={16} />
+              PMI, studi professionali e medie imprese
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
               Premia i dipendenti<br />
@@ -115,7 +129,8 @@ export default function WelfareAziendalePage() {
                 </svg>
               </Link>
               <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-                📞 06 96883381
+                <Icona forma={TELEFONO} size={20} />
+                06 96883381
               </a>
             </div>
           </div>
@@ -139,7 +154,7 @@ export default function WelfareAziendalePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {painPoints.map((p) => (
               <Card key={p.title} className="border-l-4 border-l-accent">
-                <span className="text-3xl mb-3 block">{p.icon}</span>
+                <Icona forma={p.icon} size={48} className="mb-3 text-primary" />
                 <h3 className="font-bold text-primary mb-2">{p.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
               </Card>
@@ -166,7 +181,7 @@ export default function WelfareAziendalePage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className={`flex flex-col ${cov.highlighted ? 'border-2 border-accent' : ''}`}>
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-2.5 py-1 rounded-full">
                     su preventivo
                   </span>
@@ -257,7 +272,8 @@ export default function WelfareAziendalePage() {
               Progetta il mio piano welfare
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

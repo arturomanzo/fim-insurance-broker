@@ -16,6 +16,8 @@ import {
 } from '@/lib/preventivoDocumenti'
 import { RICONTATTO } from '@/lib/tempi'
 import { campagnaPerInvio } from '@/lib/campagnaBrowser'
+import { Icona } from '@/components/icons/TettoIcons'
+import { DOCUMENTO } from '@/lib/icone'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -73,7 +75,7 @@ function SlotUploader({
 
       {file ? (
         <div className="flex items-center gap-3 p-3 border-2 border-accent/40 bg-accent/5 rounded-xl">
-          <span className="text-xl flex-shrink-0" aria-hidden="true">📄</span>
+          <Icona forma={DOCUMENTO} size={32} className="text-primary" />
           <div className="min-w-0 flex-1">
             <p className="text-sm font-medium text-primary truncate">{file.name}</p>
             <p className="text-xs text-gray-500">{formatSize(file.size)}</p>

@@ -9,6 +9,26 @@ import { OG_BASE } from '@/lib/seo'
 import { notaPremio } from '@/lib/prezzi'
 import { linkWhatsApp } from '@/lib/whatsappSito'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import {
+  BARRE,
+  BILANCIA,
+  BORSA,
+  CANTIERE,
+  CEROTTO,
+  COMPUTER,
+  CRAVATTA,
+  CRONOMETRO,
+  ELENCO,
+  LENTE,
+  LUCCHETTO,
+  MENTE,
+  OMBRELLO,
+  OSPEDALE,
+  PERSONE,
+  SQUADRA,
+  TELEFONO,
+} from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Assicurazione per Professionisti — RC Professionale Obbligatoria',
@@ -33,37 +53,37 @@ const BROCHURE = {
 
 const coverages = [
   {
-    icon: '⚖️',
+    icon: BILANCIA,
     title: 'RC Professionale',
     desc: 'Copre i danni patrimoniali causati ai tuoi clienti per errori, omissioni o negligenze commesse nell\'esercizio della professione. Obbligatoria per la maggior parte delle categorie.',
     price: 'su preventivo',
   },
   {
-    icon: '🛡️',
+    icon: OMBRELLO,
     title: 'Tutela Legale',
     desc: 'Copre le spese legali per difenderti da contestazioni ingiuste dei clienti. Serve soprattutto a chi è esposto a contenziosi.',
     price: 'su preventivo',
   },
   {
-    icon: '🔒',
+    icon: LUCCHETTO,
     title: 'Cyber Risk e Data Breach',
     desc: 'Se gestisci dati sensibili (commercialisti, medici, avvocati), un data breach comporta sanzioni GDPR e danni reputazionali. La cyber risk copre sia i costi legali che quelli di ripristino.',
     price: 'su preventivo',
   },
   {
-    icon: '👔',
+    icon: CRAVATTA,
     title: 'D&O per STP e Studi Associati',
     desc: 'Directors & Officers per studi strutturati come STP o associazioni professionali. Copre gli amministratori da richieste di risarcimento per decisioni gestionali.',
     price: 'su preventivo',
   },
   {
-    icon: '🏥',
+    icon: CEROTTO,
     title: 'Infortuni Professionali',
     desc: 'Copre infortuni avvenuti nell\'esercizio della professione: da una caduta in studio a un incidente in sopralluogo. Complementare all\'INAIL per autonomi.',
     price: 'su preventivo',
   },
   {
-    icon: '💼',
+    icon: BORSA,
     title: 'Perdita di Documenti',
     desc: 'Copre i costi di ricerca, ricostituzione o ripristino di documenti e archivi perduti o danneggiati. Particolarmente utile per studi legali e notarili.',
     price: 'inclusa in RC Prof.',
@@ -71,14 +91,14 @@ const coverages = [
 ]
 
 const categories = [
-  { name: 'Avvocati', icon: '⚖️', obligation: 'Obbligatoria ex art. 12 L. 247/2012' },
-  { name: 'Commercialisti', icon: '📊', obligation: 'Obbligatoria D.P.R. 137/2012' },
-  { name: 'Ingegneri e Architetti', icon: '🏗️', obligation: 'Obbligatoria D.P.R. 137/2012' },
-  { name: 'Medici e Professionisti Sanitari', icon: '🏥', obligation: 'Obbligatoria L. 24/2017' },
-  { name: 'Consulenti del Lavoro', icon: '👥', obligation: 'Obbligatoria D.P.R. 137/2012' },
-  { name: 'Psicologi', icon: '🧠', obligation: 'Obbligatoria D.P.R. 137/2012' },
-  { name: 'Geometri e Periti', icon: '📐', obligation: 'Obbligatoria D.P.R. 137/2012' },
-  { name: 'Consulenti IT e Digital', icon: '💻', obligation: 'Raccomandata — alta esposizione cyber' },
+  { name: 'Avvocati', icon: BILANCIA, obligation: 'Obbligatoria ex art. 12 L. 247/2012' },
+  { name: 'Commercialisti', icon: BARRE, obligation: 'Obbligatoria D.P.R. 137/2012' },
+  { name: 'Ingegneri e Architetti', icon: CANTIERE, obligation: 'Obbligatoria D.P.R. 137/2012' },
+  { name: 'Medici e Professionisti Sanitari', icon: OSPEDALE, obligation: 'Obbligatoria L. 24/2017' },
+  { name: 'Consulenti del Lavoro', icon: PERSONE, obligation: 'Obbligatoria D.P.R. 137/2012' },
+  { name: 'Psicologi', icon: MENTE, obligation: 'Obbligatoria D.P.R. 137/2012' },
+  { name: 'Geometri e Periti', icon: SQUADRA, obligation: 'Obbligatoria D.P.R. 137/2012' },
+  { name: 'Consulenti IT e Digital', icon: COMPUTER, obligation: 'Raccomandata — alta esposizione cyber' },
 ]
 
 export default function ProfessionistiPage() {
@@ -165,7 +185,7 @@ export default function ProfessionistiPage() {
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((cat) => (
               <div key={cat.name} className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2">
-                <span>{cat.icon}</span>
+                <Icona forma={cat.icon} size={20} className="text-primary" />
                 <div>
                   <div className="text-sm font-semibold text-gray-700">{cat.name}</div>
                   <div className="text-xs text-gray-500">{cat.obligation}</div>
@@ -194,7 +214,7 @@ export default function ProfessionistiPage() {
             {coverages.map((cov) => (
               <Card key={cov.title} className="flex flex-col">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-3xl">{cov.icon}</span>
+                  <Icona forma={cov.icon} size={48} className="text-primary" />
                   <span className="text-xs font-bold text-accent-cta bg-accent/10 px-3 py-1 rounded-full">
                     {cov.price}
                   </span>
@@ -258,28 +278,28 @@ export default function ProfessionistiPage() {
               <div className="space-y-5">
                 {[
                   {
-                    icon: '📋',
+                    icon: ELENCO,
                     title: 'Conosciamo la tua categoria',
                     desc: 'Ogni professione ha norme diverse. Ti guidiamo tra obblighi di legge, massimali minimi e clausole critiche senza che tu debba studiare il codice civile.',
                   },
                   {
-                    icon: '🔍',
+                    icon: LENTE,
                     title: 'Confrontiamo il mercato per te',
                     desc: 'Non rappresentiamo una sola compagnia: confrontiamo AXA, Allianz, Generali, HDI e molte altre e mettiamo a confronto coperture e premi.',
                   },
                   {
-                    icon: '⚡',
+                    icon: CRONOMETRO,
                     title: 'Confronto delle offerte',
                     desc: `Compila il form con i tuoi dati: fatturato, categoria e massimale. Ti ricontattiamo ${RICONTATTO} e ti presentiamo il confronto appena le compagnie hanno quotato.`,
                   },
                   {
-                    icon: '🤝',
+                    icon: PERSONE,
                     title: 'Ti seguiamo in caso di sinistro',
                     desc: "Un cliente ti contesta? Non affronti la situazione da solo. Il nostro ufficio sinistri ti supporta dalla denuncia alla liquidazione.",
                   },
                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-4">
-                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                    <Icona forma={item.icon} size={40} className="text-primary" />
                     <div>
                       <h3 className="font-bold text-primary mb-1">{item.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
@@ -345,7 +365,8 @@ export default function ProfessionistiPage() {
               Richiedi Preventivo
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white text-lg px-8 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={20} />
+              06 96883381
             </a>
           </div>
         </div>

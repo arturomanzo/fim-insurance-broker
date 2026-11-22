@@ -1,4 +1,5 @@
 import { clsx } from 'clsx'
+import { senzaEmoji } from '@/lib/senzaEmoji'
 
 interface ChatBubbleProps {
   role: 'user' | 'assistant'
@@ -24,13 +25,14 @@ export default function ChatBubble({ role, content, isStreaming }: ChatBubblePro
       {/* Bubble */}
       <div
         className={clsx(
-          'max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed',
+          // FIMA risponde su più righe e con link lunghi: gli a capo si tengono, i link si spezzano
+          'max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line [overflow-wrap:anywhere]',
           isUser
             ? 'bg-primary text-white rounded-tr-sm'
             : 'bg-gray-100 text-gray-800 rounded-tl-sm'
         )}
       >
-        {content}
+        {isUser ? content : senzaEmoji(content)}
         {isStreaming && (
           <span className="inline-flex gap-1 ml-1">
             <span className="w-1 h-1 bg-current rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />

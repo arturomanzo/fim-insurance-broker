@@ -10,6 +10,8 @@ import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import PreventivoAutoDocumenti from '@/components/forms/PreventivoAutoDocumenti'
 import { OG_BASE } from '@/lib/seo'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import { BARRE, CHIAVE_INGLESE, DOMANDA, LIBRO, OMBRELLO, TELEFONO } from '@/lib/icone'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -110,7 +112,7 @@ export default async function ServizioPage({ params }: Props) {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="flex items-start gap-6">
-              <span className="text-6xl hidden sm:block flex-shrink-0">{service.icon}</span>
+              <Icona forma={service.icon} size={96} className="hidden sm:block text-white" />
               <div>
                 <h1 className="text-4xl md:text-5xl font-black mb-4">
                   {service.h1 ?? service.title}
@@ -251,25 +253,26 @@ export default async function ServizioPage({ params }: Props) {
                   Richiedi Preventivo
                 </Link>
                 <a href="tel:+390696883381" className="btn-outline-white w-full text-center block text-sm">
-                  📞 06 96883381
+                  <Icona forma={TELEFONO} size={16} className="inline-block align-[-0.15em] mr-2" />
+                  06 96883381
                 </a>
               </Card>
 
               {/* Strumenti utili */}
               <div className="bg-accent/5 border border-accent/20 rounded-2xl p-4">
-                <h3 className="font-bold text-primary mb-3 text-sm">🛠 Strumenti gratuiti</h3>
+                <h3 className="font-bold text-primary mb-3 text-sm"><Icona forma={CHIAVE_INGLESE} size={16} className="inline-block align-[-0.15em] mr-2" />Strumenti gratuiti</h3>
                 <div className="space-y-2">
                   <Link href="/quiz-polizza" className="flex items-center gap-2 text-sm text-gray-700 hover:text-primary transition-colors">
-                    <span>❓</span> Quiz: che polizza ti serve?
+                    <Icona forma={DOMANDA} size={20} className="text-primary" /> Quiz: che polizza ti serve?
                   </Link>
                   <Link href="/calcolatore-rischi" className="flex items-center gap-2 text-sm text-gray-700 hover:text-primary transition-colors">
-                    <span>📊</span> Calcolatore del rischio
+                    <Icona forma={BARRE} size={20} className="text-primary" /> Calcolatore del rischio
                   </Link>
                   <Link href="/glossario" className="flex items-center gap-2 text-sm text-gray-700 hover:text-primary transition-colors">
-                    <span>📖</span> Glossario assicurativo
+                    <Icona forma={LIBRO} size={20} className="text-primary" /> Glossario assicurativo
                   </Link>
                   <Link href="/sinistri" className="flex items-center gap-2 text-sm text-gray-700 hover:text-primary transition-colors">
-                    <span>🛡️</span> Gestione sinistri
+                    <Icona forma={OMBRELLO} size={20} className="text-primary" /> Gestione sinistri
                   </Link>
                 </div>
               </div>
@@ -281,7 +284,7 @@ export default async function ServizioPage({ params }: Props) {
                   {otherServices.map((s) => (
                     <Link key={s.slug} href={`/servizi/${s.slug}`}
                       className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 hover:border-primary/20 hover:shadow-sm transition-all">
-                      <span className="text-2xl">{s.icon}</span>
+                      <Icona forma={s.icon} size={40} className="text-primary" />
                       <span className="font-medium text-gray-700 text-sm">{s.title}</span>
                     </Link>
                   ))}

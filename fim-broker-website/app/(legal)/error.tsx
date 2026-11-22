@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ALLERTA } from '@/lib/icone'
 
 interface ErrorProps {
   error: Error & { digest?: string }
@@ -16,9 +18,7 @@ export default function LegalError({ error, reset }: ErrorProps) {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
-        <div className="mb-6 inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-xl">
-          <span className="text-3xl">⚠️</span>
-        </div>
+        <Icona forma={ALLERTA} size={64} className="mx-auto mb-6 text-primary" />
         <h1 className="text-2xl font-black text-gray-900 mb-3">Errore nel caricamento</h1>
         <p className="text-gray-500 mb-8">
           Impossibile caricare questa pagina. Riprova o torna alla home.

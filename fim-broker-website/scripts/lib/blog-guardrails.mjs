@@ -59,6 +59,9 @@ const PROMESSE = [
   { re: /(?:oltre|più\s+di)\s+(?:30|trenta)\s+compagnie|\b30\+\s*compagnie/i, cosa: 'claim «30+ compagnie» (i mandati e le collaborazioni sono 20)' },
 ]
 
+// Dal 22/11/2026 il sito non ha emoji. © ® ™ sono testo, non emoji.
+const RE_EMOJI = /(?![©®™↔↕])\p{Extended_Pictographic}|[✓✔✕✖✗✘]/u
+
 // Esperienza di FIM raccontata come fatto: «nella mia esperienza le chiamate
 // arrivano per tre motivi», «scenari che vediamo tra i nostri clienti». Il
 // modello non conosce né lo studio né i clienti, e mette in bocca ad Arturo una
@@ -148,6 +151,12 @@ export function controllaPost(post, registro, { severo = false } = {}) {
     const msg = `"${dove}" — costruzione vietata dalle regole di stile: «non solo... ma».`
     if (severo) errori.push(msg)
     else avvisi.push(msg)
+  }
+
+  // Gli articoli vecchi usano ✅ e ❌ per coperto/escluso e la pagina li disegna come icone:
+  // quelli restano, un articolo nuovo non ha nessuna emoji.
+  if (severo && RE_EMOJI.test(testo)) {
+    errori.push(`"${dove}" — emoji nel testo: il sito non ne usa.`)
   }
 
   for (const { re, cosa } of PROMESSE) {

@@ -7,7 +7,7 @@ export const condominiFaq: FaqCategory = {
     text: 'Sei amministratore o consigliere di condominio?',
     description: 'Verifica gratuita della polizza globale fabbricato e della RC amministratore: massimali, esclusioni, coperture mancanti.',
     primary: { label: 'Richiedi verifica', href: '/prenota-consulenza' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

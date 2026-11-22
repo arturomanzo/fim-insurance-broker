@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { altriRami, ivassLatina, ivassRcAuto } from '@/lib/osservatorio-data'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { OG_BASE } from '@/lib/seo'
+import { Icona } from '@/components/icons/TettoIcons'
+import { AUTO, BARRE, ELENCO, TELEFONO } from '@/lib/icone'
 
 // Dal 01/11/2026 l'unica cifra della pagina è quella IVASS sulla RC auto, con
 // fonte e periodo accanto (vedi lib/osservatorio-data.ts). Anno e periodo nel
@@ -51,7 +53,8 @@ export default function OsservatorioPrezziPage() {
       <section className="gradient-primary py-16 md:py-20">
         <div className="container-custom text-center">
           <span className="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            📊 Dati IVASS, {periodo}
+            <Icona forma={BARRE} size={16} className="inline-block align-[-0.15em] mr-2" />
+            Dati IVASS, {periodo}
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-white mb-4">
             Osservatorio Prezzi<br className="hidden sm:block" /> Assicurativi Italia
@@ -68,7 +71,7 @@ export default function OsservatorioPrezziPage() {
         <div className="container-custom max-w-3xl">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-3xl">🚗</span>
+              <Icona forma={AUTO} size={48} className="text-primary" />
               <h2 className="text-2xl font-black text-primary">RC auto: il prezzo medio in Italia</h2>
             </div>
             <div className="text-5xl font-black text-primary mb-1">
@@ -126,7 +129,7 @@ export default function OsservatorioPrezziPage() {
             {altriRami.map((ramo) => (
               <div key={ramo.name} className="bg-white rounded-2xl border border-gray-100 p-6 flex flex-col">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">{ramo.icon}</span>
+                  <Icona forma={ramo.icon} size={48} className="text-primary" />
                   <h3 className="font-bold text-primary">{ramo.name}</h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">{ramo.testo}</p>
@@ -152,7 +155,7 @@ export default function OsservatorioPrezziPage() {
         <div className="container-custom max-w-3xl">
           <div className="bg-white rounded-2xl border border-gray-100 p-6">
             <h3 className="font-bold text-primary mb-2 flex items-center gap-2">
-              <span>📋</span> Da dove vengono questi numeri
+              <Icona forma={ELENCO} size={20} className="text-primary" /> Da dove vengono questi numeri
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               L&apos;unica cifra di questa pagina è quella di IVASS: l&apos;indagine IPER rileva ogni trimestre i prezzi
@@ -182,7 +185,8 @@ export default function OsservatorioPrezziPage() {
               Fai analizzare la polizza →
             </Link>
             <a href="tel:+390696883381" className="btn-outline-white px-6 py-4">
-              📞 06 96883381
+              <Icona forma={TELEFONO} size={18} />
+              06 96883381
             </a>
           </div>
         </div>

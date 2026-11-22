@@ -8,7 +8,7 @@ export const flottaAziendaleFaq: FaqCategory = {
     text: 'Hai più mezzi aziendali con polizze e scadenze diverse?',
     description: 'Mandaci le polizze che hai: le mettiamo in fila mezzo per mezzo e ti diciamo cosa allineare.',
     primary: { label: 'Richiedi preventivo flotta', href: '/preventivo?profilo=pmi&settore=Flotta+Aziendale' },
-    secondary: { label: '📞 06 96883381', href: 'tel:+390696883381' },
+    secondary: { label: '06 96883381', href: 'tel:+390696883381' },
   },
   items: [
     {

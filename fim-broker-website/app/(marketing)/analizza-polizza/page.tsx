@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import PolicyAnalyzer from '@/components/forms/PolicyAnalyzer'
 import { OG_BASE } from '@/lib/seo'
 import { RICONTATTO } from '@/lib/tempi'
+import { Icona } from '@/components/icons/TettoIcons'
+import { ALLERTA, ANALISI, EURO, FRECCIA, STELLA } from '@/lib/icone'
 
 export const metadata: Metadata = {
   title: 'Analizza la tua Polizza Gratis',
@@ -158,15 +160,15 @@ export default function AnalizzaPolizzaPage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: '🔍', title: 'Coperture trovate', desc: 'Elenco completo di tutte le garanzie con massimali e franchigie' },
-              { icon: '⚠️', title: 'Lacune critiche', desc: 'Rischi che non sei coperto e le conseguenze concrete in caso di sinistro' },
-              { icon: '💶', title: 'Dove guardare', desc: 'Le voci che pesano sul premio e cosa le farebbe scendere' },
-              { icon: '📋', title: 'Esclusioni nascoste', desc: 'Le clausole limitanti che spesso vengono tralasciate' },
-              { icon: '⭐', title: 'Punteggio polizza', desc: 'Un voto da 1 a 10 che sintetizza la qualità della tua copertura' },
-              { icon: '→', title: 'Raccomandazioni', desc: 'Azioni concrete e prioritarie per migliorare la tua protezione' },
+              { icon: ANALISI, title: 'Coperture trovate', desc: 'Elenco completo di tutte le garanzie con massimali e franchigie' },
+              { icon: ALLERTA, title: 'Lacune critiche', desc: 'Rischi che non sei coperto e le conseguenze concrete in caso di sinistro' },
+              { icon: EURO, title: 'Dove guardare', desc: 'Le voci che pesano sul premio e cosa le farebbe scendere' },
+              { icon: ALLERTA, title: 'Esclusioni nascoste', desc: 'Le clausole limitanti che spesso vengono tralasciate' },
+              { icon: STELLA, title: 'Punteggio polizza', desc: 'Un voto da 1 a 10 che sintetizza la qualità della tua copertura' },
+              { icon: FRECCIA, title: 'Raccomandazioni', desc: 'Azioni concrete e prioritarie per migliorare la tua protezione' },
             ].map((item) => (
               <div key={item.title} className="bg-white rounded-xl border border-gray-100 p-5 text-left">
-                <span className="text-2xl">{item.icon}</span>
+                <Icona forma={item.icon} size={40} className="text-primary" />
                 <h3 className="font-bold text-gray-800 mt-2 mb-1">{item.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
               </div>
