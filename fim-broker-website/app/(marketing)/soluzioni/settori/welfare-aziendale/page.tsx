@@ -107,13 +107,6 @@ export default function WelfareAziendalePage() {
               con un trattamento fiscale di favore entro i limiti di legge. Come impostarlo lo verifichi
               con il tuo commercialista; le coperture le scegliamo con te.
             </p>
-            <div className="bg-white/10 border border-white/20 rounded-xl p-5 mb-8 max-w-2xl">
-              <p className="text-white/90 text-sm">
-                <strong className="text-accent">Sapevi che</strong> — un aumento di stipendio lordo di 1.000€ costa all&apos;azienda ~1.300€
-                e arriva al dipendente come ~550€ netti. Con 1.000€ di welfare via polizze collettive, l&apos;azienda spende
-                ~720€ netti e il dipendente riceve <strong>1.000€ di valore reale</strong>.
-              </p>
-            </div>
             <div className="flex flex-wrap gap-4">
               <Link href={`/preventivo${SETTORE_QS}`} className="btn-primary text-lg px-8 py-4">
                 Progetta il mio piano welfare
