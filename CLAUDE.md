@@ -62,7 +62,7 @@ Riferimento: `app/(marketing)/chi-siamo/page.tsx` e `app/(marketing)/collabora-c
 - Array di dati a module-level (vantaggi, profili, steps, ecc.) — leggibili e facili da maintenere
 
 ### Icone
-Riferimento: `components/icons/TettoIcons.tsx` (prima pagina: chi-siamo, 22/11/2026). Niente emoji come icone nelle pagine nuove o rifatte: si usa il set «Sotto il tetto» (tetto vero del logo + oggetto pieno, regole in cima al file), e un'icona che manca si aggiunge lì. Niente fondini né tondini dietro. Il tetto sta in `public/images/brand/tetto.svg` e si richiama con `<use>`, mai incollato nell'icona (3 KB a volta): `lib/tetto.test.ts` controlla che resti uguale al logo. Le altre pagine hanno ancora le emoji e si convertono solo dopo l'ok di Arturo.
+Riferimento: `components/icons/TettoIcons.tsx` (prima pagina: chi-siamo, 22/11/2026). Niente emoji come icone nelle pagine nuove o rifatte: si usa il set «Sotto il tetto» (tetto del logo in geometria pulita + oggetto pieno, regole in cima al file), e un'icona che manca si aggiunge lì. Niente fondini né tondini dietro. Il tetto è la costante `TETTO` di quel file (sei punti): mai copiare `LOGO_PATH_ROOF` o altri pezzi del logo fuori dal logo, sono ricalchi e ingranditi ondeggiano. Le altre pagine hanno ancora le emoji e si convertono solo dopo l'ok di Arturo.
 
 ### Costanti condivise
 Quando un valore è usato in più di un file (form + route + page), estrarre in `lib/<feature>.ts` come `as const` con helper tipizzati. Vedi `lib/collabora.ts` per il pattern: `PROFILI`, `PROFILO_LABELS`, `isValidProfilo()`.

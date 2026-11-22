@@ -3,7 +3,7 @@ import { clsx } from 'clsx'
 
 /*
  * «Sotto il tetto»: il set di icone FIM.
- * - sopra c'è sempre il tetto vero del logo, con il suo lato staccato: non si ridisegna
+ * - sopra c'è il tetto del logo in geometria pulita: simmetrico, bordi dritti, fianchi verticali
  * - sotto, un solo oggetto pieno, del colore del testo, tra y=8 e y=23
  * - un taglio obliquo per oggetto, come nei terminali della F
  * - sotto i 24px il tetto sparisce e l'oggetto si allarga: in piccolo si mangiavano a vicenda
@@ -17,14 +17,18 @@ export interface TettoIconProps {
 }
 
 /*
- * Il tracciato del tetto pesa 3 KB: sta in un file solo e si richiama, scritto dentro
- * ogni icona gonfiava la pagina di 65 KB. Che resti uguale al logo lo controlla
- * `lib/tetto.test.ts`.
+ * Il tetto si disegna qui con sei punti, NON si copia da `LOGO_PATH_ROOF`: quello è un
+ * ricalco a 88 curve, che ingrandito ondeggia, e a sinistra ha il taglio dell'innesto
+ * nello scudo, che staccato dallo scudo sembra un errore.
+ * Dal logo vengono le proporzioni: largo 206, spesso 23, pendenza 0,3364 (34,65 su 103).
  */
-const TETTO = '/images/brand/tetto.svg#tetto'
+const TETTO = 'M0 34.65 103 0 206 34.65V57.65L103 23 0 57.65Z'
 
-/** Porta il tetto dalle coordinate del logo (10-215) alla griglia 24 */
-const TETTO_IN_GRIGLIA = 'translate(1 .3) scale(.1073) translate(-10 -10)'
+/** La sommità navy del riquadro: stessi fianchi e stessa pendenza, 13 sotto il verde */
+const SOMMITA = 'M0 70.65 103 36 206 70.65V76H0Z'
+
+/** Porta il tetto (largo 206) alla griglia 24 */
+const TETTO_IN_GRIGLIA = 'translate(1 .3) scale(.1068)'
 
 function SottoIlTetto({ className, size = 24, children }: TettoIconProps & { children: ReactNode }) {
   const conTetto = size >= 24
@@ -39,7 +43,7 @@ function SottoIlTetto({ className, size = 24, children }: TettoIconProps & { chi
       aria-hidden="true"
       data-icona=""
     >
-      {conTetto && <use href={TETTO} transform={TETTO_IN_GRIGLIA} className="text-accent" />}
+      {conTetto && <path d={TETTO} transform={TETTO_IN_GRIGLIA} className="text-accent" />}
       {children}
     </svg>
   )
@@ -79,7 +83,7 @@ export function TettoAnalisi(props: TettoIconProps) {
   return (
     <SottoIlTetto {...props}>
       <path d="M11 7.5a7 7 0 1 1 0 14 7 7 0 0 1 0-14ZM7.2 17.5h2v-3h-2ZM10 17.5h2v-6.7h-2ZM12.8 17.5h2v-4.7h-2Z" />
-      <path d="m16.8 18.6 4.4 3-1.7 1.9-4.2-3.3Z" />
+      <path d="m16.9 17.1 4.6 4.2-1.9 1.9-4.6-4.2Z" />
     </SottoIlTetto>
   )
 }
@@ -89,7 +93,7 @@ export function TettoGuida(props: TettoIconProps) {
   return (
     <SottoIlTetto {...props}>
       <path d="M12 7.6a7.8 7.8 0 1 0 0 15.6 7.8 7.8 0 0 0 0-15.6ZM12 9.8a5.6 5.6 0 1 1 0 11.2 5.6 5.6 0 0 1 0-11.2Z" />
-      <path d="m16.2 11.2-2.4 6-6 2.4 2.4-6ZM12 14.2a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z" />
+      <path d="m15.4 12-1.8 5-5 1.8 1.8-5ZM12 14.3a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z" />
     </SottoIlTetto>
   )
 }
@@ -98,7 +102,7 @@ export function TettoGuida(props: TettoIconProps) {
 export function TettoStrategia(props: TettoIconProps) {
   return (
     <SottoIlTetto {...props}>
-      <path d="M4 7.5h2.8V23H4ZM8 8h13l-3.5 4.5L21 17H8Z" />
+      <path d="M4.5 7.5h2.8V23H4.5ZM7.3 8h12.2L16 12.5l3.5 4.5H7.3Z" />
     </SottoIlTetto>
   )
 }
@@ -107,8 +111,8 @@ export function TettoStrategia(props: TettoIconProps) {
 export function TettoBilancia(props: TettoIconProps) {
   return (
     <SottoIlTetto {...props}>
-      <path d="M11 7.5h2v2h8v2h-8V21h4l-2 2H7v-2h4v-9.5H3v-2h8Z" />
-      <path d="m5.5 12-3.7 5.5a3.7 3.2 0 0 0 7.4 0ZM18.5 12l-3.7 5.5a3.7 3.2 0 0 0 7.4 0ZM5.5 14.3l1.8 2.7H3.7ZM18.5 14.3l1.8 2.7h-3.6Z" />
+      <path d="M11 7.5h2v2h7.5v2H13V21h3l2 2H6l2-2h3v-9.5H3.5v-2H11Z" />
+      <path d="m5.5 11.2-3.7 6.1a3.7 3.2 0 0 0 7.4 0ZM18.5 11.2l-3.7 6.1a3.7 3.2 0 0 0 7.4 0ZM5.5 14l1.9 3.1H3.6ZM18.5 14l1.9 3.1h-3.8Z" />
     </SottoIlTetto>
   )
 }
@@ -128,9 +132,9 @@ export function TettoScarica(props: TettoIconProps) {
  */
 export function CappelloTetto({ className }: { className?: string }) {
   return (
-    <svg viewBox="10 9 205.5 76" className={clsx('block h-auto w-full', className)} aria-hidden="true">
-      <use href={TETTO} className="fill-accent" />
-      <path d="M10 81 115 45 215.5 79V86H10Z" className="fill-primary" />
+    <svg viewBox="0 0 206 76" className={clsx('block h-auto w-full', className)} aria-hidden="true">
+      <path d={TETTO} className="fill-accent" />
+      <path d={SOMMITA} className="fill-primary" />
     </svg>
   )
 }
