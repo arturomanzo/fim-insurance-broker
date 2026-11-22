@@ -570,7 +570,7 @@ export default function SinistriAIAssistant() {
             )}
             <div
               className={`
-                rounded-2xl px-4 py-3 text-sm leading-relaxed max-w-[85%]
+                rounded-2xl px-4 py-3 text-sm leading-relaxed max-w-[85%] [overflow-wrap:anywhere]
                 ${msg.role === 'user'
                   ? 'bg-primary text-white rounded-tr-sm'
                   : 'bg-gray-50 text-gray-700 rounded-tl-sm'

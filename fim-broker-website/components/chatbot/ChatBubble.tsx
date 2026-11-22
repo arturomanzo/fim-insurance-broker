@@ -25,7 +25,8 @@ export default function ChatBubble({ role, content, isStreaming }: ChatBubblePro
       {/* Bubble */}
       <div
         className={clsx(
-          'max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed',
+          // FIMA risponde su più righe e con link lunghi: gli a capo si tengono, i link si spezzano
+          'max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line [overflow-wrap:anywhere]',
           isUser
             ? 'bg-primary text-white rounded-tr-sm'
             : 'bg-gray-100 text-gray-800 rounded-tl-sm'
