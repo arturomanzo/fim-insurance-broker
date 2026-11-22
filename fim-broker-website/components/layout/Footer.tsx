@@ -319,7 +319,7 @@ export default function Footer() {
 
             {/* RUI */}
             <div className="mt-6 p-3 bg-white/5 rounded-lg border border-white/10">
-              <p className="text-white/50 text-xs">
+              <p className="text-white/50 text-xs [overflow-wrap:anywhere]">
                 FIM Insurance Broker S.a.s. di Manzo Arturo & C.<br />
                 Iscrizione RUI Sez. B n. B000405449<br />
                 P.IVA 02637640596 — REA LT - 187466<br />
