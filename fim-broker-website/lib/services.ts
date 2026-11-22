@@ -214,7 +214,7 @@ export const services: Service[] = [
       'Copertura fabbricato e contenuto',
       'Valore a nuovo per i sinistri',
       'Perizia veloce',
-      'Premi competitivi',
+      'Preventivi di più compagnie a confronto',
     ],
     faq: [
       {
@@ -422,8 +422,8 @@ export const services: Service[] = [
     color: 'orange',
     image: '/images/brand/viaggio-bussola.jpg',
     features: [
-      'Spese mediche allestero',
-      'Rimpatrio durgenza',
+      'Spese mediche all\'estero',
+      'Rimpatrio d\'urgenza',
       'Annullamento del viaggio',
       'Ritardo volo e bagaglio',
       'Responsabilità civile',
