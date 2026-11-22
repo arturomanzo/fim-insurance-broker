@@ -53,6 +53,9 @@ const PROMESSE = [
   { re: /\bsenza\s+sorprese\b/i, cosa: 'promessa implicita di copertura' },
   { re: /\bsempre\s+copert[oiae]\b/i, cosa: 'promessa implicita di copertura' },
   { re: /\bnessun\s+rischio\b/i, cosa: 'promessa implicita di copertura' },
+  { re: /\bmiglior[ei]?\s+rapporto\s+(?:qualità|copertura|costi|protezione|prezzo|garanzie|tra\b|fra\b)/i, cosa: 'superlativo sul prezzo non verificabile' },
+  { re: /\b(?:prezz[oi]|premi[o]?|tariff[ae])\s+(?:più\s+)?competitiv[oaie]\b/i, cosa: 'promessa di prezzo competitivo' },
+  { re: /\b(?:intero|tutto il) mercato\b/i, cosa: 'copertura del mercato non documentata (le compagnie sono 20)' },
   { re: /(?:oltre|più\s+di)\s+(?:30|trenta)\s+compagnie|\b30\+\s*compagnie/i, cosa: 'claim «30+ compagnie» (i mandati e le collaborazioni sono 20)' },
 ]
 

@@ -31,7 +31,7 @@ export const famiglieFaq: FaqCategory = {
     {
       question: "Quanto costa un'assicurazione vita e quando serve davvero?",
       answer:
-        'Il premio di una Temporanea Caso Morte (TCM) lo calcola la compagnia su età, stato di salute, abitudine al fumo, capitale e durata. Serve quando ci sono persone economicamente dipendenti da te (figli, coniuge non lavorante), un mutuo in corso, o debiti che ricadrebbero sulla famiglia in caso di decesso.\n\nApprofondimento. La TCM è uno dei prodotti assicurativi con il miglior rapporto protezione/costo del mercato: paghi solo se muori nel periodo di copertura, e in caso di sinistro il capitale è esentasse e fuori dall\'asse ereditario. Il premio dipende da età, sesso, stato di salute, abitudine al fumo e capitale richiesto: prima la stipuli, meno costa.',
+        'Il premio di una Temporanea Caso Morte (TCM) lo calcola la compagnia su età, stato di salute, abitudine al fumo, capitale e durata. Serve quando ci sono persone economicamente dipendenti da te (figli, coniuge non lavorante), un mutuo in corso, o debiti che ricadrebbero sulla famiglia in caso di decesso.\n\nApprofondimento. La TCM è la polizza vita di puro rischio: la compagnia paga solo se muori nel periodo di copertura, e in caso di sinistro il capitale è esentasse e fuori dall\'asse ereditario. Il premio dipende da età, sesso, stato di salute, abitudine al fumo e capitale richiesto: prima la stipuli, meno costa.',
     },
     {
       question: 'Cosa copre esattamente la polizza casa e cosa non copre?',

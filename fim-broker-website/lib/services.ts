@@ -635,7 +635,7 @@ export const services: Service[] = [
     ],
     benefits: [
       'Completa la RC Azienda: protegge l\'imprenditore oltre i danni a terzi',
-      'Massimali fino a 500.000€ per sinistro',
+      'Massimale scelto sulla tua attività, scritto in polizza',
       'Nessuna franchigia sulle spese legali',
       'Rete di studi legali convenzionati o libera scelta',
       'Consulenza legale telefonica illimitata',

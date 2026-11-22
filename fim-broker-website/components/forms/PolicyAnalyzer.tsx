@@ -370,20 +370,15 @@ export default function PolicyAnalyzer() {
           <section>
             <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
               <span className="w-6 h-6 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center text-xs">€</span>
-              Dove potresti risparmiare
+              Da cosa dipende il premio
             </h3>
             <div className="space-y-3">
               {result.costiEccessivi.map((c, i) => (
                 <div key={i} className="border border-yellow-200 bg-yellow-50 rounded-xl p-4">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <h4 className="font-semibold text-gray-800">{c.voce}</h4>
-                    {c.risparmioStimato && (
-                      <span className="text-xs font-bold text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full whitespace-nowrap">
-                        {c.risparmioStimato}
-                      </span>
-                    )}
-                  </div>
+                  <h4 className="font-semibold text-gray-800 mb-2">{c.voce}</h4>
                   <p className="text-gray-600 text-sm">{c.suggerimento}</p>
+                  {/* È una frase («da cosa dipende il prezzo»), non una cifra: deve andare a capo */}
+                  {c.risparmioStimato && <p className="mt-2 text-xs text-yellow-800">{c.risparmioStimato}</p>}
                 </div>
               ))}
             </div>
