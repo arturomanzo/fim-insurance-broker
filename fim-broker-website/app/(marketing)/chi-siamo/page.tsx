@@ -7,6 +7,18 @@ import { COMPAGNIE_NOMI } from '@/lib/compagnie'
 import { OG_BASE } from '@/lib/seo'
 import { linkWhatsApp } from '@/lib/whatsappSito'
 import { RICONTATTO } from '@/lib/tempi'
+import { RUI_NUMERO } from '@/lib/compliance'
+import {
+  CappelloTetto,
+  TettoAnalisi,
+  TettoBilancia,
+  TettoDati,
+  TettoGuida,
+  TettoLavoro,
+  TettoRegole,
+  TettoScarica,
+  TettoStrategia,
+} from '@/components/icons/TettoIcons'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fimbroker.it'
 
@@ -77,26 +89,20 @@ const team = [
 
 const certifications = [
   {
-    icon: '🏛️',
-    title: 'Iscrizione RUI IVASS',
-    desc: 'Regolarmente iscritti nel Registro Unico degli Intermediari Assicurativi (RUI) tenuto dall\'IVASS.',
-    badge: 'Sezione B',
-  },
-  {
-    icon: '🔒',
+    icon: TettoLavoro,
     title: 'Garanzia RC Professionale',
     desc: 'Copertura assicurativa per responsabilità civile professionale come previsto dalla normativa vigente.',
     badge: 'D.Lgs 209/2005',
   },
   {
-    icon: '🛡️',
+    icon: TettoDati,
     title: 'Conformità GDPR',
     desc: 'Trattamento dei dati personali nel pieno rispetto del Regolamento UE 2016/679 e del Codice Privacy.',
     badge: 'Reg. UE 2016/679',
   },
   {
-    icon: '📋',
-    title: 'Codice di Condotta IDD',
+    icon: TettoRegole,
+    title: 'Regole di comportamento IDD',
     desc: 'Distribuzione assicurativa conforme alla Direttiva IDD recepita in Italia con il D.Lgs. 68/2018.',
     badge: 'D.Lgs 68/2018',
   },
@@ -189,13 +195,13 @@ export default function ChiSiamoPage() {
               </div>
               <div className="space-y-3 mt-6">
                 {[
-                  { icon: '🔍', title: 'Analisi oggettiva', desc: 'Dati concreti, non opinioni. Cerchiamo la verità nei numeri per consigliarti senza conflitti di interesse.' },
-                  { icon: '🧭', title: 'Guida nella complessità', desc: 'Prendiamo il timone nei momenti critici: sinistri, contenziosi, rinnovi strategici.' },
-                  { icon: '🎯', title: 'Visione strategica', desc: 'L\'assicurazione non è un costo: è un investimento. Ti aiutiamo a pianificare per crescere.' },
-                  { icon: '🤝', title: 'Indipendenza assoluta', desc: 'Non rappresentiamo compagnie. Le offerte di 20 partner confrontate con un solo obiettivo: il tuo.' },
+                  { icon: TettoAnalisi, title: 'Analisi oggettiva', desc: 'Dati concreti, non opinioni. Cerchiamo la verità nei numeri per consigliarti senza conflitti di interesse.' },
+                  { icon: TettoGuida, title: 'Guida nella complessità', desc: 'Prendiamo il timone nei momenti critici: sinistri, contenziosi, rinnovi strategici.' },
+                  { icon: TettoStrategia, title: 'Visione strategica', desc: 'L\'assicurazione non è un costo: è un investimento. Ti aiutiamo a pianificare per crescere.' },
+                  { icon: TettoBilancia, title: 'Indipendenza assoluta', desc: 'Non rappresentiamo compagnie. Le offerte di 20 partner confrontate con un solo obiettivo: il tuo.' },
                 ].map((val) => (
                   <Card key={val.title} className="flex items-start gap-4">
-                    <span className="text-2xl flex-shrink-0">{val.icon}</span>
+                    <val.icon size={44} className="text-primary" />
                     <div>
                       <h3 className="font-bold text-primary mb-0.5">{val.title}</h3>
                       <p className="text-gray-600 text-sm">{val.desc}</p>
@@ -287,7 +293,8 @@ export default function ChiSiamoPage() {
                 download
                 className="btn-secondary px-6 py-3"
               >
-                📄 Scarica la brochure
+                <TettoScarica size={24} />
+                Scarica la brochure
               </a>
             </div>
           </div>
@@ -328,41 +335,50 @@ export default function ChiSiamoPage() {
               Autorizzazioni & Conformità
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-              Professionisti certificati e regolamentati
+              Non crederci sulla parola. Controlla.
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Operiamo nel pieno rispetto della normativa italiana ed europea in materia di intermediazione assicurativa.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certifications.map((cert) => (
-              <Card key={cert.title} className="text-center">
-                <div className="text-4xl mb-4">{cert.icon}</div>
-                <span className="inline-block bg-accent/10 text-accent-cta text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">
-                  {cert.badge}
-                </span>
-                <h3 className="font-bold text-primary mb-2">{cert.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{cert.desc}</p>
-              </Card>
-            ))}
-          </div>
-          {/* IVASS verification note */}
-          <div className="mt-8 p-5 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4 max-w-3xl mx-auto">
-            <span className="text-3xl flex-shrink-0">ℹ️</span>
-            <div>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                <strong className="text-primary">Verifica la nostra iscrizione:</strong> Puoi controllare i dati di FIM Insurance Broker S.a.s. sul sito ufficiale IVASS all&apos;indirizzo{' '}
+          <div className="mx-auto grid max-w-5xl items-center gap-12 lg:grid-cols-[22rem_1fr] lg:gap-20">
+            {/* La prova: il numero RUI sotto il tetto del logo */}
+            <div className="mx-auto w-full max-w-[22rem]">
+              <CappelloTetto />
+              <div className="-mt-px rounded-b-2xl bg-primary px-5 pb-8 pt-1 text-center text-white sm:px-8">
+                <h3 className="font-bold">Iscrizione RUI IVASS</h3>
+                <p className="mt-1 text-xs font-bold uppercase tracking-widest text-white/80">Sezione B</p>
+                <p className="my-5 text-3xl font-black tabular-nums tracking-wide text-gold sm:text-4xl">{RUI_NUMERO}</p>
+                <p className="text-sm leading-relaxed text-white/80">
+                  Regolarmente iscritti nel Registro Unico degli Intermediari Assicurativi (RUI) tenuto dall&apos;IVASS.
+                </p>
                 <a
-                  href="https://www.ivass.it/consumatori/rui/"
+                  href="https://ruipubblico.ivass.it/rui-pubblica/ng/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent-cta underline underline-offset-2 hover:text-primary transition-colors"
+                  className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-accent-cta px-5 py-3 font-semibold text-white transition-colors hover:bg-accent-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
-                  ivass.it/consumatori/rui
+                  Cercaci nel RUI
                 </a>
-                {' '}— P.IVA 02637640596.
-              </p>
+                <p className="mt-4 text-xs leading-relaxed text-white/80">
+                  FIM Insurance Broker S.a.s.
+                  <br />
+                  P.IVA 02637640596
+                </p>
+              </div>
             </div>
+            <ul className="divide-y divide-gray-200">
+              {certifications.map((cert) => (
+                <li key={cert.title} className="flex items-start gap-5 py-7 sm:gap-7">
+                  <cert.icon size={64} className="text-primary" />
+                  <div>
+                    <h3 className="text-lg font-bold text-primary">{cert.title}</h3>
+                    <p className="mt-1 text-xs font-bold uppercase tracking-wide text-accent-cta">{cert.badge}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600">{cert.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
