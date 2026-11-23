@@ -18,6 +18,7 @@
     { "source": "/prodotti.html", "destination": "/servizi", "permanent": true },
     { "source": "/:pagina([^/.]+)\\.htm", "destination": "/:pagina", "permanent": true },
     { "source": "/:pagina([^/.]+)\\.html", "destination": "/:pagina", "permanent": true },
+    { "source": "/:percorso(.*[^.,;:!\\)]):coda([.,;:!\\)]+)", "destination": "/:percorso", "permanent": true },
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "fimbroker.it" }],
