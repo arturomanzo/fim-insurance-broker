@@ -342,11 +342,8 @@ export default function ScuolePage() {
             ))}
           </ol>
           <p className="text-center text-sm text-white/60 mt-12 max-w-2xl mx-auto">
-            Ognuno di questi passaggi sta già scritto nelle condizioni di polizza che l&apos;istituto ha firmato.{' '}
-            <Link href="#check-up" className="text-white underline underline-offset-2 hover:text-accent transition-colors">
-              Il check-up gratuito
-            </Link>{' '}
-            serve a sapere come andrebbe a finire prima che succeda.
+            Ognuno di questi passaggi sta già scritto nelle condizioni di polizza che l&apos;istituto ha firmato.
+            Leggerle per tempo serve a sapere come andrebbe a finire.
           </p>
         </div>
       </section>
