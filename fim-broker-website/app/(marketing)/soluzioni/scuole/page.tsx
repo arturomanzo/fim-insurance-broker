@@ -124,8 +124,8 @@ const sinistro = [
 const passaggi = [
   {
     n: '01',
-    titolo: 'Check-up delle polizze in essere',
-    chi: 'FIM, gratis e senza impegno',
+    titolo: 'Analisi delle polizze in essere',
+    chi: 'FIM',
     testo: 'Leggiamo per intero i contratti attivi, condizioni generali comprese: garanzie, esclusioni, franchigie, scoperti, limiti di indennizzo. Consegniamo un documento scritto, non un parere a voce.',
   },
   {
