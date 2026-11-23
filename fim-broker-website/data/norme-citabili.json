@@ -8,7 +8,7 @@
     "Il controllo automatico ferma le norme sconosciute o inventate. NON può dimostrare che una frase",
     "descriva correttamente la norma che cita: quello resta lavoro di chi rilegge."
   ],
-  "aggiornato": "2026-11-07",
+  "aggiornato": "2026-11-23",
   "norme": [
     {
       "id": "L-289-2002",
@@ -735,6 +735,17 @@
       "oggetto": "Legge di bilancio 2022. Art. 1, c. 515: istituisce il Fondo mutualistico nazionale per la copertura dei danni catastrofali meteoclimatici alle produzioni agricole causati da alluvione, gelo o brina e siccità; c. 516: gestore ISMEA. È il fondo a cui rinvia il c. 111 dell'art. 1 della L. 213/2023 per le imprese agricole escluse dall'obbligo catastrofale.",
       "fonte": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2021-12-30;234~art1",
       "verificata_il": "2026-10-31"
+    },
+    {
+      "id": "REG-IVASS-59-2026",
+      "citazione": "Reg. IVASS 59/2026",
+      "chiavi": [
+        "59/2026"
+      ],
+      "stato": "verificata",
+      "oggetto": "Regolamento IVASS n. 59 del 22 settembre 2026: modello di relazione in tema di repressione delle frodi previsto dall'art. 30, c. 1, del D.L. 1/2012 (conv. L. 27/2012). Art. 2: definisce fra l'altro «rischio frode» (danno economico derivante da condotte, anche semplici raggiri, realizzate nei confronti dell'impresa sia durante l'iter contrattuale sia nelle fasi di gestione del sinistro), «indicatore del rischio frode» (fattore individuato dall'impresa che segnala una potenziale esposizione), «sinistro esposto al rischio frode» (riconducibile ad almeno un indicatore), «sinistro oggetto di approfondimento» (esposto, con attività integrative rispetto a quelle ordinarie), «sinistro chiuso senza seguito per attività antifrode» (archiviato dopo gli approfondimenti e senza pagamenti al presunto danneggiato), «sinistro oggetto di disconoscimento» (una delle parti nega l'accadimento), «fiduciari» (periti, medici, legali), furto d'identità e intestazione fittizia. Art. 3: si applica alle imprese autorizzate in Italia e alle imprese comunitarie ammesse a operare in Italia in libera prestazione di servizi o in stabilimento, abilitate all'RC auto obbligatoria. Art. 5: quattro prospetti numerici e un questionario — dati per provincia sui sinistri denunciati, esposti al rischio frode, oggetto di approfondimento, chiusi senza seguito per attività antifrode, con denunce o querele e oggetto di disconoscimento; sinistri gestiti in CARD; denunce e querele su sinistri e su contratti, compresi i contratti annullati per furto d'identità e intestazione fittizia; questionario sull'organizzazione antifrode in assunzione e in liquidazione. Art. 6, c. 1: la relazione, approvata dall'organo amministrativo, si trasmette entro il 31 maggio di ogni anno; cc. 2-3 esoneri. Art. 7: abroga il Reg. ISVAP 44/2012 e il Provv. IVASS 1/2013. Art. 9: entra in vigore il giorno successivo alla pubblicazione in Gazzetta Ufficiale.",
+      "fonte": "https://www.ivass.it/normativa/nazionale/secondaria-ivass/regolamenti/2026/n59/Regolamento_59_del_22_settembre_2026.pdf",
+      "verificata_il": "2026-11-23"
     }
   ]
 }
