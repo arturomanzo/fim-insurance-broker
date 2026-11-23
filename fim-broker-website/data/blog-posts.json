@@ -1,6 +1,50 @@
 {
   "posts": [
     {
+      "slug": "assicurazione-infortuni-artigiani-autonomi-2026",
+      "title": "Infortuni dell'artigiano e dell'autonomo: dove arriva l'INAIL e dove serve una polizza",
+      "excerpt": "L'artigiano titolare è assicurato all'INAIL, ma l'indennità parte dopo i primi giorni e copre solo una parte del reddito. Vediamo cosa resta scoperto e come si costruisce una polizza infortuni su misura per chi lavora in proprio.",
+      "category": "Professionisti",
+      "date": "23 Novembre 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=1200&q=80&fit=crop&auto=format",
+      "sections": [
+        {
+          "heading": "L'artigiano titolare è già assicurato, ma non come pensa",
+          "body": "Il Testo unico infortuni, il D.P.R. 1124/1965, all'art. 4, primo comma, n. 3, mette fra le persone assicurate «gli artigiani, che prestano abitualmente opera manuale nelle rispettive imprese». Quindi il titolare che lavora in bottega o in cantiere è dentro la tutela pubblica, non solo i suoi dipendenti. Il punto è un altro: quella tutela è costruita sul reddito perso e sul danno permanente, non sul fatturato di un'impresa che si ferma quando si ferma chi la manda avanti."
+        },
+        {
+          "heading": "I primi giorni e la percentuale: due buchi che si sentono",
+          "body": "L'art. 68 del D.P.R. 1124/1965 dice che l'indennità per inabilità temporanea assoluta decorre dal quarto giorno successivo a quello dell'infortunio ed è pari al 60% della retribuzione giornaliera, che sale al 75% dal novantunesimo giorno. Tradotto: i primi giorni restano a carico di chi si è fatto male, e anche dopo l'indennizzo non copre l'intero reddito. Per un autonomo che non ha un sostituto in grado di tenere aperta l'attività, quella differenza pesa su rate, affitto del laboratorio, leasing del mezzo e fornitori, che nel frattempo non si fermano."
+        },
+        {
+          "heading": "Il danno permanente sotto una certa soglia non viene indennizzato",
+          "body": "Sul permanente la regola è nell'art. 13 del D.Lgs. 38/2000: le menomazioni di grado pari o superiore al 6% e inferiore al 16% sono indennizzate in capitale, dal 16% in rendita. Sotto il 6% il danno biologico non viene indennizzato. Per un falegname o un elettricista, una lesione a una mano che resta sotto quella soglia può comunque cambiare il modo di lavorare per sempre, senza dare diritto a nulla."
+        },
+        {
+          "heading": "Cosa guardo quando costruisco una polizza infortuni per chi lavora in proprio",
+          "body": "Una polizza infortuni individuale interviene con capitali propri, indipendenti dall'INAIL, e si può tarare sull'attività reale. Le voci su cui si decide davvero sono poche, ma vanno lette una per una sulle condizioni, non sul depliant.",
+          "list": [
+            "Capitale per invalidità permanente e tabella usata per calcolarla",
+            "Franchigia sull'invalidità permanente e presenza di eventuali scoperti",
+            "Diaria giornaliera da ricovero, da gesso o da inabilità temporanea, con il numero di giorni massimo",
+            "Estensione o meno agli infortuni avvenuti in ambito extraprofessionale e nel tragitto",
+            "Rimborso delle spese di cura conseguenti all'infortunio",
+            "Descrizione esatta della professione dichiarata, perché da lì dipende la valutazione del rischio"
+          ]
+        },
+        {
+          "heading": "Attenzione a cosa non è un infortunio",
+          "body": "La polizza infortuni risponde a eventi fortuiti, violenti ed esterni: la malattia, il mal di schiena che arriva negli anni, l'ernia che si manifesta senza un evento traumatico di regola seguono logiche diverse e vanno verificate caso per caso nelle condizioni. Chi lavora in proprio e vuole protezione anche sul fermo da malattia deve valutare una copertura distinta o una garanzia aggiuntiva, quando disponibile. È la parte che genera più contestazioni al momento del sinistro, e si risolve solo leggendo prima il testo, non dopo."
+        },
+        {
+          "heading": "Parliamone prima, non dopo l'infortunio",
+          "body": "FIM Insurance Broker, con sede a Cisterna di Latina e iscritta al RUI Sez. B n. B000405449, lavora come intermediario indipendente: raccogliamo le sue esigenze, confrontiamo le soluzioni disponibili sui nostri mandati e le spieghiamo per iscritto cosa è coperto e cosa no. Se è artigiano, commerciante o lavoratore autonomo, ci porti la sua posizione INAIL e una descrizione concreta di come lavora: da lì si costruisce la copertura. Ci contatti per una consulenza senza impegno."
+        }
+      ],
+      "aiAssisted": true
+    },
+    {
       "slug": "assicurazione-interruzione-attivita-business-interruption-2026",
       "title": "Interruzione di attività: la perdita che la polizza incendio non ti paga",
       "excerpt": "Dopo un incendio o un allagamento la compagnia ricostruisce il capannone e sostituisce i macchinari, ma i mesi di fermo restano a carico tuo. La garanzia di interruzione di attività serve esattamente a coprire quel buco.",
