@@ -110,7 +110,7 @@ const solutions: Solution[] = [
     title: 'Istituti Scolastici',
     subtitle: 'Dirigenti Scolastici, Direttori S.G.A., scuole paritarie',
     desc: 'Ogni istituto ha già delle polizze; quasi nessuno le ha mai lette tutte insieme. FIM legge le coperture in essere, scrive il capitolato e mette le offerte su una griglia comparabile. È il broker della scuola: la scelta resta all\'istituto.',
-    highlights: ['Check-up gratuito', 'Capitolato tecnico', 'Confronto delle offerte', 'RC patrimoniale DS e DSGA'],
+    highlights: ['Capitolato tecnico', 'Confronto delle offerte', 'RC patrimoniale DS e DSGA'],
     cta: 'Scopri il Dipartimento Scuole',
     price: 'Nessun costo per l\'istituto',
     priceLabel: 'Brokeraggio',
