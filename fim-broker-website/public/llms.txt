@@ -34,6 +34,7 @@
 - [Polizze Aziendali](https://www.fimbroker.it/servizi/polizze-aziendali): RC professionale, RC verso terzi, danni indiretti, multirischio
 - [Assicurazione Viaggio](https://www.fimbroker.it/servizi/assicurazione-viaggio): annullamento, assistenza medica all'estero, bagaglio
 - [Cauzioni e Fideiussioni](https://www.fimbroker.it/servizi/cauzioni-fideiussioni): garanzie definitive, provvisorie, anticipo
+- [Assicurazione dei Crediti](https://www.fimbroker.it/servizi/assicurazione-crediti): polizza crediti commerciali, rimborso delle fatture non pagate da clienti insolventi, valutazione dei clienti e recupero
 - [Tutela Legale Aziende](https://www.fimbroker.it/servizi/tutela-legale-aziende): copertura spese legali per controversie aziendali
 - [Risk Management](https://www.fimbroker.it/servizi/risk-management): analisi rischi, audit assicurativo, ottimizzazione portafoglio polizze
 

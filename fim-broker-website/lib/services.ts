@@ -9,6 +9,7 @@ import {
   CUORE,
   OSPEDALE,
   PALAZZO,
+  RICEVUTA,
   SIGILLO,
   type Forma,
 } from './icone'
@@ -366,6 +367,7 @@ export const services: Service[] = [
       'Cyber risk e data breach',
       'Property e property all-risk',
       'Infortuni dipendenti',
+      'Assicurazione dei crediti commerciali',
       'Benefit e welfare aziendale',
     ],
     benefits: [
@@ -419,6 +421,7 @@ export const services: Service[] = [
         'Atti di guerra e terrorismo (estensione opzionale)',
         'Sanzioni amministrative e penali non trasferibili per legge',
         'Errori professionali individuali (RC Professionale separata)',
+        'Fatture non pagate dai clienti (polizza crediti separata)',
         'Eventi pregressi alla stipula (no retroattività di default)',
       ],
       note: 'Le polizze aziendali si modellano sulla struttura specifica dell\'impresa (settore, fatturato, asset, personale). FIM costruisce il pacchetto su misura analizzando l\'intero profilo di rischio.',
@@ -623,6 +626,119 @@ export const services: Service[] = [
         titolo: 'Fideiussione per l\'anticipazione del prezzo',
         href: '/blog/fideiussione-anticipazione-pnrr',
         descrizione: 'Il 20 per cento del contratto pagato in anticipo, fino al 30 per cento se il bando lo prevede, e la garanzia che serve per incassarlo (art. 125 D.Lgs. 36/2023).',
+      },
+    ],
+  },
+  {
+    // Pagina della polizza crediti commerciali (26/11/2026, richiesta di Arturo).
+    // Niente nome della compagnia, niente percentuali di indennizzo o di premio:
+    // le fissa la polizza della compagnia proposta e FIM non ha dati per
+    // documentarle sul sito. Da non confondere con il «recupero crediti» della
+    // tutela legale, che paga l'avvocato e non la perdita.
+    slug: 'assicurazione-crediti',
+    title: 'Assicurazione dei Crediti',
+    seoTitle: 'Assicurazione dei crediti commerciali per le imprese',
+    seoDescription:
+      "La polizza che rimborsa la perdita quando un cliente non paga le fatture: valutazione dei clienti, recupero e indennizzo. Come funziona e cosa serve per il preventivo.",
+    h1: 'Assicurazione dei crediti commerciali',
+    sezioni: [
+      {
+        titolo: 'Come funziona, passo per passo',
+        testo:
+          "Prima di vendere a un cliente chiedete alla compagnia di valutarlo, e lo stesso vale per i clienti che avete già. La compagnia vi dice fino a che importo lo copre: è il fido. Voi fatturate come sempre, restando dentro quel fido. Se una fattura non viene pagata la segnalate entro il termine scritto in polizza, e il recupero lo segue la compagnia. Se il cliente finisce in una procedura concorsuale, o il mancato pagamento dura oltre il termine di polizza, la compagnia vi paga la quota coperta della perdita, al netto della franchigia.",
+      },
+      {
+        titolo: 'A chi serve',
+        testo:
+          "Alle imprese che vendono ad altre imprese con pagamento a 30, 60, 90 giorni o più: produttori, grossisti, distributori, aziende di servizi, imprese edili che lavorano per committenti privati. Il segnale da guardare è il peso dei crediti sul fatturato: quando una parte importante dei ricavi dell'anno è ancora da incassare, basta un cliente grosso che si ferma per mettere in difficoltà la cassa. Serve anche a chi esporta, perché valutare e inseguire un cliente all'estero costa molto di più.",
+      },
+      {
+        titolo: 'Recupero crediti della tutela legale e polizza crediti: non sono la stessa cosa',
+        testo:
+          "La tutela legale aziende può comprendere il recupero dei crediti commerciali: paga l'avvocato e le spese della causa, ma se il cliente non ha più nulla la perdita resta a voi. La polizza crediti fa il lavoro opposto: la compagnia valuta i clienti prima, segue il recupero e, se non riesce, vi rimborsa la quota coperta delle fatture. Le due coperture possono stare insieme.",
+      },
+      {
+        titolo: 'Più credito in banca',
+        testo:
+          "Il diritto all'indennizzo si può cedere alla banca. Con i crediti assicurati la banca rischia meno sulle anticipazioni di fatture e sul factoring, e la trattativa sui fidi parte da una base più solida. Le condizioni le decide la banca: noi prepariamo la documentazione della polizza che vi chiederà.",
+      },
+    ],
+    shortDescription: 'La polizza che vi rimborsa quando un cliente non paga le fatture: valutazione dei clienti, recupero e indennizzo, in Italia e all\'estero.',
+    description:
+      'Vendere con pagamento a 60 o 90 giorni vuol dire fare credito ai clienti. Se uno di loro fallisce o smette di pagare, la perdita arriva dritta sulla cassa. La polizza crediti la copre: la compagnia valuta i vostri clienti e assegna a ciascuno un fido, segue il recupero delle fatture non pagate e, se il recupero non riesce, vi rimborsa la quota coperta della perdita. Noi cerchiamo la compagnia adatta alla vostra impresa, prepariamo la pratica con i dati che chiederà e vi seguiamo quando un cliente non paga. Premio, percentuale di copertura e franchigia li decide la compagnia sui vostri numeri.',
+    icon: RICEVUTA,
+    color: 'emerald',
+    image: '/images/brand/strategy-mapping.jpg',
+    features: [
+      'Copertura dell\'insolvenza dei clienti (fallimento e altre procedure concorsuali)',
+      'Copertura del mancato pagamento che si protrae oltre il termine di polizza',
+      'Clienti in Italia e all\'estero',
+      'Valutazione dei clienti e fido per ciascuno',
+      'Recupero delle fatture non pagate seguito dalla compagnia',
+      'Cessione dell\'indennizzo alla banca',
+    ],
+    benefits: [
+      'Sapete prima con quali clienti lavorare tranquilli e a chi chiedere un anticipo o una garanzia',
+      'Il sollecito e il recupero non li fate voi: il rapporto col cliente non si rovina',
+      'Una perdita su un cliente grosso non vi mette in crisi la cassa',
+      'Con i crediti assicurati è più facile parlare con la banca di anticipi e fidi',
+      'Cerchiamo la compagnia adatta e leggiamo le condizioni prima della firma',
+      'Quando un cliente non paga, la segnalazione e la pratica le seguiamo con voi',
+    ],
+    faq: [
+      {
+        question: 'Cos\'è l\'assicurazione dei crediti commerciali?',
+        answer: 'È la polizza che protegge le fatture emesse ad altre imprese con pagamento dilazionato. La compagnia valuta i vostri clienti, assegna a ciascuno un fido e, se un cliente fallisce o non paga oltre il termine fissato in polizza, vi rimborsa la quota coperta della perdita, al netto della franchigia.',
+      },
+      {
+        question: 'Devo assicurare tutti i clienti o posso scegliere quelli che mi preoccupano?',
+        answer: 'Di regola si assicura tutto il portafoglio dei clienti che sono imprese, non solo quelli a rischio: è quello che permette alla compagnia di fare un premio sostenibile. Alcune polizze permettono di limitarsi all\'Italia o all\'export, o di gestire in modo semplificato i clienti di importo piccolo.',
+      },
+      {
+        question: 'Cosa succede quando un cliente non paga?',
+        answer: 'Segnalate la fattura scaduta entro il termine scritto in polizza. Da lì il recupero lo segue la compagnia, con i suoi legali e i suoi corrispondenti all\'estero. Se il cliente entra in una procedura concorsuale, o il recupero non riesce nei tempi previsti, la compagnia paga la quota coperta della perdita. Se dopo l\'indennizzo recupera altro, la parte che vi spetta torna a voi.',
+      },
+      {
+        question: 'Cosa resta fuori?',
+        answer: 'Di norma le vendite ai privati consumatori, alle società del vostro gruppo e, in molte polizze, agli enti pubblici. Restano fuori le forniture a clienti senza fido o la parte che lo supera, e le fatture che il cliente contesta, finché la contestazione non è risolta. L\'elenco preciso lo danno le condizioni della compagnia, che leggiamo con voi prima della firma.',
+      },
+      {
+        question: 'Quanto costa?',
+        answer: 'Il premio lo calcola la compagnia su fatturato assicurato, settore, termini di pagamento, numero dei clienti e perdite degli ultimi anni. Una tariffa valida per tutti non esiste: vi presentiamo il premio sul vostro caso, con percentuale di copertura e franchigia, prima di chiedervi qualsiasi firma.',
+      },
+      {
+        question: 'Cosa serve per il preventivo?',
+        answer: 'Fatturato annuo e quanto ne vendete a credito, in Italia e all\'estero; i termini di pagamento che date di solito; l\'elenco dei clienti principali con partita IVA, fatturato annuo con ciascuno e fido che vorreste; le perdite su crediti degli ultimi tre anni e le fatture scadute non pagate di oggi; visura camerale e ultimo bilancio.',
+      },
+    ],
+    priceFrom: 'Su preventivo',
+    priceNote: 'Il premio lo calcola la compagnia su fatturato assicurato, settore, termini di pagamento e perdite degli ultimi anni.',
+    coverage: {
+      covered: [
+        'Insolvenza del cliente: fallimento, liquidazione giudiziale e altre procedure concorsuali',
+        'Mancato pagamento che dura oltre il termine fissato in polizza',
+        'Fatture verso imprese in Italia e all\'estero, entro il fido concesso',
+        'Recupero delle fatture non pagate, seguito dalla compagnia',
+      ],
+      notCovered: [
+        'Vendite a privati consumatori',
+        'Vendite a società del vostro gruppo e, in molte polizze, a enti pubblici',
+        'Forniture a clienti senza fido o la parte oltre il fido',
+        'Fatture contestate dal cliente, finché la contestazione non è risolta',
+        'Il rimborso dell\'intera fattura: resta a voi la quota non coperta e la franchigia',
+      ],
+      note: 'Percentuale di copertura, franchigia, termini per segnalare i mancati pagamenti e tempi dell\'indennizzo cambiano da compagnia a compagnia: valgono quelli della polizza. Prima della firma ricevete il set informativo della compagnia proposta.',
+    },
+    approfondimenti: [
+      {
+        titolo: 'Tutela legale aziende',
+        href: '/servizi/tutela-legale-aziende',
+        descrizione: 'Le spese legali per le controversie dell\'impresa, compreso il recupero dei crediti: paga l\'avvocato, non la perdita.',
+      },
+      {
+        titolo: 'Cauzioni e fideiussioni',
+        href: '/servizi/cauzioni-fideiussioni',
+        descrizione: 'Le garanzie per gare, dogane, fisco e locazioni: l\'altra polizza che parla con la banca dell\'impresa.',
       },
     ],
   },

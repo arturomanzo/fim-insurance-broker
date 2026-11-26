@@ -18,7 +18,7 @@ const collectionSchema = {
   url: `${BASE_URL}/servizi`,
   name: 'Servizi Assicurativi FIM Insurance Broker',
   description:
-    'Catalogo completo dei servizi assicurativi: auto, vita, casa, salute, polizze aziendali, viaggio, cauzioni, tutela legale, risk management.',
+    'Catalogo completo dei servizi assicurativi: auto, vita, casa, salute, polizze aziendali, viaggio, cauzioni, assicurazione dei crediti, tutela legale, risk management.',
   inLanguage: 'it-IT',
   isPartOf: { '@id': `${BASE_URL}/#website` },
   about: { '@id': `${BASE_URL}/#organization` },
